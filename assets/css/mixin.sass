@@ -1,0 +1,98 @@
+$MAIN_COLOR: #488EC4
+$MAIN_COLOR_PALE: #F5F7F9
+$BLACK: #3E4652
+$GRAY: #7C7C7C
+
+@mixin hover
+  cursor: pointer
+  color: #ffffff
+  background: $MAIN_COLOR
+  border-radius: 100px
+
+@mixin text_input
+  border: none
+  background: $MAIN_COLOR_PALE
+  width: 100%
+  padding: 10px 20px
+  font-weight: bold
+  box-sizing: border-box
+  border-radius: 3px
+  position: relative
+  &::placeholder
+    color: $BLACK
+    opacity: .3
+  &:focus
+    outline: none
+
+@mixin suggestions
+  border: none
+  box-shadow: 0 2px 5px rgba(62, 70, 82, .22)
+  padding: 20px 0
+  margin: 0
+  position: absolute
+  background-color: #ffffff
+  z-index: 100
+  > li
+    font-size: 16px
+    line-height: 24px
+    padding: 0 20px
+    &.hover
+      color: #ffffff
+      background-color: $MAIN_COLOR
+      cursor: pointer
+
+@mixin button
+  color: #ffffff
+  background: $MAIN_COLOR
+  font-size: 16px
+  font-weight: 500
+  padding: 6px 22px
+  border: none
+  border-radius: 3px
+  display: flex
+  align-items: center
+  &:focus
+    outline: none
+  &:hover
+    cursor: pointer
+  > svg
+    font-size: 14px
+    margin-right: 4px
+
+@mixin table
+  border-top: 3px solid $BLACK
+  width: 100%
+  border-collapse: collapse
+  margin-bottom: 50px
+  > thead
+    font-size: 14px
+    > tr
+      > th
+        border-bottom: 1px solid $BLACK
+        text-align: left
+        padding: 6px 0 6px 10px
+        &:nth-of-type(1)
+          text-align: center
+          min-width: 25px
+        // &.checkbox
+        // &.gene_symbol
+        // &.gene_name
+        // &.alias
+        // &.NCBI_geneID
+        // &.annotation
+        // &.gene_expression_patterns
+  > tbody
+    border-bottom: 3px solid $BLACK
+    > tr
+      > td
+        font-size: 14px
+        line-height: 18px
+        padding: 12px 0 12px 10px
+        &:nth-of-type(1)
+          text-align: center
+        &.annotation
+          color: $MAIN_COLOR
+          &:hover
+            cursor: pointer
+      &:nth-of-type(even)
+        background-color: $MAIN_COLOR_PALE
