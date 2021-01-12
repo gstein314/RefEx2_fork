@@ -4,15 +4,69 @@
     <table>
       <thead>
         <tr>
-          <th class="sample_description">Sample Description</th>
-          <th class="median">MEDIAN [LOG2(TPM+1)]</th>
-          <th class="sample_type">Sample type</th>
-          <th class="experiment">Experiment</th>
-          <th class="cl">CL</th>
-          <th class="sex">Sex</th>
-          <th class="age">Age</th>
-          <th class="stage">Stage</th>
-          <th class="ncit">NCIT</th>
+          <th class="sample_description">
+            Sample Description
+            <font-awesome-icon 
+              :icon="sort.active === 'sample_description' ? `sort-${sort.order}` : 'sort'"
+              @click="switchSort('sample_description')"
+            />
+          </th>
+          <th class="median">
+            MEDIAN [LOG2(TPM+1)]
+            <font-awesome-icon 
+              :icon="sort.active === 'median' ? `sort-${sort.order}` : 'sort'"
+              @click="switchSort('median')"
+            />
+          </th>
+          <th class="sample_type">
+            Sample type
+            <font-awesome-icon 
+              :icon="sort.active === 'sample_type' ? `sort-${sort.order}` : 'sort'"
+              @click="switchSort('sample_type')"
+            />
+          </th>
+          <th class="experiment">
+            Experiment
+            <font-awesome-icon 
+              :icon="sort.active === 'experiment' ? `sort-${sort.order}` : 'sort'"
+              @click="switchSort('experiment')"
+            />
+          </th>
+          <th class="cl">
+            CL
+            <font-awesome-icon 
+              :icon="sort.active === 'cl' ? `sort-${sort.order}` : 'sort'"
+              @click="switchSort('cl')"
+            />
+          </th>
+          <th class="sex">
+            Sex
+            <font-awesome-icon 
+              :icon="sort.active === 'sex' ? `sort-${sort.order}` : 'sort'"
+              @click="switchSort('sex')"
+            />
+          </th>
+          <th class="age">
+            Age
+            <font-awesome-icon 
+              :icon="sort.active === 'age' ? `sort-${sort.order}` : 'sort'"
+              @click="switchSort('age')"
+            />
+          </th>
+          <th class="stage">
+            Stage
+            <font-awesome-icon 
+              :icon="sort.active === 'stage' ? `sort-${sort.order}` : 'sort'"
+              @click="switchSort('stage')"
+            />
+          </th>
+          <th class="ncit">
+            NCIT
+            <font-awesome-icon 
+              :icon="sort.active === 'ncit' ? `sort-${sort.order}` : 'sort'"
+              @click="switchSort('ncit')"
+            />
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -42,35 +96,35 @@ export default {
     let data = await axios.get(
       `http://refex2-api.bhx.jp/api/dist/${params.gid}`
     );
-    console.log(data);
-    // ここにソート機能を実装する！
-    console.log(data.data);
-    console.log(data.data.r_inf);
-
+    // default: Median sort
     data.data.r_inf.sort(function(a,b) {
       return b.Median - a.Median;
     });
-
-    // sort練習用
-    // var items = [
-    //   { name: "Edward", value: 21 },
-    //   { name: "Sharpe", value: 37 },
-    //   { name: "And", value: 45 },
-    //   { name: "The", value: -12 },
-    //   { name: "Magnetic", value: 13 },
-    //   { name: "Zeros", value: 37 },
-    // ];
-    // items.sort(function (a, b) {
-    //   return a.value - b.value;
-    // });
-    // console.log(items);
-
-    // ここまでソート機能を実装する
     return {
       results: data.data,
     };
   },
+  data() {
+    return {
+      sort: {
+        active: 'median',
+        order: 'up'
+      }
+    }
+  },
   mounted() {},
+  methods: {
+    switchSort(col_name) {
+      if(this.sort.active === col_name){
+        this.sort.order = this.sort.order === 'up' ? 'down' : 'up'
+      } else {
+        this.sort.active = col_name
+        this.order = 'up'
+      }
+      console.log('現在activeのソート', this.sort)
+      console.log('ソートしたいデータ', this.results)
+    }
+  }
 };
 </script>
 
@@ -83,4 +137,14 @@ export default {
     > thead > tr > th:nth-of-type(1),
     > tbody > tr > td:nth-of-type(1)
       text-align: left
+    > thead > tr > th
+      > svg
+        &:hover
+          cursor: pointer
+      > .fa-sort
+        color: $GRAY
+        opacity: .3
+      > .fa-sort-up,
+      > .fa-sort-down
+        color: $MAIN_COLOR
 </style>

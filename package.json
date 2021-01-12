@@ -17,7 +17,6 @@
     "jquery": "^3.5.1",
     "normalize.css": "^8.0.1",
     "nuxt": "^2.14.6",
-    "nuxt-fontawesome": "^0.4.0",
     "vue-simple-suggest": "^1.10.3"
   },
   "devDependencies": {
@@ -26,6 +25,7 @@
     "d3": "^6.3.1",
     "fibers": "^5.0.0",
     "node-sass": "^4.14.1",
+    "nuxt-fontawesome": "^0.4.0",
     "sass": "^1.28.0",
     "sass-loader": "^10.0.4"
   }
