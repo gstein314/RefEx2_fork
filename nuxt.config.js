@@ -44,12 +44,12 @@ export default {
     ['nuxt-fontawesome', {
       component: 'fa',
       imports: [
-        //import 2 icons from set 
-        // please note this is PRO set in this example, 
+        //import 2 icons from set
+        // please note this is PRO set in this example,
         // you must have it in your node_modules to actually import
         {
           set: '@fortawesome/pro-regular-svg-icons',
-          icons: ['faSort', 'faSortUp', 'faSortDown']
+          icons: ['faSort', 'faSortUp', 'faSortDown', 'faSearch']
         }
       ]
     }]
