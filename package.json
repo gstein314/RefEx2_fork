@@ -27,6 +27,7 @@
     "node-sass": "^4.14.1",
     "nuxt-fontawesome": "^0.4.0",
     "sass": "^1.28.0",
-    "sass-loader": "^10.0.4"
+    "sass-loader": "^10.0.4",
+    "vue-slider-component": "^3.2.11"
   }
 }

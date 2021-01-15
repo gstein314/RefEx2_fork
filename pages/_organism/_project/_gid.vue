@@ -24,7 +24,8 @@
             />
             <font-awesome-icon
               icon="search"
-              @click="SearchByText('sample_description')"
+              :class="filter_modal_text['Description'] ? 'active' : ''"
+              @click="openFilterModal('Sample Description')"
             />
           </th>
           <th class="median" v-if="display.median">
@@ -35,7 +36,8 @@
             />
             <font-awesome-icon
               icon="search"
-              @click="SearchByText('median')"
+              :class="filter_modal_text['Median'] ? 'active' : ''"
+              @click="openFilterModal('MEDIAN [LOG2(TPM+1)]')"
             />
           </th>
           <th class="sample_type" v-if="display.sample_type">
@@ -46,7 +48,8 @@
             />
             <font-awesome-icon
               icon="search"
-              @click="SearchByText('sample_type')"
+              :class="filter_modal_text['Sample types category'] ? 'active' : ''"
+              @click="openFilterModal('Sample type')"
             />
           </th>
           <th class="experiment" v-if="display.experiment">
@@ -57,7 +60,8 @@
             />
             <font-awesome-icon
               icon="search"
-              @click="SearchByText('experiment')"
+              :class="filter_modal_text['Experiments category'] ? 'active' : ''"
+              @click="openFilterModal('Experiment')"
             />
           </th>
           <th class="uberon" v-if="display.uberon">
@@ -68,7 +72,8 @@
             />
             <font-awesome-icon
               icon="search"
-              @click="SearchByText('uberon')"
+              :class="filter_modal_text['UBERON label'] ? 'active' : ''"
+              @click="openFilterModal('UBERON')"
             />
           </th>
           <th class="cl" v-if="display.cl">
@@ -79,7 +84,8 @@
             />
             <font-awesome-icon
               icon="search"
-              @click="SearchByText('cl')"
+              :class="filter_modal_text['CL label'] ? 'active' : ''"
+              @click="openFilterModal('CL')"
             />
           </th>
           <th class="sex" v-if="display.sex">
@@ -90,7 +96,8 @@
             />
             <font-awesome-icon
               icon="search"
-              @click="SearchByText('sex')"
+              :class="filter_modal_text['Sex'] ? 'active' : ''"
+              @click="openFilterModal('Sex')"
             />
           </th>
           <th class="age" v-if="display.age">
@@ -101,7 +108,8 @@
             />
             <font-awesome-icon
               icon="search"
-              @click="SearchByText('age')"
+              :class="filter_modal_text['Age'] ? 'active' : ''"
+              @click="openFilterModal('Age')"
             />
           </th>
           <th class="stage" v-if="display.stage">
@@ -112,7 +120,8 @@
             />
             <font-awesome-icon
               icon="search"
-              @click="SearchByText('stage')"
+              :class="filter_modal_text['Developmental stage'] ? 'active' : ''"
+              @click="openFilterModal('Stage')"
             />
           </th>
           <th class="ncit" v-if="display.ncit">
@@ -123,7 +132,8 @@
             />
             <font-awesome-icon
               icon="search"
-              @click="SearchByText('ncit')"
+              :class="filter_modal_text['NCIT label'] ? 'active' : ''"
+              @click="openFilterModal('NCIT')"
             />
           </th>
         </tr>
@@ -143,8 +153,8 @@
         </tr>
       </tbody>
     </table>
-    <div class="modal_bg" v-if="is_display_settings_on" @click="closeModal"></div>
-    <div class="display_settings_modal" v-if="is_display_settings_on">
+    <div class="modal_bg" v-if="is_display_settings_on || is_filter_modal_on" @click="closeModal"></div>
+    <div class="modal display_settings_modal" v-if="is_display_settings_on">
       <p class="modal_title">
         <font-awesome-icon icon="eye" />
         Display settings
@@ -192,6 +202,22 @@
         </div>
       </div>
     </div>
+    <div class="modal filter_modal" v-if="is_filter_modal_on">
+      <p class="modal_title">
+        <font-awesome-icon icon="search" />
+        {{ filter_modal_title }}
+      </p>
+      <div class="input_wrapper" v-if="filter_modal_title === 'MEDIAN [LOG2(TPM+1)]' || filter_modal_title === 'Age'">
+        <vue-slider ref="slider" v-model="value[label_mapping[filter_modal_title]]" v-bind="options[label_mapping[filter_modal_title]]" :marks="marks[label_mapping[filter_modal_title]]"></vue-slider>
+      </div>
+      <div class="input_wrapper" v-else>
+        <input type="text" v-model="filter_modal_text[label_mapping[filter_modal_title]]" placeholder="filter by text" @keyup.enter="filterByText">
+        <button class="search" @click="filterByText">
+          <font-awesome-icon icon="search" />
+          Search
+        </button>
+      </div>
+    </div>
   </div>
 
 </template>
@@ -200,6 +226,8 @@
 import $ from "jquery";
 import * as d3 from "d3";
 import axios from "axios";
+import VueSlider from 'vue-slider-component/dist-css/vue-slider-component.umd.min.js'
+import 'vue-slider-component/dist-css/vue-slider-component.css'
 
 export default {
   async asyncData({ params, error, payload }) {
@@ -210,8 +238,29 @@ export default {
     data.data.r_inf.sort(function(a,b) {
       return b.Median - a.Median;
     });
+    let median_array = []
+    let age_array = []
+    data.data.r_inf.forEach(datam => {
+      median_array.push(datam.Median)
+      if(datam.Age.indexOf('-') !== -1) {
+        datam.Age = datam.Age.replace(/[^0-9]/g, ',')
+      }
+
+      if(datam.Age.indexOf(',') !== -1) {
+        age_array = age_array.concat(datam.Age.split(','))
+      } else {
+        age_array.push(Number(datam.Age))
+      }
+    })
+    let age_max = Math.max(...age_array)
+    let median_max = Math.max(...median_array)
+
+    let original_r_inf = [...data.data.r_inf]
     return {
       results: data.data,
+      original_r_inf: original_r_inf,
+      age_max: age_max,
+      median_max: median_max
     };
   },
   data() {
@@ -232,10 +281,85 @@ export default {
         'stage': false,
         'ncit': false,
       },
-      is_display_settings_on: false
+      is_display_settings_on: false,
+      is_filter_modal_on: false,
+      filter_state: {
+        'sample_description': '',
+        'median': '',
+        'sample_type': '',
+        'experiment': '',
+        'uberon': '',
+        'cl': '',
+        'sex': '',
+        'age': '',
+        'stage': '',
+        'ncit': '',
+      },
+      filter_modal_title: '',
+      filter_modal_text: {
+        'Sample Description': '',
+        'MEDIAN [LOG2(TPM+1)]': '',
+        'Sample type': '',
+        'Experiment': '',
+        'UBERON': '',
+        'CL': '',
+        'Sex': '',
+        'Age': '',
+        'Stage': '',
+        'NCIT': ''
+      },
+      label_mapping: {
+        'Sample Description': 'Description',
+        'MEDIAN [LOG2(TPM+1)]': 'Median',
+        'Sample type': 'Sample types category',
+        'Experiment': 'Experiments category',
+        'UBERON': 'UBERON label',
+        'CL': 'CL label',
+        'Sex': 'Sex',
+        'Age': 'Age',
+        'Stage': 'Developmental stage',
+        'NCIT': 'NCIT label'
+      },
+      value: {
+        Median: [0, 0],
+        Age: [0, 0]
+      },
+      options: {
+        Median: {
+          min: 0,
+          max: 0
+        },
+        Age: {
+          min: 0,
+          max: 0
+        }
+      },
+      marks: {
+        Median: [],
+        Age: []
+      },
     }
   },
-  mounted() {},
+  watch: {
+    value: {
+      handler: function(val) {
+        console.log(val[this.label_mapping[this.filter_modal_title]])
+      },
+      deep: true
+    }
+  },
+  mounted() {
+    this.value.Age[1] = Math.ceil(this.age_max / 10) * 10
+    this.options.Age.max = Math.ceil(this.age_max / 10) * 10
+    this.value.Median[1] = Math.ceil(this.median_max / 10) * 10
+    this.options.Median.max = Math.ceil(this.median_max / 10) * 10
+    for(let i = 0; i < this.options.Age.max; i += 10) {
+      this.marks.Age.push(i)
+    }
+    for(let i = 0; i < this.options.Median.max; i += 200) {
+      this.marks.Median.push(i)
+    }
+  },
   methods: {
     switchSort(col_name) {
       if(this.sort.active === col_name){
@@ -268,11 +392,34 @@ export default {
         }
       });
     },
-    SearchByText(col_name) {
-
+    openFilterModal(col_name) {
+      this.is_filter_modal_on = true
+      this.filter_modal_title = col_name
     },
     closeModal() {
-      this.is_display_settings_on = false
+      this.is_display_settings_on = false,
+      this.is_filter_modal_on = false
+    },
+    filterByText() {
+      let is_all_filter_clear = true
+      let filtered_results = []
+      filtered_results = this.original_r_inf.filter(result => {
+        let flag = true
+        Object.keys(this.filter_modal_text).forEach(col => {
+          if(this.filter_modal_text[col] !== "") {
+            is_all_filter_clear = false
+            if(result[col].indexOf(this.filter_modal_text[col]) === -1) {
+              flag = false
+            }
+          }
+        })
+        return flag
+      })
+      this.results.r_inf = filtered_results
+      if(is_all_filter_clear) {
+        this.results.r_inf = this.original_r_inf
+      }
+      this.is_filter_modal_on = false
     }
   }
 };
@@ -301,6 +448,7 @@ export default {
     text-decoration: underline
     display: block
     text-align: right
+    margin-bottom: 5px
     &:hover
       cursor: pointer
   > table
@@ -316,6 +464,8 @@ export default {
       > .fa-search
         color: $MAIN_COLOR
         font-size: 12px
+        &.active
+          color: $ACTIVE_COLOR
       > .fa-sort
         color: $GRAY
         opacity: .3
@@ -330,21 +480,40 @@ export default {
     position: fixed
     top: 0
     left: 0
-  > .display_settings_modal
+  > .modal
     position: fixed
     top: 50%
     left: 50%
     transform: translate(-50%, -50%)
     background-color: #ffffff
     padding: 55px 67px
-    > .modal_title
+    > p.modal_title
       font-size: 18px
-    > .display_checkboxes
-      width: 100%
-      > div
-        width: 49%
-        display: inline-block
-        line-height: 26px
-        > label
-          font-size: 14px
+    &.display_settings_modal
+      width: 400px
+      > .display_checkboxes
+        width: 100%
+        > div
+          width: 49%
+          display: inline-block
+          line-height: 26px
+          > label
+            font-size: 14px
+    &.filter_modal
+      width: 500px
+      > .input_wrapper
+        display: flex
+        align-items: center
+        > input[type="text"]
+          +text_input
+        > button
+          +button
+          margin-left: 15px
+        > .vue-slider
+          width: 100% !important
+          margin-top: 25px
+          > .vue-slider-rail
+            background-color: $MAIN_COLOR_PALE
+            > .vue-slider-process
+              background-color: $MAIN_COLOR
 </style>
