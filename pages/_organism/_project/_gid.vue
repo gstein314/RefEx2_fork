@@ -9,7 +9,7 @@
         Comparison
       </button>
     </div>
-    <a class="display_settings" :click="is_display_settings_on = true">
+    <a class="display_settings" @click="is_display_settings_on = true">
       <font-awesome-icon icon="eye" />
       Display settings
     </a>
@@ -143,33 +143,52 @@
         </tr>
       </tbody>
     </table>
-    <div class="modal_bg" @click="closeModal">
-      <div class="display_settings_modal" v-if="is_display_settings_on">
-        <p class="modal_title">
-          <font-awesome-icon icon="eye" />
-          Display settings
-        </p>
-        <div class="display_checkboxes">
+    <div class="modal_bg" v-if="is_display_settings_on" @click="closeModal"></div>
+    <div class="display_settings_modal" v-if="is_display_settings_on">
+      <p class="modal_title">
+        <font-awesome-icon icon="eye" />
+        Display settings
+      </p>
+      <div class="display_checkboxes">
+        <div>
           <input type="checkbox" v-model="display.sample_description" name="sample_description" id="sample_description">
-          <label for="sample_description">sample_description</label>
+          <label for="sample_description">Sample Description</label>
+        </div>
+        <div>
           <input type="checkbox" v-model="display.median" name="median" id="median">
-          <label for="median">median</label>
+          <label for="median">MEDIAN [LOG2(TPM+1)]</label>
+        </div>
+        <div>
           <input type="checkbox" v-model="display.sample_type" name="sample_type" id="sample_type">
-          <label for="sample_type">sample_type</label>
+          <label for="sample_type">Sample type</label>
+        </div>
+        <div>
           <input type="checkbox" v-model="display.experiment" name="experiment" id="experiment">
-          <label for="experiment">experiment</label>
+          <label for="experiment">Experiment</label>
+        </div>
+        <div>
           <input type="checkbox" v-model="display.uberon" name="uberon" id="uberon">
-          <label for="uberon">uberon</label>
+          <label for="uberon">UBERON</label>
+        </div>
+        <div>
           <input type="checkbox" v-model="display.cl" name="cl" id="cl">
-          <label for="cl">cl</label>
+          <label for="cl">CL</label>
+        </div>
+        <div>
           <input type="checkbox" v-model="display.sex" name="sex" id="sex">
-          <label for="sex">sex</label>
+          <label for="sex">Sex</label>
+        </div>
+        <div>
           <input type="checkbox" v-model="display.age" name="age" id="age">
-          <label for="age">age</label>
+          <label for="age">Age</label>
+        </div>
+        <div>
           <input type="checkbox" v-model="display.stage" name="stage" id="stage">
-          <label for="stage">stage</label>
+          <label for="stage">Stage</label>
+        </div>
+        <div>
           <input type="checkbox" v-model="display.ncit" name="ncit" id="ncit">
-          <label for="ncit">ncit</label>
+          <label for="ncit">NCIT</label>
         </div>
       </div>
     </div>
@@ -252,7 +271,9 @@ export default {
     SearchByText(col_name) {
 
     },
-    closeModal() {}
+    closeModal() {
+      this.is_display_settings_on = false
+    }
   }
 };
 </script>
@@ -280,6 +301,8 @@ export default {
     text-decoration: underline
     display: block
     text-align: right
+    &:hover
+      cursor: pointer
   > table
     +table
     > thead > tr > th:nth-of-type(1),
@@ -300,13 +323,28 @@ export default {
       > .fa-sort-down
         color: $MAIN_COLOR
   > .modal_bg
-    display: flex
-    align-items: center
-    justify-content: center
     width: 100vw
     height: 100vh
     background-color: $BLACK
     opacity: .2
-    > .display_settings_modal
-      padding: 55px 67px
+    position: fixed
+    top: 0
+    left: 0
+  > .display_settings_modal
+    position: fixed
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    background-color: #ffffff
+    padding: 55px 67px
+    > .modal_title
+      font-size: 18px
+    > .display_checkboxes
+      width: 100%
+      > div
+        width: 49%
+        display: inline-block
+        line-height: 26px
+        > label
+          font-size: 14px
 </style>
