@@ -19,8 +19,8 @@
           <th class="sample_description" v-if="display.sample_description">
             Sample Description
             <font-awesome-icon
-              :icon="sort.active === 'Sample Description' ? `sort-${sort.order}` : 'sort'"
-              @click="switchSort('Sample Description')"
+              :icon="sort.active === 'Description' ? `sort-${sort.order}` : 'sort'"
+              @click="switchSort('Description')"
             />
             <font-awesome-icon
               icon="search"
@@ -30,8 +30,8 @@
           <th class="median" v-if="display.median">
             MEDIAN [LOG2(TPM+1)]
             <font-awesome-icon
-              :icon="sort.active === 'MEDIAN [LOG2(TPM+1)]' ? `sort-${sort.order}` : 'sort'"
-              @click="switchSort('MEDIAN [LOG2(TPM+1)]')"
+              :icon="sort.active === 'Median' ? `sort-${sort.order}` : 'sort'"
+              @click="switchSort('Median')"
             />
             <font-awesome-icon
               icon="search"
@@ -41,8 +41,8 @@
           <th class="sample_type" v-if="display.sample_type">
             Sample type
             <font-awesome-icon
-              :icon="sort.active === 'Sample type' ? `sort-${sort.order}` : 'sort'"
-              @click="switchSort('Sample type')"
+              :icon="sort.active === 'Sample types category' ? `sort-${sort.order}` : 'sort'"
+              @click="switchSort('Sample types category')"
             />
             <font-awesome-icon
               icon="search"
@@ -52,8 +52,8 @@
           <th class="experiment" v-if="display.experiment">
             Experiment
             <font-awesome-icon
-              :icon="sort.active === 'Experiment' ? `sort-${sort.order}` : 'sort'"
-              @click="switchSort('Experiment')"
+              :icon="sort.active === 'Experiments category' ? `sort-${sort.order}` : 'sort'"
+              @click="switchSort('Experiments category')"
             />
             <font-awesome-icon
               icon="search"
@@ -63,8 +63,8 @@
           <th class="uberon" v-if="display.uberon">
             UBERON
             <font-awesome-icon
-              :icon="sort.active === 'UBERON' ? `sort-${sort.order}` : 'sort'"
-              @click="switchSort('UBERON')"
+              :icon="sort.active === 'UBERON label' ? `sort-${sort.order}` : 'sort'"
+              @click="switchSort('UBERON label')"
             />
             <font-awesome-icon
               icon="search"
@@ -74,8 +74,8 @@
           <th class="cl" v-if="display.cl">
             CL
             <font-awesome-icon
-              :icon="sort.active === 'CL' ? `sort-${sort.order}` : 'sort'"
-              @click="switchSort('CL')"
+              :icon="sort.active === 'CL label' ? `sort-${sort.order}` : 'sort'"
+              @click="switchSort('CL label')"
             />
             <font-awesome-icon
               icon="search"
@@ -107,8 +107,8 @@
           <th class="stage" v-if="display.stage">
             Stage
             <font-awesome-icon
-              :icon="sort.active === 'Stage' ? `sort-${sort.order}` : 'sort'"
-              @click="switchSort('Stage')"
+              :icon="sort.active === 'Developmental stage' ? `sort-${sort.order}` : 'sort'"
+              @click="switchSort('Developmental stage')"
             />
             <font-awesome-icon
               icon="search"
@@ -118,8 +118,8 @@
           <th class="ncit" v-if="display.ncit">
             NCIT
             <font-awesome-icon
-              :icon="sort.active === 'NCIT' ? `sort-${sort.order}` : 'sort'"
-              @click="switchSort('NCIT')"
+              :icon="sort.active === 'NCIT label' ? `sort-${sort.order}` : 'sort'"
+              @click="switchSort('NCIT label')"
             />
             <font-awesome-icon
               icon="search"
@@ -191,7 +191,6 @@ export default {
     data.data.r_inf.sort(function(a,b) {
       return b.Median - a.Median;
     });
-    console.log(data)
     return {
       results: data.data,
     };
@@ -221,13 +220,34 @@ export default {
   methods: {
     switchSort(col_name) {
       if(this.sort.active === col_name){
-        this.sort.order = this.sort.order === 'up' ? 'down' : 'up'
+        this.sort.order = this.sort.order === 'up' ? 'down' : 'up';
       } else {
-        this.sort.active = col_name
-        this.order = 'up'
+        this.sort.active = col_name;
+        this.sort.order = 'up';
       }
-      console.log('現在activeのソート', this.sort)
-      console.log('ソートしたいデータ', this.results)
+      const that = this;
+      this.results.r_inf = this.results.r_inf.sort(function (a, b) {
+        switch (that.sort.order) {
+          case 'up':
+            if (a[that.sort.active] < b[that.sort.active]) {
+              return -1;
+            } else if (a[that.sort.active] > b[that.sort.active]){
+              return 1;
+            } else {
+              return 0;
+            }
+            break;
+          case 'down':
+            if (a[that.sort.active] > b[that.sort.active]) {
+              return -1;
+            } else if (a[that.sort.active] < b[that.sort.active]){
+              return 1;
+            } else {
+              return 0;
+            }
+            break;
+        }
+      });
     },
     SearchByText(col_name) {
 
