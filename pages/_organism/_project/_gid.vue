@@ -36,7 +36,7 @@
             />
             <font-awesome-icon
               icon="search"
-              :class="filter_modal_text['Median'] ? 'active' : ''"
+              :class="value.Median[0] !== 0 || value.Median[1] !== options.Median.max ? 'active' : ''"
               @click="openFilterModal('MEDIAN [LOG2(TPM+1)]')"
             />
           </th>
@@ -108,7 +108,7 @@
             />
             <font-awesome-icon
               icon="search"
-              :class="filter_modal_text['Age'] ? 'active' : ''"
+              :class="value.Age[0] !== 0 || value.Age[1] !== options.Age.max ? 'active' : ''"
               @click="openFilterModal('Age')"
             />
           </th>
@@ -207,6 +207,7 @@
         <font-awesome-icon icon="search" />
         {{ filter_modal_title }}
       </p>
+      <button v-if="filter_modal_title === 'MEDIAN [LOG2(TPM+1)]' || filter_modal_title === 'Age'" @click="resetSlider(filter_modal_title)">Reset</button>
       <div class="input_wrapper" v-if="filter_modal_title === 'MEDIAN [LOG2(TPM+1)]' || filter_modal_title === 'Age'">
         <vue-slider ref="slider" v-model="value[label_mapping[filter_modal_title]]" v-bind="options[label_mapping[filter_modal_title]]" :marks="marks[label_mapping[filter_modal_title]]"></vue-slider>
       </div>
@@ -254,7 +255,6 @@ export default {
     })
     let age_max = Math.max(...age_array)
     let median_max = Math.max(...median_array)
-
     let original_r_inf = [...data.data.r_inf]
     return {
       results: data.data,
@@ -337,13 +337,48 @@ export default {
       marks: {
         Median: [],
         Age: []
-      },
+      }
     }
   },
   watch: {
     value: {
       handler: function(val) {
-        console.log(val[this.label_mapping[this.filter_modal_title]])
+        let filtered_results = []
+        const target_col = this.filter_modal_title
+        const filter_range = val[this.label_mapping[this.filter_modal_title]]
+        console.log(this.filter_modal_title)
+        switch (this.filter_modal_title) {
+          case 'Age':
+            filtered_results = this.original_r_inf.filter(result => {
+              let flag = false
+              let age = this.normalizeAge(result.Age)
+              switch(typeof age) {
+                case 'number':
+                  if(filter_range[0] <= age && filter_range[1] >= age) {
+                    flag = true
+                  }
+                  break;
+                case 'object':
+                  if(filter_range[0] <= age[0] && filter_range[1] >= age[age.length - 1]) {
+                    flag = true
+                  }
+                  break;
+              }
+              return flag
+            })
+            break;
+          case 'MEDIAN [LOG2(TPM+1)]':
+            filtered_results = this.original_r_inf.filter(result => {
+              let flag = false
+              if(filter_range[0] <= result.Median && filter_range[1] >= result.Median) {
+                flag = true
+              }
+              return flag;
+            })
+            break;
+        }
+
+        this.results.r_inf = filtered_results
       },
       deep: true
     }
@@ -361,6 +396,31 @@ export default {
     }
   },
   methods: {
+    resetSlider(type) {
+      switch(type) {
+        case 'MEDIAN [LOG2(TPM+1)]' :
+          this.value.Median = [0, this.options.Median.max]
+          break;
+        case 'Age':
+          this.value.Age = [0, this.options.Age.max]
+          break;
+      }
+    },
+    normalizeAge(age) {
+      let normalized_age
+      if(age.indexOf('-') !== -1) {
+        age = age.replace(/[^0-9]/g, ',')
+      }
+
+      if(age.indexOf(',') !== -1) {
+        normalized_age = []
+        normalized_age = normalized_age.concat(age.split(','))
+        normalized_age = normalized_age.map(num => Number(num))
+      } else {
+        normalized_age = Number(age)
+      }
+      return normalized_age
+    },
     switchSort(col_name) {
       if(this.sort.active === col_name){
         this.sort.order = this.sort.order === 'up' ? 'down' : 'up';
@@ -419,7 +479,7 @@ export default {
       if(is_all_filter_clear) {
         this.results.r_inf = this.original_r_inf
       }
-      this.is_filter_modal_on = false
+      // this.is_filter_modal_on = false
     }
   }
 };
@@ -489,6 +549,11 @@ export default {
     padding: 55px 67px
     > p.modal_title
       font-size: 18px
+      display: inline-block
+    > button
+      +button
+      display: inline-block
+      margin-left: 10px
     &.display_settings_modal
       width: 400px
       > .display_checkboxes
