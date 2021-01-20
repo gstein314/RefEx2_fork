@@ -2,9 +2,9 @@
   <div class="chart_wrapper">
     <div class="header">
       <h1>
-        <font-awesome-icon icon="info-circle" />
+        <font-awesome-icon icon="info-circle" @click="showGeneDetail(results.ginf.id)"/>
         {{ `${results.ginf.symbol}(${results.ginf.name}, NCBI GeneID: ${results.ginf.id}` }}</h1>
-      <button class="comparison_btn">
+      <button class="comparison_btn" @click="comparisonSearch">
         <font-awesome-icon icon="chart-bar" />
         Comparison
       </button>
@@ -31,12 +31,12 @@
           <th class="median" v-if="display.median">
             MEDIAN [LOG2(TPM+1)]
             <font-awesome-icon
-              :icon="sort.active === 'Median' ? `sort-${sort.order}` : 'sort'"
-              @click="switchSort('Median')"
+              :icon="sort.active === 'log2_Median' ? `sort-${sort.order}` : 'sort'"
+              @click="switchSort('log2_Median')"
             />
             <font-awesome-icon
               icon="search"
-              :class="value.Median[0] !== 0 || value.Median[1] !== options.Median.max ? 'active' : ''"
+              :class="value.log2_Median[0] !== 0 || value.log2_Median[1] !== options.log2_Median.max ? 'active' : ''"
               @click="openFilterModal('MEDIAN [LOG2(TPM+1)]')"
             />
           </th>
@@ -141,7 +141,7 @@
       <tbody>
         <tr v-for="result in results.r_inf" :key="result.ncbiGeneId">
           <td v-if="display.sample_description" class="sample_description">{{ result["Description"] }}</td>
-          <td v-if="display.median" class="median">{{ result["Median"] }}</td>
+          <td v-if="display.median" class="median">{{ result["log2_Median"] }}</td>
           <td v-if="display.sample_type" class="sample_type">{{ result["Sample types category"] }}</td>
           <td v-if="display.experiment" class="experiment">{{ result["Experiments category"] }}</td>
           <td v-if="display.uberon" class="uberon">{{ result["UBERON label"] }}</td>
@@ -153,7 +153,7 @@
         </tr>
       </tbody>
     </table>
-    <div class="modal_bg" v-if="is_display_settings_on || is_filter_modal_on" @click="closeModal"></div>
+    <div class="modal_bg" v-if="is_display_settings_on || is_filter_modal_on || is_gene_detail_modal_shown" @click="closeModal"></div>
     <div class="modal display_settings_modal" v-if="is_display_settings_on">
       <p class="modal_title">
         <font-awesome-icon icon="eye" />
@@ -219,8 +219,8 @@
         </button>
       </div>
     </div>
+    <GeneDetailModal v-if="is_gene_detail_modal_shown" :props="{gene_id: gene_id_for_detail_modal}"/>
   </div>
-
 </template>
 
 <script>
@@ -229,20 +229,22 @@ import * as d3 from "d3";
 import axios from "axios";
 import VueSlider from 'vue-slider-component/dist-css/vue-slider-component.umd.min.js'
 import 'vue-slider-component/dist-css/vue-slider-component.css'
+import GeneDetailModal from "~/components/GeneDetailModal.vue"
 
 export default {
-  async asyncData({ params, error, payload }) {
+  async asyncData({ params, error, payload, query }) {
+    console.log(query.gid)
     let data = await axios.get(
-      `http://refex2-api.bhx.jp/api/dist/${params.gid}`
+      `http://refex2-api.bhx.jp/api/dist/${query.gid[0]}`
     );
     // default: Median sort
     data.data.r_inf.sort(function(a,b) {
-      return b.Median - a.Median;
+      return b.log2_Median - a.log2_Median;
     });
     let median_array = []
     let age_array = []
     data.data.r_inf.forEach(datam => {
-      median_array.push(datam.Median)
+      median_array.push(datam.log2_Median)
       if(datam.Age.indexOf('-') !== -1) {
         datam.Age = datam.Age.replace(/[^0-9]/g, ',')
       }
@@ -263,11 +265,14 @@ export default {
       median_max: median_max
     };
   },
+  components: {
+    GeneDetailModal
+  },
   data() {
     return {
       sort: {
-        active: 'median',
-        order: 'up'
+        active: 'log2_Median',
+        order: 'down'
       },
       display: {
         'sample_description': true,
@@ -310,7 +315,7 @@ export default {
       },
       label_mapping: {
         'Sample Description': 'Description',
-        'MEDIAN [LOG2(TPM+1)]': 'Median',
+        'MEDIAN [LOG2(TPM+1)]': 'log2_Median',
         'Sample type': 'Sample types category',
         'Experiment': 'Experiments category',
         'UBERON': 'UBERON label',
@@ -321,11 +326,11 @@ export default {
         'NCIT': 'NCIT label'
       },
       value: {
-        Median: [0, 0],
+        log2_Median: [0, 0],
         Age: [0, 0]
       },
       options: {
-        Median: {
+        log2_Median: {
           min: 0,
           max: 0
         },
@@ -335,9 +340,11 @@ export default {
         }
       },
       marks: {
-        Median: [],
+        log2_Median: [],
         Age: []
-      }
+      },
+      gene_id_for_detail_modal: 0,
+      is_gene_detail_modal_shown: false
     }
   },
   watch: {
@@ -346,7 +353,6 @@ export default {
         let filtered_results = []
         const target_col = this.filter_modal_title
         const filter_range = val[this.label_mapping[this.filter_modal_title]]
-        console.log(this.filter_modal_title)
         switch (this.filter_modal_title) {
           case 'Age':
             filtered_results = this.original_r_inf.filter(result => {
@@ -370,7 +376,7 @@ export default {
           case 'MEDIAN [LOG2(TPM+1)]':
             filtered_results = this.original_r_inf.filter(result => {
               let flag = false
-              if(filter_range[0] <= result.Median && filter_range[1] >= result.Median) {
+              if(filter_range[0] <= result.log2_Median && filter_range[1] >= result.log2_Median) {
                 flag = true
               }
               return flag;
@@ -386,20 +392,24 @@ export default {
   mounted() {
     this.value.Age[1] = Math.ceil(this.age_max / 10) * 10
     this.options.Age.max = Math.ceil(this.age_max / 10) * 10
-    this.value.Median[1] = Math.ceil(this.median_max / 10) * 10
-    this.options.Median.max = Math.ceil(this.median_max / 10) * 10
+    this.value.log2_Median[1] = Math.ceil(this.median_max / 10) * 10
+    this.options.log2_Median.max = Math.ceil(this.median_max / 10) * 10
     for(let i = 0; i < this.options.Age.max; i += 10) {
       this.marks.Age.push(i)
     }
-    for(let i = 0; i < this.options.Median.max; i += 200) {
-      this.marks.Median.push(i)
+    for(let i = 0; i < this.options.log2_Median.max; i += 200) {
+      this.marks.log2_Median.push(i)
     }
   },
   methods: {
+    showGeneDetail(id) {
+      this.gene_id_for_detail_modal = id
+      this.is_gene_detail_modal_shown = true
+    },
     resetSlider(type) {
       switch(type) {
         case 'MEDIAN [LOG2(TPM+1)]' :
-          this.value.Median = [0, this.options.Median.max]
+          this.value.log2_Median = [0, this.options.log2_Median.max]
           break;
         case 'Age':
           this.value.Age = [0, this.options.Age.max]
@@ -458,7 +468,8 @@ export default {
     },
     closeModal() {
       this.is_display_settings_on = false,
-      this.is_filter_modal_on = false
+      this.is_filter_modal_on = false,
+      this.is_gene_detail_modal_shown = false
     },
     filterByText() {
       let is_all_filter_clear = true
@@ -480,6 +491,9 @@ export default {
         this.results.r_inf = this.original_r_inf
       }
       // this.is_filter_modal_on = false
+    },
+    comparisonSearch() {
+
     }
   }
 };
@@ -500,6 +514,8 @@ export default {
         font-size: 24px
         margin-right: 6px
         margin-top: -3px
+        &:hover
+          cursor: pointer
     > button.comparison_btn
       +button
       margin-left: 20px
@@ -533,20 +549,9 @@ export default {
       > .fa-sort-down
         color: $MAIN_COLOR
   > .modal_bg
-    width: 100vw
-    height: 100vh
-    background-color: $BLACK
-    opacity: .2
-    position: fixed
-    top: 0
-    left: 0
+    +modal_bg
   > .modal
-    position: fixed
-    top: 50%
-    left: 50%
-    transform: translate(-50%, -50%)
-    background-color: #ffffff
-    padding: 55px 67px
+    +modal
     > p.modal_title
       font-size: 18px
       display: inline-block

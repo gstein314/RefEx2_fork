@@ -191,7 +191,7 @@
     <div class="results_wrapper">
       <div class="results_title_wrapper">
         <h2>Matching Genes</h2>
-        <button class="show_all_btn">
+        <button class="show_all_btn" @click="comparisonSearch">
           <font-awesome-icon icon="chart-bar" />
           Comparison
         </button>
@@ -200,7 +200,7 @@
         <thead>
           <tr>
             <th class="checkbox">
-              <input type="checkbox" name="checkall" id="checkall">
+              <input type="checkbox" @click="toggleAllCheckbox">
             </th>
             <th class="gene_symbol">GeneSymbol</th>
             <th class="gene_name">GeneName</th>
@@ -213,25 +213,40 @@
         <tbody>
           <tr v-for="result in results" :key="result.ncbiGeneId">
             <td class="checkbox">
-              <input type="checkbox" name="checkall" id="checkall">
+              <input type="checkbox" :value="result.ncbiGeneId" v-model="checked_gene">
             </td>
             <td class="gene_symbol">{{ result.symbol }}</td>
             <td class="gene_name">{{ result.name }}</td>
-            <td class="alias">{{ result.alias }}</td>
+            <td class="alias">
+              <p v-if="result.alias && typeof convertStringToArray(result.alias) === 'object'">
+                <span v-for="(alias, index) in convertStringToArray(result.alias)" :key="index">
+                  <span>{{alias}}</span>
+                  <span v-if="index !== convertStringToArray(result.alias).length - 1" class="comma">,</span>
+                </span>
+              </p>
+              <p class="contents" v-else>
+                <span>{{result.alias}}</span>
+              </p>
+            </td>
             <td class="NCBI_geneID">{{ result.ncbiGeneId }}</td>
             <td class="annotation">
-              <font-awesome-icon icon="info-circle" />
+              <font-awesome-icon icon="info-circle" @click="showGeneDetail(result.ncbiGeneId)"/>
             </td>
-            <td class="gene_expression_patterns"></td>
+            <td class="gene_expression_patterns">
+              <img :src="`http://penqe.com/refex_figs/human_fantom5_${result.ncbiGeneId}.png`" :alt="result.ncbiGeneId">
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
+    <GeneDetailModal v-if="is_gene_detail_modal_shown" :props="{gene_id: gene_id_for_detail_modal}"/>
+    <div class="modal_bg" v-if="is_gene_detail_modal_shown" @click="is_gene_detail_modal_shown = false"></div>
   </div>
 </template>
 
 <script>
 import SpeciesNavigation from "~/components/SpeciesNavigation.vue"
+import GeneDetailModal from "~/components/GeneDetailModal.vue"
 import axios from "axios"
 import VueSimpleSuggest from 'vue-simple-suggest'
 
@@ -268,6 +283,7 @@ export default {
   },
   components: {
     SpeciesNavigation,
+    GeneDetailModal,
     VueSimpleSuggest
   },
   data() {
@@ -291,7 +307,11 @@ export default {
       anatomical_structures_list: [],
       biomedical_concepts_list: [],
       autocomplete_go_term_items: [],
-      debounce: null
+      debounce: null,
+      gene_id_for_detail_modal: 0,
+      is_gene_detail_modal_shown: false,
+      checked_gene: [],
+      result_gene_id_list: []
     }
   },
   watch: {
@@ -314,6 +334,24 @@ export default {
     }
   },
   methods: {
+    toggleAllCheckbox() {
+      if(this.checked_gene.length !== this.result_gene_id_list.length) {
+        this.checked_gene = this.result_gene_id_list
+      } else {
+        this.checked_gene = []
+      }
+    },
+    convertStringToArray(str) {
+      if(str.indexOf('[') !== -1) {
+        return str.replace(/(\[|\]|"|\s)/g, '').split(',')
+      } else {
+        return str
+      }
+    },
+    showGeneDetail(id) {
+      this.gene_id_for_detail_modal = id
+      this.is_gene_detail_modal_shown = true
+    },
     setSampleQuery(type, query) {
       this.is_reload_active = true
       if (type === "gene_name") {
@@ -384,8 +422,11 @@ export default {
             query: adjusted_query
           }
         }).then((result) => {
+          if(result.data.data.humangene) {
+            this.result_gene_id_list = result.data.data.humangene.map(gene => gene.ncbiGeneId)
+            this.results = result.data.data.humangene
+          }
           this.results_num = result.data.data.numfound
-          this.results = result.data.data.humangene
           this.onEvent= false
           this.is_reload_active = false
         });
@@ -402,7 +443,7 @@ export default {
         });
     },
     moveDetailpage(suggestion) {
-      this.$router.push(`${ this.$store.state.active_taxon}/fantom5/${suggestion.entrezgene}`)
+      this.$router.push(`${ this.$store.state.active_taxon}/fantom5?gid=${suggestion.entrezgene}`)
       // this.$router.push({ path: '/gene/chart', query: { gid: suggestion.entrezgene, project: 'fantom5', organism: this.$store.state.active_taxon} })
     },
     update(newTags) {
@@ -424,6 +465,10 @@ export default {
           });
         }).catch(() => console.warn('Oh. Something went wrong'));
       }, 300);
+    },
+    comparisonSearch() {
+      if(this.checked_gene.length === 0) return;
+      this.$router.push(`${ this.$store.state.active_taxon}/fantom5?gid=${this.checked_gene}`)
     }
   }
 }
@@ -598,4 +643,11 @@ export default {
         margin-left: 18px
     > table
       +table
+      > tbody
+        > tr
+          > td.gene_expression_patterns
+            > img
+              width: 292px
+  > .modal_bg
+    +modal_bg
 </style>

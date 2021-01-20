@@ -4,6 +4,9 @@ $BLACK: #3E4652
 $GRAY: #7C7C7C
 $ACTIVE_COLOR: #F0952E
 
+$MODAL_LAYER: 10
+$MODAL_BG_LAYER: 5
+
 @mixin hover
   cursor: pointer
   color: #ffffff
@@ -97,3 +100,24 @@ $ACTIVE_COLOR: #F0952E
             cursor: pointer
       &:nth-of-type(even)
         background-color: $MAIN_COLOR_PALE
+
+@mixin modal_bg
+  width: 100vw
+  height: 100vh
+  background-color: $BLACK
+  opacity: .2
+  position: fixed
+  top: 0
+  left: 0
+  z-index: $MODAL_BG_LAYER
+
+@mixin modal
+  position: fixed
+  top: 50%
+  left: 50%
+  max-height: 70vh
+  overflow: auto
+  transform: translate(-50%, -50%)
+  background-color: #ffffff
+  padding: 55px 67px
+  z-index: $MODAL_LAYER
