@@ -1,0 +1,12 @@
+{
+  "species": [
+    {
+      "name": "homo_sapiens",
+      "projects": ["FANTOM5"]
+    },
+    {
+      "name": "mus_musculus",
+      "projects": ["FANTOM5"]
+    }
+  ]
+}

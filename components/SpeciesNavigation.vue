@@ -18,19 +18,11 @@
 </template>
 
 <script>
+import species from '~/static/species.json'
 export default {
   data() {
     return {
-      species: [
-        {
-          name: "homo_sapiens",
-          projects: ["FANTOM5"]
-        },
-        {
-          name: "mus_musculus",
-          projects: ["FANTOM5"]
-        }
-      ],
+      species: species.species,
       selected_project: {
         "homo_sapiens": "FANTOM5",
         "mus_musculus": "FANTOM5"
@@ -55,9 +47,10 @@ export default {
   border-bottom: 1px solid $BLACK
   margin: -10px 0 0px
   .species_navi
-    max-width: 1000px
+    min-width: 600px
+    padding: 0 90px
+    margin: 0
     display: flex
-    margin: 0 auto
     > li
       display: flex
       align-self: flex-end

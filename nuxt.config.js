@@ -1,5 +1,7 @@
+import species from './static/species.json'
+
 export default {
-  mode: "universal",
+  mode: "spa",
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     title: 'Refex',
@@ -69,7 +71,21 @@ export default {
   },
 
   generate: {
-    dir: "refex"
+    dir: "refex",
+    routes() {
+      let routes = []
+      species.species.map(specie => {
+        specie.projects.forEach(project => {
+          routes.push(`${specie.name}/${project}`)
+        })
+      })
+      return routes
+      // return client.getEntries({
+      //   'content_type': 'category'
+      // }).then((categories) => {
+      //   return [...categories.items.map(category => `/news/category/${category.sys.id}`)]
+      // })
+    }
   },
 
   router: {

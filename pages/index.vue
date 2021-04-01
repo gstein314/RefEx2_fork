@@ -6,14 +6,18 @@
         <h2>Search Conditions</h2>
         <h3>
           Gene Name, Symbol or Summary
-          <span>ex)&nbsp;</span>
-          <dl>
-            <dt>Gene Name:</dt>
-            <dd @click="setSampleQuery('gene_name', 'Alpha-2-macroglobulin')">Alpha-2-macroglobulin</dd>
-            <dt>Symbol:</dt>
-            <dd @click="setSampleQuery('gene_name', 'A2M')">A2M</dd>
-            <dt>Summary:</dt>
-            <dd @click="setSampleQuery('gene_name', 'Human Normal Tissues Biochain')">Human Normal Tissues Biochain</dd>
+          <span>e.g.&nbsp;</span>
+          <dl @click="setSampleQuery('gene_name', 'transcription factor')">
+            <dt>Gene Name:&nbsp;</dt>
+            <dd>transcription factor</dd>
+          </dl>
+          <dl @click="setSampleQuery('gene_name', 'ITG')">
+            <dt>Symbol:&nbsp;</dt>
+            <dd>ITG</dd>
+          </dl>
+          <dl @click="setSampleQuery('gene_name', 'Breast cancer')">
+            <dt>Summary:&nbsp;</dt>
+            <dd>Breast cancer</dd>
           </dl>
         </h3>
         <vue-simple-suggest
@@ -26,7 +30,7 @@
           class="text_search_gene_name"
           @input="showAllResult('num')"
           @select="moveDetailpage"
-          placeholder="alpha-2-macroglobulin"
+          placeholder="transcription factor"
         >
           <template slot="misc-item-above">
             <button class="show_all_btn" @click="showAllResult('all')">
@@ -46,7 +50,7 @@
         <div :class="['summary_check_wrapper', { hide: this.input_gene_name === ''}]" >
           <input
             @click="showAllResult('num')" type="checkbox" name="summary_check" id="summary_check" v-model="is_summary_included">
-          <label for="summary_check">Include this field search summary</label>
+          <label for="summary_check">Include gene summaries in your search.</label>
         </div>
         <div :class="['screener_wrapper', {open: is_screener_open}]">
           <p class="screener_title" @click="is_screener_open = !is_screener_open">
@@ -55,10 +59,13 @@
             <font-awesome-icon icon="chevron-right" :class="is_screener_open ? 'open' : 'close'"/>
           <h3>
             Genes with GO Term
-            <span class="ex">ex)&nbsp;</span>
+            <span class="ex">e.g.&nbsp;</span>
             <span
               class="sample_value"
-              @click="setSampleQuery('go')">DNA-binding transcription factor activity</span>
+              @click="setSampleQuery('go', 'transcription factor binding', 'GO:0008134')">transcription factor binding</span>,
+            <span
+              class="sample_value"
+              @click="setSampleQuery('go', 'cell differentiation', 'GO:0030154')">cell differentiation</span>
           </h3>
           <no-ssr>
             <vue-tags-input
@@ -67,7 +74,7 @@
               :autocomplete-items="autocomplete_go_term_items"
               :add-only-from-autocomplete="true"
               @tags-changed="update"
-              placeholder="DNA-binding transcription factor activity"
+              placeholder="transcription factor binding"
             >
               <div
                 slot="autocomplete-item"
@@ -87,7 +94,7 @@
             :max-suggestions=100
             class="text_search_go_term"
             @input="is_reload_active = true"
-            placeholder="DNA-binding transcription factor activity"
+            placeholder="transcription factor binding"
           >
             <div slot="suggestion-item" slot-scope="{ suggestion }">
               {{ `${suggestion.term},${suggestion.gocategory} ${suggestion.id}` }}
@@ -96,12 +103,15 @@
               <span>Loading...</span>
             </div>
           </vue-simple-suggest> -->
-          <h3>Genes that are specifically expressed in a give sample by classification</h3>
+          <h3>Genes that are specifically expressed in a given sample by classification</h3>
           <div class="classification_wrapper">
             <h4>
               Sample types by FANTOM5
-              <span class="ex">ex)&nbsp;</span>
-              <span class="sample_value" @click="setSampleQuery('sample_types', 'stem')">stem</span>
+              <span class="ex">e.g.&nbsp;</span>
+              <span class="sample_value" @click="setSampleQuery('sample_types', 'cell lines')">cell lines</span>,
+              <span class="sample_value" @click="setSampleQuery('sample_types', 'stem cells')">stem cells</span>,
+              <span class="sample_value" @click="setSampleQuery('sample_types', 'primary cells')">primary cells</span>,
+              <span class="sample_value" @click="setSampleQuery('sample_types', 'tissues')">tissues</span>
             </h4>
             <!-- <input type="text" @input="is_reload_active = true" class="text_search_sample_types" v-model="input_sample_types" placeholder="cell lines"> -->
             <vue-simple-suggest
@@ -118,8 +128,8 @@
             </vue-simple-suggest>
             <h4>
               Cell types by Cell Ontology
-              <span class="ex">ex)&nbsp;</span>
-              <span class="sample_value" @click="setSampleQuery('cell_types', 'epthelial')">epthelial</span>
+              <span class="ex">e.g.&nbsp;</span>
+              <span class="sample_value" @click="setSampleQuery('cell_types', 'hepatocyte')">hepatocyte</span>
             </h4>
             <!-- <input type="text" @input="is_reload_active = true" class="text_search_cell_types" v-model="input_cell_types" placeholder="CD14"> -->
             <vue-simple-suggest
@@ -136,8 +146,8 @@
             </vue-simple-suggest>
             <h4>
               Anatomical structures by UBERON
-              <span class="ex">ex)&nbsp;</span>
-              <span class="sample_value" @click="setSampleQuery('anatomical_structures', 'muscle')">muscle</span>
+              <span class="ex">e.g.&nbsp;</span>
+              <span class="sample_value" @click="setSampleQuery('anatomical_structures', 'liver')">liver</span>
             </h4>
             <!-- <input type="text" @input="is_reload_active = true" class="text_search_anatomical_structures" v-model="input_anatomical_structures" placeholder="skin"> -->
             <vue-simple-suggest
@@ -154,8 +164,9 @@
             </vue-simple-suggest>
             <h4>
               Biomedical concepts by NCI Thesaurus (NCIt)
-              <span class="ex">ex)&nbsp;</span>
-              <span class="sample_value" @click="setSampleQuery('biomedical_concepts', 'carcinoma')">carcinoma</span>
+              <span class="ex">e.g.&nbsp;</span>
+              <span class="sample_value" @click="setSampleQuery('biomedical_concepts', 'Osteosarcoma')">Osteosarcoma</span>,
+              <span class="sample_value" @click="setSampleQuery('biomedical_concepts', 'Ovarian Carcinoma')">Ovarian Carcinoma</span>
             </h4>
             <!-- <input type="text" @input="is_reload_active = true" class="text_search_biomedical_concepts" v-model="input_biomedical_concepts" placeholder="leukemia"> -->
             <vue-simple-suggest
@@ -195,6 +206,10 @@
           <font-awesome-icon icon="chart-bar" />
           Comparison
         </button>
+        <span class="ex">e.g.&nbsp;</span>
+        <span
+          class="sample_value"
+          @click="$router.push(`${$store.state.active_taxon}/FANTOM5?gid=5460,6657,9314,4609`)">Yamanaka Factors (OCT3/4, SOX2, KLF4 and C-MYC-OSKM)</span>
       </div>
       <table>
         <thead>
@@ -211,8 +226,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="result in results" :key="result.ncbiGeneId">
-            <td class="checkbox">
+          <tr v-for="result in results" :key="result.ncbiGeneId" @click="$router.push(`${$store.state.active_taxon}/FANTOM5?gid=${result.ncbiGeneId}`)">
+            <td class="checkbox" @click="e => e.stopPropagation()">
               <input type="checkbox" :value="result.ncbiGeneId" v-model="checked_gene">
             </td>
             <td class="gene_symbol">{{ result.symbol }}</td>
@@ -230,7 +245,7 @@
             </td>
             <td class="NCBI_geneID">{{ result.ncbiGeneId }}</td>
             <td class="annotation">
-              <font-awesome-icon icon="info-circle" @click="showGeneDetail(result.ncbiGeneId)"/>
+              <font-awesome-icon icon="info-circle" @click.stop="showGeneDetail(result.ncbiGeneId)"/>
             </td>
             <td class="gene_expression_patterns">
               <img :src="`http://penqe.com/refex_figs/human_fantom5_${result.ncbiGeneId}.png`" :alt="result.ncbiGeneId">
@@ -352,13 +367,13 @@ export default {
       this.gene_id_for_detail_modal = id
       this.is_gene_detail_modal_shown = true
     },
-    setSampleQuery(type, query) {
+    setSampleQuery(type, query, id) {
       this.is_reload_active = true
       if (type === "gene_name") {
         this.input_gene_name = query
       } else if (type === "go") {
         this.input_go_terms = []
-        this.input_go_terms.push({text: 'DNA-binding transcription factor activity', id: 'GO:0051090', tiClasses: ['ti-valid']})
+        this.input_go_terms.push({text: query, id, tiClasses: ['ti-valid']})
       } else if (type === "sample_types") {
         this.input_sample_types = query
       } else if (type === "cell_types") {
@@ -369,9 +384,6 @@ export default {
         this.input_biomedical_concepts = query
       }
       this.showAllResult("num")
-    },
-    goSelected(selected_go) {
-      console.log('selected_go', selected_go)
     },
     showAllResult(type){
       setTimeout(() => {
@@ -443,7 +455,7 @@ export default {
         });
     },
     moveDetailpage(suggestion) {
-      this.$router.push(`${ this.$store.state.active_taxon}/fantom5?gid=${suggestion.entrezgene}`)
+      this.$router.push(`${ this.$store.state.active_taxon}/FANTOM5?gid=${suggestion.entrezgene}`)
       // this.$router.push({ path: '/gene/chart', query: { gid: suggestion.entrezgene, project: 'fantom5', organism: this.$store.state.active_taxon} })
     },
     update(newTags) {
@@ -468,7 +480,11 @@ export default {
     },
     comparisonSearch() {
       if(this.checked_gene.length === 0) return;
-      this.$router.push(`${ this.$store.state.active_taxon}/fantom5?gid=${this.checked_gene}`)
+      let compare_genes = this.checked_gene
+      if(compare_genes.length > 10) {
+        compare_genes = compare_genes.slice(0, 10)
+      }
+      this.$router.push(`${ this.$store.state.active_taxon}/FANTOM5?gid=${compare_genes}`)
     }
   }
 }
@@ -477,8 +493,8 @@ export default {
 <style lang="sass">
 .index_wrapper
   > main
-    width: 1000px
-    margin: 0 auto
+    min-width: 600px
+    padding: 0 90px
     display: flex
     .vue-simple-suggest
       position: relative
@@ -487,6 +503,7 @@ export default {
       > h3
         display: flex
         align-items: center
+        margin: 6px 0
         > span
           font-size: 12px
           color: $GRAY
@@ -495,6 +512,7 @@ export default {
         > dl
           display: flex
           align-items: center
+          padding: 0 10px
           margin: 0
           > dt
             font-size: 12px
@@ -503,11 +521,12 @@ export default {
           > dd
             font-size: 14px
             font-weight: 300
-            padding: 2px 10px
-            margin-left: 0
-            margin-right: 15px
-            &:hover
-              +hover
+            padding: 2px 0
+            margin: 0
+          &:hover
+            +hover
+            > dt
+              color: #ffffff
       .text_search_gene_name
         input
           +text_input
@@ -585,18 +604,7 @@ export default {
               cursor: pointer
         h3,h4
           > span
-            &.ex
-              font-size: 12px
-              color: $GRAY
-              font-weight: 100
-            &.sample_value
-              font-size: 14px
-              font-weight: 300
-              padding: 2px 10px
-              margin-left: -3px
-              margin-right: 15px
-              &:hover
-                +hover
+            +sample_query
         input
           +text_input
           font-size: 22px
@@ -633,18 +641,25 @@ export default {
             opacity: 1
             pointer-events: initial
   > .results_wrapper
-    width: 1000px
-    margin: 0 auto
+    min-width: 600px
+    padding: 0 90px
     > .results_title_wrapper
       display: flex
       align-items: center
       > button.show_all_btn
         +button
         margin-left: 18px
+      > span
+        +sample_query
+        &.ex
+          margin-left: 20px
     > table
       +table
       > tbody
         > tr
+          &:hover
+            cursor: pointer
+            background-color: $ACTIVE_COLOR_HOVER
           > td.gene_expression_patterns
             > img
               width: 292px
