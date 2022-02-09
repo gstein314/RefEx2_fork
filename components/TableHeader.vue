@@ -41,6 +41,10 @@ export default {
             type: Boolean,
             default: true,
         },
+        filterModal: {
+            type: String,
+            default: '',
+        },
         numberValue: {
             type: Object,
             required: false,
@@ -52,7 +56,7 @@ export default {
     },
     computed: {
         isActiveSearch() {
-            return this.numberValue ? this.numberValue.value[0] !== 0 || this.numberValue.value[1] !== this.numberValue.max : false;
+            return this.numberValue ? this.numberValue.value[0] !== 0 || this.numberValue.value[1] !== this.numberValue.max : this.filterModal !== '';
         }
     },
     methods: {

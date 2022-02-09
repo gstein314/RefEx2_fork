@@ -448,7 +448,7 @@ export default {
       let filtered_results = [];
       switch (this.filter_modal) {
         case "Age":
-          filtered_results = this.original_r_inf.filter((result) => {
+          filtered_results = this.results.r_inf.filter((result) => {
             let flag = false;
             let age = this.normalizeAge(result.Age);
             switch (typeof age) {
