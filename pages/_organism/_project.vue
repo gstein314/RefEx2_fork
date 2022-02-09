@@ -90,7 +90,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="result in results.r_inf" :key="result.ncbiGeneId">
+        <tr v-for="result in filteredData" :key="result.ncbiGeneId">
           <template v-for="(value, key) of filters">
             <td v-if="value.isDisplayed" :key="key" :class="value.innerKey">
               <median-bar
@@ -157,7 +157,6 @@
           <div class="input_wrapper">
             <vue-slider
               ref="slider"
-              @change="filterByNumber(filters[filter_modal].numberValue.value)"
               v-model="filters[filter_modal].numberValue.value"
               v-bind="filters[filter_modal].numberValue"
             ></vue-slider>
@@ -168,9 +167,9 @@
             type="text"
             v-model="filters[filter_modal].filterModal"
             placeholder="filter by text"
-            @keyup.enter="filterByText"
+            @keyup.enter="closeModal"
           />
-          <button class="search" @click="filterByText">
+          <button class="search" @click="closeModal">
             <font-awesome-icon icon="search" />
             Search
           </button>
@@ -226,7 +225,7 @@ import MedianScale from "~/components/MedianScale.vue";
 
 const maxInTenth = (x) => {
   return Math.ceil(x / 10) * 10;
-}
+};
 export default {
   async asyncData({ error, payload, query }) {
     let gene_num = 1;
@@ -343,7 +342,7 @@ export default {
           filterState: "",
         },
         "UBERON label": {
-          label: "UBERON",
+          label: "Anatomical structures",
           subLabel: "(UBERON)",
           innerKey: "uberon",
           isDisplayed: true,
@@ -351,7 +350,7 @@ export default {
           filterState: "",
         },
         "CL label": {
-          label: "CL",
+          label: "Cell types",
           subLabel: "(Cell Ontology)",
           innerKey: "cl",
           isDisplayed: true,
@@ -386,7 +385,7 @@ export default {
           filterState: "",
         },
         "NCIT label": {
-          label: "NCIT",
+          label: "Biomedical concepts",
           subLabel: "(NCI Thesaurus: NCIt)",
           innerKey: "ncit",
           isDisplayed: true,
@@ -410,6 +409,54 @@ export default {
     filterModalObj() {
       if (!this.filter_modal) return {};
       return this.filters[this.filter_modal];
+    },
+    filteredData() {
+      return this.original_r_inf
+        .filter((result) => {
+          let is_filtered = false;
+          for (const [key, col] of Object.entries(this.filters)) {
+            if (col.isDisplayed) {
+              // number filter
+              if (col.numberValue) {
+                if (
+                  col.numberValue.value[0] > result[key] ||
+                  col.numberValue.value[1] < result[key]
+                ) {
+                  console.log("filtered");
+                  is_filtered = true;
+                }
+              }
+              // text filter
+              else if (
+                col.filterModal !== "" &&
+                result[key].indexOf(col.filterModal) === -1
+              ) {
+                is_filtered = true;
+              }
+            }
+          }
+          return !is_filtered;
+        })
+        ?.sort((a, b) => {
+          switch (this.sort?.order) {
+            case "up":
+              if (a[this.sort?.active] < b[this.sort?.active]) {
+                return -1;
+              } else if (a[this.sort?.active] > b[this.sort?.active]) {
+                return 1;
+              } else {
+                return 0;
+              }
+            case "down":
+              if (a[this.sort?.active] > b[this.sort?.active]) {
+                return -1;
+              } else if (a[this.sort?.active] < b[this.sort?.active]) {
+                return 1;
+              } else {
+                return 0;
+              }
+          }
+        });
     },
   },
   mounted() {
@@ -444,47 +491,6 @@ export default {
         });
       });
     },
-    filterByNumber(filter_range) {
-      let filtered_results = [];
-      switch (this.filter_modal) {
-        case "Age":
-          filtered_results = this.results.r_inf.filter((result) => {
-            let flag = false;
-            let age = this.normalizeAge(result.Age);
-            switch (typeof age) {
-              case "number":
-                if (filter_range[0] <= age && filter_range[1] >= age) {
-                  flag = true;
-                }
-                break;
-              case "object":
-                if (
-                  filter_range[0] <= age[0] &&
-                  filter_range[1] >= age[age.length - 1]
-                ) {
-                  flag = true;
-                }
-                break;
-            }
-            return flag;
-          });
-          break;
-        case "log2_Median":
-          filtered_results = this.original_r_inf.filter((result) => {
-            let flag = false;
-            if (
-              filter_range[0] <= result.log2_Median &&
-              filter_range[1] >= result.log2_Median
-            ) {
-              flag = true;
-            }
-            return flag;
-          });
-          break;
-      }
-
-      this.results.r_inf = filtered_results;
-    },
     showGeneDetail(id) {
       this.gene_id_for_detail_modal = id;
       this.is_gene_detail_modal_on = true;
@@ -493,7 +499,7 @@ export default {
       const numberValue = this.filters[type]?.numberValue;
       if (!numberValue) return;
       numberValue.value = [0, numberValue.max];
-      this.filterByNumber(numberValue.value)
+      this.$set(this.filters[type], "numberValue", numberValue);
     },
     normalizeAge(age) {
       let normalized_age;
@@ -520,29 +526,6 @@ export default {
       if (order) {
         this.sort.order = order;
       }
-      const that = this;
-      this.results.r_inf = this.results.r_inf.sort(function (a, b) {
-        switch (that.sort.order) {
-          case "up":
-            if (a[that.sort.active] < b[that.sort.active]) {
-              return -1;
-            } else if (a[that.sort.active] > b[that.sort.active]) {
-              return 1;
-            } else {
-              return 0;
-            }
-            break;
-          case "down":
-            if (a[that.sort.active] > b[that.sort.active]) {
-              return -1;
-            } else if (a[that.sort.active] < b[that.sort.active]) {
-              return 1;
-            } else {
-              return 0;
-            }
-            break;
-        }
-      });
     },
     openFilterModal(key) {
       this.is_filter_modal_on = true;
@@ -553,26 +536,6 @@ export default {
         (this.is_filter_modal_on = false),
         (this.is_gene_detail_modal_on = false),
         (this.is_compare_on = false);
-    },
-    filterByText() {
-      let is_all_filter_clear = true;
-      let filtered_results = [];
-      filtered_results = this.original_r_inf.filter((result) => {
-        let flag = true;
-        Object.entries(this.filters).forEach(([key, col]) => {
-          if (col.filterModal !== "") {
-            is_all_filter_clear = false;
-            if (result[key].indexOf(col.filterModal) === -1) {
-              flag = false;
-            }
-          }
-        });
-        return flag;
-      });
-      this.results.r_inf = filtered_results;
-      if (is_all_filter_clear) {
-        this.results.r_inf = this.original_r_inf;
-      }
     },
     comparisonSearch() {
       if (this.comparisonSearch === "") return;
