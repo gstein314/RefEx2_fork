@@ -29,6 +29,7 @@
         type: String,
         default: '',
       },
+      // eslint-disable-next-line vue/require-default-prop
       subLabel: {
         type: String,
         required: false,
@@ -37,6 +38,7 @@
         type: String,
         default: '',
       },
+      // eslint-disable-next-line vue/require-default-prop
       isDisplayed: {
         type: Boolean,
         default: true,
@@ -45,6 +47,7 @@
         type: String,
         default: '',
       },
+      // eslint-disable-next-line vue/require-default-prop
       numberValue: {
         type: Object,
         required: false,

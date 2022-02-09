@@ -179,7 +179,7 @@
     <transition name="modal">
       <GeneDetailModal
         v-if="is_gene_detail_modal_on"
-        :props="{ gene_id: gene_id_for_detail_modal }"
+        :gene-id="gene_id_for_detail_modal"
       />
     </transition>
     <transition name="modal">

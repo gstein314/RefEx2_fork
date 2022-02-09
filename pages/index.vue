@@ -1,4 +1,6 @@
 <template>
+  <!-- TODO: ask about v-html -->
+  <!-- eslint-disable vue/no-v-html -->
   <div class="index_wrapper">
     <SpeciesNavigation />
     <main>
@@ -38,6 +40,7 @@
               Show all genes that match your query
             </button>
           </template>
+          <!-- TODO: ask about suggestion -->
           <div
             slot="suggestion-item"
             slot-scope="{ suggestion }"
@@ -60,6 +63,7 @@
               style="font-size: 12px"
             />
           </div>
+
           <div
             v-if="isLoading"
             slot="misc-item-below"
@@ -418,7 +422,7 @@
     </div>
     <GeneDetailModal
       v-if="is_gene_detail_modal_shown"
-      :props="{ gene_id: gene_id_for_detail_modal }"
+      :gene-id="gene_id_for_detail_modal"
     />
     <div
       v-if="is_gene_detail_modal_shown"

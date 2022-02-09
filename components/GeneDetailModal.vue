@@ -126,8 +126,9 @@
 
   export default {
     props: {
-      props: {
-        type: Object,
+      geneId: {
+        type: String,
+        default: '',
       },
     },
     data() {
@@ -138,13 +139,10 @@
     },
     created() {
       this.is_loading = true;
-      axios
-        .get(`https://mygene.info/v3/gene/${this.props.gene_id}`)
-        .then(data => {
-          this.gene_data = data.data;
-          this.is_loading = false;
-          console.log(data.data);
-        });
+      axios.get(`https://mygene.info/v3/gene/${this.geneId}`).then(data => {
+        this.gene_data = data.data;
+        this.is_loading = false;
+      });
     },
     methods: {},
   };

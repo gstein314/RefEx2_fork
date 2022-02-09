@@ -7,6 +7,7 @@ module.exports = {
   extends: ['plugin:nuxt/recommended', 'plugin:vue/recommended', 'prettier'],
   plugins: ['import', 'vue', 'prettier'],
   rules: {
+    'vue/multi-word-component-names': 'off',
     'prettier/prettier': [
       'error',
       {
