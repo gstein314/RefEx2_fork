@@ -2,7 +2,6 @@
   <div class="chart_wrapper">
     <div class="header">
       <div class="header_title">
-        {{ filter_modal }}
         <h1>
           <font-awesome-icon
             icon="info-circle"
@@ -151,27 +150,19 @@
               : filterModalObj.label
           }}
         </p>
-        <button
-          v-if="
-            filter_modal === 'log2_Median' || filter_modal === 'Age'
-          "
-          @click="resetSlider(filter_modal)"
+        <template
+          v-if="filter_modal === 'log2_Median' || filter_modal === 'Age'"
         >
-          Reset
-        </button>
-        <div
-          class="input_wrapper"
-          v-if="
-            filter_modal === 'log2_Median' || filter_modal === 'Age'
-          "
-        >
-          <vue-slider
-            ref="slider"
-            v-model="filters[filter_modal].numberValue.value"
-            v-bind="filters[filter_modal].numberValue.options"
-            :marks="marks[filter_modal]"
-          ></vue-slider>
-        </div>
+          <button @click="resetSlider(filter_modal)">Reset</button>
+          <div class="input_wrapper">
+            <vue-slider
+              ref="slider"
+              @change="filterByNumber(filters[filter_modal].numberValue.value)"
+              v-model="filters[filter_modal].numberValue.value"
+              v-bind="filters[filter_modal].numberValue"
+            ></vue-slider>
+          </div>
+        </template>
         <div class="input_wrapper" v-else>
           <input
             type="text"
@@ -233,6 +224,9 @@ import MedianBar from "~/components/MedianBar.vue";
 import TableHeader from "~/components/TableHeader.vue";
 import MedianScale from "~/components/MedianScale.vue";
 
+const maxInTenth = (x) => {
+  return Math.ceil(x / 10) * 10;
+}
 export default {
   async asyncData({ error, payload, query }) {
     let gene_num = 1;
@@ -330,6 +324,7 @@ export default {
             value: [0, 0],
             min: 0,
             max: 0,
+            marks: [],
           },
         },
         "Sample types category": {
@@ -380,6 +375,7 @@ export default {
             value: [0, 0],
             min: 0,
             max: 0,
+            marks: [],
           },
         },
         "Developmental stage": {
@@ -401,10 +397,6 @@ export default {
       is_display_settings_on: false,
       is_filter_modal_on: false,
       filter_modal: "",
-      marks: {
-        log2_Median: [],
-        Age: [],
-      },
       gene_id_for_detail_modal: 0,
       is_gene_detail_modal_on: false,
       gene_ids_to_compare: "",
@@ -414,53 +406,6 @@ export default {
   beforeRouteUpdate(to, from, next) {
     this.$forceUpdate();
   },
-  watch: {
-    value: {
-      handler: function (val) {
-        let filtered_results = [];
-        const filter_range = val[this.filter_modal];
-        switch (this.filter_modal) {
-          case "Age":
-            filtered_results = this.original_r_inf.filter((result) => {
-              let flag = false;
-              let age = this.normalizeAge(result.Age);
-              switch (typeof age) {
-                case "number":
-                  if (filter_range[0] <= age && filter_range[1] >= age) {
-                    flag = true;
-                  }
-                  break;
-                case "object":
-                  if (
-                    filter_range[0] <= age[0] &&
-                    filter_range[1] >= age[age.length - 1]
-                  ) {
-                    flag = true;
-                  }
-                  break;
-              }
-              return flag;
-            });
-            break;
-          case "MEDIAN [LOG2(TPM+1)]":
-            filtered_results = this.original_r_inf.filter((result) => {
-              let flag = false;
-              if (
-                filter_range[0] <= result.log2_Median &&
-                filter_range[1] >= result.log2_Median
-              ) {
-                flag = true;
-              }
-              return flag;
-            });
-            break;
-        }
-
-        this.results.r_inf = filtered_results;
-      },
-      deep: true,
-    },
-  },
   computed: {
     filterModalObj() {
       if (!this.filter_modal) return {};
@@ -468,21 +413,18 @@ export default {
     },
   },
   mounted() {
-    this.filters.Age.numberValue.value[1] = Math.ceil(this.age_max / 10) * 10;
-    this.filters.Age.numberValue.max = Math.ceil(this.age_max / 10) * 10;
-    this.filters.log2_Median.numberValue.value[1] =
-      Math.ceil(this.median_max / 10) * 10;
-    this.filters.log2_Median.numberValue.max =
-      Math.ceil(this.median_max / 10) * 10;
-    
+    const ageFilter = this.filters.Age.numberValue;
+    const medianFilter = this.filters.log2_Median.numberValue;
+    ageFilter.max = maxInTenth(this.age_max);
+    ageFilter.value[1] = ageFilter.max;
+
+    medianFilter.max = maxInTenth(this.median_max);
+    medianFilter.value[1] = medianFilter.max;
     for (let i = 0; i < this.filters.Age.numberValue.max; i += 10) {
-      // console.log(i);
-      this.marks.Age.push(i);
+      ageFilter.marks.push(i);
     }
-    for (let i = 0; i < this.filters.log2_Median.numberValue.max; i += 200) {
-      console.log(this.filters.log2_Median.numberValue.max);
-      this.marks.log2_Median.push(i);
-      // console.log(i);
+    for (let i = 0; i < this.filters.log2_Median.numberValue.max; i += 1) {
+      medianFilter.marks.push(i);
     }
   },
   methods: {
@@ -502,6 +444,47 @@ export default {
         });
       });
     },
+    filterByNumber(filter_range) {
+      let filtered_results = [];
+      switch (this.filter_modal) {
+        case "Age":
+          filtered_results = this.original_r_inf.filter((result) => {
+            let flag = false;
+            let age = this.normalizeAge(result.Age);
+            switch (typeof age) {
+              case "number":
+                if (filter_range[0] <= age && filter_range[1] >= age) {
+                  flag = true;
+                }
+                break;
+              case "object":
+                if (
+                  filter_range[0] <= age[0] &&
+                  filter_range[1] >= age[age.length - 1]
+                ) {
+                  flag = true;
+                }
+                break;
+            }
+            return flag;
+          });
+          break;
+        case "log2_Median":
+          filtered_results = this.original_r_inf.filter((result) => {
+            let flag = false;
+            if (
+              filter_range[0] <= result.log2_Median &&
+              filter_range[1] >= result.log2_Median
+            ) {
+              flag = true;
+            }
+            return flag;
+          });
+          break;
+      }
+
+      this.results.r_inf = filtered_results;
+    },
     showGeneDetail(id) {
       this.gene_id_for_detail_modal = id;
       this.is_gene_detail_modal_on = true;
@@ -510,6 +493,7 @@ export default {
       const numberValue = this.filters[type]?.numberValue;
       if (!numberValue) return;
       numberValue.value = [0, numberValue.max];
+      this.filterByNumber(numberValue.value)
     },
     normalizeAge(age) {
       let normalized_age;
