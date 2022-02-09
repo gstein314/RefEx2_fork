@@ -4,11 +4,7 @@ module.exports = {
     browser: true,
     node: true,
   },
-  extends: [
-    'plugin:nuxt/recommended',
-    'plugin:vue/recommended',
-    'prettier',
-  ],
+  extends: ['plugin:nuxt/recommended', 'plugin:vue/recommended', 'prettier'],
   plugins: ['import', 'vue', 'prettier'],
   rules: {
     'prettier/prettier': [
