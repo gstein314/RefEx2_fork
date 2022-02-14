@@ -1,6 +1,5 @@
 <template>
   <div v-if="geneNum === 1" class="bar_box">
-    geneNum
     <div
       class="bar single_gene"
       :style="`width: ${(result[prefix] * 230) / 16}px;`"
