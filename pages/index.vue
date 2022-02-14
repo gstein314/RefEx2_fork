@@ -1,5 +1,5 @@
 <template>
-  <!-- TODO: ask about v-html -->
+  <!-- v-html setup neccesary for plugin, does NOT use user input/API data and is therefore safe to use -->
   <!-- eslint-disable vue/no-v-html -->
   <div class="index_wrapper">
     <SpeciesNavigation />
@@ -40,7 +40,8 @@
               Show all genes that match your query
             </button>
           </template>
-          <!-- TODO: ask about suggestion -->
+          <!-- eslint-disable vue/no-unused-vars -->
+          <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
           <div
             slot="suggestion-item"
             slot-scope="{ suggestion }"
@@ -63,7 +64,6 @@
               style="font-size: 12px"
             />
           </div>
-
           <div
             v-if="isLoading"
             slot="misc-item-below"
@@ -145,23 +145,6 @@
               ></div>
             </vue-tags-input>
           </no-ssr>
-          <!-- <vue-simple-suggest
-            :debounce="500"
-            display-attribute="term"
-            value-attribute="id"
-            :list="getSuggestionList"
-            :max-suggestions=100
-            class="text_search_go_term"
-            @input="is_reload_active = true"
-            placeholder="transcription factor binding"
-          >
-            <div slot="suggestion-item" slot-scope="{ suggestion }">
-              {{ `${suggestion.term},${suggestion.gocategory} ${suggestion.id}` }}
-            </div>
-            <div slot="misc-item-below" slot-scope="{ suggestion }" v-if="isLoading" class="misc-item">
-              <span>Loading...</span>
-            </div>
-          </vue-simple-suggest> -->
           <h3>
             Genes that are specifically expressed in a given sample by
             classification
@@ -191,7 +174,6 @@
                 >tissues</span
               >
             </h4>
-            <!-- <input type="text" @input="is_reload_active = true" class="text_search_sample_types" v-model="input_sample_types" placeholder="cell lines"> -->
             <vue-simple-suggest
               v-model="input_sample_types"
               :filter-by-query="true"
@@ -221,7 +203,6 @@
                 >hepatocyte</span
               >
             </h4>
-            <!-- <input type="text" @input="is_reload_active = true" class="text_search_cell_types" v-model="input_cell_types" placeholder="CD14"> -->
             <vue-simple-suggest
               v-model="input_cell_types"
               :filter-by-query="true"
@@ -251,7 +232,6 @@
                 >liver</span
               >
             </h4>
-            <!-- <input type="text" @input="is_reload_active = true" class="text_search_anatomical_structures" v-model="input_anatomical_structures" placeholder="skin"> -->
             <vue-simple-suggest
               v-model="input_anatomical_structures"
               :filter-by-query="true"
@@ -288,7 +268,6 @@
                 >Ovarian Carcinoma</span
               >
             </h4>
-            <!-- <input type="text" @input="is_reload_active = true" class="text_search_biomedical_concepts" v-model="input_biomedical_concepts" placeholder="leukemia"> -->
             <vue-simple-suggest
               v-model="input_biomedical_concepts"
               :filter-by-query="true"
@@ -320,10 +299,6 @@
         <div class="results_num_inner">
           <h2>Estimated Results</h2>
           <p class="results_num">{{ results_num }}</p>
-          <!-- <button :class="['reload', { active: is_reload_active && !is_all_clear}]" @click="showAllResult('num')">
-            <font-awesome-icon icon="sync-alt" />
-            Reload
-          </button> -->
         </div>
       </div>
     </main>
