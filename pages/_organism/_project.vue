@@ -169,10 +169,7 @@
             placeholder="filter by text"
             @keyup.enter="closeModal"
           />
-          <button class="search" @click="closeModal">
-            <font-awesome-icon icon="search" />
-            Search
-          </button>
+          <button @click="filters[filter_modal].filterModal = ''">Reset</button>
         </div>
       </div>
     </transition>
