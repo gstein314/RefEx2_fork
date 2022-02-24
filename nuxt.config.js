@@ -59,6 +59,11 @@ export default {
         set: '@fortawesome/free-solid-svg-icons',
         icons: ['fas'],
       },
+      {
+        set: '@fortawesome/pro-duotone-svg-icons',
+        icons: ['faTimesCircle'],
+      },
+      // { set: '@fortawesome/free-regular-svg-icons', icons: ['faTimesCircle'] },
     ],
   },
   // Build Configuration (https://go.nuxtjs.dev/config-build)

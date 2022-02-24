@@ -169,7 +169,12 @@
             placeholder="filter by text"
             @keyup.enter="closeModal"
           />
-          <button @click="filters[filter_modal].filterModal = ''">Reset</button>
+          <font-awesome-icon
+            v-show="filters[filter_modal].filterModal !== ''"
+            class="reset-btn"
+            :icon="['fad', 'circle-xmark']"
+            @click="filters[filter_modal].filterModal = ''"
+          />
         </div>
       </div>
     </transition>
@@ -698,11 +703,18 @@
         > .input_wrapper
           display: flex
           align-items: center
+          position: relative
           > input[type="text"]
             +text_input
-          > button
-            +button
-            margin-left: 15px
+          > .reset-btn
+            position: absolute
+            right: 1rem
+            --fa-secondary-opacity: 0.3
+            cursor: pointer
+            &:hover
+              --fa-secondary-opacity: 1
+              --fa-primary-color: white
+              --fa-secondary-color: #488EC4
           > .vue-slider
             width: 100% !important
             margin-top: 25px
