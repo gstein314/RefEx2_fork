@@ -218,7 +218,6 @@
 </template>
 
 <script>
-  import axios from 'axios';
   import 'vue-slider-component/dist-css/vue-slider-component.css';
   import GeneDetailModal from '~/components/GeneDetailModal.vue';
   import MedianBar from '~/components/MedianBar.vue';
@@ -238,7 +237,7 @@
     beforeRouteUpdate(to, from, next) {
       this.$forceUpdate();
     },
-    async asyncData({ error, payload, query }) {
+    async asyncData({ $axios, query }) {
       let gene_num = 1;
       if (query.gid) {
         if (query.gid.match(/,/g)) {
@@ -250,7 +249,7 @@
         } else {
           gid = query.gid.split(',').splice(0, 1)[0];
         }
-        let data = await axios.get(`http://refex2-api.bhx.jp/api/dist/${gid}`);
+        let data = await $axios.$get(gid);
 
         let median_array = [];
         let age_array = [];
@@ -259,10 +258,10 @@
         let original_r_inf;
 
         // default: Median sort
-        data.data.r_inf.sort(function (a, b) {
+        data?.r_inf.sort(function (a, b) {
           return b.log2_Median - a.log2_Median;
         });
-        data.data.r_inf.forEach(datam => {
+        data?.r_inf.forEach(datam => {
           median_array.push(datam.log2_Median);
           if (datam.Age.indexOf('-') !== -1) {
             datam.Age = datam.Age.replace(/[^0-9]/g, ',');
@@ -277,25 +276,23 @@
 
         age_max = Math.max(...age_array);
         median_max = Math.max(...median_array);
-        original_r_inf = [...data.data.r_inf];
+        original_r_inf = [...data.r_inf];
 
         let compare_genes = [];
         let gid_array = query.gid.split(',');
         gid_array.splice(0, 1);
         let compare_results = await Promise.all(
-          gid_array.map(id =>
-            axios.get(`http://refex2-api.bhx.jp/api/dist/${id}`)
-          )
+          gid_array.map(id => $axios.$get(id))
         );
         compare_results.forEach((gene, index) => {
-          compare_genes.push(gene.data);
-          gene.data.r_inf.forEach((datam, index_2) => {
-            data.data.r_inf[index_2][`log2_Median_compare_${index + 2}`] =
+          compare_genes.push(gene);
+          gene.r_inf.forEach((datam, index_2) => {
+            data.r_inf[index_2][`log2_Median_compare_${index + 2}`] =
               datam.log2_Median;
           });
         });
         return {
-          results: data.data,
+          results: data,
           gene_num: gene_num,
           original_r_inf: original_r_inf,
           age_max: age_max,
@@ -424,7 +421,6 @@
                     col.numberValue.value[0] > result[key] ||
                     col.numberValue.value[1] < result[key]
                   ) {
-                    console.log('filtered');
                     is_filtered = true;
                   }
                 }
@@ -481,9 +477,7 @@
         let gid_array = this.$route.query.gid.split(',');
         gid_array.splice(0, 1);
         let compare_results = await Promise.all(
-          gid_array.map(id =>
-            axios.get(`http://refex2-api.bhx.jp/api/dist/${id}`)
-          )
+          gid_array.map(id => this.$axios.$get(id))
         );
         this.results.r_inf.forEach(result => {
           compare_results.forEach((gene, index) => {

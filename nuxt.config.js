@@ -1,4 +1,5 @@
 import species from './static/species.json';
+import { exponentialDelay } from 'axios-retry';
 
 export default {
   mode: 'spa',
@@ -37,6 +38,7 @@ export default {
   modules: [
     '@nuxtjs/style-resources',
     'nuxt-fontawesome',
+    '@nuxtjs/axios',
     [
       'nuxt-fontawesome',
       {
@@ -53,6 +55,14 @@ export default {
       },
     ],
   ],
+
+  axios: {
+    baseURL: 'http://refex2-api.bhx.jp/api/dist',
+    retry: {
+      retries: 3,
+      retryDelay: exponentialDelay,
+    },
+  },
   fontawesome: {
     imports: [
       {
@@ -63,7 +73,6 @@ export default {
         set: '@fortawesome/pro-duotone-svg-icons',
         icons: ['faTimesCircle'],
       },
-      // { set: '@fortawesome/free-regular-svg-icons', icons: ['faTimesCircle'] },
     ],
   },
   // Build Configuration (https://go.nuxtjs.dev/config-build)
