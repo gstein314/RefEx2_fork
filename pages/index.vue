@@ -94,9 +94,7 @@
             name="summary_check"
             @click="showAllResult('num')"
           />
-          <label for="summary_check"
-            >Include gene summaries in your search.</label
-          >
+          <label for="summary_check">Include this field in search</label>
         </div>
         <screener-view
           v-bind="inputs"

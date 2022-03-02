@@ -12,19 +12,21 @@
     </p>
     <h3>
       Genes with GO Term
-      <span class="ex">e.g.&nbsp;</span>
-      <span
-        class="sample_value"
-        @click="
-          setSampleQuery('go', 'transcription factor binding', 'GO:0008134')
-        "
-        >transcription factor binding</span
-      >,
-      <span
-        class="sample_value"
-        @click="setSampleQuery('go', 'cell differentiation', 'GO:0030154')"
-        >cell differentiation</span
-      >
+      <span class="ex"
+        >e.g.
+        <span
+          class="sample_value"
+          @click="
+            setSampleQuery('go', 'transcription factor binding', 'GO:0008134')
+          "
+          >transcription factor binding</span
+        >,
+        <span
+          class="sample_value"
+          @click="setSampleQuery('go', 'cell differentiation', 'GO:0030154')"
+          >cell differentiation</span
+        >
+      </span>
     </h3>
     <no-ssr>
       <vue-tags-input
@@ -50,28 +52,30 @@
     </h3>
     <div class="classification_wrapper">
       <h4>
-        Sample types by FANTOM5
-        <span class="ex">e.g.&nbsp;</span>
-        <span
-          class="sample_value"
-          @click="setSampleQuery('sample_types', 'cell lines')"
-          >cell lines</span
-        >,
-        <span
-          class="sample_value"
-          @click="setSampleQuery('sample_types', 'stem cells')"
-          >stem cells</span
-        >,
-        <span
-          class="sample_value"
-          @click="setSampleQuery('sample_types', 'primary cells')"
-          >primary cells</span
-        >,
-        <span
-          class="sample_value"
-          @click="setSampleQuery('sample_types', 'tissues')"
-          >tissues</span
-        >
+        Sample types <span class="tag">FANTOM5</span>
+        <span class="ex"
+          >e.g.
+          <span
+            class="sample_value"
+            @click="setSampleQuery('sample_types', 'cell lines')"
+            >cell lines</span
+          >,
+          <span
+            class="sample_value"
+            @click="setSampleQuery('sample_types', 'stem cells')"
+            >stem cells</span
+          >,
+          <span
+            class="sample_value"
+            @click="setSampleQuery('sample_types', 'primary cells')"
+            >primary cells</span
+          >,
+          <span
+            class="sample_value"
+            @click="setSampleQuery('sample_types', 'tissues')"
+            >tissues</span
+          >
+        </span>
       </h4>
       <vue-simple-suggest
         :value="sample_types"
@@ -90,13 +94,15 @@
         ></div>
       </vue-simple-suggest>
       <h4>
-        Cell types by Cell Ontology
-        <span class="ex">e.g.&nbsp;</span>
-        <span
-          class="sample_value"
-          @click="setSampleQuery('cell_types', 'hepatocyte')"
-          >hepatocyte</span
-        >
+        Cell types <span class="tag">Cell Ontology</span>
+        <span class="ex"
+          >e.g.
+          <span
+            class="sample_value"
+            @click="setSampleQuery('cell_types', 'hepatocyte')"
+            >hepatocyte</span
+          >
+        </span>
       </h4>
       <!-- HI: {{ cell_types_list }} -->
       <vue-simple-suggest
@@ -116,13 +122,15 @@
         ></div>
       </vue-simple-suggest>
       <h4>
-        Anatomical structures by UBERON
-        <span class="ex">e.g.&nbsp;</span>
-        <span
-          class="sample_value"
-          @click="setSampleQuery('anatomical_structures', 'liver')"
-          >liver</span
-        >
+        Anatomical structures <span class="tag">UBERON</span>
+        <span class="ex"
+          >e.g.
+          <span
+            class="sample_value"
+            @click="setSampleQuery('anatomical_structures', 'liver')"
+            >liver</span
+          >
+        </span>
       </h4>
       <vue-simple-suggest
         :value="anatomical_structures"
@@ -146,18 +154,20 @@
         ></div>
       </vue-simple-suggest>
       <h4>
-        Biomedical concepts by NCI Thesaurus (NCIt)
-        <span class="ex">e.g.&nbsp;</span>
-        <span
-          class="sample_value"
-          @click="setSampleQuery('biomedical_concepts', 'Osteosarcoma')"
-          >Osteosarcoma</span
-        >,
-        <span
-          class="sample_value"
-          @click="setSampleQuery('biomedical_concepts', 'Ovarian Carcinoma')"
-          >Ovarian Carcinoma</span
-        >
+        Biomedical concepts <span class="tag"> NCI Thesaurus (NCIt)</span>
+        <span class="ex"
+          >e.g.
+          <span
+            class="sample_value"
+            @click="setSampleQuery('biomedical_concepts', 'Osteosarcoma')"
+            >Osteosarcoma</span
+          >,
+          <span
+            class="sample_value"
+            @click="setSampleQuery('biomedical_concepts', 'Ovarian Carcinoma')"
+            >Ovarian Carcinoma</span
+          >
+        </span>
       </h4>
       <vue-simple-suggest
         :value="biomedical_concepts"
@@ -369,6 +379,8 @@
         &:hover
           cursor: pointer
     h3,h4
+      display: flex
+      gap: .5rem
       > span
         +sample_query
     input
@@ -381,4 +393,6 @@
       border-radius: 3px
       padding: 10px 30px
       margin-top: -7px
+    .tag
+      +tag
 </style>
