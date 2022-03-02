@@ -1,0 +1,13 @@
+{
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "launch": {
+    "configurations": [],
+    "compounds": []
+  },
+  "vetur.validation.template": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.format.enable": true,
+  "eslint.lintTask.enable": true
+}
