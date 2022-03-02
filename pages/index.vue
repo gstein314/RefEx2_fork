@@ -364,12 +364,10 @@
       async getSuggestionList(suggest) {
         let url = `http://refex2-api.bhx.jp/api/suggest?query=${suggest}`;
         this.isLoading = true;
-        return fetch(url, { method: 'GET' })
-          .then(response => response.json())
-          .then(json => {
-            this.isLoading = false;
-            return json.results;
-          });
+        return this.$axios.$get(url).then(results => {
+          this.isLoading = false;
+          return results.results;
+        });
       },
       moveDetailpage(suggestion) {
         this.$router.push(
