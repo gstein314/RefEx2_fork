@@ -56,10 +56,9 @@
   };
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
   .nav_wrapper
     width: 100vw
-    border-bottom: 1px solid $BLACK
     margin: -10px 0 0px
     .species_navi
       padding: 0 90px

@@ -3,6 +3,7 @@
   <!-- eslint-disable vue/no-v-html -->
   <div class="index_wrapper">
     <SpeciesNavigation />
+    <FilterNavigation />
     <main>
       <div class="text_search_area">
         <h2>Search Conditions</h2>

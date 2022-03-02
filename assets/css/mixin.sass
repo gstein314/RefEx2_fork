@@ -16,6 +16,10 @@ $COLOR_9: #FF98A6
 $COLOR_10: #A8A8A8
 
 $PADDING_SLIM: 0.1rem 0.4rem
+$PADDING_LARGE: 0.4rem 0.8rem
+
+$BORDER_RADIUS_DEFAULT: 0.2rem
+
 $MODAL_LAYER: 10
 $MODAL_BG_LAYER: 5
 $TOOLTIP_LAYER: 2
@@ -32,7 +36,7 @@ $TOOLTIP_LAYER: 2
   width: 100%
   padding: 10px 20px
   box-sizing: border-box
-  border-radius: 3px
+  border-radius: $BORDER_RADIUS_DEFAULT
   position: relative
   &::placeholder
     color: $BLACK
@@ -64,7 +68,7 @@ $TOOLTIP_LAYER: 2
   font-weight: 500
   padding: 6px 22px
   border: none
-  border-radius: 3px
+  border-radius: $BORDER_RADIUS_DEFAULT
   display: flex
   align-items: center
   &:focus
@@ -174,4 +178,4 @@ $TOOLTIP_LAYER: 2
 @mixin tag
   background-color: $COLOR_6
   padding: $PADDING_SLIM
-  border-radius: 0.2rem
+  border-radius: $BORDER_RADIUS_DEFAULT
