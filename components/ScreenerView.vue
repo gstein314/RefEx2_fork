@@ -12,7 +12,7 @@
     </p>
     <h3>
       Genes with GO Term
-      <span class="ex"
+      <span class="example"
         >e.g.
         <span
           class="sample_value"
@@ -53,7 +53,7 @@
     <div class="classification_wrapper">
       <h4>
         Sample types <span class="tag">FANTOM5</span>
-        <span class="ex"
+        <span class="example"
           >e.g.
           <span
             class="sample_value"
@@ -95,7 +95,7 @@
       </vue-simple-suggest>
       <h4>
         Cell types <span class="tag">Cell Ontology</span>
-        <span class="ex"
+        <span class="example"
           >e.g.
           <span
             class="sample_value"
@@ -123,7 +123,7 @@
       </vue-simple-suggest>
       <h4>
         Anatomical structures <span class="tag">UBERON</span>
-        <span class="ex"
+        <span class="example"
           >e.g.
           <span
             class="sample_value"
@@ -155,7 +155,7 @@
       </vue-simple-suggest>
       <h4>
         Biomedical concepts <span class="tag"> NCI Thesaurus (NCIt)</span>
-        <span class="ex"
+        <span class="example"
           >e.g.
           <span
             class="sample_value"

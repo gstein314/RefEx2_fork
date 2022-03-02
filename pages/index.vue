@@ -8,30 +8,34 @@
         <h2>Search Conditions</h2>
         <h3>
           Gene Name, Symbol or Summary
-          <span>e.g.&nbsp;</span>
-          <dl
-            @click="
-              setSampleQuery({
-                type: 'gene_name',
-                query: 'transcription factor',
-              })
-            "
-          >
-            <dt>Gene Name:&nbsp;</dt>
-            <dd>transcription factor</dd>
-          </dl>
-          <dl @click="setSampleQuery({ type: 'gene_name', query: 'ITG' })">
-            <dt>Symbol:&nbsp;</dt>
-            <dd>ITG</dd>
-          </dl>
-          <dl
-            @click="
-              setSampleQuery({ type: 'gene_name', query: 'Breast cancer' })
-            "
-          >
-            <dt>Summary:&nbsp;</dt>
-            <dd>Breast cancer</dd>
-          </dl>
+          <span class="example"
+            >e.g.
+            <dl
+              @click="
+                setSampleQuery({
+                  type: 'gene_name',
+                  query: 'transcription factor',
+                })
+              "
+            >
+              <dt>Gene Name:</dt>
+              <dd class="sample_value">transcription factor</dd>
+            </dl>
+            ,
+            <dl @click="setSampleQuery({ type: 'gene_name', query: 'ITG' })">
+              <dt>Symbol:&nbsp;</dt>
+              <dd class="sample_value">ITG</dd>
+            </dl>
+            ,
+            <dl
+              @click="
+                setSampleQuery({ type: 'gene_name', query: 'Breast cancer' })
+              "
+            >
+              <dt>Summary:&nbsp;</dt>
+              <dd class="sample_value">Breast cancer</dd>
+            </dl>
+          </span>
         </h3>
         <vue-simple-suggest
           v-model="inputs.gene_name"
@@ -123,7 +127,7 @@
           <font-awesome-icon icon="chart-bar" />
           Comparison
         </button>
-        <span class="ex">e.g.&nbsp;</span>
+        <span class="example">e.g.</span>
         <span
           class="sample_value"
           @click="
@@ -399,31 +403,31 @@
         width: 85%
         > h3
           display: flex
+          gap: 0.5rem
           align-items: center
           margin: 6px 0
           > span
+            +sample_query
             font-size: 12px
+            display: flex
+            align-items: center
             color: $GRAY
             font-weight: 100
             margin-left: 10px
-          > dl
-            display: flex
-            align-items: center
-            padding: 0 10px
-            margin: 0
-            > dt
-              font-size: 12px
-              color: $GRAY
-              font-weight: 100
-            > dd
-              font-size: 14px
-              font-weight: 300
-              padding: 2px 0
+            > dl
+              display: flex
+              align-items: center
+              padding: $PADDING_SLIM
               margin: 0
-            &:hover
-              +hover
               > dt
-                color: #ffffff
+                font-size: 12px
+                color: $GRAY
+                font-weight: 100
+              > dd
+                font-size: 14px
+                font-weight: 300
+                padding: 2px 0
+                margin: 0
         .text_search_gene_name
           input
             +text_input
