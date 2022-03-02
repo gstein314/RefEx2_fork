@@ -7,6 +7,7 @@
         :class="{ active: $store.state.active_taxon === specie.name }"
         @click="$store.commit('setTaxon', specie.name)"
       >
+        <icon-base :icon-name="specie.name" icon-color="pink" />
         <img :src="GetSpecieImage(specie.name)" :alt="specie.name" />
         <div class="taxon_wrapper">
           <p>{{ MakeNameUpperCase(specie.name) }}</p>
@@ -29,7 +30,12 @@
 
 <script>
   import species from '~/static/species.json';
+  import IconBase from '~/components/icons/IconBase.vue';
+
   export default {
+    components: {
+      IconBase,
+    },
     data() {
       return {
         species: species.species,
@@ -67,7 +73,10 @@
         margin-right: 36px
         opacity: .3
         &.active
+          color: $MAIN_COLOR
           opacity: 1
+          *
+            color: $MAIN_COLOR
         &:hover
           cursor: pointer
         > img
