@@ -1,37 +1,32 @@
 <template>
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    :width="width"
-    :height="height"
-    :viewBox="`0 0 ${width} ${height}`"
+    :width="size[0]"
+    :height="size[1]"
+    :viewBox="`0 0 ${size[0]} ${size[1]}`"
     :aria-labelledby="iconName"
     role="presentation"
   >
     <title :id="iconName" lang="en">{{ iconName }} icon</title>
     <g :fill="iconColor">
-      <component :is="iconComponent" />
+      <component :is="iconComponent" :stroke-color="iconColor" />
     </g>
   </svg>
 </template>
 <script>
-  import IconBomby from '~/components/icons/IconBomby.vue';
+  const sizeMap = new Map([
+    ['homo_sapiens', [24, 62]],
+    ['mus_musculus', [63, 24]],
+    ['drosophilidae', [36, 18]],
+    ['oryza_sativa', [42, 71]],
+    ['bombyx_mori', [43, 10]],
+  ]);
 
   export default {
-    components: {
-      IconBomby,
-    },
     props: {
       iconName: {
         type: String,
         default: 'box',
-      },
-      width: {
-        type: [Number, String],
-        default: 24,
-      },
-      height: {
-        type: [Number, String],
-        default: 62,
       },
       iconColor: {
         type: String,
@@ -39,6 +34,9 @@
       },
     },
     computed: {
+      size() {
+        return sizeMap.get(this.iconName) ?? [24, 62];
+      },
       parsedName() {
         return this.iconName
           .split('_')

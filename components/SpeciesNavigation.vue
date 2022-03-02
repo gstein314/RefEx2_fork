@@ -7,8 +7,7 @@
         :class="{ active: $store.state.active_taxon === specie.name }"
         @click="$store.commit('setTaxon', specie.name)"
       >
-        <icon-base :icon-name="specie.name" icon-color="pink" />
-        <img :src="GetSpecieImage(specie.name)" :alt="specie.name" />
+        <icon-base :icon-name="specie.name" />
         <div class="taxon_wrapper">
           <p>{{ MakeNameUpperCase(specie.name) }}</p>
           <form>
@@ -38,11 +37,11 @@
     },
     data() {
       return {
-        species: species.species,
-        selected_project: {
-          homo_sapiens: 'FANTOM5',
-          mus_musculus: 'FANTOM5',
-        },
+        species,
+        selected_project: species.reduce((acc, specie) => {
+          acc[specie.name] = specie.projects[0];
+          return acc;
+        }, {}),
       };
     },
     methods: {
@@ -63,23 +62,23 @@
     border-bottom: 1px solid $BLACK
     margin: -10px 0 0px
     .species_navi
-      min-width: 600px
       padding: 0 90px
       margin: 0
+      gap: 3rem
       display: flex
       > li
-        display: flex
-        align-self: flex-end
-        margin-right: 36px
+        display: grid
+        grid-template-columns: auto 1fr
         opacity: .3
         &.active
           color: $MAIN_COLOR
           opacity: 1
           *
+            opacity: 1
             color: $MAIN_COLOR
         &:hover
           cursor: pointer
-        > img
+        > svg
           align-self: flex-end
         > .taxon_wrapper
           display: flex

@@ -1,5 +1,4 @@
-{
-  "species": [
+[
     {
       "name": "homo_sapiens",
       "projects": ["FANTOM5"]
@@ -7,6 +6,17 @@
     {
       "name": "mus_musculus",
       "projects": ["FANTOM5"]
+    },
+    {
+      "name": "drosophilidae",
+      "projects": ["FANTOM5"]
+    },
+    {
+      "name": "oryza_sativa",
+      "projects": ["FANTOM5"]
+    },
+    {
+      "name": "bombyx_mori",
+      "projects": ["FANTOM5"]
     }
   ]
-}
