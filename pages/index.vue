@@ -9,21 +9,32 @@
         <h3>
           Gene Name, Symbol or Summary
           <span>e.g.&nbsp;</span>
-          <dl @click="setSampleQuery('gene_name', 'transcription factor')">
+          <dl
+            @click="
+              setSampleQuery({
+                type: 'gene_name',
+                query: 'transcription factor',
+              })
+            "
+          >
             <dt>Gene Name:&nbsp;</dt>
             <dd>transcription factor</dd>
           </dl>
-          <dl @click="setSampleQuery('gene_name', 'ITG')">
+          <dl @click="setSampleQuery({ type: 'gene_name', query: 'ITG' })">
             <dt>Symbol:&nbsp;</dt>
             <dd>ITG</dd>
           </dl>
-          <dl @click="setSampleQuery('gene_name', 'Breast cancer')">
+          <dl
+            @click="
+              setSampleQuery({ type: 'gene_name', query: 'Breast cancer' })
+            "
+          >
             <dt>Summary:&nbsp;</dt>
             <dd>Breast cancer</dd>
           </dl>
         </h3>
         <vue-simple-suggest
-          v-model="input_gene_name"
+          v-model="inputs.gene_name"
           :debounce="500"
           display-attribute="name"
           value-attribute="name"
@@ -47,14 +58,14 @@
             slot-scope="{ suggestion }"
             v-html="
               `<b>${suggestion.symbol}</b>&nbsp;(${suggestion.name.replace(
-                input_gene_name,
-                '<b>' + input_gene_name + '</b>'
+                inputs.gene_name,
+                '<b>' + inputs.gene_name + '</b>'
               )}${suggestion.alias.replace(
-                input_gene_name,
-                '<b>' + input_gene_name + '</b>'
+                inputs.gene_name,
+                '<b>' + inputs.gene_name + '</b>'
               )}, NCBI_GeneID: ${suggestion.entrezgene.replace(
-                input_gene_name,
-                '<b>' + input_gene_name + '</b>'
+                inputs.gene_name,
+                '<b>' + inputs.gene_name + '</b>'
               )})`
             "
           >
@@ -74,7 +85,7 @@
           </div>
         </vue-simple-suggest>
         <div
-          :class="['summary_check_wrapper', { hide: input_gene_name === '' }]"
+          :class="['summary_check_wrapper', { hide: inputs.gene_name === '' }]"
         >
           <input
             id="summary_check"
@@ -87,209 +98,14 @@
             >Include gene summaries in your search.</label
           >
         </div>
-        <div :class="['screener_wrapper', { open: is_screener_open }]">
-          <p
-            class="screener_title"
-            @click="is_screener_open = !is_screener_open"
-          >
-            <font-awesome-icon icon="filter" class="filter" />
-            Screener
-            <font-awesome-icon
-              icon="chevron-right"
-              :class="is_screener_open ? 'open' : 'close'"
-            />
-          </p>
-
-          <h3>
-            Genes with GO Term
-            <span class="ex">e.g.&nbsp;</span>
-            <span
-              class="sample_value"
-              @click="
-                setSampleQuery(
-                  'go',
-                  'transcription factor binding',
-                  'GO:0008134'
-                )
-              "
-              >transcription factor binding</span
-            >,
-            <span
-              class="sample_value"
-              @click="
-                setSampleQuery('go', 'cell differentiation', 'GO:0030154')
-              "
-              >cell differentiation</span
-            >
-          </h3>
-          <no-ssr>
-            <vue-tags-input
-              v-model="input_go_term"
-              :tags="input_go_terms"
-              :autocomplete-items="autocomplete_go_term_items"
-              :add-only-from-autocomplete="true"
-              placeholder="transcription factor binding"
-              @tags-changed="update"
-            >
-              <div
-                slot="autocomplete-item"
-                slot-scope="props"
-                class="my-item"
-                @click="props.performAdd(props.item)"
-                v-html="
-                  props.item.text.replace(
-                    input_go_term,
-                    `<b>${input_go_term}</b>`
-                  )
-                "
-              ></div>
-            </vue-tags-input>
-          </no-ssr>
-          <h3>
-            Genes that are specifically expressed in a given sample by
-            classification
-          </h3>
-          <div class="classification_wrapper">
-            <h4>
-              Sample types by FANTOM5
-              <span class="ex">e.g.&nbsp;</span>
-              <span
-                class="sample_value"
-                @click="setSampleQuery('sample_types', 'cell lines')"
-                >cell lines</span
-              >,
-              <span
-                class="sample_value"
-                @click="setSampleQuery('sample_types', 'stem cells')"
-                >stem cells</span
-              >,
-              <span
-                class="sample_value"
-                @click="setSampleQuery('sample_types', 'primary cells')"
-                >primary cells</span
-              >,
-              <span
-                class="sample_value"
-                @click="setSampleQuery('sample_types', 'tissues')"
-                >tissues</span
-              >
-            </h4>
-            <vue-simple-suggest
-              v-model="input_sample_types"
-              :filter-by-query="true"
-              :list="sample_types_list"
-              :max-suggestions="100"
-              class="text_search_sample_types"
-              placeholder="cell lines"
-              @input="showAllResult('num')"
-            >
-              <div
-                slot="suggestion-item"
-                slot-scope="{ suggestion }"
-                v-html="
-                  suggestion.replace(
-                    input_sample_types,
-                    `<b>${input_sample_types}</b>`
-                  )
-                "
-              ></div>
-            </vue-simple-suggest>
-            <h4>
-              Cell types by Cell Ontology
-              <span class="ex">e.g.&nbsp;</span>
-              <span
-                class="sample_value"
-                @click="setSampleQuery('cell_types', 'hepatocyte')"
-                >hepatocyte</span
-              >
-            </h4>
-            <vue-simple-suggest
-              v-model="input_cell_types"
-              :filter-by-query="true"
-              :list="cell_types_list"
-              :max-suggestions="100"
-              class="text_search_cell_types"
-              placeholder="CD14"
-              @input="showAllResult('num')"
-            >
-              <div
-                slot="suggestion-item"
-                slot-scope="{ suggestion }"
-                v-html="
-                  suggestion.replace(
-                    input_cell_types,
-                    `<b>${input_cell_types}</b>`
-                  )
-                "
-              ></div>
-            </vue-simple-suggest>
-            <h4>
-              Anatomical structures by UBERON
-              <span class="ex">e.g.&nbsp;</span>
-              <span
-                class="sample_value"
-                @click="setSampleQuery('anatomical_structures', 'liver')"
-                >liver</span
-              >
-            </h4>
-            <vue-simple-suggest
-              v-model="input_anatomical_structures"
-              :filter-by-query="true"
-              :list="anatomical_structures_list"
-              :max-suggestions="100"
-              class="text_search_anatomical_structures"
-              placeholder="skin"
-              @input="showAllResult('num')"
-            >
-              <div
-                slot="suggestion-item"
-                slot-scope="{ suggestion }"
-                v-html="
-                  suggestion.replace(
-                    input_anatomical_structures,
-                    `<b>${input_anatomical_structures}</b>`
-                  )
-                "
-              ></div>
-            </vue-simple-suggest>
-            <h4>
-              Biomedical concepts by NCI Thesaurus (NCIt)
-              <span class="ex">e.g.&nbsp;</span>
-              <span
-                class="sample_value"
-                @click="setSampleQuery('biomedical_concepts', 'Osteosarcoma')"
-                >Osteosarcoma</span
-              >,
-              <span
-                class="sample_value"
-                @click="
-                  setSampleQuery('biomedical_concepts', 'Ovarian Carcinoma')
-                "
-                >Ovarian Carcinoma</span
-              >
-            </h4>
-            <vue-simple-suggest
-              v-model="input_biomedical_concepts"
-              :filter-by-query="true"
-              :list="biomedical_concepts_list"
-              :max-suggestions="100"
-              class="text_search_biomedical_concepts"
-              placeholder="leukemia"
-              @input="showAllResult('num')"
-            >
-              <div
-                slot="suggestion-item"
-                slot-scope="{ suggestion }"
-                v-html="
-                  suggestion.replace(
-                    input_biomedical_concepts,
-                    `<b>${input_biomedical_concepts}</b>`
-                  )
-                "
-              ></div>
-            </vue-simple-suggest>
-          </div>
-        </div>
+        <screener-view
+          v-bind="inputs"
+          :terms-g-o="input_go_terms"
+          @setSampleQuery="setSampleQuery"
+          @update="showAllResult"
+          @updateInputs="setInputs"
+          @setTags="setTags"
+        />
         <button class="find_genes_btn" @click="showAllResult('all')">
           <font-awesome-icon icon="search" />
           Find Genes
@@ -410,7 +226,6 @@
 <script>
   import SpeciesNavigation from '~/components/SpeciesNavigation.vue';
   import GeneDetailModal from '~/components/GeneDetailModal.vue';
-  import axios from 'axios';
   import VueSimpleSuggest from 'vue-simple-suggest';
 
   export default {
@@ -423,83 +238,24 @@
       return {
         results_num: 0,
         results: [],
-        input_gene_name: '',
-        input_go_term: '',
+        inputs: {
+          gene_name: '',
+          go_term: '',
+          sample_types: '',
+          cell_types: '',
+          anatomical_structures: '',
+          biomedical_concepts: '',
+        },
         input_go_terms: [],
-        input_sample_types: '',
-        input_cell_types: '',
-        input_anatomical_structures: '',
-        input_biomedical_concepts: '',
         onEvent: false,
         is_summary_included: false,
         is_reload_active: false,
-        is_screener_open: false,
         isLoading: false,
-        sample_types_list: [
-          'cell lines',
-          'stem cells',
-          'primary cells',
-          'tissues',
-        ],
-        cell_types_list: [],
-        anatomical_structures_list: [],
-        biomedical_concepts_list: [],
-        autocomplete_go_term_items: [],
-        debounce: null,
         gene_id_for_detail_modal: 0,
         is_gene_detail_modal_shown: false,
         checked_gene: [],
         result_gene_id_list: [],
       };
-    },
-    computed: {
-      is_all_clear: function () {
-        if (
-          this.input_gene_name === '' &&
-          this.input_go_terms.length === 0 &&
-          this.input_sample_types === '' &&
-          this.input_cell_types === '' &&
-          this.input_anatomical_structures === '' &&
-          this.input_biomedical_concepts === ''
-        ) {
-          return true;
-        } else {
-          return false;
-        }
-      },
-    },
-    watch: {
-      input_go_term: 'initItems',
-    },
-    created() {
-      axios
-        .get(`http://refex2-api.bhx.jp/api/vocablary?annotation=CL%20label`)
-        .then(data => {
-          this.cell_types_list = data.data;
-        })
-        .catch(error => {
-          console.log('error', error);
-        });
-
-      axios
-        .get(`http://refex2-api.bhx.jp/api/vocablary?annotation=UBERON%20label`)
-        .then(data => {
-          this.anatomical_structures_list = data.data;
-        })
-        .catch(error => {
-          console.log('error', error);
-        });
-
-      axios
-        .get(`http://refex2-api.bhx.jp/api/vocablary?annotation=NCIT%20label`)
-        .then(data => {
-          this.biomedical_concepts_list = data.data;
-        })
-        .catch(error => {
-          console.log('error', error);
-        });
-
-      this.showAllResult('num');
     },
     methods: {
       toggleAllCheckbox() {
@@ -520,49 +276,51 @@
         this.gene_id_for_detail_modal = id;
         this.is_gene_detail_modal_shown = true;
       },
-      setSampleQuery(type, query, id) {
+      setTags(newTags) {
+        this.input_go_terms = [];
+        if (newTags.length !== 0) {
+          this.input_go_terms[0] = newTags[newTags.length - 1];
+          this.is_reload_active = true;
+        }
+      },
+      setInputs(inputs) {
+        this.inputs = inputs;
+      },
+      setSampleQuery({ type, query, id }) {
         this.is_reload_active = true;
-        if (type === 'gene_name') {
-          this.input_gene_name = query;
-        } else if (type === 'go') {
+        if (id) {
           this.input_go_terms = [];
           this.input_go_terms.push({
             text: query,
             id,
             tiClasses: ['ti-valid'],
           });
-        } else if (type === 'sample_types') {
-          this.input_sample_types = query;
-        } else if (type === 'cell_types') {
-          this.input_cell_types = query;
-        } else if (type === 'anatomical_structures') {
-          this.input_anatomical_structures = query;
-        } else if (type === 'biomedical_concepts') {
-          this.input_biomedical_concepts = query;
+        } else {
+          this.$set(this.inputs, type, query);
         }
         this.showAllResult('num');
       },
       showAllResult(type) {
         setTimeout(() => {
           let query = {};
-          query.text = this.input_gene_name;
+          query.text = this.inputs.gene_name;
           if (this.is_summary_included) {
             query.summary = 'True';
           }
           if (this.input_go_terms.length !== 0) {
             query.go = this.input_go_terms[0].id;
           }
-          if (this.input_sample_types !== '') {
-            query.celltype = this.input_sample_types;
+          if (this.inputs.sample_types !== '') {
+            query.celltype = this.inputs.sample_types;
           }
-          if (this.input_cell_types !== '') {
-            query.cl = this.input_cell_types;
+          if (this.inputs.cell_types !== '') {
+            query.cl = this.inputs.cell_types;
           }
-          if (this.input_anatomical_structures !== '') {
-            query.uberon = this.input_anatomical_structures;
+          if (this.inputs.anatomical_structures !== '') {
+            query.uberon = this.inputs.anatomical_structures;
           }
-          if (this.input_biomedical_concepts !== '') {
-            query.ncit = this.input_biomedical_concepts;
+          if (this.inputs.biomedical_concepts !== '') {
+            query.ncit = this.inputs.biomedical_concepts;
           }
           let adjusted_query = '';
           if (type === 'num') {
@@ -584,7 +342,7 @@
           } else if (type === 'all') {
             adjusted_query += `){ncbiGeneId symbol name alias} numfound }`;
           }
-          axios({
+          this.$axios({
             url: 'http://refex2-api.bhx.jp/gql',
             method: 'post',
             data: {
@@ -603,7 +361,7 @@
           });
         }, 0);
       },
-      getSuggestionList(suggest) {
+      async getSuggestionList(suggest) {
         let url = `http://refex2-api.bhx.jp/api/suggest?query=${suggest}`;
         this.isLoading = true;
         return fetch(url, { method: 'GET' })
@@ -618,29 +376,6 @@
           `${this.$store.state.active_taxon}/FANTOM5?gid=${suggestion.entrezgene}`
         );
         // this.$router.push({ path: '/gene/chart', query: { gid: suggestion.entrezgene, project: 'fantom5', organism: this.$store.state.active_taxon} })
-      },
-      update(newTags) {
-        this.autocomplete_go_term_items = [];
-        this.input_go_terms = [];
-        if (newTags.length !== 0) {
-          this.input_go_terms[0] = newTags[newTags.length - 1];
-          this.is_reload_active = true;
-        }
-        this.showAllResult('num');
-      },
-      initItems() {
-        const url = `http://refex2-api.bhx.jp/api/suggest?query=${this.input_go_term}&go=True`;
-        clearTimeout(this.debounce);
-        this.debounce = setTimeout(() => {
-          axios
-            .get(url)
-            .then(response => {
-              this.autocomplete_go_term_items = response.data.results.map(a => {
-                return { text: a.term, id: a.id };
-              });
-            })
-            .catch(() => console.warn('Oh. Something went wrong'));
-        }, 300);
       },
       comparisonSearch() {
         if (this.checked_gene.length === 0) return;
@@ -715,72 +450,6 @@
           &.hide
             opacity: .5
             pointer-events: none
-        > .screener_wrapper
-          padding: 10px 34px
-          box-shadow: 0 1px 4px rgba(62, 70, 82, .22)
-          border-radius: 3px
-          margin-top: 27px
-          height: 42px
-          overflow: hidden
-          box-sizing: border-box
-          &.open
-            height: auto
-            overflow: visible
-          .vue-tags-input
-            max-width: initial
-            .ti-input
-              +text_input
-              padding: 10px
-              border: none
-              width: 100%
-              .ti-tags
-                height: 25px
-                input
-                  padding: 10px 10px
-                .ti-tag
-                  height: 24px
-                  background-color: $MAIN_COLOR
-                  padding: 3px 10px
-                  border-radius: 100px
-                  &.ti-deletion-mark
-                    background-color: #F24B56
-                .ti-new-tag-input-wrapper
-                  height: 24px
-                  padding: 0
-            .ti-item.ti-selected-item
-              color: #ffffff
-              background-color: $MAIN_COLOR
-          p
-            margin: 0
-            &.screener_title
-              margin-top: 3px
-              display: flex
-              align-items: center
-              > svg
-                font-size: 12px
-                transition: .3s
-                &.filter
-                  margin-right: 3px
-                &.close,
-                &.open
-                  margin-left: 10px
-                &.open
-                  transform: rotate(90deg)
-              &:hover
-                cursor: pointer
-          h3,h4
-            > span
-              +sample_query
-          input
-            +text_input
-            font-size: 22px
-            &.text_search_go_term
-              margin-bottom: 10px
-          > .classification_wrapper
-            border: 1px dashed $GRAY
-            border-radius: 3px
-            padding: 10px 30px
-            margin-top: -7px
         > .find_genes_btn
           +button
           margin-top: 26px
