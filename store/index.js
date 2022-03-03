@@ -3,6 +3,7 @@ import filters from '../static/filters.json';
 export const state = () => ({
   active_taxon: 'homo_sapiens', //default,
   active_filter: 'gene',
+  active_organization: 'FANTOM5',
   results: filters.reduce((acc, filter) => {
     acc[filter.name] = { results: [], results_num: 0 };
     return acc;
@@ -10,12 +11,13 @@ export const state = () => ({
 });
 
 export const getters = {
+  active_organization: state => state.active_organization,
   activeFilter(state) {
     return filters.find(col => col.name === state.active_filter);
   },
-  filterByName(_state) {
-    return filterName => filters.find(col => col.name === filterName);
-  },
+  filterByName: _state => filterName =>
+    filters.find(col => col.name === filterName),
+
   resultsByName(state) {
     return filterName => state.results[filterName];
   },
@@ -33,6 +35,8 @@ export const mutations = {
   setTaxon(state, taxon) {
     state.active_taxon = taxon;
   },
+  setActiveOrganization: (state, organization) =>
+    (state.organization = organization),
   setActiveFilter(state, filter = 'gene') {
     state.active_filter = filter;
   },

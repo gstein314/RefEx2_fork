@@ -44,6 +44,19 @@
         }, {}),
       };
     },
+    computed: {
+      active_taxon() {
+        return this.$store.state.active_taxon;
+      },
+      selected_organization() {
+        return this.selected_project[this.active_taxon];
+      },
+    },
+    watch: {
+      selected_organization(org) {
+        this.$store.commit('setActiveOrganization', org);
+      },
+    },
     methods: {
       MakeNameUpperCase(name) {
         let adjusted_name = name.charAt(0).toUpperCase() + name.slice(1);
