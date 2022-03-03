@@ -1,5 +1,5 @@
 <template>
-  <div class="nav_wrapper">
+  <nav class="nav_wrapper">
     <ul class="species_navi">
       <li
         v-for="specie in species"
@@ -24,7 +24,7 @@
         </div>
       </li>
     </ul>
-  </div>
+  </nav>
 </template>
 
 <script>

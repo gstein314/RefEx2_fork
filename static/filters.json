@@ -1,0 +1,23 @@
+[
+  {
+    "name": "gene",
+    "columns": [
+      { "header": "GeneSymbol", "key": "symbol" },
+      { "header": "GeneName", "key": "name" },
+      { "header": "Alias", "key": "alias"},
+      { "header": "NCBI GeneID", "key": "ncbiGeneId"}
+    ],
+    "screener": "go_terms"
+  },
+  {
+    "name": "sample",
+    "columns": [
+      "description",
+      "type",
+      "anatomical_structures",
+      "cell_types",
+      "biomedical_concepts"
+    ],
+    "screener": "sample_classification"
+  }
+]

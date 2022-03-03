@@ -4,7 +4,7 @@
       <li
         v-for="(filter, index) of filters"
         :key="index"
-        :class="{ active: activeFilter === filter.name }"
+        :class="{ active: activeFilter.name === filter.name }"
         @click="$store.commit('setActiveFilter', filter.name)"
       >
         {{ filter.name }}
@@ -14,10 +14,12 @@
 </template>
 
 <script>
+  import filters from '~/static/filters.json';
+
   export default {
     data() {
       return {
-        filters: [{ name: 'gene' }, { name: 'sample' }],
+        filters,
       };
     },
     computed: {
