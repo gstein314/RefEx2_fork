@@ -1,0 +1,61 @@
+<template>
+  <div class="nav_wrapper">
+    <ul>
+      <li
+        v-for="(filter, index) of filters"
+        :key="index"
+        :class="{ active: activeFilter.name === filter.name }"
+        @click="$store.commit('setActiveFilter', filter.name)"
+      >
+        {{ filter.name }}
+      </li>
+    </ul>
+  </div>
+</template>
+
+<script>
+  import filters from '~/static/filters.json';
+
+  export default {
+    data() {
+      return {
+        filters,
+      };
+    },
+    computed: {
+      activeFilter() {
+        return this.$store.getters.activeFilter;
+      },
+    },
+  };
+</script>
+<style lang="sass" scoped>
+  .nav_wrapper
+      background-color: $MAIN_COLOR
+      display: flex
+      justify-content: center
+      align-items: center
+      padding-top: 0.4rem
+      ul
+          display: flex
+          margin: 0
+          padding: 0
+          gap: 0.1rem
+          > li
+              text-transform: capitalize
+              font-weight: bold
+              min-width: 10rem
+              max-width: min-content
+              text-align: center
+              padding: $PADDING_LARGE
+              padding-top: 0.6rem
+              border-top-left-radius: $BORDER_RADIUS_DEFAULT
+              border-top-right-radius: $BORDER_RADIUS_DEFAULT
+              background-color: rgba(255, 255, 255, 0.5)
+              &.active
+                  background-color: white
+              &:hover
+                  cursor: pointer
+                  color: $MAIN_COLOR
+                  background: rgba(255, 255, 255, 0.8)
+</style>

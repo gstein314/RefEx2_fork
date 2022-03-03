@@ -26,7 +26,7 @@
 <style lang="sass">
   html
     border-top: 8px solid $MAIN_COLOR
-    font-family: futura-pt,sans-serif
+    font-family: Helvetica,sans-serif
     font-weight: 400
     color: $BLACK
     box-sizing: border-box

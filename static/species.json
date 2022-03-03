@@ -1,5 +1,4 @@
-{
-  "species": [
+[
     {
       "name": "homo_sapiens",
       "projects": ["FANTOM5"]
@@ -9,4 +8,3 @@
       "projects": ["FANTOM5"]
     }
   ]
-}

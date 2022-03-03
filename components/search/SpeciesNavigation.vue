@@ -1,5 +1,5 @@
 <template>
-  <div class="nav_wrapper">
+  <nav class="nav_wrapper">
     <ul class="species_navi">
       <li
         v-for="specie in species"
@@ -7,7 +7,7 @@
         :class="{ active: $store.state.active_taxon === specie.name }"
         @click="$store.commit('setTaxon', specie.name)"
       >
-        <img :src="GetSpecieImage(specie.name)" :alt="specie.name" />
+        <icon-base :icon-name="specie.name" />
         <div class="taxon_wrapper">
           <p>{{ MakeNameUpperCase(specie.name) }}</p>
           <form>
@@ -24,19 +24,24 @@
         </div>
       </li>
     </ul>
-  </div>
+  </nav>
 </template>
 
 <script>
   import species from '~/static/species.json';
+  import IconBase from '~/components/icons/IconBase.vue';
+
   export default {
+    components: {
+      IconBase,
+    },
     data() {
       return {
-        species: species.species,
-        selected_project: {
-          homo_sapiens: 'FANTOM5',
-          mus_musculus: 'FANTOM5',
-        },
+        species,
+        selected_project: species.reduce((acc, specie) => {
+          acc[specie.name] = specie.projects[0];
+          return acc;
+        }, {}),
       };
     },
     methods: {
@@ -51,26 +56,28 @@
   };
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
   .nav_wrapper
     width: 100vw
-    border-bottom: 1px solid $BLACK
     margin: -10px 0 0px
     .species_navi
-      min-width: 600px
       padding: 0 90px
       margin: 0
+      gap: 3rem
       display: flex
       > li
-        display: flex
-        align-self: flex-end
-        margin-right: 36px
+        display: grid
+        grid-template-columns: auto 1fr
         opacity: .3
         &.active
+          color: $MAIN_COLOR
           opacity: 1
+          *
+            opacity: 1
+            color: $MAIN_COLOR
         &:hover
           cursor: pointer
-        > img
+        > svg
           align-self: flex-end
         > .taxon_wrapper
           display: flex
