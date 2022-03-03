@@ -13,6 +13,12 @@ export const getters = {
   activeFilter(state) {
     return filters.find(col => col.name === state.active_filter);
   },
+  filterByName(_state) {
+    return filterName => filters.find(col => col.name === filterName);
+  },
+  resultsByName(state) {
+    return filterName => state.results[filterName];
+  },
   results(state) {
     return state.results[state.active_filter];
   },

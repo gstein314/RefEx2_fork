@@ -4,10 +4,19 @@
     "columns": [
       { "header": "GeneSymbol", "key": "symbol" },
       { "header": "GeneName", "key": "name" },
-      { "header": "Alias", "key": "alias"},
-      { "header": "NCBI GeneID", "key": "ncbiGeneId"}
+      { "header": "Alias", "key": "alias" },
+      { "header": "NCBI GeneID", "key": "ncbiGeneId" }
     ],
-    "screener": "go_terms"
+    "screener": "go_terms",
+    "search_key": "gene_name",
+    "search_conditions": [
+      {
+        "label": "Gene Name",
+        "examples": ["transcription factor"]
+      },
+      { "label": "Symbol", "examples": ["ITG"] },
+      { "label": "Summary", "examples": ["Breast cancer"] }
+    ]
   },
   {
     "name": "sample",
@@ -18,6 +27,13 @@
       "cell_types",
       "biomedical_concepts"
     ],
-    "screener": "sample_classification"
+    "search_key": "sample_name",
+    "screener": "sample_classification",
+    "search_conditions": [
+      {
+        "label": "Sample Name",
+        "examples": ["liver", "lung"]
+      }
+    ]
   }
 ]

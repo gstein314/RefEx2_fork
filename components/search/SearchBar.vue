@@ -4,31 +4,24 @@
   <div class="text_search_area">
     <h2>Search Conditions</h2>
     <h3>
-      Gene Name, Symbol or Summary
+      {{ title }}
       <span class="example"
         >e.g.
-        <dl
-          @click="
-            setSampleQuery({
-              type: 'gene_name',
-              query: 'transcription factor',
-            })
-          "
-        >
-          <dt>Gene Name:</dt>
-          <dd class="sample_value">transcription factor</dd>
-        </dl>
-        ,
-        <dl @click="setSampleQuery({ type: 'gene_name', query: 'ITG' })">
-          <dt>Symbol:&nbsp;</dt>
-          <dd class="sample_value">ITG</dd>
-        </dl>
-        ,
-        <dl
-          @click="setSampleQuery({ type: 'gene_name', query: 'Breast cancer' })"
-        >
-          <dt>Summary:&nbsp;</dt>
-          <dd class="sample_value">Breast cancer</dd>
+        <dl v-for="(condition, index) of conditions" :key="index">
+          <dt v-if="conditions.length > 1">{{ condition.label }}:</dt>
+          <dd
+            v-for="(example, example_index) of condition.examples"
+            :key="example_index"
+            class="sample_value"
+            @click="
+              setSampleQuery({
+                type: filterKey,
+                query: example,
+              })
+            "
+          >
+            {{ example }}
+          </dd>
         </dl>
       </span>
     </h3>
@@ -50,7 +43,7 @@
           Show all genes that match your query
         </button>
       </template>
-       <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
+      <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
       <!-- eslint-disable vue/no-unused-vars -->
       <div
         slot="suggestion-item"
@@ -103,18 +96,25 @@
     />
     <button class="find_results_btn" @click="showAllResult('all')">
       <font-awesome-icon icon="search" />
-      Find Genes
+      Find {{ filterObj.name }}s
     </button>
   </div>
 </template>
 <script>
   import VueSimpleSuggest from 'vue-simple-suggest';
   import ScreenerView from '~/components/search/ScreenerView.vue';
+  import { mapGetters } from 'vuex';
 
   export default {
     components: {
       VueSimpleSuggest,
       ScreenerView,
+    },
+    props: {
+      filter: {
+        type: String,
+        default: '',
+      },
     },
     data() {
       return {
@@ -132,6 +132,31 @@
         is_reload_active: false,
         isLoading: false,
       };
+    },
+    computed: {
+      ...mapGetters({
+        getFilterByName: 'filterByName',
+      }),
+      filterObj() {
+        return this.getFilterByName(this.filter);
+      },
+      filterKey() {
+        return this.filterObj.search_key;
+      },
+      conditions() {
+        return this.filterObj.search_conditions;
+      },
+      title() {
+        return this.conditions
+          .map((condition, index) => {
+            return index < this.conditions.length - 1
+              ? index === this.conditions.length - 2
+                ? condition.label + ' or '
+                : condition.label + ', '
+              : condition.label;
+          })
+          .join('');
+      },
     },
     methods: {
       setTags(newTags) {
@@ -265,6 +290,14 @@
                       font-weight: 300
                       padding: 2px 0
                       margin: 0
+                      &::after
+                          color: $MAIN_COLOR
+                          position: absolute
+                          content: ','
+                          margin-left: 5px
+                      &:last-child
+                          &::after
+                            content: none
   ::v-deep
       .text_search_gene_name
           input

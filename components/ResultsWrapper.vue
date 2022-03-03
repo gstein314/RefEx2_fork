@@ -1,7 +1,7 @@
 <template>
   <div class="results_wrapper">
     <div class="results_title_wrapper">
-      <h2>Matching Genes</h2>
+      <h2>Matching {{ filterObj.name }}s</h2>
       <button class="show_all_btn" @click="comparisonSearch">
         <font-awesome-icon icon="chart-bar" />
         Comparison
@@ -27,7 +27,7 @@
               @click="toggleAllCheckbox"
             />
           </th>
-          <th v-for="(column, index) of activeFilter.columns" :key="index">
+          <th v-for="(column, index) of filterObj.columns" :key="index">
             {{ column.header }}
           </th>
           <th class="annotation">Annotation</th>
@@ -52,38 +52,27 @@
             />
           </td>
           <td v-for="(column, index) of activeFilter.columns" :key="index">
-            {{ result[column.key] }}
-          </td>
-          <!-- <td class="gene_symbol">{{ result.symbol }}</td>
-          <td class="gene_name">{{ result.name }}</td>
-          <td class="alias">
-            <p
-              v-if="
-                result.alias &&
-                typeof convertStringToArray(result.alias) === 'object'
-              "
-            >
+            <template v-if="result[column.key].startsWith('[')">
               <span
-                v-for="(alias, index) in convertStringToArray(result.alias)"
-                :key="index"
+                v-for="(value, value_index) of JSON.parse(result[column.key])"
+                :key="value_index"
               >
-                <span>{{ alias }}</span>
+                {{ value }}
                 <span
-                  v-if="index !== convertStringToArray(result.alias).length - 1"
-                  class="comma"
+                  v-if="value_index < JSON.parse(result[column.key]).length - 1"
                   >,</span
                 >
               </span>
-            </p>
-            <p v-else class="contents">
-              <span>{{ result.alias }}</span>
-            </p>
+            </template>
+            <template v-else-if="hasStringQuotes(result[column.key])">
+              {{ result[column.key].replaceAll('"', '') }}
+            </template>
+            <template v-else> {{ result[column.key] }}</template>
           </td>
-          <td class="NCBI_geneID">{{ result.ncbiGeneId }}</td> -->
           <td class="annotation">
             <font-awesome-icon
               icon="info-circle"
-              @click.stop="$emit('showGeneDetail',result.ncbiGeneId)"
+              @click.stop="$emit('showGeneDetail', result.ncbiGeneId)"
             />
           </td>
           <td class="gene_expression_patterns">
@@ -101,6 +90,12 @@
   import { mapGetters } from 'vuex';
 
   export default {
+    props: {
+      filter: {
+        type: String,
+        default: '',
+      },
+    },
     data() {
       return {
         checked_gene: [],
@@ -109,9 +104,13 @@
     computed: {
       ...mapGetters({
         activeFilter: 'activeFilter',
-        resultObj: 'results',
+        resultsByName: 'resultsByName',
         result_gene_id_list: 'resultsGeneIds',
+        filterByName: 'filterByName',
       }),
+      filterObj() {
+        return this.filterByName(this.filter);
+      },
       isAllChecked() {
         return (
           this.result_gene_id_list.length > 0 &&
@@ -119,10 +118,13 @@
         );
       },
       results() {
-        return this.resultObj.results;
+        return this.resultsByName(this.filter).results;
       },
     },
     methods: {
+      hasStringQuotes(str) {
+        return str.startsWith('"') && str.endsWith('"');
+      },
       convertStringToArray(str) {
         return typeof str === 'string' ? str.split(',') : str;
       },
