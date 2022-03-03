@@ -405,5 +405,5 @@
       padding: 10px 30px
       margin-top: -7px
     .tag
-      +tag
+      +ontology_tag
 </style>
