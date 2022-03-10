@@ -87,6 +87,7 @@
       <label for="summary_check">Include this field in search</label>
     </div>
     <ScreenerView
+      :filter="filter"
       v-bind="inputs"
       :terms-g-o="input_go_terms"
       @setSampleQuery="setSampleQuery"
@@ -102,7 +103,7 @@
 </template>
 <script>
   import VueSimpleSuggest from 'vue-simple-suggest';
-  import ScreenerView from '~/components/search/ScreenerView.vue';
+  import ScreenerView from '~/components/ScreenerView/ScreenerView.vue';
   import { mapGetters } from 'vuex';
 
   export default {
@@ -183,7 +184,7 @@
         );
         // this.$router.push({ path: '/gene/chart', query: { gid: suggestion.entrezgene, project: 'fantom5', organism: this.$store.state.active_taxon} })
       },
-      showAllResult(type) {
+      showAllResult(type = 'all') {
         setTimeout(() => {
           let query = {};
           query.text = this.inputs.gene_name;
@@ -205,12 +206,8 @@
           if (this.inputs.biomedical_concepts !== '') {
             query.ncit = this.inputs.biomedical_concepts;
           }
-          let adjusted_query = '';
-          if (type === 'num') {
-            adjusted_query += `{numfound(`;
-          } else if (type === 'all') {
-            adjusted_query += `{humangene(`;
-          }
+          let adjusted_query = type === 'num' ? '{numfound(' : '{humangene(';
+
           if (Object.keys(query).length > 1 && query.text === '') {
             delete query.text;
           }
@@ -225,23 +222,17 @@
           } else if (type === 'all') {
             adjusted_query += `){ncbiGeneId symbol name alias} numfound }`;
           }
-          this.$axios({
-            url: 'http://refex2-api.bhx.jp/gql',
-            method: 'post',
-            data: {
-              query: adjusted_query,
-            },
-          }).then(result => {
+          this.$axios.$post('gql', { query: adjusted_query }).then(result => {
             this.$store.commit('setResults', {
-              results: result.data?.data?.humangene ?? [],
-              results_num: result.data.data.numfound ?? 0,
+              results: result.data?.humangene ?? [],
+              results_num: result.data?.numfound ?? 0,
             });
             this.onEvent = false;
             this.is_reload_active = false;
           });
         }, 0);
       },
-      setSampleQuery({ type, query, id }) {
+      setSampleQuery({ type, query, id, resultType = 'num' }) {
         this.is_reload_active = true;
         if (id) {
           this.input_go_terms = [];
@@ -253,7 +244,7 @@
         } else {
           this.$set(this.inputs, type, query);
         }
-        this.showAllResult('num');
+        this.showAllResult(resultType);
       },
     },
   };

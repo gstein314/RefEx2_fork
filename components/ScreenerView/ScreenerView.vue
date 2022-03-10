@@ -10,9 +10,9 @@
         :class="is_screener_open ? 'open' : 'close'"
       />
     </p>
-    <template v-if="activeFilter === 'go_terms'">
+    <slot></slot>
+    <template v-if="activeScreener === 'go_terms'">
       <h3>
-        {{ activeFilter }}
         Genes with GO Term
         <span class="example"
           >e.g.
@@ -50,7 +50,7 @@
         </vue-tags-input>
       </no-ssr>
     </template>
-    <template v-if="activeFilter === 'sample_classification'">
+    <template v-else-if="activeScreener === 'sample_classification'">
       <h3>
         Genes that are specifically expressed in a given sample by
         classification
@@ -109,7 +109,6 @@
             >
           </span>
         </h4>
-        <!-- HI: {{ cell_types_list }} -->
         <vue-simple-suggest
           :value="cell_types"
           :filter-by-query="true"
@@ -210,6 +209,10 @@
       VueSimpleSuggest,
     },
     props: {
+      filter: {
+        type: String,
+        required: true,
+      },
       termsGO: {
         type: Array,
         default: () => [],
@@ -239,6 +242,12 @@
       return {
         debounce: null,
         autocomplete_go_term_items: [],
+        sample_classification_list: {
+          sample_type: ['cell lines', 'stem cells', 'primary cells', 'tissues'],
+          cl: [],
+          uberon: [],
+          ncit: [],
+        },
         is_screener_open: false,
         cell_types_list: [],
         anatomical_structures_list: [],
@@ -252,8 +261,11 @@
       };
     },
     computed: {
-      activeFilter() {
-        return this.$store.getters.activeFilter.screener;
+      filterObj() {
+        return this.$store.getters.filterByName(this.filter);
+      },
+      activeScreener() {
+        return this.filterObj.screener;
       },
       placeholderGOTerm() {
         return this.go_term === '' && this.termsGO.length < 1
@@ -263,40 +275,24 @@
     },
     watch: {
       go_term() {
-        this.initItems();
+        if(this.node.key === 'gene') this.initItems();
       },
     },
     async created() {
-      this.$axios
-        .$get(`http://refex2-api.bhx.jp/api/vocablary?annotation=CL%20label`)
-        .then(data => {
-          this.cell_types_list = data;
-        })
-        .catch(error => {
-          console.log('error', error);
+      if (this.activeScreener === 'sample_classification') {
+        Object.keys(this.sample_classification_list).forEach(key => {
+          if (this.sample_classification_list[key].length > 1) return;
+          this.$axios
+            .$get(`api/vocablary?annotation=${key.toUpperCase()}%20label`)
+            .then(data => {
+              this.$set(this.sample_classification_list, key, data);
+            })
+            .catch(error => {
+              console.log('error', error);
+            });
         });
-
-      this.$axios
-        .$get(
-          `http://refex2-api.bhx.jp/api/vocablary?annotation=UBERON%20label`
-        )
-        .then(data => {
-          this.anatomical_structures_list = data;
-        })
-        .catch(error => {
-          console.log('error', error);
-        });
-
-      this.$axios
-        .$get(`http://refex2-api.bhx.jp/api/vocablary?annotation=NCIT%20label`)
-        .then(data => {
-          this.biomedical_concepts_list = data;
-        })
-        .catch(error => {
-          console.log('error', error);
-        });
-
-      this.update();
+        this.update();
+      }
     },
     methods: {
       toggleScreener() {
@@ -311,7 +307,7 @@
         this.update();
       },
       initItems() {
-        const url = `http://refex2-api.bhx.jp/api/suggest?query=${this.go_term}&go=True`;
+        const url = `api/suggest?query=${this.go_term}&go=True`;
         clearTimeout(this.debounce);
         this.debounce = setTimeout(() => {
           this.$axios
@@ -329,6 +325,7 @@
           type,
           query,
           id,
+          resultType: type === 'go_term' ? 'all' : 'num',
         });
       },
     },
