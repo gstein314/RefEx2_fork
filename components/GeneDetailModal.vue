@@ -122,8 +122,6 @@
 </template>
 
 <script>
-  import axios from 'axios';
-
   export default {
     props: {
       geneId: {
@@ -139,10 +137,12 @@
     },
     created() {
       this.is_loading = true;
-      axios.get(`https://mygene.info/v3/gene/${this.geneId}`).then(data => {
-        this.gene_data = data.data;
-        this.is_loading = false;
-      });
+      this.$axios
+        .$get(`https://mygene.info/v3/gene/${this.geneId}`)
+        .then(data => {
+          this.gene_data = data.data;
+          this.is_loading = false;
+        });
     },
     methods: {},
   };

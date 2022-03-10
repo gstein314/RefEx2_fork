@@ -57,7 +57,7 @@ export default {
   ],
 
   axios: {
-    baseURL: 'http://refex2-api.bhx.jp/api/dist',
+    baseURL: 'http://refex2-api.bhx.jp/',
     retry: {
       retries: 3,
       retryDelay: exponentialDelay,
