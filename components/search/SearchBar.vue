@@ -89,7 +89,6 @@
     <ScreenerView
       :filter="filter"
       v-bind="inputs"
-      :terms-g-o="input_go_terms"
       @setSampleQuery="setSampleQuery"
       @update="showAllResult"
       @updateInputs="setInputs"
@@ -121,13 +120,13 @@
       return {
         inputs: {
           gene_name: '',
-          go_term: '',
+          // go_term: '',
           sample_types: '',
           cell_types: '',
           anatomical_structures: '',
           biomedical_concepts: '',
         },
-        input_go_terms: [],
+        // input_go_terms: [],
         onEvent: false,
         is_summary_included: false,
         is_reload_active: false,
@@ -160,13 +159,13 @@
       },
     },
     methods: {
-      setTags(newTags) {
-        this.input_go_terms = [];
-        if (newTags.length !== 0) {
-          this.input_go_terms[0] = newTags[newTags.length - 1];
-          this.is_reload_active = true;
-        }
-      },
+      // setTags(newTags) {
+      //   this.input_go_terms = [];
+      //   if (newTags.length !== 0) {
+      //     this.input_go_terms[0] = newTags[newTags.length - 1];
+      //     this.is_reload_active = true;
+      //   }
+      // },
       async getSuggestionList(suggest) {
         let url = `http://refex2-api.bhx.jp/api/suggest?query=${suggest}`;
         this.isLoading = true;
@@ -191,9 +190,9 @@
           if (this.is_summary_included) {
             query.summary = 'True';
           }
-          if (this.input_go_terms.length !== 0) {
-            query.go = this.input_go_terms[0].id;
-          }
+          // if (this.input_go_terms.length !== 0) {
+          //   query.go = this.input_go_terms[0].id;
+          // }
           if (this.inputs.sample_types !== '') {
             query.celltype = this.inputs.sample_types;
           }

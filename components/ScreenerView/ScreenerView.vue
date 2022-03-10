@@ -11,7 +11,12 @@
       />
     </p>
     <slot></slot>
-    <template v-if="activeScreener === 'go_terms'">
+    <component
+      :is="`screener-view-gene`"
+      @updateParameters="updateScreenerParams"
+    ></component>
+
+    <!-- <template v-if="activeScreener === 'go_termss'">
       <h3>
         Genes with GO Term
         <span class="example"
@@ -49,8 +54,8 @@
           ></div>
         </vue-tags-input>
       </no-ssr>
-    </template>
-    <template v-else-if="activeScreener === 'sample_classification'">
+    </template> -->
+    <template v-if="activeScreener === 'sample_classification'">
       <h3>
         Genes that are specifically expressed in a given sample by
         classification
@@ -267,17 +272,17 @@
       activeScreener() {
         return this.filterObj.screener;
       },
-      placeholderGOTerm() {
-        return this.go_term === '' && this.termsGO.length < 1
-          ? 'transcription factor binding'
-          : '';
-      },
+      // placeholderGOTerm() {
+      //   return this.go_term === '' && this.termsGO.length < 1
+      //     ? 'transcription factor binding'
+      //     : '';
+      // },
     },
-    watch: {
-      go_term() {
-        if(this.node.key === 'gene') this.initItems();
-      },
-    },
+    // watch: {
+    //   go_term() {
+    //     if(this.node.key === 'gene') this.initItems();
+    //   },
+    // },
     async created() {
       if (this.activeScreener === 'sample_classification') {
         Object.keys(this.sample_classification_list).forEach(key => {
@@ -295,6 +300,9 @@
       }
     },
     methods: {
+      updateScreenerParams(params){
+        console.log(params);
+      },
       toggleScreener() {
         this.is_screener_open = !this.is_screener_open;
       },
