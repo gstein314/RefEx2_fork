@@ -14,9 +14,8 @@
             :key="example_index"
             class="sample_value"
             @click="
-              setSampleQuery({
-                type: filterKey,
-                query: example,
+              updateParams({
+                [condition.name]: example,
               })
             "
           >
@@ -26,7 +25,7 @@
       </span>
     </h3>
     <vue-simple-suggest
-      v-model="inputs.gene_name"
+      v-model="parameters.text"
       :debounce="500"
       display-attribute="name"
       value-attribute="name"
@@ -34,11 +33,11 @@
       :max-suggestions="100"
       class="text_search_gene_name"
       placeholder="transcription factor"
-      @input="showAllResult('num')"
+      @input="showResults('num')"
       @select="moveDetailpage"
     >
       <template slot="misc-item-above">
-        <button class="show_all_btn" @click="showAllResult('all')">
+        <button class="show_all_btn" @click="showResults">
           <font-awesome-icon icon="list" />
           Show all genes that match your query
         </button>
@@ -50,14 +49,14 @@
         slot-scope="{ suggestion }"
         v-html="
           `<b>${suggestion.symbol}</b>&nbsp;(${suggestion.name.replace(
-            inputs.gene_name,
-            '<b>' + inputs.gene_name + '</b>'
+            parameters.text,
+            '<b>' + parameters.text + '</b>'
           )}${suggestion.alias.replace(
-            inputs.gene_name,
-            '<b>' + inputs.gene_name + '</b>'
+            parameters.text,
+            '<b>' + parameters.text + '</b>'
           )}, NCBI_GeneID: ${suggestion.entrezgene.replace(
-            inputs.gene_name,
-            '<b>' + inputs.gene_name + '</b>'
+            parameters.text,
+            '<b>' + parameters.text + '</b>'
           )})`
         "
       >
@@ -76,25 +75,23 @@
         <span>Loading...</span>
       </div>
     </vue-simple-suggest>
-    <div :class="['summary_check_wrapper', { hide: inputs.gene_name === '' }]">
+    <div :class="['summary_check_wrapper', { hide: parameters.text === '' }]">
       <input
         id="summary_check"
         v-model="is_summary_included"
         type="checkbox"
         name="summary_check"
-        @click="showAllResult('num')"
+        @click="showResults('num')"
       />
       <label for="summary_check">Include this field in search</label>
     </div>
-    <ScreenerView
-      :filter="filter"
-      v-bind="inputs"
-      @setSampleQuery="setSampleQuery"
-      @update="showAllResult"
-      @updateInputs="setInputs"
-      @setTags="setTags"
-    />
-    <button class="find_results_btn" @click="showAllResult('all')">
+    <ScreenerView :filter="filter" v-bind="inputs">
+      <component
+        :is="`screener-view-${filter}`"
+        @updateParameters="updateParams"
+      ></component>
+    </ScreenerView>
+    <button class="find_results_btn" @click="showResults">
       <font-awesome-icon icon="search" />
       Find {{ filterObj.name }}s
     </button>
@@ -118,15 +115,9 @@
     },
     data() {
       return {
-        inputs: {
-          gene_name: '',
-          // go_term: '',
-          sample_types: '',
-          cell_types: '',
-          anatomical_structures: '',
-          biomedical_concepts: '',
+        parameters: {
+          text: '',
         },
-        // input_go_terms: [],
         onEvent: false,
         is_summary_included: false,
         is_reload_active: false,
@@ -136,7 +127,11 @@
     computed: {
       ...mapGetters({
         getFilterByName: 'filterByName',
+        getActiveOrganization: 'active_organization',
+        getActiveTaxon: 'activeTaxon',
       }),
+      // TODO: turn into qql query
+
       filterObj() {
         return this.getFilterByName(this.filter);
       },
@@ -159,13 +154,10 @@
       },
     },
     methods: {
-      // setTags(newTags) {
-      //   this.input_go_terms = [];
-      //   if (newTags.length !== 0) {
-      //     this.input_go_terms[0] = newTags[newTags.length - 1];
-      //     this.is_reload_active = true;
-      //   }
-      // },
+      updateParams(params) {
+        this.parameters = { ...this.parameters, ...params };
+        this.showResults('num');
+      },
       async getSuggestionList(suggest) {
         let url = `http://refex2-api.bhx.jp/api/suggest?query=${suggest}`;
         this.isLoading = true;
@@ -174,8 +166,30 @@
           return results.results;
         });
       },
-      setInputs(inputs) {
-        this.inputs = inputs;
+      suggest_query(type = 'num') {
+        const isNum = type === 'num';
+        const prefix = `${this.getActiveTaxon.suggestions_key}${
+          this.getActiveOrganization
+        }${this.filter}${isNum ? 'Numfound' : ''}`;
+        const params = Object.entries(this.parameters)
+          .map(
+            ([key, value], index) =>
+              `${key}:"${value}"${
+                index === Object.entries(this.parameters).length - 1 ? '' : ', '
+              }`
+          )
+          .join('');
+        const resultParams = isNum
+          ? ''
+          : `{${this.filterObj.columns.map(col => col.key).join(' ')}}`;
+        const suffix = isNum ? '' : ` ${prefix}Numfound`;
+        // TODO: remove temp API naming
+        // return `api/suggest?query={${prefix}(${params})${resultParams}${suffix}}`;
+        return this.filter === 'gene'
+          ? isNum
+            ? `{numfound(${params})}`
+            : `{humangene(${params})${resultParams} numfound(${params})}`
+          : `${prefix}(${params})${resultParams}${suffix}}`;
       },
       moveDetailpage(suggestion) {
         this.$router.push(
@@ -183,45 +197,10 @@
         );
         // this.$router.push({ path: '/gene/chart', query: { gid: suggestion.entrezgene, project: 'fantom5', organism: this.$store.state.active_taxon} })
       },
-      showAllResult(type = 'all') {
-        setTimeout(() => {
-          let query = {};
-          query.text = this.inputs.gene_name;
-          if (this.is_summary_included) {
-            query.summary = 'True';
-          }
-          // if (this.input_go_terms.length !== 0) {
-          //   query.go = this.input_go_terms[0].id;
-          // }
-          if (this.inputs.sample_types !== '') {
-            query.celltype = this.inputs.sample_types;
-          }
-          if (this.inputs.cell_types !== '') {
-            query.cl = this.inputs.cell_types;
-          }
-          if (this.inputs.anatomical_structures !== '') {
-            query.uberon = this.inputs.anatomical_structures;
-          }
-          if (this.inputs.biomedical_concepts !== '') {
-            query.ncit = this.inputs.biomedical_concepts;
-          }
-          let adjusted_query = type === 'num' ? '{numfound(' : '{humangene(';
-
-          if (Object.keys(query).length > 1 && query.text === '') {
-            delete query.text;
-          }
-          Object.keys(query).forEach((key, index) => {
-            adjusted_query += `${key}:"${query[key]}"`;
-            if (index !== Object.keys(query).length - 1) {
-              adjusted_query += ',';
-            }
-          });
-          if (type === 'num') {
-            adjusted_query += `)}`;
-          } else if (type === 'all') {
-            adjusted_query += `){ncbiGeneId symbol name alias} numfound }`;
-          }
-          this.$axios.$post('gql', { query: adjusted_query }).then(result => {
+      showResults(type = 'all') {
+        this.$axios
+          .$post('gql', { query: this.suggest_query(type) })
+          .then(result => {
             this.$store.commit('setResults', {
               results: result.data?.humangene ?? [],
               results_num: result.data?.numfound ?? 0,
@@ -229,21 +208,6 @@
             this.onEvent = false;
             this.is_reload_active = false;
           });
-        }, 0);
-      },
-      setSampleQuery({ type, query, id, resultType = 'num' }) {
-        this.is_reload_active = true;
-        if (id) {
-          this.input_go_terms = [];
-          this.input_go_terms.push({
-            text: query,
-            id,
-            tiClasses: ['ti-valid'],
-          });
-        } else {
-          this.$set(this.inputs, type, query);
-        }
-        this.showAllResult(resultType);
       },
     },
   };

@@ -21,12 +21,12 @@
     <no-ssr>
       <vue-tags-input
         v-model="temporaryParameters.go_term"
-        :tags="parameters.go_terms"
-        :autocomplete-items="auto_complete.go_terms"
+        :tags="parameters.go"
+        :autocomplete-items="auto_complete.go"
         :add-only-from-autocomplete="true"
         :placeholder="placeholderGOTerm"
         @input="updateAutoComplete"
-        @tags-changed="setTags"
+        @tags-changed="setTags($event, 'go')"
       >
         <div
           slot="autocomplete-item"
@@ -54,39 +54,30 @@
         },
         // passed down to API
         parameters: {
-          go_terms: [],
+          go: [],
         },
         auto_complete: {
-          go_terms: [],
+          go: [],
         },
         debounce: null,
       };
     },
     computed: {
+      go_term_string() {
+        return this.parameters.go.map(tag => tag.id).join(', ');
+      },
       placeholderGOTerm() {
         return this.temporaryParameters.go_term === '' &&
-          this.parameters.go_terms.length < 1
+          this.parameters.go.length < 1
           ? 'transcription factor binding'
           : '';
       },
     },
     watch: {
-      parameters: {
-        handler: function (newVal, oldVal) {
-          // watch it
-          console.log('Prop changed: ', newVal, ' | was: ', oldVal);
-          this.$emit('updateParameters', this.parameters);
-        },
+      parameters() {
+        this.$emit('updateParameters', { go: this.go_term_string });
       },
     },
-    //     watch:{
-    //       item:{
-    //         handler: function(newVal, oldVal) { // watch it
-    //           console.log('Prop changed: ', newVal, ' | was: ', oldVal)
-    //         },
-    //         deep: true
-    //    }
-    // }
     methods: {
       // TODO: set as global function
       getSuggestionURL(queryStr, optionalStr) {
@@ -106,7 +97,7 @@
             .then(response => {
               this.$set(
                 this.auto_complete,
-                'go_terms',
+                'go',
                 response.results.map(a => {
                   return { text: a.term, id: a.id };
                 })
@@ -116,19 +107,14 @@
         }, 300);
       },
       // TODO: set as global function
-      handleSingleTagUpdate(
-        id,
-        text,
-        tiClasses = ['ti-valid'],
-        key = 'go_terms'
-      ) {
+      handleSingleTagUpdate(id, text, tiClasses = ['ti-valid'], key = 'go') {
         if (this.parameters[key].find(tag => tag.id === id)) {
           return;
         }
         this.setTags([...this.parameters[key], { id, text, tiClasses }], key);
       },
       // TODO: set as global function
-      setTags(newTags, key = 'go_terms') {
+      setTags(newTags, key = 'go') {
         this.parameters = { ...this.parameters, [key]: newTags };
       },
     },
