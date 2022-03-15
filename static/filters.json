@@ -7,8 +7,7 @@
       { "header": "Alias", "key": "alias" },
       { "header": "NCBI GeneID", "key": "ncbiGeneId" }
     ],
-    "screener": "go_terms",
-    "search_key": "gene_name",
+    "uniqueKey": "symbol",
     "search_conditions": [
       {
         "label": "Gene Name",
@@ -21,14 +20,13 @@
   {
     "name": "sample",
     "columns": [
-      "description",
-      "type",
-      "anatomical_structures",
-      "cell_types",
-      "biomedical_concepts"
+      { "header": "Description", "key": "Description" },
+      { "header": "Type", "key": "biosample" },
+      { "header": "Anotomical Structures", "key": "UBERON" },
+      { "header": "Cell types", "key": "CL" },
+      { "header": "Description", "key": "NCIT" }
     ],
-    "search_key": "sample_name",
-    "screener": "sample_classification",
+    "uniqueKey": "anotimcal_structures",
     "search_conditions": [
       {
         "label": "Sample Name",

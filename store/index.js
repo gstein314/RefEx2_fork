@@ -1,7 +1,8 @@
 import filters from '../static/filters.json';
+import taxons from '../static/species.json';
 
 export const state = () => ({
-  active_taxon: 'homo_sapiens', //default,
+  active_taxon: taxons[0], //default,
   active_filter: 'gene',
   active_organization: 'FANTOM5',
   results: filters.reduce((acc, filter) => {
@@ -15,38 +16,35 @@ export const getters = {
   activeFilter(state) {
     return filters.find(col => col.name === state.active_filter);
   },
+  activeTaxon: state => state.active_taxon,
   filterByName: _state => filterName =>
     filters.find(col => col.name === filterName),
-
   resultsByName(state) {
     return filterName => state.results[filterName];
   },
-  results(state) {
-    return state.results[state.active_filter];
-  },
-  resultsGeneIds(state) {
+  resultsUniqueKeys(state, getters) {
     return state.results[state.active_filter].results.map(
-      gene => gene.ncbiGeneId
+      item => item[getters.activeFilter.uniqueKey]
     );
   },
 };
 
 export const mutations = {
-  setTaxon(state, taxon) {
-    state.active_taxon = taxon;
+  setTaxon(state, taxonId) {
+    state.active_taxon = taxons.find(taxon => taxon.name === taxonId);
   },
   setActiveOrganization: (state, organization) =>
     (state.organization = organization),
   setActiveFilter(state, filter = 'gene') {
     state.active_filter = filter;
   },
-  setResults(state, { results = [], results_num = 0 }) {
+  setResults(
+    state,
+    { results = [], results_num = 0, filterType = state.activeFilter }
+  ) {
     state.results = {
       ...state.results,
-      [state.active_filter]: { results, results_num },
+      [filterType]: { results, results_num },
     };
-  },
-  setResultsNum(state, results_num) {
-    state.results = { ...state.results, results_num };
   },
 };

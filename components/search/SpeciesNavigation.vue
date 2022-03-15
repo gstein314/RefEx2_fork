@@ -4,7 +4,7 @@
       <li
         v-for="specie in species"
         :key="specie.name"
-        :class="{ active: $store.state.active_taxon === specie.name }"
+        :class="{ active: $store.state.active_taxon.name === specie.name }"
         @click="$store.commit('setTaxon', specie.name)"
       >
         <icon-base :icon-name="specie.name" />
