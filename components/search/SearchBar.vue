@@ -15,7 +15,7 @@
             class="sample_value"
             @click="
               updateParams({
-                [condition.name]: example,
+                text: example,
               })
             "
           >
@@ -33,7 +33,7 @@
       :max-suggestions="100"
       class="text_search_gene_name"
       placeholder="transcription factor"
-      @input="showResults('num')"
+      @input="showResults('numfound')"
       @select="moveDetailpage"
     >
       <template slot="misc-item-above">
@@ -81,7 +81,7 @@
         v-model="is_summary_included"
         type="checkbox"
         name="summary_check"
-        @click="showResults('num')"
+        @click="showResults('numfound')"
       />
       <label for="summary_check">Include this field in search</label>
     </div>
@@ -125,6 +125,8 @@
         is_summary_included: false,
         is_reload_active: false,
         isLoading: false,
+        // either 'all' or 'numfound'
+        typeOfQuery: 'numfound',
       };
     },
     computed: {
@@ -137,9 +139,6 @@
 
       filterObj() {
         return this.getFilterByName(this.filter);
-      },
-      filterKey() {
-        return this.filterObj.search_key;
       },
       conditions() {
         return this.filterObj.search_conditions;
@@ -155,12 +154,36 @@
           })
           .join('');
       },
+      isNum() {
+        return this.typeOfQuery === 'numfound';
+      },
+      queryPrefix() {
+        return `${this.getActiveTaxon.suggestions_key}${firstLetterUpperCase(
+          this.getActiveOrganization
+        )}${firstLetterUpperCase(this.filter)}${this.isNum ? 'Numfound' : ''}`;
+      },
+      suggest_query() {
+        let params = Object.entries(this.parameters)
+          .filter(([_key, value]) => value !== '')
+          .map(
+            ([key, value], index) =>
+              `${key}:"${value}"${
+                index === Object.entries(this.parameters).length - 1 ? '' : ', '
+              }`
+          )
+          .join('');
+        if (params !== '') params = `(${params})`;
+        const resultParams = this.isNum
+          ? ''
+          : `{${this.filterObj.columns.map(col => col.key).join(' ')}}`;
+        const suffix = this.isNum ? '' : ` ${this.queryPrefix}Numfound`;
+        return `{${this.queryPrefix}${params}${resultParams}${suffix}}`;
+      },
     },
     methods: {
       updateParams(params) {
-        console.log(params);
         this.parameters = { ...this.parameters, ...params };
-        this.showResults('num');
+        this.showResults('numfound');
       },
       async getSuggestionList(suggest) {
         let url = `http://refex2-api.bhx.jp/api/suggest?query=${suggest}`;
@@ -170,33 +193,6 @@
           return results.results;
         });
       },
-      suggest_query(type = 'num') {
-        const isNum = type === 'num';
-        const prefix = `${
-          this.getActiveTaxon.suggestions_key
-        }${firstLetterUpperCase(
-          this.getActiveOrganization
-        )}${firstLetterUpperCase(this.filter)}${isNum ? 'Numfound' : ''}`;
-        const params = Object.entries(this.parameters)
-          .map(
-            ([key, value], index) =>
-              `${key}:"${value}"${
-                index === Object.entries(this.parameters).length - 1 ? '' : ', '
-              }`
-          )
-          .join('');
-        const resultParams = isNum
-          ? ''
-          : `{${this.filterObj.columns.map(col => col.key).join(' ')}}`;
-        const suffix = isNum ? '' : ` ${prefix}Numfound`;
-        // TODO: remove temp API naming
-        // return `api/suggest?query={${prefix}(${params})${resultParams}${suffix}}`;
-        return this.filter === 'gene'
-          ? isNum
-            ? `{numfound(${params})}`
-            : `{humangene(${params})${resultParams} numfound(${params})}`
-          : `{${prefix}(${params})${resultParams}${suffix}}`;
-      },
       moveDetailpage(suggestion) {
         this.$router.push(
           `${this.$store.state.active_taxon}/FANTOM5?gid=${suggestion.entrezgene}`
@@ -204,12 +200,17 @@
         // this.$router.push({ path: '/gene/chart', query: { gid: suggestion.entrezgene, project: 'fantom5', organism: this.$store.state.active_taxon} })
       },
       showResults(type = 'all') {
+        this.typeOfQuery = type;
         this.$axios
-          .$post('gql', { query: this.suggest_query(type) })
+          .$post('gql', {
+            query: this.suggest_query,
+          })
           .then(result => {
+            const prefix = this.queryPrefix.replace('Numfound', '');
             this.$store.commit('setResults', {
-              results: result.data?.humangene ?? [],
-              results_num: result.data?.numfound ?? 0,
+              results: result.data[prefix] ?? [],
+              results_num: result.data[`${prefix}Numfound`] ?? 0,
+              filterType: this.filter
             });
             this.onEvent = false;
             this.is_reload_active = false;

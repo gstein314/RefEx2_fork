@@ -1,4 +1,6 @@
 <template>
+  <!-- v-html setup neccesary for plugin, does NOT use user input/API data and is therefore safe to use -->
+  <!-- eslint-disable vue/no-v-html -->
   <div>
     <h3>
       Genes that are specifically expressed in a given sample by classification
@@ -68,6 +70,7 @@
         :max-suggestions="100"
         class="text_search_cell_types"
         placeholder="CD14"
+        @input="$emit('updateParameters', parameters)"
       >
         <div
           slot="suggestion-item"
@@ -91,6 +94,7 @@
         :max-suggestions="100"
         class="text_search_anatomical_structures"
         placeholder="skin"
+        @input="$emit('updateParameters', parameters)"
       >
         <div
           slot="suggestion-item"
@@ -123,6 +127,7 @@
         :max-suggestions="100"
         class="text_search_biomedical_concepts"
         placeholder="leukemia"
+        @input="$emit('updateParameters', parameters)"
       >
         <div
           slot="suggestion-item"
@@ -153,12 +158,7 @@
           UBERON: '',
         },
         auto_complete: {
-          project: [
-            'cell lines',
-            'stem cells',
-            'primary cells',
-            'tissues',
-          ],
+          project: ['cell lines', 'stem cells', 'primary cells', 'tissues'],
           CL: [],
           NCIT: [],
           UBERON: [],
@@ -166,7 +166,7 @@
         debounce: null,
       };
     },
-    async created() {
+    created() {
       Object.keys(this.auto_complete).forEach(key => {
         if (this.auto_complete[key].length > 1) return;
         this.$axios
@@ -203,7 +203,7 @@
         }, 300);
       },
       updateParameter(key, value) {
-        if(key && value) this.$set(this.parameters, key, value);
+        if (key && value) this.$set(this.parameters, key, value);
         this.$emit('updateParameters', this.parameters);
       },
     },
