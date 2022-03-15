@@ -44,12 +44,7 @@
         <div
           slot="suggestion-item"
           slot-scope="{ suggestion }"
-          v-html="
-            suggestion.replace(
-              parameters['project'],
-              `<b>${parameters['project']}</b>`
-            )
-          "
+          v-html="$boldenSuggestion(suggestion, parameters.project)"
         ></div>
       </vue-simple-suggest>
       <h4>
@@ -75,7 +70,7 @@
         <div
           slot="suggestion-item"
           slot-scope="{ suggestion }"
-          v-html="suggestion.replace(parameters.CL, `<b>${parameters.CL}</b>`)"
+          v-html="$boldenSuggestion(suggestion, parameters.CL)"
         ></div>
       </vue-simple-suggest>
       <h4>
@@ -99,9 +94,7 @@
         <div
           slot="suggestion-item"
           slot-scope="{ suggestion }"
-          v-html="
-            suggestion.replace(parameters.UBERON, `<b>${parameters.UBERON}</b>`)
-          "
+          v-html="$boldenSuggestion(suggestion, parameters.UBERON)"
         ></div>
       </vue-simple-suggest>
       <h4>
@@ -132,9 +125,7 @@
         <div
           slot="suggestion-item"
           slot-scope="{ suggestion }"
-          v-html="
-            suggestion.replace(parameters.NCIT, `<b>${parameters.NCIT}</b>`)
-          "
+          v-html="$boldenSuggestion(suggestion, parameters.NCIT)"
         ></div>
       </vue-simple-suggest>
     </div>
@@ -180,16 +171,12 @@
       });
     },
     methods: {
-      // TODO: set as global function
-      getSuggestionURL(queryStr, optionalStr) {
-        return `api/suggest?query=${queryStr}${optionalStr}`;
-      },
       // TODO: check if multiple go terms can be set
       updateAutoComplete(key) {
         clearTimeout(this.debounce);
         this.debounce = setTimeout(() => {
           this.$axios
-            .$get(this.getSuggestionURL(key))
+            .$get(this.$getSuggestionURL(key))
             .then(response => {
               this.$set(
                 this.auto_complete,

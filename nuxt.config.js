@@ -26,6 +26,7 @@ export default {
   plugins: [
     { src: '~/plugins/vue-tags-input', ssr: false },
     { src: '@/plugins/plugin', mode: 'client' },
+    '~/plugins/mixin.js'
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)

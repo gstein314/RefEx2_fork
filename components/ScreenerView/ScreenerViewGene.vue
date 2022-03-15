@@ -1,4 +1,6 @@
 <template>
+  <!-- v-html setup neccesary for plugin, does NOT use user input/API data and is therefore safe to use -->
+  <!-- eslint-disable vue/no-v-html -->
   <div>
     <h3>
       Genes with GO Term
@@ -30,16 +32,13 @@
       >
         <div
           slot="autocomplete-item"
-          slot-scope="props"
+          slot-scope="{ item }"
           class="my-item"
           @click="props.performAdd(props.item)"
-          v-html="
-            props.item.text.replace(
-              temporaryParameters.go_term,
-              `<b>${temporaryParameters.go_term}</b>`
-            )
-          "
-        ></div>
+          v-html="$boldenSuggestion(item.text, temporaryParameters.go_term)"
+        >
+          " >
+        </div>
       </vue-tags-input>
     </no-ssr>
   </div>
@@ -79,17 +78,13 @@
       },
     },
     methods: {
-      // TODO: set as global function
-      getSuggestionURL(queryStr, optionalStr) {
-        return `api/suggest?query=${queryStr}${optionalStr}`;
-      },
       // TODO: check if multiple go terms can be set
       updateAutoComplete() {
         clearTimeout(this.debounce);
         this.debounce = setTimeout(() => {
           this.$axios
             .$get(
-              this.getSuggestionURL(
+              this.$getSuggestionURL(
                 this.temporaryParameters.go_term,
                 '&go=True'
               )
