@@ -32,7 +32,7 @@
       :list="getSuggestionList"
       :max-suggestions="100"
       class="text_search_gene_name"
-      placeholder="transcription factor"
+      :placeholder="filter === 'gene' ? 'transcription factor' : 'liver'"
       @input="showResults('numfound')"
       @select="moveDetailpage"
     >
@@ -48,15 +48,12 @@
         slot="suggestion-item"
         slot-scope="{ suggestion }"
         v-html="
-          `<b>${suggestion.symbol}</b>&nbsp;(${suggestion.name.replace(
-            parameters.text,
-            '<b>' + parameters.text + '</b>'
-          )}${suggestion.alias.replace(
-            parameters.text,
-            '<b>' + parameters.text + '</b>'
-          )}, NCBI_GeneID: ${suggestion.entrezgene.replace(
-            parameters.text,
-            '<b>' + parameters.text + '</b>'
+          `<b>${suggestion.symbol}</b>&nbsp;
+          (${$boldenSuggestion(suggestion.name, parameters.text)}
+          ${$boldenSuggestion(suggestion.alias, parameters.text)}
+          , NCBI_GeneID: ${$boldenSuggestion(
+            suggestion.entrezgene,
+            parameters.text
           )})`
         "
       >
@@ -185,7 +182,8 @@
         this.parameters = { ...this.parameters, ...params };
         this.showResults('numfound');
       },
-      async getSuggestionList(suggest) {
+      // TODO: check if suggestions needs to be changed for sample
+      getSuggestionList(suggest) {
         let url = `http://refex2-api.bhx.jp/api/suggest?query=${suggest}`;
         this.isLoading = true;
         return this.$axios.$get(url).then(results => {
@@ -210,7 +208,7 @@
             this.$store.commit('setResults', {
               results: result.data[prefix] ?? [],
               results_num: result.data[`${prefix}Numfound`] ?? 0,
-              filterType: this.filter
+              filterType: this.filter,
             });
             this.onEvent = false;
             this.is_reload_active = false;
