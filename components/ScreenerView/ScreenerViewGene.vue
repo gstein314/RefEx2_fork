@@ -106,15 +106,13 @@
             .catch(() => console.warn('Oh. Something went wrong'));
         }, 300);
       },
-      // TODO: set as global function
       handleSingleTagUpdate(id, text, tiClasses = ['ti-valid'], key = 'go') {
         if (this.parameters[key].find(tag => tag.id === id)) {
           return;
         }
         this.setTags([...this.parameters[key], { id, text, tiClasses }], key);
       },
-      // TODO: set as global function
-      setTags(newTags, key = 'go') {
+      setTags(newTags, key) {
         this.parameters = { ...this.parameters, [key]: newTags };
       },
     },

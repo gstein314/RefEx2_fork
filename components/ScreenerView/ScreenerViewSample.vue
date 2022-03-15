@@ -10,117 +10,93 @@
           >e.g.
           <span
             class="sample_value"
-            @click="setSampleQuery('sample_types', 'cell lines')"
+            @click="updateParameter('project', 'cell lines')"
             >cell lines</span
           >,
           <span
             class="sample_value"
-            @click="setSampleQuery('sample_types', 'stem cells')"
+            @click="updateParameter('project', 'stem cells')"
             >stem cells</span
           >,
           <span
             class="sample_value"
-            @click="setSampleQuery('sample_types', 'primary cells')"
+            @click="updateParameter('project', 'primary cells')"
             >primary cells</span
           >,
           <span
             class="sample_value"
-            @click="setSampleQuery('sample_types', 'tissues')"
+            @click="updateParameter('project', 'tissues')"
             >tissues</span
           >
         </span>
       </h4>
-      <!-- params: {{ parameters }} -->
       <vue-simple-suggest
-        v-for="(item, key, index) in parameters"
-        :key="index"
-        v-model="parameters[key]"
+        v-model="parameters.project"
         :filter-by-query="true"
-        :list="auto_complete[key]"
+        :list="auto_complete.project"
         :max-suggestions="100"
         class="text_search_sample_types"
         placeholder="cell lines"
-        @input="updateAutoComplete(key)"
-        @select="setTags($event, key)"
-      >
-        <div
-          slot="suggestion-item"
-          slot-scope="{ suggestion }"
-          v-html="suggestion.replace(auto_complete[key], `<b>${auto_complete[key]}</b>`)"
-        ></div>
-      </vue-simple-suggest>
-       <vue-simple-suggest
-        :value="sample_types"
-        :filter-by-query="true"
-        :list="sample_types_list"
-        :max-suggestions="100"
-        class="text_search_sample_types"
-        placeholder="cell lines"
-        @input="setSampleQuery('sample_types', $event)"
-        @select="setSampleQuery('sample_types', $event)"
-      >
-        <div
-          slot="suggestion-item"
-          slot-scope="{ suggestion }"
-          v-html="suggestion.replace(sample_types, `<b>${sample_types}</b>`)"
-        ></div>
-      </vue-simple-suggest>
-      <!--<h4>
-        Cell types <span class="tag">Cell Ontology</span>
-        <span class="example"
-          >e.g.
-          <span
-            class="sample_value"
-            @click="setSampleQuery('cell_types', 'hepatocyte')"
-            >hepatocyte</span
-          >
-        </span>
-      </h4>
-      <vue-simple-suggest
-        :value="cell_types"
-        :filter-by-query="true"
-        :list="cell_types_list"
-        :max-suggestions="100"
-        class="text_search_cell_types"
-        placeholder="CD14"
-        @input="setSampleQuery('cell_types', $event)"
-        @select="setSampleQuery('cell_types', $event)"
-      >
-        <div
-          slot="suggestion-item"
-          slot-scope="{ suggestion }"
-          v-html="suggestion.replace(cell_types, `<b>${cell_types}</b>`)"
-        ></div>
-      </vue-simple-suggest>
-      <h4>
-        Anatomical structures <span class="tag">UBERON</span>
-        <span class="example"
-          >e.g.
-          <span
-            class="sample_value"
-            @click="setSampleQuery('anatomical_structures', 'liver')"
-            >liver</span
-          >
-        </span>
-      </h4>
-      <vue-simple-suggest
-        :value="anatomical_structures"
-        :filter-by-query="true"
-        :list="anatomical_structures_list"
-        :max-suggestions="100"
-        class="text_search_anatomical_structures"
-        placeholder="skin"
-        @input="setSampleQuery('anatomical_structures', $event)"
-        @select="setSampleQuery('anatomical_structures', $event)"
+        @input="updateParameter"
       >
         <div
           slot="suggestion-item"
           slot-scope="{ suggestion }"
           v-html="
             suggestion.replace(
-              anatomical_structures,
-              `<b>${anatomical_structures}</b>`
+              parameters['project'],
+              `<b>${parameters['project']}</b>`
             )
+          "
+        ></div>
+      </vue-simple-suggest>
+      <h4>
+        Cell types <span class="tag">Cell Ontology</span>
+        <span class="example"
+          >e.g.
+          <span
+            class="sample_value"
+            @click="updateParameter('CL', 'hepatocyte')"
+            >hepatocyte</span
+          >
+        </span>
+      </h4>
+      <vue-simple-suggest
+        v-model="parameters.CL"
+        :filter-by-query="true"
+        :list="auto_complete.CL"
+        :max-suggestions="100"
+        class="text_search_cell_types"
+        placeholder="CD14"
+      >
+        <div
+          slot="suggestion-item"
+          slot-scope="{ suggestion }"
+          v-html="suggestion.replace(parameters.CL, `<b>${parameters.CL}</b>`)"
+        ></div>
+      </vue-simple-suggest>
+      <h4>
+        Anatomical structures <span class="tag">UBERON</span>
+        <span class="example"
+          >e.g.
+          <span class="sample_value" @click="updateParameter('UBERON', 'liver')"
+            >liver</span
+          >
+        </span>
+      </h4>
+      <vue-simple-suggest
+        v-model="parameters.UBERON"
+        :filter-by-query="true"
+        :list="auto_complete.UBERON"
+        :max-suggestions="100"
+        class="text_search_anatomical_structures"
+        placeholder="skin"
+      >
+        <div
+          slot="suggestion-item"
+          slot-scope="{ suggestion }"
+          v-html="
+            suggestion.replace(parameters.UBERON, `<b>${parameters.UBERON}</b>`)
           "
         ></div>
       </vue-simple-suggest>
@@ -130,37 +106,32 @@
           >e.g.
           <span
             class="sample_value"
-            @click="setSampleQuery('biomedical_concepts', 'Osteosarcoma')"
+            @click="updateParameter('NCIT', 'Osteosarcoma')"
             >Osteosarcoma</span
           >,
           <span
             class="sample_value"
-            @click="setSampleQuery('biomedical_concepts', 'Ovarian Carcinoma')"
+            @click="updateParameter('NCIT', 'Ovarian Carcinoma')"
             >Ovarian Carcinoma</span
           >
         </span>
       </h4>
       <vue-simple-suggest
-        :value="biomedical_concepts"
+        v-model="parameters.NCIT"
         :filter-by-query="true"
-        :list="biomedical_concepts_list"
+        :list="auto_complete.NCIT"
         :max-suggestions="100"
         class="text_search_biomedical_concepts"
         placeholder="leukemia"
-        @input="setSampleQuery('biomedical_concepts', $event)"
-        @select="setSampleQuery('biomedical_concepts', $event)"
       >
         <div
           slot="suggestion-item"
           slot-scope="{ suggestion }"
           v-html="
-            suggestion.replace(
-              biomedical_concepts,
-              `<b>${biomedical_concepts}</b>`
-            )
+            suggestion.replace(parameters.NCIT, `<b>${parameters.NCIT}</b>`)
           "
         ></div>
-      </vue-simple-suggest> --> 
+      </vue-simple-suggest>
     </div>
   </div>
 </template>
@@ -170,23 +141,19 @@
 
   export default {
     components: {
-      // VueSimpleSuggest,
+      VueSimpleSuggest,
     },
     data() {
       return {
-        // only used in this component
-        temporaryParameters: {
-          go_term: '',
-        },
         // passed down to API
         parameters: {
-          fantom5SampleId: '',
+          project: '',
           CL: '',
           NCIT: '',
           UBERON: '',
         },
         auto_complete: {
-          fantom5SampleId: [
+          project: [
             'cell lines',
             'stem cells',
             'primary cells',
@@ -199,24 +166,18 @@
         debounce: null,
       };
     },
-    watch: {
-      parameters() {
-        this.$emit('updateParameters', this.parameters);
-      },
-    },
     async created() {
       Object.keys(this.auto_complete).forEach(key => {
         if (this.auto_complete[key].length > 1) return;
         this.$axios
           .$get(`api/vocablary?annotation=${key.toUpperCase()}%20label`)
           .then(data => {
-            this.$set(this.parameters, key, data);
+            this.$set(this.auto_complete, key, data);
           })
           .catch(error => {
             console.log('error', error);
           });
       });
-      // this.update();
     },
     methods: {
       // TODO: set as global function
@@ -241,16 +202,9 @@
             .catch(() => console.warn('Oh. Something went wrong'));
         }, 300);
       },
-      // TODO: set as global function
-      handleSingleTagUpdate(id, text, tiClasses = ['ti-valid'], key = 'go') {
-        if (this.parameters[key].find(tag => tag.id === id)) {
-          return;
-        }
-        this.setTags([...this.parameters[key], { id, text, tiClasses }], key);
-      },
-      // TODO: set as global function
-      setTags(newTags, key) {
-        this.parameters = { ...this.parameters, [key]: newTags };
+      updateParameter(key, value) {
+        if(key && value) this.$set(this.parameters, key, value);
+        this.$emit('updateParameters', this.parameters);
       },
     },
   };

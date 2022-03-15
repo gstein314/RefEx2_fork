@@ -85,7 +85,7 @@
       />
       <label for="summary_check">Include this field in search</label>
     </div>
-    <ScreenerView :filter="filter" v-bind="inputs">
+    <ScreenerView>
       <component
         :is="`screener-view-${filter}`"
         @updateParameters="updateParams"
@@ -102,6 +102,9 @@
   import ScreenerView from '~/components/ScreenerView/ScreenerView.vue';
   import { mapGetters } from 'vuex';
 
+  const firstLetterUpperCase = str => {
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  };
   export default {
     components: {
       VueSimpleSuggest,
@@ -155,6 +158,7 @@
     },
     methods: {
       updateParams(params) {
+        console.log(params);
         this.parameters = { ...this.parameters, ...params };
         this.showResults('num');
       },
@@ -168,9 +172,11 @@
       },
       suggest_query(type = 'num') {
         const isNum = type === 'num';
-        const prefix = `${this.getActiveTaxon.suggestions_key}${
+        const prefix = `${
+          this.getActiveTaxon.suggestions_key
+        }${firstLetterUpperCase(
           this.getActiveOrganization
-        }${this.filter}${isNum ? 'Numfound' : ''}`;
+        )}${firstLetterUpperCase(this.filter)}${isNum ? 'Numfound' : ''}`;
         const params = Object.entries(this.parameters)
           .map(
             ([key, value], index) =>
@@ -189,7 +195,7 @@
           ? isNum
             ? `{numfound(${params})}`
             : `{humangene(${params})${resultParams} numfound(${params})}`
-          : `${prefix}(${params})${resultParams}${suffix}}`;
+          : `{${prefix}(${params})${resultParams}${suffix}}`;
       },
       moveDetailpage(suggestion) {
         this.$router.push(
