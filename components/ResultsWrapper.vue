@@ -46,12 +46,12 @@
         >
           <td class="checkbox" @click="e => e.stopPropagation()">
             <input
-              v-model="checked_gene"
+              v-model="checked_results"
               type="checkbox"
               :value="result.ncbiGeneId"
             />
           </td>
-          <td v-for="(column, index) of activeFilter.columns" :key="index">
+          <td v-for="(column, index) of filterObj.columns" :key="index">
             <template v-if="result[column.key].startsWith('[')">
               <span
                 v-for="(value, value_index) of JSON.parse(result[column.key])"
@@ -69,7 +69,7 @@
             </template>
             <template v-else> {{ result[column.key] }}</template>
           </td>
-          <td class="annotation">
+          <!-- <td class="annotation">
             <font-awesome-icon
               icon="info-circle"
               @click.stop="$emit('showGeneDetail', result.ncbiGeneId)"
@@ -80,7 +80,7 @@
               :src="`http://penqe.com/refex_figs/human_fantom5_${result.ncbiGeneId}.png`"
               :alt="result.ncbiGeneId"
             />
-          </td>
+          </td> -->
         </tr>
       </tbody>
     </table>
@@ -90,35 +90,28 @@
   import { mapGetters } from 'vuex';
 
   export default {
-    props: {
-      filter: {
-        type: String,
-        default: '',
-      },
-    },
     data() {
       return {
-        checked_gene: [],
+        checked_results: [],
       };
     },
     computed: {
       ...mapGetters({
-        activeFilter: 'activeFilter',
         resultsByName: 'resultsByName',
-        result_gene_id_list: 'resultsGeneIds',
         filterByName: 'filterByName',
+        resultsUniqueKeys: 'resultsUniqueKeys',
       }),
       filterObj() {
-        return this.filterByName(this.filter);
+        return this.filterByName(this.$vnode.key.split('_')[0]);
       },
       isAllChecked() {
         return (
-          this.result_gene_id_list.length > 0 &&
-          this.checked_gene.length === this.result_gene_id_list.length
+          this.resultsUniqueKeys.length > 0 &&
+          this.checked_results.length === this.resultsUniqueKeys.length
         );
       },
       results() {
-        return this.resultsByName(this.filter).results;
+        return this.resultsByName(this.filterObj.name).results;
       },
     },
     methods: {
@@ -130,12 +123,12 @@
       },
       toggleAllCheckbox() {
         this.isAllChecked
-          ? (this.checked_gene = [])
-          : (this.checked_gene = this.result_gene_id_list);
+          ? (this.checked_results = [])
+          : (this.checked_results = this.resultsUniqueKeys);
       },
       comparisonSearch() {
-        if (this.checked_gene.length === 0) return;
-        let compare_genes = this.checked_gene;
+        if (this.checked_results.length === 0) return;
+        let compare_genes = this.checked_results;
         if (compare_genes.length > 10) {
           compare_genes = compare_genes.slice(0, 10);
         }

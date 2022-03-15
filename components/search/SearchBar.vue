@@ -84,7 +84,7 @@
     </div>
     <ScreenerView>
       <component
-        :is="`screener-view-${filter}`"
+        :is="`screener-view-${filterObj.name}`"
         @updateParameters="updateParams"
       ></component>
     </ScreenerView>
@@ -106,12 +106,6 @@
     components: {
       VueSimpleSuggest,
       ScreenerView,
-    },
-    props: {
-      filter: {
-        type: String,
-        default: '',
-      },
     },
     data() {
       return {
@@ -135,7 +129,7 @@
       // TODO: turn into qql query
 
       filterObj() {
-        return this.getFilterByName(this.filter);
+        return this.getFilterByName(this.$vnode.key.split('_')[0]);
       },
       conditions() {
         return this.filterObj.search_conditions;
@@ -157,7 +151,9 @@
       queryPrefix() {
         return `${this.getActiveTaxon.suggestions_key}${firstLetterUpperCase(
           this.getActiveOrganization
-        )}${firstLetterUpperCase(this.filter)}${this.isNum ? 'Numfound' : ''}`;
+        )}${firstLetterUpperCase(this.filterObj.name)}${
+          this.isNum ? 'Numfound' : ''
+        }`;
       },
       suggest_query() {
         let params = Object.entries(this.parameters)
@@ -208,7 +204,7 @@
             this.$store.commit('setResults', {
               results: result.data[prefix] ?? [],
               results_num: result.data[`${prefix}Numfound`] ?? 0,
-              filterType: this.filter,
+              filterType: this.filterObj.name,
             });
             this.onEvent = false;
             this.is_reload_active = false;

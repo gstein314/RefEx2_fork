@@ -1,7 +1,7 @@
 <template>
   <div v-show="$vnode.key === activeFilter" class="filter_tab">
     <main>
-      <search-bar :filter="$vnode.key" />
+      <search-bar :key="`${$vnode.key}_search`" />
       <div class="results_num_wrapper">
         <div class="results_num_inner">
           <h2>Estimated Results</h2>
@@ -9,7 +9,10 @@
         </div>
       </div>
     </main>
-    <ResultsWrapper :filter="$vnode.key" @showGeneDetail="showGeneDetail" />
+    <ResultsWrapper
+      :key="`${$vnode.key}_results`"
+      @showGeneDetail="showGeneDetail"
+    />
   </div>
 </template>
 <script>
@@ -29,7 +32,6 @@
       activeFilter() {
         return this.$store.state.active_filter;
       },
-
       results_num() {
         return this.$store.getters.resultsByName(this.$vnode.key).results_num;
       },
