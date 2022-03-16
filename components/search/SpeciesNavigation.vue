@@ -5,7 +5,7 @@
         v-for="specie in species"
         :key="specie.name"
         :class="{ active: $store.state.active_taxon.name === specie.name }"
-        @click="$store.commit('setTaxon', specie.name)"
+        @click="$store.commit('set_taxon', specie.name)"
       >
         <icon-base :icon-name="specie.name" />
         <div class="taxon_wrapper">
@@ -15,7 +15,7 @@
               v-model="selected_project[specie.name]"
               @change="
                 $store.commit(
-                  'setActiveOrganization',
+                  'set_active_organization',
                   selected_project[specie.name]
                 )
               "

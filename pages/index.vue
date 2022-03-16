@@ -7,7 +7,7 @@
     <div
       v-if="geneModal.isShowing"
       class="modal_bg"
-      @click="$store.commit('setGeneModal', {})"
+      @click="$store.commit('set_gene_modal', {})"
     ></div>
   </div>
 </template>
@@ -32,7 +32,7 @@
     },
     computed: {
       ...mapGetters({
-        geneModal: 'geneModal',
+        geneModal: 'gene_modal',
       }),
     },
   };

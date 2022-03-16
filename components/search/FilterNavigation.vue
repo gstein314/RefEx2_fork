@@ -5,7 +5,7 @@
         v-for="(filter, index) of filters"
         :key="index"
         :class="{ active: activeFilter.name === filter.name }"
-        @click="$store.commit('setActiveFilter', filter.name)"
+        @click="$store.commit('set_active_filter', filter.name)"
       >
         {{ filter.name }}
       </li>
@@ -24,7 +24,7 @@
     },
     computed: {
       activeFilter() {
-        return this.$store.getters.activeFilter;
+        return this.$store.getters.active_filter;
       },
     },
   };

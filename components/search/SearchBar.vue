@@ -121,14 +121,14 @@
     },
     computed: {
       ...mapGetters({
-        getFilterByName: 'filterByName',
-        getActiveOrganization: 'active_organization',
-        getActiveTaxon: 'activeTaxon',
+        filterByName: 'filter_by_name',
+        activeOrganization: 'active_organization',
+        activeTaxon: 'active_taxon',
       }),
       // TODO: turn into qql query
 
       filterObj() {
-        return this.getFilterByName(this.$vnode.key.split('_')[0]);
+        return this.filterByName(this.$vnode.key.split('_')[0]);
       },
       conditions() {
         return this.filterObj.search_conditions;
@@ -148,10 +148,8 @@
         return this.typeOfQuery === 'numfound';
       },
       queryPrefix() {
-        return `${
-          this.getActiveTaxon.suggestions_key
-        }${this.$firstLetterUppercase(
-          this.getActiveOrganization
+        return `${this.activeTaxon.suggestions_key}${this.$firstLetterUppercase(
+          this.activeOrganization
         )}${this.$firstLetterUppercase(this.filterObj.name)}${
           this.isNum ? 'Numfound' : ''
         }`;
@@ -175,10 +173,10 @@
       },
     },
     watch: {
-      getActiveOrganization() {
+      activeOrganization() {
         this.showResults('numfound');
       },
-      getActiveTaxon() {
+      activeTaxon() {
         this.showResults('numfound');
       },
     },
@@ -221,7 +219,7 @@
           .finally(() => {
             this.onEvent = false;
             this.is_reload_active = false;
-            this.$store.commit('setResults', {
+            this.$store.commit('set_results', {
               results,
               results_num,
               filterType: this.filterObj.name,
