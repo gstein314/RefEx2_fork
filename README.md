@@ -96,6 +96,187 @@ For the component folder, find the preferred structure below:
    - grouped together in folder
    - folder name should be a single word like `search`
 
+## Main API callings in front-end app
+
+＊all API callings are done by Axios and have a base of 'http://refex2-api.bhx.jp/' as set in `nuxt.config.js`
+
+1. ### Auto suggestions - upon creation
+
+   #### api
+
+   ```JavaScript
+    // GET API call
+    `api/vocablary?annotation=${KEY}%20label`
+   ```
+
+   ***
+
+   #### parameters
+
+   - `KEY`
+     - string reffering to the autocompletion list to get.
+     - EG. `Cell types` of the sample tab screener(`components/ScreenerView/ScreenerViewSample.vue`) parameter key is `CL` as set in the `auto_complete` & `parameters` property of `data`
+
+   ***
+
+   #### response
+
+   String array (with suggestions)
+
+   ***
+
+   #### place of usage
+
+   used in `components/ScreenerView/ScreenerViewSample.vue` upon creation to set autocomplete items. The API is only called on creation and not updated afterwards.
+
+2. ### Auto suggestions - real time API fetch
+
+   #### api
+
+   ```JavaScript
+    // GET API call
+    `api/suggest?query=${SEARCH_TERM}&${KEY}=True`
+   ```
+
+   ***
+
+   #### parameters
+
+   - `SEARCH_TERM`
+     - string reffering to the search key inputted by the user
+   - `KEY`
+     - string reffering to the autocompletion list to get.
+     - EG. `Genes with GO terms` of the gene tab screener(`components/ScreenerView/ScreenerViewGene.vue`) parameter key is `go` as set in the `auto_complete` & `parameters` property of `data`
+
+   ***
+
+   #### response
+
+   Object with `total_results` and `results` property. Only the `results` list is used in the application at the time.
+
+   ```JavaScript
+   // example of Genes with GO terms auto completion list
+   {
+       "total_results": 2239,
+       "results":
+            [
+                {
+                    // string starting with 'GO:'
+                    "id": "GO:0015804",
+                    "term": "neutral amino acid transport",
+                    "gocategory": "BP"
+                }
+                ...
+            ]
+   }
+   ```
+
+   ***
+
+   #### place of usage
+
+   used in `components/ScreenerView/ScreenerViewGene.vue` when the input for `temporaryParameters.go_term` has been changed. This process is done by the `vue-tags-input` external plugin.
+
+3. ### Results and Estimated results number fetch of Index page
+
+   #### api
+
+   ```JavaScript
+    // POST API call
+    `gql`
+   ```
+
+   see more and test[http://refex2-api.bhx.jp/gql]
+
+   ***
+
+   #### parameters
+
+   - `query`
+
+     ```JavaScript
+     // string with the following structure
+     `${SPECIE}${DATASET}${FILTERTYPE}${NUMFOUND}(${FILTER_PARAMETERS}){${RESPONSE_PARAMETERS}}`
+
+     // SPECIE - specie selected by user.
+     // Uses`suggestions_key` property of `static/species.json`
+
+     // DATASET - dataset selected by user.
+     // Uses a single item of `projects` of `static/species.json`
+
+     // FILTERTYPE - filtertype selected by user.
+     // Uses `name` property of  `static/filters.json`
+
+     // NUMFOUND - suffix in case the API is called to get the estimated result count.
+     // In this case, `Numfound` is attached to the string.
+
+     // RESPONSE_PARAMETERS - properties that should be included in response separated by spaces.
+
+     // FILTER_PARAMETERS - filters set by user on the `index` page.
+     // Contains each key and value of the filter
+
+
+     // example calling both `response` and `numfound` API
+     `humanFantom5Sample(UBERON: "skin epidermi", )
+         {
+             Description
+             biosample
+             UBERON
+             CL
+             NCIT
+         } humanFantom5SampleNumfound }"`
+     ```
+
+   ***
+
+   #### response
+
+   Object with `data` property containing dynamic result properties based on `${SPECIE}${DATASET}${FILTERTYPE}`.
+
+   ```JavaScript
+       {
+         data:
+          {
+            // only available in case `${SPECIE}${DATASET}${FILTERTYPE}` was part of the POST calling
+            // contains result data shown in `components/ResultsWrapper.vue`
+            // array contains objects with keys set at `columns` of the FILTERTYPE as set in`static/filters.json`
+            `${SPECIE}${DATASET}${FILTERTYPE}`: [],
+
+            // only available in case `${SPECIE}${DATASET}${FILTERTYPE}${NUMFOUND}` was part of the POST calling
+            // only counts amount of results as number
+            `${SPECIE}${DATASET}${FILTERTYPE}${NUMFOUND}`: 0
+          }
+       }
+
+        // example of API response with both `response` and `numfound`
+        {
+            data:
+                {
+                    humanFantom5Sample:
+                    [
+                        {
+                            Description: "basal cell carcinoma cell line:TE 354.T",
+                            biosample: "SAMD00004671",
+                            UBERON: "skin epidermis"
+                            ,CL: "basal cell of epidermis",
+                            NCIT: "Skin basal cell carcinoma"
+                        }...
+                    ]
+                    humanFantom5SampleNumfound :19
+                }
+        }
+   ```
+
+   ***
+
+   #### place of usage
+
+   used in `components/SearchBar.vue` when
+
+   1. a filter has changed value, triggering a `Numfound` search to update the estimated results.
+   2. the `search` button has been clicked, triggering a `results` and `Numfound` API call.
+      The query itself is formed in the `suggest_query` method.
+
 #### use of SVG icons
 
 - all SVG icons should be set in `components/icons` by the name of `Icon{NameOfIconInPascalCase}`.
