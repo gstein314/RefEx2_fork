@@ -171,24 +171,6 @@
       });
     },
     methods: {
-      // TODO: check if multiple go terms can be set
-      updateAutoComplete(key) {
-        clearTimeout(this.debounce);
-        this.debounce = setTimeout(() => {
-          this.$axios
-            .$get(this.$getSuggestionURL(key))
-            .then(response => {
-              this.$set(
-                this.auto_complete,
-                key,
-                response.results.map(a => {
-                  return { text: a.term, id: a.id };
-                })
-              );
-            })
-            .catch(() => console.warn('Oh. Something went wrong'));
-        }, 300);
-      },
       updateParameter(key, value) {
         if (key && value) this.$set(this.parameters, key, value);
         this.$emit('updateParameters', this.parameters);
