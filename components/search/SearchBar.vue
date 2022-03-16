@@ -32,7 +32,9 @@
       :list="getSuggestionList"
       :max-suggestions="100"
       class="text_search_gene_name"
-      :placeholder="filter === 'gene' ? 'transcription factor' : 'liver'"
+      :placeholder="
+        filterObj.name === 'gene' ? 'transcription factor' : 'liver'
+      "
       @input="showResults('numfound')"
       @select="moveDetailpage"
     >

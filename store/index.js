@@ -5,6 +5,10 @@ export const state = () => ({
   active_taxon: taxons[0], //default,
   active_filter: 'gene',
   active_organization: 'FANTOM5',
+  gene_modal: {
+    isShowing: false,
+    geneId: '',
+  },
   results: filters.reduce((acc, filter) => {
     acc[filter.name] = { results: [], results_num: 0 };
     return acc;
@@ -12,6 +16,9 @@ export const state = () => ({
 });
 
 export const getters = {
+  geneModal(state) {
+    return state.gene_modal;
+  },
   active_organization: state => state.active_organization,
   activeFilter(state) {
     return filters.find(col => col.name === state.active_filter);
@@ -30,6 +37,9 @@ export const getters = {
 };
 
 export const mutations = {
+  setGeneModal(state, { isShowing = false, geneId = '' }) {
+    state.gene_modal = { isShowing, geneId };
+  },
   setTaxon(state, taxonId) {
     state.active_taxon = taxons.find(taxon => taxon.name === taxonId);
   },

@@ -5,9 +5,15 @@
       { "header": "GeneSymbol", "key": "symbol" },
       { "header": "GeneName", "key": "name" },
       { "header": "Alias", "key": "alias" },
-      { "header": "NCBI GeneID", "key": "ncbiGeneId" }
+      { "header": "NCBI GeneID", "key": "ncbiGeneId" },
+      { "header": "Annotation", "key": "ncbiGeneId", "specialClass": "annotation"},
+      {
+        "header": "Gene expression patterns",
+        "key": "ncbiGeneId",
+        "specialClass": "gene_expression_patterns"
+      }
     ],
-    "uniqueKey": "symbol",
+    "uniqueKey": "ncbiGeneId",
     "search_conditions": [
       {
         "label": "Gene Name",

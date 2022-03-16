@@ -9,10 +9,7 @@
         </div>
       </div>
     </main>
-    <ResultsWrapper
-      :key="`${$vnode.key}_results`"
-      @showGeneDetail="showGeneDetail"
-    />
+    <ResultsWrapper :key="`${$vnode.key}_results`" />
   </div>
 </template>
 <script>
@@ -22,24 +19,12 @@
     components: {
       SearchBar,
     },
-    data() {
-      return {
-        gene_id_for_detail_modal: 0,
-        is_gene_detail_modal_shown: false,
-      };
-    },
     computed: {
       activeFilter() {
         return this.$store.state.active_filter;
       },
       results_num() {
         return this.$store.getters.resultsByName(this.$vnode.key).results_num;
-      },
-    },
-    methods: {
-      showGeneDetail(id) {
-        this.gene_id_for_detail_modal = id;
-        this.is_gene_detail_modal_shown = true;
       },
     },
   };
