@@ -4,17 +4,25 @@
       <li
         v-for="specie in species"
         :key="specie.name"
-        :class="{ active: $store.state.active_taxon === specie.name }"
+        :class="{ active: $store.state.active_taxon.name === specie.name }"
         @click="$store.commit('setTaxon', specie.name)"
       >
         <icon-base :icon-name="specie.name" />
         <div class="taxon_wrapper">
           <p>{{ MakeNameUpperCase(specie.name) }}</p>
           <form>
-            <select v-model="selected_project[specie.name]">
+            <select
+              v-model="selected_project[specie.name]"
+              @change="
+                $store.commit(
+                  'setActiveOrganization',
+                  selected_project[specie.name]
+                )
+              "
+            >
               <option
                 v-for="project in specie.projects"
-                :key="specie.name + project"
+                :key="`${specie.name}_${project}`"
                 :value="project"
               >
                 {{ project }}
@@ -44,10 +52,17 @@
         }, {}),
       };
     },
+    computed: {
+      active_taxon() {
+        return this.$store.state.active_taxon;
+      },
+      selected_organization() {
+        return this.selected_project[this.active_taxon];
+      },
+    },
     methods: {
       MakeNameUpperCase(name) {
-        let adjusted_name = name.charAt(0).toUpperCase() + name.slice(1);
-        return adjusted_name.replace('_', ' ');
+        return this.$firstLetterUppercase(name).replace('_', ' ');
       },
       GetSpecieImage(specie_name) {
         return require(`~/assets/img/icon_${specie_name}.svg`);

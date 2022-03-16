@@ -1,7 +1,7 @@
 <template>
   <div v-show="$vnode.key === activeFilter" class="filter_tab">
     <main>
-      <search-bar :filter="$vnode.key" />
+      <search-bar :key="`${$vnode.key}_search`" />
       <div class="results_num_wrapper">
         <div class="results_num_inner">
           <h2>Estimated Results</h2>
@@ -9,7 +9,7 @@
         </div>
       </div>
     </main>
-    <ResultsWrapper :filter="$vnode.key" @showGeneDetail="showGeneDetail" />
+    <ResultsWrapper :key="`${$vnode.key}_results`" />
   </div>
 </template>
 <script>
@@ -19,25 +19,12 @@
     components: {
       SearchBar,
     },
-    data() {
-      return {
-        gene_id_for_detail_modal: 0,
-        is_gene_detail_modal_shown: false,
-      };
-    },
     computed: {
       activeFilter() {
         return this.$store.state.active_filter;
       },
-
       results_num() {
         return this.$store.getters.resultsByName(this.$vnode.key).results_num;
-      },
-    },
-    methods: {
-      showGeneDetail(id) {
-        this.gene_id_for_detail_modal = id;
-        this.is_gene_detail_modal_shown = true;
       },
     },
   };

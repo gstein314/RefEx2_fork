@@ -1,5 +1,5 @@
 <template>
-  <div class="modal_wrapper">
+  <div v-if="isShowing && geneId !== ''" class="modal_wrapper">
     <div v-if="!is_loading" class="gene_detail">
       <a
         class="gene_name"
@@ -122,13 +122,15 @@
 </template>
 
 <script>
-  import axios from 'axios';
-
   export default {
     props: {
       geneId: {
         type: String,
         default: '',
+      },
+      isShowing: {
+        type: Boolean,
+        default: false,
       },
     },
     data() {
@@ -137,14 +139,21 @@
         is_loading: false,
       };
     },
-    created() {
-      this.is_loading = true;
-      axios.get(`https://mygene.info/v3/gene/${this.geneId}`).then(data => {
-        this.gene_data = data.data;
+    watch: {
+      isShowing() {
+        this.is_loading = true;
+        this.$axios
+          .$get(`https://mygene.info/v3/gene/${this.geneId}`)
+          .then(data => {
+            this.gene_data = data;
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+
         this.is_loading = false;
-      });
+      },
     },
-    methods: {},
   };
 </script>
 

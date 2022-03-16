@@ -3,19 +3,17 @@
     <SpeciesNavigation />
     <FilterNavigation />
     <FilterTab v-for="filter of filters" :key="filter.name" />
-    <GeneDetailModal
-      v-if="is_gene_detail_modal_shown"
-      :gene-id="gene_id_for_detail_modal"
-    />
+    <GeneDetailModal v-bind="geneModal" />
     <div
-      v-if="is_gene_detail_modal_shown"
+      v-if="geneModal.isShowing"
       class="modal_bg"
-      @click="is_gene_detail_modal_shown = false"
+      @click="$store.commit('setGeneModal', {})"
     ></div>
   </div>
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
   import SpeciesNavigation from '~/components/search/SpeciesNavigation.vue';
   import FilterNavigation from '~/components/search/FilterNavigation.vue';
   import FilterTab from '~/components/search/FilterTab.vue';
@@ -30,15 +28,12 @@
     data() {
       return {
         filters,
-        gene_id_for_detail_modal: 0,
-        is_gene_detail_modal_shown: false,
       };
     },
-    methods: {
-      showGeneDetail(id) {
-        this.gene_id_for_detail_modal = id;
-        this.is_gene_detail_modal_shown = true;
-      },
+    computed: {
+      ...mapGetters({
+        geneModal: 'geneModal',
+      }),
     },
   };
 </script>

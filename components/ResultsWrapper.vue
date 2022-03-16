@@ -30,56 +30,62 @@
           <th v-for="(column, index) of filterObj.columns" :key="index">
             {{ column.header }}
           </th>
-          <th class="annotation">Annotation</th>
-          <th class="gene_expression_patterns">Gene expression patterns</th>
         </tr>
       </thead>
       <tbody>
         <tr
           v-for="result in results"
-          :key="result.ncbiGeneId"
+          :key="result[filterObj.uniqueKey]"
           @click="
             $router.push(
-              `${$store.state.active_taxon}/FANTOM5?gid=${result.ncbiGeneId}`
+              `${$store.state.active_taxon}/FANTOM5?gid=${
+                result[filterObj.uniqueKey]
+              }`
             )
           "
         >
           <td class="checkbox" @click="e => e.stopPropagation()">
             <input
-              v-model="checked_gene"
+              v-model="checked_results"
               type="checkbox"
-              :value="result.ncbiGeneId"
+              :value="result[filterObj.uniqueKey]"
             />
           </td>
-          <td v-for="(column, index) of activeFilter.columns" :key="index">
-            <template v-if="result[column.key].startsWith('[')">
+          <td
+            v-for="(column, index) of filterObj.columns"
+            :key="index"
+            :class="column.specialClass || ''"
+          >
+            <font-awesome-icon
+              v-if="column.specialClass === 'annotation'"
+              icon="info-circle"
+              @click.stop="
+                setGeneModal({
+                  isShowing: true,
+                  geneId: result[filterObj.uniqueKey],
+                })
+              "
+            />
+            <img
+              v-else-if="column.specialClass === 'gene_expression_patterns'"
+              :src="geneDescriptionSource(result[filterObj.uniqueKey])"
+              :alt="result[filterObj.uniqueKey]"
+            />
+            <span
+              v-for="(value, value_index) of JSON.parse(result[column.key])"
+              v-else-if="result[column.key].startsWith('[')"
+              :key="value_index"
+            >
+              {{ value }}
               <span
-                v-for="(value, value_index) of JSON.parse(result[column.key])"
-                :key="value_index"
+                v-if="value_index < JSON.parse(result[column.key]).length - 1"
+                >,</span
               >
-                {{ value }}
-                <span
-                  v-if="value_index < JSON.parse(result[column.key]).length - 1"
-                  >,</span
-                >
-              </span>
-            </template>
+            </span>
             <template v-else-if="hasStringQuotes(result[column.key])">
               {{ result[column.key].replaceAll('"', '') }}
             </template>
             <template v-else> {{ result[column.key] }}</template>
-          </td>
-          <td class="annotation">
-            <font-awesome-icon
-              icon="info-circle"
-              @click.stop="$emit('showGeneDetail', result.ncbiGeneId)"
-            />
-          </td>
-          <td class="gene_expression_patterns">
-            <img
-              :src="`http://penqe.com/refex_figs/human_fantom5_${result.ncbiGeneId}.png`"
-              :alt="result.ncbiGeneId"
-            />
           </td>
         </tr>
       </tbody>
@@ -87,41 +93,39 @@
   </div>
 </template>
 <script>
-  import { mapGetters } from 'vuex';
+  import { mapGetters, mapMutations } from 'vuex';
 
   export default {
-    props: {
-      filter: {
-        type: String,
-        default: '',
-      },
-    },
     data() {
       return {
-        checked_gene: [],
+        checked_results: [],
       };
     },
     computed: {
       ...mapGetters({
-        activeFilter: 'activeFilter',
         resultsByName: 'resultsByName',
-        result_gene_id_list: 'resultsGeneIds',
         filterByName: 'filterByName',
+        resultsUniqueKeys: 'resultsUniqueKeys',
+        active_taxon: 'activeTaxon',
+        active_organization: 'active_organization',
       }),
       filterObj() {
-        return this.filterByName(this.filter);
+        return this.filterByName(this.$vnode.key.split('_')[0]);
       },
       isAllChecked() {
         return (
-          this.result_gene_id_list.length > 0 &&
-          this.checked_gene.length === this.result_gene_id_list.length
+          this.resultsUniqueKeys.length > 0 &&
+          this.checked_results.length === this.resultsUniqueKeys.length
         );
       },
       results() {
-        return this.resultsByName(this.filter).results;
+        return this.resultsByName(this.filterObj.name).results;
       },
     },
     methods: {
+      ...mapMutations({
+        setGeneModal: 'setGeneModal',
+      }),
       hasStringQuotes(str) {
         return str.startsWith('"') && str.endsWith('"');
       },
@@ -130,18 +134,21 @@
       },
       toggleAllCheckbox() {
         this.isAllChecked
-          ? (this.checked_gene = [])
-          : (this.checked_gene = this.result_gene_id_list);
+          ? (this.checked_results = [])
+          : (this.checked_results = this.resultsUniqueKeys);
       },
       comparisonSearch() {
-        if (this.checked_gene.length === 0) return;
-        let compare_genes = this.checked_gene;
+        if (this.checked_results.length === 0) return;
+        let compare_genes = this.checked_results;
         if (compare_genes.length > 10) {
           compare_genes = compare_genes.slice(0, 10);
         }
         this.$router.push(
           `${this.$store.state.active_taxon}/FANTOM5?gid=${compare_genes}`
         );
+      },
+      geneDescriptionSource(resultItem) {
+        return `http://penqe.com/refex_figs/${this.active_taxon?.suggestions_key.toLowerCase()}_${this.active_organization.toLowerCase()}_${resultItem}.png`;
       },
     },
   };

@@ -26,6 +26,7 @@ export default {
   plugins: [
     { src: '~/plugins/vue-tags-input', ssr: false },
     { src: '@/plugins/plugin', mode: 'client' },
+    '~/plugins/mixin.js',
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -57,7 +58,7 @@ export default {
   ],
 
   axios: {
-    baseURL: 'http://refex2-api.bhx.jp/api/dist',
+    baseURL: 'http://refex2-api.bhx.jp/',
     retry: {
       retries: 3,
       retryDelay: exponentialDelay,

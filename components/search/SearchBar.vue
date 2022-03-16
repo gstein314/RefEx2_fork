@@ -14,9 +14,8 @@
             :key="example_index"
             class="sample_value"
             @click="
-              setSampleQuery({
-                type: filterKey,
-                query: example,
+              updateParams({
+                text: example,
               })
             "
           >
@@ -26,19 +25,21 @@
       </span>
     </h3>
     <vue-simple-suggest
-      v-model="inputs.gene_name"
+      v-model="parameters.text"
       :debounce="500"
       display-attribute="name"
       value-attribute="name"
       :list="getSuggestionList"
       :max-suggestions="100"
       class="text_search_gene_name"
-      placeholder="transcription factor"
-      @input="showAllResult('num')"
+      :placeholder="
+        filterObj.name === 'gene' ? 'transcription factor' : 'liver'
+      "
+      @input="showResults('numfound')"
       @select="moveDetailpage"
     >
       <template slot="misc-item-above">
-        <button class="show_all_btn" @click="showAllResult('all')">
+        <button class="show_all_btn" @click="showResults">
           <font-awesome-icon icon="list" />
           Show all genes that match your query
         </button>
@@ -49,15 +50,12 @@
         slot="suggestion-item"
         slot-scope="{ suggestion }"
         v-html="
-          `<b>${suggestion.symbol}</b>&nbsp;(${suggestion.name.replace(
-            inputs.gene_name,
-            '<b>' + inputs.gene_name + '</b>'
-          )}${suggestion.alias.replace(
-            inputs.gene_name,
-            '<b>' + inputs.gene_name + '</b>'
-          )}, NCBI_GeneID: ${suggestion.entrezgene.replace(
-            inputs.gene_name,
-            '<b>' + inputs.gene_name + '</b>'
+          `<b>${suggestion.symbol}</b>&nbsp;
+          (${$boldenSuggestion(suggestion.name, parameters.text)}
+          ${$boldenSuggestion(suggestion.alias, parameters.text)}
+          , NCBI_GeneID: ${$boldenSuggestion(
+            suggestion.entrezgene,
+            parameters.text
           )})`
         "
       >
@@ -76,25 +74,23 @@
         <span>Loading...</span>
       </div>
     </vue-simple-suggest>
-    <div :class="['summary_check_wrapper', { hide: inputs.gene_name === '' }]">
+    <div :class="['summary_check_wrapper', { hide: parameters.text === '' }]">
       <input
         id="summary_check"
         v-model="is_summary_included"
         type="checkbox"
         name="summary_check"
-        @click="showAllResult('num')"
+        @click="showResults('numfound')"
       />
       <label for="summary_check">Include this field in search</label>
     </div>
-    <ScreenerView
-      v-bind="inputs"
-      :terms-g-o="input_go_terms"
-      @setSampleQuery="setSampleQuery"
-      @update="showAllResult"
-      @updateInputs="setInputs"
-      @setTags="setTags"
-    />
-    <button class="find_results_btn" @click="showAllResult('all')">
+    <ScreenerView>
+      <component
+        :is="`screener-view-${filterObj.name}`"
+        @updateParameters="updateParams"
+      ></component>
+    </ScreenerView>
+    <button class="find_results_btn" @click="showResults">
       <font-awesome-icon icon="search" />
       Find {{ filterObj.name }}s
     </button>
@@ -102,7 +98,7 @@
 </template>
 <script>
   import VueSimpleSuggest from 'vue-simple-suggest';
-  import ScreenerView from '~/components/search/ScreenerView.vue';
+  import ScreenerView from '~/components/ScreenerView/ScreenerView.vue';
   import { mapGetters } from 'vuex';
 
   export default {
@@ -110,38 +106,29 @@
       VueSimpleSuggest,
       ScreenerView,
     },
-    props: {
-      filter: {
-        type: String,
-        default: '',
-      },
-    },
     data() {
       return {
-        inputs: {
-          gene_name: '',
-          go_term: '',
-          sample_types: '',
-          cell_types: '',
-          anatomical_structures: '',
-          biomedical_concepts: '',
+        parameters: {
+          text: '',
         },
-        input_go_terms: [],
         onEvent: false,
         is_summary_included: false,
         is_reload_active: false,
         isLoading: false,
+        // either 'all' or 'numfound'
+        typeOfQuery: 'numfound',
       };
     },
     computed: {
       ...mapGetters({
         getFilterByName: 'filterByName',
+        getActiveOrganization: 'active_organization',
+        getActiveTaxon: 'activeTaxon',
       }),
+      // TODO: turn into qql query
+
       filterObj() {
-        return this.getFilterByName(this.filter);
-      },
-      filterKey() {
-        return this.filterObj.search_key;
+        return this.getFilterByName(this.$vnode.key.split('_')[0]);
       },
       conditions() {
         return this.filterObj.search_conditions;
@@ -157,16 +144,51 @@
           })
           .join('');
       },
+      isNum() {
+        return this.typeOfQuery === 'numfound';
+      },
+      queryPrefix() {
+        return `${
+          this.getActiveTaxon.suggestions_key
+        }${this.$firstLetterUppercase(
+          this.getActiveOrganization
+        )}${this.$firstLetterUppercase(this.filterObj.name)}${
+          this.isNum ? 'Numfound' : ''
+        }`;
+      },
+      suggest_query() {
+        let params = Object.entries(this.parameters)
+          .filter(([_key, value]) => value !== '')
+          .map(
+            ([key, value], index) =>
+              `${key}:"${value}"${
+                index === Object.entries(this.parameters).length - 1 ? '' : ', '
+              }`
+          )
+          .join('');
+        if (params !== '') params = `(${params})`;
+        const resultParams = this.isNum
+          ? ''
+          : `{${this.filterObj.columns.map(col => col.key).join(' ')}}`;
+        const suffix = this.isNum ? '' : ` ${this.queryPrefix}Numfound`;
+        return `{${this.queryPrefix}${params}${resultParams}${suffix}}`;
+      },
+    },
+    watch: {
+      getActiveOrganization() {
+        this.showResults('numfound');
+      },
+      getActiveTaxon() {
+        this.showResults('numfound');
+      },
     },
     methods: {
-      setTags(newTags) {
-        this.input_go_terms = [];
-        if (newTags.length !== 0) {
-          this.input_go_terms[0] = newTags[newTags.length - 1];
-          this.is_reload_active = true;
-        }
+      updateParams(params) {
+        this.parameters = { ...this.parameters, ...params };
+        this.showResults('numfound');
       },
-      async getSuggestionList(suggest) {
+      // TODO: check if suggestions needs to be changed for sample
+      getSuggestionList(suggest) {
         let url = `http://refex2-api.bhx.jp/api/suggest?query=${suggest}`;
         this.isLoading = true;
         return this.$axios.$get(url).then(results => {
@@ -174,86 +196,38 @@
           return results.results;
         });
       },
-      setInputs(inputs) {
-        this.inputs = inputs;
-      },
       moveDetailpage(suggestion) {
         this.$router.push(
           `${this.$store.state.active_taxon}/FANTOM5?gid=${suggestion.entrezgene}`
         );
         // this.$router.push({ path: '/gene/chart', query: { gid: suggestion.entrezgene, project: 'fantom5', organism: this.$store.state.active_taxon} })
       },
-      showAllResult(type) {
-        setTimeout(() => {
-          let query = {};
-          query.text = this.inputs.gene_name;
-          if (this.is_summary_included) {
-            query.summary = 'True';
-          }
-          if (this.input_go_terms.length !== 0) {
-            query.go = this.input_go_terms[0].id;
-          }
-          if (this.inputs.sample_types !== '') {
-            query.celltype = this.inputs.sample_types;
-          }
-          if (this.inputs.cell_types !== '') {
-            query.cl = this.inputs.cell_types;
-          }
-          if (this.inputs.anatomical_structures !== '') {
-            query.uberon = this.inputs.anatomical_structures;
-          }
-          if (this.inputs.biomedical_concepts !== '') {
-            query.ncit = this.inputs.biomedical_concepts;
-          }
-          let adjusted_query = '';
-          if (type === 'num') {
-            adjusted_query += `{numfound(`;
-          } else if (type === 'all') {
-            adjusted_query += `{humangene(`;
-          }
-          if (Object.keys(query).length > 1 && query.text === '') {
-            delete query.text;
-          }
-          Object.keys(query).forEach((key, index) => {
-            adjusted_query += `${key}:"${query[key]}"`;
-            if (index !== Object.keys(query).length - 1) {
-              adjusted_query += ',';
-            }
-          });
-          if (type === 'num') {
-            adjusted_query += `)}`;
-          } else if (type === 'all') {
-            adjusted_query += `){ncbiGeneId symbol name alias} numfound }`;
-          }
-          this.$axios({
-            url: 'http://refex2-api.bhx.jp/gql',
-            method: 'post',
-            data: {
-              query: adjusted_query,
-            },
-          }).then(result => {
-            this.$store.commit('setResults', {
-              results: result.data?.data?.humangene ?? [],
-              results_num: result.data.data.numfound ?? 0,
-            });
+      showResults(type = 'all') {
+        this.typeOfQuery = type;
+        let results = [],
+          results_num = 0;
+        this.$axios
+          .$post('gql', {
+            query: this.suggest_query,
+          })
+          .then(result => {
+            const prefix = this.queryPrefix.replace('Numfound', '');
+            if (prefix in result.data) results = result.data[prefix];
+            if (`${prefix}Numfound` in result.data)
+              results_num = result.data[prefix + 'Numfound'];
+          })
+          .catch(err => {
+            console.log(err);
+          })
+          .finally(() => {
             this.onEvent = false;
             this.is_reload_active = false;
+            this.$store.commit('setResults', {
+              results,
+              results_num,
+              filterType: this.filterObj.name,
+            });
           });
-        }, 0);
-      },
-      setSampleQuery({ type, query, id }) {
-        this.is_reload_active = true;
-        if (id) {
-          this.input_go_terms = [];
-          this.input_go_terms.push({
-            text: query,
-            id,
-            tiClasses: ['ti-valid'],
-          });
-        } else {
-          this.$set(this.inputs, type, query);
-        }
-        this.showAllResult('num');
       },
     },
   };

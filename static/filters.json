@@ -5,10 +5,15 @@
       { "header": "GeneSymbol", "key": "symbol" },
       { "header": "GeneName", "key": "name" },
       { "header": "Alias", "key": "alias" },
-      { "header": "NCBI GeneID", "key": "ncbiGeneId" }
+      { "header": "NCBI GeneID", "key": "ncbiGeneId" },
+      { "header": "Annotation", "key": "ncbiGeneId", "specialClass": "annotation"},
+      {
+        "header": "Gene expression patterns",
+        "key": "ncbiGeneId",
+        "specialClass": "gene_expression_patterns"
+      }
     ],
-    "screener": "go_terms",
-    "search_key": "gene_name",
+    "uniqueKey": "ncbiGeneId",
     "search_conditions": [
       {
         "label": "Gene Name",
@@ -21,14 +26,13 @@
   {
     "name": "sample",
     "columns": [
-      "description",
-      "type",
-      "anatomical_structures",
-      "cell_types",
-      "biomedical_concepts"
+      { "header": "Description", "key": "Description" },
+      { "header": "Type", "key": "biosample" },
+      { "header": "Anotomical Structures", "key": "UBERON" },
+      { "header": "Cell types", "key": "CL" },
+      { "header": "Description", "key": "NCIT" }
     ],
-    "search_key": "sample_name",
-    "screener": "sample_classification",
+    "uniqueKey": "anotimcal_structures",
     "search_conditions": [
       {
         "label": "Sample Name",
