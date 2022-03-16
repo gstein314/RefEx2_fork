@@ -40,7 +40,7 @@
       parsedName() {
         return this.iconName
           .split('_')
-          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+          .map(word => this.$firstLetterUppercase(word))
           .join('');
       },
       iconComponent() {
