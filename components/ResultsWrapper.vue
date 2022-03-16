@@ -9,11 +9,7 @@
       <span class="example">e.g.</span>
       <span
         class="sample_value"
-        @click="
-          $router.push(
-            `${$store.state.active_taxon}/FANTOM5?gid=5460,6657,9314,4609`
-          )
-        "
+        @click="$router.push(`${routerPrefix}?id=5460,6657,9314,4609`)"
         >Yamanaka Factors (OCT3/4, SOX2, KLF4 and C-MYC-OSKM)</span
       >
     </div>
@@ -37,11 +33,7 @@
           v-for="result in results"
           :key="result[filterObj.uniqueKey]"
           @click="
-            $router.push(
-              `${$store.state.active_taxon}/FANTOM5?gid=${
-                result[filterObj.uniqueKey]
-              }`
-            )
+            $router.push(`${routerPrefix}?id=${result[filterObj.uniqueKey]}`)
           "
         >
           <td class="checkbox" @click="e => e.stopPropagation()">
@@ -109,6 +101,9 @@
         active_taxon: 'activeTaxon',
         active_organization: 'active_organization',
       }),
+      routerPrefix() {
+        return `${this.active_taxon.suggestions_key}/${this.active_organization}`;
+      },
       filterObj() {
         return this.filterByName(this.$vnode.key.split('_')[0]);
       },
@@ -139,13 +134,12 @@
       },
       comparisonSearch() {
         if (this.checked_results.length === 0) return;
-        let compare_genes = this.checked_results;
-        if (compare_genes.length > 10) {
-          compare_genes = compare_genes.slice(0, 10);
-        }
-        this.$router.push(
-          `${this.$store.state.active_taxon}/FANTOM5?gid=${compare_genes}`
-        );
+        const compareItems = [
+          ...(this.checked_results.length > 10
+            ? this.checked_results.slice(0, 10)
+            : this.checked_results),
+        ];
+        this.$router.push(`${this.routerPrefix}?id=${compareItems}`);
       },
       geneDescriptionSource(resultItem) {
         return `http://penqe.com/refex_figs/${this.active_taxon?.suggestions_key.toLowerCase()}_${this.active_organization.toLowerCase()}_${resultItem}.png`;

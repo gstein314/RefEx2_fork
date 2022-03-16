@@ -198,9 +198,8 @@
       },
       moveDetailpage(suggestion) {
         this.$router.push(
-          `${this.$store.state.active_taxon}/FANTOM5?gid=${suggestion.entrezgene}`
+          `${this.getActiveTaxon.suggestions_key}/${this.getActiveOrganization}?id=${suggestion.entrezgene}`
         );
-        // this.$router.push({ path: '/gene/chart', query: { gid: suggestion.entrezgene, project: 'fantom5', organism: this.$store.state.active_taxon} })
       },
       showResults(type = 'all') {
         this.typeOfQuery = type;

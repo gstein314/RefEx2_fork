@@ -14,6 +14,7 @@
             }}</span>
           </span>
         </h1>
+
         <button class="comparison_btn" @click="is_compare_on = true">
           <font-awesome-icon icon="chart-bar" />
           Comparison
@@ -237,68 +238,77 @@
     beforeRouteUpdate(to, from, next) {
       this.$forceUpdate();
     },
-    async asyncData({ $axios, query }) {
-      let gene_num = 1;
-      if (query.gid) {
-        if (query.gid.match(/,/g)) {
-          gene_num = query.gid.match(/,/g).length + 1;
-        }
-        let gid = '';
-        if (gene_num === 1) {
-          gid = query.gid;
-        } else {
-          gid = query.gid.split(',').splice(0, 1)[0];
-        }
-        let data = await $axios.$get(gid);
-
-        let median_array = [];
-        let age_array = [];
-        let age_max;
-        let median_max;
-        let original_r_inf;
-
-        // default: Median sort
-        data?.r_inf.sort(function (a, b) {
-          return b.log2_Median - a.log2_Median;
-        });
-        data?.r_inf.forEach(datam => {
-          median_array.push(datam.log2_Median);
-          if (datam.Age.indexOf('-') !== -1) {
-            datam.Age = datam.Age.replace(/[^0-9]/g, ',');
+    // TODO: refactor
+    // TODO: add sample option
+    async asyncData({ $axios, query, store }) {
+      console.log(query);
+      if (query.id) {
+        let gene_num = 1;
+        if (query.id) {
+          if (query.id.match(/,/g)) {
+            gene_num = query.id.match(/,/g).length + 1;
           }
-
-          if (datam.Age.indexOf(',') !== -1) {
-            age_array = age_array.concat(datam.Age.split(','));
+          let id = '';
+          if (gene_num === 1) {
+            id = query.id;
           } else {
-            age_array.push(Number(datam.Age));
+            id = query.id.split(',').splice(0, 1)[0];
           }
-        });
+          let data = await $axios.$get(
+            `api/${store.state.active_filter}/${id}`
+          );
+          console.log(data);
+          let median_array = [];
+          let age_array = [];
+          let age_max;
+          let median_max;
+          let original_r_inf;
 
-        age_max = Math.max(...age_array);
-        median_max = Math.max(...median_array);
-        original_r_inf = [...data.r_inf];
-
-        let compare_genes = [];
-        let gid_array = query.gid.split(',');
-        gid_array.splice(0, 1);
-        let compare_results = await Promise.all(
-          gid_array.map(id => $axios.$get(id))
-        );
-        compare_results.forEach((gene, index) => {
-          compare_genes.push(gene);
-          gene.r_inf.forEach((datam, index_2) => {
-            data.r_inf[index_2][`log2_Median_compare_${index + 2}`] =
-              datam.log2_Median;
+          // default: Median sort
+          data?.r_inf.sort(function (a, b) {
+            return b.log2_Median - a.log2_Median;
           });
-        });
-        return {
-          results: data,
-          gene_num: gene_num,
-          original_r_inf: original_r_inf,
-          age_max: age_max,
-          median_max: median_max,
-          compare_genes: compare_genes,
-        };
+          data?.r_inf.forEach(datam => {
+            median_array.push(datam.log2_Median);
+            if (datam.Age.indexOf('-') !== -1) {
+              datam.Age = datam.Age.replace(/[^0-9]/g, ',');
+            }
+
+            if (datam.Age.indexOf(',') !== -1) {
+              age_array = age_array.concat(datam.Age.split(','));
+            } else {
+              age_array.push(Number(datam.Age));
+            }
+          });
+
+          age_max = Math.max(...age_array);
+          median_max = Math.max(...median_array);
+          original_r_inf = [...data.r_inf];
+
+          let compare_genes = [];
+          let id_array = query.id.split(',');
+          id_array.splice(0, 1);
+          let compare_results = await Promise.all(
+            id_array.map(id =>
+              $axios.$get(`api/${store.state.active_filter}/${id}`)
+            )
+          );
+          compare_results.forEach((gene, index) => {
+            compare_genes.push(gene);
+            gene.r_inf.forEach((datam, index_2) => {
+              data.r_inf[index_2][`log2_Median_compare_${index + 2}`] =
+                datam.log2_Median;
+            });
+          });
+          return {
+            results: data,
+            gene_num: gene_num,
+            original_r_inf: original_r_inf,
+            age_max: age_max,
+            median_max: median_max,
+            compare_genes: compare_genes,
+          };
+        }
       }
     },
     data() {
@@ -474,10 +484,10 @@
     },
     methods: {
       async fetchCompareData() {
-        let gid_array = this.$route.query.gid.split(',');
-        gid_array.splice(0, 1);
+        let id_array = this.$route.query.id.split(',');
+        id_array.splice(0, 1);
         let compare_results = await Promise.all(
-          gid_array.map(id => this.$axios.$get(id))
+          id_array.map(id => this.$axios.$get(`${this.activeFilter}/${id}`))
         );
         this.results.r_inf.forEach(result => {
           compare_results.forEach((gene, index) => {
@@ -535,7 +545,7 @@
       },
       comparisonSearch() {
         if (this.comparisonSearch === '') return;
-        location.href = `${location.origin}${location.pathname}?gid=${this.gene_ids_to_compare}`;
+        location.href = `${location.origin}${location.pathname}?id=${this.gene_ids_to_compare}`;
       },
     },
   };
@@ -747,21 +757,17 @@
       &.gene_10
         &:after
           background-color: $COLOR_10 !important
-
   // transition
   .modal-enter,
   .modal-leave-to
     opacity: 0
     margin-top: -20px
-
   .modal-enter-active,
   .modal-leave-active
     transition: opacity 0.4s, margin-top 0.4s
-
   .modal_bg-enter,
   .modal_bg-leave-to
     opacity: 0
-
   .modal_bg-enter-active,
   .modal_bg-leave-active
     transition: opacity 0.4s
