@@ -212,7 +212,7 @@
           })
           .then(result => {
             const prefix = this.queryPrefix.replace('Numfound', '');
-            if (prefix in result.data) results = results.data[prefix];
+            if (prefix in result.data) results = result.data[prefix];
             if (`${prefix}Numfound` in result.data)
               results_num = result.data[prefix + 'Numfound'];
           })

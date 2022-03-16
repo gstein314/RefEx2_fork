@@ -94,10 +94,8 @@
 </template>
 <script>
   import { mapGetters, mapMutations } from 'vuex';
-  import { geneDetailModal } from '@/components/GeneDetailModal.vue';
 
   export default {
-    components: geneDetailModal,
     data() {
       return {
         checked_results: [],
