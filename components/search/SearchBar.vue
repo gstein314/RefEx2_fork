@@ -198,7 +198,7 @@
       },
       moveDetailpage(suggestion) {
         this.$router.push(
-          `${this.getActiveTaxon.suggestions_key}/${this.getActiveOrganization}?id=${suggestion.entrezgene}`
+          `${this.activeSpecie.suggestions_key}/${this.activeProject}?id=${suggestion.entrezgene}`
         );
       },
       showResults(type = 'all') {

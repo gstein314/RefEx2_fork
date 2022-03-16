@@ -102,7 +102,7 @@
         activeProject: 'active_project',
       }),
       routerPrefix() {
-        return `${this.active_taxon.suggestions_key}/${this.active_organization}`;
+        return `${this.activeSpecie.suggestions_key}/${this.activeProject}`;
       },
       filterObj() {
         return this.filterByName(this.$vnode.key.split('_')[0]);
