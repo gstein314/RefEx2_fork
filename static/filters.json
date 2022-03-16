@@ -13,7 +13,7 @@
         "specialClass": "gene_expression_patterns"
       }
     ],
-    "uniqueKey": "ncbiGeneId",
+    "unique_key": "ncbiGeneId",
     "search_conditions": [
       {
         "label": "Gene Name",
@@ -28,11 +28,11 @@
     "columns": [
       { "header": "Description", "key": "Description" },
       { "header": "Type", "key": "biosample" },
-      { "header": "Anotomical Structures", "key": "UBERON" },
+      { "header": "Anotomical structures", "key": "UBERON" },
       { "header": "Cell types", "key": "CL" },
-      { "header": "Description", "key": "NCIT" }
+      { "header": "Biomedical concepts", "key": "NCIT" }
     ],
-    "uniqueKey": "anotimcal_structures",
+    "unique_key": "biosample",
     "search_conditions": [
       {
         "label": "Sample Name",

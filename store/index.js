@@ -31,7 +31,7 @@ export const getters = {
   },
   results_unique_keys(state, getters) {
     return state.results[state.active_filter].results.map(
-      item => item[getters.active_filter.uniqueKey]
+      item => item[getters.active_filter.unique_key]
     );
   },
 };
