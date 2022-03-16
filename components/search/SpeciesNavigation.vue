@@ -4,7 +4,7 @@
       <li
         v-for="specie in species"
         :key="specie.name"
-        :class="{ active: $store.state.active_taxon.name === specie.name }"
+        :class="{ active: activeTaxon.name === specie.name }"
         @click="$store.commit('set_taxon', specie.name)"
       >
         <icon-base :icon-name="specie.name" />
@@ -12,11 +12,11 @@
           <p>{{ MakeNameUpperCase(specie.name) }}</p>
           <form>
             <select
-              v-model="selected_project[specie.name]"
+              v-model="selectedProject[specie.name]"
               @change="
                 $store.commit(
                   'set_active_organization',
-                  selected_project[specie.name]
+                  selectedProject[specie.name]
                 )
               "
             >
@@ -46,19 +46,16 @@
     data() {
       return {
         species,
-        selected_project: species.reduce((acc, specie) => {
+        selectedProject: species.reduce((acc, specie) => {
           acc[specie.name] = specie.projects[0];
           return acc;
         }, {}),
       };
     },
     computed: {
-      active_taxon() {
-        return this.$store.state.active_taxon;
-      },
-      selected_organization() {
-        return this.selected_project[this.active_taxon];
-      },
+      ...mapGetters({
+        activeTaxon: 'active_taxon',
+      }),
     },
     methods: {
       MakeNameUpperCase(name) {

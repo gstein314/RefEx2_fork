@@ -35,7 +35,7 @@
       <vue-simple-suggest
         v-model="parameters.project"
         :filter-by-query="true"
-        :list="auto_complete.project"
+        :list="autoComplete.project"
         :max-suggestions="100"
         class="text_search_sample_types"
         placeholder="cell lines"
@@ -61,7 +61,7 @@
       <vue-simple-suggest
         v-model="parameters.CL"
         :filter-by-query="true"
-        :list="auto_complete.CL"
+        :list="autoComplete.CL"
         :max-suggestions="100"
         class="text_search_cell_types"
         placeholder="CD14"
@@ -85,7 +85,7 @@
       <vue-simple-suggest
         v-model="parameters.UBERON"
         :filter-by-query="true"
-        :list="auto_complete.UBERON"
+        :list="autoComplete.UBERON"
         :max-suggestions="100"
         class="text_search_anatomical_structures"
         placeholder="skin"
@@ -116,7 +116,7 @@
       <vue-simple-suggest
         v-model="parameters.NCIT"
         :filter-by-query="true"
-        :list="auto_complete.NCIT"
+        :list="autoComplete.NCIT"
         :max-suggestions="100"
         class="text_search_biomedical_concepts"
         placeholder="leukemia"
@@ -148,7 +148,7 @@
           NCIT: '',
           UBERON: '',
         },
-        auto_complete: {
+        autoComplete: {
           project: ['cell lines', 'stem cells', 'primary cells', 'tissues'],
           CL: [],
           NCIT: [],
@@ -158,12 +158,12 @@
       };
     },
     created() {
-      Object.keys(this.auto_complete).forEach(key => {
-        if (this.auto_complete[key].length > 1) return;
+      Object.keys(this.autoComplete).forEach(key => {
+        if (this.autoComplete[key].length > 1) return;
         this.$axios
           .$get(`api/vocablary?annotation=${key.toUpperCase()}%20label`)
           .then(data => {
-            this.$set(this.auto_complete, key, data);
+            this.$set(this.autoComplete, key, data);
           })
           .catch(error => {
             console.log('error', error);

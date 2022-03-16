@@ -77,7 +77,7 @@
     <div :class="['summary_check_wrapper', { hide: parameters.text === '' }]">
       <input
         id="summary_check"
-        v-model="is_summary_included"
+        v-model="isSummaryIncluded"
         type="checkbox"
         name="summary_check"
         @click="showResults('numfound')"
@@ -112,8 +112,8 @@
           text: '',
         },
         onEvent: false,
-        is_summary_included: false,
-        is_reload_active: false,
+        isSummaryIncluded: false,
+        isReloadActive: false,
         isLoading: false,
         // either 'all' or 'numfound'
         typeOfQuery: 'numfound',
@@ -218,7 +218,7 @@
           })
           .finally(() => {
             this.onEvent = false;
-            this.is_reload_active = false;
+            this.isReloadActive = false;
             this.$store.commit('set_results', {
               results,
               results_num,
