@@ -4,18 +4,18 @@
       <li
         v-for="specie in species"
         :key="specie.name"
-        :class="{ active: activeTaxon.name === specie.name }"
-        @click="$store.commit('set_taxon', specie.name)"
+        :class="{ active: activeSpecie.name === specie.name }"
+        @click="$store.commit('set_specie', specie.name)"
       >
         <icon-base :icon-name="specie.name" />
-        <div class="taxon_wrapper">
+        <div class="specie_wrapper">
           <p>{{ MakeNameUpperCase(specie.name) }}</p>
           <form>
             <select
               v-model="selectedProject[specie.name]"
               @change="
                 $store.commit(
-                  'set_active_organization',
+                  'set_active_project',
                   selectedProject[specie.name]
                 )
               "
@@ -36,6 +36,7 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
   import species from '~/static/species.json';
   import IconBase from '~/components/icons/IconBase.vue';
 
@@ -54,7 +55,7 @@
     },
     computed: {
       ...mapGetters({
-        activeTaxon: 'active_taxon',
+        activeSpecie: 'active_specie',
       }),
     },
     methods: {
@@ -91,7 +92,7 @@
           cursor: pointer
         > svg
           align-self: flex-end
-        > .taxon_wrapper
+        > .specie_wrapper
           display: flex
           flex-direction: column
           align-self: flex-end

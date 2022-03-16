@@ -98,8 +98,8 @@
         resultsByName: 'results_by_name',
         filterByName: 'filter_by_name',
         resultsUniqueKeys: 'results_unique_keys',
-        activeTaxon: 'active_taxon',
-        activeOrganization: 'active_organization',
+        activeSpecie: 'active_specie',
+        activeProject: 'active_project',
       }),
       routerPrefix() {
         return `${this.active_taxon.suggestions_key}/${this.active_organization}`;
@@ -142,7 +142,7 @@
         this.$router.push(`${this.routerPrefix}?id=${compareItems}`);
       },
       geneDescriptionSource(resultItem) {
-        return `http://penqe.com/refex_figs/${this.activeTaxon?.suggestions_key.toLowerCase()}_${this.activeOrganization.toLowerCase()}_${resultItem}.png`;
+        return `http://penqe.com/refex_figs/${this.activeSpecie?.suggestions_key.toLowerCase()}_${this.activeProject.toLowerCase()}_${resultItem}.png`;
       },
     },
   };

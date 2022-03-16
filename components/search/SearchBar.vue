@@ -122,8 +122,8 @@
     computed: {
       ...mapGetters({
         filterByName: 'filter_by_name',
-        activeOrganization: 'active_organization',
-        activeTaxon: 'active_taxon',
+        activeProject: 'active_project',
+        activeSpecie: 'active_specie',
       }),
       // TODO: turn into qql query
 
@@ -148,8 +148,10 @@
         return this.typeOfQuery === 'numfound';
       },
       queryPrefix() {
-        return `${this.activeTaxon.suggestions_key}${this.$firstLetterUppercase(
-          this.activeOrganization
+        return `${
+          this.activeSpecie.suggestions_key
+        }${this.$firstLetterUppercase(
+          this.activeProject
         )}${this.$firstLetterUppercase(this.filterObj.name)}${
           this.isNum ? 'Numfound' : ''
         }`;
@@ -173,10 +175,10 @@
       },
     },
     watch: {
-      activeOrganization() {
+      activeProject() {
         this.showResults('numfound');
       },
-      activeTaxon() {
+      activeSpecie() {
         this.showResults('numfound');
       },
     },
