@@ -174,6 +174,14 @@
         return `{${this.queryPrefix}${params}${resultParams}${suffix}}`;
       },
     },
+    watch: {
+      getActiveOrganization() {
+        this.showResults('numfound');
+      },
+      getActiveTaxon() {
+        this.showResults('numfound');
+      },
+    },
     methods: {
       updateParams(params) {
         this.parameters = { ...this.parameters, ...params };
@@ -196,19 +204,29 @@
       },
       showResults(type = 'all') {
         this.typeOfQuery = type;
+        let results = [],
+          results_num = 0;
         this.$axios
           .$post('gql', {
             query: this.suggest_query,
           })
           .then(result => {
             const prefix = this.queryPrefix.replace('Numfound', '');
-            this.$store.commit('setResults', {
-              results: result.data[prefix] ?? [],
-              results_num: result.data[`${prefix}Numfound`] ?? 0,
-              filterType: this.filterObj.name,
-            });
+            if (prefix in result.data) results = results.data[prefix];
+            if (`${prefix}Numfound` in result.data)
+              results_num = result.data[prefix + 'Numfound'];
+          })
+          .catch(err => {
+            console.log(err);
+          })
+          .finally(() => {
             this.onEvent = false;
             this.is_reload_active = false;
+            this.$store.commit('setResults', {
+              results,
+              results_num,
+              filterType: this.filterObj.name,
+            });
           });
       },
     },

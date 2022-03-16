@@ -43,8 +43,9 @@ export const mutations = {
   setTaxon(state, taxonId) {
     state.active_taxon = taxons.find(taxon => taxon.name === taxonId);
   },
-  setActiveOrganization: (state, organization) =>
-    (state.organization = organization),
+  setActiveOrganization(state, organization) {
+    return (state.active_organization = organization);
+  },
   setActiveFilter(state, filter = 'gene') {
     state.active_filter = filter;
   },
