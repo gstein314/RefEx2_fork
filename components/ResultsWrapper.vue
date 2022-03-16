@@ -33,7 +33,7 @@
           v-for="result in results"
           :key="result[filterObj.uniqueKey]"
           @click="
-            $router.push(`${routerPrefix}?gid=${result[filterObj.uniqueKey]}`)
+            $router.push(`${routerPrefix}?id=${result[filterObj.uniqueKey]}`)
           "
         >
           <td class="checkbox" @click="e => e.stopPropagation()">
