@@ -101,9 +101,6 @@
   import ScreenerView from '~/components/ScreenerView/ScreenerView.vue';
   import { mapGetters } from 'vuex';
 
-  const firstLetterUpperCase = str => {
-    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-  };
   export default {
     components: {
       VueSimpleSuggest,
@@ -151,9 +148,11 @@
         return this.typeOfQuery === 'numfound';
       },
       queryPrefix() {
-        return `${this.getActiveTaxon.suggestions_key}${firstLetterUpperCase(
+        return `${
+          this.getActiveTaxon.suggestions_key
+        }${this.$firstLetterUppercase(
           this.getActiveOrganization
-        )}${firstLetterUpperCase(this.filterObj.name)}${
+        )}${this.$firstLetterUppercase(this.filterObj.name)}${
           this.isNum ? 'Numfound' : ''
         }`;
       },
