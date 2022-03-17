@@ -23,13 +23,18 @@ export const getters = {
   gene_modal(state) {
     return state.gene_modal;
   },
-  active_project: state => state.active_project,
+  active_project(state) {
+    return state.active_project;
+  },
   active_filter(state) {
     return filters.find(col => col.name === state.active_filter);
   },
-  active_specie: state => state.active_specie,
-  filter_by_name: _state => filterName =>
-    filters.find(col => col.name === filterName),
+  active_specie(state) {
+    return state.active_specie;
+  },
+  filter_by_name: _state => filterName => {
+    return filters.find(col => col.name === filterName);
+  },
   results_by_name(state) {
     return filterName => state.results[filterName];
   },
@@ -48,7 +53,7 @@ export const mutations = {
     state.active_specie = species.find(specie => specie.name === specieId);
   },
   set_active_project(state, project) {
-    return (state.active_project = project);
+    state.active_project = project;
   },
   set_active_filter(state, filter = 'gene') {
     state.active_filter = filter;
