@@ -1,11 +1,11 @@
 <template>
-  <div class="screener_wrapper" :class="{ open: is_screener_open }">
+  <div class="screener_wrapper" :class="{ open: isOpen }">
     <p class="screener_title" @click="toggleScreener">
       <font-awesome-icon icon="filter" class="filter" />
       Screener
       <font-awesome-icon
         icon="chevron-right"
-        :class="is_screener_open ? 'open' : 'close'"
+        :class="isOpen ? 'open' : 'close'"
       />
     </p>
     <slot></slot>
@@ -17,12 +17,12 @@
   export default {
     data() {
       return {
-        is_screener_open: false,
+        isOpen: false,
       };
     },
     methods: {
       toggleScreener() {
-        this.is_screener_open = !this.is_screener_open;
+        this.isOpen = !this.isOpen;
       },
     },
   };

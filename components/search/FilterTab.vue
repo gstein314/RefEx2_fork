@@ -5,7 +5,7 @@
       <div class="results_num_wrapper">
         <div class="results_num_inner">
           <h2>Estimated Results</h2>
-          <p class="results_num">{{ results_num }}</p>
+          <p class="results_num">{{ resultsNum }}</p>
         </div>
       </div>
     </main>
@@ -21,10 +21,10 @@
     },
     computed: {
       activeFilter() {
-        return this.$store.state.active_filter;
+        return this.$store.getters.active_filter.name;
       },
-      results_num() {
-        return this.$store.getters.resultsByName(this.$vnode.key).results_num;
+      resultsNum() {
+        return this.$store.getters.results_by_name(this.$vnode.key).results_num;
       },
     },
   };

@@ -22,9 +22,9 @@
     </h3>
     <no-ssr>
       <vue-tags-input
-        v-model="temporaryParameters.go_term"
+        v-model="temporaryParameters.goTerm"
         :tags="parameters.go"
-        :autocomplete-items="auto_complete.go"
+        :autocomplete-items="autoComplete.go"
         :add-only-from-autocomplete="true"
         :placeholder="placeholderGOTerm"
         @input="updateAutoComplete"
@@ -35,7 +35,7 @@
           slot-scope="{ item }"
           class="my-item"
           @click="props.performAdd(props.item)"
-          v-html="$boldenSuggestion(item.text, temporaryParameters.go_term)"
+          v-html="$boldenSuggestion(item.text, temporaryParameters.goTerm)"
         >
           " >
         </div>
@@ -49,24 +49,24 @@
       return {
         // only used in this component
         temporaryParameters: {
-          go_term: '',
+          goTerm: '',
         },
         // passed down to API
         parameters: {
           go: [],
         },
-        auto_complete: {
+        autoComplete: {
           go: [],
         },
         debounce: null,
       };
     },
     computed: {
-      go_term_string() {
+      goTermString() {
         return this.parameters.go.map(tag => tag.id).join(', ');
       },
       placeholderGOTerm() {
-        return this.temporaryParameters.go_term === '' &&
+        return this.temporaryParameters.goTerm === '' &&
           this.parameters.go.length < 1
           ? 'transcription factor binding'
           : '';
@@ -74,7 +74,7 @@
     },
     watch: {
       parameters() {
-        this.$emit('updateParameters', { go: this.go_term_string });
+        this.$emit('updateParameters', { go: this.goTermString });
       },
     },
     methods: {
@@ -85,13 +85,13 @@
           this.$axios
             .$get(
               this.$getSuggestionURL(
-                this.temporaryParameters.go_term,
+                this.temporaryParameters.goTerm,
                 '&go=True'
               )
             )
             .then(response => {
               this.$set(
-                this.auto_complete,
+                this.autoComplete,
                 'go',
                 response.results.map(a => {
                   return { text: a.term, id: a.id };

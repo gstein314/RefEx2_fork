@@ -1,10 +1,10 @@
 import filters from '../static/filters.json';
-import taxons from '../static/species.json';
+import species from '../static/species.json';
 
 export const state = () => ({
-  active_taxon: taxons[0], //default,
+  active_specie: species[0], //default,
   active_filter: 'gene',
-  active_organization: 'FANTOM5',
+  active_project: 'FANTOM5',
   gene_modal: {
     isShowing: false,
     geneId: '',
@@ -16,40 +16,49 @@ export const state = () => ({
 });
 
 export const getters = {
-  geneModal(state) {
+  route_to_project_page: state => ids => {
+    if (Array.isArray(ids)) ids = ids.join(',');
+    return `${state.active_specie.suggestions_key}/${state.active_filter}?id=${ids}`;
+  },
+  gene_modal(state) {
     return state.gene_modal;
   },
-  active_organization: state => state.active_organization,
-  activeFilter(state) {
+  active_project(state) {
+    return state.active_project;
+  },
+  active_filter(state) {
     return filters.find(col => col.name === state.active_filter);
   },
-  activeTaxon: state => state.active_taxon,
-  filterByName: _state => filterName =>
-    filters.find(col => col.name === filterName),
-  resultsByName(state) {
+  active_specie(state) {
+    return state.active_specie;
+  },
+  filter_by_name: _state => filterName => {
+    return filters.find(col => col.name === filterName);
+  },
+  results_by_name(state) {
     return filterName => state.results[filterName];
   },
-  resultsUniqueKeys(state, getters) {
+  results_unique_keys(state, getters) {
     return state.results[state.active_filter].results.map(
-      item => item[getters.activeFilter.uniqueKey]
+      item => item[getters.active_filter.unique_key]
     );
   },
 };
 
 export const mutations = {
-  setGeneModal(state, { isShowing = false, geneId = '' }) {
+  set_gene_modal(state, { isShowing = false, geneId = '' }) {
     state.gene_modal = { isShowing, geneId };
   },
-  setTaxon(state, taxonId) {
-    state.active_taxon = taxons.find(taxon => taxon.name === taxonId);
+  set_specie(state, specieId) {
+    state.active_specie = species.find(specie => specie.name === specieId);
   },
-  setActiveOrganization(state, organization) {
-    return (state.active_organization = organization);
+  set_active_project(state, project) {
+    state.active_project = project;
   },
-  setActiveFilter(state, filter = 'gene') {
+  set_active_filter(state, filter = 'gene') {
     state.active_filter = filter;
   },
-  setResults(
+  set_results(
     state,
     { results = [], results_num = 0, filterType = state.activeFilter }
   ) {

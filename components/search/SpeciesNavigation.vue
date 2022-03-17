@@ -4,19 +4,19 @@
       <li
         v-for="specie in species"
         :key="specie.name"
-        :class="{ active: $store.state.active_taxon.name === specie.name }"
-        @click="$store.commit('setTaxon', specie.name)"
+        :class="{ active: activeSpecie.name === specie.name }"
+        @click="$store.commit('set_specie', specie.name)"
       >
         <icon-base :icon-name="specie.name" />
-        <div class="taxon_wrapper">
-          <p>{{ MakeNameUpperCase(specie.name) }}</p>
+        <div class="specie_wrapper">
+          <p>{{ capitalizeAndTidy(specie.name) }}</p>
           <form>
             <select
-              v-model="selected_project[specie.name]"
+              v-model="selectedProject[specie.name]"
               @change="
                 $store.commit(
-                  'setActiveOrganization',
-                  selected_project[specie.name]
+                  'set_active_project',
+                  selectedProject[specie.name]
                 )
               "
             >
@@ -36,6 +36,7 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
   import species from '~/static/species.json';
   import IconBase from '~/components/icons/IconBase.vue';
 
@@ -46,26 +47,20 @@
     data() {
       return {
         species,
-        selected_project: species.reduce((acc, specie) => {
+        selectedProject: species.reduce((acc, specie) => {
           acc[specie.name] = specie.projects[0];
           return acc;
         }, {}),
       };
     },
     computed: {
-      active_taxon() {
-        return this.$store.state.active_taxon;
-      },
-      selected_organization() {
-        return this.selected_project[this.active_taxon];
-      },
+      ...mapGetters({
+        activeSpecie: 'active_specie',
+      }),
     },
     methods: {
-      MakeNameUpperCase(name) {
+      capitalizeAndTidy(name) {
         return this.$firstLetterUppercase(name).replace('_', ' ');
-      },
-      GetSpecieImage(specie_name) {
-        return require(`~/assets/img/icon_${specie_name}.svg`);
       },
     },
   };
@@ -94,7 +89,7 @@
           cursor: pointer
         > svg
           align-self: flex-end
-        > .taxon_wrapper
+        > .specie_wrapper
           display: flex
           flex-direction: column
           align-self: flex-end

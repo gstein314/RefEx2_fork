@@ -9,7 +9,7 @@
       <span class="example">e.g.</span>
       <span
         class="sample_value"
-        @click="$router.push(`${routerPrefix}?id=5460,6657,9314,4609`)"
+        @click="$router.push(routeToProjectPage([5460, 6657, 9314, 4609]))"
         >Yamanaka Factors (OCT3/4, SOX2, KLF4 and C-MYC-OSKM)</span
       >
     </div>
@@ -31,16 +31,16 @@
       <tbody>
         <tr
           v-for="result in results"
-          :key="result[filterObj.uniqueKey]"
+          :key="result[filterObj.unique_key]"
           @click="
-            $router.push(`${routerPrefix}?id=${result[filterObj.uniqueKey]}`)
+            $router.push(routeToProjectPage(result[filterObj.unique_key]))
           "
         >
           <td class="checkbox" @click="e => e.stopPropagation()">
             <input
-              v-model="checked_results"
+              v-model="checkedResults"
               type="checkbox"
-              :value="result[filterObj.uniqueKey]"
+              :value="result[filterObj.unique_key]"
             />
           </td>
           <td
@@ -54,14 +54,14 @@
               @click.stop="
                 setGeneModal({
                   isShowing: true,
-                  geneId: result[filterObj.uniqueKey],
+                  geneId: result[filterObj.unique_key],
                 })
               "
             />
             <img
               v-else-if="column.specialClass === 'gene_expression_patterns'"
-              :src="geneDescriptionSource(result[filterObj.uniqueKey])"
-              :alt="result[filterObj.uniqueKey]"
+              :src="geneDescriptionSource(result[filterObj.unique_key])"
+              :alt="result[filterObj.unique_key]"
             />
             <span
               v-for="(value, value_index) of JSON.parse(result[column.key])"
@@ -90,27 +90,25 @@
   export default {
     data() {
       return {
-        checked_results: [],
+        checkedResults: [],
       };
     },
     computed: {
       ...mapGetters({
-        resultsByName: 'resultsByName',
-        filterByName: 'filterByName',
-        resultsUniqueKeys: 'resultsUniqueKeys',
-        active_taxon: 'activeTaxon',
-        active_organization: 'active_organization',
+        resultsByName: 'results_by_name',
+        filterByName: 'filter_by_name',
+        resultsUniqueKeys: 'results_unique_keys',
+        activeSpecie: 'active_specie',
+        activeProject: 'active_project',
+        routeToProjectPage: 'route_to_project_page',
       }),
-      routerPrefix() {
-        return `${this.active_taxon.suggestions_key}/${this.active_organization}`;
-      },
       filterObj() {
         return this.filterByName(this.$vnode.key.split('_')[0]);
       },
       isAllChecked() {
         return (
           this.resultsUniqueKeys.length > 0 &&
-          this.checked_results.length === this.resultsUniqueKeys.length
+          this.checkedResults.length === this.resultsUniqueKeys.length
         );
       },
       results() {
@@ -119,30 +117,27 @@
     },
     methods: {
       ...mapMutations({
-        setGeneModal: 'setGeneModal',
+        setGeneModal: 'set_gene_modal',
       }),
       hasStringQuotes(str) {
         return str.startsWith('"') && str.endsWith('"');
       },
-      convertStringToArray(str) {
-        return typeof str === 'string' ? str.split(',') : str;
-      },
       toggleAllCheckbox() {
         this.isAllChecked
-          ? (this.checked_results = [])
-          : (this.checked_results = this.resultsUniqueKeys);
+          ? (this.checkedResults = [])
+          : (this.checkedResults = this.resultsUniqueKeys);
       },
       comparisonSearch() {
-        if (this.checked_results.length === 0) return;
+        if (this.checkedResults.length === 0) return;
         const compareItems = [
-          ...(this.checked_results.length > 10
-            ? this.checked_results.slice(0, 10)
-            : this.checked_results),
+          ...(this.checkedResults.length > 10
+            ? this.checkedResults.slice(0, 10)
+            : this.checkedResults),
         ];
-        this.$router.push(`${this.routerPrefix}?id=${compareItems}`);
+        this.$router.push(this.routeToProjectPage(compareItems));
       },
       geneDescriptionSource(resultItem) {
-        return `http://penqe.com/refex_figs/${this.active_taxon?.suggestions_key.toLowerCase()}_${this.active_organization.toLowerCase()}_${resultItem}.png`;
+        return `http://penqe.com/refex_figs/${this.activeSpecie?.suggestions_key.toLowerCase()}_${this.activeProject.toLowerCase()}_${resultItem}.png`;
       },
     },
   };

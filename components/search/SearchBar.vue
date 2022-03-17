@@ -77,7 +77,7 @@
     <div :class="['summary_check_wrapper', { hide: parameters.text === '' }]">
       <input
         id="summary_check"
-        v-model="is_summary_included"
+        v-model="isSummaryIncluded"
         type="checkbox"
         name="summary_check"
         @click="showResults('numfound')"
@@ -112,8 +112,8 @@
           text: '',
         },
         onEvent: false,
-        is_summary_included: false,
-        is_reload_active: false,
+        isSummaryIncluded: false,
+        isReloadActive: false,
         isLoading: false,
         // either 'all' or 'numfound'
         typeOfQuery: 'numfound',
@@ -121,14 +121,15 @@
     },
     computed: {
       ...mapGetters({
-        getFilterByName: 'filterByName',
-        getActiveOrganization: 'active_organization',
-        getActiveTaxon: 'activeTaxon',
+        filterByName: 'filter_by_name',
+        routeToProjectPage: 'route_to_project_page',
+        activeProject: 'active_project',
+        activeSpecie: 'active_specie',
       }),
       // TODO: turn into qql query
 
       filterObj() {
-        return this.getFilterByName(this.$vnode.key.split('_')[0]);
+        return this.filterByName(this.$vnode.key.split('_')[0]);
       },
       conditions() {
         return this.filterObj.search_conditions;
@@ -149,9 +150,9 @@
       },
       queryPrefix() {
         return `${
-          this.getActiveTaxon.suggestions_key
+          this.activeSpecie.suggestions_key
         }${this.$firstLetterUppercase(
-          this.getActiveOrganization
+          this.activeProject
         )}${this.$firstLetterUppercase(this.filterObj.name)}${
           this.isNum ? 'Numfound' : ''
         }`;
@@ -175,10 +176,10 @@
       },
     },
     watch: {
-      getActiveOrganization() {
+      activeProject() {
         this.showResults('numfound');
       },
-      getActiveTaxon() {
+      activeSpecie() {
         this.showResults('numfound');
       },
     },
@@ -197,9 +198,7 @@
         });
       },
       moveDetailpage(suggestion) {
-        this.$router.push(
-          `${this.getActiveTaxon.suggestions_key}/${this.getActiveOrganization}?id=${suggestion.entrezgene}`
-        );
+        this.$router.push(this.routeToProjectPage(suggestion.entrezgene));
       },
       showResults(type = 'all') {
         this.typeOfQuery = type;
@@ -220,8 +219,8 @@
           })
           .finally(() => {
             this.onEvent = false;
-            this.is_reload_active = false;
-            this.$store.commit('setResults', {
+            this.isReloadActive = false;
+            this.$store.commit('set_results', {
               results,
               results_num,
               filterType: this.filterObj.name,
