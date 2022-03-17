@@ -19,6 +19,27 @@ $ npm run generate
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
 
+## Naming rules for variables
+- #### ```JS variables```
+  camelCase
+  
+  ***
+
+- #### ```Vuex variables```
+  snake_case
+
+  ***
+  
+- #### ```CSS classes```
+  snake_case
+  *but can sometimes be kebab-case due to use of plugin*
+
+  ***
+
+- ### ```json / config files```
+  snake_case
+
+
 ## Maintenance for filters(eg. sample / gene)
 
 A filter consists of the following attributes:
