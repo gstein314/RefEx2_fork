@@ -16,6 +16,10 @@ export const state = () => ({
 });
 
 export const getters = {
+  route_to_project_page: state => ids => {
+    if (Array.isArray(ids)) ids = ids.join(',');
+    return `${state.active_specie.suggestions_key}/${state.active_filter}?id=${ids}`;
+  },
   gene_modal(state) {
     return state.gene_modal;
   },

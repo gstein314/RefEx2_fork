@@ -122,6 +122,7 @@
     computed: {
       ...mapGetters({
         filterByName: 'filter_by_name',
+        routeToProjectPage: 'route_to_project_page',
         activeProject: 'active_project',
         activeSpecie: 'active_specie',
       }),
@@ -197,9 +198,7 @@
         });
       },
       moveDetailpage(suggestion) {
-        this.$router.push(
-          `${this.activeSpecie.suggestions_key}/${this.activeProject}?id=${suggestion.entrezgene}`
-        );
+        this.$router.push(this.routeToProjectPage(suggestion.entrezgene));
       },
       showResults(type = 'all') {
         this.typeOfQuery = type;

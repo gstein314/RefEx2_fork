@@ -9,7 +9,7 @@
       <span class="example">e.g.</span>
       <span
         class="sample_value"
-        @click="$router.push(`${routerPrefix}?id=5460,6657,9314,4609`)"
+        @click="$router.push(routeToProjectPage([5460, 6657, 9314, 4609]))"
         >Yamanaka Factors (OCT3/4, SOX2, KLF4 and C-MYC-OSKM)</span
       >
     </div>
@@ -33,7 +33,7 @@
           v-for="result in results"
           :key="result[filterObj.unique_key]"
           @click="
-            $router.push(`${routerPrefix}?id=${result[filterObj.unique_key]}`)
+            $router.push(routeToProjectPage(result[filterObj.unique_key]))
           "
         >
           <td class="checkbox" @click="e => e.stopPropagation()">
@@ -100,10 +100,8 @@
         resultsUniqueKeys: 'results_unique_keys',
         activeSpecie: 'active_specie',
         activeProject: 'active_project',
+        routeToProjectPage: 'route_to_project_page',
       }),
-      routerPrefix() {
-        return `${this.activeSpecie.suggestions_key}/${this.activeProject}`;
-      },
       filterObj() {
         return this.filterByName(this.$vnode.key.split('_')[0]);
       },
@@ -135,11 +133,11 @@
       comparisonSearch() {
         if (this.checkedResults.length === 0) return;
         const compareItems = [
-          ...(this.checked_results.length > 10
-            ? this.checked_results.slice(0, 10)
-            : this.checked_results),
+          ...(this.checkedResults.length > 10
+            ? this.checkedResults.slice(0, 10)
+            : this.checkedResults),
         ];
-        this.$router.push(`${this.routerPrefix}?id=${compareItems}`);
+        this.$router.push(this.routeToProjectPage(compareItems));
       },
       geneDescriptionSource(resultItem) {
         return `http://penqe.com/refex_figs/${this.activeSpecie?.suggestions_key.toLowerCase()}_${this.activeProject.toLowerCase()}_${resultItem}.png`;
