@@ -122,9 +122,6 @@
       hasStringQuotes(str) {
         return str.startsWith('"') && str.endsWith('"');
       },
-      convertStringToArray(str) {
-        return typeof str === 'string' ? str.split(',') : str;
-      },
       toggleAllCheckbox() {
         this.isAllChecked
           ? (this.checkedResults = [])

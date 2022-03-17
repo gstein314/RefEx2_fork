@@ -9,7 +9,7 @@
       >
         <icon-base :icon-name="specie.name" />
         <div class="specie_wrapper">
-          <p>{{ MakeNameUpperCase(specie.name) }}</p>
+          <p>{{ capitalizeAndTidy(specie.name) }}</p>
           <form>
             <select
               v-model="selectedProject[specie.name]"
@@ -59,11 +59,8 @@
       }),
     },
     methods: {
-      MakeNameUpperCase(name) {
+      capitalizeAndTidy(name) {
         return this.$firstLetterUppercase(name).replace('_', ' ');
-      },
-      GetSpecieImage(specie_name) {
-        return require(`~/assets/img/icon_${specie_name}.svg`);
       },
     },
   };
