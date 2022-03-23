@@ -5,10 +5,9 @@ export const state = () => ({
   active_specie: species[0], //default,
   active_filter: 'gene',
   active_project: 'FANTOM5',
-  gene_modal: {
-    isShowing: false,
-    geneId: '',
-  },
+  project_filters: {},
+  filter_modal: null,
+  gene_modal: null,
   results: filters.reduce((acc, filter) => {
     acc[filter.name] = { results: [], results_num: 0 };
     return acc;
@@ -16,6 +15,12 @@ export const state = () => ({
 });
 
 export const getters = {
+  project_filters(state) {
+    return state.project_filters;
+  },
+  active_filter_modal(state) {
+    return state.project_filters[state.filter_modal] || null;
+  },
   route_to_project_page: state => ids => {
     if (Array.isArray(ids)) ids = ids.join(',');
     return `${state.active_specie.suggestions_key}/${state.active_filter}?id=${ids}`;
@@ -46,8 +51,34 @@ export const getters = {
 };
 
 export const mutations = {
-  set_gene_modal(state, { isShowing = false, geneId = '' }) {
-    state.gene_modal = { isShowing, geneId };
+  set_filter_modal(state, filterKey = null) {
+    state.filter_modal = filterKey;
+  },
+  set_project_filters(state) {
+    const copy = { ...getters.active_filter(state).filters };
+    Object.values(copy).forEach(value => {
+      value.filterModal = '';
+      if (['age', 'median'].includes(value.innerKey))
+        value.numberValue = {
+          value: [0, 0],
+          min: 0,
+          max: 0,
+          marks: [],
+        };
+    });
+
+    state.project_filters = copy;
+  },
+  update_project_filters(
+    state,
+    { key, filter, filterKey = state.filter_modal }
+  ) {
+    const copy = { ...state.project_filters };
+    copy[filterKey][key] = filter;
+    state.project_filters = copy;
+  },
+  set_gene_modal(state, id = null) {
+    state.gene_modal = id;
   },
   set_specie(state, specieId) {
     state.active_specie = species.find(specie => specie.name === specieId);

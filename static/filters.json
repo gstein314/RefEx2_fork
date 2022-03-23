@@ -6,7 +6,11 @@
       { "header": "GeneName", "key": "name" },
       { "header": "Alias", "key": "alias" },
       { "header": "NCBI GeneID", "key": "ncbiGeneId" },
-      { "header": "Annotation", "key": "ncbiGeneId", "specialClass": "annotation"},
+      {
+        "header": "Annotation",
+        "key": "ncbiGeneId",
+        "specialClass": "annotation"
+      },
       {
         "header": "Gene expression patterns",
         "key": "ncbiGeneId",
@@ -21,7 +25,63 @@
       },
       { "label": "Symbol", "examples": ["ITG"] },
       { "label": "Summary", "examples": ["Breast cancer"] }
-    ]
+    ],
+    "filters": {
+      "Description": {
+        "label": "Sample Description",
+        "innerKey": "sample_description",
+        "isDisplayed": true
+      },
+      "log2_Median": {
+        "label": "MEDIAN [LOG2(TPM+1)]",
+        "innerKey": "median",
+        "isDisplayed": true
+      },
+      "Sample types category": {
+        "label": "Sample Type",
+        "subLabel": "(FANTOM5)",
+        "innerKey": "sample_type",
+        "isDisplayed": true
+      },
+      "Experiments category": {
+        "label": "Experiment",
+        "innerKey": "expirement",
+        "isDisplayed": false
+      },
+      "UBERON label": {
+        "label": "Anatomical structures",
+        "subLabel": "(UBERON)",
+        "innerKey": "uberon",
+        "isDisplayed": true
+      },
+      "CL label": {
+        "label": "Cell types",
+        "subLabel": "(Cell Ontology)",
+        "innerKey": "cl",
+        "isDisplayed": true
+      },
+      "Sex": {
+        "label": "Sex",
+        "innerKey": "sex",
+        "isDisplayed": false
+      },
+      "Age": {
+        "label": "Age",
+        "innerKey": "age",
+        "isDisplayed": false
+      },
+      "Developmental stage": {
+        "label": "Stage",
+        "innerKey": "stage",
+        "isDisplayed": false
+      },
+      "NCIT label": {
+        "label": "Biomedical concepts",
+        "subLabel": "(NCI Thesaurus: NCIt)",
+        "innerKey": "ncit",
+        "isDisplayed": true
+      }
+    }
   },
   {
     "name": "sample",

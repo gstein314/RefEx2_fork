@@ -3,17 +3,12 @@
     <SpeciesNavigation />
     <FilterNavigation />
     <FilterTab v-for="filter of filters" :key="filter.name" />
-    <GeneDetailModal v-bind="geneModal" />
-    <div
-      v-if="geneModal.isShowing"
-      class="modal_bg"
-      @click="$store.commit('set_gene_modal', {})"
-    ></div>
+    <gene-detail-modal />
   </div>
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
+  import GeneDetailModal from '~/components/ModalView/GeneDetailModal.vue';
   import SpeciesNavigation from '~/components/search/SpeciesNavigation.vue';
   import FilterNavigation from '~/components/search/FilterNavigation.vue';
   import FilterTab from '~/components/search/FilterTab.vue';
@@ -21,6 +16,7 @@
 
   export default {
     components: {
+      GeneDetailModal,
       SpeciesNavigation,
       FilterNavigation,
       FilterTab,
@@ -29,11 +25,6 @@
       return {
         filters,
       };
-    },
-    computed: {
-      ...mapGetters({
-        geneModal: 'gene_modal',
-      }),
     },
   };
 </script>

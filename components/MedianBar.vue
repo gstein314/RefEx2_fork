@@ -1,5 +1,6 @@
 <template>
-  <div v-if="geneNum === 1" class="bar_box">
+  <div>{{ result }}</div>
+  <!-- <div v-if="geneNum === 1" class="bar_box">
     <div
       class="bar single_gene"
       :style="`width: ${(result[prefix] * 230) / 16}px;`"
@@ -49,32 +50,32 @@
         </span>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
   export default {
     props: {
       result: {
-        type: Object,
-        required: true,
-      },
-      geneNum: {
         type: Number,
         required: true,
       },
-      compareGenes: {
-        type: Array,
-        required: true,
-      },
-      symbol: {
-        type: String,
-        required: true,
-      },
-      prefix: {
-        type: String,
-        default: 'log2_Median',
-      },
+      // geneNum: {
+      //   type: Number,
+      //   required: true,
+      // },
+      // compareGenes: {
+      //   type: Array,
+      //   required: true,
+      // },
+      // symbol: {
+      //   type: String,
+      //   required: true,
+      // },
+      // prefix: {
+      //   type: String,
+      //   default: 'log2_Median',
+      // },
     },
   };
 </script>

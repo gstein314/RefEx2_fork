@@ -51,12 +51,7 @@
             <font-awesome-icon
               v-if="column.specialClass === 'annotation'"
               icon="info-circle"
-              @click.stop="
-                setGeneModal({
-                  isShowing: true,
-                  geneId: result[filterObj.unique_key],
-                })
-              "
+              @click.stop="setGeneModal(result[filterObj.unique_key])"
             />
             <img
               v-else-if="column.specialClass === 'gene_expression_patterns'"

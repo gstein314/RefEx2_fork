@@ -1,3 +1,4 @@
+import { mapMutations } from 'vuex';
 <template>
   <th v-if="isDisplayed" class="age">
     <span v-if="subLabel">
@@ -13,12 +14,14 @@
     <font-awesome-icon
       icon="search"
       :class="{ active: isActiveSearch }"
-      @click="openFilterModal"
+      @click="setFilterModal($vnode.key)"
     />
   </th>
 </template>
 
 <script>
+  import { mapMutations } from 'vuex';
+
   export default {
     props: {
       id: {
@@ -69,9 +72,9 @@
       switchSort() {
         this.$emit('switchSort', this.id);
       },
-      openFilterModal() {
-        this.$emit('openFilterModal', this.id);
-      },
+      ...mapMutations({
+        setFilterModal: 'set_filter_modal',
+      }),
     },
   };
 </script>
