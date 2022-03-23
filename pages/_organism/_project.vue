@@ -41,10 +41,13 @@
       :key="`${index}_${item.id}`"
       v-bind="item"
     />
-    <DisplayModal v-if="isDisplaySettingsOn" @close="toggleDisplaySettings" />
-    <filter-modal />
-    <GeneDetailModal />
-    <!-- <CompareModal :id="idForCompareModal" /> -->
+    <ModalViewDisplay
+      v-if="isDisplaySettingsOn"
+      @close="toggleDisplaySettings"
+    />
+    <ModalViewFilter />
+    <ModalViewGene />
+    <!-- <ModalViewCompare :id="idForCompareModal" /> -->
   </div>
 </template>
 
@@ -52,19 +55,19 @@
   import 'vue-slider-component/dist-css/vue-slider-component.css';
   import { mapMutations } from 'vuex';
   import ItemComparison from '~/components/results/ItemComparison.vue';
-  import GeneDetailModal from '~/components/ModalView/GeneDetailModal.vue';
-  import CompareModal from '~/components/ModalView/CompareModal.vue';
-  import DisplayModal from '~/components/ModalView/DisplayModal.vue';
-  import FilterModal from '~/components/ModalView/FilterModal.vue';
+  import ModalViewGene from '~/components/ModalView/ModalViewGene.vue';
+  import ModalViewCompare from '~/components/ModalView/ModalViewCompare.vue';
+  import ModalViewDisplay from '~/components/ModalView/ModalViewDisplay.vue';
+  import ModalViewFilter from '~/components/ModalView/ModalViewFilter.vue';
   import ProjectResults from '~/components/results/ProjectResults.vue';
 
   export default {
     components: {
       ItemComparison,
-      GeneDetailModal,
-      // CompareModal,
-      DisplayModal,
-      FilterModal,
+      ModalViewGene,
+      // ModalViewCompare,
+      ModalViewDisplay,
+      ModalViewFilter,
       ProjectResults,
     },
     beforeRouteUpdate(to, from, next) {

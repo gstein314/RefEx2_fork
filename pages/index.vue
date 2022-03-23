@@ -3,12 +3,12 @@
     <SpeciesNavigation />
     <FilterNavigation />
     <FilterTab v-for="filter of filters" :key="filter.name" />
-    <gene-detail-modal />
+    <ModalViewGene />
   </div>
 </template>
 
 <script>
-  import GeneDetailModal from '~/components/ModalView/GeneDetailModal.vue';
+  import ModalViewGene from '~/components/ModalView/ModalViewGene.vue';
   import SpeciesNavigation from '~/components/search/SpeciesNavigation.vue';
   import FilterNavigation from '~/components/search/FilterNavigation.vue';
   import FilterTab from '~/components/search/FilterTab.vue';
@@ -16,7 +16,7 @@
 
   export default {
     components: {
-      GeneDetailModal,
+      ModalViewGene,
       SpeciesNavigation,
       FilterNavigation,
       FilterTab,
