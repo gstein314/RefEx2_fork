@@ -6,57 +6,57 @@
         "column": "Sample type category",
         "label": "Sample type",
         "note": "FANTOM5",
-        "checkbox": true,
+        "is_checkbox": true,
         "is_displayed": true,
-        "ontology": false
+        "is_ontology": false
       },
       {
         "column": "Experiment category",
         "label": "Experiment",
         "note": "FANTOM5",
-        "checkbox": true,
+        "is_checkbox": true,
         "is_displayed": false,
-        "ontology": false
+        "is_ontology": false
       },
       {
         "column": "UBERON label",
         "label": "Tissue",
         "note": "UBERON",
-        "checkbox": false,
+        "is_checkbox": false,
         "is_displayed": true,
-        "ontology": true
+        "is_ontology": true
       },
       {
         "column": "CL label",
         "label": "Cell type",
         "note": "Cell Ontology",
-        "checkbox": false,
+        "is_checkbox": false,
         "is_displayed": true,
-        "ontology": true
+        "is_ontology": true
       },
       {
         "column": "NCIT label",
         "label": "Disease",
         "note": "NCI Thesaurus",
-        "checkbox": false,
+        "is_checkbox": false,
         "is_displayed": true,
-        "ontology": true
+        "is_ontology": true
       },
       {
         "column": "Developmental stage",
         "label": "Developmental stage",
         "note": "",
-        "checkbox": true,
+        "is_checkbox": true,
         "is_displayed": false,
-        "ontology": false
+        "is_ontology": false
       },
       {
         "column": "Sex",
         "label": "Sex",
         "note": "",
-        "checkbox": true,
+        "is_checkbox": true,
         "is_displayed": false,
-        "ontology": false
+        "is_ontology": false
       }
     ]
   },
@@ -67,33 +67,33 @@
         "column": "Tissue",
         "label": "Tissue",
         "note": "",
-        "checkbox": true,
+        "is_checkbox": true,
         "is_displayed": true,
-        "ontology": false
+        "is_ontology": false
       },
       {
         "column": "Sub-region",
         "label": "Sub-region",
         "note": "",
-        "checkbox": true,
+        "is_checkbox": true,
         "is_displayed": true,
-        "ontology": false
+        "is_ontology": false
       },
       {
         "column": "Sex",
         "label": "Sex",
         "note": "",
-        "checkbox": true,
+        "is_checkbox": true,
         "is_displayed": true,
-        "ontology": false
+        "is_ontology": false
       },
       {
         "column": "Age",
         "label": "Age",
         "note": "",
-        "checkbox": true,
+        "is_checkbox": true,
         "is_displayed": true,
-        "ontology": false
+        "is_ontology": false
       }
     ]
   }
