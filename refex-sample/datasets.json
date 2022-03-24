@@ -1,0 +1,100 @@
+[
+  {
+    "dataset": "fantom5_human",
+    "sample_filter": [
+      {
+        "column": "Sample type category",
+        "label": "Sample type",
+        "note": "FANTOM5",
+        "is_checkbox": true,
+        "is_displayed": true,
+        "is_ontology": false
+      },
+      {
+        "column": "Experiment category",
+        "label": "Experiment",
+        "note": "FANTOM5",
+        "is_checkbox": true,
+        "is_displayed": false,
+        "is_ontology": false
+      },
+      {
+        "column": "UBERON label",
+        "label": "Tissue",
+        "note": "UBERON",
+        "is_checkbox": false,
+        "is_displayed": true,
+        "is_ontology": true
+      },
+      {
+        "column": "CL label",
+        "label": "Cell type",
+        "note": "Cell Ontology",
+        "is_checkbox": false,
+        "is_displayed": true,
+        "is_ontology": true
+      },
+      {
+        "column": "NCIT label",
+        "label": "Disease",
+        "note": "NCI Thesaurus",
+        "is_checkbox": false,
+        "is_displayed": true,
+        "is_ontology": true
+      },
+      {
+        "column": "Developmental stage",
+        "label": "Developmental stage",
+        "note": "",
+        "is_checkbox": true,
+        "is_displayed": false,
+        "is_ontology": false
+      },
+      {
+        "column": "Sex",
+        "label": "Sex",
+        "note": "",
+        "is_checkbox": true,
+        "is_displayed": false,
+        "is_ontology": false
+      }
+    ]
+  },
+  {
+    "dataset": "gtex_v8",
+    "sample_filter": [
+      {
+        "column": "Tissue",
+        "label": "Tissue",
+        "note": "",
+        "is_checkbox": true,
+        "is_displayed": true,
+        "is_ontology": false
+      },
+      {
+        "column": "Sub-region",
+        "label": "Sub-region",
+        "note": "",
+        "is_checkbox": true,
+        "is_displayed": true,
+        "is_ontology": false
+      },
+      {
+        "column": "Sex",
+        "label": "Sex",
+        "note": "",
+        "is_checkbox": true,
+        "is_displayed": true,
+        "is_ontology": false
+      },
+      {
+        "column": "Age",
+        "label": "Age",
+        "note": "",
+        "is_checkbox": true,
+        "is_displayed": true,
+        "is_ontology": false
+      }
+    ]
+  }
+]
