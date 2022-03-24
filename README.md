@@ -81,7 +81,7 @@ A specie consists of the following attributes:
   {
     // name of specie. `_` characters will be parsed to ` `
     "name": "homo_sapiens",
-    // list of projects associated witht the species, this project name will be used as an API prefix.
+    // list of projects associated with the species, this project name will be used as an API prefix.
     "projects": ["FANTOM5"]
   }
 ```
@@ -92,7 +92,7 @@ A specie consists of the following attributes:
 
 For the component folder, find the preferred structure below:
 
-1. Simple, dynamic components to be used all troughout the app
+1. Simple, dynamic components to be used all throughout the app
 
    - Stored inside the `components` folder
    - name of single component consist of 2 words in PascalCase eg `LoadingSpinner`
