@@ -1,97 +1,58 @@
 <template>
-  <div>{{ result }}</div>
-  <!-- <div v-if="geneNum === 1" class="bar_box">
+  <div class="bar_box" :style="`height: ${height}px`">
     <div
-      class="bar single_gene"
-      :style="`width: ${(result[prefix] * 230) / 16}px;`"
+      v-for="(medianData, symbol, index) in medianInfo"
+      :key="symbol"
+      class="bar single_item value"
+      :class="`item_${index + 1}`"
+      :style="`width: ${(medianData * 230) / 16}px;`"
     ></div>
     <div class="tooltip">
       <span class="title">Expression(log2(TPM+1))</span>
-      <span class="value single_gene gene_1 align_right">{{
-        result[prefix].toFixed(2)
-      }}</span>
+      <span
+        v-for="(medianData, symbol, index) in medianInfo"
+        :key="symbol"
+        class="value single_item align_right"
+        :class="`item_${index + 1}`"
+      >
+        <span v-if="numberOfItems > 1" class="symbol">{{
+          `${symbol}&nbsp;&nbsp;`
+        }}</span>
+        {{ medianData.toFixed(2) }}
+      </span>
     </div>
   </div>
-  <div v-else>
-    <div v-for="index in geneNum" :key="index" class="bar_box">
-      <div
-        v-if="index === 1"
-        class="bar single_gene gene_1"
-        :style="`width: ${(result[prefix] * 230) / 16}px;`"
-      ></div>
-      <div
-        v-else
-        :class="['bar', 'single_gene', `gene_${index}`]"
-        :style="`width: ${
-          (result[`${prefix}_compare_${index}`] * 230) / 16
-        }px;`"
-      ></div>
-      <div class="tooltip">
-        <span class="title">Expression(log2(TPM+1))</span>
-        <span
-          v-for="index_2 in Number(geneNum)"
-          :key="index_2"
-          :class="['value', 'single_gene', `gene_${index_2}`]"
-        >
-          <template v-if="index_2 === 1">
-            <span class="symbol">{{ `${symbol}&nbsp;&nbsp;` }}</span>
-            <span class="align_right">{{
-              `${result[prefix].toFixed(2)}`
-            }}</span>
-          </template>
-          <template v-else>
-            <span class="symbol">{{
-              `${compareGenes[index_2 - 2].ginf.symbol}&nbsp;&nbsp;`
-            }}</span>
-            <span class="align_right">{{
-              `${result[`${prefix}_compare_${index_2}`].toFixed(2)}`
-            }}</span>
-          </template>
-        </span>
-      </div>
-    </div>
-  </div> -->
 </template>
 
 <script>
   export default {
     props: {
-      result: {
-        type: Number,
-        required: true,
+      medianInfo: {
+        type: Object,
+        default: () => {},
       },
-      // geneNum: {
-      //   type: Number,
-      //   required: true,
-      // },
-      // compareGenes: {
-      //   type: Array,
-      //   required: true,
-      // },
-      // symbol: {
-      //   type: String,
-      //   required: true,
-      // },
-      // prefix: {
-      //   type: String,
-      //   default: 'log2_Median',
-      // },
+    },
+    computed: {
+      numberOfItems() {
+        return Object.keys(this.medianInfo).length;
+      },
+      height() {
+        return this.numberOfItems * 15;
+      },
     },
   };
 </script>
 
 <style lang="sass" scoped>
   .bar_box
-    display: block
-    height: 20px
-    position: relative
+    display: grid
+    align-items: center
     border-left: 1px solid $BLACK
     > .bar
       width: 100%
       height: 2px
       background-color: rgba(112, 112, 112, .4)
       position: relative
-      transform: translateY(10px)
       &:after
         content: ''
         width: 10px
@@ -137,39 +98,39 @@
         text-align: right
         width: 100%
         margin-left: 10px
-      &:hover
-        > .tooltip
-          display: block
-          z-index: 100
-    .single_gene
-      &.gene_1
+    &:hover
+      > .tooltip
+        display: block
+        z-index: 100
+    .single_item
+      &.item_1
         &:after
           background-color: $COLOR_1 !important
-      &.gene_2
+      &.item_2
         &:after
           background-color: $COLOR_2 !important
-      &.gene_3
+      &.item_3
         &:after
           background-color: $COLOR_3 !important
-      &.gene_4
+      &.item_4
         &:after
           background-color: $COLOR_4 !important
-      &.gene_5
+      &.item_5
         &:after
           background-color: $COLOR_5 !important
-      &.gene_6
+      &.item_6
         &:after
           background-color: $COLOR_6 !important
-      &.gene_7
+      &.item_7
         &:after
           background-color: $COLOR_7 !important
-      &.gene_8
+      &.item_8
         &:after
           background-color: $COLOR_8 !important
-      &.gene_9
+      &.item_9
         &:after
           background-color: $COLOR_9 !important
-      &.gene_10
+      &.item_10
         &:after
           background-color: $COLOR_10 !important
 </style>

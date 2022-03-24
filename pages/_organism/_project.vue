@@ -5,16 +5,15 @@
         <h1>
           <font-awesome-icon
             icon="info-circle"
-            @click="setGeneModal(selectedItem.id)"
+            @click="setGeneModal(selectedId)"
           />
           <span class="title">
-            {{ `${selectedItem.info.symbol}` }}
+            {{ `${infoForMainItem.symbol}` }}
             <span class="metadata">{{
-              `(${selectedItem.info.name}, NCBI GeneID: ${selectedItem.info.id})`
+              `(${infoForMainItem.name}, NCBI GeneID: ${infoForMainItem.id})`
             }}</span>
           </span>
         </h1>
-
         <button class="comparison_btn" @click="is_compare_on = true">
           <font-awesome-icon icon="chart-bar" />
           Comparison
@@ -22,7 +21,7 @@
       </div>
       <item-comparison
         :items="items"
-        :active-id="selectedItem.id"
+        :active-id="selectedId"
         active-sort="down"
         @select="updateSelectedItem"
         @showModal="setGeneModal"
@@ -36,10 +35,9 @@
     </div>
 
     <project-results
-      v-for="(item, index) of items"
-      v-show="item.id === selectedItem.id"
-      :key="`${index}_${item.id}`"
-      v-bind="item"
+      :results="results"
+      :selected-item="selectedItem"
+      :median-info="medianDataBySymbol"
     />
     <ModalViewDisplay
       v-if="isDisplaySettingsOn"
@@ -61,6 +59,16 @@
   import ModalViewFilter from '~/components/ModalView/ModalViewFilter.vue';
   import ProjectResults from '~/components/results/ProjectResults.vue';
 
+  const inRange = (x, [min, max]) => {
+    return typeof x !== 'number' || (x - min) * (x - max) <= 0;
+  };
+  const createNumberList = str =>
+    str
+      .replace('-', ',')
+      .split(',')
+      .map(x => parseInt(x) || 'out of filter bounds')
+      .sort();
+
   export default {
     components: {
       ItemComparison,
@@ -76,47 +84,49 @@
     // TODO: refactor
     // TODO: add sample option
     async asyncData({ $axios, query, store }) {
+      let results, ageRange, medianRange;
       const items = await Promise.all(
-        query.id.split(',').map(async id => {
+        query.id.split(',').map(async (id, index) => {
           const data = await $axios.$get(
             `api/${store.state.active_filter}/${id}`
           );
-          const results = data.r_inf;
-
-          const medianRange = [0, null];
-          // set ageRange for id
-          const ageRange = [null, null];
-          // set ageRange for single result
-          for (const result of results) {
-            if (result.log2_Median > medianRange[1]) {
-              medianRange[1] = result.log2_Median;
-            }
-
-            const n = result.Age.replace('-', ',')
-              .split(',')
-              .map(x => parseInt(x) || 'not a number')
-              .sort();
-            if (n.length <= 0) return;
-            result.ageNumberList = n;
-            const [min, max] = [n[0], n.pop()];
-
-            if (typeof min === 'number' && typeof max === 'number') {
-              if (min < ageRange[0] || ageRange[0] === null) ageRange[0] = min;
-              if (max > ageRange[1]) ageRange[1] = max;
-            }
-            result.ageRange = [min, max];
-          }
+          if (index === 0) results = data.r_inf;
           return {
             id,
-            results,
             info: data.ginf,
-            ageRange,
-            medianRange,
+            medianData: data.r_inf.map(x => x.log2_Median),
           };
         })
       );
+      // set ranges based on the results. Results are gained from the first ID item
+      medianRange = [0, 0];
+      ageRange = [0, 0];
+      for (const [resultIndex, result] of results.entries()) {
+        // for (const item of items.slice(1)) {
+        //   result[`log2_Median_${item.id}`] = item.medianData[resultIndex];
+        //   if (result[`log2_Median_${item.id}`] > medianRange[1]) {
+        //     medianRange[1] = result[`log2_Median_${item.id}`];
+        //   }
+        // }
+        //         if (result.log2_Median > medianRange[1]) {
+        //   medianRange[1] = result.log2_Median;
+        // }
+        for (const item of items) {
+          if (item.medianData[resultIndex] > medianRange[1]) {
+            medianRange[1] = item.medianData[resultIndex];
+          }
+        }
+
+        // set age range
+        const n = createNumberList(result.Age);
+        if (n.find(x => inRange(x, ageRange))) continue;
+        ageRange[1] = n.pop();
+      }
       return {
         items,
+        results,
+        ageRange,
+        medianRange,
         selectedId: items[0].id,
       };
     },
@@ -128,13 +138,29 @@
       };
     },
     computed: {
+      medianDataBySymbol() {
+        return this.results
+          .map(x => x.log2_Median)
+          .reduce((acc, _curr, resultIndex) => {
+            const itemToPush = this.items.reduce((obj, item) => {
+              obj[item.info.symbol] = item.medianData[resultIndex];
+              return obj;
+            }, {});
+            acc.push(itemToPush);
+            return acc;
+          }, []);
+      },
+      infoForMainItem() {
+        return this.items[0].info;
+      },
       selectedItem() {
         return this.items.find(item => item.id === this.selectedId);
       },
     },
     mounted() {
       this.$store.commit('set_project_filters', {
-        ...this.selectedItem,
+        ageRange: this.ageRange,
+        medianRange: this.medianRange,
       });
     },
     methods: {

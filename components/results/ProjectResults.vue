@@ -18,18 +18,15 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="result in filteredData" :key="result.ncbiGeneId">
+      <tr v-for="(result, resultIndex) in filteredData" :key="resultIndex">
         <template v-for="(value, key) of filters">
           <td v-if="value.isDisplayed" :key="key" :class="value.innerKey">
-            <!-- <median-bar
+            <median-bar
               v-if="key === 'log2_Median'"
-              :result="result[key]"
-              :gene-num="gene_num"
-              :compare-genes="compare_genes"
-              :symbol="info.symbol"
+              :median-info="medianInfo[resultIndex]"
             >
-            </median-bar> -->
-            <template>
+            </median-bar>
+            <template v-else>
               {{ result[key] }}
             </template>
           </td>
@@ -64,9 +61,9 @@
         type: Array,
         default: () => [],
       },
-      info: {
-        type: Object,
-        default: () => {},
+      medianInfo: {
+        type: Array,
+        default: () => [],
       },
     },
     data() {
