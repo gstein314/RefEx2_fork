@@ -94,9 +94,10 @@
 
             const n = result.Age.replace('-', ',')
               .split(',')
-              .map(x => parseInt(x) || null)
+              .map(x => parseInt(x) || 'not a number')
               .sort();
             if (n.length <= 0) return;
+            result.ageNumberList = n;
             const [min, max] = [n[0], n.pop()];
 
             if (typeof min === 'number' && typeof max === 'number') {
@@ -132,7 +133,9 @@
       },
     },
     mounted() {
-      this.$store.commit('set_project_filters');
+      this.$store.commit('set_project_filters', {
+        ...this.selectedItem,
+      });
     },
     methods: {
       ...mapMutations({
@@ -229,25 +232,6 @@
         > .fa-sort-up,
         > .fa-sort-down
           color: $MAIN_COLOR
-    // .modal
-    //   +modal
-    //   > p.modal_title
-    //     font-size: 18px
-    //     display: inline-block
-    //   > button
-    //     +button
-    //     display: inline-block
-        // margin-left: 10px
-      // &.display_settings_modal
-      //   width: 400px
-      //   > .display_checkboxes
-      //     column-count: 2
-      //     > div
-      //       width: 100%
-      //       display: inline-block
-      //       line-height: 26px
-      //       > label
-      //         font-size: 14px
       &.compare_modal
         > div
           display: flex
@@ -261,59 +245,4 @@
           > button
             +button
             margin-left: 10px
-      // &.filter_modal
-      //   width: 500px
-      //   > .input_wrapper
-      //     display: flex
-      //     align-items: center
-      //     position: relative
-      //     > input[type="text"]
-      //       +text_input
-      //     > .reset-btn
-      //       position: absolute
-      //       right: 1rem
-      //       --fa-secondary-opacity: 0.3
-      //       cursor: pointer
-      //       &:hover
-      //         --fa-secondary-opacity: 1
-      //         --fa-primary-color: white
-      //         --fa-secondary-color: #488EC4
-      //     > .vue-slider
-      //       width: 100% !important
-      //       margin-top: 25px
-      //       > .vue-slider-rail
-      //         background-color: $MAIN_COLOR_PALE
-      //         > .vue-slider-process
-      //           background-color: $MAIN_COLOR
-    .single_gene
-      &.gene_1
-        &:after
-          background-color: $COLOR_1 !important
-      &.gene_2
-        &:after
-          background-color: $COLOR_2 !important
-      &.gene_3
-        &:after
-          background-color: $COLOR_3 !important
-      &.gene_4
-        &:after
-          background-color: $COLOR_4 !important
-      &.gene_5
-        &:after
-          background-color: $COLOR_5 !important
-      &.gene_6
-        &:after
-          background-color: $COLOR_6 !important
-      &.gene_7
-        &:after
-          background-color: $COLOR_7 !important
-      &.gene_8
-        &:after
-          background-color: $COLOR_8 !important
-      &.gene_9
-        &:after
-          background-color: $COLOR_9 !important
-      &.gene_10
-        &:after
-          background-color: $COLOR_10 !important
 </style>

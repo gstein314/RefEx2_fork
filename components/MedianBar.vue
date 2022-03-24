@@ -82,64 +82,95 @@
 
 <style lang="sass" scoped>
   .bar_box
-      display: block
-      height: 20px
+    display: block
+    height: 20px
+    position: relative
+    border-left: 1px solid $BLACK
+    > .bar
+      width: 100%
+      height: 2px
+      background-color: rgba(112, 112, 112, .4)
       position: relative
-      border-left: 1px solid $BLACK
-      > .bar
-          width: 100%
-          height: 2px
-          background-color: rgba(112, 112, 112, .4)
+      transform: translateY(10px)
+      &:after
+        content: ''
+        width: 10px
+        height: 10px
+        border-radius: 50%
+        position: absolute
+        top: 50%
+        right: -5px
+        transform: translateY(-50%)
+        background-color: $COLOR_1
+    > .tooltip
+      display: none
+      background-color: #ffffff
+      padding: 3px 8px
+      border: 1px solid $MAIN_COLOR
+      border-radius: 3px
+      box-shadow: 0 1px 4px rgba(62, 70, 82, .22)
+      position: absolute
+      left: calc(100% + 10px)
+      top: 0
+      z-index: $TOOLTIP_LAYER
+      > span
+        display: block
+        white-space: nowrap
+        &.title
+          font-size: 10px
+        &.value
+          font-weight: bold
           position: relative
-          transform: translateY(10px)
+          padding-left: 12px
+          line-height: 20px
+          display: flex
           &:after
-              content: ''
-              width: 10px
-              height: 10px
-              border-radius: 50%
-              position: absolute
-              top: 50%
-              right: -5px
-              transform: translateY(-50%)
-              background-color: $COLOR_1
-      > .tooltip
-          display: none
-          background-color: #ffffff
-          padding: 3px 8px
-          border: 1px solid $MAIN_COLOR
-          border-radius: 3px
-          box-shadow: 0 1px 4px rgba(62, 70, 82, .22)
-          position: absolute
-          left: calc(100% + 10px)
-          top: 0
-          z-index: $TOOLTIP_LAYER
-          > span
-              display: block
-              white-space: nowrap
-              &.title
-                  font-size: 10px
-              &.value
-                  font-weight: bold
-                  position: relative
-                  padding-left: 12px
-                  line-height: 20px
-                  display: flex
-                  &:after
-                      content: ''
-                      width: 10px
-                      height: 10px
-                      border-radius: 100px
-                      position: absolute
-                      left: 0
-                      top: 50%
-                      transform: translateY(-50%)
-          span.align_right
-              text-align: right
-              width: 100%
-              margin-left: 10px
+            content: ''
+            width: 10px
+            height: 10px
+            border-radius: 100px
+            position: absolute
+            left: 0
+            top: 50%
+            transform: translateY(-50%)
+      span.align_right
+        text-align: right
+        width: 100%
+        margin-left: 10px
       &:hover
-          > .tooltip
-              display: block
-              z-index: 100
+        > .tooltip
+          display: block
+          z-index: 100
+    .single_gene
+      &.gene_1
+        &:after
+          background-color: $COLOR_1 !important
+      &.gene_2
+        &:after
+          background-color: $COLOR_2 !important
+      &.gene_3
+        &:after
+          background-color: $COLOR_3 !important
+      &.gene_4
+        &:after
+          background-color: $COLOR_4 !important
+      &.gene_5
+        &:after
+          background-color: $COLOR_5 !important
+      &.gene_6
+        &:after
+          background-color: $COLOR_6 !important
+      &.gene_7
+        &:after
+          background-color: $COLOR_7 !important
+      &.gene_8
+        &:after
+          background-color: $COLOR_8 !important
+      &.gene_9
+        &:after
+          background-color: $COLOR_9 !important
+      &.gene_10
+        &:after
+          background-color: $COLOR_10 !important
 </style>
 >

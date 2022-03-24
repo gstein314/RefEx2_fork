@@ -1,4 +1,3 @@
-import { mapMutations } from 'vuex';
 <template>
   <th v-if="isDisplayed" class="age">
     <span v-if="subLabel">
@@ -47,7 +46,7 @@ import { mapMutations } from 'vuex';
         default: true,
       },
       filterModal: {
-        type: String,
+        type: [String, Array],
         default: '',
       },
       // eslint-disable-next-line vue/require-default-prop
@@ -63,8 +62,8 @@ import { mapMutations } from 'vuex';
     computed: {
       isActiveSearch() {
         return this.numberValue
-          ? this.numberValue.value[0] !== 0 ||
-              this.numberValue.value[1] !== this.numberValue.max
+          ? this.filterModal[0] !== this.numberValue.min ||
+              this.filterModal[1] !== this.numberValue.max
           : this.filterModal !== '';
       },
     },

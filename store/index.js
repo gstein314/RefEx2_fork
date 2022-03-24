@@ -1,6 +1,26 @@
 import filters from '../static/filters.json';
 import species from '../static/species.json';
 
+const maxInTenth = x => {
+  return Math.ceil(x / 10) * 10;
+};
+
+const numberFilterObj = ([min, max], value) => {
+  [min, max] = [maxInTenth(min), maxInTenth(max)];
+  const isInTenths = max > 20;
+  return {
+    ...value,
+    filterModal: [0, max],
+    numberValue: {
+      min: 0,
+      max,
+      marks: Array(isInTenths ? max / 10 : max)
+        .fill(null)
+        .map((_, i) => (isInTenths ? i * 10 : i)),
+    },
+  };
+};
+
 export const state = () => ({
   active_specie: species[0], //default,
   active_filter: 'gene',
@@ -54,19 +74,16 @@ export const mutations = {
   set_filter_modal(state, filterKey = null) {
     state.filter_modal = filterKey;
   },
-  set_project_filters(state) {
+  set_project_filters(state, { ageRange, medianRange }) {
     const copy = { ...getters.active_filter(state).filters };
-    Object.values(copy).forEach(value => {
-      value.filterModal = '';
-      if (['age', 'median'].includes(value.innerKey))
-        value.numberValue = {
-          value: [0, 0],
-          min: 0,
-          max: 0,
-          marks: [],
-        };
+    Object.entries(copy).forEach(([key, value]) => {
+      if (['Age', 'log2_Median'].includes(key)) {
+        copy[key] = numberFilterObj(
+          key === 'Age' ? ageRange : medianRange,
+          value
+        );
+      } else value.filterModal = '';
     });
-
     state.project_filters = copy;
   },
   update_project_filters(

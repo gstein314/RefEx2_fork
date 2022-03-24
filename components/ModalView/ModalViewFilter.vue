@@ -16,8 +16,8 @@
         <div class="input_wrapper">
           <vue-slider
             ref="slider"
+            v-model="searchValue"
             v-bind="filterObj.numberValue"
-            @change="updateSlider('numberValue')"
           ></vue-slider>
         </div>
       </template>
@@ -48,47 +48,36 @@
     },
     data() {
       return {
-        searchValue: this.filterObj?.filterModal || '',
+        searchValue: this.filterObj?.filterModal,
+        isOn: false,
       };
     },
     computed: {
       ...mapGetters({
         filterObj: 'active_filter_modal',
       }),
-      isOn() {
-        return this.filterObj !== null;
-      },
     },
     watch: {
       searchValue() {
-        this.updateFilterModal('filterModal', this.searchValue);
+        if (this.isOn) this.updateFilterModal('filterModal', this.searchValue);
       },
+      filterObj() {
+        this.isOn = this.filterObj !== null;
+        this.searchValue = this.filterObj?.filterModal;
+      },
+    },
+    created() {
+      this.searchValue = this.filterObj?.filterModal ?? '';
     },
     methods: {
       ...mapMutations({
         updateProjectFilters: 'update_project_filters',
         close: 'set_filter_modal',
       }),
-      resetSlider(type) {
-        const numberValue = this.filters[type]?.numberValue;
+      resetSlider() {
+        const numberValue = this.filterObj?.numberValue;
         if (!numberValue) return;
-        numberValue.value = [0, numberValue.max];
-        this.$set(this.filters[type], 'numberValue', numberValue);
-      },
-      normalizeAge(age) {
-        let normalized_age;
-        if (age.indexOf('-') !== -1) {
-          age = age.replace(/[^0-9]/g, ',');
-        }
-
-        if (age.indexOf(',') !== -1) {
-          normalized_age = [];
-          normalized_age = normalized_age.concat(age.split(','));
-          normalized_age = normalized_age.map(num => Number(num));
-        } else {
-          normalized_age = Number(age);
-        }
-        return normalized_age;
+        this.searchValue = [numberValue.min, numberValue.max];
       },
       updateFilterModal(type, value) {
         this.updateProjectFilters({

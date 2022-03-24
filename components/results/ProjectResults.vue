@@ -43,9 +43,17 @@
   // import MedianBar from '@/components/MedianBar.vue';
   import { mapGetters } from 'vuex';
   import TableHeader from '~/components/results/TableHeader.vue';
-  const maxInTenth = x => {
-    return Math.ceil(x / 10) * 10;
+
+  const inRange = (x, [min, max]) => {
+    return typeof x !== 'number' || (x - min) * (x - max) <= 0;
   };
+
+  const createNumberList = str =>
+    str
+      .replace('-', ',')
+      .split(',')
+      .map(x => parseInt(x) || 'out of filter bounds');
+
   export default {
     components: {
       // MedianBar,
@@ -78,23 +86,24 @@
           .filter(result => {
             let isFiltered = false;
             for (const [key, col] of Object.entries(this.filters)) {
-              if (col.isDisplayed) {
-                // number filter
-                if (col.numberValue) {
-                  if (
-                    col.numberValue.value[0] > result[key] ||
-                    col.numberValue.value[1] < result[key]
-                  ) {
-                    isFiltered = true;
-                  }
-                }
-                // text filter
-                else if (
-                  col.filterModal !== '' &&
-                  result[key].indexOf(col.filterModal) === -1
-                ) {
-                  isFiltered = true;
-                }
+              if (!col.isDisplayed) continue;
+              // number filter
+              if (
+                typeof col.filterModal === 'number' ||
+                Array.isArray(col.filterModal)
+              ) {
+                // checks if all values are in range. Creates a list in case of Age due to multiple values in string form
+                const n =
+                  key === 'Age' ? createNumberList(result[key]) : [result[key]];
+                if (n.find(x => inRange(x, col.filterModal))) continue;
+                isFiltered = true;
+              }
+              // text filter
+              else if (
+                col.filterModal !== '' &&
+                result[key].indexOf(col.filterModal) === -1
+              ) {
+                isFiltered = true;
               }
             }
             return !isFiltered;
@@ -120,20 +129,6 @@
             }
           });
       },
-    },
-    mounted() {
-      // const ageFilter = this.filters.Age.numberValue;
-      // const medianFilter = this.filters.log2_Median.numberValue;
-      // ageFilter.max = maxInTenth(this.age_max);
-      // ageFilter.value[1] = ageFilter.max;
-      // medianFilter.max = maxInTenth(this.median_max);
-      // medianFilter.value[1] = medianFilter.max;
-      // for (let i = 0; i < this.filters.Age.numberValue.max; i += 10) {
-      //   ageFilter.marks.push(i);
-      // }
-      // for (let i = 0; i < this.filters.log2_Median.numberValue.max; i += 1) {
-      //   medianFilter.marks.push(i);
-      // }
     },
     methods: {
       switchSort(col_name, order) {
