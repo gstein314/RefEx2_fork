@@ -7,6 +7,7 @@
         "label": "Sample type",
         "note": "FANTOM5",
         "checkbox": true,
+        "is_displayed": true,
         "ontology": false
       },
       {
@@ -14,6 +15,7 @@
         "label": "Experiment",
         "note": "FANTOM5",
         "checkbox": true,
+        "is_displayed": false,
         "ontology": false
       },
       {
@@ -21,6 +23,7 @@
         "label": "Tissue",
         "note": "UBERON",
         "checkbox": false,
+        "is_displayed": true,
         "ontology": true
       },
       {
@@ -28,6 +31,7 @@
         "label": "Cell type",
         "note": "Cell Ontology",
         "checkbox": false,
+        "is_displayed": true,
         "ontology": true
       },
       {
@@ -35,7 +39,24 @@
         "label": "Disease",
         "note": "NCI Thesaurus",
         "checkbox": false,
+        "is_displayed": true,
         "ontology": true
+      },
+      {
+        "column": "Developmental stage",
+        "label": "Developmental stage",
+        "note": "",
+        "checkbox": true,
+        "is_displayed": false,
+        "ontology": false
+      },
+      {
+        "column": "Sex",
+        "label": "Sex",
+        "note": "",
+        "checkbox": true,
+        "is_displayed": false,
+        "ontology": false
       }
     ]
   },
@@ -47,6 +68,7 @@
         "label": "Tissue",
         "note": "",
         "checkbox": true,
+        "is_displayed": true,
         "ontology": false
       },
       {
@@ -54,6 +76,7 @@
         "label": "Sub-region",
         "note": "",
         "checkbox": true,
+        "is_displayed": true,
         "ontology": false
       },
       {
@@ -61,6 +84,7 @@
         "label": "Sex",
         "note": "",
         "checkbox": true,
+        "is_displayed": true,
         "ontology": false
       },
       {
@@ -68,6 +92,7 @@
         "label": "Age",
         "note": "",
         "checkbox": true,
+        "is_displayed": true,
         "ontology": false
       }
     ]
