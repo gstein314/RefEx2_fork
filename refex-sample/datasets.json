@@ -6,30 +6,35 @@
         "column": "Sample type category",
         "label": "Sample type",
         "note": "FANTOM5",
+        "checkbox": true,
         "ontology": false
       },
       {
         "column": "Experiment category",
         "label": "Experiment",
         "note": "FANTOM5",
+        "checkbox": true,
         "ontology": false
       },
       {
         "column": "UBERON label",
         "label": "Tissue",
         "note": "UBERON",
+        "checkbox": false,
         "ontology": true
       },
       {
         "column": "CL label",
         "label": "Cell type",
         "note": "Cell Ontology",
+        "checkbox": false,
         "ontology": true
       },
       {
         "column": "NCIT label",
         "label": "Disease",
         "note": "NCI Thesaurus",
+        "checkbox": false,
         "ontology": true
       }
     ]
@@ -41,24 +46,28 @@
         "column": "Tissue",
         "label": "Tissue",
         "note": "",
+        "checkbox": true,
         "ontology": false
       },
       {
         "column": "Sub-region",
         "label": "Sub-region",
         "note": "",
+        "checkbox": true,
         "ontology": false
       },
       {
         "column": "Sex",
         "label": "Sex",
         "note": "",
+        "checkbox": true,
         "ontology": false
       },
       {
         "column": "Age",
         "label": "Age",
         "note": "",
+        "checkbox": true,
         "ontology": false
       }
     ]
