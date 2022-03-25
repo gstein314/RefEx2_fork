@@ -14,7 +14,7 @@
             }}</span>
           </span>
         </h1>
-        <button class="comparison_btn" @click="is_compare_on = true">
+        <button class="comparison_btn" @click="toggleCompareModal">
           <font-awesome-icon icon="chart-bar" />
           Comparison
         </button>
@@ -46,6 +46,7 @@
     />
     <ModalViewFilter />
     <ModalViewGene />
+    <ModalViewCompare v-if="isCompareModalOn" @close="toggleCompareModal" />
   </div>
 </template>
 
@@ -73,7 +74,7 @@
     components: {
       ItemComparison,
       ModalViewGene,
-      // ModalViewCompare,
+      ModalViewCompare,
       ModalViewDisplay,
       ModalViewFilter,
       ProjectResults,
@@ -188,10 +189,6 @@
         this.selectedId = id;
         this.$refs.results.switchSort('log2_Median', sortOrder);
       },
-      // comparisonSearch() {
-      //   if (this.comparisonSearch === '') return;
-      //   location.href = `${location.origin}${location.pathname}?id=${this.gene_ids_to_compare}`;
-      // },
     },
   };
 </script>

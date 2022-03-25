@@ -1,24 +1,19 @@
 <template>
-  <transition name="modal">
-    <div v-if="is_compare_on" class="modal compare_modal">
+  <modal-view @click.native="$emit('close')">
+    <div class="modal compare_modal" @click.stop="">
       <p class="modal_title">
         <font-awesome-icon icon="search" />
         Compare with comma separated ID list
       </p>
       <div class="sample">
         <span class="ex">e.g.&nbsp;</span>
-        <span
-          class="sample_value"
-          @click="
-            gene_ids_to_compare = '5460,6657,9314,4609';
-            comparisonSearch();
-          "
-          >Yamanaka Factors (OCT3/4, SOX2, KLF4 and C-MYC-OSKM)</span
-        >
+        <span class="sample_value" @click="setExample">{{
+          example.label
+        }}</span>
       </div>
       <div>
         <input
-          v-model="gene_ids_to_compare"
+          v-model="itemIdsForComparisonStr"
           type="text"
           @keydown.enter="comparisonSearch"
         />
@@ -28,5 +23,53 @@
         </button>
       </div>
     </div>
-  </transition>
+  </modal-view>
 </template>
+<script>
+  import ModalView from '~/components/ModalView/ModalView.vue';
+  import { mapGetters } from 'vuex';
+
+  export default {
+    components: {
+      ModalView,
+    },
+    data() {
+      return {
+        itemIdsForComparisonStr: '',
+      };
+    },
+    computed: {
+      ...mapGetters({
+        filter: 'active_filter',
+        routeToProjectPage: 'route_to_project_page',
+      }),
+      example() {
+        return this.filter.item_comparison_example;
+      },
+    },
+    methods: {
+      setExample() {
+        this.itemIdsForComparisonStr = this.example.route;
+      },
+      comparisonSearch() {
+        if (this.itemIdsForComparisonStr === '') return;
+        this.$router.go(this.routeToProjectPage(this.itemIdsForComparisonStr));
+      },
+    },
+  };
+</script>
+<style lang="sass" scoped>
+  .compare_modal
+    > div
+      display: flex
+      align-items: center
+      &.sample
+        margin-bottom: 8px
+        > span
+          @include sample_query
+      > input
+        +text_input
+      > button
+        +button
+        margin-left: 10px
+</style>

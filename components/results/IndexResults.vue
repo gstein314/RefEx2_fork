@@ -129,7 +129,7 @@
             ? this.checkedResults.slice(0, 10)
             : this.checkedResults),
         ];
-        this.$router.push(this.routeToProjectPage(compareItems));
+        this.$router.go(this.routeToProjectPage(compareItems));
       },
       geneDescriptionSource(resultItem) {
         return `http://penqe.com/refex_figs/${this.activeSpecie?.suggestions_key.toLowerCase()}_${this.activeProject.toLowerCase()}_${resultItem}.png`;

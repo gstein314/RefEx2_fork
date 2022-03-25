@@ -17,6 +17,10 @@
         "specialClass": "gene_expression_patterns"
       }
     ],
+    "item_comparison_example": {
+      "route": "5460,6657,9314,4609",
+      "label": "Yamanaka Factors (OCT3/4, SOX2, KLF4 and C-MYC-OSKM)"
+    },
     "unique_key": "ncbiGeneId",
     "search_conditions": [
       {
@@ -92,6 +96,10 @@
       { "header": "Cell types", "key": "CL" },
       { "header": "Biomedical concepts", "key": "NCIT" }
     ],
+    "item_comparison_example": {
+      "route": "5460,6657,9314,4609",
+      "label": "Yamanaka Factors (OCT3/4, SOX2, KLF4 and C-MYC-OSKM)"
+    },
     "unique_key": "biosample",
     "search_conditions": [
       {
