@@ -2,15 +2,12 @@
   <div class="results_wrapper">
     <div class="results_title_wrapper">
       <h2>Matching {{ filterObj.name }}s</h2>
-      <button class="show_all_btn" @click="comparisonSearch">
-        <font-awesome-icon icon="chart-bar" />
-        Comparison
-      </button>
+      <ComparisonButton />
       <span class="example">e.g.</span>
       <span
         class="sample_value"
-        @click="$router.push(routeToProjectPage([5460, 6657, 9314, 4609]))"
-        >Yamanaka Factors (OCT3/4, SOX2, KLF4 and C-MYC-OSKM)</span
+        @click="$router.push(routeToProjectPage(comparisonExample.route))"
+        >{{ comparisonExample.label }}</span
       >
     </div>
     <table>
@@ -100,6 +97,9 @@
       filterObj() {
         return this.filterByName(this.$vnode.key.split('_')[0]);
       },
+      comparisonExample() {
+        return this.filterObj.item_comparison_example;
+      },
       isAllChecked() {
         return (
           this.resultsUniqueKeys.length > 0 &&
@@ -121,15 +121,6 @@
         this.isAllChecked
           ? (this.checkedResults = [])
           : (this.checkedResults = this.resultsUniqueKeys);
-      },
-      comparisonSearch() {
-        if (this.checkedResults.length === 0) return;
-        const compareItems = [
-          ...(this.checkedResults.length > 10
-            ? this.checkedResults.slice(0, 10)
-            : this.checkedResults),
-        ];
-        this.$router.go(this.routeToProjectPage(compareItems));
       },
       geneDescriptionSource(resultItem) {
         return `http://penqe.com/refex_figs/${this.activeSpecie?.suggestions_key.toLowerCase()}_${this.activeProject.toLowerCase()}_${resultItem}.png`;

@@ -1,5 +1,5 @@
 <template>
-  <modal-view @click.native="$emit('close')">
+  <modal-view v-if="isOn" @click.native="toggleCompareModal">
     <div class="modal compare_modal" @click.stop="">
       <p class="modal_title">
         <font-awesome-icon icon="search" />
@@ -27,7 +27,7 @@
 </template>
 <script>
   import ModalView from '~/components/ModalView/ModalView.vue';
-  import { mapGetters } from 'vuex';
+  import { mapGetters, mapMutations } from 'vuex';
 
   export default {
     components: {
@@ -42,18 +42,24 @@
       ...mapGetters({
         filter: 'active_filter',
         routeToProjectPage: 'route_to_project_page',
+        isOn: 'compare_modal',
       }),
       example() {
         return this.filter.item_comparison_example;
       },
     },
     methods: {
+      ...mapMutations({
+        toggleCompareModal: 'set_compare_modal',
+      }),
       setExample() {
         this.itemIdsForComparisonStr = this.example.route;
       },
       comparisonSearch() {
+        // TODO: add error handling for invalid comparison input
         if (this.itemIdsForComparisonStr === '') return;
-        this.$router.go(this.routeToProjectPage(this.itemIdsForComparisonStr));
+        location.href = this.routeToProjectPage(this.itemIdsForComparisonStr);
+        this.toggleCompareModal();
       },
     },
   };

@@ -28,6 +28,7 @@ export const state = () => ({
   project_filters: {},
   filter_modal: null,
   gene_modal: null,
+  compare_modal: false,
   results: filters.reduce((acc, filter) => {
     acc[filter.name] = { results: [], results_num: 0 };
     return acc;
@@ -40,6 +41,9 @@ export const getters = {
   },
   active_filter_modal(state) {
     return state.project_filters[state.filter_modal] || null;
+  },
+  compare_modal(state) {
+    return state.compare_modal;
   },
   route_to_project_page: state => ids => {
     if (Array.isArray(ids)) ids = ids.join(',');
@@ -73,6 +77,9 @@ export const getters = {
 export const mutations = {
   set_filter_modal(state, filterKey = null) {
     state.filter_modal = filterKey;
+  },
+  set_compare_modal(state) {
+    state.compare_modal = !state.compare_modal;
   },
   set_project_filters(state, { ageRange, medianRange }) {
     const copy = { ...getters.active_filter(state).filters };

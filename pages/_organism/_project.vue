@@ -14,10 +14,7 @@
             }}</span>
           </span>
         </h1>
-        <button class="comparison_btn" @click="toggleCompareModal">
-          <font-awesome-icon icon="chart-bar" />
-          Comparison
-        </button>
+        <ComparisonButton />
       </div>
       <item-comparison
         :items="items"
@@ -46,7 +43,7 @@
     />
     <ModalViewFilter />
     <ModalViewGene />
-    <ModalViewCompare v-if="isCompareModalOn" @close="toggleCompareModal" />
+    <ModalViewCompare />
   </div>
 </template>
 
@@ -129,7 +126,6 @@
           order: 'down',
         },
         isDisplaySettingsOn: false,
-        isCompareModalOn: false,
       };
     },
     computed: {
@@ -174,9 +170,6 @@
       ...mapMutations({
         setGeneModal: 'set_gene_modal',
       }),
-      toggleCompareModal() {
-        this.isCompareModalOn = !this.isCompareModalOn;
-      },
       toggleDisplaySettings() {
         this.isDisplaySettingsOn = !this.isDisplaySettingsOn;
       },
@@ -224,9 +217,6 @@
             display: block
             margin-top: -2px
             font-weight: normal
-        > button.comparison_btn
-          +button
-          margin-left: 20px
     > .display_settings_wrapper
       display: flex
       justify-content: flex-end
