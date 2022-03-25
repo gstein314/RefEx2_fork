@@ -5,7 +5,7 @@
         <h1>
           <font-awesome-icon
             icon="info-circle"
-            @click="setGeneModal(selectedId)"
+            @click="setGeneModal(items[0].id)"
           />
           <span class="title">
             {{ `${infoForMainItem.symbol}` }}
@@ -22,7 +22,7 @@
       <item-comparison
         :items="items"
         :active-id="selectedId"
-        active-sort="down"
+        :active-sort="resultsSort"
         @select="updateSelectedItem"
         @showModal="setGeneModal"
       />
@@ -35,9 +35,10 @@
     </div>
 
     <project-results
-      :results="results"
-      :selected-item="selectedItem"
-      :median-info="medianDataBySymbol"
+      ref="results"
+      :results="resultsWithMedianData"
+      :selected-item="selectedItem.info.symbol"
+      @updateSort="resultsSort = $event"
     />
     <ModalViewDisplay
       v-if="isDisplaySettingsOn"
@@ -45,7 +46,6 @@
     />
     <ModalViewFilter />
     <ModalViewGene />
-    <!-- <ModalViewCompare :id="idForCompareModal" /> -->
   </div>
 </template>
 
@@ -102,15 +102,6 @@
       medianRange = [0, 0];
       ageRange = [0, 0];
       for (const [resultIndex, result] of results.entries()) {
-        // for (const item of items.slice(1)) {
-        //   result[`log2_Median_${item.id}`] = item.medianData[resultIndex];
-        //   if (result[`log2_Median_${item.id}`] > medianRange[1]) {
-        //     medianRange[1] = result[`log2_Median_${item.id}`];
-        //   }
-        // }
-        //         if (result.log2_Median > medianRange[1]) {
-        //   medianRange[1] = result.log2_Median;
-        // }
         for (const item of items) {
           if (item.medianData[resultIndex] > medianRange[1]) {
             medianRange[1] = item.medianData[resultIndex];
@@ -132,12 +123,24 @@
     },
     data() {
       return {
+        resultsSort: {
+          key: '',
+          order: 'down',
+        },
         isDisplaySettingsOn: false,
-        gene_ids_to_compare: '',
-        is_compare_on: false,
+        isCompareModalOn: false,
       };
     },
     computed: {
+      // TODO: see if needs refactoring
+      resultsWithMedianData() {
+        return this.results.map((result, index) => {
+          return {
+            ...result,
+            combinedMedianData: this.medianDataBySymbol[index],
+          };
+        });
+      },
       medianDataBySymbol() {
         return this.results
           .map(x => x.log2_Median)
@@ -167,11 +170,15 @@
       ...mapMutations({
         setGeneModal: 'set_gene_modal',
       }),
+      toggleCompareModal() {
+        this.isCompareModalOn = !this.isCompareModalOn;
+      },
       toggleDisplaySettings() {
         this.isDisplaySettingsOn = !this.isDisplaySettingsOn;
       },
-      updateSelectedItem(id) {
+      updateSelectedItem({ id, sortOrder = 'down' }) {
         this.selectedId = id;
+        this.$refs.results.switchSort('log2_Median', sortOrder);
       },
       // comparisonSearch() {
       //   if (this.comparisonSearch === '') return;
@@ -258,17 +265,4 @@
         > .fa-sort-up,
         > .fa-sort-down
           color: $MAIN_COLOR
-      &.compare_modal
-        > div
-          display: flex
-          align-items: center
-          &.sample
-            margin-bottom: 8px
-            > span
-              @include sample_query
-          > input
-            +text_input
-          > button
-            +button
-            margin-left: 10px
 </style>

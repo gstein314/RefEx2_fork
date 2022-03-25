@@ -11,9 +11,7 @@
           :class="key"
           @switchSort="switchSort"
         >
-          <template v-if="key === 'log2_Median'">
-            <median-scale />
-          </template>
+          <median-scale v-if="key === 'log2_Median'" />
         </table-header>
       </tr>
     </thead>
@@ -21,11 +19,10 @@
       <tr v-for="(result, resultIndex) in filteredData" :key="resultIndex">
         <template v-for="(value, key) of filters">
           <td v-if="value.isDisplayed" :key="key" :class="value.innerKey">
-            <median-bar
+            <MedianBar
               v-if="key === 'log2_Median'"
-              :median-info="medianInfo[resultIndex]"
-            >
-            </median-bar>
+              :median-info="result.combinedMedianData"
+            />
             <template v-else>
               {{ result[key] }}
             </template>
@@ -37,7 +34,6 @@
 </template>
 
 <script>
-  // import MedianBar from '@/components/MedianBar.vue';
   import { mapGetters } from 'vuex';
   import TableHeader from '~/components/results/TableHeader.vue';
 
@@ -61,19 +57,20 @@
         type: Array,
         default: () => [],
       },
-      medianInfo: {
-        type: Array,
-        default: () => [],
+      selectedItem: {
+        type: String,
+        default: '',
       },
     },
     data() {
       return {
         sort: {
-          active: 'log2_Median',
+          key: 'log2_Median',
           order: 'down',
         },
       };
     },
+
     computed: {
       ...mapGetters({
         filters: 'project_filters',
@@ -85,40 +82,54 @@
             for (const [key, col] of Object.entries(this.filters)) {
               if (!col.isDisplayed) continue;
               // number filter
-              if (
+              else if (
                 typeof col.filterModal === 'number' ||
                 Array.isArray(col.filterModal)
               ) {
                 // checks if all values are in range. Creates a list in case of Age due to multiple values in string form
                 const n =
-                  key === 'Age' ? createNumberList(result[key]) : [result[key]];
-                if (n.find(x => inRange(x, col.filterModal))) continue;
-                isFiltered = true;
+                  key === 'Age'
+                    ? createNumberList(result[key])
+                    : key === 'log2_Median'
+                    ? Object.values(result.combinedMedianData)
+                    : [result[key]];
+                isFiltered =
+                  n.find(x => inRange(x, col.filterModal)) === undefined;
               }
               // text filter
               else if (
                 col.filterModal !== '' &&
-                result[key].indexOf(col.filterModal) === -1
+                !result[key].includes(col.filterModal)
               ) {
-                isFiltered = true;
+                isFiltered =
+                  col.filterModal !== '' &&
+                  !result[key].includes(col.filterModal);
               }
             }
             return !isFiltered;
           })
           ?.sort((a, b) => {
+            const aVal =
+              this.sort.key === 'log2_Median'
+                ? a.combinedMedianData[this.selectedItem]
+                : a[this.sort.key];
+            const bVal =
+              this.sort.key === 'log2_Median'
+                ? b.combinedMedianData[this.selectedItem]
+                : b[this.sort.key];
             switch (this.sort?.order) {
               case 'up':
-                if (a[this.sort?.active] < b[this.sort?.active]) {
+                if (aVal < bVal) {
                   return -1;
-                } else if (a[this.sort?.active] > b[this.sort?.active]) {
+                } else if (aVal > bVal) {
                   return 1;
                 } else {
                   return 0;
                 }
               case 'down':
-                if (a[this.sort?.active] > b[this.sort?.active]) {
+                if (aVal > bVal) {
                   return -1;
-                } else if (a[this.sort?.active] < b[this.sort?.active]) {
+                } else if (aVal < bVal) {
                   return 1;
                 } else {
                   return 0;
@@ -127,17 +138,21 @@
           });
       },
     },
+    mounted() {
+      this.$emit('updateSort', this.sort);
+    },
     methods: {
       switchSort(col_name, order) {
-        if (this.sort.active === col_name) {
+        if (this.sort.key === col_name) {
           this.sort.order = this.sort.order === 'up' ? 'down' : 'up';
         } else {
-          this.sort.active = col_name;
+          this.sort.key = col_name;
           this.sort.order = 'up';
         }
         if (order) {
           this.sort.order = order;
         }
+        this.$emit('updateSort', this.sort);
       },
     },
   };

@@ -6,9 +6,9 @@
       class="item_box"
       :class="[
         `item_${index + 1}`,
-        { active: activeId === item.id && activeSort },
+        { active: activeId === item.id && isMedianSort },
       ]"
-      @click="$emit('select', item.id)"
+      @click="select(item.id)"
     >
       <font-awesome-icon
         class="info"
@@ -18,8 +18,8 @@
       {{ item.info.symbol }}
 
       <font-awesome-icon
-        v-if="activeId === item.id && activeSort"
-        :icon="`sort-amount-${activeSort}`"
+        v-if="activeId === item.id && isMedianSort"
+        :icon="`sort-amount-${activeSort.order}`"
       />
     </li>
   </ul>
@@ -37,8 +37,30 @@
         default: '',
       },
       activeSort: {
-        type: String,
-        default: '',
+        type: Object,
+        default: () => ({
+          key: '',
+          order: 'down',
+        }),
+      },
+    },
+    computed: {
+      isMedianSort() {
+        return this.activeSort.key === 'log2_Median';
+      },
+    },
+    methods: {
+      // only switch to 'up' order if the same item is selected and it was already a median sort
+      select(id) {
+        this.$emit('select', {
+          id,
+          sortOrder:
+            this.activeId === id &&
+            this.isMedianSort &&
+            this.activeSort.order === 'down'
+              ? 'up'
+              : 'down',
+        });
       },
     },
   };

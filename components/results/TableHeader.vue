@@ -7,7 +7,7 @@
     <template v-else> {{ label }}</template>
     <slot></slot>
     <font-awesome-icon
-      :icon="currentSort.active === id ? `sort-${currentSort.order}` : 'sort'"
+      :icon="currentSort.key === id ? `sort-${currentSort.order}` : 'sort'"
       @click="switchSort"
     />
     <font-awesome-icon
