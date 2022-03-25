@@ -7,18 +7,20 @@
     <template v-else> {{ label }}</template>
     <slot></slot>
     <font-awesome-icon
-      :icon="currentSort.active === id ? `sort-${currentSort.order}` : 'sort'"
+      :icon="currentSort.key === id ? `sort-${currentSort.order}` : 'sort'"
       @click="switchSort"
     />
     <font-awesome-icon
       icon="search"
       :class="{ active: isActiveSearch }"
-      @click="openFilterModal"
+      @click="setFilterModal($vnode.key)"
     />
   </th>
 </template>
 
 <script>
+  import { mapMutations } from 'vuex';
+
   export default {
     props: {
       id: {
@@ -44,7 +46,7 @@
         default: true,
       },
       filterModal: {
-        type: String,
+        type: [String, Array],
         default: '',
       },
       // eslint-disable-next-line vue/require-default-prop
@@ -60,8 +62,8 @@
     computed: {
       isActiveSearch() {
         return this.numberValue
-          ? this.numberValue.value[0] !== 0 ||
-              this.numberValue.value[1] !== this.numberValue.max
+          ? this.filterModal[0] !== this.numberValue.min ||
+              this.filterModal[1] !== this.numberValue.max
           : this.filterModal !== '';
       },
     },
@@ -69,9 +71,9 @@
       switchSort() {
         this.$emit('switchSort', this.id);
       },
-      openFilterModal() {
-        this.$emit('openFilterModal', this.id);
-      },
+      ...mapMutations({
+        setFilterModal: 'set_filter_modal',
+      }),
     },
   };
 </script>

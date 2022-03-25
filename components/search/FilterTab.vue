@@ -9,15 +9,17 @@
         </div>
       </div>
     </main>
-    <ResultsWrapper :key="`${$vnode.key}_results`" />
+    <index-results :key="`${$vnode.key}_results`" />
   </div>
 </template>
 <script>
+  import IndexResults from '~/components/results/IndexResults.vue';
   import SearchBar from '~/components/search/SearchBar.vue';
 
   export default {
     components: {
       SearchBar,
+      IndexResults,
     },
     computed: {
       activeFilter() {

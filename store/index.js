@@ -1,14 +1,34 @@
 import filters from '../static/filters.json';
 import species from '../static/species.json';
 
+const maxInTenth = x => {
+  return Math.ceil(x / 10) * 10;
+};
+
+const numberFilterObj = ([min, max], value) => {
+  [min, max] = [maxInTenth(min), maxInTenth(max)];
+  const isInTenths = max > 20;
+  return {
+    ...value,
+    filterModal: [0, max],
+    numberValue: {
+      min: 0,
+      max,
+      marks: Array(isInTenths ? max / 10 : max)
+        .fill(null)
+        .map((_, i) => (isInTenths ? i * 10 : i)),
+    },
+  };
+};
+
 export const state = () => ({
   active_specie: species[0], //default,
   active_filter: 'gene',
   active_project: 'FANTOM5',
-  gene_modal: {
-    isShowing: false,
-    geneId: '',
-  },
+  project_filters: {},
+  filter_modal: null,
+  gene_modal: null,
+  compare_modal: false,
   results: filters.reduce((acc, filter) => {
     acc[filter.name] = { results: [], results_num: 0 };
     return acc;
@@ -16,6 +36,15 @@ export const state = () => ({
 });
 
 export const getters = {
+  project_filters(state) {
+    return state.project_filters;
+  },
+  active_filter_modal(state) {
+    return state.project_filters[state.filter_modal] || null;
+  },
+  compare_modal(state) {
+    return state.compare_modal;
+  },
   route_to_project_page: state => ids => {
     if (Array.isArray(ids)) ids = ids.join(',');
     return `${state.active_specie.suggestions_key}/${state.active_filter}?id=${ids}`;
@@ -46,8 +75,34 @@ export const getters = {
 };
 
 export const mutations = {
-  set_gene_modal(state, { isShowing = false, geneId = '' }) {
-    state.gene_modal = { isShowing, geneId };
+  set_filter_modal(state, filterKey = null) {
+    state.filter_modal = filterKey;
+  },
+  set_compare_modal(state) {
+    state.compare_modal = !state.compare_modal;
+  },
+  set_project_filters(state, { ageRange, medianRange }) {
+    const copy = { ...getters.active_filter(state).filters };
+    Object.entries(copy).forEach(([key, value]) => {
+      if (['Age', 'log2_Median'].includes(key)) {
+        copy[key] = numberFilterObj(
+          key === 'Age' ? ageRange : medianRange,
+          value
+        );
+      } else value.filterModal = '';
+    });
+    state.project_filters = copy;
+  },
+  update_project_filters(
+    state,
+    { key, filter, filterKey = state.filter_modal }
+  ) {
+    const copy = { ...state.project_filters };
+    copy[filterKey][key] = filter;
+    state.project_filters = copy;
+  },
+  set_gene_modal(state, id = null) {
+    state.gene_modal = id;
   },
   set_specie(state, specieId) {
     state.active_specie = species.find(specie => specie.name === specieId);
