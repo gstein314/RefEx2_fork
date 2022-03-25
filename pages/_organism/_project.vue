@@ -38,7 +38,7 @@
       ref="results"
       :results="resultsWithMedianData"
       :selected-item="selectedItem.info.symbol"
-      @updateSort="resultsSort = $event"
+      @updateSort="updateResultSort"
     />
     <ModalViewDisplay
       v-if="isDisplaySettingsOn"
@@ -153,8 +153,11 @@
             return acc;
           }, []);
       },
+      mainItem() {
+        return this.items[0];
+      },
       infoForMainItem() {
-        return this.items[0].info;
+        return this.mainItem.info;
       },
       selectedItem() {
         return this.items.find(item => item.id === this.selectedId);
@@ -175,6 +178,11 @@
       },
       toggleDisplaySettings() {
         this.isDisplaySettingsOn = !this.isDisplaySettingsOn;
+      },
+      updateResultSort(sort) {
+        // reset selectedItem if sort other then median is changed
+        if (sort.key !== 'log2_Median') this.selectedId = this.mainItem.id;
+        this.resultsSort = sort;
       },
       updateSelectedItem({ id, sortOrder = 'down' }) {
         this.selectedId = id;
