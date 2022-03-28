@@ -28,7 +28,7 @@
       <tbody>
         <tr
           v-for="(result, resultIndex) in results"
-          :key="result[filterObj.unique_key] + resultIndex"
+          :key="`${result[filterObj.unique_key]}_${resultIndex}`"
           @click="
             $router.push(routeToProjectPage(result[filterObj.unique_key]))
           "
