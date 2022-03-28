@@ -170,7 +170,9 @@
         if (params !== '') params = `(${params})`;
         const resultParams = this.isNum
           ? ''
-          : `{${this.filterObj.columns.map(col => col.key).join(' ')}}`;
+          : `{${this.filterObj.columns.map(col => col.key).join(' ')} ${
+              this.filterObj.unique_key
+            }}`;
         const suffix = this.isNum ? '' : ` ${this.queryPrefix}Numfound`;
         return `{${this.queryPrefix}${params}${resultParams}${suffix}}`;
       },
