@@ -105,7 +105,7 @@
         if (this.parameters[key].find(tag => tag.id === id)) {
           return;
         }
-        this.setTags([...this.parameters[key], { id, text, tiClasses }], key);
+        this.setTags([{ id, text, tiClasses }], key);
       },
       setTags(newTags, key) {
         this.parameters = { ...this.parameters, [key]: newTags };
