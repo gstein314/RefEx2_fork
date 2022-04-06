@@ -25,6 +25,7 @@
         "label": "Tissue",
         "note": "UBERON",
         "is_checkbox": false,
+        "examples": ["skin", "liver"],
         "is_displayed": true,
         "is_ontology": true
       },
@@ -33,6 +34,7 @@
         "label": "Cell type",
         "note": "Cell Ontology",
         "is_checkbox": false,
+        "examples": ["macrophage", "hepatocyte"],
         "is_displayed": true,
         "is_ontology": true
       },
@@ -41,6 +43,7 @@
         "label": "Disease",
         "note": "NCI Thesaurus",
         "is_checkbox": false,
+        "examples": ["osteosarcoma", "Down syndrome"],
         "is_displayed": true,
         "is_ontology": true
       },
