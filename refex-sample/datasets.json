@@ -1,9 +1,9 @@
 [
   {
-    "dataset": "fantom5_human",
+    "dataset": "humanFantom5",
     "sample_filter": [
       {
-        "column": "Sample type category",
+        "column": "SampleTypeCategory",
         "label": "Sample type",
         "note": "FANTOM5",
         "is_checkbox": true,
@@ -11,7 +11,7 @@
         "is_ontology": false
       },
       {
-        "column": "Experiment category",
+        "column": "ExperimentCategory",
         "label": "Experiment",
         "note": "FANTOM5",
         "is_checkbox": true,
@@ -19,7 +19,7 @@
         "is_ontology": false
       },
       {
-        "column": "UBERON label",
+        "column": "UberonLabel",
         "label": "Tissue",
         "note": "UBERON",
         "is_checkbox": false,
@@ -27,7 +27,7 @@
         "is_ontology": true
       },
       {
-        "column": "CL label",
+        "column": "ClLabel",
         "label": "Cell type",
         "note": "Cell Ontology",
         "is_checkbox": false,
@@ -35,7 +35,7 @@
         "is_ontology": true
       },
       {
-        "column": "NCIT label",
+        "column": "NcitLabel",
         "label": "Disease",
         "note": "NCI Thesaurus",
         "is_checkbox": false,
@@ -43,7 +43,7 @@
         "is_ontology": true
       },
       {
-        "column": "Developmental stage",
+        "column": "DevelopmentalStage",
         "label": "Developmental stage",
         "note": "",
         "is_checkbox": true,
@@ -61,7 +61,7 @@
     ]
   },
   {
-    "dataset": "gtex_v8",
+    "dataset": "gtexV8",
     "sample_filter": [
       {
         "column": "Tissue",
@@ -72,7 +72,7 @@
         "is_ontology": false
       },
       {
-        "column": "Sub-region",
+        "column": "SubRegion",
         "label": "Sub-region",
         "note": "",
         "is_checkbox": true,

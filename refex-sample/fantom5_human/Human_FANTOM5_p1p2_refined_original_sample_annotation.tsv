@@ -1,4 +1,4 @@
-FANTOM5_Sample_ID	Characteristics [description]	Sample types category	Experiments category	Chracteristics [Species]	Characteristics [Sex]	Characteristics [Age]	Unit[Age]	Characteristics [Developmental stage]	UBERON ID	UBERON label	CL ID	CL label	NCIT ID	NCIT label
+Fantom5SampleId	Description	SampleTypesCategory	ExperimentsCategory	Species	Sex	Age	AgeUnit	DevelopmentalStage	UberonId	UberonLabel	ClId	ClLabel	NcitId	NcitLabel
 10000-101A1	Clontech Human Universal Reference Total RNA, pool1	tissues	snapshot	Human (Homo sapiens)	mixed	NA	NA	NA	NA	NA	NA	NA	NA	NA
 10002-101A5	SABiosciences XpressRef Human Universal Total RNA, pool1	tissues	snapshot	Human (Homo sapiens)	mixed	NA	NA	NA	NA	NA	NA	NA	NA	NA
 10007-101B4	Universal RNA - Human Normal Tissues Biochain, pool1	tissues	snapshot	Human (Homo sapiens)	mixed	34-76	year	adult	NA	NA	NA	NA	NA	NA
