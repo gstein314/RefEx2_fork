@@ -1,6 +1,8 @@
 [
   {
     "dataset": "humanFantom5",
+    "gene_id": "ncbiGeneId",
+    "gene_header": "NCBI Gene ID",
     "sample_filter": [
       {
         "column": "SampleTypeCategory",
@@ -62,6 +64,8 @@
   },
   {
     "dataset": "gtexV8",
+    "gene_id": "ensemblGeneId",
+    "gene_header": "Ensembl Gene ID",
     "sample_filter": [
       {
         "column": "Tissue",
