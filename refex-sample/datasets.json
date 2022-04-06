@@ -1,8 +1,24 @@
 [
   {
     "dataset": "humanFantom5",
-    "gene_id": "ncbiGeneId",
-    "gene_header": "NCBI Gene ID",
+    "gene": {
+      "key": "ncbiGeneId",
+      "header": "NCBI Gene ID",
+      "item_comparison_example": [
+        {
+          "route": "5460,6657,9314,4609",
+          "label": "Yamanaka Factors (OCT3/4, SOX2, KLF4 and C-MYC-OSKM)"
+        }
+      ],
+      "search_conditions": [
+        {
+          "label": "Gene Name",
+          "examples": ["transcription factor"]
+        },
+        { "label": "Symbol", "examples": ["ITG"] },
+        { "label": "Summary", "examples": ["Breast cancer"] }
+      ]
+    },
     "sample_filter": [
       {
         "column": "SampleTypeCategory",
@@ -67,8 +83,24 @@
   },
   {
     "dataset": "gtexV8",
-    "gene_id": "ensemblGeneId",
-    "gene_header": "Ensembl Gene ID",
+    "gene": {
+      "key": "ensemblGeneId",
+      "header": "Ensembl Gene ID",
+      "item_comparison_example": [
+        {
+          "route": "ENSG00000204531,ENSG00000181449,ENSG00000136826,ENSG00000136997",
+          "label": "Yamanaka Factors (OCT3/4, SOX2, KLF4 and C-MYC-OSKM)"
+        }
+      ],
+      "search_conditions": [
+        {
+          "label": "Gene Name",
+          "examples": ["transcription factor"]
+        },
+        { "label": "Symbol", "examples": ["ITG"] },
+        { "label": "Summary", "examples": ["Breast cancer"] }
+      ]
+    },
     "sample_filter": [
       {
         "column": "Tissue",
