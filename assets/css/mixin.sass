@@ -14,6 +14,7 @@ $COLOR_7: #B97CBF
 $COLOR_8: #A3735E
 $COLOR_9: #FF98A6
 $COLOR_10: #A8A8A8
+$HOVER_COLOR: rgba(72, 142, 196, 0.8)
 
 $PADDING_SLIM: 0.1rem 0.4rem
 $PADDING_LARGE: 0.4rem 0.8rem
@@ -75,6 +76,7 @@ $TOOLTIP_LAYER: 2
     outline: none
   &:hover
     cursor: pointer
+    background: $HOVER_COLOR
   > svg
     font-size: 14px
     margin-right: 4px
@@ -162,7 +164,7 @@ $TOOLTIP_LAYER: 2
   z-index: $MODAL_LAYER
 
 @mixin sample_query
-  &.example
+  .example
     font-size: 12px
     margin-left: 0.5rem
     color: $GRAY

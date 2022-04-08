@@ -71,8 +71,9 @@
       align-items: center
       &.sample
         margin-bottom: 8px
-        > span
-          @include sample_query
+        +sample_query
+        > .ex
+          margin-left: 20px
       > input
         +text_input
       > button
