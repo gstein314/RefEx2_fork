@@ -85,8 +85,21 @@
           *
             opacity: 1
             color: $MAIN_COLOR
+          > .specie_wrapper
+            > form
+              > select
+                color: $MAIN_COLOR
         &:hover
+          opacity: 1
           cursor: pointer
+          color: $MAIN_COLOR
+          > .specie_wrapper
+            > form
+              > select
+                cursor: pointer
+                color: $MAIN_COLOR
+                &:hover
+                  color: $COLOR_9
         > svg
           align-self: flex-end
         > .specie_wrapper
@@ -101,6 +114,7 @@
             margin-left: -4px
             > select
               border: none
+              color: $BLACK
               &:focus
                 outline: none
 </style>
