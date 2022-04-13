@@ -1,4 +1,4 @@
-RefEx Sample ID	Description	Number of samples	Sample type category	Experiment category	UBERON ID	UBERON label	CL ID	CL label	NCIT ID	NCIT label	Developmental stage	Sex
+RefexSampleId	Description	NumberOfSamples	SampleTypeCategory	ExperimentCategory	UberonId	UberonLabel	ClId	ClLabel	NcitId	NcitLabel	DevelopmentalStage	Sex
 RES00001647	293SLAM rinderpest infection, 00hr	3	cell lines	time courses	UBERON:0002113	kidney	NA	NA	NA	NA	NA	NA
 RES00001648	293SLAM rinderpest infection, 06hr	3	cell lines	time courses	UBERON:0002113	kidney	NA	NA	NA	NA	NA	NA
 RES00001649	293SLAM rinderpest infection, 12hr	3	cell lines	time courses	UBERON:0002113	kidney	NA	NA	NA	NA	NA	NA
