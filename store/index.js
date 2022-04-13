@@ -1,3 +1,4 @@
+import datasets from '../refex-sample/datasets.json';
 import filters from '../static/filters.json';
 import species from '../static/species.json';
 
@@ -56,7 +57,7 @@ export const getters = {
     return state.active_dataset;
   },
   active_filter(state) {
-    return filters.find(col => col.name === state.active_filter);
+    return filters.find(filter => state.active_filter === filter.name);
   },
   active_specie(state) {
     return state.active_specie;

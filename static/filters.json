@@ -1,7 +1,7 @@
 [
   {
     "name": "gene",
-    "columns": [
+    "filter": [
       { "header": "GeneSymbol", "key": "symbol" },
       { "header": "GeneName", "key": "name" },
       { "header": "Alias", "key": "alias" },
@@ -16,19 +16,6 @@
         "key": "ncbiGeneId",
         "specialClass": "gene_expression_patterns"
       }
-    ],
-    "item_comparison_example": {
-      "route": "5460,6657,9314,4609",
-      "label": "Yamanaka Factors (OCT3/4, SOX2, KLF4 and C-MYC-OSKM)"
-    },
-    "unique_key": "ncbiGeneId",
-    "search_conditions": [
-      {
-        "label": "Gene Name",
-        "examples": ["transcription factor"]
-      },
-      { "label": "Symbol", "examples": ["ITG"] },
-      { "label": "Summary", "examples": ["Breast cancer"] }
     ],
     "screener": {
       "classification_items": [

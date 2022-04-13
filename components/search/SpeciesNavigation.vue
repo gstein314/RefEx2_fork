@@ -21,8 +21,8 @@
               "
             >
               <option
-                v-for="project in specie.projects"
-                :key="`${specie.name}_${project}`"
+                v-for="(project, index) of projects"
+                :key="index"
                 :value="project"
               >
                 {{ project }}
@@ -37,6 +37,7 @@
 
 <script>
   import { mapGetters } from 'vuex';
+  import datasets from '~/refex-sample/datasets.json';
   import species from '~/static/species.json';
   import IconBase from '~/components/icons/IconBase.vue';
 
@@ -46,9 +47,10 @@
     },
     data() {
       return {
+        projects: datasets.map(dataset => dataset.dataset),
         species,
         selectedProject: species.reduce((acc, specie) => {
-          acc[specie.name] = specie.projects[0];
+          acc[specie.name] = datasets[0].dataset;
           return acc;
         }, {}),
       };
