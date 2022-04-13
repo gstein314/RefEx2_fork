@@ -91,7 +91,7 @@
         filterByName: 'filter_by_name',
         resultsUniqueKeys: 'results_unique_keys',
         activeSpecie: 'active_specie',
-        activeProject: 'active_project',
+        activeDataset: 'active_dataset',
         routeToProjectPage: 'route_to_project_page',
       }),
       filterObj() {
@@ -123,7 +123,7 @@
           : (this.checkedResults = this.resultsUniqueKeys);
       },
       geneDescriptionSource(resultItem) {
-        return `http://penqe.com/refex_figs/${this.activeSpecie?.suggestions_key.toLowerCase()}_${this.activeProject.toLowerCase()}_${resultItem}.png`;
+        return `http://penqe.com/refex_figs/${this.activeSpecie?.suggestions_key.toLowerCase()}_${this.activeDataset.toLowerCase()}_${resultItem}.png`;
       },
     },
   };

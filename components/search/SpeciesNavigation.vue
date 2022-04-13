@@ -15,7 +15,7 @@
               v-model="selectedProject[specie.name]"
               @change="
                 $store.commit(
-                  'set_active_project',
+                  'set_active_dataset',
                   selectedProject[specie.name]
                 )
               "

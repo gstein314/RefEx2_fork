@@ -123,7 +123,7 @@
       ...mapGetters({
         filterByName: 'filter_by_name',
         routeToProjectPage: 'route_to_project_page',
-        activeProject: 'active_project',
+        activeDataset: 'active_dataset',
         activeSpecie: 'active_specie',
       }),
       // TODO: turn into qql query
@@ -152,7 +152,7 @@
         return `${
           this.activeSpecie.suggestions_key
         }${this.$firstLetterUppercase(
-          this.activeProject
+          this.activeDataset
         )}${this.$firstLetterUppercase(this.filterObj.name)}${
           this.isNum ? 'Numfound' : ''
         }`;
@@ -178,7 +178,7 @@
       },
     },
     watch: {
-      activeProject() {
+      activeDataset() {
         this.showResults('numfound');
       },
       activeSpecie() {
