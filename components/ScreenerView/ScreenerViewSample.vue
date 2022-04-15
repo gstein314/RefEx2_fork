@@ -2,43 +2,49 @@
   <!-- v-html setup neccesary for plugin, does NOT use user input/API data and is therefore safe to use -->
   <!-- eslint-disable vue/no-v-html -->
   <div>
-    <h3 v-if="screenerInfo.description !== ''">
-      {{ screenerInfo.description }}
+    <h3 v-if="description !== ''">
+      {{ description }}
     </h3>
-    <div :class="{ classification_wrapper: classificationItems.length > 1 }">
+    <div v-if="filters && filters.length > 0" class="classification_wrapper">
       <div
-        v-for="item of classificationItems"
-        :key="item.column"
-        class="classification_item"
+        v-for="(filter, filterIndex) of filters"
+        :key="`${filterIndex + 1}_test`"
       >
-        <h4>
-          {{ item.label }}
-          <span v-if="item.note" class="tag">{{ item.note }}</span>
-          <span class="example">
+        <h4 :key="`${filterIndex + 1}_gene_h3`">
+          {{ filter.label }}
+          <span v-if="filter.note" class="tag">{{ filter.note }}</span>
+          <span v-if="filter.examples" class="example">
             e.g.
-            <template v-for="(sample, sampleIndex) of item.examples">
+            <template v-for="(example, exampleIndex) of filter.examples">
               <span
-                :key="`${sampleIndex}_sample`"
+                :key="`${exampleIndex}_example`"
                 class="sample_value"
-                @click="updateParameter(item.column, sample.route)"
+                @click="updateParameter(filter.column, example)"
               >
-                {{ sample.label }}
+                {{ example }}
               </span>
               <span
-                v-if="sampleIndex < item.examples.length - 1"
-                :key="`${sampleIndex}_separator`"
+                v-if="exampleIndex < filter.examples.length - 1"
+                :key="`${exampleIndex}_separator`"
                 >,</span
               >
             </template>
           </span>
         </h4>
+        <input
+          v-if="filter.is_checkbox"
+          v-model="parameters[filter.column]"
+          type="checkbox"
+        />
         <vue-simple-suggest
-          v-model="parameters[item.column]"
+          v-else
+          :key="`${filterIndex + 1}_gene_tags`"
+          v-model="parameters[filter.column]"
           :filter-by-query="true"
-          :list="autoComplete[item.column]"
+          :list="autoComplete[filter.column]"
           :max-suggestions="100"
           class="text_search_sample_types"
-          :placeholder="item.placeholder"
+          :placeholder="filter.examples ? filter.examples[0] : ''"
           @input="updateParameter"
         >
           <div
@@ -52,9 +58,8 @@
   </div>
 </template>
 <script>
-  /* eslint-disable vue/prop-name-casing */
-  import VueSimpleSuggest from 'vue-simple-suggest';
   import { mapGetters } from 'vuex';
+  import VueSimpleSuggest from 'vue-simple-suggest';
 
   export default {
     components: {
@@ -62,30 +67,33 @@
     },
     data() {
       return {
-        // passed down to API. will hold keys of the column parameter of screener > classification_items > column of filters.json
+        // passed down to API
         parameters: {},
         // will contain same keys as parameters. Autocompletion that does not come from the API should be hardcoded here in advance
-        autoComplete: {
-          Description: ['cell lines', 'stem cells', 'primary cells', 'tissues'],
-        },
+        autoComplete: {},
+        debounce: null,
       };
     },
     computed: {
       ...mapGetters({
-        activeFilter: 'active_filter',
+        filterByName: 'filter_by_name',
+        activeDataset: 'active_dataset',
       }),
-      screenerInfo() {
-        return this.activeFilter.screener;
+      description() {
+        return this.filterByName('sample').description;
       },
-      classificationItems() {
-        return this.screenerInfo.classification_items;
+      dataSetSpecificParameters() {
+        return this.activeDataset.sample;
+      },
+      filters() {
+        return this.dataSetSpecificParameters.filter ?? [];
       },
     },
     async created() {
-      this.classificationItems.forEach(item => {
-        const key = item.column;
-        this.$set(this.parameters, key, '');
+      this.filters.forEach(filter => {
+        const key = filter.column;
         if (key in this.autoComplete) return;
+        this.$set(this.parameters, key, '');
         this.$axios
           .$get(`api/vocablary?annotation=${key.toUpperCase()}%20label`)
           .then(data => {
@@ -97,6 +105,9 @@
       });
     },
     methods: {
+      toggleScreener() {
+        this.isOpen = !this.isOpen;
+      },
       updateParameter(key, value) {
         if (key && value) this.$set(this.parameters, key, value);
         this.$emit('updateParameters', this.parameters);

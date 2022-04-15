@@ -83,12 +83,11 @@
       />
       <label for="summary_check">Include this field in search</label>
     </div>
-    <ScreenerView :type="filterType">
-      <!-- <ScreenerViewGene  /> -->
-      <!-- <component
+    <ScreenerView>
+      <component
         :is="`screener-view-${filterType}`"
         @updateParameters="updateParams"
-      ></component> -->
+      ></component>
     </ScreenerView>
     <button class="find_results_btn" @click="showResults">
       <font-awesome-icon icon="search" />
@@ -98,7 +97,6 @@
 </template>
 <script>
   import VueSimpleSuggest from 'vue-simple-suggest';
-  import ScreenerViewGene from '~/components/ScreenerView/ScreenerViewGene.vue';
   import ScreenerView from '~/components/ScreenerView/ScreenerView.vue';
   import { mapGetters } from 'vuex';
 
@@ -106,7 +104,6 @@
     components: {
       VueSimpleSuggest,
       ScreenerView,
-      // ScreenerViewGene,
     },
     data() {
       return {
