@@ -4,11 +4,10 @@
   <div class="text_search_area">
     <h2>Search Conditions</h2>
     <h3>
-      {{ title }}
       <span class="example"
         >e.g.
         <dl v-for="(condition, index) of conditions" :key="index">
-          <dt v-if="conditions.length > 1">{{ condition.label }}:</dt>
+          <dt>{{ condition.label }}:</dt>
           <dd
             v-for="(example, example_index) of condition.examples"
             :key="example_index"
@@ -84,20 +83,22 @@
       />
       <label for="summary_check">Include this field in search</label>
     </div>
-    <ScreenerView>
-      <component
-        :is="`screener-view-${filterObj.name}`"
+    <ScreenerView :type="filterType">
+      <!-- <ScreenerViewGene  /> -->
+      <!-- <component
+        :is="`screener-view-${filterType}`"
         @updateParameters="updateParams"
-      ></component>
+      ></component> -->
     </ScreenerView>
     <button class="find_results_btn" @click="showResults">
       <font-awesome-icon icon="search" />
-      Find {{ filterObj.name }}s
+      Find {{ filterType }}s
     </button>
   </div>
 </template>
 <script>
   import VueSimpleSuggest from 'vue-simple-suggest';
+  import ScreenerViewGene from '~/components/ScreenerView/ScreenerViewGene.vue';
   import ScreenerView from '~/components/ScreenerView/ScreenerView.vue';
   import { mapGetters } from 'vuex';
 
@@ -105,6 +106,7 @@
     components: {
       VueSimpleSuggest,
       ScreenerView,
+      // ScreenerViewGene,
     },
     data() {
       return {
@@ -126,10 +128,14 @@
         activeDataset: 'active_dataset',
         activeSpecie: 'active_specie',
       }),
+      // returns either gene or sample
+      filterType() {
+        return this.$vnode.key.split('_')[0];
+      },
       // TODO: turn into qql query
 
       filterObj() {
-        return this.filterByName(this.$vnode.key.split('_')[0]);
+        return this.activeDataset[this.filterType];
       },
       conditions() {
         return this.filterObj.search_conditions;
@@ -149,13 +155,9 @@
         return this.typeOfQuery === 'numfound';
       },
       queryPrefix() {
-        return `${
-          this.activeSpecie.suggestions_key
-        }${this.$firstLetterUppercase(
-          this.activeDataset
-        )}${this.$firstLetterUppercase(this.filterObj.name)}${
-          this.isNum ? 'Numfound' : ''
-        }`;
+        return `${this.activeDataset.dataset}${this.$firstLetterUppercase(
+          this.filterType
+        )}${this.isNum ? 'Numfound' : ''}`;
       },
       suggest_query() {
         let params = Object.entries(this.parameters)
@@ -170,8 +172,8 @@
         if (params !== '') params = `(${params})`;
         const resultParams = this.isNum
           ? ''
-          : `{${this.filterObj.columns.map(col => col.key).join(' ')} ${
-              this.filterObj.unique_key
+          : `{${this.filterObj.filter.map(col => col.key).join(' ')} ${
+              this.filterObj.key ?? 'refexSampleId'
             }}`;
         const suffix = this.isNum ? '' : ` ${this.queryPrefix}Numfound`;
         return `{${this.queryPrefix}${params}${resultParams}${suffix}}`;

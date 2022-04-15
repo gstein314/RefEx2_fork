@@ -3,8 +3,8 @@
     <SpeciesNavigation />
     <FilterNavigation />
     <FilterTab v-for="filter of filters" :key="filter.name" />
-    <ModalViewGene />
-    <ModalViewCompare />
+    <!-- <ModalViewGene />
+    <ModalViewCompare /> -->
   </div>
 </template>
 
@@ -18,8 +18,8 @@
 
   export default {
     components: {
-      ModalViewGene,
-      ModalViewCompare,
+      // ModalViewGene,
+      // ModalViewCompare,
       SpeciesNavigation,
       FilterNavigation,
       FilterTab,

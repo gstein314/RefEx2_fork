@@ -86,7 +86,7 @@
       const items = await Promise.all(
         query.id.split(',').map(async (id, index) => {
           const data = await $axios.$get(
-            `api/${store.state.active_filter}/${id}`
+            `api/${store.state.active_filter}/${id}?dataset=${store.state.active_dataset}`
           );
           if (index === 0) results = data.r_inf;
           return {

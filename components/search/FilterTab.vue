@@ -1,5 +1,5 @@
 <template>
-  <div v-show="$vnode.key === activeFilter" class="filter_tab">
+  <div v-show="$vnode.key === activeFilterKey" class="filter_tab">
     <main>
       <search-bar :key="`${$vnode.key}_search`" />
       <div class="results_num_wrapper">
@@ -9,7 +9,7 @@
         </div>
       </div>
     </main>
-    <index-results :key="`${$vnode.key}_results`" />
+    <!-- <index-results :key="`${$vnode.key}_results`" /> -->
   </div>
 </template>
 <script>
@@ -18,12 +18,12 @@
 
   export default {
     components: {
-      SearchBar,
-      IndexResults,
+      // SearchBar,
+      // IndexResults,
     },
     computed: {
-      activeFilter() {
-        return this.$store.getters.active_filter.name;
+      activeFilterKey() {
+        return this.$store.state.active_filter;
       },
       resultsNum() {
         return this.$store.getters.results_by_name(this.$vnode.key).results_num;

@@ -10,4 +10,7 @@ export default ({ app }, inject) => {
   inject('firstLetterUppercase', str => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   });
+  inject('variableName', str => {
+    return str.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+  });
 };

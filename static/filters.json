@@ -1,6 +1,7 @@
 [
   {
     "name": "gene",
+    "description": "",
     "filter": [
       { "header": "GeneSymbol", "key": "symbol" },
       { "header": "GeneName", "key": "name" },
@@ -164,6 +165,7 @@
       ],
       "description": "Genes that are specifically expressed in a given sample by classification"
     },
+    "description": "Genes that are specifically expressed in a given sample by classification",
     "unique_key": "refexSampleId",
     "search_conditions": [
       {

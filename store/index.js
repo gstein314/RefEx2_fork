@@ -25,7 +25,7 @@ const numberFilterObj = ([min, max], value) => {
 export const state = () => ({
   active_specie: species[0], //default,
   active_filter: 'gene',
-  active_dataset: 'FANTOM5',
+  active_dataset: datasets[0].dataset,
   project_filters: {},
   filter_modal: null,
   gene_modal: null,
@@ -54,7 +54,7 @@ export const getters = {
     return state.gene_modal;
   },
   active_dataset(state) {
-    return state.active_dataset;
+    return datasets.find(dataset => dataset.dataset === state.active_dataset);
   },
   active_filter(state) {
     return filters.find(filter => state.active_filter === filter.name);
