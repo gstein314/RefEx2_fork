@@ -93,13 +93,18 @@
           opacity: 1
           cursor: pointer
           color: $MAIN_COLOR
+          transition: 0.6s
           > .specie_wrapper
             > form
               > select
                 cursor: pointer
                 color: $MAIN_COLOR
+                transition: 0.6s
                 &:hover
-                  color: $COLOR_9
+                  background-color: $MAIN_COLOR
+                  color: #fff
+                  border-radius: $BORDER_RADIUS_DEFAULT
+                  transition: 0.6s
         > svg
           align-self: flex-end
         > .specie_wrapper
