@@ -4,7 +4,7 @@ $BLACK: #3E4652
 $GRAY: #7C7C7C
 $ACTIVE_COLOR: #FFE100
 $ACTIVE_COLOR_HOVER: rgba(255, 255, 0, .1)
-$BUTTON_HOVER_COLOR: rgba(72, 142, 196, 0.8)
+$BUTTON_HOVER_COLOR: #366c96
 $COLOR_1: #488EC4
 $COLOR_2: #FF8A17
 $COLOR_3: #67C1C7
@@ -30,6 +30,7 @@ $TOOLTIP_LAYER: 2
   color: #ffffff
   background: $MAIN_COLOR
   border-radius: 100px
+  transition: .6s
 
 @mixin text_input
   border: none
@@ -77,6 +78,7 @@ $TOOLTIP_LAYER: 2
   &:hover
     cursor: pointer
     background: $BUTTON_HOVER_COLOR
+    transition: 0.6s
   > svg
     font-size: 14px
     margin-right: 4px
