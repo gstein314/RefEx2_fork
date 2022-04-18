@@ -1,7 +1,7 @@
 <template>
   <div v-show="$vnode.key === activeFilterKey" class="filter_tab">
     <main>
-      <search-bar :key="`${$vnode.key}_search`" />
+      <SearchBar :key="`${$vnode.key}_search`" />
       <div class="results_num_wrapper">
         <div class="results_num_inner">
           <h2>Estimated Results</h2>
@@ -9,17 +9,15 @@
         </div>
       </div>
     </main>
-    <!-- <index-results :key="`${$vnode.key}_results`" /> -->
+    <index-results :key="`${$vnode.key}_results`" />
   </div>
 </template>
 <script>
   import IndexResults from '~/components/results/IndexResults.vue';
-  import SearchBar from '~/components/search/SearchBar.vue';
 
   export default {
     components: {
-      // SearchBar,
-      // IndexResults,
+      IndexResults,
     },
     computed: {
       activeFilterKey() {

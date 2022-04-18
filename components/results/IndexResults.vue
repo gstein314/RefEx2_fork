@@ -1,10 +1,14 @@
 <template>
   <div class="results_wrapper">
     <div class="results_title_wrapper">
-      <h2>Matching {{ filterObj.name }}s</h2>
+      <h2>Matching {{ filterType }}s</h2>
       <ComparisonButton />
       <span class="example">e.g.</span>
       <span
+        v-for="(
+          comparisonExample, comparisonExampleIndex
+        ) in datasetInfo.item_comparison_example"
+        :key="comparisonExampleIndex"
         class="sample_value"
         @click="$router.push(routeToProjectPage(comparisonExample.route))"
         >{{ comparisonExample.label }}</span
@@ -20,56 +24,56 @@
               @click="toggleAllCheckbox"
             />
           </th>
-          <th v-for="(column, index) of filterObj.columns" :key="index">
-            {{ column.header }}
+          <th v-for="(filter, index) of datasetInfo.filter" :key="index">
+            {{ filter.label }}
           </th>
         </tr>
       </thead>
       <tbody>
         <tr
           v-for="(result, resultIndex) in results"
-          :key="`${result[filterObj.unique_key]}_${resultIndex}`"
-          @click="
-            $router.push(routeToProjectPage(result[filterObj.unique_key]))
-          "
+          :key="`result_${resultIndex}`"
+          @click="$router.push(routeToProjectPage(result[keyForID]))"
         >
           <td class="checkbox" @click="e => e.stopPropagation()">
             <input
               v-model="checkedResults"
               type="checkbox"
-              :value="result[filterObj.unique_key]"
+              :value="result[keyForID]"
             />
           </td>
           <td
-            v-for="(column, index) of filterObj.columns"
+            v-for="(filter, index) of datasetInfo.filter"
             :key="index"
-            :class="column.specialClass || ''"
+            :class="filter.specialClass || ''"
           >
             <font-awesome-icon
-              v-if="column.specialClass === 'annotation'"
+              v-if="filter.specialClass === 'annotation'"
               icon="info-circle"
-              @click.stop="setGeneModal(result[filterObj.unique_key])"
+              @click.stop="setGeneModal(result[geneKey])"
             />
             <img
-              v-else-if="column.specialClass === 'gene_expression_patterns'"
-              :src="geneDescriptionSource(result[filterObj.unique_key])"
-              :alt="result[filterObj.unique_key]"
+              v-else-if="filter.specialClass === 'gene_expression_patterns'"
+              :src="geneDescriptionSource(result[geneKey])"
+              :alt="result[geneKey]"
             />
             <span
-              v-for="(value, value_index) of JSON.parse(result[column.key])"
-              v-else-if="result[column.key].startsWith('[')"
+              v-for="(value, value_index) of JSON.parse(result[filter.column])"
+              v-else-if="result[filter.column].startsWith('[')"
               :key="value_index"
             >
               {{ value }}
               <span
-                v-if="value_index < JSON.parse(result[column.key]).length - 1"
+                v-if="
+                  value_index < JSON.parse(result[filter.column]).length - 1
+                "
                 >,</span
               >
             </span>
-            <template v-else-if="hasStringQuotes(result[column.key])">
-              {{ result[column.key].replaceAll('"', '') }}
+            <template v-else-if="hasStringQuotes(result[filter.column])">
+              {{ result[filter.column].replaceAll('"', '') }}
             </template>
-            <template v-else> {{ result[column.key] }}</template>
+            <template v-else> {{ result[filter.column] }}</template>
           </td>
         </tr>
       </tbody>
@@ -94,11 +98,17 @@
         activeDataset: 'active_dataset',
         routeToProjectPage: 'route_to_project_page',
       }),
-      filterObj() {
-        return this.filterByName(this.$vnode.key.split('_')[0]);
+      geneKey() {
+        return this.activeDataset.gene.key;
       },
-      comparisonExample() {
-        return this.filterObj.item_comparison_example;
+      keyForID() {
+        return this.filterType === 'gene' ? this.geneKey : 'refexSampleId';
+      },
+      filterType() {
+        return this.$vnode.key.split('_')[0];
+      },
+      datasetInfo() {
+        return this.activeDataset[this.filterType];
       },
       isAllChecked() {
         return (
@@ -107,7 +117,7 @@
         );
       },
       results() {
-        return this.resultsByName(this.filterObj.name).results;
+        return this.resultsByName(this.filterType).results;
       },
     },
     methods: {
@@ -123,7 +133,7 @@
           : (this.checkedResults = this.resultsUniqueKeys);
       },
       geneDescriptionSource(resultItem) {
-        return `http://penqe.com/refex_figs/${this.activeSpecie?.suggestions_key.toLowerCase()}_${this.activeDataset.toLowerCase()}_${resultItem}.png`;
+        return `http://penqe.com/refex_figs/${this.geneKey.toLowerCase()}_${this.activeDataset.toLowerCase()}_${resultItem}.png`;
       },
     },
   };

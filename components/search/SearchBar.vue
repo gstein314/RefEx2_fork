@@ -156,6 +156,11 @@
           this.filterType
         )}${this.isNum ? 'Numfound' : ''}`;
       },
+      keyForID() {
+        return this.filterType === 'gene'
+          ? this.activeDataset.gene.key
+          : 'refexSampleId';
+      },
       suggest_query() {
         let params = Object.entries(this.parameters)
           .filter(([_key, value]) => value !== '')
@@ -169,16 +174,16 @@
         if (params !== '') params = `(${params})`;
         const resultParams = this.isNum
           ? ''
-          : `{${this.filterObj.filter.map(col => col.key).join(' ')} ${
-              this.filterObj.key ?? 'refexSampleId'
-            }}`;
+          : `{${Object.keys(this.parameters)
+              .filter(param => param !== 'text')
+              .join(' ')} ${this.keyForID}}`;
         const suffix = this.isNum ? '' : ` ${this.queryPrefix}Numfound`;
         return `{${this.queryPrefix}${params}${resultParams}${suffix}}`;
       },
     },
     watch: {
       activeDataset() {
-        this.showResults('numfound');
+        this.showResults('reset numfound');
       },
       activeSpecie() {
         this.showResults('numfound');
@@ -186,7 +191,10 @@
     },
     methods: {
       updateParams(params) {
-        this.parameters = { ...this.parameters, ...params };
+        console.log(this.typeOfQuery);
+        this.parameters = this.typeOfQuery.includes('reset')
+          ? { ...params }
+          : { ...this.parameters, ...params };
         this.showResults('numfound');
       },
       // TODO: check if suggestions needs to be changed for sample
@@ -211,9 +219,11 @@
           })
           .then(result => {
             const prefix = this.queryPrefix.replace('Numfound', '');
-            if (prefix in result.data) results = result.data[prefix];
-            if (`${prefix}Numfound` in result.data)
+            if (`${prefix}Numfound` in result.data) {
               results_num = result.data[prefix + 'Numfound'];
+              if (type === 'reset numfound') results = [];
+            }
+            if (prefix in result.data) results = result.data[prefix] || [];
           })
           .catch(err => {
             console.log(err);

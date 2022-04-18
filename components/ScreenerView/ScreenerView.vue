@@ -85,6 +85,7 @@
     h3,h4
       display: flex
       gap: .5rem
+      margin-bottom: 0.5rem
       > span
         +sample_query
     input

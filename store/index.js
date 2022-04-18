@@ -116,7 +116,7 @@ export const mutations = {
   },
   set_results(
     state,
-    { results = [], results_num = 0, filterType = state.activeFilter }
+    { results = [], results_num = 0, filterType = state.active_filter }
   ) {
     state.results = {
       ...state.results,

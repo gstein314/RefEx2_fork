@@ -31,11 +31,19 @@
             </template>
           </span>
         </h4>
-        <input
+        <select
           v-if="filter.is_checkbox"
           v-model="parameters[filter.column]"
-          type="checkbox"
-        />
+          @change="updateParameter(filter.column, $event.target.value)"
+        >
+          <option value="" label=""></option>
+          <option
+            v-for="(option, optionIndex) of autoComplete[filter.column]"
+            :key="optionIndex"
+            :value="option"
+            :label="option"
+          ></option>
+        </select>
         <vue-simple-suggest
           v-else
           :key="`${filterIndex + 1}_gene_tags`"
@@ -45,12 +53,11 @@
           :max-suggestions="100"
           class="text_search_sample_types"
           :placeholder="filter.examples ? filter.examples[0] : ''"
-          @input="updateParameter"
         >
           <div
             slot="suggestion-item"
             slot-scope="{ suggestion }"
-            v-html="$boldenSuggestion(suggestion, parameters[item.column])"
+            v-html="$boldenSuggestion(suggestion, parameters[filter.column])"
           ></div>
         </vue-simple-suggest>
       </div>
@@ -89,22 +96,44 @@
         return this.dataSetSpecificParameters.filter ?? [];
       },
     },
-    async created() {
-      this.filters.forEach(filter => {
-        const key = filter.column;
-        if (key in this.autoComplete) return;
-        this.$set(this.parameters, key, '');
+    watch: {
+      filters() {
+        this.parameters = {};
+        this.setAutoComplete();
+        this.initiateParametersDataset();
+      },
+    },
+    created() {
+      this.setAutoComplete();
+      this.initiateParametersDataset();
+    },
+    methods: {
+      async initiateParametersDataset() {
+        for (const filter of this.filters) {
+          const key = filter.column;
+          this.$set(this.parameters, key, '');
+          this.$set(this.autoComplete, key, []);
+        }
+        this.$emit('updateParameters', { ...this.parameters });
+      },
+      setAutoComplete() {
         this.$axios
-          .$get(`api/vocablary?annotation=${key.toUpperCase()}%20label`)
+          .$get(`api/cv`)
           .then(data => {
-            this.$set(this.autoComplete, key, data);
+            this.filters.forEach(filter => {
+              this.$set(
+                this.autoComplete,
+                filter.column,
+                filter.is_checkbox
+                  ? data[this.activeDataset.dataset][filter.column] ?? []
+                  : []
+              );
+            });
           })
           .catch(error => {
             console.log('error', error);
           });
-      });
-    },
-    methods: {
+      },
       toggleScreener() {
         this.isOpen = !this.isOpen;
       },
