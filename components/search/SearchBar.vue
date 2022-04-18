@@ -38,7 +38,7 @@
       @select="moveDetailpage"
     >
       <template slot="misc-item-above">
-        <button class="show_all_btn" @click="showResults">
+        <button class="show_all_btn" @click="showResults()">
           <font-awesome-icon icon="list" />
           Show all genes that match your query
         </button>
@@ -89,7 +89,7 @@
         @updateParameters="updateParams"
       ></component>
     </ScreenerView>
-    <button class="find_results_btn" @click="showResults">
+    <button class="find_results_btn" @click="showResults()">
       <font-awesome-icon icon="search" />
       Find {{ filterType }}s
     </button>
@@ -191,7 +191,6 @@
     },
     methods: {
       updateParams(params) {
-        console.log(this.typeOfQuery);
         this.parameters = this.typeOfQuery.includes('reset')
           ? { ...params }
           : { ...this.parameters, ...params };
