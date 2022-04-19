@@ -14,6 +14,12 @@
         >{{ comparisonExample.label }}</span
       >
     </div>
+    <div class="display_settings_wrapper">
+      <a class="display_settings" @click="$emit('toggleDisplaySettings')">
+        <font-awesome-icon icon="eye" />
+        Display settings
+      </a>
+    </div>
     <table>
       <thead>
         <tr>
@@ -24,7 +30,11 @@
               @click="toggleAllCheckbox"
             />
           </th>
-          <th v-for="(filter, index) of datasetInfo.filter" :key="index">
+          <th
+            v-for="(filter, index) of filters"
+            v-show="filter.is_displayed"
+            :key="index"
+          >
             {{ filter.label }}
           </th>
         </tr>
@@ -43,7 +53,8 @@
             />
           </td>
           <td
-            v-for="(filter, index) of datasetInfo.filter"
+            v-for="(filter, index) of filters"
+            v-show="filter.is_displayed"
             :key="index"
             :class="filter.specialClass || ''"
           >
@@ -84,6 +95,12 @@
   import { mapGetters, mapMutations } from 'vuex';
 
   export default {
+    props: {
+      filters: {
+        type: Array,
+        default: () => [],
+      },
+    },
     data() {
       return {
         checkedResults: [],

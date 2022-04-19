@@ -9,22 +9,58 @@
         </div>
       </div>
     </main>
-    <index-results :key="`${$vnode.key}_results`" />
+    <ModalViewDisplay
+      v-if="isDisplaySettings"
+      :filters="filters"
+      @click.native="toggleDisplaySettings"
+      @toggleDisplayOfFilter="toggleDisplayOfFilter"
+    />
+    <index-results
+      :key="`${$vnode.key}_results`"
+      :filters="filters"
+      @toggleDisplaySettings="toggleDisplaySettings"
+    />
   </div>
 </template>
 <script>
+  import { mapGetters } from 'vuex';
   import IndexResults from '~/components/results/IndexResults.vue';
 
   export default {
     components: {
       IndexResults,
     },
+    data() {
+      return {
+        isDisplaySettings: false,
+        filters:
+          this.$store.getters.active_dataset[this.$vnode.key].filter || [],
+      };
+    },
     computed: {
+      ...mapGetters({
+        activeDataset: 'active_dataset',
+        resultsByName: 'results_by_name',
+      }),
       activeFilterKey() {
         return this.$store.state.active_filter;
       },
       resultsNum() {
-        return this.$store.getters.results_by_name(this.$vnode.key).results_num;
+        return this.resultsByName(this.$vnode.key).results_num;
+      },
+    },
+    watch: {
+      activeDataset() {
+        this.filters =
+          this.$store.getters.active_dataset[this.$vnode.key].filter || [];
+      },
+    },
+    methods: {
+      toggleDisplayOfFilter(arr) {
+        this.filters = arr;
+      },
+      toggleDisplaySettings() {
+        this.isDisplaySettings = !this.isDisplaySettings;
       },
     },
   };
