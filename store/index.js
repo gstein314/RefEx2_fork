@@ -68,11 +68,6 @@ export const getters = {
   results_by_name(state) {
     return filterName => state.results[filterName];
   },
-  results_unique_keys(state, getters) {
-    return state.results[state.active_filter].results.map(
-      item => item[getters.active_filter.unique_key]
-    );
-  },
 };
 
 export const mutations = {

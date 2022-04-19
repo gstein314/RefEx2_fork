@@ -52,7 +52,7 @@
           `<b>${suggestion.symbol}</b>&nbsp;
           (${$boldenSuggestion(suggestion.name, parameters.text)}
           ${$boldenSuggestion(suggestion.alias, parameters.text)}
-          , NCBI_GeneID: ${$boldenSuggestion(
+          , GeneID: ${$boldenSuggestion(
             suggestion.entrezgene,
             parameters.text
           )})`
