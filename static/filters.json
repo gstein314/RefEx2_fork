@@ -3,19 +3,55 @@
     "name": "gene",
     "description": "",
     "filter": [
-      { "header": "GeneSymbol", "key": "symbol" },
-      { "header": "GeneName", "key": "name" },
-      { "header": "Alias", "key": "alias" },
-      { "header": "NCBI GeneID", "key": "ncbiGeneId" },
       {
-        "header": "Annotation",
-        "key": "ncbiGeneId",
-        "specialClass": "annotation"
+        "column": "symbol",
+        "label": "GeneSymbol",
+        "note": "",
+        "is_checkbox": false,
+        "is_displayed": true,
+        "is_ontology": false
       },
       {
-        "header": "Gene expression patterns",
-        "key": "ncbiGeneId",
-        "specialClass": "gene_expression_patterns"
+        "column": "name",
+        "label": "GeneName",
+        "note": "",
+        "is_checkbox": false,
+        "is_displayed": true,
+        "is_ontology": false
+      },
+      {
+        "column": "alias",
+        "label": "Alias",
+        "note": "",
+        "is_checkbox": false,
+        "is_displayed": true,
+        "is_ontology": false
+      },
+      {
+        "column": "geneid",
+        "label": "Gene ID",
+        "note": "",
+        "is_checkbox": false,
+        "is_displayed": true,
+        "is_ontology": false
+      },
+      {
+        "column": "annotation",
+        "label": "Annotation",
+        "note": "",
+        "is_checkbox": false,
+        "is_displayed": true,
+        "is_ontology": false,
+        "special_class": "annotation"
+      },
+      {
+        "column": "gene expression patterns",
+        "label": "Gene expression patterns",
+        "note": "",
+        "is_checkbox": false,
+        "is_displayed": true,
+        "is_ontology": false,
+        "special_class": "gene_expression_patterns"
       }
     ],
     "screener": {

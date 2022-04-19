@@ -157,8 +157,9 @@
         )}${this.isNum ? 'Numfound' : ''}`;
       },
       keyForID() {
+        const fixedResultParamsForGene = 'symbol name alias geneid';
         return this.filterType === 'gene'
-          ? this.activeDataset.gene.key
+          ? fixedResultParamsForGene
           : 'refexSampleId';
       },
       suggest_query() {

@@ -56,17 +56,17 @@
             v-for="(filter, index) of filters"
             v-show="filter.is_displayed"
             :key="index"
-            :class="filter.specialClass || ''"
+            :class="filter.special_class"
           >
             <font-awesome-icon
-              v-if="filter.specialClass === 'annotation'"
+              v-if="filter.special_class === 'annotation'"
               icon="info-circle"
-              @click.stop="setGeneModal(result[geneKey])"
+              @click.stop="setGeneModal(result.geneid)"
             />
             <img
-              v-else-if="filter.specialClass === 'gene_expression_patterns'"
-              :src="geneDescriptionSource(result[geneKey])"
-              :alt="result[geneKey]"
+              v-else-if="filter.special_class === 'gene_expression_patterns'"
+              :src="geneDescriptionSource(result.geneid)"
+              :alt="result.geneid"
             />
             <span
               v-for="(value, value_index) of JSON.parse(result[filter.column])"
@@ -115,11 +115,8 @@
         activeDataset: 'active_dataset',
         routeToProjectPage: 'route_to_project_page',
       }),
-      geneKey() {
-        return this.activeDataset.gene.key;
-      },
       keyForID() {
-        return this.filterType === 'gene' ? this.geneKey : 'refexSampleId';
+        return this.filterType === 'gene' ? 'geneid' : 'refexSampleId';
       },
       filterType() {
         return this.$vnode.key.split('_')[0];
@@ -153,7 +150,7 @@
           : (this.checkedResults = this.resultsUniqueKeys);
       },
       geneDescriptionSource(resultItem) {
-        return `http://penqe.com/refex_figs/${this.geneKey.toLowerCase()}_${this.activeDataset.toLowerCase()}_${resultItem}.png`;
+        return `http://penqe.com/refex_figs/geneid_${this.activeDataset.dataset.toLowerCase()}_${resultItem}.png`;
       },
     },
   };

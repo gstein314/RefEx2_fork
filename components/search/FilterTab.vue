@@ -1,5 +1,5 @@
 <template>
-  <div v-show="$vnode.key === activeFilterKey" class="filter_tab">
+  <div v-show="isActive" class="filter_tab">
     <main>
       <SearchBar :key="`${$vnode.key}_search`" />
       <div class="results_num_wrapper">
@@ -33,17 +33,41 @@
     data() {
       return {
         isDisplaySettings: false,
-        filters:
-          this.$store.getters.active_dataset[this.$vnode.key].filter || [],
+        filters: this.$store.getters.active_dataset[this.$vnode.key].filter || [
+          ...this.$store.getters.active_filter.filter,
+          // {
+          //   column: this.$store.getters.active_dataset.gene.key,
+          //   label: this.$store.getters.active_dataset.gene.header,
+          //   note: '',
+          //   is_checkbox: false,
+          //   is_displayed: true,
+          //   is_ontology: false,
+          // },
+        ],
       };
     },
     computed: {
       ...mapGetters({
         activeDataset: 'active_dataset',
+        activeFilter: 'active_filter',
         resultsByName: 'results_by_name',
       }),
-      activeFilterKey() {
-        return this.$store.state.active_filter;
+      initialGeneFilters() {
+        const geneInfo = this.activeDataset.gene;
+        return [
+          ...this.$store.getters.active_filter.filter,
+          // {
+          //   column: geneInfo.key,
+          //   label: geneInfo.header,
+          //   note: '',
+          //   is_checkbox: false,
+          //   is_displayed: true,
+          //   is_ontology: false,
+          // },
+        ];
+      },
+      isActive() {
+        return this.$vnode.key === this.$store.state.active_filter;
       },
       resultsNum() {
         return this.resultsByName(this.$vnode.key).results_num;
@@ -51,8 +75,10 @@
     },
     watch: {
       activeDataset() {
-        this.filters =
-          this.$store.getters.active_dataset[this.$vnode.key].filter || [];
+        if (!this.isActive) return;
+        this.filters = this.activeDataset[this.$vnode.key]?.filter || [
+          ...this.$store.getters.active_filter.filter,
+        ];
       },
     },
     methods: {

@@ -98,6 +98,7 @@
     },
     watch: {
       activeDataset() {
+        if (this.$store.state.active_filter !== 'sample') return;
         this.parameters = {};
         this.setAutoComplete();
         this.initiateParametersDataset();
