@@ -97,7 +97,7 @@
       },
     },
     watch: {
-      filters() {
+      activeDataset() {
         this.parameters = {};
         this.setAutoComplete();
         this.initiateParametersDataset();

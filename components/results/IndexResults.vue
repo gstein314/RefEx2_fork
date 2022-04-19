@@ -70,7 +70,7 @@
             />
             <span
               v-for="(value, value_index) of JSON.parse(result[filter.column])"
-              v-else-if="result[filter.column].startsWith('[')"
+              v-else-if="isArray(result[filter.column])"
               :key="value_index"
             >
               {{ value }}
@@ -141,8 +141,11 @@
       ...mapMutations({
         setGeneModal: 'set_gene_modal',
       }),
+      isArray(str) {
+        return str?.startsWith('[');
+      },
       hasStringQuotes(str) {
-        return str.startsWith('"') && str.endsWith('"');
+        return str?.startsWith('"') && str?.endsWith('"');
       },
       toggleAllCheckbox() {
         this.isAllChecked
