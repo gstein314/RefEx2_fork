@@ -5,13 +5,13 @@
       <ComparisonButton />
       <span class="example">e.g.</span>
       <span
-        v-for="(
-          comparisonExample, comparisonExampleIndex
-        ) in datasetInfo.item_comparison_example"
-        :key="comparisonExampleIndex"
         class="sample_value"
-        @click="$router.push(routeToProjectPage(comparisonExample.route))"
-        >{{ comparisonExample.label }}</span
+        @click="
+          $router.push(
+            routeToProjectPage(datasetInfo.item_comparison_example[0].route)
+          )
+        "
+        >{{ datasetInfo.item_comparison_example[0].label }}</span
       >
       <div class="display_settings_wrapper">
         <a class="display_settings" @click="$emit('toggleDisplaySettings')">
