@@ -13,12 +13,12 @@
         @click="$router.push(routeToProjectPage(comparisonExample.route))"
         >{{ comparisonExample.label }}</span
       >
-    </div>
-    <div class="display_settings_wrapper">
-      <a class="display_settings" @click="$emit('toggleDisplaySettings')">
-        <font-awesome-icon icon="eye" />
-        Display settings
-      </a>
+      <div class="display_settings_wrapper">
+        <a class="display_settings" @click="$emit('toggleDisplaySettings')">
+          <font-awesome-icon icon="eye" />
+          Display settings
+        </a>
+      </div>
     </div>
     <table>
       <thead>
@@ -110,11 +110,13 @@
       ...mapGetters({
         resultsByName: 'results_by_name',
         filterByName: 'filter_by_name',
-        resultsUniqueKeys: 'results_unique_keys',
         activeSpecie: 'active_specie',
         activeDataset: 'active_dataset',
         routeToProjectPage: 'route_to_project_page',
       }),
+      resultsUniqueKeys() {
+        return this.results.map(item => item[this.keyForID]);
+      },
       keyForID() {
         return this.filterType === 'gene' ? 'geneid' : 'refexSampleId';
       },
@@ -132,6 +134,11 @@
       },
       results() {
         return this.resultsByName(this.filterType).results;
+      },
+    },
+    watch: {
+      activeDataset() {
+        this.checkedResults = [];
       },
     },
     methods: {
@@ -161,8 +168,11 @@
     padding: 0 90px
     > .results_title_wrapper
       display: flex
+      width: 100%
       align-items: center
       +sample_query
+      > .display_settings_wrapper
+        +display_settings_wrapper
       > button.show_all_btn
         +button
         margin-left: 18px

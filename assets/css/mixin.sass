@@ -116,13 +116,6 @@ $TOOLTIP_LAYER: 2
         &.checkbox
           text-align: center
           min-width: 25px
-        // &.checkbox
-        // &.gene_symbol
-        // &.gene_name
-        // &.alias
-        // &.NCBI_geneID
-        // &.annotation
-        // &.gene_expression_patterns
   > tbody
     border-bottom: 3px solid $BLACK
     > tr
@@ -183,3 +176,19 @@ $TOOLTIP_LAYER: 2
   background-color: $COLOR_6
   padding: $PADDING_SLIM
   border-radius: $BORDER_RADIUS_DEFAULT
+
+@mixin display_settings_wrapper
+  display: flex
+  justify-content: flex-end
+  position: sticky
+  margin-left: auto
+  top: 119px
+  background-color: #ffffff
+  z-index: 1
+  word-break: keep-all
+  > .display_settings
+    color: $MAIN_COLOR
+    text-decoration: underline
+    margin: 5px 0
+    &:hover
+      cursor: pointer

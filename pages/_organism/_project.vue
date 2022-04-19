@@ -10,7 +10,7 @@
           <span class="title">
             {{ `${infoForMainItem.symbol}` }}
             <span class="metadata">{{
-              `(${infoForMainItem.name}, NCBI GeneID: ${infoForMainItem.id})`
+              `(${infoForMainItem.name}, GeneID: ${infoForMainItem.id})`
             }}</span>
           </span>
         </h1>
@@ -218,18 +218,7 @@
             margin-top: -2px
             font-weight: normal
     > .display_settings_wrapper
-      display: flex
-      justify-content: flex-end
-      position: sticky
-      top: 119px
-      background-color: #ffffff
-      z-index: 1
-      > .display_settings
-        color: $MAIN_COLOR
-        text-decoration: underline
-        margin: 5px 0
-        &:hover
-          cursor: pointer
+      +display_settings_wrapper
     > table
       +table
       > thead > tr > th:nth-of-type(1),
