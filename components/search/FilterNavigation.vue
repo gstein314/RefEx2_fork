@@ -54,8 +54,9 @@
               background-color: rgba(255, 255, 255, 0.5)
               &.active
                   background-color: white
-              &:hover
+              &:hover:not(.active)
                   cursor: pointer
                   color: $MAIN_COLOR
                   background: rgba(255, 255, 255, 0.8)
+                  transition: 0.6s
 </style>

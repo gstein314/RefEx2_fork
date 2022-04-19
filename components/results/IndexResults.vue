@@ -135,13 +135,10 @@
     > .results_title_wrapper
       display: flex
       align-items: center
+      +sample_query
       > button.show_all_btn
         +button
         margin-left: 18px
-      > span
-        +sample_query
-        &.ex
-          margin-left: 20px
     > table
       +table
       > tbody
