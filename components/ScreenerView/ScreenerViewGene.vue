@@ -78,6 +78,12 @@
       },
     },
     watch: {
+      activeDataset() {
+        // reset all keys of this.parameters to ''
+        this.parameters = {
+          go: [],
+        };
+      },
       parameters() {
         this.$emit('updateParameters', { go: this.goTermString });
       },

@@ -78,6 +78,7 @@
         parameters: {},
         // will contain same keys as parameters. Autocompletion that does not come from the API should be hardcoded here in advance
         autoComplete: {},
+        autocompleteStaticData: {},
         debounce: null,
       };
     },
@@ -98,42 +99,49 @@
     },
     watch: {
       activeDataset() {
-        if (this.$store.state.active_filter !== 'sample') return;
         this.parameters = {};
         this.setAutoComplete();
         this.initiateParametersDataset();
       },
     },
-    created() {
-      this.setAutoComplete();
-      this.initiateParametersDataset();
+    async created() {
+      this.getAutoCompleteData().then(() => {
+        this.initiateParametersDataset();
+        this.setAutoComplete();
+      });
     },
     methods: {
-      async initiateParametersDataset() {
+      initiateParametersDataset() {
         for (const filter of this.filters) {
           const key = filter.column;
           this.$set(this.parameters, key, '');
-          this.$set(this.autoComplete, key, []);
+          if (!this.autoComplete[key]) this.$set(this.autoComplete, key, []);
         }
         this.$emit('updateParameters', { ...this.parameters });
       },
-      setAutoComplete() {
-        this.$axios
+      getAutoCompleteData() {
+        return this.$axios
           .$get(`api/cv`)
           .then(data => {
-            this.filters.forEach(filter => {
-              this.$set(
-                this.autoComplete,
-                filter.column,
-                filter.is_checkbox
-                  ? data[this.activeDataset.dataset][filter.column] ?? []
-                  : []
-              );
-            });
+            this.autocompleteStaticData = data;
           })
           .catch(error => {
-            console.log('error', error);
+            console.log(error);
           });
+      },
+      setAutoComplete() {
+        this.filters.forEach(filter => {
+          this.$set(
+            this.autoComplete,
+            filter.column,
+            filter.is_checkbox &&
+              this.autocompleteStaticData[this.activeDataset.dataset]
+              ? this.autocompleteStaticData[this.activeDataset.dataset][
+                  filter.column
+                ]
+              : []
+          );
+        });
       },
       toggleScreener() {
         this.isOpen = !this.isOpen;

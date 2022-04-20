@@ -14,6 +14,7 @@
             class="sample_value"
             @click="
               updateParams({
+                ...parameters,
                 text: example,
               })
             "
@@ -120,6 +121,7 @@
     },
     computed: {
       ...mapGetters({
+        activeFilter: 'active_filter',
         filterByName: 'filter_by_name',
         routeToProjectPage: 'route_to_project_page',
         activeDataset: 'active_dataset',
@@ -149,7 +151,7 @@
           .join('');
       },
       isNum() {
-        return this.typeOfQuery === 'numfound';
+        return this.typeOfQuery.includes('numfound');
       },
       queryPrefix() {
         return `${this.activeDataset.dataset}${this.$firstLetterUppercase(
@@ -184,7 +186,9 @@
     },
     watch: {
       activeDataset() {
-        this.showResults('reset numfound');
+        this.typeOfQuery = 'reset numfound';
+        // if (this.activeFilter.name !== this.filterType) return;
+        // this.showResults('reset numfound');
       },
       activeSpecie() {
         this.showResults('numfound');
@@ -192,10 +196,11 @@
     },
     methods: {
       updateParams(params) {
-        this.parameters = this.typeOfQuery.includes('reset')
-          ? { ...params }
-          : { ...this.parameters, ...params };
-        this.showResults('numfound');
+        this.parameters = { ...params };
+
+        this.showResults(
+          this.typeOfQuery === 'reset numfound' ? this.typeOfQuery : 'numfound'
+        );
       },
       // TODO: check if suggestions needs to be changed for sample
       getSuggestionList(suggest) {
@@ -210,6 +215,7 @@
         this.$router.push(this.routeToProjectPage(suggestion.entrezgene));
       },
       showResults(type = 'all') {
+        console.log(type);
         this.typeOfQuery = type;
         let results = [],
           results_num = 0;
@@ -221,7 +227,7 @@
             const prefix = this.queryPrefix.replace('Numfound', '');
             if (`${prefix}Numfound` in result.data) {
               results_num = result.data[prefix + 'Numfound'];
-              if (type === 'reset numfound') results = [];
+              // if (type === 'reset numfound') results = [];
             }
             if (prefix in result.data) results = result.data[prefix] || [];
           })
@@ -234,7 +240,7 @@
             this.$store.commit('set_results', {
               results,
               results_num,
-              filterType: this.filterObj.name,
+              filterType: this.filterType,
             });
           });
       },

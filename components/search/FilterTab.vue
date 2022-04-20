@@ -42,6 +42,7 @@
       ...mapGetters({
         activeDataset: 'active_dataset',
         resultsByName: 'results_by_name',
+        filterByName: 'filter_by_name',
       }),
       isActive() {
         return this.$vnode.key === this.$store.state.active_filter;
@@ -52,9 +53,8 @@
     },
     watch: {
       activeDataset() {
-        if (!this.isActive) return;
         this.filters = this.activeDataset[this.$vnode.key]?.filter || [
-          ...this.$store.getters.active_filter.filter,
+          ...this.filterByName('gene').filter,
         ];
       },
     },
