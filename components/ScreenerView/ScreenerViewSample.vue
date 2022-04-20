@@ -54,6 +54,7 @@
           :max-suggestions="100"
           class="text_search_sample_types"
           :placeholder="filter.examples ? filter.examples[0] : ''"
+          @input="updateParameter(filter.column, parameters[filter.column])"
         >
           <div
             slot="suggestion-item"

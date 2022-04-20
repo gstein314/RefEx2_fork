@@ -178,7 +178,7 @@
         const resultParams = this.isNum
           ? ''
           : `{${Object.keys(this.parameters)
-              .filter(param => param !== 'text')
+              .filter(param => !['text', 'go'].includes(param))
               .join(' ')} ${this.keyForID}}`;
         const suffix = this.isNum ? '' : ` ${this.queryPrefix}Numfound`;
         return `{${this.queryPrefix}${params}${resultParams}${suffix}}`;
@@ -188,7 +188,7 @@
       activeDataset() {
         this.typeOfQuery = 'reset numfound';
         // if (this.activeFilter.name !== this.filterType) return;
-        // this.showResults('reset numfound');
+        this.showResults('reset numfound');
       },
       activeSpecie() {
         this.showResults('numfound');
@@ -196,11 +196,9 @@
     },
     methods: {
       updateParams(params) {
-        this.parameters = { ...params };
+        this.parameters = { text: this.parameters.text, ...params };
 
-        this.showResults(
-          this.typeOfQuery === 'reset numfound' ? this.typeOfQuery : 'numfound'
-        );
+        this.showResults('numfound');
       },
       // TODO: check if suggestions needs to be changed for sample
       getSuggestionList(suggest) {
@@ -227,7 +225,6 @@
             const prefix = this.queryPrefix.replace('Numfound', '');
             if (`${prefix}Numfound` in result.data) {
               results_num = result.data[prefix + 'Numfound'];
-              // if (type === 'reset numfound') results = [];
             }
             if (prefix in result.data) results = result.data[prefix] || [];
           })
