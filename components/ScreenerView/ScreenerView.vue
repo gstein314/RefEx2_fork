@@ -1,4 +1,6 @@
 <template>
+  <!-- v-html setup neccesary for plugin, does NOT use user input/API data and is therefore safe to use -->
+  <!-- eslint-disable vue/no-v-html -->
   <div class="screener_wrapper" :class="{ open: isOpen }">
     <p class="screener_title" @click="toggleScreener">
       <font-awesome-icon icon="filter" class="filter" />
@@ -12,8 +14,6 @@
   </div>
 </template>
 <script>
-  /* eslint-disable vue/prop-name-casing */
-
   export default {
     data() {
       return {
@@ -85,6 +85,7 @@
     h3,h4
       display: flex
       gap: .5rem
+      margin-bottom: 0.5rem
       > span
         +sample_query
     input

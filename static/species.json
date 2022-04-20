@@ -1,12 +1,10 @@
 [
   {
     "name": "homo_sapiens",
-    "projects": ["FANTOM5"],
     "suggestions_key": "human"
   },
   {
     "name": "mus_musculus",
-    "projects": ["FANTOM5"],
     "suggestions_key": "mouse"
   }
 ]

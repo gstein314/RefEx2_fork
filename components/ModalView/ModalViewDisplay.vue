@@ -1,16 +1,16 @@
 <template>
-  <modal-view @click.native="$emit('close')">
+  <modal-view>
     <div class="modal display_settings_modal" @click.stop="">
       <p class="modal_title">
         <font-awesome-icon icon="eye" />
         Display settings
       </p>
       <div class="display_checkboxes">
-        <div v-for="(value, key) of filters" :key="key">
+        <div v-for="value of filters" :key="value.column">
           <input
-            :checked="value.isDisplayed"
+            :checked="value.is_displayed"
             type="checkbox"
-            @click="updateFilterModal(key, value.isDisplayed)"
+            @click="toggleDisplayOfFilter(value.column)"
           />
           <label :for="value.innerKey"> {{ value.label }} </label>
         </div>
@@ -20,26 +20,25 @@
 </template>
 <script>
   import ModalView from '~/components/ModalView/ModalView.vue';
-  import { mapGetters, mapMutations } from 'vuex';
   export default {
     components: {
       ModalView,
     },
-    computed: {
-      ...mapGetters({
-        filters: 'project_filters',
-      }),
+    props: {
+      filters: {
+        type: Array,
+        default: () => [],
+      },
     },
     methods: {
-      ...mapMutations({
-        updateProjectFilters: 'update_project_filters',
-      }),
-      updateFilterModal(filterKey, value) {
-        this.updateProjectFilters({
-          key: 'isDisplayed',
-          filter: !value,
-          filterKey,
-        });
+      toggleDisplayOfFilter(key) {
+        const copy = [...this.filters];
+        const itemIndex = this.filters.findIndex(item => item.column === key);
+        copy[itemIndex].is_displayed = !copy[itemIndex].is_displayed;
+        this.$emit('toggleDisplayOfFilter', copy);
+      },
+      toggleDisplaySettings() {
+        this.isDisplaySettings = !this.isDisplaySettings;
       },
     },
   };
