@@ -218,6 +218,9 @@
           })
           .catch(err => {
             console.log(err);
+            $store.commit('set_alert_modal', {
+              msg: 'Failed to get data in Search Bar',
+            });
           })
           .finally(() => {
             this.onEvent = false;
