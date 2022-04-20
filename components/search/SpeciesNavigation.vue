@@ -13,6 +13,7 @@
           <form>
             <select
               v-model="selectedProject[specie.name]"
+              class="specie_select"
               @change="
                 $store.commit(
                   'set_active_dataset',
@@ -89,24 +90,13 @@
             color: $MAIN_COLOR
           > .specie_wrapper
             > form
-              > select
+              > .specie_select
                 color: $MAIN_COLOR
         &:hover
           opacity: 1
           cursor: pointer
           color: $MAIN_COLOR
           transition: 0.6s
-          > .specie_wrapper
-            > form
-              > select
-                cursor: pointer
-                color: $MAIN_COLOR
-                transition: 0.6s
-                &:hover
-                  background-color: $MAIN_COLOR
-                  color: #fff
-                  border-radius: $BORDER_RADIUS_DEFAULT
-                  transition: 0.6s
         > svg
           align-self: flex-end
         > .specie_wrapper
@@ -119,9 +109,9 @@
             margin: 0
           > form
             margin-left: -4px
-            > select
-              border: none
-              color: $BLACK
-              &:focus
-                outline: none
+            > .specie_select
+              +select
+              background: none
+              font-size: inherit
+              width: auto
 </style>

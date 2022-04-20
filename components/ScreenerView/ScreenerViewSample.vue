@@ -34,6 +34,7 @@
         <select
           v-if="filter.is_checkbox"
           v-model="parameters[filter.column]"
+          class="fixed_select"
           @change="updateParameter(filter.column, $event.target.value)"
         >
           <option value="" label=""></option>
@@ -153,3 +154,8 @@
     },
   };
 </script>
+<style lang="sass" scoped>
+  .classification_wrapper
+    .fixed_select
+      +select
+</style>
