@@ -275,14 +275,11 @@ RES00001919	Melanocyte	3	primary cells	snapshot	UBERON:0001003	skin epidermis	CL
 RES00001920	Meningeal Cells	3	primary cells	snapshot	UBERON:0002360	meninx	CL:0000708	leptomeningeal cell	NA	NA	NA	NA
 RES00001921	Mesenchymal Stem Cells - Vertebral	1	primary cells	snapshot	UBERON:0002412	vertebra	CL:0002572	vertebral mesenchymal stem cell	NA	NA	NA	NA
 RES00001922	Mesenchymal Stem Cells - Wharton's Jelly	1	primary cells	snapshot	UBERON:0002331	umbilical cord	CL:0002568	mesenchymal stem cell of Wharton's jelly	NA	NA	fetus	female
-RES00001923	Mesenchymal Stem Cells - adipose	3	primary cells	snapshot	UBERON:0001013	adipose tissue	CL:0002570	mesenchymal stem cell of adipose	NA	NA	NA	NA
+RES00001923	Mesenchymal Stem Cells - adipose	4	primary cells	snapshot	UBERON:0001013	adipose tissue	CL:0002570	mesenchymal stem cell of adipose	NA	NA	NA	NA
 RES00001924	Mesenchymal Stem Cells - amniotic membrane	2	primary cells	snapshot	UBERON:0000305	amnion	CL:0002537	amnion mesenchymal stem cell	NA	NA	NA,fetus	female
 RES00001925	Mesenchymal Stem Cells - bone marrow	4	primary cells	snapshot	UBERON:0002371	bone marrow	CL:0002540	mesenchymal stem cell of the bone marrow	NA	NA	NA	NA
-RES00001926	Mesenchymal Stem Cells - hepatic	2	primary cells	snapshot	UBERON:0002107	liver	CL:0002571	hepatic mesenchymal stem cell	NA	NA	NA	NA
-RES00001927	Mesenchymal Stem Cells - umbilical	3	primary cells	snapshot	UBERON:0003422	mesenchyme of umbilical cord	CL:0002569	mesenchymal stem cell of umbilical cord	NA	NA	NA	NA
-RES00001928	Mesenchymal stem cells - adipose	1	primary cells	snapshot	UBERON:0001013	adipose tissue	CL:0002570	mesenchymal stem cell of adipose	NA	NA	NA	NA
-RES00001929	Mesenchymal stem cells - hepatic	1	primary cells	snapshot	UBERON:0002107	liver	CL:0002571	hepatic mesenchymal stem cell	NA	NA	NA	NA
-RES00001930	Mesenchymal stem cells - umbilical	1	primary cells	snapshot	UBERON:0003422	mesenchyme of umbilical cord	CL:0002569	mesenchymal stem cell of umbilical cord	NA	NA	NA	NA
+RES00001926	Mesenchymal Stem Cells - hepatic	3	primary cells	snapshot	UBERON:0002107	liver	CL:0002571	hepatic mesenchymal stem cell	NA	NA	NA	NA
+RES00001927	Mesenchymal Stem Cells - umbilical	4	primary cells	snapshot	UBERON:0003422	mesenchyme of umbilical cord	CL:0002569	mesenchymal stem cell of umbilical cord	NA	NA	NA	NA
 RES00001931	Mesothelial Cells	3	primary cells	snapshot	UBERON:0001136	mesothelium	CL:0000077	mesothelial cell	NA	NA	adult	female
 RES00001932	Monocyte-derived macrophages response to LPS, 00hr00min	3	primary cells	time courses	UBERON:0000178	blood	CL:0000235	macrophage	NA	NA	adult	NA
 RES00001933	Monocyte-derived macrophages response to LPS, 00hr15min	3	primary cells	time courses	UBERON:0000178	blood	CL:0000235	macrophage	NA	NA	adult	NA
@@ -414,9 +411,8 @@ RES00002058	Smooth Muscle Cells - Prostate	3	primary cells	snapshot	UBERON:00023
 RES00002059	Smooth Muscle Cells - Pulmonary Artery	3	primary cells	snapshot	UBERON:0002012	pulmonary artery	CL:0002591	smooth muscle cell of the pulmonary artery	NA	NA	adult	mixed
 RES00002060	Smooth Muscle Cells - Subclavian Artery	3	primary cells	snapshot	UBERON:0001533	subclavian artery	CL:0002595	smooth muscle cell of the subclavian artery	NA	NA	adult	mixed
 RES00002061	Smooth Muscle Cells - Tracheal	3	primary cells	snapshot	UBERON:0003126	trachea	CL:0002600	smooth muscle cell of trachea	NA	NA	NA	NA
-RES00002062	Smooth Muscle Cells - Umbilical Artery	3	primary cells	snapshot	UBERON:0001310	umbilical artery	CL:0002594	smooth muscle cell of the umbilical artery	NA	NA	infant	female
+RES00002062	Smooth Muscle Cells - Umbilical Artery	4	primary cells	snapshot	UBERON:0001310	umbilical artery	CL:0002594	smooth muscle cell of the umbilical artery	NA	NA	infant	female
 RES00002063	Smooth Muscle Cells - Umbilical Vein	3	primary cells	snapshot	UBERON:0002066	umbilical vein	CL:0002588	smooth muscle cell of the umbilical vein	NA	NA	NA	NA
-RES00002064	Smooth Muscle Cells - Umbilical artery	1	primary cells	snapshot	UBERON:0001310	umbilical artery	CL:0002594	smooth muscle cell of the umbilical artery	NA	NA	NA	NA
 RES00002065	Smooth Muscle Cells - Uterine	2	primary cells	snapshot	UBERON:0000995	uterus	CL:0002601	uterine smooth muscle cell	NA	NA	NA,adult	female
 RES00002066	Smooth muscle cells - airway, asthmatic	6	primary cells	snapshot	UBERON:0003126	trachea	CL:0002600	smooth muscle cell of trachea	NCIT:C28397	Asthma	NA	NA
 RES00002067	Smooth muscle cells - airway, control	4	primary cells	snapshot	UBERON:0003126	trachea	CL:0002600	smooth muscle cell of trachea	NA	NA	NA	NA
