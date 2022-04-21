@@ -148,7 +148,6 @@
             this.data = data;
           })
           .catch(function (error) {
-            console.log(error);
             $store.commit('set_alert_modal', {
               msg: 'Failed to get data in Modal View Gene',
             });

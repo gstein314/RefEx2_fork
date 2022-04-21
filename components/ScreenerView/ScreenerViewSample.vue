@@ -166,7 +166,6 @@
             this.$set(this.autoComplete, key, data);
           })
           .catch(error => {
-            console.log('error', error);
             $store.commit('set_alert_modal', {
               msg: 'Failed to get data in Screener View Sample',
             });
