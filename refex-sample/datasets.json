@@ -134,11 +134,19 @@
           "is_ontology": false
         },
         {
-          "column": "SubRegion",
-          "label": "Sub-region",
+          "column": "TissueCategory",
+          "label": "Tissue category",
           "note": "",
           "is_checkbox": true,
-          "is_displayed": true,
+          "is_displayed": false,
+          "is_ontology": false
+        },
+        {
+          "column": "TissueSubcategory",
+          "label": "Tissue subcategory",
+          "note": "",
+          "is_checkbox": true,
+          "is_displayed": false,
           "is_ontology": false
         },
         {
