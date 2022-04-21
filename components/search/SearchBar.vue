@@ -4,17 +4,17 @@
   <div class="text_search_area">
     <h2>Search Conditions</h2>
     <h3>
-      {{ title }}
       <span class="example"
         >e.g.
         <dl v-for="(condition, index) of conditions" :key="index">
-          <dt v-if="conditions.length > 1">{{ condition.label }}:</dt>
+          <dt>{{ condition.label }}:</dt>
           <dd
             v-for="(example, example_index) of condition.examples"
             :key="example_index"
             class="sample_value"
             @click="
               updateParams({
+                ...parameters,
                 text: example,
               })
             "
@@ -39,7 +39,7 @@
       @select="moveDetailpage"
     >
       <template slot="misc-item-above">
-        <button class="show_all_btn" @click="showResults">
+        <button class="show_all_btn" @click="showResults()">
           <font-awesome-icon icon="list" />
           Show all genes that match your query
         </button>
@@ -53,7 +53,7 @@
           `<b>${suggestion.symbol}</b>&nbsp;
           (${$boldenSuggestion(suggestion.name, parameters.text)}
           ${$boldenSuggestion(suggestion.alias, parameters.text)}
-          , NCBI_GeneID: ${$boldenSuggestion(
+          , GeneID: ${$boldenSuggestion(
             suggestion.entrezgene,
             parameters.text
           )})`
@@ -86,13 +86,13 @@
     </div>
     <ScreenerView>
       <component
-        :is="`screener-view-${filterObj.name}`"
+        :is="`screener-view-${filterType}`"
         @updateParameters="updateParams"
       ></component>
     </ScreenerView>
-    <button class="find_results_btn" @click="showResults">
+    <button class="find_results_btn" @click="showResults()">
       <font-awesome-icon icon="search" />
-      Find {{ filterObj.name }}s
+      Find {{ filterType }}s
     </button>
   </div>
 </template>
@@ -121,15 +121,20 @@
     },
     computed: {
       ...mapGetters({
+        activeFilter: 'active_filter',
         filterByName: 'filter_by_name',
         routeToProjectPage: 'route_to_project_page',
-        activeProject: 'active_project',
+        activeDataset: 'active_dataset',
         activeSpecie: 'active_specie',
       }),
+      // returns either gene or sample
+      filterType() {
+        return this.$vnode.key.split('_')[0];
+      },
       // TODO: turn into qql query
 
       filterObj() {
-        return this.filterByName(this.$vnode.key.split('_')[0]);
+        return this.activeDataset[this.filterType];
       },
       conditions() {
         return this.filterObj.search_conditions;
@@ -146,16 +151,18 @@
           .join('');
       },
       isNum() {
-        return this.typeOfQuery === 'numfound';
+        return this.typeOfQuery.includes('numfound');
       },
       queryPrefix() {
-        return `${
-          this.activeSpecie.suggestions_key
-        }${this.$firstLetterUppercase(
-          this.activeProject
-        )}${this.$firstLetterUppercase(this.filterObj.name)}${
-          this.isNum ? 'Numfound' : ''
-        }`;
+        return `${this.activeDataset.dataset}${this.$firstLetterUppercase(
+          this.filterType
+        )}${this.isNum ? 'Numfound' : ''}`;
+      },
+      keyForID() {
+        const fixedResultParamsForGene = 'symbol name alias geneid';
+        return this.filterType === 'gene'
+          ? fixedResultParamsForGene
+          : 'refexSampleId';
       },
       suggest_query() {
         let params = Object.entries(this.parameters)
@@ -170,16 +177,19 @@
         if (params !== '') params = `(${params})`;
         const resultParams = this.isNum
           ? ''
-          : `{${this.filterObj.columns.map(col => col.key).join(' ')} ${
-              this.filterObj.unique_key
-            }}`;
+          : `{${Object.keys(this.parameters)
+              .filter(param => !['text', 'go'].includes(param))
+              .join(' ')} ${this.keyForID}}`;
         const suffix = this.isNum ? '' : ` ${this.queryPrefix}Numfound`;
         return `{${this.queryPrefix}${params}${resultParams}${suffix}}`;
       },
     },
     watch: {
-      activeProject() {
-        this.showResults('numfound');
+      activeDataset() {
+        this.$set(this.parameters, 'text', '');
+        this.typeOfQuery = 'reset numfound';
+        // if (this.activeFilter.name !== this.filterType) return;
+        this.showResults('reset numfound');
       },
       activeSpecie() {
         this.showResults('numfound');
@@ -187,7 +197,8 @@
     },
     methods: {
       updateParams(params) {
-        this.parameters = { ...this.parameters, ...params };
+        this.parameters = { text: this.parameters.text, ...params };
+
         this.showResults('numfound');
       },
       // TODO: check if suggestions needs to be changed for sample
@@ -203,6 +214,7 @@
         this.$router.push(this.routeToProjectPage(suggestion.entrezgene));
       },
       showResults(type = 'all') {
+        console.log(type);
         this.typeOfQuery = type;
         let results = [],
           results_num = 0;
@@ -212,9 +224,10 @@
           })
           .then(result => {
             const prefix = this.queryPrefix.replace('Numfound', '');
-            if (prefix in result.data) results = result.data[prefix];
-            if (`${prefix}Numfound` in result.data)
+            if (`${prefix}Numfound` in result.data) {
               results_num = result.data[prefix + 'Numfound'];
+            }
+            if (prefix in result.data) results = result.data[prefix] || [];
           })
           .catch(err => {
             $store.commit('set_alert_modal', {
@@ -227,7 +240,7 @@
             this.$store.commit('set_results', {
               results,
               results_num,
-              filterType: this.filterObj.name,
+              filterType: this.filterType,
             });
           });
       },

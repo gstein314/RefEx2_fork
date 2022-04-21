@@ -5,9 +5,13 @@
         <font-awesome-icon icon="search" />
         Compare with comma separated ID list
       </p>
-      <div class="sample">
+      <div
+        v-for="(example, exampleIndex) of examples"
+        :key="exampleIndex"
+        class="sample"
+      >
         <span class="ex">e.g.&nbsp;</span>
-        <span class="sample_value" @click="setExample">{{
+        <span class="sample_value" @click="setExample(example.route)">{{
           example.label
         }}</span>
       </div>
@@ -40,20 +44,21 @@
     },
     computed: {
       ...mapGetters({
-        filter: 'active_filter',
+        activeDataset: 'active_dataset',
         routeToProjectPage: 'route_to_project_page',
         isOn: 'compare_modal',
       }),
-      example() {
-        return this.filter.item_comparison_example;
+      examples() {
+        return this.activeDataset[this.$store.state.active_filter]
+          .item_comparison_example;
       },
     },
     methods: {
       ...mapMutations({
         toggleCompareModal: 'set_compare_modal',
       }),
-      setExample() {
-        this.itemIdsForComparisonStr = this.example.route;
+      setExample(route) {
+        this.itemIdsForComparisonStr = route;
       },
       comparisonSearch() {
         // TODO: add error handling for invalid comparison input

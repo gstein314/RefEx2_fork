@@ -7,7 +7,7 @@
           :href="`https://www.ncbi.nlm.nih.gov/gene/?term=${data._id}`"
           target="_blank"
           >{{ `${data.symbol}`
-          }}<span>{{ ` (${data.name}, NCBI_GeneID: ${data._id})` }}</span></a
+          }}<span>{{ ` (${data.name}, GeneID: ${data._id})` }}</span></a
         >
         <div class="detail_contents">
           <p class="title">Alias</p>

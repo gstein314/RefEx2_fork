@@ -116,13 +116,6 @@ $TOOLTIP_LAYER: 2
         &.checkbox
           text-align: center
           min-width: 25px
-        // &.checkbox
-        // &.gene_symbol
-        // &.gene_name
-        // &.alias
-        // &.NCBI_geneID
-        // &.annotation
-        // &.gene_expression_patterns
   > tbody
     border-bottom: 3px solid $BLACK
     > tr
@@ -144,6 +137,23 @@ $TOOLTIP_LAYER: 2
             cursor: pointer
       &:nth-of-type(even)
         background-color: $MAIN_COLOR_PALE
+
+@mixin select
+  cursor: pointer
+  width: 70%
+  font-size: 22px
+  font-width: normal
+  padding: 4px
+  background: $MAIN_COLOR_PALE
+  border: none
+  border-radius: $BORDER_RADIUS_DEFAULT
+  transition: 0.6s
+  &:focus
+    outline: none
+  &:hover
+    background-color: $MAIN_COLOR
+    color: #fff
+    transition: all 0.3s
 
 @mixin modal_bg
   width: 100vw
@@ -183,3 +193,19 @@ $TOOLTIP_LAYER: 2
   background-color: $COLOR_6
   padding: $PADDING_SLIM
   border-radius: $BORDER_RADIUS_DEFAULT
+
+@mixin display_settings_wrapper
+  display: flex
+  justify-content: flex-end
+  position: sticky
+  margin-left: auto
+  top: 119px
+  background-color: #ffffff
+  z-index: 1
+  word-break: keep-all
+  > .display_settings
+    color: $MAIN_COLOR
+    text-decoration: underline
+    margin: 5px 0
+    &:hover
+      cursor: pointer

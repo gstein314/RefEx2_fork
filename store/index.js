@@ -1,3 +1,4 @@
+import datasets from '../refex-sample/datasets.json';
 import filters from '../static/filters.json';
 import species from '../static/species.json';
 
@@ -24,7 +25,7 @@ const numberFilterObj = ([min, max], value) => {
 export const state = () => ({
   active_specie: species[0], //default,
   active_filter: 'gene',
-  active_project: 'FANTOM5',
+  active_dataset: datasets[0].dataset,
   project_filters: {},
   filter_modal: null,
   gene_modal: null,
@@ -53,11 +54,11 @@ export const getters = {
   gene_modal(state) {
     return state.gene_modal;
   },
-  active_project(state) {
-    return state.active_project;
+  active_dataset(state) {
+    return datasets.find(dataset => dataset.dataset === state.active_dataset);
   },
   active_filter(state) {
-    return filters.find(col => col.name === state.active_filter);
+    return filters.find(filter => state.active_filter === filter.name);
   },
   alert_modal(state) {
     return state.alert_modal;
@@ -70,11 +71,6 @@ export const getters = {
   },
   results_by_name(state) {
     return filterName => state.results[filterName];
-  },
-  results_unique_keys(state, getters) {
-    return state.results[state.active_filter].results.map(
-      item => item[getters.active_filter.unique_key]
-    );
   },
 };
 
@@ -115,15 +111,15 @@ export const mutations = {
   set_specie(state, specieId) {
     state.active_specie = species.find(specie => specie.name === specieId);
   },
-  set_active_project(state, project) {
-    state.active_project = project;
+  set_active_dataset(state, project) {
+    state.active_dataset = project;
   },
   set_active_filter(state, filter = 'gene') {
     state.active_filter = filter;
   },
   set_results(
     state,
-    { results = [], results_num = 0, filterType = state.activeFilter }
+    { results = [], results_num = 0, filterType = state.active_filter }
   ) {
     state.results = {
       ...state.results,
