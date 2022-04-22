@@ -16,8 +16,8 @@
         <span
           class="sample_value"
           @click="handleSingleTagUpdate('GO:0030154', 'cell differentiation')"
-          >cell differentiation</span
-        >
+          >cell differentiation
+        </span>
       </span>
     </h3>
     <no-ssr>
@@ -36,14 +36,15 @@
           class="my-item"
           @click="props.performAdd(props.item)"
           v-html="$boldenSuggestion(item.text, temporaryParameters.goTerm)"
-        >
-          " >
-        </div>
+        ></div>
       </vue-tags-input>
     </no-ssr>
   </div>
 </template>
+
 <script>
+  import { mapGetters } from 'vuex';
+
   export default {
     data() {
       return {
@@ -55,6 +56,7 @@
         parameters: {
           go: [],
         },
+        // will contain same keys as parameters. Autocompletion that does not come from the API should be hardcoded here in advance
         autoComplete: {
           go: [],
         },
@@ -62,6 +64,9 @@
       };
     },
     computed: {
+      ...mapGetters({
+        activeDataset: 'active_dataset',
+      }),
       goTermString() {
         return this.parameters.go.map(tag => tag.id).join(', ');
       },
@@ -73,6 +78,12 @@
       },
     },
     watch: {
+      activeDataset() {
+        // reset all keys of this.parameters to ''
+        this.parameters = {
+          go: [],
+        };
+      },
       parameters() {
         this.$emit('updateParameters', { go: this.goTermString });
       },

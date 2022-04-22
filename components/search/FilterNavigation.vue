@@ -4,27 +4,25 @@
       <li
         v-for="(filter, index) of filters"
         :key="index"
-        :class="{ active: activeFilter.name === filter.name }"
-        @click="$store.commit('set_active_filter', filter.name)"
+        :class="{ active: activeFilter === filter }"
+        @click="$store.commit('set_active_filter', filter)"
       >
-        {{ filter.name }}
+        {{ filter }}
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-  import filters from '~/static/filters.json';
-
   export default {
     data() {
       return {
-        filters,
+        filters: ['gene', 'sample'],
       };
     },
     computed: {
       activeFilter() {
-        return this.$store.getters.active_filter;
+        return this.$store.state.active_filter;
       },
     },
   };
