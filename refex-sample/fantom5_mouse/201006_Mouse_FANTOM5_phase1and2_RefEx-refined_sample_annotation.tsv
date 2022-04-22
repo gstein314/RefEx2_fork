@@ -1,0 +1,1019 @@
+FANTOM5_Sample_ID	Characteristics [description]	Sample types category	Experiments category	Chracteristics [Species]	Characteristics [Sex]	Characteristics [Age]	Unit[Age]	Characteristics [Developmental stage]	UBERON ID	UBERON label	CL ID	CL label	NCIT ID	NCIT label
+13063-139I3	J2E erythroblastic leukemia response to erythropoietin, 00hr00min, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13129-140G6	J2E erythroblastic leukemia response to erythropoietin, 00hr00min, biol_rep2	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13195-141E9	J2E erythroblastic leukemia response to erythropoietin, 00hr00min, biol_rep3	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13064-139I4	J2E erythroblastic leukemia response to erythropoietin, 00hr15min, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13130-140G7	J2E erythroblastic leukemia response to erythropoietin, 00hr15min, biol_rep2	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13196-141F1	J2E erythroblastic leukemia response to erythropoietin, 00hr15min, biol_rep3	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13065-139I5	J2E erythroblastic leukemia response to erythropoietin, 00hr30min, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13131-140G8	J2E erythroblastic leukemia response to erythropoietin, 00hr30min, biol_rep2	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13197-141F2	J2E erythroblastic leukemia response to erythropoietin, 00hr30min, biol_rep3	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13066-139I6	J2E erythroblastic leukemia response to erythropoietin, 00hr45min, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13132-140G9	J2E erythroblastic leukemia response to erythropoietin, 00hr45min, biol_rep2	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13198-141F3	J2E erythroblastic leukemia response to erythropoietin, 00hr45min, biol_rep3	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13067-139I7	J2E erythroblastic leukemia response to erythropoietin, 01hr00min, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13133-140H1	J2E erythroblastic leukemia response to erythropoietin, 01hr00min, biol_rep2	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13199-141F4	J2E erythroblastic leukemia response to erythropoietin, 01hr00min, biol_rep3	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13068-139I8	J2E erythroblastic leukemia response to erythropoietin, 01hr20min, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13134-140H2	J2E erythroblastic leukemia response to erythropoietin, 01hr20min, biol_rep2	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13200-141F5	J2E erythroblastic leukemia response to erythropoietin, 01hr20min, biol_rep3	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13069-139I9	J2E erythroblastic leukemia response to erythropoietin, 01hr40min, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13135-140H3	J2E erythroblastic leukemia response to erythropoietin, 01hr40min, biol_rep2	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13201-141F6	J2E erythroblastic leukemia response to erythropoietin, 01hr40min, biol_rep3	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13070-140A1	J2E erythroblastic leukemia response to erythropoietin, 02hr00min, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13136-140H4	J2E erythroblastic leukemia response to erythropoietin, 02hr00min, biol_rep2	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13202-141F7	J2E erythroblastic leukemia response to erythropoietin, 02hr00min, biol_rep3	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13071-140A2	J2E erythroblastic leukemia response to erythropoietin, 02hr30min, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13137-140H5	J2E erythroblastic leukemia response to erythropoietin, 02hr30min, biol_rep2	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13203-141F8	J2E erythroblastic leukemia response to erythropoietin, 02hr30min, biol_rep3	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13072-140A3	J2E erythroblastic leukemia response to erythropoietin, 03hr00min, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13138-140H6	J2E erythroblastic leukemia response to erythropoietin, 03hr00min, biol_rep2	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13204-141F9	J2E erythroblastic leukemia response to erythropoietin, 03hr00min, biol_rep3	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13073-140A4	J2E erythroblastic leukemia response to erythropoietin, 03hr30min, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13139-140H7	J2E erythroblastic leukemia response to erythropoietin, 03hr30min, biol_rep2	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13205-141G1	J2E erythroblastic leukemia response to erythropoietin, 03hr30min, biol_rep3	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13074-140A5	J2E erythroblastic leukemia response to erythropoietin, 04hr, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13140-140H8	J2E erythroblastic leukemia response to erythropoietin, 04hr, biol_rep2	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13206-141G2	J2E erythroblastic leukemia response to erythropoietin, 04hr, biol_rep3	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13075-140A6	J2E erythroblastic leukemia response to erythropoietin, 06hr, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13141-140H9	J2E erythroblastic leukemia response to erythropoietin, 06hr, biol_rep2	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13207-141G3	J2E erythroblastic leukemia response to erythropoietin, 06hr, biol_rep3	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13076-140A7	J2E erythroblastic leukemia response to erythropoietin, 12hr, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13142-140I1	J2E erythroblastic leukemia response to erythropoietin, 12hr, biol_rep2	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13208-141G4	J2E erythroblastic leukemia response to erythropoietin, 12hr, biol_rep3	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13077-140A8	J2E erythroblastic leukemia response to erythropoietin, 24hr, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13143-140I2	J2E erythroblastic leukemia response to erythropoietin, 24hr, biol_rep2	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13209-141G5	J2E erythroblastic leukemia response to erythropoietin, 24hr, biol_rep3	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13078-140A9	J2E erythroblastic leukemia response to erythropoietin, 48hr, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13144-140I3	J2E erythroblastic leukemia response to erythropoietin, 48hr, biol_rep2	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13210-141G6	J2E erythroblastic leukemia response to erythropoietin, 48hr, biol_rep3	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+13297-142H3	trophoblast stem cell line B1 differentiation, day00, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0000358	blastocyst	CL:0000351	trophoblast cell	NA	NA
+13298-142H4	trophoblast stem cell line B1 differentiation, day01, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	female	NA	NA	NA	NA	NA	CL:0000819	B-1 B cell	NA	NA
+13299-142H5	trophoblast stem cell line B1 differentiation, day02, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	female	NA	NA	NA	NA	NA	CL:0000819	B-1 B cell	NA	NA
+13300-142H6	trophoblast stem cell line B1 differentiation, day03, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	female	NA	NA	NA	NA	NA	CL:0000819	B-1 B cell	NA	NA
+13301-142H7	trophoblast stem cell line B1 differentiation, day04, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	female	NA	NA	NA	NA	NA	CL:0000819	B-1 B cell	NA	NA
+13302-142H8	trophoblast stem cell line B1 differentiation, day05, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	female	NA	NA	NA	NA	NA	CL:0000819	B-1 B cell	NA	NA
+13303-142H9	trophoblast stem cell line B1 differentiation, day06, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	female	NA	NA	NA	NA	NA	CL:0000819	B-1 B cell	NA	NA
+13283-142F7	trophoblast stem cell line R1AB differentiation, day00, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0000358	blastocyst	CL:0000351	trophoblast cell	NA	NA
+13284-142F8	trophoblast stem cell line R1AB differentiation, day01, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	male	NA	NA	NA	NA	NA	NA	NA	NA	NA
+13285-142F9	trophoblast stem cell line R1AB differentiation, day02, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	male	NA	NA	NA	NA	NA	NA	NA	NA	NA
+13286-142G1	trophoblast stem cell line R1AB differentiation, day03, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	male	NA	NA	NA	NA	NA	NA	NA	NA	NA
+13287-142G2	trophoblast stem cell line R1AB differentiation, day04, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	male	NA	NA	NA	NA	NA	NA	NA	NA	NA
+13288-142G3	trophoblast stem cell line R1AB differentiation, day05, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	male	NA	NA	NA	NA	NA	NA	NA	NA	NA
+13289-142G4	trophoblast stem cell line R1AB differentiation, day06, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	male	NA	NA	NA	NA	NA	NA	NA	NA	NA
+13290-142G5	trophoblast stem cell line Rybp differentiation, day00, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0000358	blastocyst	CL:0000351	trophoblast cell	NA	NA
+13291-142G6	trophoblast stem cell line Rybp differentiation, day01, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	male	NA	NA	NA	NA	NA	NA	NA	NA	NA
+13292-142G7	trophoblast stem cell line Rybp differentiation, day02, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	male	NA	NA	NA	NA	NA	NA	NA	NA	NA
+13293-142G8	trophoblast stem cell line Rybp differentiation, day03, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	male	NA	NA	NA	NA	NA	NA	NA	NA	NA
+13294-142G9	trophoblast stem cell line Rybp differentiation, day04, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	male	NA	NA	NA	NA	NA	NA	NA	NA	NA
+13295-142H1	trophoblast stem cell line Rybp differentiation, day05, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	male	NA	NA	NA	NA	NA	NA	NA	NA	NA
+13296-142H2	trophoblast stem cell line Rybp differentiation, day06, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	male	NA	NA	NA	NA	NA	NA	NA	NA	NA
+1830-49C7	mouse fibroblast cell line: CRL-1658 NIH/3T3	cell lines	snapshot	Mouse (Mus musculus)	NA	NA	NA	embryo	NA	NA	CL:0000057	fibroblast	NA	NA
+12971-138H1	TSt-4/DLL1 feeder cells, biol_rep1	cell lines	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002370	thymus	NA	NA	NA	NA
+12987-138I8	TSt-4/DLL1 feeder cells, biol_rep2	cell lines	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002370	thymus	NA	NA	NA	NA
+13003-139B6	TSt-4/DLL1 feeder cells, biol_rep3	cell lines	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002370	thymus	NA	NA	NA	NA
+13532-145G4	cerebellar granule cells, embryo E13, biol_rep1 (E13R1)	primary cells	time courses	Mouse (Mus musculus)	NA	13	day	embryo	UBERON:0002037	cerebellum	CL:0001031	cerebellar granule cell	NA	NA
+13533-145G5	cerebellar granule cells, embryo E13, biol_rep2 (E13R2)	primary cells	time courses	Mouse (Mus musculus)	NA	13	day	embryo	UBERON:0002037	cerebellum	CL:0001031	cerebellar granule cell	NA	NA
+13534-145G6	cerebellar granule cells, embryo E13, biol_rep3 (E13R3)	primary cells	time courses	Mouse (Mus musculus)	NA	13	day	embryo	UBERON:0002037	cerebellum	CL:0001031	cerebellar granule cell	NA	NA
+13535-145G7	cerebellar granule cells, embryo E15, biol_rep1 (E15R1)	primary cells	time courses	Mouse (Mus musculus)	NA	15	day	embryo	UBERON:0002037	cerebellum	CL:0001031	cerebellar granule cell	NA	NA
+13536-145G8	cerebellar granule cells, embryo E15, biol_rep2 (E15R2)	primary cells	time courses	Mouse (Mus musculus)	NA	15	day	embryo	UBERON:0002037	cerebellum	CL:0001031	cerebellar granule cell	NA	NA
+13537-145G9	cerebellar granule cells, embryo E15, biol_rep3 (E15R3)	primary cells	time courses	Mouse (Mus musculus)	NA	15	day	embryo	UBERON:0002037	cerebellum	CL:0001031	cerebellar granule cell	NA	NA
+13538-145H1	cerebellar granule cells, embryo E18, biol_rep1 (E18R1)	primary cells	time courses	Mouse (Mus musculus)	NA	18	day	embryo	UBERON:0002037	cerebellum	CL:0001031	cerebellar granule cell	NA	NA
+13539-145H2	cerebellar granule cells, embryo E18, biol_rep2 (E18R2)	primary cells	time courses	Mouse (Mus musculus)	NA	18	day	embryo	UBERON:0002037	cerebellum	CL:0001031	cerebellar granule cell	NA	NA
+13540-145H3	cerebellar granule cells, embryo E18, biol_rep3 (E13R3)	primary cells	time courses	Mouse (Mus musculus)	NA	18	day	embryo	UBERON:0002037	cerebellum	CL:0001031	cerebellar granule cell	NA	NA
+13613-146G4	hepatic stellate cells, partial hepatectomy, 02hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002107	liver	CL:0000632	hepatic stellate cell	NA	NA
+13616-146G7	hepatic stellate cells, partial hepatectomy, 30hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002107	liver	CL:0000632	hepatic stellate cell	NA	NA
+13617-146G8	hepatic stellate cells, partial hepatectomy, 30hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002107	liver	CL:0000632	hepatic stellate cell	NA	NA
+13618-146G9	hepatic stellate cells, partial hepatectomy, 30hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002107	liver	CL:0000632	hepatic stellate cell	NA	NA
+13619-146H1	hepatic stellate cells, partial hepatectomy, 48hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002107	liver	CL:0000632	hepatic stellate cell	NA	NA
+13620-146H2	hepatic stellate cells, partial hepatectomy, 48hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002107	liver	CL:0000632	hepatic stellate cell	NA	NA
+13621-146H3	hepatic stellate cells, partial hepatectomy, 48hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002107	liver	CL:0000632	hepatic stellate cell	NA	NA
+13622-146H4	hepatic stellate cells, partial hepatectomy, week01, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002107	liver	CL:0000632	hepatic stellate cell	NA	NA
+13610-146G1	hepatic stellate cells, sham operation, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002107	liver	CL:0000632	hepatic stellate cell	NA	NA
+13611-146G2	hepatic stellate cells, sham operation, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002107	liver	CL:0000632	hepatic stellate cell	NA	NA
+13612-146G3	hepatic stellate cells, sham operation, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002107	liver	CL:0000632	hepatic stellate cell	NA	NA
+13583-146D1	hepatocytes, partial hepatectomy, 02hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002107	liver	CL:0000182	hepatocyte	NA	NA
+13584-146D2	hepatocytes, partial hepatectomy, 02hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002107	liver	CL:0000182	hepatocyte	NA	NA
+13585-146D3	hepatocytes, partial hepatectomy, 02hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002107	liver	CL:0000182	hepatocyte	NA	NA
+13586-146D4	hepatocytes, partial hepatectomy, 30hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002107	liver	CL:0000182	hepatocyte	NA	NA
+13587-146D5	hepatocytes, partial hepatectomy, 30hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002107	liver	CL:0000182	hepatocyte	NA	NA
+13588-146D6	hepatocytes, partial hepatectomy, 30hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002107	liver	CL:0000182	hepatocyte	NA	NA
+13589-146D7	hepatocytes, partial hepatectomy, 48hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002107	liver	CL:0000182	hepatocyte	NA	NA
+13590-146D8	hepatocytes, partial hepatectomy, 48hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002107	liver	CL:0000182	hepatocyte	NA	NA
+13591-146D9	hepatocytes, partial hepatectomy, 48hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002107	liver	CL:0000182	hepatocyte	NA	NA
+13592-146E1	hepatocytes, partial hepatectomy, week01, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002107	liver	CL:0000182	hepatocyte	NA	NA
+13593-146E2	hepatocytes, partial hepatectomy, week01, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002107	liver	CL:0000182	hepatocyte	NA	NA
+13594-146E3	hepatocytes, partial hepatectomy, week01, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002107	liver	CL:0000182	hepatocyte	NA	NA
+13580-146C7	hepatocytes, sham operation, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002107	liver	CL:0000182	hepatocyte	NA	NA
+13581-146C8	hepatocytes, sham operation, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002107	liver	CL:0000182	hepatocyte	NA	NA
+13582-146C9	hepatocytes, sham operation, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002107	liver	CL:0000182	hepatocyte	NA	NA
+13598-146E7	liver sinusoidal endothelial cells, partial hepatectomy, 02hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0001281	hepatic sinusoid	CL:1000398	endothelial cell of hepatic sinusoid	NA	NA
+13599-146E8	liver sinusoidal endothelial cells, partial hepatectomy, 02hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0001281	hepatic sinusoid	CL:1000398	endothelial cell of hepatic sinusoid	NA	NA
+13600-146E9	liver sinusoidal endothelial cells, partial hepatectomy, 02hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0001281	hepatic sinusoid	CL:1000398	endothelial cell of hepatic sinusoid	NA	NA
+13601-146F1	liver sinusoidal endothelial cells, partial hepatectomy, 30hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0001281	hepatic sinusoid	CL:1000398	endothelial cell of hepatic sinusoid	NA	NA
+13602-146F2	liver sinusoidal endothelial cells, partial hepatectomy, 30hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0001281	hepatic sinusoid	CL:1000398	endothelial cell of hepatic sinusoid	NA	NA
+13603-146F3	liver sinusoidal endothelial cells, partial hepatectomy, 30hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0001281	hepatic sinusoid	CL:1000398	endothelial cell of hepatic sinusoid	NA	NA
+13604-146F4	liver sinusoidal endothelial cells, partial hepatectomy, 48hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0001281	hepatic sinusoid	CL:1000398	endothelial cell of hepatic sinusoid	NA	NA
+13605-146F5	liver sinusoidal endothelial cells, partial hepatectomy, 48hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0001281	hepatic sinusoid	CL:1000398	endothelial cell of hepatic sinusoid	NA	NA
+13606-146F6	liver sinusoidal endothelial cells, partial hepatectomy, 48hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0001281	hepatic sinusoid	CL:1000398	endothelial cell of hepatic sinusoid	NA	NA
+13607-146F7	liver sinusoidal endothelial cells, partial hepatectomy, week01, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0001281	hepatic sinusoid	CL:1000398	endothelial cell of hepatic sinusoid	NA	NA
+13608-146F8	liver sinusoidal endothelial cells, partial hepatectomy, week01, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0001281	hepatic sinusoid	CL:1000398	endothelial cell of hepatic sinusoid	NA	NA
+13609-146F9	liver sinusoidal endothelial cells, partial hepatectomy, week01, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0001281	hepatic sinusoid	CL:1000398	endothelial cell of hepatic sinusoid	NA	NA
+13595-146E4	liver sinusoidal endothelial cells, sham operation, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0001281	hepatic sinusoid	CL:1000398	endothelial cell of hepatic sinusoid	NA	NA
+13596-146E5	liver sinusoidal endothelial cells, sham operation, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0001281	hepatic sinusoid	CL:1000398	endothelial cell of hepatic sinusoid	NA	NA
+13597-146E6	liver sinusoidal endothelial cells, sham operation, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0001281	hepatic sinusoid	CL:1000398	endothelial cell of hepatic sinusoid	NA	NA
+3560-170A1	macrophage, bone marrow derived, pool1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0002476	bone marrow macrophage	NA	NA
+3632-171A1	macrophage, bone marrow derived, pool2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0002476	bone marrow macrophage	NA	NA
+3704-172A1	macrophage, bone marrow derived, pool3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0002476	bone marrow macrophage	NA	NA
+3607-170C6	macrophage, TB infection, non-stimulated BMDM, with Mtb, 028hr(004h after stimulation), biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3679-171C6	macrophage, TB infection, non-stimulated BMDM, with Mtb, 028hr(004h after stimulation), biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3972-173I4	macrophage, TB infection, non-stimulated BMDM, with Mtb, 028hr(004h after stimulation), biol_rep4	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3608-170D6	macrophage, TB infection, non-stimulated BMDM, with Mtb, 036hr(012h after stimulation), biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3680-171D6	macrophage, TB infection, non-stimulated BMDM, with Mtb, 036hr(012h after stimulation), biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3973-173A5	macrophage, TB infection, non-stimulated BMDM, with Mtb, 036hr(012h after stimulation), biol_rep4	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3609-170E6	macrophage, TB infection, non-stimulated BMDM, with Mtb, 048hr(024h after stimulation), biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3681-171E6	macrophage, TB infection, non-stimulated BMDM, with Mtb, 048hr(024h after stimulation), biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3974-173B5	macrophage, TB infection, non-stimulated BMDM, with Mtb, 048hr(024h after stimulation), biol_rep4	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3610-170F6	macrophage, TB infection, non-stimulated BMDM, with Mtb, 072hr(048h after stimulation), biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3682-171F6	macrophage, TB infection, non-stimulated BMDM, with Mtb, 072hr(048h after stimulation), biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3975-173C5	macrophage, TB infection, non-stimulated BMDM, with Mtb, 072hr(048h after stimulation), biol_rep4	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3611-170G6	macrophage, TB infection, non-stimulated BMDM, with Mtb, 120hr(096h after stimulation), biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3683-171G6	macrophage, TB infection, non-stimulated BMDM, with Mtb, 120hr(096h after stimulation), biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3976-173D5	macrophage, TB infection, non-stimulated BMDM, with Mtb, 120hr(096h after stimulation), biol_rep4	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3705-172B1	macrophage, TB infection, non-stimulated BMDM, without Mtb, 004hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3706-172C1	macrophage, TB infection, non-stimulated BMDM, without Mtb, 006hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3707-172D1	macrophage, TB infection, non-stimulated BMDM, without Mtb, 012hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3561-170B1	macrophage, TB infection, non-stimulated BMDM, without Mtb, 024hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3633-171B1	macrophage, TB infection, non-stimulated BMDM, without Mtb, 024hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3708-172E1	macrophage, TB infection, non-stimulated BMDM, without Mtb, 024hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3967-173D4	macrophage, TB infection, non-stimulated BMDM, without Mtb, 024hr, biol_rep4	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3562-170C1	macrophage, TB infection, non-stimulated BMDM, without Mtb, 028hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3634-171C1	macrophage, TB infection, non-stimulated BMDM, without Mtb, 028hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3709-172F1	macrophage, TB infection, non-stimulated BMDM, without Mtb, 028hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3563-170D1	macrophage, TB infection, non-stimulated BMDM, without Mtb, 036hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3635-171D1	macrophage, TB infection, non-stimulated BMDM, without Mtb, 036hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3710-172G1	macrophage, TB infection, non-stimulated BMDM, without Mtb, 036hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3564-170E1	macrophage, TB infection, non-stimulated BMDM, without Mtb, 048hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3636-171E1	macrophage, TB infection, non-stimulated BMDM, without Mtb, 048hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3711-172H1	macrophage, TB infection, non-stimulated BMDM, without Mtb, 048hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3565-170F1	macrophage, TB infection, non-stimulated BMDM, without Mtb, 072hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3637-171F1	macrophage, TB infection, non-stimulated BMDM, without Mtb, 072hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3712-172I1	macrophage, TB infection, non-stimulated BMDM, without Mtb, 072hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3566-170G1	macrophage, TB infection, non-stimulated BMDM, without Mtb, 120hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3638-171G1	macrophage, TB infection, non-stimulated BMDM, without Mtb, 120hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3713-172A2	macrophage, TB infection, non-stimulated BMDM, without Mtb, 120hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3612-170H6	macrophage, TB infection, stimulated BMDM+IFNg(caMph), with Mtb, 028hr(004h after stimulation), biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3684-171H6	macrophage, TB infection, stimulated BMDM+IFNg(caMph), with Mtb, 028hr(004h after stimulation), biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3977-173E5	macrophage, TB infection, stimulated BMDM+IFNg(caMph), with Mtb, 028hr(004h after stimulation), biol_rep4	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3613-170I6	macrophage, TB infection, stimulated BMDM+IFNg(caMph), with Mtb, 036hr(012h after stimulation), biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3685-171I6	macrophage, TB infection, stimulated BMDM+IFNg(caMph), with Mtb, 036hr(012h after stimulation), biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3978-173F5	macrophage, TB infection, stimulated BMDM+IFNg(caMph), with Mtb, 036hr(012h after stimulation), biol_rep4	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3614-170A7	macrophage, TB infection, stimulated BMDM+IFNg(caMph), with Mtb, 048hr(024h after stimulation), biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3686-171A7	macrophage, TB infection, stimulated BMDM+IFNg(caMph), with Mtb, 048hr(024h after stimulation), biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3979-173G5	macrophage, TB infection, stimulated BMDM+IFNg(caMph), with Mtb, 048hr(024h after stimulation), biol_rep4	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3615-170B7	macrophage, TB infection, stimulated BMDM+IFNg(caMph), with Mtb, 072hr(048h after stimulation), biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3687-171B7	macrophage, TB infection, stimulated BMDM+IFNg(caMph), with Mtb, 072hr(048h after stimulation), biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3980-173H5	macrophage, TB infection, stimulated BMDM+IFNg(caMph), with Mtb, 072hr(048h after stimulation), biol_rep4	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3616-170C7	macrophage, TB infection, stimulated BMDM+IFNg(caMph), with Mtb, 120hr(096h after stimulation), biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3688-171C7	macrophage, TB infection, stimulated BMDM+IFNg(caMph), with Mtb, 120hr(096h after stimulation), biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3981-173I5	macrophage, TB infection, stimulated BMDM+IFNg(caMph), with Mtb, 120hr(096h after stimulation), biol_rep4	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3567-170H1	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 002hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3639-171H1	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 002hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3714-172B2	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 002hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3568-170I1	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 004hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3640-171I1	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 004hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3715-172C2	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 004hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3569-170A2	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 006hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3641-171A2	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 006hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3716-172D2	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 006hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3570-170B2	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 012hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3642-171B2	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 012hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3717-172E2	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 012hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3571-170C2	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 024hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3643-171C2	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 024hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3718-172F2	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 024hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3968-173E4	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 024hr, biol_rep4	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3572-170D2	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 028hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3644-171D2	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 028hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3719-172G2	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 028hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3573-170E2	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 036hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3645-171E2	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 036hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3720-172H2	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 036hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3574-170F2	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 048hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3646-171F2	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 048hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3721-172I2	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 048hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3575-170G2	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 072hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3647-171G2	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 072hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3722-172A3	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 072hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3576-170H2	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 120hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3648-171H2	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 120hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3723-172B3	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 120hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3617-170D7	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), with Mtb, 028hr(004h after stimulation), biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3689-171D7	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), with Mtb, 028hr(004h after stimulation), biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3982-173A6	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), with Mtb, 028hr(004h after stimulation), biol_rep4	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3618-170E7	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), with Mtb, 036hr(012h after stimulation), biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3690-171E7	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), with Mtb, 036hr(012h after stimulation), biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3619-170F7	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), with Mtb, 048hr(024h after stimulation), biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3691-171F7	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), with Mtb, 048hr(024h after stimulation), biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3984-173C6	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), with Mtb, 048hr(024h after stimulation), biol_rep4	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3620-170G7	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), with Mtb, 072hr(048h after stimulation), biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3692-171G7	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), with Mtb, 072hr(048h after stimulation), biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3985-173D6	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), with Mtb, 072hr(048h after stimulation), biol_rep4	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3621-170H7	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), with Mtb, 120hr(096h after stimulation), biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3693-171H7	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), with Mtb, 120hr(096h after stimulation), biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3986-173E6	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), with Mtb, 120hr(096h after stimulation), biol_rep4	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3577-170I2	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 002hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3649-171I2	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 002hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3724-172C3	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 002hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3578-170A3	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 004hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3650-171A3	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 004hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3725-172D3	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 004hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3579-170B3	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 006hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3651-171B3	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 006hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3726-172E3	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 006hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3580-170C3	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 012hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3652-171C3	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 012hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3727-172F3	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 012hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3581-170D3	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 024hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3653-171D3	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 024hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3728-172G3	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 024hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3969-173F4	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 024hr, biol_rep4	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3582-170E3	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 028hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3654-171E3	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 028hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3729-172H3	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 028hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3583-170F3	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 036hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3655-171F3	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 036hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3730-172I3	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 036hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3584-170G3	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 048hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3656-171G3	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 048hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3731-172A4	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 048hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3585-170H3	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 072hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3657-171H3	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 072hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3732-172B4	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 072hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3586-170I3	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 120hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3658-171I3	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 120hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3733-172C4	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 120hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3627-170E8	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), with Mtb, 028hr(004h after stimulation), biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3699-171E8	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), with Mtb, 028hr(004h after stimulation), biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3992-173B7	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), with Mtb, 028hr(004h after stimulation), biol_rep4	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3628-170F8	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), with Mtb, 036hr(012h after stimulation), biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3700-171F8	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), with Mtb, 036hr(012h after stimulation), biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3993-173C7	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), with Mtb, 036hr(012h after stimulation), biol_rep4	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3629-170G8	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), with Mtb, 048hr(024h after stimulation), biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3701-171G8	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), with Mtb, 048hr(024h after stimulation), biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3994-173D7	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), with Mtb, 048hr(024h after stimulation), biol_rep4	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3630-170H8	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), with Mtb, 072hr(048h after stimulation), biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3702-171H8	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), with Mtb, 072hr(048h after stimulation), biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3995-173E7	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), with Mtb, 072hr(048h after stimulation), biol_rep4	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3631-170I8	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), with Mtb, 120hr(096h after stimulation), biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3703-171I8	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), with Mtb, 120hr(096h after stimulation), biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3996-173F7	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), with Mtb, 120hr(096h after stimulation), biol_rep4	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3597-170B5	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 002hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3669-171B5	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 002hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3744-172E5	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 002hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3598-170C5	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 004hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3670-171C5	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 004hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3745-172F5	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 004hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3599-170D5	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 006hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3671-171D5	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 006hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3746-172G5	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 006hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3600-170E5	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 012hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3672-171E5	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 012hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3747-172H5	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 012hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3601-170F5	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 024hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3673-171F5	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 024hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3748-172I5	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 024hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3971-173H4	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 024hr, biol_rep4	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3602-170G5	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 028hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3674-171G5	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 028hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3749-172A6	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 028hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3603-170H5	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 036hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3675-171H5	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 036hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3750-172B6	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 036hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3604-170I5	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 048hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3676-171I5	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 048hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3751-172C6	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 048hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3605-170A6	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 072hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3677-171A6	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 072hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3752-172D6	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 072hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3606-170B6	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 120hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3678-171B6	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 120hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3753-172E6	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 120hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3622-170I7	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), with Mtb, 028hr(004h after stimulation), biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3694-171I7	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), with Mtb, 028hr(004h after stimulation), biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3987-173F6	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), with Mtb, 028hr(004h after stimulation), biol_rep4	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3623-170A8	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), with Mtb, 036hr(012h after stimulation), biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3695-171A8	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), with Mtb, 036hr(012h after stimulation), biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3988-173G6	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), with Mtb, 036hr(012h after stimulation), biol_rep4	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3624-170B8	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), with Mtb, 048hr(024h after stimulation), biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3696-171B8	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), with Mtb, 048hr(024h after stimulation), biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3989-173H6	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), with Mtb, 048hr(024h after stimulation), biol_rep4	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3625-170C8	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), with Mtb, 072hr(048h after stimulation), biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3697-171C8	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), with Mtb, 072hr(048h after stimulation), biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3990-173I6	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), with Mtb, 072hr(048h after stimulation), biol_rep4	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3626-170D8	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), with Mtb, 120hr(096h after stimulation), biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3698-171D8	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), with Mtb, 120hr(096h after stimulation), biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3991-173A7	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), with Mtb, 120hr(096h after stimulation), biol_rep4	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3587-170A4	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 002hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3659-171A4	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 002hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3734-172D4	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 002hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3588-170B4	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 004hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3660-171B4	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 004hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3735-172E4	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 004hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3589-170C4	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 006hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3661-171C4	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 006hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3736-172F4	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 006hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3590-170D4	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 012hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3662-171D4	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 012hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3737-172G4	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 012hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3591-170E4	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 024hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3663-171E4	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 024hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3738-172H4	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 024hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3970-173G4	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 024hr, biol_rep4	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3592-170F4	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 028hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3664-171F4	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 028hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3739-172I4	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 028hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3593-170G4	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 036hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3665-171G4	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 036hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3740-172A5	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 036hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3594-170H4	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 048hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3666-171H4	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 048hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3741-172B5	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 048hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3595-170I4	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 072hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3667-171I4	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 072hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3742-172C5	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 072hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3596-170A5	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 120hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3668-171A5	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 120hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+3743-172D5	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 120hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+13367-143G1	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 000hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13368-143G2	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 000hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13369-143G3	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 000hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13370-143G4	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 004hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13371-143G5	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 004hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13372-143G6	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 004hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13373-143G7	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 008hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13374-143G8	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 008hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13375-143G9	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 008hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13376-143H1	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 012hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13377-143H2	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 012hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13378-143H3	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 012hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13379-143H4	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 016hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13380-143H5	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 016hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13381-143H6	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 016hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13382-143H7	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 020hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13383-143H8	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 020hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13384-143H9	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 020hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13385-143I1	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 024hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13386-143I2	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 024hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13387-143I3	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 024hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13388-143I4	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 030hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13389-143I5	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 030hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13390-143I6	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 030hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13391-143I7	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 036hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13392-143I8	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 036hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13393-143I9	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 036hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13394-144A1	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 042hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13395-144A2	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 042hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13396-144A3	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 042hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13397-144A4	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 048hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13398-144A5	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 048hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13399-144A6	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 048hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13400-144A7	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 054hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13401-144A8	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 054hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13402-144A9	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 054hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13403-144B1	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 060hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13404-144B2	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 060hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13405-144B3	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 060hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13406-144B4	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 066hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13407-144B5	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 066hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13408-144B6	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 066hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13409-144B7	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 072hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13410-144B8	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 072hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13411-144B9	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 072hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13412-144C1	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 084hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13413-144C2	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 084hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13414-144C3	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 084hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13415-144C4	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 096hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13416-144C5	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 096hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13417-144C6	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 096hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13418-144C7	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 120hr, biol_rep1	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13419-144C8	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 120hr, biol_rep2	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+13420-144C9	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 120hr, biol_rep3	primary cells	time courses	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+11710-123B9	Astrocytes, donor1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000955	brain	CL:0000127	astrocyte	NA	NA
+12158-128G7	Atoh+ Inner ear hair cells - organ of corti, pool1	primary cells	snapshot	Mouse (Mus musculus)	mixed	NA	NA	NA	UBERON:0002227	spiral organ of cochlea	CL:0000589	cochlear inner hair cell	NA	NA
+11850-124I5	CD326+ enterocyte isolated from mice, treated with RANKL, day03, pool1	primary cells	snapshot	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0002116	ileum	CL:0000584	enterocyte	NA	NA
+11851-124I6	CD326+ enterocyte isolated from mice, treated with RANKL, day03, pool2	primary cells	snapshot	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0002116	ileum	CL:0000584	enterocyte	NA	NA
+11848-124I3	CD326+ enterocyte, pool1	primary cells	snapshot	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0002116	ileum	CL:0000584	enterocyte	NA	NA
+11849-124I4	CD326+ enterocyte, pool2	primary cells	snapshot	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0002116	ileum	CL:0000584	enterocyte	NA	NA
+11852-124I7	CD326++ enterocyte isolated from mice, treated with RANKL, day03, pool1	primary cells	snapshot	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0002116	ileum	CL:0000584	enterocyte	NA	NA
+11853-124I8	CD326++ enterocyte isolated from mice, treated with RANKL, day03, pool2	primary cells	snapshot	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0002116	ileum	CL:0000584	enterocyte	NA	NA
+11815-124E6	CD4+CD25-CD44- naive conventional T cells, antiCD3_CD28 stimulation, 06hr, pool1 (C57BL_6J)	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002193	hemolymphoid system	CL:0000895	naive thymus-derived CD4-positive, alpha-beta T cell	NA	NA
+11819-124F1	CD4+CD25-CD44- naive conventional T cells, antiCD3_CD28 stimulation, 06hr, pool2 (Balb_cAJcl)	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002193	hemolymphoid system	CL:0000895	naive thymus-derived CD4-positive, alpha-beta T cell	NA	NA
+11816-124E7	CD4+CD25-CD44- naive conventional T cells, PMA and ionomycin stimulation, 02hr, pool1 (C57BL_6J)	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002193	hemolymphoid system	CL:0000895	naive thymus-derived CD4-positive, alpha-beta T cell	NA	NA
+11820-124F2	CD4+CD25-CD44- naive conventional T cells, PMA and ionomycin stimulation, 02hr, pool2 (Balb_cAJcl)	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002193	hemolymphoid system	CL:0000895	naive thymus-derived CD4-positive, alpha-beta T cell	NA	NA
+11813-124E4	CD4+CD25-CD44- naive conventional T cells, pool1 (C57BL_6J)	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002193	hemolymphoid system	CL:0000895	naive thymus-derived CD4-positive, alpha-beta T cell	NA	NA
+11817-124E8	CD4+CD25-CD44- naive conventional T cells, pool2 (Balb_cAJcl)	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002193	hemolymphoid system	CL:0000895	naive thymus-derived CD4-positive, alpha-beta T cell	NA	NA
+11943-126A8	CD4+CD25+ regulatory T cells, antiCD3 CD28 stimulation, 06hr, pool1 (BalbcA)	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002193	hemolymphoid system	CL:0000792	CD4-positive, CD25-positive, alpha-beta regulatory T cell	NA	NA
+11944-126A9	CD4+CD25+ regulatory T cells, antiCD3 CD28 stimulation, 06hr, pool1 (C57BL 6J)	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002193	hemolymphoid system	CL:0000792	CD4-positive, CD25-positive, alpha-beta regulatory T cell	NA	NA
+11946-126B2	CD4+CD25+ regulatory T cells, PMA and ionomycin stimulation, 02hr, pool1 (BalbcA)	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002193	hemolymphoid system	CL:0000792	CD4-positive, CD25-positive, alpha-beta regulatory T cell	NA	NA
+11945-126B1	CD4+CD25+ regulatory T cells, PMA and ionomycin stimulation, 02hr, pool1 (C57BL 6J)	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002193	hemolymphoid system	CL:0000792	CD4-positive, CD25-positive, alpha-beta regulatory T cell	NA	NA
+11814-124E5	CD4+CD25+ regulatory T cells, pool1 (C57BL_6J)	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002193	hemolymphoid system	CL:0000792	CD4-positive, CD25-positive, alpha-beta regulatory T cell	NA	NA
+11818-124E9	CD4+CD25+ regulatory T cells, pool2 (Balb_cAJcl)	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002193	hemolymphoid system	CL:0000792	CD4-positive, CD25-positive, alpha-beta regulatory T cell	NA	NA
+11774-124A1	CD41+ megakaryocyte cancer, donor1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0002027	CD9-positive, CD41-positive megakaryocyte cell	NA	NA
+11776-124A3	CD41+ megakaryocyte cancer, donor2	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0002027	CD9-positive, CD41-positive megakaryocyte cell	NA	NA
+11778-124A5	CD41+ megakaryocyte cancer, donor3	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0002027	CD9-positive, CD41-positive megakaryocyte cell	NA	NA
+11775-124A2	CD41+ megakaryocyte control, donor1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0002027	CD9-positive, CD41-positive megakaryocyte cell	NA	NA
+11777-124A4	CD41+ megakaryocyte control, donor2	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0002027	CD9-positive, CD41-positive megakaryocyte cell	NA	NA
+11779-124A6	CD41+ megakaryocyte control, donor3	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0002027	CD9-positive, CD41-positive megakaryocyte cell	NA	NA
+12122-128C7	common myeloid progenitor CMP, biol_rep1	primary cells	snapshot	Mouse (Mus musculus)	male	9-10	week	adult	UBERON:0002371	bone marrow	CL:0000049	common myeloid progenitor	NA	NA
+12125-128D1	common myeloid progenitor CMP, biol_rep2	primary cells	snapshot	Mouse (Mus musculus)	male	9-10	week	adult	UBERON:0002371	bone marrow	CL:0000049	common myeloid progenitor	NA	NA
+12128-128D4	common myeloid progenitor CMP, biol_rep3	primary cells	snapshot	Mouse (Mus musculus)	male	9-10	week	adult	UBERON:0002371	bone marrow	CL:0000049	common myeloid progenitor	NA	NA
+11845-124H9	GP2+ M cell, pool1	primary cells	snapshot	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0003929	digestive tract epithelium	CL:0000682	M cell of gut	NA	NA
+11846-124I1	GP2+ M cell, pool2	primary cells	snapshot	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0003929	digestive tract epithelium	CL:0000682	M cell of gut	NA	NA
+11847-124I2	GP2+ M cell, pool3	primary cells	snapshot	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0003929	digestive tract epithelium	CL:0000682	M cell of gut	NA	NA
+12123-128C8	granulocyte macrophage progenitor GMP, biol_rep1	primary cells	snapshot	Mouse (Mus musculus)	male	9-10	week	adult	UBERON:0002371	bone marrow	CL:0000557	granulocyte monocyte progenitor cell	NA	NA
+12126-128D2	granulocyte macrophage progenitor GMP, biol_rep2	primary cells	snapshot	Mouse (Mus musculus)	male	9-10	week	adult	UBERON:0002371	bone marrow	CL:0000557	granulocyte monocyte progenitor cell	NA	NA
+12129-128D5	granulocyte macrophage progenitor GMP, biol_rep3	primary cells	snapshot	Mouse (Mus musculus)	male	9-10	week	adult	UBERON:0002371	bone marrow	CL:0000557	granulocyte monocyte progenitor cell	NA	NA
+11949-126B5	hematopoietic stem cell, aorta-gonad-mesonephros (AGM) region derived, embryo E10.5	primary cells	snapshot	Mouse (Mus musculus)	NA	10.5	day	embryo	UBERON:0000080	mesonephros	CL:0002360	AGM hematopoietic stem cell	NA	NA
+11956-126C3	hematopoietic stem cell, bone marrow derived, embryo E19.5	primary cells	snapshot	Mouse (Mus musculus)	NA	19.5	day	embryo	UBERON:0002371	bone marrow	CL:0000037	hematopoietic stem cell	NA	NA
+12215-129E1	Inner ear stem cells, 1st generation stem cells, pool1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002227	spiral organ of cochlea	CL:0000034	stem cell	NA	NA
+12216-129E2	Inner ear stem cells, 4th generation stem cells, pool1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002227	spiral organ of cochlea	CL:0000723	somatic stem cell	NA	NA
+12217-129E3	Inner ear stem cells, differentiation, day03, pool1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002227	spiral organ of cochlea	CL:0000723	somatic stem cell	NA	NA
+12218-129E4	Inner ear stem cells, differentiation, day10, pool1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002227	spiral organ of cochlea	CL:0000723	somatic stem cell	NA	NA
+12228-129F5	Lgr5 positive intestinal stem cells, pool1	primary cells	snapshot	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002108	small intestine	CL:0000723	somatic stem cell	NA	NA
+12229-129F6	Lgr5 positive intestinal stem cells, pool2	primary cells	snapshot	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0002108	small intestine	CL:0000723	somatic stem cell	NA	NA
+12230-129F7	Lgr5 positive intestinal stem cells, pool3	primary cells	snapshot	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0002108	small intestine	CL:0000723	somatic stem cell	NA	NA
+2171-50H8	macrophage, bone marrow derived	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0002476	bone marrow macrophage	NA	NA
+12159-128G8	MC1+Gr1+ myeloid-derived suppressor cells cancer, donor1 (10,11,12 3LL)	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0002467	Gr1-high myeloid suppressor cell	NA	NA
+12161-128H1	MC1+Gr1+ myeloid-derived suppressor cells cancer, donor2 (0127 3LL)	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0002467	Gr1-high myeloid suppressor cell	NA	NA
+12163-128H3	MC1+Gr1+ myeloid-derived suppressor cells cancer, donor3 (0128 3LL)	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0002467	Gr1-high myeloid suppressor cell	NA	NA
+12160-128G9	MC1+Gr1+ myeloid-derived suppressor cells control, donor1 (4,5,6PBS)	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0002467	Gr1-high myeloid suppressor cell	NA	NA
+12162-128H2	MC1+Gr1+ myeloid-derived suppressor cells control, donor2 (0127 PBS)	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0002467	Gr1-high myeloid suppressor cell	NA	NA
+12164-128H4	MC1+Gr1+ myeloid-derived suppressor cells control, donor3 (0128 PBS)	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0002467	Gr1-high myeloid suppressor cell	NA	NA
+11484-119D8	Mouse Aortic Smooth Muscle cells - differentiated, biol_rep1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0004178	aorta smooth muscle tissue	CL:0002539	aortic smooth muscle cell	NA	NA
+11485-119D9	Mouse Aortic Smooth Muscle cells - differentiated, biol_rep2	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0004178	aorta smooth muscle tissue	CL:0002539	aortic smooth muscle cell	NA	NA
+11299-117B3	Mouse Aortic Smooth Muscle cells, donor1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0004178	aorta smooth muscle tissue	CL:0002539	aortic smooth muscle cell	NA	NA
+11708-123B7	Mouse Astrocytes - cerebellar, donor1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002037	cerebellum	CL:0002603	astrocyte of the cerebellum	NA	NA
+11550-120C2	Mouse Astrocytes - cerebellar, donor2	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002037	cerebellum	CL:0002603	astrocyte of the cerebellum	NA	NA
+11709-123B8	Mouse Astrocytes - hippocampus, donor1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0001954	Ammon's horn	CL:0002604	astrocyte of the hippocampus	NA	NA
+11551-120C3	Mouse Astrocytes - hippocampus, donor2	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0001954	Ammon's horn	CL:0002604	astrocyte of the hippocampus	NA	NA
+11632-122C3	Mouse Astrocytes - hippocampus, donor3	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0001954	Ammon's horn	CL:0002604	astrocyte of the hippocampus	NA	NA
+11552-120C4	Mouse Astrocytes, donor2	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000955	brain	CL:0000127	astrocyte	NA	NA
+11633-122C4	Mouse Astrocytes, donor3	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000955	brain	CL:0000127	astrocyte	NA	NA
+11711-123C1	Mouse Cardiac Myocytes, donor1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0007100	primary circulatory organ	CL:0000746	cardiac muscle cell	NA	NA
+11729-123E1	Mouse Cardiac Myocytes, donor2	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0007100	primary circulatory organ	CL:0000746	cardiac muscle cell	NA	NA
+11634-122C5	Mouse Cardiac Myocytes, donor3	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0007100	primary circulatory organ	CL:0000746	cardiac muscle cell	NA	NA
+11856-125A2	Mouse CD19+ B Cells, donor1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002106	spleen	CL:0000236	B cell	NA	NA
+11854-124I9	Mouse CD4+ T Cells, donor1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002106	spleen	CL:0000624	CD4-positive, alpha-beta T cell	NA	NA
+11855-125A1	Mouse CD8+ T Cells, donor1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002106	spleen	CL:0000625	CD8-positive, alpha-beta T cell	NA	NA
+11712-123C2	Mouse Embryonic fibroblasts, donor1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000057	fibroblast	NA	NA
+11713-123C3	Mouse Granule cells, donor1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000955	brain	CL:0000120	granule cell	NA	NA
+11731-123E3	Mouse Granule cells, donor2	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000955	brain	CL:0000120	granule cell	NA	NA
+11636-122C7	Mouse Granule cells, donor3	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000955	brain	CL:0000120	granule cell	NA	NA
+11830-124G3	Mouse hepatic Sinusoidal Endothelial Cells, donor1	primary cells	snapshot	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0001281	hepatic sinusoid	CL:1000398	endothelial cell of hepatic sinusoid	NA	NA
+11825-124F7	Mouse hepatic Stellate Cells (lipocyte), donor1	primary cells	snapshot	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002107	liver	CL:0000632	hepatic stellate cell	NA	NA
+11714-123C4	Mouse hepatocyte, donor1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002107	liver	CL:0000182	hepatocyte	NA	NA
+11637-122C8	Mouse hepatocyte, donor3	primary cells	snapshot	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002107	liver	CL:0000182	hepatocyte	NA	NA
+11821-124F3	Mouse hepatocyte, donor5	primary cells	snapshot	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002107	liver	CL:0000182	hepatocyte	NA	NA
+11822-124F4	Mouse hepatocyte, donor6	primary cells	snapshot	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002107	liver	CL:0000182	hepatocyte	NA	NA
+11823-124F5	Mouse hepatocyte, donor7	primary cells	snapshot	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002107	liver	CL:0000182	hepatocyte	NA	NA
+11824-124F6	Mouse hepatocyte, donor8	primary cells	snapshot	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002107	liver	CL:0000182	hepatocyte	NA	NA
+11716-123C6	Mouse Meningeal cells, donor1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002360	meninx	CL:0000708	leptomeningeal cell	NA	NA
+11734-123E6	Mouse Meningeal cells, donor2	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002360	meninx	CL:0000708	leptomeningeal cell	NA	NA
+11639-122D1	Mouse Meningeal cells, donor3	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002360	meninx	CL:0000708	leptomeningeal cell	NA	NA
+11717-123C7	Mouse Mesenchymal stem cells - bone marrow derived, donor1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0002540	mesenchymal stem cell of the bone marrow	NA	NA
+11735-123E7	Mouse Mesenchymal stem cells - bone marrow derived, donor2	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0002540	mesenchymal stem cell of the bone marrow	NA	NA
+11640-122D2	Mouse Mesenchymal stem cells - bone marrow derived, donor3	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0002540	mesenchymal stem cell of the bone marrow	NA	NA
+11718-123C8	Mouse Microglia, donor1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0001017	central nervous system	CL:0000129	microglial cell	NA	NA
+11736-123E8	Mouse Microglia, donor2	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0001017	central nervous system	CL:0000129	microglial cell	NA	NA
+11641-122D3	Mouse Microglia, donor3	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0001017	central nervous system	CL:0000129	microglial cell	NA	NA
+11724-123D5	Mouse Neurons - cortical, donor1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000956	cerebral cortex	CL:0002609	neuron of cerebral cortex	NA	NA
+11742-123F5	Mouse Neurons - cortical, donor2	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000956	cerebral cortex	CL:0002609	neuron of cerebral cortex	NA	NA
+11647-122D9	Mouse Neurons - cortical, donor3	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000956	cerebral cortex	CL:0002609	neuron of cerebral cortex	NA	NA
+11720-123D1	Mouse Neurons - dorsal spinal cord, donor1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002256	dorsal horn of spinal cord	CL:0002611	neuron of the dorsal spinal cord	NA	NA
+11738-123F1	Mouse Neurons - dorsal spinal cord, donor2	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002256	dorsal horn of spinal cord	CL:0002611	neuron of the dorsal spinal cord	NA	NA
+11643-122D5	Mouse Neurons - dorsal spinal cord, donor3	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002256	dorsal horn of spinal cord	CL:0002611	neuron of the dorsal spinal cord	NA	NA
+11721-123D2	Mouse Neurons - hippocampal, donor1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0001954	Ammon's horn	CL:0002608	hippocampal neuron	NA	NA
+11739-123F2	Mouse Neurons - hippocampal, donor2	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0001954	Ammon's horn	CL:0002608	hippocampal neuron	NA	NA
+11644-122D6	Mouse Neurons - hippocampal, donor3	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0001954	Ammon's horn	CL:0002608	hippocampal neuron	NA	NA
+11722-123D3	Mouse Neurons - raphe, donor1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0004684	raphe nuclei	CL:0002610	raphe nuclei neuron	NA	NA
+11740-123F3	Mouse Neurons - raphe, donor2	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0004684	raphe nuclei	CL:0002610	raphe nuclei neuron	NA	NA
+11645-122D7	Mouse Neurons - raphe, donor3	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0004684	raphe nuclei	CL:0002610	raphe nuclei neuron	NA	NA
+11723-123D4	Mouse Neurons - striatal, donor1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002435	striatum	CL:0002613	striatum neuron	NA	NA
+11741-123F4	Mouse Neurons - striatal, donor2	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002435	striatum	CL:0002613	striatum neuron	NA	NA
+11646-122D8	Mouse Neurons - striatal, donor3	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002435	striatum	CL:0002613	striatum neuron	NA	NA
+11489-119E4	Mouse Neurons - substantia nigra, donor4	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002038	substantia nigra	CL:0002614	neuron of the substantia nigra	NA	NA
+11490-119E5	Mouse Neurons - substantia nigra, donor5	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002038	substantia nigra	CL:0002614	neuron of the substantia nigra	NA	NA
+11770-123I6	Mouse Neurons - substantia nigra, donor6	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002038	substantia nigra	CL:0002614	neuron of the substantia nigra	NA	NA
+11725-123D6	Mouse Neurons - ventral spinal cord, donor1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002257	ventral horn of spinal cord	CL:0002612	neuron of the ventral spinal cord	NA	NA
+11743-123F6	Mouse Neurons - ventral spinal cord, donor2	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002257	ventral horn of spinal cord	CL:0002612	neuron of the ventral spinal cord	NA	NA
+11648-122E1	Mouse Neurons - ventral spinal cord, donor3	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002257	ventral horn of spinal cord	CL:0002612	neuron of the ventral spinal cord	NA	NA
+11727-123D8	Mouse Renal epithelial cells, donor1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002113	kidney	CL:0002518	kidney epithelial cell	NA	NA
+12247-129H6	natural helper cells, IL2 treated, day15, biol_rep1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002679	natural helper lymphocyte	NA	NA
+12248-129H7	natural helper cells, IL2 treated, day15, biol_rep2	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002679	natural helper lymphocyte	NA	NA
+12249-129H8	natural helper cells, IL2 treated, day15, biol_rep3	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002679	natural helper lymphocyte	NA	NA
+12253-129I3	natural helper cells, IL33 treated, 01hr, biol_rep1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002679	natural helper lymphocyte	NA	NA
+12254-129I4	natural helper cells, IL33 treated, 01hr, biol_rep2	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002679	natural helper lymphocyte	NA	NA
+12255-129I5	natural helper cells, IL33 treated, 01hr, biol_rep3	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002679	natural helper lymphocyte	NA	NA
+12250-129H9	natural helper cells, IL33 treated, day02, biol_rep1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002679	natural helper lymphocyte	NA	NA
+12251-129I1	natural helper cells, IL33 treated, day02, biol_rep2	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002679	natural helper lymphocyte	NA	NA
+12252-129I2	natural helper cells, IL33 treated, day02, biol_rep3	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002679	natural helper lymphocyte	NA	NA
+12256-129I6	natural helper cells, naive, biol_rep1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002679	natural helper lymphocyte	NA	NA
+12257-129I7	natural helper cells, naive, biol_rep2	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002679	natural helper lymphocyte	NA	NA
+12258-129I8	natural helper cells, naive, biol_rep3	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002679	natural helper lymphocyte	NA	NA
+11959-126C6	Neurons - spiral ganglion, pool1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000395	cochlear ganglion	CL:0011113	spiral ganglion neuron	NA	NA
+11810-124E1	neurospheres - enteric neuron derived, biol_rep1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002005	enteric nervous system	CL:0007011	enteric neuron	NA	NA
+11811-124E2	neurospheres - enteric neuron derived, biol_rep2	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002005	enteric nervous system	CL:0007011	enteric neuron	NA	NA
+11812-124E3	neurospheres - enteric neuron derived, biol_rep3	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002005	enteric nervous system	CL:0007011	enteric neuron	NA	NA
+11807-124D7	neurospheres - parasympathetic neuron derived, biol_rep1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0023879	neural system	CL:0011102	parasympathetic neuron	NA	NA
+11808-124D8	neurospheres - parasympathetic neuron derived, biol_rep2	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0023879	neural system	CL:0011102	parasympathetic neuron	NA	NA
+11809-124D9	neurospheres - parasympathetic neuron derived, biol_rep3	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0023879	neural system	CL:0011102	parasympathetic neuron	NA	NA
+11804-124D4	neurospheres - sympathetic neuron derived, biol_rep1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0023879	neural system	CL:0011103	sympathetic neuron	NA	NA
+11805-124D5	neurospheres - sympathetic neuron derived, biol_rep2	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0023879	neural system	CL:0011103	sympathetic neuron	NA	NA
+11806-124D6	neurospheres - sympathetic neuron derived, biol_rep3	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0023879	neural system	CL:0011103	sympathetic neuron	NA	NA
+2379-69A1	osteoclast, bone marrow derived	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000092	osteoclast	NA	NA
+11728-123D9	Schwann, donor1	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000010	peripheral nervous system	CL:0000218	myelinating Schwann cell	NA	NA
+11746-123F9	Schwann, donor2	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000010	peripheral nervous system	CL:0000218	myelinating Schwann cell	NA	NA
+11651-122E4	Schwann, donor3	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000010	peripheral nervous system	CL:0000218	myelinating Schwann cell	NA	NA
+12157-128G6	Sox2+ Supporting cells - organ of corti, pool1	primary cells	snapshot	Mouse (Mus musculus)	mixed	NA	NA	NA	UBERON:0002227	spiral organ of cochlea	CL:0002490	organ of Corti supporting cell	NA	NA
+12121-128C6	stem cell (cKit+ Sca1- lineage-) KSL, biol_rep1	primary cells	snapshot	Mouse (Mus musculus)	male	9-10	week	adult	UBERON:0002371	bone marrow	CL:0000034	stem cell	NA	NA
+12124-128C9	stem cell (cKit+ Sca1- lineage-) KSL, biol_rep2	primary cells	snapshot	Mouse (Mus musculus)	male	9-10	week	adult	UBERON:0002371	bone marrow	CL:0000034	stem cell	NA	NA
+12127-128D3	stem cell (cKit+ Sca1- lineage-) KSL, biol_rep3	primary cells	snapshot	Mouse (Mus musculus)	male	9-10	week	adult	UBERON:0002371	bone marrow	CL:0000034	stem cell	NA	NA
+12972-138H2	EBF KO HPCs induced to T cell, 00hr00min, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000837	hematopoietic multipotent progenitor cell	NA	NA
+12988-138I9	EBF KO HPCs induced to T cell, 00hr00min, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000837	hematopoietic multipotent progenitor cell	NA	NA
+13004-139B7	EBF KO HPCs induced to T cell, 00hr00min, biol_rep3	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000837	hematopoietic multipotent progenitor cell	NA	NA
+12973-138H3	EBF KO HPCs induced to T cell, 00hr30min, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+12989-139A1	EBF KO HPCs induced to T cell, 00hr30min, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+13005-139B8	EBF KO HPCs induced to T cell, 00hr30min, biol_rep3	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+12974-138H4	EBF KO HPCs induced to T cell, 01hr, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+12990-139A2	EBF KO HPCs induced to T cell, 01hr, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+12975-138H5	EBF KO HPCs induced to T cell, 02hr, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+12991-139A3	EBF KO HPCs induced to T cell, 02hr, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+13006-139B9	EBF KO HPCs induced to T cell, 02hr, biol_rep3	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+13007-139C1	EBF KO HPCs induced to T cell, 02hr, biol_rep3	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+12976-138H6	EBF KO HPCs induced to T cell, 04hr, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+12992-139A4	EBF KO HPCs induced to T cell, 04hr, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+13008-139C2	EBF KO HPCs induced to T cell, 04hr, biol_rep3	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+12977-138H7	EBF KO HPCs induced to T cell, 06hr, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+12993-139A5	EBF KO HPCs induced to T cell, 06hr, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+13009-139C3	EBF KO HPCs induced to T cell, 06hr, biol_rep3	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+12978-138H8	EBF KO HPCs induced to T cell, 08hr, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+12994-139A6	EBF KO HPCs induced to T cell, 08hr, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+13010-139C4	EBF KO HPCs induced to T cell, 08hr, biol_rep3	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+12979-138H9	EBF KO HPCs induced to T cell, 10hr, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+12995-139A7	EBF KO HPCs induced to T cell, 10hr, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+13011-139C5	EBF KO HPCs induced to T cell, 10hr, biol_rep3	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+12980-138I1	EBF KO HPCs induced to T cell, 12hr, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+12996-139A8	EBF KO HPCs induced to T cell, 12hr, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+13012-139C6	EBF KO HPCs induced to T cell, 12hr, biol_rep3	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+12981-138I2	EBF KO HPCs induced to T cell, 24hr, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+12997-139A9	EBF KO HPCs induced to T cell, 24hr, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+13013-139C7	EBF KO HPCs induced to T cell, 24hr, biol_rep3	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+12982-138I3	EBF KO HPCs induced to T cell, day02, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+12998-139B1	EBF KO HPCs induced to T cell, day02, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+13014-139C8	EBF KO HPCs induced to T cell, day02, biol_rep3	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+12983-138I4	EBF KO HPCs induced to T cell, day03, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+12999-139B2	EBF KO HPCs induced to T cell, day03, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+13015-139C9	EBF KO HPCs induced to T cell, day03, biol_rep3	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+12984-138I5	EBF KO HPCs induced to T cell, day04, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+13000-139B3	EBF KO HPCs induced to T cell, day04, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+13016-139D1	EBF KO HPCs induced to T cell, day04, biol_rep3	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+12985-138I6	EBF KO HPCs induced to T cell, day05, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+13001-139B4	EBF KO HPCs induced to T cell, day05, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+13017-139D2	EBF KO HPCs induced to T cell, day05, biol_rep3	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+12986-138I7	EBF KO HPCs induced to T cell, day06, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+13002-139B5	EBF KO HPCs induced to T cell, day06, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+13018-139D3	EBF KO HPCs induced to T cell, day06, biol_rep3	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000084	T cell	NA	NA
+14375-156B1	ES-46C derived epistem cells, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14376-156B2	ES-46C derived epistem cells, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14377-156B3	ES-46C derived epistem cells, biol_rep3	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14378-156B4	ES-46C derived epistem cells, neuronal differentiation, day05, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000031	neuroblast	NA	NA
+14379-156B5	ES-46C derived epistem cells, neuronal differentiation, day14, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000031	neuroblast	NA	NA
+14357-155I1	ES-46C embryonic stem cells, neuronal differentiation, day00, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000031	neuroblast	NA	NA
+14362-155I6	ES-46C embryonic stem cells, neuronal differentiation, day00, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000031	neuroblast	NA	NA
+14358-155I2	ES-46C embryonic stem cells, neuronal differentiation, day01, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000031	neuroblast	NA	NA
+14363-155I7	ES-46C embryonic stem cells, neuronal differentiation, day01, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000031	neuroblast	NA	NA
+14359-155I3	ES-46C embryonic stem cells, neuronal differentiation, day02, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000031	neuroblast	NA	NA
+14364-155I8	ES-46C embryonic stem cells, neuronal differentiation, day02, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000031	neuroblast	NA	NA
+14360-155I4	ES-46C embryonic stem cells, neuronal differentiation, day03, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000031	neuroblast	NA	NA
+14365-155I9	ES-46C embryonic stem cells, neuronal differentiation, day03, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000031	neuroblast	NA	NA
+14361-155I5	ES-46C embryonic stem cells, neuronal differentiation, day04, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000031	neuroblast	NA	NA
+14366-156A1	ES-46C embryonic stem cells, neuronal differentiation, day04, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000031	neuroblast	NA	NA
+14354-155H7	ES-Ert2 embryonic stem cells, tamoxifen treated, 48hr, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14355-155H8	ES-Ert2 embryonic stem cells, tamoxifen treated, 48hr, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14356-155H9	ES-Ert2 embryonic stem cells, tamoxifen treated, 48hr, biol_rep3	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14351-155H4	ES-Ert2 embryonic stem cells, untreated control, 48hr, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14352-155H5	ES-Ert2 embryonic stem cells, untreated control, 48hr, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14353-155H6	ES-Ert2 embryonic stem cells, untreated control, 48hr, biol_rep3	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14348-155H1	ES-OS25 embryonic stem cells, aminitin treatment for 7hr, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14349-155H2	ES-OS25 embryonic stem cells, aminitin treatment for 7hr, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14350-155H3	ES-OS25 embryonic stem cells, aminitin treatment for 7hr, biol_rep3	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14339-155G1	ES-OS25 embryonic stem cells, DMSO control, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14340-155G2	ES-OS25 embryonic stem cells, DMSO control, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14341-155G3	ES-OS25 embryonic stem cells, DMSO control, biol_rep3	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14342-155G4	ES-OS25 embryonic stem cells, flavopiridol treatment, 01hr, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14343-155G5	ES-OS25 embryonic stem cells, flavopiridol treatment, 01hr, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14344-155G6	ES-OS25 embryonic stem cells, flavopiridol treatment, 01hr, biol_rep3	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14371-156A6	ES-OS25 embryonic stem cells, KD for exosomal component EXOSC3, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14372-156A7	ES-OS25 embryonic stem cells, KD for exosomal component EXOSC3, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14373-156A8	ES-OS25 embryonic stem cells, KD for exosomal component EXOSC5, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14374-156A9	ES-OS25 embryonic stem cells, KD for exosomal component EXOSC5, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14369-156A4	ES-OS25 embryonic stem cells, scrambled siRNA control, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14370-156A5	ES-OS25 embryonic stem cells, scrambled siRNA control, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14345-155G7	ES-OS25 embryonic stem cells, untreated control, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14346-155G8	ES-OS25 embryonic stem cells, untreated control, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14347-155G9	ES-OS25 embryonic stem cells, untreated control, biol_rep3	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14367-156A2	ES-OS25 embryonic stem cells, untreated siRNA control, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14368-156A3	ES-OS25 embryonic stem cells, untreated siRNA control, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+11958-126C5	hematopoietic stem cell, bone marrow derived, adult 2years	stem cells	time courses	Mouse (Mus musculus)	NA	2	year	adult	UBERON:0002371	bone marrow	CL:0000037	hematopoietic stem cell	NA	NA
+11957-126C4	hematopoietic stem cell, bone marrow derived, newborn 2-3months	stem cells	time courses	Mouse (Mus musculus)	NA	2-3	month	adult	UBERON:0002371	bone marrow	CL:0000037	hematopoietic stem cell	NA	NA
+11953-126B9	hematopoietic stem cell, fetal liver derived, embryo E12.5	stem cells	time courses	Mouse (Mus musculus)	NA	12.5	day	embryo	UBERON:0002107	liver	CL:0000037	hematopoietic stem cell	NA	NA
+11954-126C1	hematopoietic stem cell, fetal liver derived, embryo E14.5	stem cells	time courses	Mouse (Mus musculus)	NA	14.5	day	embryo	UBERON:0002107	liver	CL:0000037	hematopoietic stem cell	NA	NA
+11955-126C2	hematopoietic stem cell, fetal liver derived, embryo E19.5	stem cells	time courses	Mouse (Mus musculus)	NA	19.5	day	embryo	UBERON:0002107	liver	CL:0000037	hematopoietic stem cell	NA	NA
+11950-126B6	hematopoietic stem cell, placenta derived, embryo E10.5	stem cells	time courses	Mouse (Mus musculus)	NA	10.5	day	embryo	UBERON:0001987	placenta	CL:0002359	placental hematopoietic stem cell	NA	NA
+11952-126B8	hematopoietic stem cell, placenta derived, embryo E11.5	stem cells	time courses	Mouse (Mus musculus)	NA	11.5	day	embryo	UBERON:0001987	placenta	CL:0002359	placental hematopoietic stem cell	NA	NA
+11951-126B7	hematopoietic stem cell,aorta-gonad-mesonephros (AGM) region derived, embryo E11.5	stem cells	time courses	Mouse (Mus musculus)	NA	11.5	day	embryo	UBERON:0000080	mesonephros	CL:0002360	AGM hematopoietic stem cell	NA	NA
+11947-126B3	Mesoderm, embryo E8.5	stem cells	time courses	Mouse (Mus musculus)	NA	8.5	day	embryo	UBERON:0000926	mesoderm	CL:0000222	mesodermal cell	NA	NA
+11948-126B4	Pre-hematopoietic stem cell, aorta-gonad-mesonephros (AGM) region derived, embryo E9.5	stem cells	time courses	Mouse (Mus musculus)	NA	9.5	day	embryo	UBERON:0002390	hematopoietic system	CL:0002360	AGM hematopoietic stem cell	NA	NA
+12308-130F4	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 00hr15min, biol_rep1 (015mA1)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12430-132A9	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 00hr15min, biol_rep2 (015mA2)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12552-133F5	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 00hr15min, biol_rep3 (015mA3)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12309-130F5	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 00hr30min, biol_rep1 (030mA1)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12431-132B1	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 00hr30min, biol_rep2 (030mA2)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12553-133F6	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 00hr30min, biol_rep3 (030mA3)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12310-130F6	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 01hr, biol_rep1 (001hA1)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12432-132B2	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 01hr, biol_rep2 (001hA2)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12554-133F7	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 01hr, biol_rep3 (001hA3)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12311-130F7	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 02hr, biol_rep1 (002hA1)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12433-132B3	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 02hr, biol_rep2 (002hA2)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12555-133F8	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 02hr, biol_rep3 (002hA3)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12312-130F8	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 03hr, biol_rep1 (003hA1)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12434-132B4	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 03hr, biol_rep2 (003hA2)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12556-133F9	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 03hr, biol_rep3 (003hA3)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12313-130F9	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 06hr, biol_rep1 (006hA1)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12435-132B5	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 06hr, biol_rep2 (006hA2)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12557-133G1	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 06hr, biol_rep3 (006hA3)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12314-130G1	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 12hr, biol_rep1 (012hA1)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12436-132B6	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 12hr, biol_rep2 (012hA2)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12558-133G2	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 12hr, biol_rep3 (012hA3)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12315-130G2	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 18hr, biol_rep1 (018hA1)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12437-132B7	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 18hr, biol_rep2 (018hA2)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12559-133G3	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 18hr, biol_rep3 (018hA3)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12316-130G3	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 24hr, biol_rep1 (024hA1)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12438-132B8	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 24hr, biol_rep2 (024hA2)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12560-133G4	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 24hr, biol_rep3 (024hA3)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12317-130G4	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 36hr, biol_rep1 (036hA1)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12439-132B9	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 36hr, biol_rep2 (036hA2)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12561-133G5	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 36hr, biol_rep3 (036hA3)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12318-130G5	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, day02, biol_rep1 (048hA1)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12440-132C1	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, day02, biol_rep2 (048hA2)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12562-133G6	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, day02, biol_rep3 (048hA3)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12319-130G6	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, day03, biol_rep1 (072hA1)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12441-132C2	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, day03, biol_rep2 (072hA2)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12563-133G7	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, day03, biol_rep3 (072hA3)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12320-130G7	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, day04, biol_rep1 (096hA1)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12442-132C3	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, day04, biol_rep2 (096hA2)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12564-133G8	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, day04, biol_rep3 (096hA3)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12321-130G8	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, day05, biol_rep1 (120hA1)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12443-132C4	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, day05, biol_rep2 (120hA2)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12565-133G9	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, day05, biol_rep3 (120hA3)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12322-130G9	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, day06, biol_rep1 (144hA1)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12444-132C5	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, day06, biol_rep2 (144hA2)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12566-133H1	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, day06, biol_rep3 (144hA3)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+12323-130H1	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 00hr15min, biol_rep1 (015mB1)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12445-132C6	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 00hr15min, biol_rep2 (015mB2)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12567-133H2	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 00hr15min, biol_rep3 (015mB3)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12324-130H2	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 00hr30min, biol_rep1 (030mB1)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12446-132C7	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 00hr30min, biol_rep2 (030mB2)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12568-133H3	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 00hr30min, biol_rep3 (030mB3)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12325-130H3	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 01hr, biol_rep1 (001hB1)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12447-132C8	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 01hr, biol_rep2 (001hB2)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12569-133H4	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 01hr, biol_rep3 (001hB3)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12326-130H4	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 02hr, biol_rep1 (002hB1)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12448-132C9	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 02hr, biol_rep2 (002hB2)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12570-133H5	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 02hr, biol_rep3 (002hB3)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12327-130H5	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 03hr, biol_rep1 (003hB1)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12449-132D1	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 03hr, biol_rep2 (003hB2)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12571-133H6	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 03hr, biol_rep3 (003hB3)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12328-130H6	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 06hr, biol_rep1 (006hB1)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12450-132D2	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 06hr, biol_rep2 (006hB2)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12572-133H7	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 06hr, biol_rep3 (006hB3)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12329-130H7	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 12hr, biol_rep1 (012hB1)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12451-132D3	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 12hr, biol_rep2 (012hB2)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12573-133H8	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 12hr, biol_rep3 (012hB3)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12330-130H8	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 18hr, biol_rep1 (018hB1)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12452-132D4	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 18hr, biol_rep2 (018hB2)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12574-133H9	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 18hr, biol_rep3 (018hB3)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12331-130H9	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 24hr, biol_rep1 (024hB1)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12453-132D5	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 24hr, biol_rep2 (024hB2)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12575-133I1	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 24hr, biol_rep3 (024hB3)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12332-130I1	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 36hr, biol_rep1 (036hB1)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12454-132D6	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 36hr, biol_rep2 (036hB2)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12576-133I2	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 36hr, biol_rep3 (036hB3)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12333-130I2	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, day02, biol_rep1 (048hB1)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12455-132D7	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, day02, biol_rep2 (048hB2)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12577-133I3	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, day02, biol_rep3 (048hB3)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12334-130I3	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, day03, biol_rep1 (072hB1)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12456-132D8	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, day03, biol_rep2 (072hB2)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12578-133I4	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, day03, biol_rep3 (072hB3)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12335-130I4	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, day04, biol_rep1 (096hB1)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12457-132D9	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, day04, biol_rep2 (096hB2)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12579-133I5	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, day04, biol_rep3 (096hB3)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12336-130I5	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, day05, biol_rep1 (120hB1)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12458-132E1	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, day05, biol_rep2 (120hB2)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12580-133I6	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, day05, biol_rep3 (120hB3)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12337-130I6	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, day06, biol_rep1 (144hB1)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12459-132E2	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, day06, biol_rep2 (144hB2)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12581-133I7	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, day06, biol_rep3 (144hB3)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+12338-130I7	ST2 (Mesenchymal stem cells) cells, medium change (without induction), 00hr, biol_rep1 (000hC4)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000134	mesenchymal stem cell	NA	NA
+12460-132E3	ST2 (Mesenchymal stem cells) cells, medium change (without induction), 00hr, biol_rep2 (000hC5)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000134	mesenchymal stem cell	NA	NA
+12582-133I8	ST2 (Mesenchymal stem cells) cells, medium change (without induction), 00hr, biol_rep3 (000hC6)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000134	mesenchymal stem cell	NA	NA
+12347-131A7	ST2 (Mesenchymal stem cells) cells, medium change (without induction), day06, biol_rep1 (144hC1)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000134	mesenchymal stem cell	NA	NA
+12469-132F3	ST2 (Mesenchymal stem cells) cells, medium change (without induction), day06, biol_rep2 (144hC2)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000134	mesenchymal stem cell	NA	NA
+12591-134A8	ST2 (Mesenchymal stem cells) cells, medium change (without induction), day06, biol_rep3 (144hC3)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000134	mesenchymal stem cell	NA	NA
+1063-29H9	accessory axillary lymph node, adult	tissues	developmental	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0001097	axillary lymph node	NA	NA	NA	NA
+49-24D7	adrenal gland, adult	tissues	developmental	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0002369	adrenal gland	NA	NA	NA	NA
+406-44C5	adrenal gland, embryo E14	tissues	developmental	Mouse (Mus musculus)	mixed	14	day	embryo	UBERON:0002369	adrenal gland	NA	NA	NA	NA
+1254-43D6	adrenal gland, embryo E16	tissues	developmental	Mouse (Mus musculus)	mixed	16	day	embryo	UBERON:0002369	adrenal gland	NA	NA	NA	NA
+1263-45I1	adrenal gland, embryo E17	tissues	developmental	Mouse (Mus musculus)	mixed	17	day	embryo	UBERON:0002369	adrenal gland	NA	NA	NA	NA
+1262-18F5	adrenal gland, embryo E18	tissues	developmental	Mouse (Mus musculus)	mixed	18	day	embryo	UBERON:0002369	adrenal gland	NA	NA	NA	NA
+1311-23C1	adrenal gland, neonate N00	tissues	developmental	Mouse (Mus musculus)	mixed	0	day	neonate	UBERON:0002369	adrenal gland	NA	NA	NA	NA
+1377-27I3	adrenal gland, neonate N25	tissues	developmental	Mouse (Mus musculus)	mixed	25	day	child	UBERON:0002369	adrenal gland	NA	NA	NA	NA
+583-22A8	amnion, adult pregnant day17.5	tissues	developmental	Mouse (Mus musculus)	female	17.5	day	pregnant adult	UBERON:0000305	amnion	NA	NA	NA	NA
+46-23H1	aorta, adult	tissues	developmental	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0000947	aorta	NA	NA	NA	NA
+56-12G2	bone (os femoris), adult	tissues	developmental	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0000981	femur	NA	NA	NA	NA
+1985-43F5	bone (os femoris), neonate N02	tissues	developmental	Mouse (Mus musculus)	mixed	2	day	neonate	UBERON:0000981	femur	NA	NA	NA	NA
+1525-43A6	bone (os femoris), neonate N16	tissues	developmental	Mouse (Mus musculus)	mixed	16	day	child	UBERON:0000981	femur	NA	NA	NA	NA
+1350-25C3	bone (os femoris), neonate N20	tissues	developmental	Mouse (Mus musculus)	mixed	20	day	child	UBERON:0000981	femur	NA	NA	NA	NA
+37-13H4	cecum, adult	tissues	developmental	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0001153	caecum	NA	NA	NA	NA
+15-8B2	cerebellum, adult	tissues	developmental	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10114-102E6	cerebellum, embryo E11, biol_rep1 (E11R1)	tissues	developmental	Mouse (Mus musculus)	NA	11	day	embryo	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10126-102F9	cerebellum, embryo E11, biol_rep2 (E11R2)	tissues	developmental	Mouse (Mus musculus)	NA	11	day	embryo	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10138-102H3	cerebellum, embryo E11, biol_rep3 (E11R3)	tissues	developmental	Mouse (Mus musculus)	NA	11	day	embryo	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10115-102E7	cerebellum, embryo E12, biol_rep1 (E12R1)	tissues	developmental	Mouse (Mus musculus)	NA	12	day	embryo	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10127-102G1	cerebellum, embryo E12, biol_rep2 (E12R2)	tissues	developmental	Mouse (Mus musculus)	NA	12	day	embryo	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10139-102H4	cerebellum, embryo E12, biol_rep3 (E12R3)	tissues	developmental	Mouse (Mus musculus)	NA	12	day	embryo	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10116-102E8	cerebellum, embryo E13, biol_rep1 (E13R1)	tissues	developmental	Mouse (Mus musculus)	NA	13	day	embryo	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10128-102G2	cerebellum, embryo E13, biol_rep2 (E13R2)	tissues	developmental	Mouse (Mus musculus)	NA	13	day	embryo	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10140-102H5	cerebellum, embryo E13, biol_rep3 (E13R3)	tissues	developmental	Mouse (Mus musculus)	NA	13	day	embryo	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10117-102E9	cerebellum, embryo E14, biol_rep1 (E14R1)	tissues	developmental	Mouse (Mus musculus)	NA	14	day	embryo	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10129-102G3	cerebellum, embryo E14, biol_rep2 (E14R2)	tissues	developmental	Mouse (Mus musculus)	NA	14	day	embryo	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10141-102H6	cerebellum, embryo E14, biol_rep3 (E14R3)	tissues	developmental	Mouse (Mus musculus)	NA	14	day	embryo	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10118-102F1	cerebellum, embryo E15, biol_rep1 (E15R1)	tissues	developmental	Mouse (Mus musculus)	NA	15	day	embryo	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10130-102G4	cerebellum, embryo E15, biol_rep2 (E15R2)	tissues	developmental	Mouse (Mus musculus)	NA	15	day	embryo	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10142-102H7	cerebellum, embryo E15, biol_rep3 (E15R3)	tissues	developmental	Mouse (Mus musculus)	NA	15	day	embryo	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10119-102F2	cerebellum, embryo E16, biol_rep1 (E16R1)	tissues	developmental	Mouse (Mus musculus)	NA	16	day	embryo	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10131-102G5	cerebellum, embryo E16, biol_rep2 (E16R2)	tissues	developmental	Mouse (Mus musculus)	NA	16	day	embryo	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10143-102H8	cerebellum, embryo E16, biol_rep3 (E16R3)	tissues	developmental	Mouse (Mus musculus)	NA	16	day	embryo	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10120-102F3	cerebellum, embryo E17, biol_rep1 (E17R1)	tissues	developmental	Mouse (Mus musculus)	NA	17	day	embryo	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10132-102G6	cerebellum, embryo E17, biol_rep2 (E17R2)	tissues	developmental	Mouse (Mus musculus)	NA	17	day	embryo	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10144-102H9	cerebellum, embryo E17, biol_rep3 (E17R3)	tissues	developmental	Mouse (Mus musculus)	NA	17	day	embryo	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10121-102F4	cerebellum, embryo E18, biol_rep1 (E18R1)	tissues	developmental	Mouse (Mus musculus)	NA	18	day	embryo	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10133-102G7	cerebellum, embryo E18, biol_rep2 (E18R2)	tissues	developmental	Mouse (Mus musculus)	NA	18	day	embryo	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10145-102I1	cerebellum, embryo E18, biol_rep3 (E18R3)	tissues	developmental	Mouse (Mus musculus)	NA	18	day	embryo	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10122-102F5	cerebellum, neonate N00, biol_rep1 (P0R1)	tissues	developmental	Mouse (Mus musculus)	NA	0	day	neonate	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10134-102G8	cerebellum, neonate N00, biol_rep2 (P0R2)	tissues	developmental	Mouse (Mus musculus)	NA	0	day	neonate	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10146-102I2	cerebellum, neonate N00, biol_rep3 (P0R3)	tissues	developmental	Mouse (Mus musculus)	NA	0	day	neonate	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10123-102F6	cerebellum, neonate N03, biol_rep1 (P3R1)	tissues	developmental	Mouse (Mus musculus)	NA	3	day	neonate	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10135-102G9	cerebellum, neonate N03, biol_rep2 (P3R2)	tissues	developmental	Mouse (Mus musculus)	NA	3	day	neonate	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10147-102I3	cerebellum, neonate N03, biol_rep3 (P3R3)	tissues	developmental	Mouse (Mus musculus)	NA	3	day	neonate	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10124-102F7	cerebellum, neonate N06, biol_rep1 (P6R1)	tissues	developmental	Mouse (Mus musculus)	NA	6	day	neonate	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10136-102H1	cerebellum, neonate N06, biol_rep2 (P6R2)	tissues	developmental	Mouse (Mus musculus)	NA	6	day	neonate	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10148-102I4	cerebellum, neonate N06, biol_rep3 (P6R3)	tissues	developmental	Mouse (Mus musculus)	NA	6	day	neonate	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10125-102F8	cerebellum, neonate N09, biol_rep1 (P9R1)	tissues	developmental	Mouse (Mus musculus)	NA	9	day	neonate	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10137-102H2	cerebellum, neonate N09, biol_rep2 (P9R2)	tissues	developmental	Mouse (Mus musculus)	NA	9	day	neonate	UBERON:0002037	cerebellum	NA	NA	NA	NA
+10149-102I5	cerebellum, neonate N09, biol_rep3 (P9R3)	tissues	developmental	Mouse (Mus musculus)	NA	9	day	neonate	UBERON:0002037	cerebellum	NA	NA	NA	NA
+1395-42I2	cerebellum, neonate N30	tissues	developmental	Mouse (Mus musculus)	mixed	30	day	child	UBERON:0002037	cerebellum	NA	NA	NA	NA
+36-18H7	colon, adult	tissues	developmental	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0001155	colon	NA	NA	NA	NA
+16-22A4	corpora quadrigemina, adult	tissues	developmental	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0002259	corpora quadrigemina	NA	NA	NA	NA
+19-21D8	corpus striatum, adult	tissues	developmental	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0000369	corpus striatum	NA	NA	NA	NA
+630-43F1	corpus striatum, neonate N00	tissues	developmental	Mouse (Mus musculus)	mixed	0	day	neonate	UBERON:0000369	corpus striatum	NA	NA	NA	NA
+12-14D5	cortex, adult	tissues	developmental	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0001851	cortex	NA	NA	NA	NA
+1392-42F2	cortex, neonate N30	tissues	developmental	Mouse (Mus musculus)	mixed	30	day	child	UBERON:0001851	cortex	NA	NA	NA	NA
+20-12F2	diencephalon, adult	tissues	developmental	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0001894	diencephalon	NA	NA	NA	NA
+1388-42B2	diencephalon, neonate N30	tissues	developmental	Mouse (Mus musculus)	mixed	30	day	child	UBERON:0001894	diencephalon	NA	NA	NA	NA
+1310-23B1	epididymis and seminiferous tubule, neonate N00	tissues	developmental	Mouse (Mus musculus)	male	0	day	neonate	UBERON:0001301	epididymis	NA	NA	NA	NA
+1387-42A2	epididymis and seminiferous tubule, neonate N30	tissues	developmental	Mouse (Mus musculus)	male	30	day	child	UBERON:0001301	epididymis	NA	NA	NA	NA
+58-23B2	epididymis, adult	tissues	developmental	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0001301	epididymis	NA	NA	NA	NA
+31-12G4	eyeball, adult	tissues	developmental	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0000970	eye	NA	NA	NA	NA
+345-16C6	eyeball, embryo E12	tissues	developmental	Mouse (Mus musculus)	mixed	12	day	embryo	UBERON:0000970	eye	NA	NA	NA	NA
+399-16E2	eyeball, embryo E14	tissues	developmental	Mouse (Mus musculus)	mixed	14	day	embryo	UBERON:0000970	eye	NA	NA	NA	NA
+426-16C9	eyeball, embryo E15	tissues	developmental	Mouse (Mus musculus)	mixed	15	day	embryo	UBERON:0000970	eye	NA	NA	NA	NA
+1261-18D4	eyeball, embryo E17	tissues	developmental	Mouse (Mus musculus)	mixed	17	day	embryo	UBERON:0000970	eye	NA	NA	NA	NA
+633-15C6	eyeball, neonate N00	tissues	developmental	Mouse (Mus musculus)	mixed	0	day	neonate	UBERON:0000970	eye	NA	NA	NA	NA
+1532-43E7	eyeball, neonate N01	tissues	developmental	Mouse (Mus musculus)	mixed	1	day	neonate	UBERON:0000970	eye	NA	NA	NA	NA
+1551-44G8	eyeball, neonate N02	tissues	developmental	Mouse (Mus musculus)	mixed	2	day	neonate	UBERON:0000970	eye	NA	NA	NA	NA
+777-19A2	eyeball, neonate N16	tissues	developmental	Mouse (Mus musculus)	mixed	16	day	child	UBERON:0000970	eye	NA	NA	NA	NA
+335-25E2	forelimb, embryo E11	tissues	developmental	Mouse (Mus musculus)	mixed	11	day	embryo	UBERON:0002102	forelimb	NA	NA	NA	NA
+359-14H2	forelimb, embryo E12	tissues	developmental	Mouse (Mus musculus)	mixed	12	day	embryo	UBERON:0002102	forelimb	NA	NA	NA	NA
+384-1E2	forelimb, embryo E13	tissues	developmental	Mouse (Mus musculus)	mixed	13	day	embryo	UBERON:0002102	forelimb	NA	NA	NA	NA
+413-26A8	forelimb, embryo E14	tissues	developmental	Mouse (Mus musculus)	mixed	14	day	embryo	UBERON:0002102	forelimb	NA	NA	NA	NA
+437-20E7	forelimb, embryo E15	tissues	developmental	Mouse (Mus musculus)	mixed	15	day	embryo	UBERON:0002102	forelimb	NA	NA	NA	NA
+1517-43C4	forelimb, embryo E17	tissues	developmental	Mouse (Mus musculus)	mixed	17	day	embryo	UBERON:0002102	forelimb	NA	NA	NA	NA
+1520-43B5	forelimb, embryo E18	tissues	developmental	Mouse (Mus musculus)	mixed	18	day	embryo	UBERON:0002102	forelimb	NA	NA	NA	NA
+1564-45I6	gonad, embryo E13	tissues	developmental	Mouse (Mus musculus)	mixed	13	day	embryo	UBERON:0000991	gonad	NA	NA	NA	NA
+331-24E9	heart, embryo E11	tissues	developmental	Mouse (Mus musculus)	mixed	11	day	embryo	UBERON:0000948	heart	NA	NA	NA	NA
+353-12F5	heart, embryo E12	tissues	developmental	Mouse (Mus musculus)	mixed	12	day	embryo	UBERON:0000948	heart	NA	NA	NA	NA
+376-3I9	heart, embryo E13	tissues	developmental	Mouse (Mus musculus)	mixed	13	day	embryo	UBERON:0000948	heart	NA	NA	NA	NA
+403-26D4	heart, embryo E14	tissues	developmental	Mouse (Mus musculus)	mixed	14	day	embryo	UBERON:0000948	heart	NA	NA	NA	NA
+431-16C8	heart, embryo E15	tissues	developmental	Mouse (Mus musculus)	mixed	15	day	embryo	UBERON:0000948	heart	NA	NA	NA	NA
+457-17C6	heart, embryo E16	tissues	developmental	Mouse (Mus musculus)	mixed	16	day	embryo	UBERON:0000948	heart	NA	NA	NA	NA
+479-18E5	heart, embryo E17	tissues	developmental	Mouse (Mus musculus)	mixed	17	day	embryo	UBERON:0000948	heart	NA	NA	NA	NA
+1283-20G3	heart, embryo E18	tissues	developmental	Mouse (Mus musculus)	mixed	18	day	embryo	UBERON:0000948	heart	NA	NA	NA	NA
+639-21E3	heart, neonate N00	tissues	developmental	Mouse (Mus musculus)	mixed	0	day	neonate	UBERON:0000948	heart	NA	NA	NA	NA
+1349-25I2	heart, neonate N03	tissues	developmental	Mouse (Mus musculus)	mixed	3	day	neonate	UBERON:0000948	heart	NA	NA	NA	NA
+749-24G1	heart, neonate N10	tissues	developmental	Mouse (Mus musculus)	mixed	10	day	child	UBERON:0000948	heart	NA	NA	NA	NA
+782-15G1	heart, neonate N16	tissues	developmental	Mouse (Mus musculus)	mixed	16	day	child	UBERON:0000948	heart	NA	NA	NA	NA
+821-26I6	heart, neonate N20	tissues	developmental	Mouse (Mus musculus)	mixed	20	day	child	UBERON:0000948	heart	NA	NA	NA	NA
+1351-25D3	heart, neonate N25	tissues	developmental	Mouse (Mus musculus)	mixed	25	day	child	UBERON:0000948	heart	NA	NA	NA	NA
+1390-42D2	heart, neonate N30	tissues	developmental	Mouse (Mus musculus)	mixed	30	day	child	UBERON:0000948	heart	NA	NA	NA	NA
+13-16E8	hippocampus, adult	tissues	developmental	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0002421	hippocampal formation	NA	NA	NA	NA
+627-43G1	hippocampus, neonate N00	tissues	developmental	Mouse (Mus musculus)	mixed	0	day	neonate	UBERON:0002421	hippocampal formation	NA	NA	NA	NA
+10252-104B9	Ileum epithelium, pool1	tissues	developmental	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0002116	ileum	NA	NA	NA	NA
+860-29I3	intestinal mucosa, adult	tissues	developmental	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0001242	intestinal mucosa	NA	NA	NA	NA
+178-9A3	intestine, adult	tissues	developmental	Mouse (Mus musculus)	mixed	NA	NA	adult	UBERON:0000160	intestine	NA	NA	NA	NA
+1251-16I5	intestine, embryo E12	tissues	developmental	Mouse (Mus musculus)	mixed	12	day	embryo	UBERON:0000160	intestine	NA	NA	NA	NA
+381-16D5	intestine, embryo E13	tissues	developmental	Mouse (Mus musculus)	mixed	13	day	embryo	UBERON:0000160	intestine	NA	NA	NA	NA
+976-16D8	intestine, embryo E15	tissues	developmental	Mouse (Mus musculus)	mixed	15	day	embryo	UBERON:0000160	intestine	NA	NA	NA	NA
+463-22H4	intestine, embryo E16	tissues	developmental	Mouse (Mus musculus)	mixed	16	day	embryo	UBERON:0000160	intestine	NA	NA	NA	NA
+482-18D3	intestine, embryo E17	tissues	developmental	Mouse (Mus musculus)	mixed	17	day	embryo	UBERON:0000160	intestine	NA	NA	NA	NA
+1289-20F7	intestine, embryo E18	tissues	developmental	Mouse (Mus musculus)	mixed	18	day	embryo	UBERON:0000160	intestine	NA	NA	NA	NA
+644-26D1	intestine, neonate N00	tissues	developmental	Mouse (Mus musculus)	mixed	0	day	neonate	UBERON:0000160	intestine	NA	NA	NA	NA
+1322-23E9	intestine, neonate N01	tissues	developmental	Mouse (Mus musculus)	mixed	1	day	neonate	UBERON:0000160	intestine	NA	NA	NA	NA
+688-20B8	intestine, neonate N06	tissues	developmental	Mouse (Mus musculus)	mixed	6	day	neonate	UBERON:0000160	intestine	NA	NA	NA	NA
+720-20F2	intestine, neonate N07	tissues	developmental	Mouse (Mus musculus)	mixed	7	day	neonate	UBERON:0000160	intestine	NA	NA	NA	NA
+755-23A5	intestine, neonate N10	tissues	developmental	Mouse (Mus musculus)	mixed	10	day	child	UBERON:0000160	intestine	NA	NA	NA	NA
+827-18D1	intestine, neonate N20	tissues	developmental	Mouse (Mus musculus)	mixed	20	day	child	UBERON:0000160	intestine	NA	NA	NA	NA
+1352-25E3	intestine, neonate N25	tissues	developmental	Mouse (Mus musculus)	mixed	25	day	child	UBERON:0000160	intestine	NA	NA	NA	NA
+1384-42G1	intestine, neonate N30	tissues	developmental	Mouse (Mus musculus)	mixed	30	day	child	UBERON:0000160	intestine	NA	NA	NA	NA
+411-4I9	kidney, embryo E14	tissues	developmental	Mouse (Mus musculus)	mixed	14	day	embryo	UBERON:0002113	kidney	NA	NA	NA	NA
+434-16F8	kidney, embryo E15	tissues	developmental	Mouse (Mus musculus)	mixed	15	day	embryo	UBERON:0002113	kidney	NA	NA	NA	NA
+464-22A5	kidney, embryo E16	tissues	developmental	Mouse (Mus musculus)	mixed	16	day	embryo	UBERON:0002113	kidney	NA	NA	NA	NA
+483-18I2	kidney, embryo E17	tissues	developmental	Mouse (Mus musculus)	mixed	17	day	embryo	UBERON:0002113	kidney	NA	NA	NA	NA
+1288-20C7	kidney, embryo E18	tissues	developmental	Mouse (Mus musculus)	mixed	18	day	embryo	UBERON:0002113	kidney	NA	NA	NA	NA
+646-21G7	kidney, neonate N00	tissues	developmental	Mouse (Mus musculus)	mixed	0	day	neonate	UBERON:0002113	kidney	NA	NA	NA	NA
+758-6D5	kidney, neonate N10	tissues	developmental	Mouse (Mus musculus)	mixed	10	day	child	UBERON:0002113	kidney	NA	NA	NA	NA
+832-19I1	kidney, neonate N20	tissues	developmental	Mouse (Mus musculus)	mixed	20	day	child	UBERON:0002113	kidney	NA	NA	NA	NA
+1353-25F3	kidney, neonate N25	tissues	developmental	Mouse (Mus musculus)	mixed	25	day	child	UBERON:0002113	kidney	NA	NA	NA	NA
+1385-42H1	kidney, neonate N30	tissues	developmental	Mouse (Mus musculus)	mixed	30	day	child	UBERON:0002113	kidney	NA	NA	NA	NA
+508-5B2	liver, adult pregnant day01	tissues	developmental	Mouse (Mus musculus)	mixed	1	day	pregnant adult	UBERON:0002107	liver	NA	NA	NA	NA
+355-15F8	liver, embryo E12	tissues	developmental	Mouse (Mus musculus)	mixed	12	day	embryo	UBERON:0002107	liver	NA	NA	NA	NA
+378-3H6	liver, embryo E13	tissues	developmental	Mouse (Mus musculus)	mixed	13	day	embryo	UBERON:0002107	liver	NA	NA	NA	NA
+409-16E1	liver, embryo E14	tissues	developmental	Mouse (Mus musculus)	mixed	14	day	embryo	UBERON:0002107	liver	NA	NA	NA	NA
+433-16D7	liver, embryo E15	tissues	developmental	Mouse (Mus musculus)	mixed	15	day	embryo	UBERON:0002107	liver	NA	NA	NA	NA
+462-17F5	liver, embryo E16	tissues	developmental	Mouse (Mus musculus)	mixed	16	day	embryo	UBERON:0002107	liver	NA	NA	NA	NA
+481-18A3	liver, embryo E17	tissues	developmental	Mouse (Mus musculus)	mixed	17	day	embryo	UBERON:0002107	liver	NA	NA	NA	NA
+499-43G4	liver, embryo E18	tissues	developmental	Mouse (Mus musculus)	mixed	18	day	embryo	UBERON:0002107	liver	NA	NA	NA	NA
+641-24F4	liver, neonate N00	tissues	developmental	Mouse (Mus musculus)	mixed	0	day	neonate	UBERON:0002107	liver	NA	NA	NA	NA
+1345-25G2	liver, neonate N03	tissues	developmental	Mouse (Mus musculus)	mixed	3	day	neonate	UBERON:0002107	liver	NA	NA	NA	NA
+684-20A8	liver, neonate N06	tissues	developmental	Mouse (Mus musculus)	mixed	6	day	neonate	UBERON:0002107	liver	NA	NA	NA	NA
+716-20H2	liver, neonate N07	tissues	developmental	Mouse (Mus musculus)	mixed	7	day	neonate	UBERON:0002107	liver	NA	NA	NA	NA
+751-24B9	liver, neonate N10	tissues	developmental	Mouse (Mus musculus)	mixed	10	day	child	UBERON:0002107	liver	NA	NA	NA	NA
+823-25A3	liver, neonate N20	tissues	developmental	Mouse (Mus musculus)	mixed	20	day	child	UBERON:0002107	liver	NA	NA	NA	NA
+1368-26H1	liver, neonate N25	tissues	developmental	Mouse (Mus musculus)	mixed	25	day	child	UBERON:0002107	liver	NA	NA	NA	NA
+1382-42D1	liver, neonate N30	tissues	developmental	Mouse (Mus musculus)	mixed	30	day	child	UBERON:0002107	liver	NA	NA	NA	NA
+28-22B1	lung, adult	tissues	developmental	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0002048	lung	NA	NA	NA	NA
+354-16G2	lung, embryo E12	tissues	developmental	Mouse (Mus musculus)	mixed	12	day	embryo	UBERON:0002048	lung	NA	NA	NA	NA
+404-26F8	lung, embryo E14	tissues	developmental	Mouse (Mus musculus)	mixed	14	day	embryo	UBERON:0002048	lung	NA	NA	NA	NA
+432-17C5	lung, embryo E15	tissues	developmental	Mouse (Mus musculus)	mixed	15	day	embryo	UBERON:0002048	lung	NA	NA	NA	NA
+458-17B6	lung, embryo E16	tissues	developmental	Mouse (Mus musculus)	mixed	16	day	embryo	UBERON:0002048	lung	NA	NA	NA	NA
+480-44A6	lung, embryo E17	tissues	developmental	Mouse (Mus musculus)	mixed	17	day	embryo	UBERON:0002048	lung	NA	NA	NA	NA
+1287-20I6	lung, embryo E18	tissues	developmental	Mouse (Mus musculus)	mixed	18	day	embryo	UBERON:0002048	lung	NA	NA	NA	NA
+640-42C6	lung, neonate N00	tissues	developmental	Mouse (Mus musculus)	mixed	0	day	neonate	UBERON:0002048	lung	NA	NA	NA	NA
+683-20E5	lung, neonate N06	tissues	developmental	Mouse (Mus musculus)	mixed	6	day	neonate	UBERON:0002048	lung	NA	NA	NA	NA
+715-19A3	lung, neonate N07	tissues	developmental	Mouse (Mus musculus)	mixed	7	day	neonate	UBERON:0002048	lung	NA	NA	NA	NA
+750-23E6	lung, neonate N10	tissues	developmental	Mouse (Mus musculus)	mixed	10	day	child	UBERON:0002048	lung	NA	NA	NA	NA
+822-18A4	lung, neonate N20	tissues	developmental	Mouse (Mus musculus)	mixed	20	day	child	UBERON:0002048	lung	NA	NA	NA	NA
+1359-25C7	lung, neonate N25	tissues	developmental	Mouse (Mus musculus)	mixed	25	day	child	UBERON:0002048	lung	NA	NA	NA	NA
+1394-42H2	lung, neonate N30	tissues	developmental	Mouse (Mus musculus)	mixed	30	day	child	UBERON:0002048	lung	NA	NA	NA	NA
+595-22B6	mammary gland, adult lactating day02	tissues	developmental	Mouse (Mus musculus)	female	2	day	lactation adult	UBERON:0001911	mammary gland	NA	NA	NA	NA
+588-5H2	mammary gland, adult pregnant day19	tissues	developmental	Mouse (Mus musculus)	female	19	day	pregnant adult	UBERON:0001911	mammary gland	NA	NA	NA	NA
+17-12C2	medulla oblongata, adult	tissues	developmental	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0001896	medulla oblongata	NA	NA	NA	NA
+1396-42A3	medulla oblongata, neonate N30	tissues	developmental	Mouse (Mus musculus)	mixed	30	day	child	UBERON:0001896	medulla oblongata	NA	NA	NA	NA
+1389-42C2	muscle (biceps femoris), neonate N30	tissues	developmental	Mouse (Mus musculus)	mixed	30	day	child	UBERON:0001374	biceps femoris	NA	NA	NA	NA
+18-22I9	olfactory brain, adult	tissues	developmental	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0002264	olfactory bulb	NA	NA	NA	NA
+91-2I7	ovary, adult	tissues	developmental	Mouse (Mus musculus)	female	NA	NA	adult	UBERON:0000992	ovary	NA	NA	NA	NA
+505-44H7	ovary, embryo E18	tissues	developmental	Mouse (Mus musculus)	female	18	day	embryo	UBERON:0000992	ovary	NA	NA	NA	NA
+1299-22I4	ovary, neonate N00	tissues	developmental	Mouse (Mus musculus)	female	0	day	neonate	UBERON:0000992	ovary	NA	NA	NA	NA
+988-6G6	oviduct, adult pregnant day01	tissues	developmental	Mouse (Mus musculus)	female	1	day	pregnant adult	UBERON:0000993	oviduct	NA	NA	NA	NA
+34-16E4	pancreas, adult	tissues	developmental	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0001264	pancreas	NA	NA	NA	NA
+405-44F4	pancreas, embryo E14	tissues	developmental	Mouse (Mus musculus)	mixed	14	day	embryo	UBERON:0001264	pancreas	NA	NA	NA	NA
+1556-45F2	pancreas, embryo E15	tissues	developmental	Mouse (Mus musculus)	mixed	15	day	embryo	UBERON:0001264	pancreas	NA	NA	NA	NA
+460-26E5	pancreas, embryo E16	tissues	developmental	Mouse (Mus musculus)	mixed	16	day	embryo	UBERON:0001264	pancreas	NA	NA	NA	NA
+1558-45G3	pancreas, embryo E17	tissues	developmental	Mouse (Mus musculus)	mixed	17	day	embryo	UBERON:0001264	pancreas	NA	NA	NA	NA
+1535-43I7	pancreas, embryo E18	tissues	developmental	Mouse (Mus musculus)	mixed	18	day	embryo	UBERON:0001264	pancreas	NA	NA	NA	NA
+645-26G9	pancreas, neonate N00	tissues	developmental	Mouse (Mus musculus)	mixed	0	day	neonate	UBERON:0001264	pancreas	NA	NA	NA	NA
+1531-43D7	pancreas, neonate N01	tissues	developmental	Mouse (Mus musculus)	mixed	1	day	neonate	UBERON:0001264	pancreas	NA	NA	NA	NA
+1539-43D8	pancreas, neonate N02	tissues	developmental	Mouse (Mus musculus)	mixed	2	day	neonate	UBERON:0001264	pancreas	NA	NA	NA	NA
+787-43B6	pancreas, neonate N16	tissues	developmental	Mouse (Mus musculus)	mixed	16	day	child	UBERON:0001264	pancreas	NA	NA	NA	NA
+1555-45E2	pancreas, neonate N25	tissues	developmental	Mouse (Mus musculus)	mixed	25	day	child	UBERON:0001264	pancreas	NA	NA	NA	NA
+1548-44H5	pancreas, neonate N30	tissues	developmental	Mouse (Mus musculus)	mixed	30	day	child	UBERON:0001264	pancreas	NA	NA	NA	NA
+21-1G8	pituitary gland, adult	tissues	developmental	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0000007	pituitary gland	NA	NA	NA	NA
+346-16E6	pituitary gland, embryo E12	tissues	developmental	Mouse (Mus musculus)	mixed	12	day	embryo	UBERON:0000007	pituitary gland	NA	NA	NA	NA
+370-44C7	pituitary gland, embryo E13	tissues	developmental	Mouse (Mus musculus)	mixed	13	day	embryo	UBERON:0000007	pituitary gland	NA	NA	NA	NA
+398-44A5	pituitary gland, embryo E14	tissues	developmental	Mouse (Mus musculus)	mixed	14	day	embryo	UBERON:0000007	pituitary gland	NA	NA	NA	NA
+427-16B9	pituitary gland, embryo E15	tissues	developmental	Mouse (Mus musculus)	mixed	15	day	embryo	UBERON:0000007	pituitary gland	NA	NA	NA	NA
+449-43F6	pituitary gland, embryo E16	tissues	developmental	Mouse (Mus musculus)	mixed	16	day	embryo	UBERON:0000007	pituitary gland	NA	NA	NA	NA
+1265-44F5	pituitary gland, embryo E17	tissues	developmental	Mouse (Mus musculus)	mixed	17	day	embryo	UBERON:0000007	pituitary gland	NA	NA	NA	NA
+1308-22E9	pituitary gland, neonate N00	tissues	developmental	Mouse (Mus musculus)	mixed	0	day	neonate	UBERON:0000007	pituitary gland	NA	NA	NA	NA
+539-13I7	placenta, adult pregnant day10	tissues	developmental	Mouse (Mus musculus)	female	10	day	pregnant adult	UBERON:0001987	placenta	NA	NA	NA	NA
+577-18G3	placenta, adult pregnant day17	tissues	developmental	Mouse (Mus musculus)	female	17	day	pregnant adult	UBERON:0001987	placenta	NA	NA	NA	NA
+859-1F8	prostate, adult	tissues	developmental	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0002097	skin of body	NA	NA	NA	NA
+30-1C3	skin, adult	tissues	developmental	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0002097	skin of body	NA	NA	NA	NA
+650-25G4	skin, neonate N00	tissues	developmental	Mouse (Mus musculus)	mixed	0	day	neonate	UBERON:0002097	skin of body	NA	NA	NA	NA
+662-22H3	skin, neonate N03	tissues	developmental	Mouse (Mus musculus)	mixed	3	day	neonate	UBERON:0002097	skin of body	NA	NA	NA	NA
+693-20I5	skin, neonate N06	tissues	developmental	Mouse (Mus musculus)	mixed	6	day	neonate	UBERON:0002097	skin of body	NA	NA	NA	NA
+762-6C4	skin, neonate N10	tissues	developmental	Mouse (Mus musculus)	mixed	10	day	child	UBERON:0002097	skin of body	NA	NA	NA	NA
+790-21I1	small intestine, neonate N16	tissues	developmental	Mouse (Mus musculus)	mixed	16	day	child	UBERON:0002108	small intestine	NA	NA	NA	NA
+24-13C9	spinal cord, adult	tissues	developmental	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0002240	spinal cord	NA	NA	NA	NA
+25-2G2	spleen, adult	tissues	developmental	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0002106	spleen	NA	NA	NA	NA
+461-43C1	spleen, embryo E16	tissues	developmental	Mouse (Mus musculus)	mixed	16	day	embryo	UBERON:0002106	spleen	NA	NA	NA	NA
+1271-21F2	spleen, embryo E18	tissues	developmental	Mouse (Mus musculus)	mixed	18	day	embryo	UBERON:0002106	spleen	NA	NA	NA	NA
+752-24D1	spleen, neonate N10	tissues	developmental	Mouse (Mus musculus)	mixed	10	day	child	UBERON:0002106	spleen	NA	NA	NA	NA
+824-19H1	spleen, neonate N20	tissues	developmental	Mouse (Mus musculus)	mixed	20	day	child	UBERON:0002106	spleen	NA	NA	NA	NA
+1354-25G3	spleen, neonate N25	tissues	developmental	Mouse (Mus musculus)	mixed	25	day	child	UBERON:0002106	spleen	NA	NA	NA	NA
+33-1H6	stomach, adult	tissues	developmental	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0000945	stomach	NA	NA	NA	NA
+356-43E3	stomach, embryo E12	tissues	developmental	Mouse (Mus musculus)	mixed	12	day	embryo	UBERON:0000945	stomach	NA	NA	NA	NA
+1252-16G8	stomach, embryo E15	tissues	developmental	Mouse (Mus musculus)	mixed	15	day	embryo	UBERON:0000945	stomach	NA	NA	NA	NA
+459-17D4	stomach, embryo E16	tissues	developmental	Mouse (Mus musculus)	mixed	16	day	embryo	UBERON:0000945	stomach	NA	NA	NA	NA
+1035-18D5	stomach, embryo E17	tissues	developmental	Mouse (Mus musculus)	mixed	17	day	embryo	UBERON:0000945	stomach	NA	NA	NA	NA
+1286-20C6	stomach, embryo E18	tissues	developmental	Mouse (Mus musculus)	mixed	18	day	embryo	UBERON:0000945	stomach	NA	NA	NA	NA
+1340-24B8	stomach, neonate N03	tissues	developmental	Mouse (Mus musculus)	mixed	3	day	neonate	UBERON:0000945	stomach	NA	NA	NA	NA
+718-18A9	stomach, neonate N07	tissues	developmental	Mouse (Mus musculus)	mixed	7	day	neonate	UBERON:0000945	stomach	NA	NA	NA	NA
+1355-25E4	stomach, neonate N25	tissues	developmental	Mouse (Mus musculus)	mixed	25	day	child	UBERON:0000945	stomach	NA	NA	NA	NA
+1386-42I1	stomach, neonate N30	tissues	developmental	Mouse (Mus musculus)	mixed	30	day	child	UBERON:0000945	stomach	NA	NA	NA	NA
+59-29C1	submandibular gland, adult	tissues	developmental	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0001736	submandibular gland	NA	NA	NA	NA
+57-7G5	testis, adult	tissues	developmental	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0000473	testis	NA	NA	NA	NA
+389-23F5	testis, embryo E13	tissues	developmental	Mouse (Mus musculus)	male	13	day	embryo	UBERON:0000473	testis	NA	NA	NA	NA
+443-27C5	testis, embryo E15	tissues	developmental	Mouse (Mus musculus)	male	15	day	embryo	UBERON:0000473	testis	NA	NA	NA	NA
+470-26G5	testis, embryo E16	tissues	developmental	Mouse (Mus musculus)	male	16	day	embryo	UBERON:0000473	testis	NA	NA	NA	NA
+486-18I5	testis, embryo E17	tissues	developmental	Mouse (Mus musculus)	male	17	day	embryo	UBERON:0000473	testis	NA	NA	NA	NA
+503-18G5	testis, embryo E18	tissues	developmental	Mouse (Mus musculus)	male	18	day	embryo	UBERON:0000473	testis	NA	NA	NA	NA
+1300-22B7	testis, neonate N00	tissues	developmental	Mouse (Mus musculus)	male	0	day	neonate	UBERON:0000473	testis	NA	NA	NA	NA
+726-26I4	testis, neonate N07	tissues	developmental	Mouse (Mus musculus)	male	7	day	neonate	UBERON:0000473	testis	NA	NA	NA	NA
+763-44D9	testis, neonate N10	tissues	developmental	Mouse (Mus musculus)	male	10	day	child	UBERON:0000473	testis	NA	NA	NA	NA
+839-18H3	testis, neonate N20	tissues	developmental	Mouse (Mus musculus)	male	20	day	child	UBERON:0000473	testis	NA	NA	NA	NA
+1391-42E2	testis, neonate N30	tissues	developmental	Mouse (Mus musculus)	male	30	day	child	UBERON:0000473	testis	NA	NA	NA	NA
+38-12B5	thymus, adult	tissues	developmental	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0002370	thymus	NA	NA	NA	NA
+402-44I4	thymus, embryo E14	tissues	developmental	Mouse (Mus musculus)	mixed	14	day	embryo	UBERON:0002370	thymus	NA	NA	NA	NA
+430-45I2	thymus, embryo E15	tissues	developmental	Mouse (Mus musculus)	mixed	15	day	embryo	UBERON:0002370	thymus	NA	NA	NA	NA
+456-26C5	thymus, embryo E16	tissues	developmental	Mouse (Mus musculus)	mixed	16	day	embryo	UBERON:0002370	thymus	NA	NA	NA	NA
+478-18C1	thymus, embryo E17	tissues	developmental	Mouse (Mus musculus)	mixed	17	day	embryo	UBERON:0002370	thymus	NA	NA	NA	NA
+1273-19G4	thymus, embryo E18	tissues	developmental	Mouse (Mus musculus)	mixed	18	day	embryo	UBERON:0002370	thymus	NA	NA	NA	NA
+1541-43F8	thymus, neonate N02	tissues	developmental	Mouse (Mus musculus)	mixed	2	day	neonate	UBERON:0002370	thymus	NA	NA	NA	NA
+2104-43C7	thymus, neonate N03	tissues	developmental	Mouse (Mus musculus)	mixed	3	day	neonate	UBERON:0002370	thymus	NA	NA	NA	NA
+681-26C4	thymus, neonate N06	tissues	developmental	Mouse (Mus musculus)	mixed	6	day	neonate	UBERON:0002370	thymus	NA	NA	NA	NA
+713-19D3	thymus, neonate N07	tissues	developmental	Mouse (Mus musculus)	mixed	7	day	neonate	UBERON:0002370	thymus	NA	NA	NA	NA
+748-24E4	thymus, neonate N10	tissues	developmental	Mouse (Mus musculus)	mixed	10	day	child	UBERON:0002370	thymus	NA	NA	NA	NA
+820-7A2	thymus, neonate N20	tissues	developmental	Mouse (Mus musculus)	mixed	20	day	child	UBERON:0002370	thymus	NA	NA	NA	NA
+1362-25G7	thymus, neonate N25	tissues	developmental	Mouse (Mus musculus)	mixed	25	day	child	UBERON:0002370	thymus	NA	NA	NA	NA
+1393-42G2	thymus, neonate N30	tissues	developmental	Mouse (Mus musculus)	mixed	30	day	child	UBERON:0002370	thymus	NA	NA	NA	NA
+32-1B4	tongue, adult	tissues	developmental	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0001723	tongue	NA	NA	NA	NA
+879-12E4	urinary bladder, adult	tissues	developmental	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0001255	urinary bladder	NA	NA	NA	NA
+92-27E5	uterus, adult	tissues	developmental	Mouse (Mus musculus)	female	NA	NA	adult	UBERON:0000995	uterus	NA	NA	NA	NA
+590-15F5	uterus, adult pregnant day19	tissues	developmental	Mouse (Mus musculus)	female	19	day	pregnant adult	UBERON:0000995	uterus	NA	NA	NA	NA
+89-27D5	vagina, adult	tissues	developmental	Mouse (Mus musculus)	female	NA	NA	adult	UBERON:0000996	vagina	NA	NA	NA	NA
+51-27F8	vesicular gland, adult	tissues	developmental	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0007194	vesicular gland	NA	NA	NA	NA
+10244-104B1	visual cortex - Mecp knockout, neonate N15, donor1	tissues	developmental	Mouse (Mus musculus)	male	15	day	child	UBERON:0000411	visual cortex	NA	NA	NA	NA
+10245-104B2	visual cortex - Mecp knockout, neonate N15, donor2	tissues	developmental	Mouse (Mus musculus)	male	15	day	child	UBERON:0000411	visual cortex	NA	NA	NA	NA
+10350-105D8	visual cortex - Mecp knockout, neonate N15, donor3	tissues	developmental	Mouse (Mus musculus)	male	15	day	child	UBERON:0000411	visual cortex	NA	NA	NA	NA
+10246-104B3	visual cortex - Mecp knockout, neonate N30, donor1	tissues	developmental	Mouse (Mus musculus)	male	30	day	child	UBERON:0000411	visual cortex	NA	NA	NA	NA
+10247-104B4	visual cortex - Mecp knockout, neonate N30, donor2	tissues	developmental	Mouse (Mus musculus)	male	30	day	child	UBERON:0000411	visual cortex	NA	NA	NA	NA
+10248-104B5	visual cortex - Mecp knockout, neonate N30, donor3	tissues	developmental	Mouse (Mus musculus)	male	30	day	child	UBERON:0000411	visual cortex	NA	NA	NA	NA
+10249-104B6	visual cortex - Mecp knockout, neonate N60-70, donor1	tissues	developmental	Mouse (Mus musculus)	male	60-70	day	child	UBERON:0000411	visual cortex	NA	NA	NA	NA
+10250-104B7	visual cortex - Mecp knockout, neonate N60-70, donor2	tissues	developmental	Mouse (Mus musculus)	male	60-70	day	child	UBERON:0000411	visual cortex	NA	NA	NA	NA
+10251-104B8	visual cortex - Mecp knockout, neonate N60-70, donor3	tissues	developmental	Mouse (Mus musculus)	male	60-70	day	child	UBERON:0000411	visual cortex	NA	NA	NA	NA
+10235-104A1	visual cortex - wildtype, neonate N15, donor1	tissues	developmental	Mouse (Mus musculus)	male	15	day	child	UBERON:0000411	visual cortex	NA	NA	NA	NA
+10236-104A2	visual cortex - wildtype, neonate N15, donor2	tissues	developmental	Mouse (Mus musculus)	male	15	day	child	UBERON:0000411	visual cortex	NA	NA	NA	NA
+10237-104A3	visual cortex - wildtype, neonate N15, donor3	tissues	developmental	Mouse (Mus musculus)	male	15	day	child	UBERON:0000411	visual cortex	NA	NA	NA	NA
+10349-105D7	visual cortex - wildtype, neonate N15, donor5	tissues	developmental	Mouse (Mus musculus)	male	15	day	child	UBERON:0000411	visual cortex	NA	NA	NA	NA
+10238-104A4	visual cortex - wildtype, neonate N30, donor1	tissues	developmental	Mouse (Mus musculus)	male	30	day	child	UBERON:0000411	visual cortex	NA	NA	NA	NA
+10239-104A5	visual cortex - wildtype, neonate N30, donor2	tissues	developmental	Mouse (Mus musculus)	male	30	day	child	UBERON:0000411	visual cortex	NA	NA	NA	NA
+10240-104A6	visual cortex - wildtype, neonate N30, donor3	tissues	developmental	Mouse (Mus musculus)	male	30	day	child	UBERON:0000411	visual cortex	NA	NA	NA	NA
+10241-104A7	visual cortex - wildtype, neonate N60-70, donor1	tissues	developmental	Mouse (Mus musculus)	male	60-70	day	child	UBERON:0000411	visual cortex	NA	NA	NA	NA
+10242-104A8	visual cortex - wildtype, neonate N60-70, donor2	tissues	developmental	Mouse (Mus musculus)	male	60-70	day	child	UBERON:0000411	visual cortex	NA	NA	NA	NA
+10243-104A9	visual cortex - wildtype, neonate N60-70, donor3	tissues	developmental	Mouse (Mus musculus)	male	60-70	day	child	UBERON:0000411	visual cortex	NA	NA	NA	NA
+324-5I8	whole body, embryo E11	tissues	developmental	Mouse (Mus musculus)	mixed	11	day	embryo	NA	NA	NA	NA	NA	NA
+857-27C9	whole body, embryo E12	tissues	developmental	Mouse (Mus musculus)	mixed	12	day	embryo	NA	NA	NA	NA	NA	NA
+372-23H2	whole body, embryo E13	tissues	developmental	Mouse (Mus musculus)	mixed	13	day	embryo	NA	NA	NA	NA	NA	NA
+395-14B1	whole body, embryo E14	tissues	developmental	Mouse (Mus musculus)	mixed	14	day	embryo	NA	NA	NA	NA	NA	NA
+420-27D2	whole body, embryo E14.5	tissues	developmental	Mouse (Mus musculus)	mixed	14.5	day	embryo	NA	NA	NA	NA	NA	NA
+453-14F2	whole body, embryo E16	tissues	developmental	Mouse (Mus musculus)	mixed	16	day	embryo	NA	NA	NA	NA	NA	NA
+475-3I5	whole body, embryo E17	tissues	developmental	Mouse (Mus musculus)	mixed	17	day	embryo	NA	NA	NA	NA	NA	NA
+490-9F9	whole body, embryo E17.5	tissues	developmental	Mouse (Mus musculus)	male	17.5	day	embryo	NA	NA	NA	NA	NA	NA
+493-3B3	whole body, embryo E18	tissues	developmental	Mouse (Mus musculus)	mixed	18	day	embryo	NA	NA	NA	NA	NA	NA
+657-19C2	whole body, neonate N00	tissues	developmental	Mouse (Mus musculus)	female	0	day	neonate	NA	NA	NA	NA	NA	NA
+659-23C6	whole body, neonate N01	tissues	developmental	Mouse (Mus musculus)	mixed	1	day	neonate	NA	NA	NA	NA	NA	NA
+692-21D1	whole body, neonate N06	tissues	developmental	Mouse (Mus musculus)	mixed	6	day	neonate	NA	NA	NA	NA	NA	NA
+761-6B4	whole body, neonate N10	tissues	developmental	Mouse (Mus musculus)	mixed	10	day	child	NA	NA	NA	NA	NA	NA
+10101-102D2	whole body, embryo E17.5, pool1 (internal control)	tissues	qualitycontrol	Mouse (Mus musculus)	NA	17.5	day	embryo	NA	NA	NA	NA	NA	NA
+10101-102D3	whole body, embryo E17.5, pool1 (internal control)	tissues	qualitycontrol	Mouse (Mus musculus)	NA	17.5	day	embryo	NA	NA	NA	NA	NA	NA
+10101-102D4	whole body, embryo E17.5, pool1 (internal control)	tissues	qualitycontrol	Mouse (Mus musculus)	NA	17.5	day	embryo	NA	NA	NA	NA	NA	NA
+3139-67G5	whole body, embryo E17.5, pool1 (internal control)	tissues	qualitycontrol	Mouse (Mus musculus)	NA	17.5	day	embryo	NA	NA	NA	NA	NA	NA
+10001-101A3	Clontech Mouse Universal Reference Total RNA, pool1	tissues	snapshot	Mouse (Mus musculus)	mixed	NA	NA	NA	NA	NA	NA	NA	NA	NA
+10262-104D1	Follicle Associated Epithelium, pool2	tissues	snapshot	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0001211	Peyer's patch	NA	NA	NA	NA
+10263-104D2	Follicle Associated Epithelium, pool3	tissues	snapshot	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0001211	Peyer's patch	NA	NA	NA	NA
+10253-104C1	Ileum epithelium, pool2	tissues	snapshot	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0002116	ileum	NA	NA	NA	NA
+10260-104C8	Ileum epithelium, treated with RANKL, day03, pool3	tissues	snapshot	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0002116	ileum	NA	NA	NA	NA
+10003-101A7	SABiosciences XpressRef Mouse Universal Total RNA, pool1	tissues	snapshot	Mouse (Mus musculus)	mixed	NA	NA	NA	NA	NA	NA	NA	NA	NA
+10008-101B6	Universal RNA - Mouse Normal Tissues Biochain, pool1	tissues	snapshot	Mouse (Mus musculus)	mixed	6-8	week	adult	NA	NA	NA	NA	NA	NA
