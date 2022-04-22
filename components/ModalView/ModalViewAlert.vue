@@ -39,7 +39,7 @@
       font-weight: bold
       > p
         font-size: 18px
-        color: $COLOR_9
+        color: $ERROR_COLOR
         margin: 0
         > .fa-exclamation-triangle
             font-size: 18px
