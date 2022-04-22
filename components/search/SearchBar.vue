@@ -88,10 +88,6 @@
         @updateParameters="updateParams"
       ></component>
     </ScreenerView>
-    <button class="find_results_btn" @click="showResults()">
-      <font-awesome-icon icon="search" />
-      Find {{ filterType }}s
-    </button>
   </div>
 </template>
 <script>
@@ -189,6 +185,8 @@
       },
       // TODO: check if neccesary to watch both
       activeSpecie() {
+        this.$set(this.parameters, 'text', '');
+        this.typeOfQuery = 'reset numfound';
         this.showResults('numfound');
       },
     },
@@ -197,6 +195,7 @@
         setAlertModal: 'set_alert_modal',
       }),
       updateParams(params) {
+        this.$emit('updateScreener');
         this.parameters = { text: this.parameters.text, ...params };
 
         this.showResults('numfound');
@@ -214,10 +213,9 @@
         this.$router.push(this.routeToProjectPage(suggestion.entrezgene));
       },
       showResults(type = 'all') {
-        console.log(type);
         this.typeOfQuery = type;
-        let results = [],
-          results_num = 0;
+        let results;
+        let results_num = 0;
         this.$axios
           .$post('gql', {
             query: this.suggest_query,
@@ -233,6 +231,8 @@
             this.setAlertModal({ msg: 'Failed to get data in Search Bar' });
           })
           .finally(() => {
+            if (type === 'all') this.$emit('updateResults');
+
             this.onEvent = false;
             this.isReloadActive = false;
             this.$store.commit('set_results', {

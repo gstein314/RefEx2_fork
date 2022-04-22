@@ -5,6 +5,8 @@ $GRAY: #7C7C7C
 $ERROR_COLOR: #FF4C5E
 $ACTIVE_COLOR: #FFE100
 $ACTIVE_COLOR_HOVER: rgba(255, 255, 0, .1)
+$ACCENT_COLOR: #fad275
+$SUCCES_COLOR: #5cb85c
 $BUTTON_HOVER_COLOR: #366c96
 $COLOR_1: #488EC4
 $COLOR_2: #FF8A17
@@ -83,6 +85,13 @@ $TOOLTIP_LAYER: 2
   > svg
     font-size: 14px
     margin-right: 4px
+  &.update
+    background: $SUCCES_COLOR
+    color: #ffffff
+  &.disabled
+    background: #cccccc
+    color: #ffffff
+    cursor: not-allowed
 
 @mixin table
   width: 100%
@@ -191,7 +200,7 @@ $TOOLTIP_LAYER: 2
       +hover
 
 @mixin ontology_tag
-  background-color: $COLOR_6
+  background-color: $ACCENT_COLOR
   padding: $PADDING_SLIM
   border-radius: $BORDER_RADIUS_DEFAULT
 
