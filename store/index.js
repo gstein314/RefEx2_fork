@@ -1,6 +1,5 @@
-import datasets from '../refex-sample/datasets.json';
+import specieSets from '../refex-sample/datasets.json';
 import filters from '../static/filters.json';
-import species from '../static/species.json';
 
 const maxInTenth = x => {
   return Math.ceil(x / 10) * 10;
@@ -23,9 +22,9 @@ const numberFilterObj = ([min, max], value) => {
 };
 
 export const state = () => ({
-  active_specie: species[0], //default,
+  active_specie: specieSets[0],
   active_filter: 'gene',
-  active_dataset: datasets[0].dataset,
+  active_dataset: specieSets[0].datasets[0],
   project_filters: {},
   filter_modal: null,
   gene_modal: null,
@@ -48,19 +47,22 @@ export const getters = {
   },
   route_to_project_page: state => ids => {
     if (Array.isArray(ids)) ids = ids.join(',');
-    return `${state.active_specie.suggestions_key}/${state.active_filter}?id=${ids}`;
+    return `${state.active_specie.species}/${state.active_filter}?id=${ids}`;
   },
   gene_modal(state) {
     return state.gene_modal;
   },
   active_dataset(state) {
-    return datasets.find(dataset => dataset.dataset === state.active_dataset);
+    return state.active_dataset;
   },
   active_filter(state) {
     return filters.find(filter => state.active_filter === filter.name);
   },
   active_specie(state) {
     return state.active_specie;
+  },
+  search_condition_by_specie: state => {
+    return state.active_specie.search_conditions;
   },
   filter_by_name: _state => filterName => {
     return filters.find(col => col.name === filterName);
@@ -101,7 +103,9 @@ export const mutations = {
     state.gene_modal = id;
   },
   set_specie(state, specieId) {
-    state.active_specie = species.find(specie => specie.name === specieId);
+    state.active_specie = specieSets.find(
+      specie => specie.species === specieId
+    );
   },
   set_active_dataset(state, project) {
     state.active_dataset = project;

@@ -32,7 +32,7 @@
     },
     methods: {
       toggleDisplayOfFilter(key) {
-        const copy = [...this.filters];
+        const copy = JSON.parse(JSON.stringify(this.filters));
         const itemIndex = this.filters.findIndex(item => item.column === key);
         copy[itemIndex].is_displayed = !copy[itemIndex].is_displayed;
         this.$emit('toggleDisplayOfFilter', copy);

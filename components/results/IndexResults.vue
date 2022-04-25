@@ -6,12 +6,8 @@
       <span class="example">e.g.</span>
       <span
         class="sample_value"
-        @click="
-          $router.push(
-            routeToProjectPage(datasetInfo.item_comparison_example[0].route)
-          )
-        "
-        >{{ datasetInfo.item_comparison_example[0].label }}</span
+        @click="$router.push(routeToProjectPage(examples[0].route))"
+        >{{ examples[0].label }}</span
       >
       <div class="display_settings_wrapper">
         <a class="display_settings" @click="$emit('toggleDisplaySettings')">
@@ -114,6 +110,9 @@
         activeDataset: 'active_dataset',
         routeToProjectPage: 'route_to_project_page',
       }),
+      examples() {
+        return this.activeDataset[this.filterType].item_comparison_example;
+      },
       resultsUniqueKeys() {
         return this.results.map(item => item[this.keyForID]);
       },

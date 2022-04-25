@@ -2,11 +2,11 @@
   <!-- v-html setup neccesary for plugin, does NOT use user input/API data and is therefore safe to use -->
   <!-- eslint-disable vue/no-v-html -->
   <div class="text_search_area">
-    <h2>Search Conditions</h2>
+    <h2>Search searchCondition</h2>
     <h3>
       <span class="example"
         >e.g.
-        <dl v-for="(condition, index) of conditions" :key="index">
+        <dl v-for="(condition, index) of searchCondition" :key="index">
           <dt>{{ condition.label }}:</dt>
           <dd
             v-for="(example, example_index) of condition.examples"
@@ -32,9 +32,7 @@
       :list="getSuggestionList"
       :max-suggestions="100"
       class="text_search_gene_name"
-      :placeholder="
-        filterObj.name === 'gene' ? 'transcription factor' : 'liver'
-      "
+      :placeholder="filterType === 'gene' ? 'transcription factor' : 'liver'"
       @input="showResults('numfound')"
       @select="moveDetailpage"
     >
@@ -126,24 +124,21 @@
         routeToProjectPage: 'route_to_project_page',
         activeDataset: 'active_dataset',
         activeSpecie: 'active_specie',
+        searchCondition: 'search_condition_by_specie',
       }),
       // returns either gene or sample
       filterType() {
         return this.$vnode.key.split('_')[0];
       },
       // TODO: turn into qql query
-
       filterObj() {
         return this.activeDataset[this.filterType];
       },
-      conditions() {
-        return this.filterObj.search_conditions;
-      },
       title() {
-        return this.conditions
+        return this.searchCondition
           .map((condition, index) => {
-            return index < this.conditions.length - 1
-              ? index === this.conditions.length - 2
+            return index < this.searchCondition.length - 1
+              ? index === this.searchCondition.length - 2
                 ? condition.label + ' or '
                 : condition.label + ', '
               : condition.label;
@@ -191,6 +186,7 @@
         // if (this.activeFilter.name !== this.filterType) return;
         this.showResults('reset numfound');
       },
+      // TODO: check if neccesary to watch both
       activeSpecie() {
         this.showResults('numfound');
       },
