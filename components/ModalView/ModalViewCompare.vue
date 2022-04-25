@@ -44,14 +44,10 @@
     },
     computed: {
       ...mapGetters({
-        activeDataset: 'active_dataset',
         routeToProjectPage: 'route_to_project_page',
         isOn: 'compare_modal',
+        examples: 'search_condition_by_specie',
       }),
-      examples() {
-        return this.activeDataset[this.$store.state.active_filter]
-          .item_comparison_example;
-      },
     },
     methods: {
       ...mapMutations({

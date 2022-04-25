@@ -96,7 +96,7 @@
         return this.activeDataset.sample;
       },
       filters() {
-        return this.dataSetSpecificParameters.filter ?? [];
+        return this.dataSetSpecificParameters?.filter ?? [];
       },
     },
     watch: {
