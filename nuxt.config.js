@@ -1,4 +1,4 @@
-import species from './static/species.json';
+import datasets from './refex-sample/datasets.json';
 import { exponentialDelay } from 'axios-retry';
 
 export default {
@@ -85,9 +85,9 @@ export default {
     dir: 'refex',
     routes() {
       let routes = [];
-      species.species.map(specie => {
-        specie.projects.forEach(project => {
-          routes.push(`${specie.name}/${project}`);
+      datasets.map(specie => {
+        specie.datasets.forEach(dataset => {
+          routes.push(`${specie.species}/${dataset.dataset}`);
         });
       });
       return routes;
