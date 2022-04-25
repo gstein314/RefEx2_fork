@@ -109,8 +109,10 @@
         activeSpecie: 'active_specie',
         activeDataset: 'active_dataset',
         routeToProjectPage: 'route_to_project_page',
-        examples: 'search_condition_by_specie',
       }),
+      examples() {
+        return this.activeDataset[this.filterType].item_comparison_example;
+      },
       resultsUniqueKeys() {
         return this.results.map(item => item[this.keyForID]);
       },
