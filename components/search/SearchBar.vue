@@ -186,6 +186,7 @@
         // if (this.activeFilter.name !== this.filterType) return;
         this.showResults('reset numfound');
       },
+      // TODO: check if neccesary to watch both
       activeSpecie() {
         this.showResults('numfound');
       },
