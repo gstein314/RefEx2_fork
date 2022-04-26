@@ -100,6 +100,7 @@
   import VueSimpleSuggest from 'vue-simple-suggest';
   import ScreenerView from '~/components/ScreenerView/ScreenerView.vue';
   import { mapGetters } from 'vuex';
+  import { mapMutations } from 'vuex';
 
   export default {
     components: {
@@ -196,6 +197,9 @@
       },
     },
     methods: {
+      ...mapMutations({
+        setAlertModal: 'set_alert_modal',
+      }),
       updateParams(params) {
         this.parameters = { text: this.parameters.text, ...params };
 
@@ -229,10 +233,8 @@
             }
             if (prefix in result.data) results = result.data[prefix] || [];
           })
-          .catch(err => {
-            $store.commit('set_alert_modal', {
-              msg: 'Failed to get data in Search Bar',
-            });
+          .catch(_err => {
+            this.setAlertModal({ msg: 'Failed to get data in Search Bar' });
           })
           .finally(() => {
             this.onEvent = false;
