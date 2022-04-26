@@ -73,11 +73,16 @@
         </tr>
       </tbody>
     </table>
+    <ProjectResultsPagination
+      :pages-number="results.length"
+      @change-page="handleChangePage"
+    />
   </section>
 </template>
 
 <script>
   import TableHeader from '~/components/results/TableHeader.vue';
+  import ProjectResultsPagination from '~/components/results/ProjectResultsPagination.vue';
   import { mapGetters, mapMutations } from 'vuex';
 
   const inRange = (x, [min, max]) => {
@@ -93,6 +98,7 @@
   export default {
     components: {
       TableHeader,
+      ProjectResultsPagination,
     },
     props: {
       selectedItem: {
@@ -122,6 +128,8 @@
           key: 'LogMedian',
           order: 'down',
         },
+        limit: 10,
+        offset: 0,
       };
     },
 
@@ -182,6 +190,9 @@
             .slice(this.paginationObject.offset, this.paginationObject.limit)
         );
       },
+      pageItems() {
+        return this.filteredData.slice(this.offset, this.offset + this.limit);
+      },
     },
     mounted() {
       this.$emit('updateSort', this.sort);
@@ -224,6 +235,15 @@
           this.sort.order = order;
         }
         this.$emit('updateSort', this.sort);
+      },
+      setLimit(limit) {
+        this.limit = limit;
+      },
+      setOffset(offset) {
+        this.offset = offset;
+      },
+      handleChangePage(page) {
+        this.offset = (page - 1) * this.limit;
       },
     },
   };
