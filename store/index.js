@@ -28,6 +28,7 @@ export const state = () => ({
   project_filters: {},
   filter_modal: null,
   gene_modal: null,
+  alert_modal: { isOn: false, msg: '' },
   compare_modal: false,
   results: filters.reduce((acc, filter) => {
     acc[filter.name] = { results: [], results_num: 0 };
@@ -57,6 +58,9 @@ export const getters = {
   },
   active_filter(state) {
     return filters.find(filter => state.active_filter === filter.name);
+  },
+  alert_modal(state) {
+    return state.alert_modal;
   },
   active_specie(state) {
     return state.active_specie;
@@ -101,6 +105,10 @@ export const mutations = {
   },
   set_gene_modal(state, id = null) {
     state.gene_modal = id;
+  },
+  set_alert_modal(state, { msg = '' }) {
+    (state.alert_modal.isOn = !state.alert_modal.isOn),
+      (state.alert_modal.msg = msg);
   },
   set_specie(state, specieId) {
     state.active_specie = specieSets.find(

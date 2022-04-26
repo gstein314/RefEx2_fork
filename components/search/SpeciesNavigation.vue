@@ -89,12 +89,13 @@
         display: grid
         grid-template-columns: auto 1fr
         opacity: .3
+        > .specie_wrapper
+          > form
+            > .specie_select
+              color: $BLACK
         &.active
           color: $MAIN_COLOR
           opacity: 1
-          *
-            opacity: 1
-            color: $MAIN_COLOR
           > .specie_wrapper
             > form
               > .specie_select
@@ -104,6 +105,10 @@
           cursor: pointer
           color: $MAIN_COLOR
           transition: 0.6s
+          > .specie_wrapper
+            > form
+              > .specie_select
+                color: $MAIN_COLOR
         > svg
           align-self: flex-end
         > .specie_wrapper
