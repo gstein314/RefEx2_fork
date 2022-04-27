@@ -1006,10 +1006,10 @@ FANTOM5_Sample_ID	Characteristics [description]	Sample types category	Experiment
 659-23C6	whole body, neonate N01	tissues	developmental	Mouse (Mus musculus)	mixed	1	day	neonate	NA	NA	NA	NA	NA	NA
 692-21D1	whole body, neonate N06	tissues	developmental	Mouse (Mus musculus)	mixed	6	day	neonate	NA	NA	NA	NA	NA	NA
 761-6B4	whole body, neonate N10	tissues	developmental	Mouse (Mus musculus)	mixed	10	day	child	NA	NA	NA	NA	NA	NA
-10101-102D2	whole body, embryo E17.5, pool1 (internal control)	tissues	qualitycontrol	Mouse (Mus musculus)	NA	17.5	day	embryo	NA	NA	NA	NA	NA	NA
-10101-102D3	whole body, embryo E17.5, pool1 (internal control)	tissues	qualitycontrol	Mouse (Mus musculus)	NA	17.5	day	embryo	NA	NA	NA	NA	NA	NA
-10101-102D4	whole body, embryo E17.5, pool1 (internal control)	tissues	qualitycontrol	Mouse (Mus musculus)	NA	17.5	day	embryo	NA	NA	NA	NA	NA	NA
-3139-67G5	whole body, embryo E17.5, pool1 (internal control)	tissues	qualitycontrol	Mouse (Mus musculus)	NA	17.5	day	embryo	NA	NA	NA	NA	NA	NA
+10101-102D2	whole body, embryo E17.5, pool1 (internal control)	tissues	developmental	Mouse (Mus musculus)	NA	17.5	day	embryo	NA	NA	NA	NA	NA	NA
+10101-102D3	whole body, embryo E17.5, pool1 (internal control)	tissues	developmental	Mouse (Mus musculus)	NA	17.5	day	embryo	NA	NA	NA	NA	NA	NA
+10101-102D4	whole body, embryo E17.5, pool1 (internal control)	tissues	developmental	Mouse (Mus musculus)	NA	17.5	day	embryo	NA	NA	NA	NA	NA	NA
+3139-67G5	whole body, embryo E17.5, pool1 (internal control)	tissues	developmental	Mouse (Mus musculus)	NA	17.5	day	embryo	NA	NA	NA	NA	NA	NA
 10001-101A3	Clontech Mouse Universal Reference Total RNA, pool1	tissues	snapshot	Mouse (Mus musculus)	mixed	NA	NA	NA	NA	NA	NA	NA	NA	NA
 10262-104D1	Follicle Associated Epithelium, pool2	tissues	snapshot	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0001211	Peyer's patch	NA	NA	NA	NA
 10263-104D2	Follicle Associated Epithelium, pool3	tissues	snapshot	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0001211	Peyer's patch	NA	NA	NA	NA
