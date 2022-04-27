@@ -1,4 +1,4 @@
-FANTOM5_Sample_ID	Characteristics [description]	Sample types category	Experiments category	Chracteristics [Species]	Characteristics [Sex]	Characteristics [Age]	Unit[Age]	Characteristics [Developmental stage]	UBERON ID	UBERON label	CL ID	CL label	NCIT ID	NCIT label
+Fantom5SampleId	Description	SampleTypesCategory	ExperimentsCategory	Species	Sex	Age	AgeUnit	DevelopmentalStage	UberonId	UberonLabel	ClId	ClLabel	NcitId	NcitLabel
 13063-139I3	J2E erythroblastic leukemia response to erythropoietin, 00hr00min, biol_rep1	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
 13129-140G6	J2E erythroblastic leukemia response to erythropoietin, 00hr00min, biol_rep2	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
 13195-141E9	J2E erythroblastic leukemia response to erythropoietin, 00hr00min, biol_rep3	cell lines	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
