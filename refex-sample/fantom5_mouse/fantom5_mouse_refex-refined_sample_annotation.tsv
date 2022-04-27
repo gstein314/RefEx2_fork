@@ -443,7 +443,7 @@ FANTOM5_Sample_ID	Characteristics [description]	Sample types category	Experiment
 12228-129F5	Lgr5 positive intestinal stem cells, pool1	primary cells	snapshot	Mouse (Mus musculus)	male	NA	NA	NA	UBERON:0002108	small intestine	CL:0000723	somatic stem cell	NA	NA
 12229-129F6	Lgr5 positive intestinal stem cells, pool2	primary cells	snapshot	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0002108	small intestine	CL:0000723	somatic stem cell	NA	NA
 12230-129F7	Lgr5 positive intestinal stem cells, pool3	primary cells	snapshot	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0002108	small intestine	CL:0000723	somatic stem cell	NA	NA
-2171-50H8	macrophage, bone marrow derived	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0002476	bone marrow macrophage	NA	NA
+2171-50H8	macrophage, bone marrow derived	primary cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0002476	bone marrow macrophage	NA	NA
 12159-128G8	MC1+Gr1+ myeloid-derived suppressor cells cancer, donor1 (10,11,12 3LL)	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0002467	Gr1-high myeloid suppressor cell	NA	NA
 12161-128H1	MC1+Gr1+ myeloid-derived suppressor cells cancer, donor2 (0127 3LL)	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0002467	Gr1-high myeloid suppressor cell	NA	NA
 12163-128H3	MC1+Gr1+ myeloid-derived suppressor cells cancer, donor3 (0128 3LL)	primary cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0002467	Gr1-high myeloid suppressor cell	NA	NA
@@ -599,32 +599,32 @@ FANTOM5_Sample_ID	Characteristics [description]	Sample types category	Experiment
 14365-155I9	ES-46C embryonic stem cells, neuronal differentiation, day03, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000031	neuroblast	NA	NA
 14361-155I5	ES-46C embryonic stem cells, neuronal differentiation, day04, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000031	neuroblast	NA	NA
 14366-156A1	ES-46C embryonic stem cells, neuronal differentiation, day04, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0000031	neuroblast	NA	NA
-14354-155H7	ES-Ert2 embryonic stem cells, tamoxifen treated, 48hr, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
-14355-155H8	ES-Ert2 embryonic stem cells, tamoxifen treated, 48hr, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
-14356-155H9	ES-Ert2 embryonic stem cells, tamoxifen treated, 48hr, biol_rep3	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
-14351-155H4	ES-Ert2 embryonic stem cells, untreated control, 48hr, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
-14352-155H5	ES-Ert2 embryonic stem cells, untreated control, 48hr, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
-14353-155H6	ES-Ert2 embryonic stem cells, untreated control, 48hr, biol_rep3	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
-14348-155H1	ES-OS25 embryonic stem cells, aminitin treatment for 7hr, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
-14349-155H2	ES-OS25 embryonic stem cells, aminitin treatment for 7hr, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
-14350-155H3	ES-OS25 embryonic stem cells, aminitin treatment for 7hr, biol_rep3	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
-14339-155G1	ES-OS25 embryonic stem cells, DMSO control, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
-14340-155G2	ES-OS25 embryonic stem cells, DMSO control, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
-14341-155G3	ES-OS25 embryonic stem cells, DMSO control, biol_rep3	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
-14342-155G4	ES-OS25 embryonic stem cells, flavopiridol treatment, 01hr, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
-14343-155G5	ES-OS25 embryonic stem cells, flavopiridol treatment, 01hr, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
-14344-155G6	ES-OS25 embryonic stem cells, flavopiridol treatment, 01hr, biol_rep3	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
-14371-156A6	ES-OS25 embryonic stem cells, KD for exosomal component EXOSC3, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
-14372-156A7	ES-OS25 embryonic stem cells, KD for exosomal component EXOSC3, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
-14373-156A8	ES-OS25 embryonic stem cells, KD for exosomal component EXOSC5, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
-14374-156A9	ES-OS25 embryonic stem cells, KD for exosomal component EXOSC5, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
-14369-156A4	ES-OS25 embryonic stem cells, scrambled siRNA control, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
-14370-156A5	ES-OS25 embryonic stem cells, scrambled siRNA control, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
-14345-155G7	ES-OS25 embryonic stem cells, untreated control, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
-14346-155G8	ES-OS25 embryonic stem cells, untreated control, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
-14347-155G9	ES-OS25 embryonic stem cells, untreated control, biol_rep3	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
-14367-156A2	ES-OS25 embryonic stem cells, untreated siRNA control, biol_rep1	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
-14368-156A3	ES-OS25 embryonic stem cells, untreated siRNA control, biol_rep2	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14354-155H7	ES-Ert2 embryonic stem cells, tamoxifen treated, 48hr, biol_rep1	stem cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14355-155H8	ES-Ert2 embryonic stem cells, tamoxifen treated, 48hr, biol_rep2	stem cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14356-155H9	ES-Ert2 embryonic stem cells, tamoxifen treated, 48hr, biol_rep3	stem cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14351-155H4	ES-Ert2 embryonic stem cells, untreated control, 48hr, biol_rep1	stem cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14352-155H5	ES-Ert2 embryonic stem cells, untreated control, 48hr, biol_rep2	stem cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14353-155H6	ES-Ert2 embryonic stem cells, untreated control, 48hr, biol_rep3	stem cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14348-155H1	ES-OS25 embryonic stem cells, aminitin treatment for 7hr, biol_rep1	stem cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14349-155H2	ES-OS25 embryonic stem cells, aminitin treatment for 7hr, biol_rep2	stem cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14350-155H3	ES-OS25 embryonic stem cells, aminitin treatment for 7hr, biol_rep3	stem cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14339-155G1	ES-OS25 embryonic stem cells, DMSO control, biol_rep1	stem cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14340-155G2	ES-OS25 embryonic stem cells, DMSO control, biol_rep2	stem cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14341-155G3	ES-OS25 embryonic stem cells, DMSO control, biol_rep3	stem cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14342-155G4	ES-OS25 embryonic stem cells, flavopiridol treatment, 01hr, biol_rep1	stem cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14343-155G5	ES-OS25 embryonic stem cells, flavopiridol treatment, 01hr, biol_rep2	stem cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14344-155G6	ES-OS25 embryonic stem cells, flavopiridol treatment, 01hr, biol_rep3	stem cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14371-156A6	ES-OS25 embryonic stem cells, KD for exosomal component EXOSC3, biol_rep1	stem cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14372-156A7	ES-OS25 embryonic stem cells, KD for exosomal component EXOSC3, biol_rep2	stem cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14373-156A8	ES-OS25 embryonic stem cells, KD for exosomal component EXOSC5, biol_rep1	stem cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14374-156A9	ES-OS25 embryonic stem cells, KD for exosomal component EXOSC5, biol_rep2	stem cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14369-156A4	ES-OS25 embryonic stem cells, scrambled siRNA control, biol_rep1	stem cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14370-156A5	ES-OS25 embryonic stem cells, scrambled siRNA control, biol_rep2	stem cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14345-155G7	ES-OS25 embryonic stem cells, untreated control, biol_rep1	stem cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14346-155G8	ES-OS25 embryonic stem cells, untreated control, biol_rep2	stem cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14347-155G9	ES-OS25 embryonic stem cells, untreated control, biol_rep3	stem cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14367-156A2	ES-OS25 embryonic stem cells, untreated siRNA control, biol_rep1	stem cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+14368-156A3	ES-OS25 embryonic stem cells, untreated siRNA control, biol_rep2	stem cells	snapshot	Mouse (Mus musculus)	NA	NA	NA	NA	NA	NA	CL:0002322	embryonic stem cell	NA	NA
 11958-126C5	hematopoietic stem cell, bone marrow derived, adult 2years	stem cells	time courses	Mouse (Mus musculus)	NA	2	year	adult	UBERON:0002371	bone marrow	CL:0000037	hematopoietic stem cell	NA	NA
 11957-126C4	hematopoietic stem cell, bone marrow derived, newborn 2-3months	stem cells	time courses	Mouse (Mus musculus)	NA	2-3	month	adult	UBERON:0002371	bone marrow	CL:0000037	hematopoietic stem cell	NA	NA
 11953-126B9	hematopoietic stem cell, fetal liver derived, embryo E12.5	stem cells	time courses	Mouse (Mus musculus)	NA	12.5	day	embryo	UBERON:0002107	liver	CL:0000037	hematopoietic stem cell	NA	NA
@@ -632,9 +632,9 @@ FANTOM5_Sample_ID	Characteristics [description]	Sample types category	Experiment
 11955-126C2	hematopoietic stem cell, fetal liver derived, embryo E19.5	stem cells	time courses	Mouse (Mus musculus)	NA	19.5	day	embryo	UBERON:0002107	liver	CL:0000037	hematopoietic stem cell	NA	NA
 11950-126B6	hematopoietic stem cell, placenta derived, embryo E10.5	stem cells	time courses	Mouse (Mus musculus)	NA	10.5	day	embryo	UBERON:0001987	placenta	CL:0002359	placental hematopoietic stem cell	NA	NA
 11952-126B8	hematopoietic stem cell, placenta derived, embryo E11.5	stem cells	time courses	Mouse (Mus musculus)	NA	11.5	day	embryo	UBERON:0001987	placenta	CL:0002359	placental hematopoietic stem cell	NA	NA
-11951-126B7	hematopoietic stem cell,aorta-gonad-mesonephros (AGM) region derived, embryo E11.5	stem cells	time courses	Mouse (Mus musculus)	NA	11.5	day	embryo	UBERON:0000080	mesonephros	CL:0002360	AGM hematopoietic stem cell	NA	NA
-11947-126B3	Mesoderm, embryo E8.5	stem cells	time courses	Mouse (Mus musculus)	NA	8.5	day	embryo	UBERON:0000926	mesoderm	CL:0000222	mesodermal cell	NA	NA
-11948-126B4	Pre-hematopoietic stem cell, aorta-gonad-mesonephros (AGM) region derived, embryo E9.5	stem cells	time courses	Mouse (Mus musculus)	NA	9.5	day	embryo	UBERON:0002390	hematopoietic system	CL:0002360	AGM hematopoietic stem cell	NA	NA
+11951-126B7	hematopoietic stem cell,aorta-gonad-mesonephros (AGM) region derived, embryo E11.5	stem cells	snapshot	Mouse (Mus musculus)	NA	11.5	day	embryo	UBERON:0000080	mesonephros	CL:0002360	AGM hematopoietic stem cell	NA	NA
+11947-126B3	Mesoderm, embryo E8.5	stem cells	snapshot	Mouse (Mus musculus)	NA	8.5	day	embryo	UBERON:0000926	mesoderm	CL:0000222	mesodermal cell	NA	NA
+11948-126B4	Pre-hematopoietic stem cell, aorta-gonad-mesonephros (AGM) region derived, embryo E9.5	stem cells	snapshot	Mouse (Mus musculus)	NA	9.5	day	embryo	UBERON:0002390	hematopoietic system	CL:0002360	AGM hematopoietic stem cell	NA	NA
 12308-130F4	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 00hr15min, biol_rep1 (015mA1)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
 12430-132A9	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 00hr15min, biol_rep2 (015mA2)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
 12552-133F5	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 00hr15min, biol_rep3 (015mA3)	stem cells	time courses	Mouse (Mus musculus)	NA	NA	NA	NA	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
@@ -829,7 +829,7 @@ FANTOM5_Sample_ID	Characteristics [description]	Sample types category	Experiment
 1390-42D2	heart, neonate N30	tissues	developmental	Mouse (Mus musculus)	mixed	30	day	child	UBERON:0000948	heart	NA	NA	NA	NA
 13-16E8	hippocampus, adult	tissues	developmental	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0002421	hippocampal formation	NA	NA	NA	NA
 627-43G1	hippocampus, neonate N00	tissues	developmental	Mouse (Mus musculus)	mixed	0	day	neonate	UBERON:0002421	hippocampal formation	NA	NA	NA	NA
-10252-104B9	Ileum epithelium, pool1	tissues	developmental	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0002116	ileum	NA	NA	NA	NA
+10252-104B9	Ileum epithelium, pool1	tissues	snapshot	Mouse (Mus musculus)	female	NA	NA	NA	UBERON:0002116	ileum	NA	NA	NA	NA
 860-29I3	intestinal mucosa, adult	tissues	developmental	Mouse (Mus musculus)	male	NA	NA	adult	UBERON:0001242	intestinal mucosa	NA	NA	NA	NA
 178-9A3	intestine, adult	tissues	developmental	Mouse (Mus musculus)	mixed	NA	NA	adult	UBERON:0000160	intestine	NA	NA	NA	NA
 1251-16I5	intestine, embryo E12	tissues	developmental	Mouse (Mus musculus)	mixed	12	day	embryo	UBERON:0000160	intestine	NA	NA	NA	NA
