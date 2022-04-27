@@ -1,536 +1,536 @@
-RefEx_Sample_ID	Description	#_of_samples	category
-RES00003105	Mouse Astrocytes	3	primary cells
-RES00003106	Atoh1+ Inner ear hair cells - organ of corti	1	primary cells
-RES00003107	CD326+ enterocyte isolated from mice, treated with RANKL, day03	2	primary cells
-RES00003108	CD326+ enterocyte	2	primary cells
-RES00003109	CD326++ enterocyte isolated from mice, treated with RANKL, day03	2	primary cells
-RES00003110	CD4+CD25+ regulatory T cells, PMA and ionomycin stimulation, 02hr	2	primary cells
-RES00003111	CD4+CD25+ regulatory T cells, antiCD3 CD28 stimulation, 06hr	2	primary cells
-RES00003112	CD4+CD25+ regulatory T cells	2	primary cells
-RES00003113	CD4+CD25-CD44- naive conventional T cells, PMA and ionomycin stimulation, 02hr	2	primary cells
-RES00003114	CD4+CD25-CD44- naive conventional T cells, antiCD3_CD28 stimulation, 06hr	2	primary cells
-RES00003115	CD4+CD25-CD44- naive conventional T cells	2	primary cells
-RES00003116	CD41+ megakaryocyte cancer	3	primary cells
-RES00003117	CD41+ megakaryocyte control	3	primary cells
-RES00003118	Clontech Mouse Universal Reference Total RNA	1	tissues
-RES00003119	EBF KO HPCs induced to T cell, 00hr00min	3	stem cells
-RES00003120	EBF KO HPCs induced to T cell, 00hr30min	3	stem cells
-RES00003121	EBF KO HPCs induced to T cell, 01hr	3	stem cells
-RES00003122	EBF KO HPCs induced to T cell, 02hr	3	stem cells
-RES00003123	EBF KO HPCs induced to T cell, 04hr	3	stem cells
-RES00003124	EBF KO HPCs induced to T cell, 06hr	3	stem cells
-RES00003125	EBF KO HPCs induced to T cell, 08hr	3	stem cells
-RES00003126	EBF KO HPCs induced to T cell, 10hr	3	stem cells
-RES00003127	EBF KO HPCs induced to T cell, 12hr	3	stem cells
-RES00003128	EBF KO HPCs induced to T cell, 24hr	3	stem cells
-RES00003129	EBF KO HPCs induced to T cell, day02	3	stem cells
-RES00003130	EBF KO HPCs induced to T cell, day03	3	stem cells
-RES00003131	EBF KO HPCs induced to T cell, day04	3	stem cells
-RES00003132	EBF KO HPCs induced to T cell, day05	3	stem cells
-RES00003133	EBF KO HPCs induced to T cell, day06	3	stem cells
-RES00003134	ES-46C derived epistem cells	3	stem cells
-RES00003135	ES-46C derived epistem cells, neuronal differentiation, day05	1	stem cells
-RES00003136	ES-46C derived epistem cells, neuronal differentiation, day14	1	stem cells
-RES00003137	ES-46C embryonic stem cells, neuronal differentiation, day00	2	stem cells
-RES00003138	ES-46C embryonic stem cells, neuronal differentiation, day01	2	stem cells
-RES00003139	ES-46C embryonic stem cells, neuronal differentiation, day02	2	stem cells
-RES00003140	ES-46C embryonic stem cells, neuronal differentiation, day03	2	stem cells
-RES00003141	ES-46C embryonic stem cells, neuronal differentiation, day04	2	stem cells
-RES00003142	ES-Ert2 embryonic stem cells, tamoxifen treated, 48hr	3	stem cells
-RES00003143	ES-Ert2 embryonic stem cells, untreated control, 48hr	3	stem cells
-RES00003144	ES-OS25 embryonic stem cells, DMSO control	3	stem cells
-RES00003145	ES-OS25 embryonic stem cells, KD for exosomal component EXOSC3	2	stem cells
-RES00003146	ES-OS25 embryonic stem cells, KD for exosomal component EXOSC5	2	stem cells
-RES00003147	ES-OS25 embryonic stem cells, aminitin treatment for 7hr	3	stem cells
-RES00003148	ES-OS25 embryonic stem cells, flavopiridol treatment, 01hr	3	stem cells
-RES00003149	ES-OS25 embryonic stem cells, scrambled siRNA control	2	stem cells
-RES00003150	ES-OS25 embryonic stem cells, untreated control	3	stem cells
-RES00003151	ES-OS25 embryonic stem cells, untreated siRNA control	2	stem cells
-RES00003152	Follicle Associated Epithelium	2	tissues
-RES00003153	GP2+ M cell	3	primary cells
-RES00003154	Ileum epithelium	2	tissues
-RES00003155	Ileum epithelium, treated with RANKL, day03	1	tissues
-RES00003156	Inner ear stem cells, 1st generation stem cells	1	primary cells
-RES00003157	Inner ear stem cells, 4th generation stem cells	1	primary cells
-RES00003158	Inner ear stem cells, differentiation, day03	1	primary cells
-RES00003159	Inner ear stem cells, differentiation, day10	1	primary cells
-RES00003160	J2E erythroblastic leukemia response to erythropoietin, 00hr00min	4	cell lines
-RES00003161	J2E erythroblastic leukemia response to erythropoietin, 00hr15min	3	cell lines
-RES00003162	J2E erythroblastic leukemia response to erythropoietin, 00hr30min	4	cell lines
-RES00003163	J2E erythroblastic leukemia response to erythropoietin, 00hr45min	3	cell lines
-RES00003164	J2E erythroblastic leukemia response to erythropoietin, 01hr00min	3	cell lines
-RES00003165	J2E erythroblastic leukemia response to erythropoietin, 01hr20min	3	cell lines
-RES00003166	J2E erythroblastic leukemia response to erythropoietin, 01hr40min	3	cell lines
-RES00003167	J2E erythroblastic leukemia response to erythropoietin, 02hr00min	4	cell lines
-RES00003168	J2E erythroblastic leukemia response to erythropoietin, 02hr30min	3	cell lines
-RES00003169	J2E erythroblastic leukemia response to erythropoietin, 03hr00min	3	cell lines
-RES00003170	J2E erythroblastic leukemia response to erythropoietin, 03hr30min	3	cell lines
-RES00003171	J2E erythroblastic leukemia response to erythropoietin, 04hr	3	cell lines
-RES00003172	J2E erythroblastic leukemia response to erythropoietin, 06hr	3	cell lines
-RES00003173	J2E erythroblastic leukemia response to erythropoietin, 12hr	4	cell lines
-RES00003174	J2E erythroblastic leukemia response to erythropoietin, 24hr	3	cell lines
-RES00003175	J2E erythroblastic leukemia response to erythropoietin, 48hr	3	cell lines
-RES00003176	Lgr5 positive intestinal stem cells	3	primary cells
-RES00003177	MC1+Gr1+ myeloid-derived suppressor cells cancer	3	primary cells
-RES00003178	MC1+Gr1+ myeloid-derived suppressor cells control	3	primary cells
-RES00003179	Mesoderm, embryo E8.5	1	stem cells
-RES00003180	Mouse Aortic Smooth Muscle cells - differentiated	2	primary cells
-RES00003181	Mouse Aortic Smooth Muscle cells	1	primary cells
-RES00003182	Mouse Astrocytes - cerebellar	2	primary cells
-RES00003183	Mouse Astrocytes - hippocampus	3	primary cells
-RES00003184	Mouse CD19+ B Cells	1	primary cells
-RES00003185	Mouse CD4+ T Cells	1	primary cells
-RES00003186	Mouse CD8+ T Cells	1	primary cells
-RES00003187	Mouse Cardiac Myocytes	3	primary cells
-RES00003188	Mouse Embryonic fibroblasts	1	primary cells
-RES00003189	Mouse Granule cells	3	primary cells
-RES00003190	Mouse Meningeal cells	3	primary cells
-RES00003191	Mouse Mesenchymal stem cells - bone marrow derived	3	primary cells
-RES00003192	Mouse Microglia	3	primary cells
-RES00003193	Mouse Neurons - cortical	3	primary cells
-RES00003194	Mouse Neurons - dorsal spinal cord	3	primary cells
-RES00003195	Mouse Neurons - hippocampal	3	primary cells
-RES00003196	Mouse Neurons - raphe	3	primary cells
-RES00003197	Mouse Neurons - striatal	3	primary cells
-RES00003198	Mouse Neurons - substantia nigra	5	primary cells
-RES00003199	Mouse Neurons - ventral spinal cord	3	primary cells
-RES00003200	Mouse Renal epithelial cells	1	primary cells
-RES00003201	Mouse Schwann	3	primary cells
-RES00003202	Mouse hepatic Sinusoidal Endothelial Cells	1	primary cells
-RES00003203	Mouse hepatic Stellate Cells (lipocyte)	1	primary cells
-RES00003204	Mouse hepatocyte	6	primary cells
-RES00003205	Neurons - spiral ganglion	1	primary cells
-RES00003206	Pre-hematopoietic stem cell, aorta-gonad-mesonephros (AGM) region derived, embryo E9.5	1	stem cells
-RES00003207	SABiosciences XpressRef Mouse Universal Total RNA	1	tissues
-RES00003208	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 00hr15min	3	stem cells
-RES00003209	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 00hr30min	3	stem cells
-RES00003210	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 01hr	3	stem cells
-RES00003211	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 02hr	3	stem cells
-RES00003212	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 03hr	3	stem cells
-RES00003213	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 06hr	3	stem cells
-RES00003214	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 12hr	3	stem cells
-RES00003215	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 18hr	3	stem cells
-RES00003216	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 24hr	3	stem cells
-RES00003217	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 36hr	3	stem cells
-RES00003218	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, day02	3	stem cells
-RES00003219	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, day03	3	stem cells
-RES00003220	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, day04	3	stem cells
-RES00003221	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, day05	3	stem cells
-RES00003222	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, day06	3	stem cells
-RES00003223	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 00hr15min	3	stem cells
-RES00003224	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 00hr30min	3	stem cells
-RES00003225	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 01hr	3	stem cells
-RES00003226	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 02hr	3	stem cells
-RES00003227	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 03hr	3	stem cells
-RES00003228	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 06hr	3	stem cells
-RES00003229	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 12hr	3	stem cells
-RES00003230	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 18hr	3	stem cells
-RES00003231	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 24hr	3	stem cells
-RES00003232	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 36hr	3	stem cells
-RES00003233	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, day02	3	stem cells
-RES00003234	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, day03	3	stem cells
-RES00003235	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, day04	3	stem cells
-RES00003236	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, day05	3	stem cells
-RES00003237	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, day06	3	stem cells
-RES00003238	ST2 (Mesenchymal stem cells) cells, medium change (without induction), 00hr	3	stem cells
-RES00003239	ST2 (Mesenchymal stem cells) cells, medium change (without induction), day06	3	stem cells
-RES00003240	Sox2+ Supporting cells - organ of corti	1	primary cells
-RES00003241	TSt-4/DLL1 feeder cells	3	cell lines
-RES00003242	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 000hr	3	primary cells
-RES00003243	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 004hr	3	primary cells
-RES00003244	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 008hr	3	primary cells
-RES00003245	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 012hr	3	primary cells
-RES00003246	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 016hr	3	primary cells
-RES00003247	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 020hr	3	primary cells
-RES00003248	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 024hr	3	primary cells
-RES00003249	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 030hr	3	primary cells
-RES00003250	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 036hr	3	primary cells
-RES00003251	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 042hr	3	primary cells
-RES00003252	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 048hr	3	primary cells
-RES00003253	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 054hr	3	primary cells
-RES00003254	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 060hr	3	primary cells
-RES00003255	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 066hr	3	primary cells
-RES00003256	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 072hr	3	primary cells
-RES00003257	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 084hr	3	primary cells
-RES00003258	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 096hr	3	primary cells
-RES00003259	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 120hr	3	primary cells
-RES00003260	Universal RNA - Mouse Normal Tissues Biochain	1	tissues
-RES00003261	accessory axillary lymph node, adult	1	tissues
-RES00003262	adrenal gland, adult	1	tissues
-RES00003263	adrenal gland, embryo E14	1	tissues
-RES00003264	adrenal gland, embryo E16	1	tissues
-RES00003265	adrenal gland, embryo E17	1	tissues
-RES00003266	adrenal gland, embryo E18	1	tissues
-RES00003267	adrenal gland, neonate N00	1	tissues
-RES00003268	adrenal gland, neonate N25	1	tissues
-RES00003269	amnion, adult pregnant day17.5	1	tissues
-RES00003270	aorta, adult	1	tissues
-RES00003271	bone (os femoris), adult	1	tissues
-RES00003272	bone (os femoris), neonate N02	1	tissues
-RES00003273	bone (os femoris), neonate N16	1	tissues
-RES00003274	bone (os femoris), neonate N20	1	tissues
-RES00003275	cecum, adult	1	tissues
-RES00003276	cerebellar granule cells, embryo E13	3	primary cells
-RES00003277	cerebellar granule cells, embryo E15	3	primary cells
-RES00003278	cerebellar granule cells, embryo E18	3	primary cells
-RES00003279	cerebellum, adult	1	tissues
-RES00003280	cerebellum, embryo E11	3	tissues
-RES00003281	cerebellum, embryo E12	3	tissues
-RES00003282	cerebellum, embryo E13	3	tissues
-RES00003283	cerebellum, embryo E14	3	tissues
-RES00003284	cerebellum, embryo E15	3	tissues
-RES00003285	cerebellum, embryo E16	3	tissues
-RES00003286	cerebellum, embryo E17	3	tissues
-RES00003287	cerebellum, embryo E18	3	tissues
-RES00003288	cerebellum, neonate N00	3	tissues
-RES00003289	cerebellum, neonate N03	3	tissues
-RES00003290	cerebellum, neonate N06	3	tissues
-RES00003291	cerebellum, neonate N09	3	tissues
-RES00003292	cerebellum, neonate N30	1	tissues
-RES00003293	colon, adult	1	tissues
-RES00003294	common myeloid progenitor CMP	3	primary cells
-RES00003295	corpora quadrigemina, adult	1	tissues
-RES00003296	corpus striatum, adult	1	tissues
-RES00003297	corpus striatum, neonate N00	1	tissues
-RES00003298	cortex, adult	1	tissues
-RES00003299	cortex, neonate N30	1	tissues
-RES00003300	diencephalon, adult	1	tissues
-RES00003301	diencephalon, neonate N30	1	tissues
-RES00003302	epididymis and seminiferous tubule, neonate N00	1	tissues
-RES00003303	epididymis and seminiferous tubule, neonate N30	1	tissues
-RES00003304	epididymis, adult	1	tissues
-RES00003305	eyeball, adult	1	tissues
-RES00003306	eyeball, embryo E12	1	tissues
-RES00003307	eyeball, embryo E14	1	tissues
-RES00003308	eyeball, embryo E15	1	tissues
-RES00003309	eyeball, embryo E17	1	tissues
-RES00003310	eyeball, neonate N00	1	tissues
-RES00003311	eyeball, neonate N01	1	tissues
-RES00003312	eyeball, neonate N02	1	tissues
-RES00003313	eyeball, neonate N16	1	tissues
-RES00003314	forelimb, embryo E11	1	tissues
-RES00003315	forelimb, embryo E12	1	tissues
-RES00003316	forelimb, embryo E13	1	tissues
-RES00003317	forelimb, embryo E14	1	tissues
-RES00003318	forelimb, embryo E15	1	tissues
-RES00003319	forelimb, embryo E17	1	tissues
-RES00003320	forelimb, embryo E18	1	tissues
-RES00003321	gonad, embryo E13	1	tissues
-RES00003322	granulocyte macrophage progenitor GMP	3	primary cells
-RES00003323	heart, embryo E11	1	tissues
-RES00003324	heart, embryo E12	1	tissues
-RES00003325	heart, embryo E13	1	tissues
-RES00003326	heart, embryo E14	1	tissues
-RES00003327	heart, embryo E15	1	tissues
-RES00003328	heart, embryo E16	1	tissues
-RES00003329	heart, embryo E17	1	tissues
-RES00003330	heart, embryo E18	1	tissues
-RES00003331	heart, neonate N00	1	tissues
-RES00003332	heart, neonate N03	1	tissues
-RES00003333	heart, neonate N10	1	tissues
-RES00003334	heart, neonate N16	1	tissues
-RES00003335	heart, neonate N20	1	tissues
-RES00003336	heart, neonate N25	1	tissues
-RES00003337	heart, neonate N30	1	tissues
-RES00003338	hematopoietic stem cell, aorta-gonad-mesonephros (AGM) region derived, embryo E10.5	1	primary cells
-RES00003339	hematopoietic stem cell, bone marrow derived, adult 2years	1	stem cells
-RES00003340	hematopoietic stem cell, bone marrow derived, embryo E19.5	1	primary cells
-RES00003341	hematopoietic stem cell, bone marrow derived, newborn 2-3months	1	stem cells
-RES00003342	hematopoietic stem cell, fetal liver derived, embryo E12.5	1	stem cells
-RES00003343	hematopoietic stem cell, fetal liver derived, embryo E14.5	1	stem cells
-RES00003344	hematopoietic stem cell, fetal liver derived, embryo E19.5	1	stem cells
-RES00003345	hematopoietic stem cell, placenta derived, embryo E10.5	1	stem cells
-RES00003346	hematopoietic stem cell, placenta derived, embryo E11.5	1	stem cells
-RES00003347	hematopoietic stem cell,aorta-gonad-mesonephros (AGM) region derived, embryo E11.5	1	stem cells
-RES00003348	hepatic stellate cells, partial hepatectomy, 01week	1	primary cells
-RES00003349	hepatic stellate cells, partial hepatectomy, 02hr	1	primary cells
-RES00003350	hepatic stellate cells, partial hepatectomy, 30hr	3	primary cells
-RES00003351	hepatic stellate cells, partial hepatectomy, 48hr	3	primary cells
-RES00003352	hepatic stellate cells, sham operation	3	primary cells
-RES00003353	hepatocytes, partial hepatectomy, 02hr	3	primary cells
-RES00003354	hepatocytes, partial hepatectomy, 30hr	3	primary cells
-RES00003355	hepatocytes, partial hepatectomy, 48hr	3	primary cells
-RES00003356	hepatocytes, partial hepatectomy, week01	3	primary cells
-RES00003357	hepatocytes, sham operation	3	primary cells
-RES00003358	hippocampus, adult	1	tissues
-RES00003359	hippocampus, neonate N00	1	tissues
-RES00003360	intestinal mucosa, adult	1	tissues
-RES00003361	intestine, adult	1	tissues
-RES00003362	intestine, embryo E12	1	tissues
-RES00003363	intestine, embryo E13	1	tissues
-RES00003364	intestine, embryo E15	1	tissues
-RES00003365	intestine, embryo E16	1	tissues
-RES00003366	intestine, embryo E17	1	tissues
-RES00003367	intestine, embryo E18	1	tissues
-RES00003368	intestine, neonate N00	1	tissues
-RES00003369	intestine, neonate N01	1	tissues
-RES00003370	intestine, neonate N06	1	tissues
-RES00003371	intestine, neonate N07	1	tissues
-RES00003372	intestine, neonate N10	1	tissues
-RES00003373	intestine, neonate N20	1	tissues
-RES00003374	intestine, neonate N25	1	tissues
-RES00003375	intestine, neonate N30	1	tissues
-RES00003376	kidney, embryo E14	1	tissues
-RES00003377	kidney, embryo E15	1	tissues
-RES00003378	kidney, embryo E16	1	tissues
-RES00003379	kidney, embryo E17	1	tissues
-RES00003380	kidney, embryo E18	1	tissues
-RES00003381	kidney, neonate N00	1	tissues
-RES00003382	kidney, neonate N10	1	tissues
-RES00003383	kidney, neonate N20	1	tissues
-RES00003384	kidney, neonate N25	1	tissues
-RES00003385	kidney, neonate N30	1	tissues
-RES00003386	liver sinusoidal endothelial cells, partial hepatectomy, 01week	3	primary cells
-RES00003387	liver sinusoidal endothelial cells, partial hepatectomy, 02hr	3	primary cells
-RES00003388	liver sinusoidal endothelial cells, partial hepatectomy, 30hr	3	primary cells
-RES00003389	liver sinusoidal endothelial cells, partial hepatectomy, 48hr	3	primary cells
-RES00003390	liver sinusoidal endothelial cells, sham operation	3	primary cells
-RES00003391	liver, adult pregnant day01	1	tissues
-RES00003392	liver, embryo E12	1	tissues
-RES00003393	liver, embryo E13	1	tissues
-RES00003394	liver, embryo E14	1	tissues
-RES00003395	liver, embryo E15	1	tissues
-RES00003396	liver, embryo E16	1	tissues
-RES00003397	liver, embryo E17	1	tissues
-RES00003398	liver, embryo E18	1	tissues
-RES00003399	liver, neonate N00	1	tissues
-RES00003400	liver, neonate N03	1	tissues
-RES00003401	liver, neonate N06	1	tissues
-RES00003402	liver, neonate N07	1	tissues
-RES00003403	liver, neonate N10	1	tissues
-RES00003404	liver, neonate N20	1	tissues
-RES00003405	liver, neonate N25	1	tissues
-RES00003406	liver, neonate N30	1	tissues
-RES00003407	lung, adult	1	tissues
-RES00003408	lung, embryo E12	1	tissues
-RES00003409	lung, embryo E14	1	tissues
-RES00003410	lung, embryo E15	1	tissues
-RES00003411	lung, embryo E16	1	tissues
-RES00003412	lung, embryo E17	1	tissues
-RES00003413	lung, embryo E18	1	tissues
-RES00003414	lung, neonate N00	1	tissues
-RES00003415	lung, neonate N06	1	tissues
-RES00003416	lung, neonate N07	1	tissues
-RES00003417	lung, neonate N10	1	tissues
-RES00003418	lung, neonate N20	1	tissues
-RES00003419	lung, neonate N25	1	tissues
-RES00003420	lung, neonate N30	1	tissues
-RES00003421	macrophage, TB infection, non stimulated BMDM, with Mtb, 028hr(004h after stimulation)	1	primary cells
-RES00003422	macrophage, TB infection, non stimulated BMDM, with Mtb, 036hr(012h after stimulation)	1	primary cells
-RES00003423	macrophage, TB infection, non stimulated BMDM, with Mtb, 048hr(024h after stimulation)	1	primary cells
-RES00003424	macrophage, TB infection, non stimulated BMDM, with Mtb, 072hr(048h after stimulation)	1	primary cells
-RES00003425	macrophage, TB infection, non stimulated BMDM, with Mtb, 120hr(096h after stimulation)	1	primary cells
-RES00003426	macrophage, TB infection, non stimulated BMDM, without Mtb, 024hr	1	primary cells
-RES00003427	macrophage, TB infection, non-stimulated BMDM, with Mtb, 028hr(004h after stimulation)	2	primary cells
-RES00003428	macrophage, TB infection, non-stimulated BMDM, with Mtb, 036hr(012h after stimulation)	2	primary cells
-RES00003429	macrophage, TB infection, non-stimulated BMDM, with Mtb, 048hr(024h after stimulation)	2	primary cells
-RES00003430	macrophage, TB infection, non-stimulated BMDM, with Mtb, 072hr(048h after stimulation)	2	primary cells
-RES00003431	macrophage, TB infection, non-stimulated BMDM, with Mtb, 120hr(096h after stimulation)	2	primary cells
-RES00003432	macrophage, TB infection, non-stimulated BMDM, without Mtb, 004hr	1	primary cells
-RES00003433	macrophage, TB infection, non-stimulated BMDM, without Mtb, 006hr	1	primary cells
-RES00003434	macrophage, TB infection, non-stimulated BMDM, without Mtb, 012hr	1	primary cells
-RES00003435	macrophage, TB infection, non-stimulated BMDM, without Mtb, 024hr	3	primary cells
-RES00003436	macrophage, TB infection, non-stimulated BMDM, without Mtb, 028hr	3	primary cells
-RES00003437	macrophage, TB infection, non-stimulated BMDM, without Mtb, 036hr	3	primary cells
-RES00003438	macrophage, TB infection, non-stimulated BMDM, without Mtb, 048hr	3	primary cells
-RES00003439	macrophage, TB infection, non-stimulated BMDM, without Mtb, 072hr	3	primary cells
-RES00003440	macrophage, TB infection, non-stimulated BMDM, without Mtb, 120hr	3	primary cells
-RES00003441	macrophage, TB infection, stimulated BMDM+IFNg(caMph), with Mtb, 028hr(004h after stimulation)	3	primary cells
-RES00003442	macrophage, TB infection, stimulated BMDM+IFNg(caMph), with Mtb, 036hr(012h after stimulation)	3	primary cells
-RES00003443	macrophage, TB infection, stimulated BMDM+IFNg(caMph), with Mtb, 048hr(024h after stimulation)	3	primary cells
-RES00003444	macrophage, TB infection, stimulated BMDM+IFNg(caMph), with Mtb, 072hr(048h after stimulation)	3	primary cells
-RES00003445	macrophage, TB infection, stimulated BMDM+IFNg(caMph), with Mtb, 120hr(096h after stimulation)	3	primary cells
-RES00003446	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 002hr	3	primary cells
-RES00003447	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 004hr	3	primary cells
-RES00003448	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 006hr	3	primary cells
-RES00003449	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 012hr	3	primary cells
-RES00003450	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 024hr	4	primary cells
-RES00003451	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 028hr	3	primary cells
-RES00003452	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 036hr	3	primary cells
-RES00003453	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 048hr	3	primary cells
-RES00003454	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 072hr	3	primary cells
-RES00003455	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 120hr	3	primary cells
-RES00003456	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), with Mtb, 028hr(004h after stimulation)	3	primary cells
-RES00003457	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), with Mtb, 036hr(012h after stimulation)	2	primary cells
-RES00003458	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), with Mtb, 048hr(024h after stimulation)	3	primary cells
-RES00003459	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), with Mtb, 072hr(048h after stimulation)	3	primary cells
-RES00003460	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), with Mtb, 120hr(096h after stimulation)	3	primary cells
-RES00003461	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 002hr	3	primary cells
-RES00003462	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 004hr	3	primary cells
-RES00003463	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 006hr	3	primary cells
-RES00003464	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 012hr	3	primary cells
-RES00003465	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 024hr	4	primary cells
-RES00003466	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 028hr	3	primary cells
-RES00003467	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 036hr	3	primary cells
-RES00003468	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 048hr	3	primary cells
-RES00003469	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 072hr	3	primary cells
-RES00003470	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 120hr	3	primary cells
-RES00003471	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), with Mtb, 028hr(004h after stimulation)	3	primary cells
-RES00003472	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), with Mtb, 036hr(012h after stimulation)	3	primary cells
-RES00003473	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), with Mtb, 048hr(024h after stimulation)	3	primary cells
-RES00003474	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), with Mtb, 072hr(048h after stimulation)	3	primary cells
-RES00003475	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), with Mtb, 120hr(096h after stimulation)	3	primary cells
-RES00003476	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 002hr	3	primary cells
-RES00003477	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 004hr	3	primary cells
-RES00003478	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 006hr	3	primary cells
-RES00003479	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 012hr	3	primary cells
-RES00003480	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 024hr	4	primary cells
-RES00003481	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 028hr	3	primary cells
-RES00003482	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 036hr	3	primary cells
-RES00003483	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 048hr	3	primary cells
-RES00003484	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 072hr	3	primary cells
-RES00003485	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 120hr	3	primary cells
-RES00003486	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), with Mtb, 028hr(004h after stimulation)	3	primary cells
-RES00003487	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), with Mtb, 036hr(012h after stimulation)	3	primary cells
-RES00003488	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), with Mtb, 048hr(024h after stimulation)	3	primary cells
-RES00003489	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), with Mtb, 072hr(048h after stimulation)	3	primary cells
-RES00003490	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), with Mtb, 120hr(096h after stimulation)	3	primary cells
-RES00003491	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 002hr	3	primary cells
-RES00003492	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 004hr	3	primary cells
-RES00003493	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 006hr	3	primary cells
-RES00003494	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 012hr	3	primary cells
-RES00003495	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 024hr	4	primary cells
-RES00003496	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 028hr	3	primary cells
-RES00003497	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 036hr	3	primary cells
-RES00003498	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 048hr	3	primary cells
-RES00003499	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 072hr	3	primary cells
-RES00003500	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 120hr	3	primary cells
-RES00003501	macrophage, bone marrow derived	4	primary cells
-RES00003502	mammary gland, adult lactating day02	1	tissues
-RES00003503	mammary gland, adult pregnant day19	1	tissues
-RES00003504	medulla oblongata, adult	1	tissues
-RES00003505	medulla oblongata, neonate N30	1	tissues
-RES00003506	mouse fibroblast cell line: CRL-1658 NIH/3T3	1	cell lines
-RES00003507	muscle (biceps femoris), neonate N30	1	tissues
-RES00003508	natural helper cells, IL2 treated, day15	9	primary cells
-RES00003509	natural helper cells, IL33 treated, 01hr	7	primary cells
-RES00003510	natural helper cells, IL33 treated, day02	7	primary cells
-RES00003511	natural helper cells, naive	8	primary cells
-RES00003512	neurospheres - enteric neuron derived	3	primary cells
-RES00003513	neurospheres - parasympathetic neuron derived	3	primary cells
-RES00003514	neurospheres - sympathetic neuron derived	3	primary cells
-RES00003515	olfactory brain, adult	1	tissues
-RES00003516	osteoclast, bone marrow derived	1	primary cells
-RES00003517	ovary, adult	1	tissues
-RES00003518	ovary, embryo E18	1	tissues
-RES00003519	ovary, neonate N00	1	tissues
-RES00003520	oviduct, adult pregnant day01	1	tissues
-RES00003521	pancreas, adult	1	tissues
-RES00003522	pancreas, embryo E14	1	tissues
-RES00003523	pancreas, embryo E15	1	tissues
-RES00003524	pancreas, embryo E16	1	tissues
-RES00003525	pancreas, embryo E17	1	tissues
-RES00003526	pancreas, embryo E18	1	tissues
-RES00003527	pancreas, neonate N00	1	tissues
-RES00003528	pancreas, neonate N01	1	tissues
-RES00003529	pancreas, neonate N02	1	tissues
-RES00003530	pancreas, neonate N16	1	tissues
-RES00003531	pancreas, neonate N25	1	tissues
-RES00003532	pancreas, neonate N30	1	tissues
-RES00003533	pituitary gland, adult	1	tissues
-RES00003534	pituitary gland, embryo E12	1	tissues
-RES00003535	pituitary gland, embryo E13	1	tissues
-RES00003536	pituitary gland, embryo E14	1	tissues
-RES00003537	pituitary gland, embryo E15	1	tissues
-RES00003538	pituitary gland, embryo E16	1	tissues
-RES00003539	pituitary gland, embryo E17	1	tissues
-RES00003540	pituitary gland, neonate N00	1	tissues
-RES00003541	placenta, adult pregnant day10	1	tissues
-RES00003542	placenta, adult pregnant day17	1	tissues
-RES00003543	prostate, adult	1	tissues
-RES00003544	skin, adult	1	tissues
-RES00003545	skin, neonate N00	1	tissues
-RES00003546	skin, neonate N03	1	tissues
-RES00003547	skin, neonate N06	1	tissues
-RES00003548	skin, neonate N10	1	tissues
-RES00003549	small intestine, neonate N16	1	tissues
-RES00003550	spinal cord, adult	1	tissues
-RES00003551	spleen, adult	1	tissues
-RES00003552	spleen, embryo E16	1	tissues
-RES00003553	spleen, embryo E18	1	tissues
-RES00003554	spleen, neonate N10	1	tissues
-RES00003555	spleen, neonate N20	1	tissues
-RES00003556	spleen, neonate N25	1	tissues
-RES00003557	stem cell (cKit+ Sca1- lineage-) KSL	3	primary cells
-RES00003558	stomach, adult	1	tissues
-RES00003559	stomach, embryo E12	1	tissues
-RES00003560	stomach, embryo E15	1	tissues
-RES00003561	stomach, embryo E16	1	tissues
-RES00003562	stomach, embryo E17	1	tissues
-RES00003563	stomach, embryo E18	1	tissues
-RES00003564	stomach, neonate N03	1	tissues
-RES00003565	stomach, neonate N07	1	tissues
-RES00003566	stomach, neonate N25	1	tissues
-RES00003567	stomach, neonate N30	1	tissues
-RES00003568	submandibular gland, adult	1	tissues
-RES00003569	testis, adult	1	tissues
-RES00003570	testis, embryo E13	1	tissues
-RES00003571	testis, embryo E15	1	tissues
-RES00003572	testis, embryo E16	1	tissues
-RES00003573	testis, embryo E17	1	tissues
-RES00003574	testis, embryo E18	1	tissues
-RES00003575	testis, neonate N00	1	tissues
-RES00003576	testis, neonate N07	1	tissues
-RES00003577	testis, neonate N10	1	tissues
-RES00003578	testis, neonate N20	1	tissues
-RES00003579	testis, neonate N30	1	tissues
-RES00003580	thymus, adult	1	tissues
-RES00003581	thymus, embryo E14	1	tissues
-RES00003582	thymus, embryo E15	1	tissues
-RES00003583	thymus, embryo E16	1	tissues
-RES00003584	thymus, embryo E17	1	tissues
-RES00003585	thymus, embryo E18	1	tissues
-RES00003586	thymus, neonate N02	1	tissues
-RES00003587	thymus, neonate N03	1	tissues
-RES00003588	thymus, neonate N06	1	tissues
-RES00003589	thymus, neonate N07	1	tissues
-RES00003590	thymus, neonate N10	1	tissues
-RES00003591	thymus, neonate N20	1	tissues
-RES00003592	thymus, neonate N25	1	tissues
-RES00003593	thymus, neonate N30	1	tissues
-RES00003594	tongue, adult	1	tissues
-RES00003595	trophoblast stem cell line B1 differentiation, day00	1	cell lines
-RES00003596	trophoblast stem cell line B1 differentiation, day01	1	cell lines
-RES00003597	trophoblast stem cell line B1 differentiation, day02	1	cell lines
-RES00003598	trophoblast stem cell line B1 differentiation, day03	1	cell lines
-RES00003599	trophoblast stem cell line B1 differentiation, day04	1	cell lines
-RES00003600	trophoblast stem cell line B1 differentiation, day05	1	cell lines
-RES00003601	trophoblast stem cell line B1 differentiation, day06	1	cell lines
-RES00003602	trophoblast stem cell line R1AB differentiation, day00	1	cell lines
-RES00003603	trophoblast stem cell line R1AB differentiation, day01	1	cell lines
-RES00003604	trophoblast stem cell line R1AB differentiation, day02	1	cell lines
-RES00003605	trophoblast stem cell line R1AB differentiation, day03	1	cell lines
-RES00003606	trophoblast stem cell line R1AB differentiation, day04	1	cell lines
-RES00003607	trophoblast stem cell line R1AB differentiation, day05	1	cell lines
-RES00003608	trophoblast stem cell line R1AB differentiation, day06	1	cell lines
-RES00003609	trophoblast stem cell line Rybp differentiation, day00	1	cell lines
-RES00003610	trophoblast stem cell line Rybp differentiation, day01	1	cell lines
-RES00003611	trophoblast stem cell line Rybp differentiation, day02	1	cell lines
-RES00003612	trophoblast stem cell line Rybp differentiation, day03	1	cell lines
-RES00003613	trophoblast stem cell line Rybp differentiation, day04	1	cell lines
-RES00003614	trophoblast stem cell line Rybp differentiation, day05	1	cell lines
-RES00003615	trophoblast stem cell line Rybp differentiation, day06	1	cell lines
-RES00003617	urinary bladder, adult	1	tissues
-RES00003618	uterus, adult pregnant day19	1	tissues
-RES00003619	uterus, adult	1	tissues
-RES00003620	vagina, adult	1	tissues
-RES00003621	vesicular gland, adult	1	tissues
-RES00003622	visual cortex - Mecp knockout, neonate N15	3	tissues
-RES00003623	visual cortex - Mecp knockout, neonate N30	3	tissues
-RES00003624	visual cortex - Mecp knockout, neonate N60-70	3	tissues
-RES00003625	visual cortex - wildtype, neonate N15	4	tissues
-RES00003626	visual cortex - wildtype, neonate N30	3	tissues
-RES00003627	visual cortex - wildtype, neonate N60-70	3	tissues
-RES00003628	whole body, embryo E11	1	tissues
-RES00003629	whole body, embryo E12	1	tissues
-RES00003630	whole body, embryo E13	1	tissues
-RES00003631	whole body, embryo E14.5	1	tissues
-RES00003632	whole body, embryo E14	1	tissues
-RES00003633	whole body, embryo E16	1	tissues
-RES00003634	whole body, embryo E17.5	30	tissues
-RES00003635	whole body, embryo E17	1	tissues
-RES00003636	whole body, embryo E18	1	tissues
-RES00003637	whole body, neonate N00	1	tissues
-RES00003638	whole body, neonate N01	1	tissues
-RES00003639	whole body, neonate N06	1	tissues
-RES00003640	whole body, neonate N10	1	tissues
+RefexSampleId	Description	NumberOfSamples	SampleTypeCategory	ExperimentCategory	UberonId	UberonLabel	ClId	ClLabel	NcitId	NcitLabel	DevelopmentalStage	Sex
+RES00003105	Mouse Astrocytes	3	primary cells	snapshot	UBERON:0000955	brain	CL:0000127	astrocyte	NA	NA
+RES00003106	Atoh1+ Inner ear hair cells - organ of corti	1	primary cells	snapshot	UBERON:0002227	spiral organ of cochlea	CL:0000589	cochlear inner hair cell	NA	NA
+RES00003107	CD326+ enterocyte isolated from mice, treated with RANKL, day03	2	primary cells	snapshot	UBERON:0002116	ileum	CL:0000584	enterocyte	NA	NA
+RES00003108	CD326+ enterocyte	2	primary cells	snapshot	UBERON:0002116	ileum	CL:0000584	enterocyte	NA	NA
+RES00003109	CD326++ enterocyte isolated from mice, treated with RANKL, day03	2	primary cells	snapshot	UBERON:0002116	ileum	CL:0000584	enterocyte	NA	NA
+RES00003110	CD4+CD25+ regulatory T cells, PMA and ionomycin stimulation, 02hr	2	primary cells	snapshot	UBERON:0002193	hemolymphoid system	CL:0000792	CD4-positive, CD25-positive, alpha-beta regulatory T cell	NA	NA
+RES00003111	CD4+CD25+ regulatory T cells, antiCD3 CD28 stimulation, 06hr	2	primary cells	snapshot	UBERON:0002193	hemolymphoid system	CL:0000792	CD4-positive, CD25-positive, alpha-beta regulatory T cell	NA	NA
+RES00003112	CD4+CD25+ regulatory T cells	2	primary cells	snapshot	UBERON:0002193	hemolymphoid system	CL:0000792	CD4-positive, CD25-positive, alpha-beta regulatory T cell	NA	NA
+RES00003113	CD4+CD25-CD44- naive conventional T cells, PMA and ionomycin stimulation, 02hr	2	primary cells	snapshot	UBERON:0002193	hemolymphoid system	CL:0000895	naive thymus-derived CD4-positive, alpha-beta T cell	NA	NA
+RES00003114	CD4+CD25-CD44- naive conventional T cells, antiCD3_CD28 stimulation, 06hr	2	primary cells	snapshot	UBERON:0002193	hemolymphoid system	CL:0000895	naive thymus-derived CD4-positive, alpha-beta T cell	NA	NA
+RES00003115	CD4+CD25-CD44- naive conventional T cells	2	primary cells	snapshot	UBERON:0002193	hemolymphoid system	CL:0000895	naive thymus-derived CD4-positive, alpha-beta T cell	NA	NA
+RES00003116	CD41+ megakaryocyte cancer	3	primary cells	snapshot	UBERON:0002371	bone marrow	CL:0002027	CD9-positive, CD41-positive megakaryocyte cell	NA	NA
+RES00003117	CD41+ megakaryocyte control	3	primary cells	snapshot	UBERON:0002371	bone marrow	CL:0002027	CD9-positive, CD41-positive megakaryocyte cell	NA	NA
+RES00003118	Clontech Mouse Universal Reference Total RNA	1	tissues	snapshot	NA	NA	NA	NA	NA	NA
+RES00003119	EBF KO HPCs induced to T cell, 00hr00min	3	stem cells	time courses	NA	NA	CL:0000837	hematopoietic multipotent progenitor cell	NA	NA
+RES00003120	EBF KO HPCs induced to T cell, 00hr30min	3	stem cells	time courses	NA	NA	CL:0000084	T cell	NA	NA
+RES00003121	EBF KO HPCs induced to T cell, 01hr	3	stem cells	time courses	NA	NA	CL:0000084	T cell	NA	NA
+RES00003122	EBF KO HPCs induced to T cell, 02hr	3	stem cells	time courses	NA	NA	CL:0000084	T cell	NA	NA
+RES00003123	EBF KO HPCs induced to T cell, 04hr	3	stem cells	time courses	NA	NA	CL:0000084	T cell	NA	NA
+RES00003124	EBF KO HPCs induced to T cell, 06hr	3	stem cells	time courses	NA	NA	CL:0000084	T cell	NA	NA
+RES00003125	EBF KO HPCs induced to T cell, 08hr	3	stem cells	time courses	NA	NA	CL:0000084	T cell	NA	NA
+RES00003126	EBF KO HPCs induced to T cell, 10hr	3	stem cells	time courses	NA	NA	CL:0000084	T cell	NA	NA
+RES00003127	EBF KO HPCs induced to T cell, 12hr	3	stem cells	time courses	NA	NA	CL:0000084	T cell	NA	NA
+RES00003128	EBF KO HPCs induced to T cell, 24hr	3	stem cells	time courses	NA	NA	CL:0000084	T cell	NA	NA
+RES00003129	EBF KO HPCs induced to T cell, day02	3	stem cells	time courses	NA	NA	CL:0000084	T cell	NA	NA
+RES00003130	EBF KO HPCs induced to T cell, day03	3	stem cells	time courses	NA	NA	CL:0000084	T cell	NA	NA
+RES00003131	EBF KO HPCs induced to T cell, day04	3	stem cells	time courses	NA	NA	CL:0000084	T cell	NA	NA
+RES00003132	EBF KO HPCs induced to T cell, day05	3	stem cells	time courses	NA	NA	CL:0000084	T cell	NA	NA
+RES00003133	EBF KO HPCs induced to T cell, day06	3	stem cells	time courses	NA	NA	CL:0000084	T cell	NA	NA
+RES00003134	ES-46C derived epistem cells	3	stem cells	time courses	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+RES00003135	ES-46C derived epistem cells, neuronal differentiation, day05	1	stem cells	time courses	NA	NA	CL:0000031	neuroblast	NA	NA
+RES00003136	ES-46C derived epistem cells, neuronal differentiation, day14	1	stem cells	time courses	NA	NA	CL:0000031	neuroblast	NA	NA
+RES00003137	ES-46C embryonic stem cells, neuronal differentiation, day00	2	stem cells	time courses	NA	NA	CL:0000031	neuroblast	NA	NA
+RES00003138	ES-46C embryonic stem cells, neuronal differentiation, day01	2	stem cells	time courses	NA	NA	CL:0000031	neuroblast	NA	NA
+RES00003139	ES-46C embryonic stem cells, neuronal differentiation, day02	2	stem cells	time courses	NA	NA	CL:0000031	neuroblast	NA	NA
+RES00003140	ES-46C embryonic stem cells, neuronal differentiation, day03	2	stem cells	time courses	NA	NA	CL:0000031	neuroblast	NA	NA
+RES00003141	ES-46C embryonic stem cells, neuronal differentiation, day04	2	stem cells	time courses	NA	NA	CL:0000031	neuroblast	NA	NA
+RES00003142	ES-Ert2 embryonic stem cells, tamoxifen treated, 48hr	3	stem cells	snapshot	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+RES00003143	ES-Ert2 embryonic stem cells, untreated control, 48hr	3	stem cells	snapshot	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+RES00003144	ES-OS25 embryonic stem cells, DMSO control	3	stem cells	snapshot	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+RES00003145	ES-OS25 embryonic stem cells, KD for exosomal component EXOSC3	2	stem cells	snapshot	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+RES00003146	ES-OS25 embryonic stem cells, KD for exosomal component EXOSC5	2	stem cells	snapshot	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+RES00003147	ES-OS25 embryonic stem cells, aminitin treatment for 7hr	3	stem cells	snapshot	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+RES00003148	ES-OS25 embryonic stem cells, flavopiridol treatment, 01hr	3	stem cells	snapshot	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+RES00003149	ES-OS25 embryonic stem cells, scrambled siRNA control	2	stem cells	snapshot	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+RES00003150	ES-OS25 embryonic stem cells, untreated control	3	stem cells	snapshot	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+RES00003151	ES-OS25 embryonic stem cells, untreated siRNA control	2	stem cells	snapshot	NA	NA	CL:0002322	embryonic stem cell	NA	NA
+RES00003152	Follicle Associated Epithelium	2	tissues	snapshot	UBERON:0001211	Peyer's patch	NA	NA	NA	NA
+RES00003153	GP2+ M cell	3	primary cells	snapshot	UBERON:0003929	digestive tract epithelium	CL:0000682	M cell of gut	NA	NA
+RES00003154	Ileum epithelium	2	tissues	snapshot	UBERON:0002116	ileum	NA	NA	NA	NA
+RES00003155	Ileum epithelium, treated with RANKL, day03	1	tissues	snapshot	UBERON:0002116	ileum	NA	NA	NA	NA
+RES00003156	Inner ear stem cells, 1st generation stem cells	1	primary cells	snapshot	UBERON:0002227	spiral organ of cochlea	CL:0000034	stem cell	NA	NA
+RES00003157	Inner ear stem cells, 4th generation stem cells	1	primary cells	snapshot	UBERON:0002227	spiral organ of cochlea	CL:0000723	somatic stem cell	NA	NA
+RES00003158	Inner ear stem cells, differentiation, day03	1	primary cells	snapshot	UBERON:0002227	spiral organ of cochlea	CL:0000723	somatic stem cell	NA	NA
+RES00003159	Inner ear stem cells, differentiation, day10	1	primary cells	snapshot	UBERON:0002227	spiral organ of cochlea	CL:0000723	somatic stem cell	NA	NA
+RES00003160	J2E erythroblastic leukemia response to erythropoietin, 00hr00min	4	cell lines	time courses	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+RES00003161	J2E erythroblastic leukemia response to erythropoietin, 00hr15min	3	cell lines	time courses	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+RES00003162	J2E erythroblastic leukemia response to erythropoietin, 00hr30min	4	cell lines	time courses	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+RES00003163	J2E erythroblastic leukemia response to erythropoietin, 00hr45min	3	cell lines	time courses	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+RES00003164	J2E erythroblastic leukemia response to erythropoietin, 01hr00min	3	cell lines	time courses	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+RES00003165	J2E erythroblastic leukemia response to erythropoietin, 01hr20min	3	cell lines	time courses	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+RES00003166	J2E erythroblastic leukemia response to erythropoietin, 01hr40min	3	cell lines	time courses	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+RES00003167	J2E erythroblastic leukemia response to erythropoietin, 02hr00min	4	cell lines	time courses	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+RES00003168	J2E erythroblastic leukemia response to erythropoietin, 02hr30min	3	cell lines	time courses	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+RES00003169	J2E erythroblastic leukemia response to erythropoietin, 03hr00min	3	cell lines	time courses	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+RES00003170	J2E erythroblastic leukemia response to erythropoietin, 03hr30min	3	cell lines	time courses	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+RES00003171	J2E erythroblastic leukemia response to erythropoietin, 04hr	3	cell lines	time courses	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+RES00003172	J2E erythroblastic leukemia response to erythropoietin, 06hr	3	cell lines	time courses	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+RES00003173	J2E erythroblastic leukemia response to erythropoietin, 12hr	4	cell lines	time courses	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+RES00003174	J2E erythroblastic leukemia response to erythropoietin, 24hr	3	cell lines	time courses	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+RES00003175	J2E erythroblastic leukemia response to erythropoietin, 48hr	3	cell lines	time courses	UBERON:0000178	blood	CL:0000765	erythroblast	NCIT:C7064	Erythroid Neoplasm
+RES00003176	Lgr5 positive intestinal stem cells	3	primary cells	snapshot	UBERON:0002108	small intestine	CL:0000723	somatic stem cell	NA	NA
+RES00003177	MC1+Gr1+ myeloid-derived suppressor cells cancer	3	primary cells	snapshot	UBERON:0002371	bone marrow	CL:0002467	Gr1-high myeloid suppressor cell	NA	NA
+RES00003178	MC1+Gr1+ myeloid-derived suppressor cells control	3	primary cells	snapshot	UBERON:0002371	bone marrow	CL:0002467	Gr1-high myeloid suppressor cell	NA	NA
+RES00003179	Mesoderm, embryo E8.5	1	stem cells	snapshot	UBERON:0000926	mesoderm	CL:0000222	mesodermal cell	NA	NA
+RES00003180	Mouse Aortic Smooth Muscle cells - differentiated	2	primary cells	snapshot	UBERON:0004178	aorta smooth muscle tissue	CL:0002539	aortic smooth muscle cell	NA	NA
+RES00003181	Mouse Aortic Smooth Muscle cells	1	primary cells	snapshot	UBERON:0004178	aorta smooth muscle tissue	CL:0002539	aortic smooth muscle cell	NA	NA
+RES00003182	Mouse Astrocytes - cerebellar	2	primary cells	snapshot	UBERON:0002037	cerebellum	CL:0002603	astrocyte of the cerebellum	NA	NA
+RES00003183	Mouse Astrocytes - hippocampus	3	primary cells	snapshot	UBERON:0001954	Ammon's horn	CL:0002604	astrocyte of the hippocampus	NA	NA
+RES00003184	Mouse CD19+ B Cells	1	primary cells	snapshot	UBERON:0002106	spleen	CL:0000236	B cell	NA	NA
+RES00003185	Mouse CD4+ T Cells	1	primary cells	snapshot	UBERON:0002106	spleen	CL:0000624	CD4-positive, alpha-beta T cell	NA	NA
+RES00003186	Mouse CD8+ T Cells	1	primary cells	snapshot	UBERON:0002106	spleen	CL:0000625	CD8-positive, alpha-beta T cell	NA	NA
+RES00003187	Mouse Cardiac Myocytes	3	primary cells	snapshot	UBERON:0007100	primary circulatory organ	CL:0000746	cardiac muscle cell	NA	NA
+RES00003188	Mouse Embryonic fibroblasts	1	primary cells	snapshot	NA	NA	CL:0000057	fibroblast	NA	NA
+RES00003189	Mouse Granule cells	3	primary cells	snapshot	UBERON:0000955	brain	CL:0000120	granule cell	NA	NA
+RES00003190	Mouse Meningeal cells	3	primary cells	snapshot	UBERON:0002360	meninx	CL:0000708	leptomeningeal cell	NA	NA
+RES00003191	Mouse Mesenchymal stem cells - bone marrow derived	3	primary cells	snapshot	UBERON:0002371	bone marrow	CL:0002540	mesenchymal stem cell of the bone marrow	NA	NA
+RES00003192	Mouse Microglia	3	primary cells	snapshot	UBERON:0001017	central nervous system	CL:0000129	microglial cell	NA	NA
+RES00003193	Mouse Neurons - cortical	3	primary cells	snapshot	UBERON:0000956	cerebral cortex	CL:0002609	neuron of cerebral cortex	NA	NA
+RES00003194	Mouse Neurons - dorsal spinal cord	3	primary cells	snapshot	UBERON:0002256	dorsal horn of spinal cord	CL:0002611	neuron of the dorsal spinal cord	NA	NA
+RES00003195	Mouse Neurons - hippocampal	3	primary cells	snapshot	UBERON:0001954	Ammon's horn	CL:0002608	hippocampal neuron	NA	NA
+RES00003196	Mouse Neurons - raphe	3	primary cells	snapshot	UBERON:0004684	raphe nuclei	CL:0002610	raphe nuclei neuron	NA	NA
+RES00003197	Mouse Neurons - striatal	3	primary cells	snapshot	UBERON:0002435	striatum	CL:0002613	striatum neuron	NA	NA
+RES00003198	Mouse Neurons - substantia nigra	5	primary cells	snapshot	UBERON:0002038	substantia nigra	CL:0002614	neuron of the substantia nigra	NA	NA
+RES00003199	Mouse Neurons - ventral spinal cord	3	primary cells	snapshot	UBERON:0002257	ventral horn of spinal cord	CL:0002612	neuron of the ventral spinal cord	NA	NA
+RES00003200	Mouse Renal epithelial cells	1	primary cells	snapshot	UBERON:0002113	kidney	CL:0002518	kidney epithelial cell	NA	NA
+RES00003201	Mouse Schwann	3	primary cells	snapshot	UBERON:0000010	peripheral nervous system	CL:0000218	myelinating Schwann cell	NA	NA
+RES00003202	Mouse hepatic Sinusoidal Endothelial Cells	1	primary cells	snapshot	UBERON:0001281	hepatic sinusoid	CL:1000398	endothelial cell of hepatic sinusoid	NA	NA
+RES00003203	Mouse hepatic Stellate Cells (lipocyte)	1	primary cells	snapshot	UBERON:0002107	liver	CL:0000632	hepatic stellate cell	NA	NA
+RES00003204	Mouse hepatocyte	6	primary cells	snapshot	UBERON:0002107	liver	CL:0000182	hepatocyte	NA	NA
+RES00003205	Neurons - spiral ganglion	1	primary cells	snapshot	UBERON:0000395	cochlear ganglion	CL:0011113	spiral ganglion neuron	NA	NA
+RES00003206	Pre-hematopoietic stem cell, aorta-gonad-mesonephros (AGM) region derived, embryo E9.5	1	stem cells	snapshot	UBERON:0002390	hematopoietic system	CL:0002360	AGM hematopoietic stem cell	NA	NA
+RES00003207	SABiosciences XpressRef Mouse Universal Total RNA	1	tissues	snapshot	NA	NA	NA	NA	NA	NA
+RES00003208	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 00hr15min	3	stem cells	time courses	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+RES00003209	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 00hr30min	3	stem cells	time courses	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+RES00003210	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 01hr	3	stem cells	time courses	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+RES00003211	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 02hr	3	stem cells	time courses	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+RES00003212	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 03hr	3	stem cells	time courses	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+RES00003213	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 06hr	3	stem cells	time courses	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+RES00003214	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 12hr	3	stem cells	time courses	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+RES00003215	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 18hr	3	stem cells	time courses	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+RES00003216	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 24hr	3	stem cells	time courses	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+RES00003217	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, 36hr	3	stem cells	time courses	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+RES00003218	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, day02	3	stem cells	time courses	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+RES00003219	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, day03	3	stem cells	time courses	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+RES00003220	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, day04	3	stem cells	time courses	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+RES00003221	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, day05	3	stem cells	time courses	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+RES00003222	ST2 (Mesenchymal stem cells) cells, differentiation to adipocytes, day06	3	stem cells	time courses	UBERON:0002371	bone marrow	CL:0000136	fat cell	NA	NA
+RES00003223	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 00hr15min	3	stem cells	time courses	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+RES00003224	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 00hr30min	3	stem cells	time courses	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+RES00003225	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 01hr	3	stem cells	time courses	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+RES00003226	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 02hr	3	stem cells	time courses	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+RES00003227	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 03hr	3	stem cells	time courses	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+RES00003228	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 06hr	3	stem cells	time courses	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+RES00003229	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 12hr	3	stem cells	time courses	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+RES00003230	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 18hr	3	stem cells	time courses	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+RES00003231	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 24hr	3	stem cells	time courses	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+RES00003232	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, 36hr	3	stem cells	time courses	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+RES00003233	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, day02	3	stem cells	time courses	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+RES00003234	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, day03	3	stem cells	time courses	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+RES00003235	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, day04	3	stem cells	time courses	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+RES00003236	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, day05	3	stem cells	time courses	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+RES00003237	ST2 (Mesenchymal stem cells) cells, differentiation to osteocytes, day06	3	stem cells	time courses	UBERON:0002481	bone tissue	CL:0000137	osteocyte	NA	NA
+RES00003238	ST2 (Mesenchymal stem cells) cells, medium change (without induction), 00hr	3	stem cells	time courses	UBERON:0002371	bone marrow	CL:0000134	mesenchymal stem cell	NA	NA
+RES00003239	ST2 (Mesenchymal stem cells) cells, medium change (without induction), day06	3	stem cells	time courses	UBERON:0002371	bone marrow	CL:0000134	mesenchymal stem cell	NA	NA
+RES00003240	Sox2+ Supporting cells - organ of corti	1	primary cells	snapshot	UBERON:0002227	spiral organ of cochlea	CL:0002490	organ of Corti supporting cell	NA	NA
+RES00003241	TSt-4/DLL1 feeder cells	3	cell lines	snapshot	UBERON:0002370	thymus	NA	NA	NA	NA
+RES00003242	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 000hr	3	primary cells	time courses	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+RES00003243	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 004hr	3	primary cells	time courses	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+RES00003244	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 008hr	3	primary cells	time courses	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+RES00003245	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 012hr	3	primary cells	time courses	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+RES00003246	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 016hr	3	primary cells	time courses	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+RES00003247	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 020hr	3	primary cells	time courses	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+RES00003248	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 024hr	3	primary cells	time courses	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+RES00003249	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 030hr	3	primary cells	time courses	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+RES00003250	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 036hr	3	primary cells	time courses	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+RES00003251	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 042hr	3	primary cells	time courses	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+RES00003252	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 048hr	3	primary cells	time courses	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+RES00003253	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 054hr	3	primary cells	time courses	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+RES00003254	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 060hr	3	primary cells	time courses	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+RES00003255	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 066hr	3	primary cells	time courses	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+RES00003256	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 072hr	3	primary cells	time courses	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+RES00003257	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 084hr	3	primary cells	time courses	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+RES00003258	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 096hr	3	primary cells	time courses	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+RES00003259	Tracheal epithelial cells, differentiation to ciliated epithelial cells, 120hr	3	primary cells	time courses	UBERON:0003126	trachea	CL:0000307	tracheal epithelial cell	NA	NA
+RES00003260	Universal RNA - Mouse Normal Tissues Biochain	1	tissues	snapshot	NA	NA	NA	NA	NA	NA
+RES00003261	accessory axillary lymph node, adult	1	tissues	developmental	UBERON:0001097	axillary lymph node	NA	NA	NA	NA
+RES00003262	adrenal gland, adult	1	tissues	developmental	UBERON:0002369	adrenal gland	NA	NA	NA	NA
+RES00003263	adrenal gland, embryo E14	1	tissues	developmental	UBERON:0002369	adrenal gland	NA	NA	NA	NA
+RES00003264	adrenal gland, embryo E16	1	tissues	developmental	UBERON:0002369	adrenal gland	NA	NA	NA	NA
+RES00003265	adrenal gland, embryo E17	1	tissues	developmental	UBERON:0002369	adrenal gland	NA	NA	NA	NA
+RES00003266	adrenal gland, embryo E18	1	tissues	developmental	UBERON:0002369	adrenal gland	NA	NA	NA	NA
+RES00003267	adrenal gland, neonate N00	1	tissues	developmental	UBERON:0002369	adrenal gland	NA	NA	NA	NA
+RES00003268	adrenal gland, neonate N25	1	tissues	developmental	UBERON:0002369	adrenal gland	NA	NA	NA	NA
+RES00003269	amnion, adult pregnant day17.5	1	tissues	developmental	UBERON:0000305	amnion	NA	NA	NA	NA
+RES00003270	aorta, adult	1	tissues	developmental	UBERON:0000947	aorta	NA	NA	NA	NA
+RES00003271	bone (os femoris), adult	1	tissues	developmental	UBERON:0000981	femur	NA	NA	NA	NA
+RES00003272	bone (os femoris), neonate N02	1	tissues	developmental	UBERON:0000981	femur	NA	NA	NA	NA
+RES00003273	bone (os femoris), neonate N16	1	tissues	developmental	UBERON:0000981	femur	NA	NA	NA	NA
+RES00003274	bone (os femoris), neonate N20	1	tissues	developmental	UBERON:0000981	femur	NA	NA	NA	NA
+RES00003275	cecum, adult	1	tissues	developmental	UBERON:0001153	caecum	NA	NA	NA	NA
+RES00003276	cerebellar granule cells, embryo E13	3	primary cells	time courses	UBERON:0002037	cerebellum	CL:0001031	cerebellar granule cell	NA	NA
+RES00003277	cerebellar granule cells, embryo E15	3	primary cells	time courses	UBERON:0002037	cerebellum	CL:0001031	cerebellar granule cell	NA	NA
+RES00003278	cerebellar granule cells, embryo E18	3	primary cells	time courses	UBERON:0002037	cerebellum	CL:0001031	cerebellar granule cell	NA	NA
+RES00003279	cerebellum, adult	1	tissues	developmental	UBERON:0002037	cerebellum	NA	NA	NA	NA
+RES00003280	cerebellum, embryo E11	3	tissues	developmental	UBERON:0002037	cerebellum	NA	NA	NA	NA
+RES00003281	cerebellum, embryo E12	3	tissues	developmental	UBERON:0002037	cerebellum	NA	NA	NA	NA
+RES00003282	cerebellum, embryo E13	3	tissues	developmental	UBERON:0002037	cerebellum	NA	NA	NA	NA
+RES00003283	cerebellum, embryo E14	3	tissues	developmental	UBERON:0002037	cerebellum	NA	NA	NA	NA
+RES00003284	cerebellum, embryo E15	3	tissues	developmental	UBERON:0002037	cerebellum	NA	NA	NA	NA
+RES00003285	cerebellum, embryo E16	3	tissues	developmental	UBERON:0002037	cerebellum	NA	NA	NA	NA
+RES00003286	cerebellum, embryo E17	3	tissues	developmental	UBERON:0002037	cerebellum	NA	NA	NA	NA
+RES00003287	cerebellum, embryo E18	3	tissues	developmental	UBERON:0002037	cerebellum	NA	NA	NA	NA
+RES00003288	cerebellum, neonate N00	3	tissues	developmental	UBERON:0002037	cerebellum	NA	NA	NA	NA
+RES00003289	cerebellum, neonate N03	3	tissues	developmental	UBERON:0002037	cerebellum	NA	NA	NA	NA
+RES00003290	cerebellum, neonate N06	3	tissues	developmental	UBERON:0002037	cerebellum	NA	NA	NA	NA
+RES00003291	cerebellum, neonate N09	3	tissues	developmental	UBERON:0002037	cerebellum	NA	NA	NA	NA
+RES00003292	cerebellum, neonate N30	1	tissues	developmental	UBERON:0002037	cerebellum	NA	NA	NA	NA
+RES00003293	colon, adult	1	tissues	developmental	UBERON:0001155	colon	NA	NA	NA	NA
+RES00003294	common myeloid progenitor CMP	3	primary cells	snapshot	UBERON:0002371	bone marrow	CL:0000049	common myeloid progenitor	NA	NA
+RES00003295	corpora quadrigemina, adult	1	tissues	developmental	UBERON:0002259	corpora quadrigemina	NA	NA	NA	NA
+RES00003296	corpus striatum, adult	1	tissues	developmental	UBERON:0000369	corpus striatum	NA	NA	NA	NA
+RES00003297	corpus striatum, neonate N00	1	tissues	developmental	UBERON:0000369	corpus striatum	NA	NA	NA	NA
+RES00003298	cortex, adult	1	tissues	developmental	UBERON:0001851	cortex	NA	NA	NA	NA
+RES00003299	cortex, neonate N30	1	tissues	developmental	UBERON:0001851	cortex	NA	NA	NA	NA
+RES00003300	diencephalon, adult	1	tissues	developmental	UBERON:0001894	diencephalon	NA	NA	NA	NA
+RES00003301	diencephalon, neonate N30	1	tissues	developmental	UBERON:0001894	diencephalon	NA	NA	NA	NA
+RES00003302	epididymis and seminiferous tubule, neonate N00	1	tissues	developmental	UBERON:0001301	epididymis	NA	NA	NA	NA
+RES00003303	epididymis and seminiferous tubule, neonate N30	1	tissues	developmental	UBERON:0001301	epididymis	NA	NA	NA	NA
+RES00003304	epididymis, adult	1	tissues	developmental	UBERON:0001301	epididymis	NA	NA	NA	NA
+RES00003305	eyeball, adult	1	tissues	developmental	UBERON:0000970	eye	NA	NA	NA	NA
+RES00003306	eyeball, embryo E12	1	tissues	developmental	UBERON:0000970	eye	NA	NA	NA	NA
+RES00003307	eyeball, embryo E14	1	tissues	developmental	UBERON:0000970	eye	NA	NA	NA	NA
+RES00003308	eyeball, embryo E15	1	tissues	developmental	UBERON:0000970	eye	NA	NA	NA	NA
+RES00003309	eyeball, embryo E17	1	tissues	developmental	UBERON:0000970	eye	NA	NA	NA	NA
+RES00003310	eyeball, neonate N00	1	tissues	developmental	UBERON:0000970	eye	NA	NA	NA	NA
+RES00003311	eyeball, neonate N01	1	tissues	developmental	UBERON:0000970	eye	NA	NA	NA	NA
+RES00003312	eyeball, neonate N02	1	tissues	developmental	UBERON:0000970	eye	NA	NA	NA	NA
+RES00003313	eyeball, neonate N16	1	tissues	developmental	UBERON:0000970	eye	NA	NA	NA	NA
+RES00003314	forelimb, embryo E11	1	tissues	developmental	UBERON:0002102	forelimb	NA	NA	NA	NA
+RES00003315	forelimb, embryo E12	1	tissues	developmental	UBERON:0002102	forelimb	NA	NA	NA	NA
+RES00003316	forelimb, embryo E13	1	tissues	developmental	UBERON:0002102	forelimb	NA	NA	NA	NA
+RES00003317	forelimb, embryo E14	1	tissues	developmental	UBERON:0002102	forelimb	NA	NA	NA	NA
+RES00003318	forelimb, embryo E15	1	tissues	developmental	UBERON:0002102	forelimb	NA	NA	NA	NA
+RES00003319	forelimb, embryo E17	1	tissues	developmental	UBERON:0002102	forelimb	NA	NA	NA	NA
+RES00003320	forelimb, embryo E18	1	tissues	developmental	UBERON:0002102	forelimb	NA	NA	NA	NA
+RES00003321	gonad, embryo E13	1	tissues	developmental	UBERON:0000991	gonad	NA	NA	NA	NA
+RES00003322	granulocyte macrophage progenitor GMP	3	primary cells	snapshot	UBERON:0002371	bone marrow	CL:0000557	granulocyte monocyte progenitor cell	NA	NA
+RES00003323	heart, embryo E11	1	tissues	developmental	UBERON:0000948	heart	NA	NA	NA	NA
+RES00003324	heart, embryo E12	1	tissues	developmental	UBERON:0000948	heart	NA	NA	NA	NA
+RES00003325	heart, embryo E13	1	tissues	developmental	UBERON:0000948	heart	NA	NA	NA	NA
+RES00003326	heart, embryo E14	1	tissues	developmental	UBERON:0000948	heart	NA	NA	NA	NA
+RES00003327	heart, embryo E15	1	tissues	developmental	UBERON:0000948	heart	NA	NA	NA	NA
+RES00003328	heart, embryo E16	1	tissues	developmental	UBERON:0000948	heart	NA	NA	NA	NA
+RES00003329	heart, embryo E17	1	tissues	developmental	UBERON:0000948	heart	NA	NA	NA	NA
+RES00003330	heart, embryo E18	1	tissues	developmental	UBERON:0000948	heart	NA	NA	NA	NA
+RES00003331	heart, neonate N00	1	tissues	developmental	UBERON:0000948	heart	NA	NA	NA	NA
+RES00003332	heart, neonate N03	1	tissues	developmental	UBERON:0000948	heart	NA	NA	NA	NA
+RES00003333	heart, neonate N10	1	tissues	developmental	UBERON:0000948	heart	NA	NA	NA	NA
+RES00003334	heart, neonate N16	1	tissues	developmental	UBERON:0000948	heart	NA	NA	NA	NA
+RES00003335	heart, neonate N20	1	tissues	developmental	UBERON:0000948	heart	NA	NA	NA	NA
+RES00003336	heart, neonate N25	1	tissues	developmental	UBERON:0000948	heart	NA	NA	NA	NA
+RES00003337	heart, neonate N30	1	tissues	developmental	UBERON:0000948	heart	NA	NA	NA	NA
+RES00003338	hematopoietic stem cell, aorta-gonad-mesonephros (AGM) region derived, embryo E10.5	1	primary cells	snapshot	UBERON:0000080	mesonephros	CL:0002360	AGM hematopoietic stem cell	NA	NA
+RES00003339	hematopoietic stem cell, bone marrow derived, adult 2years	1	stem cells	time courses	UBERON:0002371	bone marrow	CL:0000037	hematopoietic stem cell	NA	NA
+RES00003340	hematopoietic stem cell, bone marrow derived, embryo E19.5	1	primary cells	snapshot	UBERON:0002371	bone marrow	CL:0000037	hematopoietic stem cell	NA	NA
+RES00003341	hematopoietic stem cell, bone marrow derived, newborn 2-3months	1	stem cells	time courses	UBERON:0002371	bone marrow	CL:0000037	hematopoietic stem cell	NA	NA
+RES00003342	hematopoietic stem cell, fetal liver derived, embryo E12.5	1	stem cells	time courses	UBERON:0002107	liver	CL:0000037	hematopoietic stem cell	NA	NA
+RES00003343	hematopoietic stem cell, fetal liver derived, embryo E14.5	1	stem cells	time courses	UBERON:0002107	liver	CL:0000037	hematopoietic stem cell	NA	NA
+RES00003344	hematopoietic stem cell, fetal liver derived, embryo E19.5	1	stem cells	time courses	UBERON:0002107	liver	CL:0000037	hematopoietic stem cell	NA	NA
+RES00003345	hematopoietic stem cell, placenta derived, embryo E10.5	1	stem cells	time courses	UBERON:0001987	placenta	CL:0002359	placental hematopoietic stem cell	NA	NA
+RES00003346	hematopoietic stem cell, placenta derived, embryo E11.5	1	stem cells	time courses	UBERON:0001987	placenta	CL:0002359	placental hematopoietic stem cell	NA	NA
+RES00003347	hematopoietic stem cell,aorta-gonad-mesonephros (AGM) region derived, embryo E11.5	1	stem cells	snapshot	UBERON:0000080	mesonephros	CL:0002360	AGM hematopoietic stem cell	NA	NA
+RES00003348	hepatic stellate cells, partial hepatectomy, 01week	1	primary cells	time courses	UBERON:0002107	liver	CL:0000632	hepatic stellate cell	NA	NA
+RES00003349	hepatic stellate cells, partial hepatectomy, 02hr	1	primary cells	time courses	UBERON:0002107	liver	CL:0000632	hepatic stellate cell	NA	NA
+RES00003350	hepatic stellate cells, partial hepatectomy, 30hr	3	primary cells	time courses	UBERON:0002107	liver	CL:0000632	hepatic stellate cell	NA	NA
+RES00003351	hepatic stellate cells, partial hepatectomy, 48hr	3	primary cells	time courses	UBERON:0002107	liver	CL:0000632	hepatic stellate cell	NA	NA
+RES00003352	hepatic stellate cells, sham operation	3	primary cells	time courses	UBERON:0002107	liver	CL:0000632	hepatic stellate cell	NA	NA
+RES00003353	hepatocytes, partial hepatectomy, 02hr	3	primary cells	time courses	UBERON:0002107	liver	CL:0000182	hepatocyte	NA	NA
+RES00003354	hepatocytes, partial hepatectomy, 30hr	3	primary cells	time courses	UBERON:0002107	liver	CL:0000182	hepatocyte	NA	NA
+RES00003355	hepatocytes, partial hepatectomy, 48hr	3	primary cells	time courses	UBERON:0002107	liver	CL:0000182	hepatocyte	NA	NA
+RES00003356	hepatocytes, partial hepatectomy, week01	3	primary cells	time courses	UBERON:0002107	liver	CL:0000182	hepatocyte	NA	NA
+RES00003357	hepatocytes, sham operation	3	primary cells	time courses	UBERON:0002107	liver	CL:0000182	hepatocyte	NA	NA
+RES00003358	hippocampus, adult	1	tissues	developmental	UBERON:0002421	hippocampal formation	NA	NA	NA	NA
+RES00003359	hippocampus, neonate N00	1	tissues	developmental	UBERON:0002421	hippocampal formation	NA	NA	NA	NA
+RES00003360	intestinal mucosa, adult	1	tissues	developmental	UBERON:0001242	intestinal mucosa	NA	NA	NA	NA
+RES00003361	intestine, adult	1	tissues	developmental	UBERON:0000160	intestine	NA	NA	NA	NA
+RES00003362	intestine, embryo E12	1	tissues	developmental	UBERON:0000160	intestine	NA	NA	NA	NA
+RES00003363	intestine, embryo E13	1	tissues	developmental	UBERON:0000160	intestine	NA	NA	NA	NA
+RES00003364	intestine, embryo E15	1	tissues	developmental	UBERON:0000160	intestine	NA	NA	NA	NA
+RES00003365	intestine, embryo E16	1	tissues	developmental	UBERON:0000160	intestine	NA	NA	NA	NA
+RES00003366	intestine, embryo E17	1	tissues	developmental	UBERON:0000160	intestine	NA	NA	NA	NA
+RES00003367	intestine, embryo E18	1	tissues	developmental	UBERON:0000160	intestine	NA	NA	NA	NA
+RES00003368	intestine, neonate N00	1	tissues	developmental	UBERON:0000160	intestine	NA	NA	NA	NA
+RES00003369	intestine, neonate N01	1	tissues	developmental	UBERON:0000160	intestine	NA	NA	NA	NA
+RES00003370	intestine, neonate N06	1	tissues	developmental	UBERON:0000160	intestine	NA	NA	NA	NA
+RES00003371	intestine, neonate N07	1	tissues	developmental	UBERON:0000160	intestine	NA	NA	NA	NA
+RES00003372	intestine, neonate N10	1	tissues	developmental	UBERON:0000160	intestine	NA	NA	NA	NA
+RES00003373	intestine, neonate N20	1	tissues	developmental	UBERON:0000160	intestine	NA	NA	NA	NA
+RES00003374	intestine, neonate N25	1	tissues	developmental	UBERON:0000160	intestine	NA	NA	NA	NA
+RES00003375	intestine, neonate N30	1	tissues	developmental	UBERON:0000160	intestine	NA	NA	NA	NA
+RES00003376	kidney, embryo E14	1	tissues	developmental	UBERON:0002113	kidney	NA	NA	NA	NA
+RES00003377	kidney, embryo E15	1	tissues	developmental	UBERON:0002113	kidney	NA	NA	NA	NA
+RES00003378	kidney, embryo E16	1	tissues	developmental	UBERON:0002113	kidney	NA	NA	NA	NA
+RES00003379	kidney, embryo E17	1	tissues	developmental	UBERON:0002113	kidney	NA	NA	NA	NA
+RES00003380	kidney, embryo E18	1	tissues	developmental	UBERON:0002113	kidney	NA	NA	NA	NA
+RES00003381	kidney, neonate N00	1	tissues	developmental	UBERON:0002113	kidney	NA	NA	NA	NA
+RES00003382	kidney, neonate N10	1	tissues	developmental	UBERON:0002113	kidney	NA	NA	NA	NA
+RES00003383	kidney, neonate N20	1	tissues	developmental	UBERON:0002113	kidney	NA	NA	NA	NA
+RES00003384	kidney, neonate N25	1	tissues	developmental	UBERON:0002113	kidney	NA	NA	NA	NA
+RES00003385	kidney, neonate N30	1	tissues	developmental	UBERON:0002113	kidney	NA	NA	NA	NA
+RES00003386	liver sinusoidal endothelial cells, partial hepatectomy, 01week	3	primary cells	time courses	UBERON:0001281	hepatic sinusoid	CL:1000398	endothelial cell of hepatic sinusoid	NA	NA
+RES00003387	liver sinusoidal endothelial cells, partial hepatectomy, 02hr	3	primary cells	time courses	UBERON:0001281	hepatic sinusoid	CL:1000398	endothelial cell of hepatic sinusoid	NA	NA
+RES00003388	liver sinusoidal endothelial cells, partial hepatectomy, 30hr	3	primary cells	time courses	UBERON:0001281	hepatic sinusoid	CL:1000398	endothelial cell of hepatic sinusoid	NA	NA
+RES00003389	liver sinusoidal endothelial cells, partial hepatectomy, 48hr	3	primary cells	time courses	UBERON:0001281	hepatic sinusoid	CL:1000398	endothelial cell of hepatic sinusoid	NA	NA
+RES00003390	liver sinusoidal endothelial cells, sham operation	3	primary cells	time courses	UBERON:0001281	hepatic sinusoid	CL:1000398	endothelial cell of hepatic sinusoid	NA	NA
+RES00003391	liver, adult pregnant day01	1	tissues	developmental	UBERON:0002107	liver	NA	NA	NA	NA
+RES00003392	liver, embryo E12	1	tissues	developmental	UBERON:0002107	liver	NA	NA	NA	NA
+RES00003393	liver, embryo E13	1	tissues	developmental	UBERON:0002107	liver	NA	NA	NA	NA
+RES00003394	liver, embryo E14	1	tissues	developmental	UBERON:0002107	liver	NA	NA	NA	NA
+RES00003395	liver, embryo E15	1	tissues	developmental	UBERON:0002107	liver	NA	NA	NA	NA
+RES00003396	liver, embryo E16	1	tissues	developmental	UBERON:0002107	liver	NA	NA	NA	NA
+RES00003397	liver, embryo E17	1	tissues	developmental	UBERON:0002107	liver	NA	NA	NA	NA
+RES00003398	liver, embryo E18	1	tissues	developmental	UBERON:0002107	liver	NA	NA	NA	NA
+RES00003399	liver, neonate N00	1	tissues	developmental	UBERON:0002107	liver	NA	NA	NA	NA
+RES00003400	liver, neonate N03	1	tissues	developmental	UBERON:0002107	liver	NA	NA	NA	NA
+RES00003401	liver, neonate N06	1	tissues	developmental	UBERON:0002107	liver	NA	NA	NA	NA
+RES00003402	liver, neonate N07	1	tissues	developmental	UBERON:0002107	liver	NA	NA	NA	NA
+RES00003403	liver, neonate N10	1	tissues	developmental	UBERON:0002107	liver	NA	NA	NA	NA
+RES00003404	liver, neonate N20	1	tissues	developmental	UBERON:0002107	liver	NA	NA	NA	NA
+RES00003405	liver, neonate N25	1	tissues	developmental	UBERON:0002107	liver	NA	NA	NA	NA
+RES00003406	liver, neonate N30	1	tissues	developmental	UBERON:0002107	liver	NA	NA	NA	NA
+RES00003407	lung, adult	1	tissues	developmental	UBERON:0002048	lung	NA	NA	NA	NA
+RES00003408	lung, embryo E12	1	tissues	developmental	UBERON:0002048	lung	NA	NA	NA	NA
+RES00003409	lung, embryo E14	1	tissues	developmental	UBERON:0002048	lung	NA	NA	NA	NA
+RES00003410	lung, embryo E15	1	tissues	developmental	UBERON:0002048	lung	NA	NA	NA	NA
+RES00003411	lung, embryo E16	1	tissues	developmental	UBERON:0002048	lung	NA	NA	NA	NA
+RES00003412	lung, embryo E17	1	tissues	developmental	UBERON:0002048	lung	NA	NA	NA	NA
+RES00003413	lung, embryo E18	1	tissues	developmental	UBERON:0002048	lung	NA	NA	NA	NA
+RES00003414	lung, neonate N00	1	tissues	developmental	UBERON:0002048	lung	NA	NA	NA	NA
+RES00003415	lung, neonate N06	1	tissues	developmental	UBERON:0002048	lung	NA	NA	NA	NA
+RES00003416	lung, neonate N07	1	tissues	developmental	UBERON:0002048	lung	NA	NA	NA	NA
+RES00003417	lung, neonate N10	1	tissues	developmental	UBERON:0002048	lung	NA	NA	NA	NA
+RES00003418	lung, neonate N20	1	tissues	developmental	UBERON:0002048	lung	NA	NA	NA	NA
+RES00003419	lung, neonate N25	1	tissues	developmental	UBERON:0002048	lung	NA	NA	NA	NA
+RES00003420	lung, neonate N30	1	tissues	developmental	UBERON:0002048	lung	NA	NA	NA	NA
+RES00003421	macrophage, TB infection, non stimulated BMDM, with Mtb, 028hr(004h after stimulation)	1	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003422	macrophage, TB infection, non stimulated BMDM, with Mtb, 036hr(012h after stimulation)	1	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003423	macrophage, TB infection, non stimulated BMDM, with Mtb, 048hr(024h after stimulation)	1	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003424	macrophage, TB infection, non stimulated BMDM, with Mtb, 072hr(048h after stimulation)	1	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003425	macrophage, TB infection, non stimulated BMDM, with Mtb, 120hr(096h after stimulation)	1	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003426	macrophage, TB infection, non stimulated BMDM, without Mtb, 024hr	1	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003427	macrophage, TB infection, non-stimulated BMDM, with Mtb, 028hr(004h after stimulation)	2	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003428	macrophage, TB infection, non-stimulated BMDM, with Mtb, 036hr(012h after stimulation)	2	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003429	macrophage, TB infection, non-stimulated BMDM, with Mtb, 048hr(024h after stimulation)	2	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003430	macrophage, TB infection, non-stimulated BMDM, with Mtb, 072hr(048h after stimulation)	2	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003431	macrophage, TB infection, non-stimulated BMDM, with Mtb, 120hr(096h after stimulation)	2	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003432	macrophage, TB infection, non-stimulated BMDM, without Mtb, 004hr	1	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003433	macrophage, TB infection, non-stimulated BMDM, without Mtb, 006hr	1	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003434	macrophage, TB infection, non-stimulated BMDM, without Mtb, 012hr	1	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003435	macrophage, TB infection, non-stimulated BMDM, without Mtb, 024hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003436	macrophage, TB infection, non-stimulated BMDM, without Mtb, 028hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003437	macrophage, TB infection, non-stimulated BMDM, without Mtb, 036hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003438	macrophage, TB infection, non-stimulated BMDM, without Mtb, 048hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003439	macrophage, TB infection, non-stimulated BMDM, without Mtb, 072hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003440	macrophage, TB infection, non-stimulated BMDM, without Mtb, 120hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003441	macrophage, TB infection, stimulated BMDM+IFNg(caMph), with Mtb, 028hr(004h after stimulation)	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003442	macrophage, TB infection, stimulated BMDM+IFNg(caMph), with Mtb, 036hr(012h after stimulation)	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003443	macrophage, TB infection, stimulated BMDM+IFNg(caMph), with Mtb, 048hr(024h after stimulation)	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003444	macrophage, TB infection, stimulated BMDM+IFNg(caMph), with Mtb, 072hr(048h after stimulation)	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003445	macrophage, TB infection, stimulated BMDM+IFNg(caMph), with Mtb, 120hr(096h after stimulation)	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003446	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 002hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003447	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 004hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003448	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 006hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003449	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 012hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003450	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 024hr	4	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003451	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 028hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003452	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 036hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003453	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 048hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003454	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 072hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003455	macrophage, TB infection, stimulated BMDM+IFNg(caMph), without Mtb, 120hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003456	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), with Mtb, 028hr(004h after stimulation)	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003457	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), with Mtb, 036hr(012h after stimulation)	2	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003458	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), with Mtb, 048hr(024h after stimulation)	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003459	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), with Mtb, 072hr(048h after stimulation)	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003460	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), with Mtb, 120hr(096h after stimulation)	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003461	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 002hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003462	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 004hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003463	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 006hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003464	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 012hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003465	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 024hr	4	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003466	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 028hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003467	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 036hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003468	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 048hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003469	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 072hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003470	macrophage, TB infection, stimulated BMDM+IL-13(aaMph), without Mtb, 120hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003471	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), with Mtb, 028hr(004h after stimulation)	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003472	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), with Mtb, 036hr(012h after stimulation)	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003473	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), with Mtb, 048hr(024h after stimulation)	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003474	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), with Mtb, 072hr(048h after stimulation)	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003475	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), with Mtb, 120hr(096h after stimulation)	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003476	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 002hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003477	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 004hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003478	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 006hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003479	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 012hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003480	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 024hr	4	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003481	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 028hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003482	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 036hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003483	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 048hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003484	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 072hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003485	macrophage, TB infection, stimulated BMDM+IL-4(aaMph), without Mtb, 120hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003486	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), with Mtb, 028hr(004h after stimulation)	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003487	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), with Mtb, 036hr(012h after stimulation)	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003488	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), with Mtb, 048hr(024h after stimulation)	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003489	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), with Mtb, 072hr(048h after stimulation)	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003490	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), with Mtb, 120hr(096h after stimulation)	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003491	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 002hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003492	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 004hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003493	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 006hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003494	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 012hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003495	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 024hr	4	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003496	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 028hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003497	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 036hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003498	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 048hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003499	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 072hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003500	macrophage, TB infection, stimulated BMDM+IL-4/IL-13(aaMph), without Mtb, 120hr	3	primary cells	time courses	UBERON:0002371	bone marrow	CL:0000235	macrophage	NA	NA
+RES00003501	macrophage, bone marrow derived	4	primary cells	time courses	UBERON:0002371	bone marrow	CL:0002476	bone marrow macrophage	NA	NA
+RES00003502	mammary gland, adult lactating day02	1	tissues	developmental	UBERON:0001911	mammary gland	NA	NA	NA	NA
+RES00003503	mammary gland, adult pregnant day19	1	tissues	developmental	UBERON:0001911	mammary gland	NA	NA	NA	NA
+RES00003504	medulla oblongata, adult	1	tissues	developmental	UBERON:0001896	medulla oblongata	NA	NA	NA	NA
+RES00003505	medulla oblongata, neonate N30	1	tissues	developmental	UBERON:0001896	medulla oblongata	NA	NA	NA	NA
+RES00003506	mouse fibroblast cell line: CRL-1658 NIH/3T3	1	cell lines	snapshot	NA	NA	CL:0000057	fibroblast	NA	NA
+RES00003507	muscle (biceps femoris), neonate N30	1	tissues	developmental	UBERON:0001374	biceps femoris	NA	NA	NA	NA
+RES00003508	natural helper cells, IL2 treated, day15	9	primary cells	snapshot	NA	NA	CL:0002679	natural helper lymphocyte	NA	NA
+RES00003509	natural helper cells, IL33 treated, 01hr	7	primary cells	snapshot	NA	NA	CL:0002679	natural helper lymphocyte	NA	NA
+RES00003510	natural helper cells, IL33 treated, day02	7	primary cells	snapshot	NA	NA	CL:0002679	natural helper lymphocyte	NA	NA
+RES00003511	natural helper cells, naive	8	primary cells	snapshot	NA	NA	CL:0002679	natural helper lymphocyte	NA	NA
+RES00003512	neurospheres - enteric neuron derived	3	primary cells	snapshot	UBERON:0002005	enteric nervous system	CL:0007011	enteric neuron	NA	NA
+RES00003513	neurospheres - parasympathetic neuron derived	3	primary cells	snapshot	UBERON:0023879	neural system	CL:0011102	parasympathetic neuron	NA	NA
+RES00003514	neurospheres - sympathetic neuron derived	3	primary cells	snapshot	UBERON:0023879	neural system	CL:0011103	sympathetic neuron	NA	NA
+RES00003515	olfactory brain, adult	1	tissues	developmental	UBERON:0002264	olfactory bulb	NA	NA	NA	NA
+RES00003516	osteoclast, bone marrow derived	1	primary cells	snapshot	UBERON:0002371	bone marrow	CL:0000092	osteoclast	NA	NA
+RES00003517	ovary, adult	1	tissues	developmental	UBERON:0000992	ovary	NA	NA	NA	NA
+RES00003518	ovary, embryo E18	1	tissues	developmental	UBERON:0000992	ovary	NA	NA	NA	NA
+RES00003519	ovary, neonate N00	1	tissues	developmental	UBERON:0000992	ovary	NA	NA	NA	NA
+RES00003520	oviduct, adult pregnant day01	1	tissues	developmental	UBERON:0000993	oviduct	NA	NA	NA	NA
+RES00003521	pancreas, adult	1	tissues	developmental	UBERON:0001264	pancreas	NA	NA	NA	NA
+RES00003522	pancreas, embryo E14	1	tissues	developmental	UBERON:0001264	pancreas	NA	NA	NA	NA
+RES00003523	pancreas, embryo E15	1	tissues	developmental	UBERON:0001264	pancreas	NA	NA	NA	NA
+RES00003524	pancreas, embryo E16	1	tissues	developmental	UBERON:0001264	pancreas	NA	NA	NA	NA
+RES00003525	pancreas, embryo E17	1	tissues	developmental	UBERON:0001264	pancreas	NA	NA	NA	NA
+RES00003526	pancreas, embryo E18	1	tissues	developmental	UBERON:0001264	pancreas	NA	NA	NA	NA
+RES00003527	pancreas, neonate N00	1	tissues	developmental	UBERON:0001264	pancreas	NA	NA	NA	NA
+RES00003528	pancreas, neonate N01	1	tissues	developmental	UBERON:0001264	pancreas	NA	NA	NA	NA
+RES00003529	pancreas, neonate N02	1	tissues	developmental	UBERON:0001264	pancreas	NA	NA	NA	NA
+RES00003530	pancreas, neonate N16	1	tissues	developmental	UBERON:0001264	pancreas	NA	NA	NA	NA
+RES00003531	pancreas, neonate N25	1	tissues	developmental	UBERON:0001264	pancreas	NA	NA	NA	NA
+RES00003532	pancreas, neonate N30	1	tissues	developmental	UBERON:0001264	pancreas	NA	NA	NA	NA
+RES00003533	pituitary gland, adult	1	tissues	developmental	UBERON:0000007	pituitary gland	NA	NA	NA	NA
+RES00003534	pituitary gland, embryo E12	1	tissues	developmental	UBERON:0000007	pituitary gland	NA	NA	NA	NA
+RES00003535	pituitary gland, embryo E13	1	tissues	developmental	UBERON:0000007	pituitary gland	NA	NA	NA	NA
+RES00003536	pituitary gland, embryo E14	1	tissues	developmental	UBERON:0000007	pituitary gland	NA	NA	NA	NA
+RES00003537	pituitary gland, embryo E15	1	tissues	developmental	UBERON:0000007	pituitary gland	NA	NA	NA	NA
+RES00003538	pituitary gland, embryo E16	1	tissues	developmental	UBERON:0000007	pituitary gland	NA	NA	NA	NA
+RES00003539	pituitary gland, embryo E17	1	tissues	developmental	UBERON:0000007	pituitary gland	NA	NA	NA	NA
+RES00003540	pituitary gland, neonate N00	1	tissues	developmental	UBERON:0000007	pituitary gland	NA	NA	NA	NA
+RES00003541	placenta, adult pregnant day10	1	tissues	developmental	UBERON:0001987	placenta	NA	NA	NA	NA
+RES00003542	placenta, adult pregnant day17	1	tissues	developmental	UBERON:0001987	placenta	NA	NA	NA	NA
+RES00003543	prostate, adult	1	tissues	developmental	UBERON:0002097	skin of body	NA	NA	NA	NA
+RES00003544	skin, adult	1	tissues	developmental	UBERON:0002097	skin of body	NA	NA	NA	NA
+RES00003545	skin, neonate N00	1	tissues	developmental	UBERON:0002097	skin of body	NA	NA	NA	NA
+RES00003546	skin, neonate N03	1	tissues	developmental	UBERON:0002097	skin of body	NA	NA	NA	NA
+RES00003547	skin, neonate N06	1	tissues	developmental	UBERON:0002097	skin of body	NA	NA	NA	NA
+RES00003548	skin, neonate N10	1	tissues	developmental	UBERON:0002097	skin of body	NA	NA	NA	NA
+RES00003549	small intestine, neonate N16	1	tissues	developmental	UBERON:0002108	small intestine	NA	NA	NA	NA
+RES00003550	spinal cord, adult	1	tissues	developmental	UBERON:0002240	spinal cord	NA	NA	NA	NA
+RES00003551	spleen, adult	1	tissues	developmental	UBERON:0002106	spleen	NA	NA	NA	NA
+RES00003552	spleen, embryo E16	1	tissues	developmental	UBERON:0002106	spleen	NA	NA	NA	NA
+RES00003553	spleen, embryo E18	1	tissues	developmental	UBERON:0002106	spleen	NA	NA	NA	NA
+RES00003554	spleen, neonate N10	1	tissues	developmental	UBERON:0002106	spleen	NA	NA	NA	NA
+RES00003555	spleen, neonate N20	1	tissues	developmental	UBERON:0002106	spleen	NA	NA	NA	NA
+RES00003556	spleen, neonate N25	1	tissues	developmental	UBERON:0002106	spleen	NA	NA	NA	NA
+RES00003557	stem cell (cKit+ Sca1- lineage-) KSL	3	primary cells	snapshot	UBERON:0002371	bone marrow	CL:0000034	stem cell	NA	NA
+RES00003558	stomach, adult	1	tissues	developmental	UBERON:0000945	stomach	NA	NA	NA	NA
+RES00003559	stomach, embryo E12	1	tissues	developmental	UBERON:0000945	stomach	NA	NA	NA	NA
+RES00003560	stomach, embryo E15	1	tissues	developmental	UBERON:0000945	stomach	NA	NA	NA	NA
+RES00003561	stomach, embryo E16	1	tissues	developmental	UBERON:0000945	stomach	NA	NA	NA	NA
+RES00003562	stomach, embryo E17	1	tissues	developmental	UBERON:0000945	stomach	NA	NA	NA	NA
+RES00003563	stomach, embryo E18	1	tissues	developmental	UBERON:0000945	stomach	NA	NA	NA	NA
+RES00003564	stomach, neonate N03	1	tissues	developmental	UBERON:0000945	stomach	NA	NA	NA	NA
+RES00003565	stomach, neonate N07	1	tissues	developmental	UBERON:0000945	stomach	NA	NA	NA	NA
+RES00003566	stomach, neonate N25	1	tissues	developmental	UBERON:0000945	stomach	NA	NA	NA	NA
+RES00003567	stomach, neonate N30	1	tissues	developmental	UBERON:0000945	stomach	NA	NA	NA	NA
+RES00003568	submandibular gland, adult	1	tissues	developmental	UBERON:0001736	submandibular gland	NA	NA	NA	NA
+RES00003569	testis, adult	1	tissues	developmental	UBERON:0000473	testis	NA	NA	NA	NA
+RES00003570	testis, embryo E13	1	tissues	developmental	UBERON:0000473	testis	NA	NA	NA	NA
+RES00003571	testis, embryo E15	1	tissues	developmental	UBERON:0000473	testis	NA	NA	NA	NA
+RES00003572	testis, embryo E16	1	tissues	developmental	UBERON:0000473	testis	NA	NA	NA	NA
+RES00003573	testis, embryo E17	1	tissues	developmental	UBERON:0000473	testis	NA	NA	NA	NA
+RES00003574	testis, embryo E18	1	tissues	developmental	UBERON:0000473	testis	NA	NA	NA	NA
+RES00003575	testis, neonate N00	1	tissues	developmental	UBERON:0000473	testis	NA	NA	NA	NA
+RES00003576	testis, neonate N07	1	tissues	developmental	UBERON:0000473	testis	NA	NA	NA	NA
+RES00003577	testis, neonate N10	1	tissues	developmental	UBERON:0000473	testis	NA	NA	NA	NA
+RES00003578	testis, neonate N20	1	tissues	developmental	UBERON:0000473	testis	NA	NA	NA	NA
+RES00003579	testis, neonate N30	1	tissues	developmental	UBERON:0000473	testis	NA	NA	NA	NA
+RES00003580	thymus, adult	1	tissues	developmental	UBERON:0002370	thymus	NA	NA	NA	NA
+RES00003581	thymus, embryo E14	1	tissues	developmental	UBERON:0002370	thymus	NA	NA	NA	NA
+RES00003582	thymus, embryo E15	1	tissues	developmental	UBERON:0002370	thymus	NA	NA	NA	NA
+RES00003583	thymus, embryo E16	1	tissues	developmental	UBERON:0002370	thymus	NA	NA	NA	NA
+RES00003584	thymus, embryo E17	1	tissues	developmental	UBERON:0002370	thymus	NA	NA	NA	NA
+RES00003585	thymus, embryo E18	1	tissues	developmental	UBERON:0002370	thymus	NA	NA	NA	NA
+RES00003586	thymus, neonate N02	1	tissues	developmental	UBERON:0002370	thymus	NA	NA	NA	NA
+RES00003587	thymus, neonate N03	1	tissues	developmental	UBERON:0002370	thymus	NA	NA	NA	NA
+RES00003588	thymus, neonate N06	1	tissues	developmental	UBERON:0002370	thymus	NA	NA	NA	NA
+RES00003589	thymus, neonate N07	1	tissues	developmental	UBERON:0002370	thymus	NA	NA	NA	NA
+RES00003590	thymus, neonate N10	1	tissues	developmental	UBERON:0002370	thymus	NA	NA	NA	NA
+RES00003591	thymus, neonate N20	1	tissues	developmental	UBERON:0002370	thymus	NA	NA	NA	NA
+RES00003592	thymus, neonate N25	1	tissues	developmental	UBERON:0002370	thymus	NA	NA	NA	NA
+RES00003593	thymus, neonate N30	1	tissues	developmental	UBERON:0002370	thymus	NA	NA	NA	NA
+RES00003594	tongue, adult	1	tissues	developmental	UBERON:0001723	tongue	NA	NA	NA	NA
+RES00003595	trophoblast stem cell line B1 differentiation, day00	1	cell lines	time courses	UBERON:0000358	blastocyst	CL:0000351	trophoblast cell	NA	NA
+RES00003596	trophoblast stem cell line B1 differentiation, day01	1	cell lines	time courses	NA	NA	CL:0000819	B-1 B cell	NA	NA
+RES00003597	trophoblast stem cell line B1 differentiation, day02	1	cell lines	time courses	NA	NA	CL:0000819	B-1 B cell	NA	NA
+RES00003598	trophoblast stem cell line B1 differentiation, day03	1	cell lines	time courses	NA	NA	CL:0000819	B-1 B cell	NA	NA
+RES00003599	trophoblast stem cell line B1 differentiation, day04	1	cell lines	time courses	NA	NA	CL:0000819	B-1 B cell	NA	NA
+RES00003600	trophoblast stem cell line B1 differentiation, day05	1	cell lines	time courses	NA	NA	CL:0000819	B-1 B cell	NA	NA
+RES00003601	trophoblast stem cell line B1 differentiation, day06	1	cell lines	time courses	NA	NA	CL:0000819	B-1 B cell	NA	NA
+RES00003602	trophoblast stem cell line R1AB differentiation, day00	1	cell lines	time courses	UBERON:0000358	blastocyst	CL:0000351	trophoblast cell	NA	NA
+RES00003603	trophoblast stem cell line R1AB differentiation, day01	1	cell lines	time courses	NA	NA	NA	NA	NA	NA
+RES00003604	trophoblast stem cell line R1AB differentiation, day02	1	cell lines	time courses	NA	NA	NA	NA	NA	NA
+RES00003605	trophoblast stem cell line R1AB differentiation, day03	1	cell lines	time courses	NA	NA	NA	NA	NA	NA
+RES00003606	trophoblast stem cell line R1AB differentiation, day04	1	cell lines	time courses	NA	NA	NA	NA	NA	NA
+RES00003607	trophoblast stem cell line R1AB differentiation, day05	1	cell lines	time courses	NA	NA	NA	NA	NA	NA
+RES00003608	trophoblast stem cell line R1AB differentiation, day06	1	cell lines	time courses	NA	NA	NA	NA	NA	NA
+RES00003609	trophoblast stem cell line Rybp differentiation, day00	1	cell lines	time courses	UBERON:0000358	blastocyst	CL:0000351	trophoblast cell	NA	NA
+RES00003610	trophoblast stem cell line Rybp differentiation, day01	1	cell lines	time courses	NA	NA	NA	NA	NA	NA
+RES00003611	trophoblast stem cell line Rybp differentiation, day02	1	cell lines	time courses	NA	NA	NA	NA	NA	NA
+RES00003612	trophoblast stem cell line Rybp differentiation, day03	1	cell lines	time courses	NA	NA	NA	NA	NA	NA
+RES00003613	trophoblast stem cell line Rybp differentiation, day04	1	cell lines	time courses	NA	NA	NA	NA	NA	NA
+RES00003614	trophoblast stem cell line Rybp differentiation, day05	1	cell lines	time courses	NA	NA	NA	NA	NA	NA
+RES00003615	trophoblast stem cell line Rybp differentiation, day06	1	cell lines	time courses	NA	NA	NA	NA	NA	NA
+RES00003617	urinary bladder, adult	1	tissues	developmental	UBERON:0001255	urinary bladder	NA	NA	NA	NA
+RES00003618	uterus, adult pregnant day19	1	tissues	developmental	UBERON:0000995	uterus	NA	NA	NA	NA
+RES00003619	uterus, adult	1	tissues	developmental	UBERON:0000995	uterus	NA	NA	NA	NA
+RES00003620	vagina, adult	1	tissues	developmental	UBERON:0000996	vagina	NA	NA	NA	NA
+RES00003621	vesicular gland, adult	1	tissues	developmental	UBERON:0007194	vesicular gland	NA	NA	NA	NA
+RES00003622	visual cortex - Mecp knockout, neonate N15	3	tissues	developmental	UBERON:0000411	visual cortex	NA	NA	NA	NA
+RES00003623	visual cortex - Mecp knockout, neonate N30	3	tissues	developmental	UBERON:0000411	visual cortex	NA	NA	NA	NA
+RES00003624	visual cortex - Mecp knockout, neonate N60-70	3	tissues	developmental	UBERON:0000411	visual cortex	NA	NA	NA	NA
+RES00003625	visual cortex - wildtype, neonate N15	4	tissues	developmental	UBERON:0000411	visual cortex	NA	NA	NA	NA
+RES00003626	visual cortex - wildtype, neonate N30	3	tissues	developmental	UBERON:0000411	visual cortex	NA	NA	NA	NA
+RES00003627	visual cortex - wildtype, neonate N60-70	3	tissues	developmental	UBERON:0000411	visual cortex	NA	NA	NA	NA
+RES00003628	whole body, embryo E11	1	tissues	developmental	NA	NA	NA	NA	NA	NA
+RES00003629	whole body, embryo E12	1	tissues	developmental	NA	NA	NA	NA	NA	NA
+RES00003630	whole body, embryo E13	1	tissues	developmental	NA	NA	NA	NA	NA	NA
+RES00003631	whole body, embryo E14.5	1	tissues	developmental	NA	NA	NA	NA	NA	NA
+RES00003632	whole body, embryo E14	1	tissues	developmental	NA	NA	NA	NA	NA	NA
+RES00003633	whole body, embryo E16	1	tissues	developmental	NA	NA	NA	NA	NA	NA
+RES00003634	whole body, embryo E17.5	30	tissues	developmental	NA	NA	NA	NA	NA	NA
+RES00003635	whole body, embryo E17	1	tissues	developmental	NA	NA	NA	NA	NA	NA
+RES00003636	whole body, embryo E18	1	tissues	developmental	NA	NA	NA	NA	NA	NA
+RES00003637	whole body, neonate N00	1	tissues	developmental	NA	NA	NA	NA	NA	NA
+RES00003638	whole body, neonate N01	1	tissues	developmental	NA	NA	NA	NA	NA	NA
+RES00003639	whole body, neonate N06	1	tissues	developmental	NA	NA	NA	NA	NA	NA
+RES00003640	whole body, neonate N10	1	tissues	developmental	NA	NA	NA	NA	NA	NA
