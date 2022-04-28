@@ -69,6 +69,7 @@
 <script>
   import { mapGetters } from 'vuex';
   import VueSimpleSuggest from 'vue-simple-suggest';
+  import { mapMutations } from 'vuex';
 
   export default {
     components: {
@@ -96,7 +97,7 @@
         return this.activeDataset.sample;
       },
       filters() {
-        return this.dataSetSpecificParameters.filter ?? [];
+        return this.dataSetSpecificParameters?.filter ?? [];
       },
     },
     watch: {
@@ -113,6 +114,9 @@
       });
     },
     methods: {
+      ...mapMutations({
+        setAlertModal: 'set_alert_modal',
+      }),
       initiateParametersDataset() {
         for (const filter of this.filters) {
           const key = filter.column;
@@ -127,8 +131,10 @@
           .then(data => {
             this.autocompleteStaticData = data;
           })
-          .catch(error => {
-            console.log(error);
+          .catch(_error => {
+            this.setAlertModal({
+              msg: 'Failed to get data in Screener View Sample',
+            });
           });
       },
       setAutoComplete() {

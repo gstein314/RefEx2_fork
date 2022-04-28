@@ -1,187 +1,183 @@
 [
   {
-    "dataset": "humanFantom5",
-    "gene": {
-      "key": "ncbiGeneId",
-      "header": "NCBI Gene ID",
-      "item_comparison_example": [
-        {
-          "route": "5460,6657,9314,4609",
-          "label": "Yamanaka Factors (OCT3/4, SOX2, KLF4 and C-MYC-OSKM)"
+    "species": "Human",
+    "search_conditions": [
+      { "label": "Gene Name", "examples": ["transcription factor"] },
+      { "label": "Symbol", "examples": ["ITG"] },
+      { "label": "Summary", "examples": ["Breast cancer"] }
+    ],
+    "datasets": [
+      {
+        "dataset": "humanFantom5",
+        "label": "FANTOM5",
+        "gene": {
+          "key": "ncbiGeneId",
+          "header": "NCBI Gene ID",
+          "item_comparison_example": [
+            {
+              "route": "5460,6657,9314,4609",
+              "label": "Yamanaka Factors (OCT3/4, SOX2, KLF4 and C-MYC-OSKM)"
+            }
+          ]
+        },
+        "sample": {
+          "filter": [
+            {
+              "column": "SampleTypeCategory",
+              "label": "Sample type",
+              "note": "FANTOM5",
+              "is_checkbox": true,
+              "is_displayed": true,
+              "is_ontology": false
+            },
+            {
+              "column": "ExperimentCategory",
+              "label": "Experiment",
+              "note": "FANTOM5",
+              "is_checkbox": true,
+              "is_displayed": false,
+              "is_ontology": false
+            },
+            {
+              "column": "UberonLabel",
+              "label": "Tissue",
+              "note": "UBERON",
+              "is_checkbox": false,
+              "examples": ["skin", "liver"],
+              "is_displayed": true,
+              "is_ontology": true
+            },
+            {
+              "column": "ClLabel",
+              "label": "Cell type",
+              "note": "Cell Ontology",
+              "is_checkbox": false,
+              "examples": ["macrophage", "hepatocyte"],
+              "is_displayed": true,
+              "is_ontology": true
+            },
+            {
+              "column": "NcitLabel",
+              "label": "Disease",
+              "note": "NCI Thesaurus",
+              "is_checkbox": false,
+              "examples": ["osteosarcoma", "Down syndrome"],
+              "is_displayed": true,
+              "is_ontology": true
+            },
+            {
+              "column": "DevelopmentalStage",
+              "label": "Developmental stage",
+              "note": "",
+              "is_checkbox": true,
+              "is_displayed": false,
+              "is_ontology": false
+            },
+            {
+              "column": "Sex",
+              "label": "Sex",
+              "note": "",
+              "is_checkbox": true,
+              "is_displayed": false,
+              "is_ontology": false
+            }
+          ],
+          "item_comparison_example": [
+            {
+              "route": "RES00001676,RES00001677,RES00001678",
+              "label": "Adipocyte differentiation"
+            },
+            {
+              "route": "RES00001672,RES00001673,RES00001674,RES00001675",
+              "label": "Adipocytes from various tissues"
+            },
+            {
+              "route": "RES00001984,RES00001985",
+              "label": "NK T cell leukemia cell line vs NK T cell"
+            }
+          ],
+          "search_conditions": [
+            {
+              "label": "Sample Name",
+              "examples": ["liver", "lung"]
+            }
+          ]
         }
-      ],
-      "search_conditions": [
-        {
-          "label": "Gene Name",
-          "examples": ["transcription factor"]
+      },
+      {
+        "dataset": "gtexV8",
+        "label": "GTEx",
+        "gene": {
+          "key": "ensemblGeneId",
+          "header": "Ensembl Gene ID",
+          "item_comparison_example": [
+            {
+              "route": "ENSG00000204531,ENSG00000181449,ENSG00000136826,ENSG00000136997",
+              "label": "Yamanaka Factors (OCT3/4, SOX2, KLF4 and C-MYC-OSKM)"
+            }
+          ]
         },
-        { "label": "Symbol", "examples": ["ITG"] },
-        { "label": "Summary", "examples": ["Breast cancer"] }
-      ]
-    },
-    "sample": {
-      "filter": [
-        {
-          "column": "SampleTypeCategory",
-          "label": "Sample type",
-          "note": "FANTOM5",
-          "is_checkbox": true,
-          "is_displayed": true,
-          "is_ontology": false
-        },
-        {
-          "column": "ExperimentCategory",
-          "label": "Experiment",
-          "note": "FANTOM5",
-          "is_checkbox": true,
-          "is_displayed": false,
-          "is_ontology": false
-        },
-        {
-          "column": "UberonLabel",
-          "label": "Tissue",
-          "note": "UBERON",
-          "is_checkbox": false,
-          "examples": ["skin", "liver"],
-          "is_displayed": true,
-          "is_ontology": true
-        },
-        {
-          "column": "ClLabel",
-          "label": "Cell type",
-          "note": "Cell Ontology",
-          "is_checkbox": false,
-          "examples": ["macrophage", "hepatocyte"],
-          "is_displayed": true,
-          "is_ontology": true
-        },
-        {
-          "column": "NcitLabel",
-          "label": "Disease",
-          "note": "NCI Thesaurus",
-          "is_checkbox": false,
-          "examples": ["osteosarcoma", "Down syndrome"],
-          "is_displayed": true,
-          "is_ontology": true
-        },
-        {
-          "column": "DevelopmentalStage",
-          "label": "Developmental stage",
-          "note": "",
-          "is_checkbox": true,
-          "is_displayed": false,
-          "is_ontology": false
-        },
-        {
-          "column": "Sex",
-          "label": "Sex",
-          "note": "",
-          "is_checkbox": true,
-          "is_displayed": false,
-          "is_ontology": false
+        "sample": {
+          "filter": [
+            {
+              "column": "Tissue",
+              "label": "Tissue",
+              "note": "",
+              "is_checkbox": true,
+              "is_displayed": true,
+              "is_ontology": false
+            },
+            {
+              "column": "TissueCategory",
+              "label": "Tissue category",
+              "note": "",
+              "is_checkbox": true,
+              "is_displayed": false,
+              "is_ontology": false
+            },
+            {
+              "column": "TissueSubcategory",
+              "label": "Tissue subcategory",
+              "note": "",
+              "is_checkbox": true,
+              "is_displayed": false,
+              "is_ontology": false
+            },
+            {
+              "column": "Sex",
+              "label": "Sex",
+              "note": "",
+              "is_checkbox": true,
+              "is_displayed": true,
+              "is_ontology": false
+            },
+            {
+              "column": "Age",
+              "label": "Age",
+              "note": "",
+              "is_checkbox": true,
+              "is_displayed": true,
+              "is_ontology": false
+            }
+          ],
+          "item_comparison_example": [
+            {
+              "route": "RES00002931,RES00002801,RES00002755,RES00002733,RES00002592,RES00002992,RES00002769,RES00002700,RES00002788,RES00002540,RES00002568,RES00002953",
+              "label": "Lung (comparison among different ages and sexes)"
+            },
+            {
+              "route": "RES00003699,RES00003684",
+              "label": "Sun exposed skin vs Not sun exposed skin"
+            }
+          ],
+          "search_conditions": [
+            {
+              "label": "Sample Name",
+              "examples": ["liver", "lung"]
+            }
+          ]
         }
-      ],
-      "item_comparison_example": [
-        {
-          "route": "RES00001676,RES00001677,RES00001678",
-          "label": "Adipocyte differentiation"
-        },
-        {
-          "route": "RES00001672,RES00001673,RES00001674,RES00001675",
-          "label": "Adipocytes from various tissues"
-        },
-        {
-          "route": "RES00001984,RES00001985",
-          "label": "NK T cell leukemia cell line vs NK T cell"
-        }
-      ],
-      "search_conditions": [
-        {
-          "label": "Sample Name",
-          "examples": ["liver", "lung"]
-        }
-      ]
-    }
-  },
-  {
-    "dataset": "gtexV8",
-    "gene": {
-      "key": "ensemblGeneId",
-      "header": "Ensembl Gene ID",
-      "item_comparison_example": [
-        {
-          "route": "ENSG00000204531,ENSG00000181449,ENSG00000136826,ENSG00000136997",
-          "label": "Yamanaka Factors (OCT3/4, SOX2, KLF4 and C-MYC-OSKM)"
-        }
-      ],
-      "search_conditions": [
-        {
-          "label": "Gene Name",
-          "examples": ["transcription factor"]
-        },
-        { "label": "Symbol", "examples": ["ITG"] },
-        { "label": "Summary", "examples": ["Breast cancer"] }
-      ]
-    },
-    "sample": {
-      "filter": [
-        {
-          "column": "Tissue",
-          "label": "Tissue",
-          "note": "",
-          "is_checkbox": true,
-          "is_displayed": true,
-          "is_ontology": false
-        },
-        {
-          "column": "TissueCategory",
-          "label": "Tissue category",
-          "note": "",
-          "is_checkbox": true,
-          "is_displayed": false,
-          "is_ontology": false
-        },
-        {
-          "column": "TissueSubcategory",
-          "label": "Tissue subcategory",
-          "note": "",
-          "is_checkbox": true,
-          "is_displayed": false,
-          "is_ontology": false
-        },
-        {
-          "column": "Sex",
-          "label": "Sex",
-          "note": "",
-          "is_checkbox": true,
-          "is_displayed": true,
-          "is_ontology": false
-        },
-        {
-          "column": "Age",
-          "label": "Age",
-          "note": "",
-          "is_checkbox": true,
-          "is_displayed": true,
-          "is_ontology": false
-        }
-      ],
-      "item_comparison_example": [
-        {
-          "route": "RES00002931,RES00002801,RES00002755,RES00002733,RES00002592,RES00002992,RES00002769,RES00002700,RES00002788,RES00002540,RES00002568,RES00002953",
-          "label": "Lung (comparison among different ages and sexes)"
-        },
-        {
-          "route": "RES00003699,RES00003684",
-          "label": "Sun exposed skin vs Not sun exposed skin"
-        }
-      ],
-      "search_conditions": [
-        {
-          "label": "Sample Name",
-          "examples": ["liver", "lung"]
-        }
-      ]
-    }
+      }
+    ]
   }
 ]

@@ -15,8 +15,8 @@
 </template>
 <script>
   const sizeMap = new Map([
-    ['homo_sapiens', [24, 62]],
-    ['mus_musculus', [63, 24]],
+    ['Human', [24, 62]],
+    ['Mouse', [63, 24]],
     ['drosophilidae', [36, 18]],
     ['oryza_sativa', [42, 71]],
     ['bombyx_mori', [43, 10]],

@@ -147,8 +147,10 @@
           .then(data => {
             this.data = data;
           })
-          .catch(function (error) {
-            console.log(error);
+          .catch(function (_error) {
+            this.setAlertModal({
+              msg: 'Failed to get data in Modal View Gene',
+            });
           });
 
         this.isLoading = false;
@@ -157,6 +159,7 @@
     methods: {
       ...mapMutations({
         setGeneModal: 'set_gene_modal',
+        setAlertModal: 'set_alert_modal',
       }),
     },
   };

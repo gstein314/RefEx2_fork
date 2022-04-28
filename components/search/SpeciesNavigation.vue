@@ -3,30 +3,27 @@
     <ul class="species_navi">
       <li
         v-for="specie in species"
-        :key="specie.name"
-        :class="{ active: activeSpecie.name === specie.name }"
-        @click="$store.commit('set_specie', specie.name)"
+        :key="specie.species"
+        :class="{
+          active: activeSpecie.species === specie.species,
+        }"
+        @click="$store.commit('set_specie', specie.species)"
       >
-        <icon-base :icon-name="specie.name" />
+        <icon-base :icon-name="specie.species" />
         <div class="specie_wrapper">
-          <p>{{ capitalizeAndTidy(specie.name) }}</p>
+          <p>{{ specie.species }}</p>
           <form>
             <select
-              v-model="selectedProject[specie.name]"
+              v-model="selectedProject[specie.species]"
               class="specie_select"
-              @change="
-                $store.commit(
-                  'set_active_dataset',
-                  selectedProject[specie.name]
-                )
-              "
+              @change="updateActiveDataset(selectedProject[specie.species])"
             >
               <option
-                v-for="(project, index) of projects"
+                v-for="(project, index) of specie.datasets"
                 :key="index"
-                :value="project"
+                :value="project.dataset"
               >
-                {{ project }}
+                {{ project.label }}
               </option>
             </select>
           </form>
@@ -37,9 +34,8 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
+  import { mapGetters, mapMutations } from 'vuex';
   import datasets from '~/refex-sample/datasets.json';
-  import species from '~/static/species.json';
   import IconBase from '~/components/icons/IconBase.vue';
 
   export default {
@@ -48,10 +44,9 @@
     },
     data() {
       return {
-        projects: datasets.map(dataset => dataset.dataset),
-        species,
-        selectedProject: species.reduce((acc, specie) => {
-          acc[specie.name] = datasets[0].dataset;
+        species: datasets,
+        selectedProject: datasets.reduce((acc, specie) => {
+          acc[specie.species] = specie.datasets[0].dataset;
           return acc;
         }, {}),
       };
@@ -62,8 +57,20 @@
       }),
     },
     methods: {
-      capitalizeAndTidy(name) {
-        return this.$firstLetterUppercase(name).replace('_', ' ');
+      ...mapMutations({
+        setSpecie: 'set_specie',
+        setActiveDataset: 'set_active_dataset',
+      }),
+      updateActiveDataset(datasetId) {
+        this.setActiveDataset(
+          this.activeSpecie.datasets.find(
+            dataset => dataset.dataset === datasetId
+          )
+        );
+      },
+      updateSpecie(specieId) {
+        this.setSpecie(specieId);
+        this.updateActiveDataset(this.selectedProject[specieId]);
       },
     },
   };
@@ -82,12 +89,13 @@
         display: grid
         grid-template-columns: auto 1fr
         opacity: .3
+        > .specie_wrapper
+          > form
+            > .specie_select
+              color: $BLACK
         &.active
           color: $MAIN_COLOR
           opacity: 1
-          *
-            opacity: 1
-            color: $MAIN_COLOR
           > .specie_wrapper
             > form
               > .specie_select
@@ -97,6 +105,10 @@
           cursor: pointer
           color: $MAIN_COLOR
           transition: 0.6s
+          > .specie_wrapper
+            > form
+              > .specie_select
+                color: $MAIN_COLOR
         > svg
           align-self: flex-end
         > .specie_wrapper

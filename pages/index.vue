@@ -1,10 +1,21 @@
 <template>
   <div class="index_wrapper">
+    <!-- TODO: remove after testing
+    <button
+      @click="
+        $store.commit('set_alert_modal', {
+          msg: 'PENQE',
+        })
+      "
+    >
+      test
+    </button> -->
     <SpeciesNavigation />
     <FilterNavigation />
     <FilterTab v-for="filter of filters" :key="filter.name" />
     <ModalViewGene />
     <ModalViewCompare />
+    <ModalViewAlert />
   </div>
 </template>
 
@@ -15,6 +26,7 @@
   import FilterNavigation from '~/components/search/FilterNavigation.vue';
   import FilterTab from '~/components/search/FilterTab.vue';
   import filters from '~/static/filters.json';
+  import ModalViewAlert from '~/components/ModalView/ModalViewAlert.vue';
 
   export default {
     components: {
@@ -23,6 +35,7 @@
       SpeciesNavigation,
       FilterNavigation,
       FilterTab,
+      ModalViewAlert,
     },
     data() {
       return {
