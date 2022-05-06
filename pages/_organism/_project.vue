@@ -8,9 +8,11 @@
             @click="setGeneModal(items[0].id)"
           />
           <span class="title">
-            {{ `${infoForMainItem.symbol}` }}
-            <span class="metadata">{{
-              `(${infoForMainItem.name}, GeneID: ${infoForMainItem.id})`
+            {{ `${infoForMainItem.Description}` }}
+            <span v-if="filterType === 'gene'" class="metadata">{{
+              `(${infoForMainItem.name}, ID: ${
+                infoForMainItem[filterType + '_id']
+              })`
             }}</span>
           </span>
         </h1>
@@ -39,7 +41,9 @@
     />
     <ModalViewDisplay
       v-if="isDisplaySettingsOn"
-      @close="toggleDisplaySettings"
+      :filters="filters"
+      @click.native="toggleDisplaySettings"
+      @toggleDisplayOfFilter="toggleDisplayOfFilter"
     />
     <ModalViewFilter />
     <ModalViewGene />
@@ -81,18 +85,20 @@
     },
     // TODO: refactor
     // TODO: add sample option
-    async asyncData({ $axios, query, store }) {
+    async asyncData({ $axios, query, store, route }) {
       let results, ageRange, medianRange;
+      const filterType = route.params?.project;
+      // const filter = query.id.split(/(?<=\/)\w*?(?=\?)/);
       const items = await Promise.all(
         query.id.split(',').map(async (id, index) => {
           const data = await $axios.$get(
-            `api/${store.state.active_filter}/${id}?dataset=${store.state.active_dataset}`
+            `api/${filterType}/${id}?dataset=${store.state.active_dataset.toLowerCase()}&offset=0&limit=10`
           );
-          if (index === 0) results = data.r_inf;
+          if (index === 0) results = data.refex_info;
           return {
             id,
-            info: data.ginf,
-            medianData: data.r_inf.map(x => x.log2_Median),
+            info: data[`${filterType}_info`],
+            medianData: data.refex_info?.map(x => x.LogMedian),
           };
         })
       );
@@ -107,12 +113,18 @@
         }
 
         // set age range
-        const n = createNumberList(result.Age);
-        if (n.find(x => inRange(x, ageRange))) continue;
-        ageRange[1] = n.pop();
+        if ('age' in result) {
+          const n = createNumberList(result.Age);
+          if (n.find(x => inRange(x, ageRange))) continue;
+          ageRange[1] = n.pop();
+        }
       }
       return {
+        filterType,
         items,
+        filters: [...store.getters.active_dataset[filterType]?.filter] || [
+          ...store.getters.active_filter?.filter,
+        ],
         results,
         ageRange,
         medianRange,
@@ -140,10 +152,10 @@
       },
       medianDataBySymbol() {
         return this.results
-          .map(x => x.log2_Median)
+          .map(x => x.LogMedian)
           .reduce((acc, _curr, resultIndex) => {
             const itemToPush = this.items.reduce((obj, item) => {
-              obj[item.info.symbol] = item.medianData[resultIndex];
+              obj[item.id] = item.medianData[resultIndex];
               return obj;
             }, {});
             acc.push(itemToPush);
@@ -173,14 +185,18 @@
       toggleDisplaySettings() {
         this.isDisplaySettingsOn = !this.isDisplaySettingsOn;
       },
+      toggleDisplayOfFilter(arr) {
+        console.log(arr);
+        this.filters = arr;
+      },
       updateResultSort(sort) {
         // reset selectedItem if sort other then median is changed
-        if (sort.key !== 'log2_Median') this.selectedId = this.mainItem.id;
+        if (sort.key !== 'LogMedian') this.selectedId = this.mainItem.id;
         this.resultsSort = sort;
       },
       updateSelectedItem({ id, sortOrder = 'down' }) {
         this.selectedId = id;
-        this.$refs.results.switchSort('log2_Median', sortOrder);
+        this.$refs.results.switchSort('LogMedian', sortOrder);
       },
     },
   };
@@ -194,8 +210,6 @@
       position: sticky
       top: 0
       background-color: #ffffff
-      max-height: 122px
-      overflow: hidden
       z-index: 1
       > .header_title
         margin: 15px 0

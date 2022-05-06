@@ -92,10 +92,6 @@
       toggleDisplaySettings() {
         this.isDisplaySettings = !this.isDisplaySettings;
       },
-      // test() {
-      //   console.log(this.$refs[`${$vnode.key}_search`]);
-      //   this.$refs[`${$vnode.key}_search`].showResults('all');
-      // },
     },
   };
 </script>

@@ -84,7 +84,10 @@ export const mutations = {
     state.compare_modal = !state.compare_modal;
   },
   set_project_filters(state, { ageRange, medianRange }) {
-    const copy = { ...getters.active_filter(state).filters };
+    const copy = {
+      ...(getters.active_filter(state).filters ??
+        getters.active_dataset(state)?.sample?.filter),
+    };
     Object.entries(copy).forEach(([key, value]) => {
       if (['Age', 'log2_Median'].includes(key)) {
         copy[key] = numberFilterObj(

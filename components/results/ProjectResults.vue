@@ -3,28 +3,40 @@
     <thead>
       <tr>
         <table-header
-          v-for="(filter, key) of filters"
-          :id="key"
-          :key="key"
+          id="LogMedian"
           :current-sort="sort"
-          v-bind="filter"
-          :class="key"
+          v-bind="logMedianFilter"
           @switchSort="switchSort"
         >
-          <median-scale v-if="key === 'log2_Median'" />
+          <median-scale />
+        </table-header>
+        <table-header
+          v-for="(filter, filterIndex) of filters"
+          :id="filter.column"
+          :key="`filterIndex-${filterIndex}`"
+          :current-sort="sort"
+          v-bind="filter"
+          :class="filter.column"
+          @switchSort="switchSort"
+        >
         </table-header>
       </tr>
     </thead>
     <tbody>
       <tr v-for="(result, resultIndex) in filteredData" :key="resultIndex">
-        <template v-for="(value, key) of filters">
-          <td v-if="value.isDisplayed" :key="key" :class="value.innerKey">
+        <MedianBar :median-info="result.combinedMedianData" />
+        <template v-for="(filter, filterIndex) of filters">
+          <td
+            v-if="filter.is_displayed"
+            :key="`result-${filterIndex}`"
+            :class="filter.column"
+          >
             <MedianBar
-              v-if="key === 'log2_Median'"
+              v-if="filter.column === 'LogMedian'"
               :median-info="result.combinedMedianData"
             />
             <template v-else>
-              {{ result[key] }}
+              {{ result }}
             </template>
           </td>
         </template>
@@ -39,6 +51,14 @@
 
   const inRange = (x, [min, max]) => {
     return typeof x !== 'number' || (x - min) * (x - max) <= 0;
+  };
+
+  const logMedianFilter = {
+    column: 'LogMedian',
+    label: 'Log Median',
+    is_displayed: true,
+    is_displayed: true,
+    filterModal: '',
   };
 
   const createNumberList = str =>
@@ -64,8 +84,9 @@
     },
     data() {
       return {
+        logMedianFilter,
         sort: {
-          key: 'log2_Median',
+          key: 'LogMedian',
           order: 'down',
         },
       };
@@ -90,7 +111,7 @@
                 const n =
                   key === 'Age'
                     ? createNumberList(result[key])
-                    : key === 'log2_Median'
+                    : key === 'LogMedian'
                     ? Object.values(result.combinedMedianData)
                     : [result[key]];
                 isFiltered =
@@ -110,11 +131,11 @@
           })
           ?.sort((a, b) => {
             const aVal =
-              this.sort.key === 'log2_Median'
+              this.sort.key === 'LogMedian'
                 ? a.combinedMedianData[this.selectedItem]
                 : a[this.sort.key];
             const bVal =
-              this.sort.key === 'log2_Median'
+              this.sort.key === 'LogMedian'
                 ? b.combinedMedianData[this.selectedItem]
                 : b[this.sort.key];
             switch (this.sort?.order) {
@@ -157,3 +178,7 @@
     },
   };
 </script>
+<style lang="sass" scoped>
+  table
+    +table
+</style>

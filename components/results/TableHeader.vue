@@ -1,24 +1,27 @@
 <template>
-  <th v-if="isDisplayed" class="age">
-    <span v-if="subLabel">
-      {{ label }}<br />
-      <span class="small">{{ subLabel }}</span>
-    </span>
-    <template v-else> {{ label }}</template>
-    <slot></slot>
-    <font-awesome-icon
-      :icon="currentSort.key === id ? `sort-${currentSort.order}` : 'sort'"
-      @click="switchSort"
-    />
-    <font-awesome-icon
-      icon="search"
-      :class="{ active: isActiveSearch }"
-      @click="setFilterModal($vnode.key)"
-    />
+  <th v-if="is_displayed" class="label">
+    <div class="inner">
+      <span class="label"> {{ label }} </span>
+
+      <slot></slot>
+      <div class="banner">
+        <span v-if="note" class="tag">{{ note }}</span>
+        <font-awesome-icon
+          :icon="currentSort.key === id ? `sort-${currentSort.order}` : 'sort'"
+          @click="switchSort"
+        />
+        <font-awesome-icon
+          icon="search"
+          :class="{ active: isActiveSearch }"
+          @click="setFilterModal($vnode.key)"
+        />
+      </div>
+    </div>
   </th>
 </template>
 
 <script>
+  /* eslint-disable vue/prop-name-casing */
   import { mapMutations } from 'vuex';
 
   export default {
@@ -32,16 +35,16 @@
         default: '',
       },
       // eslint-disable-next-line vue/require-default-prop
-      subLabel: {
+      note: {
         type: String,
         required: false,
       },
-      innerKey: {
-        type: String,
-        default: '',
+      is_ontology: {
+        type: Boolean,
+        default: false,
       },
       // eslint-disable-next-line vue/require-default-prop
-      isDisplayed: {
+      is_displayed: {
         type: Boolean,
         default: true,
       },
@@ -77,3 +80,19 @@
     },
   };
 </script>
+<style lang="sass" scoped>
+  th > .inner
+    display: grid
+    gap: 0.5rem
+    > .banner
+      display: flex
+      gap: 0.5rem
+      align-items: center
+      svg
+        &[data-icon="sort"]
+          color: $COLOR_10
+        &[data-icon="search"]
+          color: $MAIN_COLOR
+    .tag
+      +ontology_tag
+</style>
