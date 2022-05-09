@@ -15,8 +15,7 @@
         icon="info-circle"
         @click="$emit('showModal', item.id)"
       />
-      {{ item.info.symbol }}
-
+      <span>{{ item.info.Description || item.info.symbol }}</span>
       <font-awesome-icon
         v-if="activeId === item.id && isMedianSort"
         :icon="`sort-amount-${activeSort.order}`"
@@ -46,7 +45,10 @@
     },
     computed: {
       isMedianSort() {
-        return this.activeSort.key === 'log2_Median';
+        return this.activeSort.key === 'LogMedian';
+      },
+      filterType() {
+        return window.location.pathname.split('/')[1];
       },
     },
     methods: {

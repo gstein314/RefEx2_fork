@@ -179,9 +179,6 @@
       +table
       > tbody
         > tr
-          &:hover
-            cursor: pointer
-            background-color: $ACTIVE_COLOR_HOVER
           > td.gene_expression_patterns
             > img
               width: 292px

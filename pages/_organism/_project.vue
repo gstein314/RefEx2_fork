@@ -1,21 +1,19 @@
 <template>
-  <div class="chart_wrapper">
-    <div class="header">
-      <div class="header_title">
-        <h1>
-          <font-awesome-icon
-            icon="info-circle"
-            @click="setGeneModal(items[0].id)"
-          />
-          <span class="title">
-            {{ `${infoForMainItem.symbol}` }}
-            <span class="metadata">{{
-              `(${infoForMainItem.name}, GeneID: ${infoForMainItem.id})`
-            }}</span>
-          </span>
-        </h1>
-        <ComparisonButton />
-      </div>
+  <div class="wrapper">
+    <div ref="chartWrapper" class="chart_wrapper">
+      <h1 class="header_title">
+        <font-awesome-icon
+          icon="info-circle"
+          @click="setGeneModal(items[0].id)"
+        />
+        <span class="title">
+          {{ infoForMainItem.Description || infoForMainItem.name }}
+          <span v-if="filterType === 'gene'" class="metadata">{{
+            `(${infoForMainItem.name}, Gene ID: ${infoForMainItem.id})`
+          }}</span>
+        </span>
+      </h1>
+      <ComparisonButton />
       <item-comparison
         :items="items"
         :active-id="selectedId"
@@ -23,27 +21,28 @@
         @select="updateSelectedItem"
         @showModal="setGeneModal"
       />
-    </div>
-    <div class="display_settings_wrapper">
       <a class="display_settings" @click="toggleDisplaySettings">
         <font-awesome-icon icon="eye" />
         Display settings
       </a>
     </div>
-
-    <project-results
-      ref="results"
-      :results="resultsWithMedianData"
-      :selected-item="selectedItem.info.symbol"
-      @updateSort="updateResultSort"
-    />
     <ModalViewDisplay
       v-if="isDisplaySettingsOn"
-      @close="toggleDisplaySettings"
+      :filters="filters"
+      @click.native="toggleDisplaySettings"
+      @toggleDisplayOfFilter="toggleDisplayOfFilter"
     />
     <ModalViewFilter />
     <ModalViewGene />
     <ModalViewCompare />
+    <project-results
+      ref="results"
+      :height-chart-wrapper="heightChartWrapper"
+      :filters="filters"
+      :results="resultsWithMedianData.slice(1, 20)"
+      :selected-item="selectedId"
+      @updateSort="updateResultSort"
+    />
   </div>
 </template>
 
@@ -81,18 +80,20 @@
     },
     // TODO: refactor
     // TODO: add sample option
-    async asyncData({ $axios, query, store }) {
+    async asyncData({ $axios, query, store, route }) {
       let results, ageRange, medianRange;
+      const filterType = route.params?.project;
+      // const filter = query.id.split(/(?<=\/)\w*?(?=\?)/);
       const items = await Promise.all(
         query.id.split(',').map(async (id, index) => {
           const data = await $axios.$get(
-            `api/${store.state.active_filter}/${id}?dataset=${store.state.active_dataset}`
+            `api/${filterType}/${id}?dataset=${store.state.active_dataset.dataset.toLowerCase()}&offset=0&limit=1`
           );
-          if (index === 0) results = data.r_inf;
+          if (index === 0) results = data.refex_info;
           return {
             id,
-            info: data.ginf,
-            medianData: data.r_inf.map(x => x.log2_Median),
+            info: data[`${filterType}_info`],
+            medianData: data.refex_info?.map(x => x.LogMedian),
           };
         })
       );
@@ -107,12 +108,18 @@
         }
 
         // set age range
-        const n = createNumberList(result.Age);
-        if (n.find(x => inRange(x, ageRange))) continue;
-        ageRange[1] = n.pop();
+        if ('age' in result) {
+          const n = createNumberList(result.Age);
+          if (n.find(x => inRange(x, ageRange))) continue;
+          ageRange[1] = n.pop();
+        }
       }
       return {
+        filterType,
         items,
+        filters:
+          store.getters.active_dataset[filterType]?.filter ??
+          store.getters.filter_by_name(filterType)?.filter,
         results,
         ageRange,
         medianRange,
@@ -126,6 +133,7 @@
           order: 'down',
         },
         isDisplaySettingsOn: false,
+        heightChartWrapper: 200,
       };
     },
     computed: {
@@ -138,12 +146,15 @@
           };
         });
       },
+      sampleIdKey() {
+        return this.filterType === 'gene' ? 'sample_id' : 'id';
+      },
       medianDataBySymbol() {
         return this.results
-          .map(x => x.log2_Median)
+          .map(x => x.LogMedian)
           .reduce((acc, _curr, resultIndex) => {
             const itemToPush = this.items.reduce((obj, item) => {
-              obj[item.info.symbol] = item.medianData[resultIndex];
+              obj[item.id] = item.medianData[resultIndex];
               return obj;
             }, {});
             acc.push(itemToPush);
@@ -154,13 +165,14 @@
         return this.items[0];
       },
       infoForMainItem() {
-        return this.mainItem.info;
+        return this.mainItem?.info;
       },
       selectedItem() {
         return this.items.find(item => item.id === this.selectedId);
       },
     },
     mounted() {
+      this.heightChartWrapper = this.$refs.chartWrapper.clientHeight;
       this.$store.commit('set_project_filters', {
         ageRange: this.ageRange,
         medianRange: this.medianRange,
@@ -173,80 +185,60 @@
       toggleDisplaySettings() {
         this.isDisplaySettingsOn = !this.isDisplaySettingsOn;
       },
+      toggleDisplayOfFilter(arr) {
+        this.filters = arr;
+      },
       updateResultSort(sort) {
         // reset selectedItem if sort other then median is changed
-        if (sort.key !== 'log2_Median') this.selectedId = this.mainItem.id;
+        if (sort.key !== 'LogMedian')
+          this.selectedId = this.mainItem[this.sampleIdKey];
         this.resultsSort = sort;
       },
       updateSelectedItem({ id, sortOrder = 'down' }) {
         this.selectedId = id;
-        this.$refs.results.switchSort('log2_Median', sortOrder);
+        this.$refs.results.switchSort('LogMedian', sortOrder);
       },
     },
   };
 </script>
 
 <style lang="sass">
-  .chart_wrapper
-    min-width: 600px
-    padding: 0 90px
-    > .header
+  .wrapper
+    display: flex
+    min-width: 800px
+    flex-direction: column
+    .chart_wrapper
+      grid-template-columns: 1fr auto
+      grid-template-rows: auto auto
+      gap: 20px
+      padding: 10px 60px
+      display: grid
+      max-width: 100vw
       position: sticky
+      background-color: white
       top: 0
-      background-color: #ffffff
-      max-height: 122px
-      overflow: hidden
       z-index: 1
+      > .comparison_btn
+        margin-left: 0
+        height: fit-content
+        place-self: flex-end
       > .header_title
-        margin: 15px 0
         display: flex
         align-items: flex-start
-        > h1
-          display: flex
-          align-items: flex-start
-          margin: 0
-          > .fa-info-circle
-            color: $MAIN_COLOR
-            font-size: 24px
-            margin-right: 6px
-            margin-top: 4px
-            &:hover
-              cursor: pointer
-          .metadata
-            font-size: 20px
-            display: block
-            margin-top: -2px
-            font-weight: normal
-    > .display_settings_wrapper
-      +display_settings_wrapper
-    > table
-      +table
-      > thead > tr > th:nth-of-type(1),
-      > tbody > tr > td:nth-of-type(1)
-        text-align: left
-      > tbody
-        > tr
-          > td
-            &.median
-              width: 230px
-              padding: 12px 20px 12px 10px
-      > thead > tr > th
-        white-space: nowrap
-        top: 147px
-        &.median
-          padding-right: 20px
-        > svg
+        margin: 0
+        > .fa-info-circle
+          color: $MAIN_COLOR
+          font-size: 24px
+          margin-right: 6px
+          margin-top: 4px
           &:hover
             cursor: pointer
-        > .fa-search
-          color: $MAIN_COLOR
-          font-size: 12px
-          &.active
-            color: $ACTIVE_COLOR
-        > .fa-sort
-          color: $GRAY
-          opacity: .3
-        > .fa-sort-up,
-        > .fa-sort-down
-          color: $MAIN_COLOR
+        .metadata
+          font-size: 20px
+          display: block
+          margin-top: -2px
+          font-weight: normal
+      > .display_settings
+        +display_settings
+        place-self: flex-end
 </style>

@@ -18,7 +18,7 @@
         <span v-if="numberOfItems > 1" class="symbol">{{
           `${symbol}&nbsp;&nbsp;`
         }}</span>
-        {{ medianData.toFixed(2) }}
+        {{ Number(medianData).toFixed(2) }}
       </span>
     </div>
   </div>
@@ -48,6 +48,7 @@
     display: grid
     align-items: center
     border-left: 1px solid $BLACK
+    position: relative
     > .bar
       width: 100%
       height: 2px

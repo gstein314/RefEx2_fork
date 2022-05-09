@@ -1,44 +1,76 @@
 <template>
-  <table>
-    <thead>
-      <tr>
-        <table-header
-          v-for="(filter, key) of filters"
-          :id="key"
-          :key="key"
-          :current-sort="sort"
-          v-bind="filter"
-          :class="key"
-          @switchSort="switchSort"
-        >
-          <median-scale v-if="key === 'log2_Median'" />
-        </table-header>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="(result, resultIndex) in filteredData" :key="resultIndex">
-        <template v-for="(value, key) of filters">
-          <td v-if="value.isDisplayed" :key="key" :class="value.innerKey">
-            <MedianBar
-              v-if="key === 'log2_Median'"
-              :median-info="result.combinedMedianData"
-            />
-            <template v-else>
-              {{ result[key] }}
-            </template>
-          </td>
-        </template>
-      </tr>
-    </tbody>
-  </table>
+  <section class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th
+            v-show="logMedianFilter.is_displayed"
+            :style="{ top: heightChartWrapper + 'px' }"
+          >
+            <table-header
+              id="LogMedian"
+              :current-sort="sort"
+              v-bind="logMedianFilter"
+              @switchSort="switchSort"
+            >
+              <median-scale />
+            </table-header>
+          </th>
+
+          <th
+            v-for="(filter, filterIndex) of filters"
+            v-show="filter.is_displayed"
+            :key="`filterIndex-${filterIndex}`"
+            :style="{ top: heightChartWrapper + 'px' }"
+          >
+            <table-header
+              :id="filter.column"
+              :current-sort="sort"
+              v-bind="filter"
+              :class="filter.column"
+              @switchSort="switchSort"
+            >
+            </table-header>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(result, resultIndex) in filteredData" :key="resultIndex">
+          <MedianBar :median-info="result.combinedMedianData" />
+          <template v-for="(filter, filterIndex) of filters">
+            <td
+              v-if="filter.is_displayed"
+              :key="`result-${filterIndex}`"
+              :class="filter.column"
+            >
+              <MedianBar
+                v-if="filter.column === 'LogMedian'"
+                :median-info="result.combinedMedianData"
+              />
+              <template v-else>
+                {{ result[filter.column] }}
+              </template>
+            </td>
+          </template>
+        </tr>
+      </tbody>
+    </table>
+  </section>
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
   import TableHeader from '~/components/results/TableHeader.vue';
 
   const inRange = (x, [min, max]) => {
     return typeof x !== 'number' || (x - min) * (x - max) <= 0;
+  };
+
+  const logMedianFilter = {
+    column: 'LogMedian',
+    label: 'Log Median',
+    is_displayed: true,
+    is_displayed: true,
+    filterModal: '',
   };
 
   const createNumberList = str =>
@@ -49,7 +81,6 @@
 
   export default {
     components: {
-      // MedianBar,
       TableHeader,
     },
     props: {
@@ -57,24 +88,27 @@
         type: Array,
         default: () => [],
       },
+      filters: { type: Array, default: () => [] },
       selectedItem: {
         type: String,
         default: '',
       },
+      heightChartWrapper: {
+        type: Number,
+        default: 200,
+      },
     },
     data() {
       return {
+        logMedianFilter,
         sort: {
-          key: 'log2_Median',
+          key: 'LogMedian',
           order: 'down',
         },
       };
     },
 
     computed: {
-      ...mapGetters({
-        filters: 'project_filters',
-      }),
       filteredData() {
         return this.results
           .filter(result => {
@@ -90,7 +124,7 @@
                 const n =
                   key === 'Age'
                     ? createNumberList(result[key])
-                    : key === 'log2_Median'
+                    : key === 'LogMedian'
                     ? Object.values(result.combinedMedianData)
                     : [result[key]];
                 isFiltered =
@@ -110,11 +144,11 @@
           })
           ?.sort((a, b) => {
             const aVal =
-              this.sort.key === 'log2_Median'
+              this.sort.key === 'LogMedian'
                 ? a.combinedMedianData[this.selectedItem]
                 : a[this.sort.key];
             const bVal =
-              this.sort.key === 'log2_Median'
+              this.sort.key === 'LogMedian'
                 ? b.combinedMedianData[this.selectedItem]
                 : b[this.sort.key];
             switch (this.sort?.order) {
@@ -157,3 +191,10 @@
     },
   };
 </script>
+<style lang="sass" scoped>
+  .table-wrapper
+    display: flex
+    margin-left: 45px
+    table
+      +table
+</style>

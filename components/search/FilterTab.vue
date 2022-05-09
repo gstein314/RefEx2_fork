@@ -1,11 +1,25 @@
 <template>
   <div v-show="isActive" class="filter_tab">
     <main>
-      <SearchBar :key="`${$vnode.key}_search`" />
+      <SearchBar
+        :key="`${$vnode.key}_search`"
+        :ref="`${$vnode.key}_search`"
+        @updateScreener="setTableDataIsSameAsScreener(false)"
+        @updateResults="setTableDataIsSameAsScreener(true)"
+      />
       <div class="results_num_wrapper">
         <div class="results_num_inner">
           <h2>Estimated Results</h2>
           <p class="results_num">{{ resultsNum }}</p>
+          <button
+            class="find_results_btn"
+            :class="{ update: isNewResult }"
+            @click="$refs[`${$vnode.key}_search`].showResults('all')"
+          >
+            <font-awesome-icon icon="search" />
+            {{ isNewResult ? 'Update' : 'Find' }}
+            {{ $vnode.key }}s
+          </button>
         </div>
       </div>
     </main>
@@ -32,6 +46,7 @@
     },
     data() {
       return {
+        tableDataIsSameAsScreener: true,
         isDisplaySettings: false,
         filters: this.$store.getters.active_dataset[this.$vnode.key].filter || [
           ...this.$store.getters.active_filter.filter,
@@ -44,11 +59,17 @@
         resultsByName: 'results_by_name',
         filterByName: 'filter_by_name',
       }),
+      isNewResult() {
+        return !this.tableDataIsSameAsScreener && this.resultTableLength > 0;
+      },
       isActive() {
         return this.$vnode.key === this.$store.state.active_filter;
       },
       resultsNum() {
         return this.resultsByName(this.$vnode.key).results_num;
+      },
+      resultTableLength() {
+        return this.resultsByName(this.$vnode.key).results.length;
       },
     },
     watch: {
@@ -59,6 +80,12 @@
       },
     },
     methods: {
+      updateResults(length = 0) {
+        this.setTableDataIsSameAsScreener(length > 0);
+      },
+      setTableDataIsSameAsScreener(bool = false) {
+        this.tableDataIsSameAsScreener = bool;
+      },
       toggleDisplayOfFilter(arr) {
         this.filters = arr;
       },
@@ -89,10 +116,4 @@
             margin: 18px 0 14px
           > button
             +button
-            opacity: .3
-            pointer-events: none
-            transition: opacity .3s
-            &.active
-              opacity: 1
-              pointer-events: initial
 </style>
