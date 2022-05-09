@@ -1,25 +1,21 @@
 <template>
-  <th v-if="is_displayed" class="label">
-    <div class="inner" :class="{ '-column': note }">
-      <span class="label"> {{ label }} </span>
+  <div class="inner" :class="{ '-column': note }">
+    <span class="label"> {{ label }} </span>
+    <div class="details">
+      <span v-if="note" class="tag">{{ note }}</span>
 
-      <div class="details">
-        <span v-if="note" class="tag">{{ note }}</span>
-
-        <font-awesome-icon
-          :icon="currentSort.key === id ? `sort-${currentSort.order}` : 'sort'"
-          @click="switchSort"
-        />
-        <font-awesome-icon
-          icon="search"
-          :class="{ active: isActiveSearch }"
-          @click="setFilterModal($vnode.key)"
-        />
-      </div>
-
-      <slot></slot>
+      <font-awesome-icon
+        :icon="currentSort.key === id ? `sort-${currentSort.order}` : 'sort'"
+        @click="switchSort"
+      />
+      <font-awesome-icon
+        icon="search"
+        :class="{ active: isActiveSearch }"
+        @click="setFilterModal($vnode.key)"
+      />
     </div>
-  </th>
+    <slot></slot>
+  </div>
 </template>
 
 <script>
@@ -65,6 +61,9 @@
       },
     },
     computed: {
+      height() {
+        return this.heightChartWrapper + 'px';
+      },
       isActiveSearch() {
         return this.numberValue
           ? this.filterModal[0] !== this.numberValue.min ||
@@ -74,8 +73,6 @@
     },
     methods: {
       switchSort() {
-        // console.log('switchSort');
-        // console.log(this.id);
         this.$emit('switchSort', this.id);
       },
       ...mapMutations({
@@ -85,7 +82,7 @@
   };
 </script>
 <style lang="sass" scoped>
-  th > .inner
+  .inner
     display: grid
     gap: 0.5rem
     grid-template-columns: auto 1fr
@@ -97,10 +94,16 @@
       gap: 0.5rem
       align-items: center
       svg
+        &:hover
+          cursor: pointer
         &[data-icon="sort"]
-          color: $COLOR_10
+          color: $GRAY
+          opacity: .3
         &[data-icon="search"]
+          font-size: 12px
           color: $MAIN_COLOR
+          &.active
+            color: $ACTIVE_COLOR
     .tag
       +ontology_tag
       width: fit-content

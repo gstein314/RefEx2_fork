@@ -1,48 +1,61 @@
 <template>
-  <table>
-    <thead>
-      <tr>
-        <table-header
-          id="LogMedian"
-          :current-sort="sort"
-          v-bind="logMedianFilter"
-          @switchSort="switchSort"
-        >
-          <median-scale />
-        </table-header>
-        <table-header
-          v-for="(filter, filterIndex) of filters"
-          :id="filter.column"
-          :key="`filterIndex-${filterIndex}`"
-          :current-sort="sort"
-          v-bind="filter"
-          :class="filter.column"
-          @switchSort="switchSort"
-        >
-        </table-header>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="(result, resultIndex) in filteredData" :key="resultIndex">
-        <MedianBar :median-info="result.combinedMedianData" />
-        <template v-for="(filter, filterIndex) of filters">
-          <td
-            v-if="filter.is_displayed"
-            :key="`result-${filterIndex}`"
-            :class="filter.column"
+  <section class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th
+            v-show="logMedianFilter.is_displayed"
+            :style="{ top: heightChartWrapper + 'px' }"
           >
-            <MedianBar
-              v-if="filter.column === 'LogMedian'"
-              :median-info="result.combinedMedianData"
-            />
-            <template v-else>
-              {{ result[filter.column] }}
-            </template>
-          </td>
-        </template>
-      </tr>
-    </tbody>
-  </table>
+            <table-header
+              id="LogMedian"
+              :current-sort="sort"
+              v-bind="logMedianFilter"
+              @switchSort="switchSort"
+            >
+              <median-scale />
+            </table-header>
+          </th>
+
+          <th
+            v-for="(filter, filterIndex) of filters"
+            v-show="filter.is_displayed"
+            :key="`filterIndex-${filterIndex}`"
+            :style="{ top: heightChartWrapper + 'px' }"
+          >
+            <table-header
+              :id="filter.column"
+              :current-sort="sort"
+              v-bind="filter"
+              :class="filter.column"
+              @switchSort="switchSort"
+            >
+            </table-header>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(result, resultIndex) in filteredData" :key="resultIndex">
+          <MedianBar :median-info="result.combinedMedianData" />
+          <template v-for="(filter, filterIndex) of filters">
+            <td
+              v-if="filter.is_displayed"
+              :key="`result-${filterIndex}`"
+              :class="filter.column"
+            >
+              <MedianBar
+                v-if="filter.column === 'LogMedian'"
+                :median-info="result.combinedMedianData"
+              />
+              <template v-else>
+                {{ result[filter.column] }}
+              </template>
+            </td>
+          </template>
+        </tr>
+      </tbody>
+    </table>
+  </section>
 </template>
 
 <script>
@@ -68,7 +81,6 @@
 
   export default {
     components: {
-      // MedianBar,
       TableHeader,
     },
     props: {
@@ -80,6 +92,10 @@
       selectedItem: {
         type: String,
         default: '',
+      },
+      heightChartWrapper: {
+        type: Number,
+        default: 200,
       },
     },
     data() {
@@ -176,6 +192,9 @@
   };
 </script>
 <style lang="sass" scoped>
-  table
-    +table
+  .table-wrapper
+    display: flex
+    margin-left: 45px
+    table
+      +table
 </style>

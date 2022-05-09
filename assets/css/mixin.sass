@@ -109,7 +109,7 @@ $TOOLTIP_LAYER: 2
         text-align: left
         padding: 8px 0 6px 10px
         background-color: #ffffff
-        z-index: 2
+        z-index: 1
         .small
           font-weight: normal
           font-size: 12px
@@ -217,6 +217,9 @@ $TOOLTIP_LAYER: 2
   z-index: 1
   word-break: keep-all
   > .display_settings
+    +display_settings
+
+@mixin display_settings
     color: $MAIN_COLOR
     text-decoration: underline
     margin: 5px 0

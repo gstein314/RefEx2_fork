@@ -1,21 +1,19 @@
 <template>
-  <div class="chart_wrapper">
-    <div class="header">
-      <div class="header_title">
-        <h1>
-          <font-awesome-icon
-            icon="info-circle"
-            @click="setGeneModal(items[0].id)"
-          />
-          <span class="title">
-            {{ infoForMainItem.Description || infoForMainItem.name }}
-            <span v-if="filterType === 'gene'" class="metadata">{{
-              `(${infoForMainItem.name}, Gene ID: ${infoForMainItem.id})`
-            }}</span>
-          </span>
-        </h1>
-        <ComparisonButton />
-      </div>
+  <div class="wrapper">
+    <div ref="chartWrapper" class="chart_wrapper">
+      <h1 class="header_title">
+        <font-awesome-icon
+          icon="info-circle"
+          @click="setGeneModal(items[0].id)"
+        />
+        <span class="title">
+          {{ infoForMainItem.Description || infoForMainItem.name }}
+          <span v-if="filterType === 'gene'" class="metadata">{{
+            `(${infoForMainItem.name}, Gene ID: ${infoForMainItem.id})`
+          }}</span>
+        </span>
+      </h1>
+      <ComparisonButton />
       <item-comparison
         :items="items"
         :active-id="selectedId"
@@ -23,21 +21,11 @@
         @select="updateSelectedItem"
         @showModal="setGeneModal"
       />
-    </div>
-    <div class="display_settings_wrapper">
       <a class="display_settings" @click="toggleDisplaySettings">
         <font-awesome-icon icon="eye" />
         Display settings
       </a>
     </div>
-
-    <project-results
-      ref="results"
-      :filters="filters"
-      :results="resultsWithMedianData.slice(1, 20)"
-      :selected-item="selectedId"
-      @updateSort="updateResultSort"
-    />
     <ModalViewDisplay
       v-if="isDisplaySettingsOn"
       :filters="filters"
@@ -47,6 +35,14 @@
     <ModalViewFilter />
     <ModalViewGene />
     <ModalViewCompare />
+    <project-results
+      ref="results"
+      :height-chart-wrapper="heightChartWrapper"
+      :filters="filters"
+      :results="resultsWithMedianData.slice(1, 20)"
+      :selected-item="selectedId"
+      @updateSort="updateResultSort"
+    />
   </div>
 </template>
 
@@ -137,6 +133,7 @@
           order: 'down',
         },
         isDisplaySettingsOn: false,
+        heightChartWrapper: 200,
       };
     },
     computed: {
@@ -175,6 +172,7 @@
       },
     },
     mounted() {
+      this.heightChartWrapper = this.$refs.chartWrapper.clientHeight;
       this.$store.commit('set_project_filters', {
         ageRange: this.ageRange,
         medianRange: this.medianRange,
@@ -192,7 +190,6 @@
       },
       updateResultSort(sort) {
         // reset selectedItem if sort other then median is changed
-        // console.log(sort);
         if (sort.key !== 'LogMedian')
           this.selectedId = this.mainItem[this.sampleIdKey];
         this.resultsSort = sort;
@@ -206,64 +203,42 @@
 </script>
 
 <style lang="sass">
-  .chart_wrapper
-    min-width: 600px
-    padding: 0 90px
-    > .header
+  .wrapper
+    display: flex
+    min-width: 800px
+    flex-direction: column
+    .chart_wrapper
+      grid-template-columns: 1fr auto
+      grid-template-rows: auto auto
+      gap: 20px
+      padding: 10px 60px
+      display: grid
+      max-width: 100vw
       position: sticky
+      background-color: white
       top: 0
-      background-color: #ffffff
       z-index: 1
+      > .comparison_btn
+        margin-left: 0
+        height: fit-content
+        place-self: flex-end
       > .header_title
-        margin: 15px 0
         display: flex
         align-items: flex-start
-        > h1
-          display: flex
-          align-items: flex-start
-          margin: 0
-          > .fa-info-circle
-            color: $MAIN_COLOR
-            font-size: 24px
-            margin-right: 6px
-            margin-top: 4px
-            &:hover
-              cursor: pointer
-          .metadata
-            font-size: 20px
-            display: block
-            margin-top: -2px
-            font-weight: normal
-    > .display_settings_wrapper
-      +display_settings_wrapper
-    > table
-      +table
-      > thead > tr > th:nth-of-type(1),
-      > tbody > tr > td:nth-of-type(1)
-        text-align: left
-      > tbody
-        > tr
-          > td
-            &.median
-              width: 230px
-              padding: 12px 20px 12px 10px
-      > thead > tr > th
-        white-space: nowrap
-        top: 147px
-        &.median
-          padding-right: 20px
-        > svg
+        margin: 0
+        > .fa-info-circle
+          color: $MAIN_COLOR
+          font-size: 24px
+          margin-right: 6px
+          margin-top: 4px
           &:hover
             cursor: pointer
-        > .fa-search
-          color: $MAIN_COLOR
-          font-size: 12px
-          &.active
-            color: $ACTIVE_COLOR
-        > .fa-sort
-          color: $GRAY
-          opacity: .3
-        > .fa-sort-up,
-        > .fa-sort-down
-          color: $MAIN_COLOR
+        .metadata
+          font-size: 20px
+          display: block
+          margin-top: -2px
+          font-weight: normal
+      > .display_settings
+        +display_settings
+        place-self: flex-end
 </style>
