@@ -36,7 +36,7 @@
               :median-info="result.combinedMedianData"
             />
             <template v-else>
-              {{ result }}
+              {{ result[filter.column] }}
             </template>
           </td>
         </template>
@@ -46,7 +46,6 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
   import TableHeader from '~/components/results/TableHeader.vue';
 
   const inRange = (x, [min, max]) => {
@@ -77,6 +76,7 @@
         type: Array,
         default: () => [],
       },
+      filters: { type: Array, default: () => [] },
       selectedItem: {
         type: String,
         default: '',
@@ -93,9 +93,6 @@
     },
 
     computed: {
-      ...mapGetters({
-        filters: 'project_filters',
-      }),
       filteredData() {
         return this.results
           .filter(result => {

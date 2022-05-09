@@ -8,11 +8,9 @@
             @click="setGeneModal(items[0].id)"
           />
           <span class="title">
-            {{ `${infoForMainItem.Description}` }}
+            {{ infoForMainItem.Description || infoForMainItem.name }}
             <span v-if="filterType === 'gene'" class="metadata">{{
-              `(${infoForMainItem.name}, ID: ${
-                infoForMainItem[filterType + '_id']
-              })`
+              `(${infoForMainItem.name}, Gene ID: ${infoForMainItem.id})`
             }}</span>
           </span>
         </h1>
@@ -35,8 +33,9 @@
 
     <project-results
       ref="results"
-      :results="resultsWithMedianData"
-      :selected-item="selectedItem.info.symbol"
+      :filters="filters"
+      :results="resultsWithMedianData.slice(1, 20)"
+      :selected-item="selectedId"
       @updateSort="updateResultSort"
     />
     <ModalViewDisplay
@@ -92,7 +91,7 @@
       const items = await Promise.all(
         query.id.split(',').map(async (id, index) => {
           const data = await $axios.$get(
-            `api/${filterType}/${id}?dataset=${store.state.active_dataset.toLowerCase()}&offset=0&limit=10`
+            `api/${filterType}/${id}?dataset=${store.state.active_dataset.dataset.toLowerCase()}&offset=0&limit=1`
           );
           if (index === 0) results = data.refex_info;
           return {
@@ -122,9 +121,9 @@
       return {
         filterType,
         items,
-        filters: [...store.getters.active_dataset[filterType]?.filter] || [
-          ...store.getters.active_filter?.filter,
-        ],
+        filters:
+          store.getters.active_dataset[filterType]?.filter ??
+          store.getters.filter_by_name(filterType)?.filter,
         results,
         ageRange,
         medianRange,
@@ -150,6 +149,9 @@
           };
         });
       },
+      sampleIdKey() {
+        return this.filterType === 'gene' ? 'sample_id' : 'id';
+      },
       medianDataBySymbol() {
         return this.results
           .map(x => x.LogMedian)
@@ -166,7 +168,7 @@
         return this.items[0];
       },
       infoForMainItem() {
-        return this.mainItem.info;
+        return this.mainItem?.info;
       },
       selectedItem() {
         return this.items.find(item => item.id === this.selectedId);
@@ -186,12 +188,13 @@
         this.isDisplaySettingsOn = !this.isDisplaySettingsOn;
       },
       toggleDisplayOfFilter(arr) {
-        console.log(arr);
         this.filters = arr;
       },
       updateResultSort(sort) {
         // reset selectedItem if sort other then median is changed
-        if (sort.key !== 'LogMedian') this.selectedId = this.mainItem.id;
+        // console.log(sort);
+        if (sort.key !== 'LogMedian')
+          this.selectedId = this.mainItem[this.sampleIdKey];
         this.resultsSort = sort;
       },
       updateSelectedItem({ id, sortOrder = 'down' }) {

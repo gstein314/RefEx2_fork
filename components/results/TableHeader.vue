@@ -1,11 +1,11 @@
 <template>
   <th v-if="is_displayed" class="label">
-    <div class="inner">
+    <div class="inner" :class="{ '-column': note }">
       <span class="label"> {{ label }} </span>
 
-      <slot></slot>
-      <div class="banner">
+      <div class="details">
         <span v-if="note" class="tag">{{ note }}</span>
+
         <font-awesome-icon
           :icon="currentSort.key === id ? `sort-${currentSort.order}` : 'sort'"
           @click="switchSort"
@@ -16,6 +16,8 @@
           @click="setFilterModal($vnode.key)"
         />
       </div>
+
+      <slot></slot>
     </div>
   </th>
 </template>
@@ -72,6 +74,8 @@
     },
     methods: {
       switchSort() {
+        // console.log('switchSort');
+        // console.log(this.id);
         this.$emit('switchSort', this.id);
       },
       ...mapMutations({
@@ -84,7 +88,11 @@
   th > .inner
     display: grid
     gap: 0.5rem
-    > .banner
+    grid-template-columns: auto 1fr
+    grid-template-rows: auto 1fr
+    &.-column
+      grid-template-columns: 1fr
+    > .details
       display: flex
       gap: 0.5rem
       align-items: center
@@ -95,4 +103,5 @@
           color: $MAIN_COLOR
     .tag
       +ontology_tag
+      width: fit-content
 </style>
