@@ -125,16 +125,22 @@
       // set filters
       // In case of Gene, use dataset filters (sample values)
       // In case of Sample, use fixed gene filters with exception of geneDataFromGeneInfo (gene values)
-      const geneDataFromGeneInfo = [
-        'annotation',
-        'gene expression patterns',
-        'geneid',
-      ];
+      const geneDataFromGeneInfo = ['annotation', 'gene expression patterns'];
+      const infoFromCurrentDataset = store.getters.active_dataset;
       const filters = [
         ...(filterType === 'gene'
-          ? store.getters.active_dataset['sample']['filter']
+          ? infoFromCurrentDataset['sample']['filter']
           : store.getters.filter_by_name('gene')?.filter || []),
       ].filter(x => !geneDataFromGeneInfo.includes(x.column));
+
+      let geneIdIndex = filters.findIndex(x => x.column === 'geneid');
+
+      if (geneIdIndex)
+        filters[geneIdIndex] = {
+          ...filters[geneIdIndex],
+          column: infoFromCurrentDataset.gene.key,
+          label: infoFromCurrentDataset.gene.header,
+        };
       filters.splice(1, 0, logMedianFilter);
 
       return {
