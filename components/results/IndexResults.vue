@@ -16,6 +16,7 @@
         </a>
       </div>
     </div>
+
     <table>
       <thead>
         <tr>
@@ -36,8 +37,18 @@
         </tr>
       </thead>
       <tbody>
+        <td
+          v-if="!tableDataIsSameAsScreener"
+          class="error"
+          :colspan="filters.filter(x => x.is_displayed).length"
+        >
+          <font-awesome-icon icon="exclamation-triangle" />
+          Please press the 'Find {{ filterType }}s' button to update the results
+          to the current screener settings.
+        </td>
         <tr
           v-for="(result, resultIndex) in results"
+          v-else
           :key="`result_${resultIndex}`"
           @click="$router.push(routeToProjectPage(result[keyForID]))"
         >
@@ -95,6 +106,10 @@
       filters: {
         type: Array,
         default: () => [],
+      },
+      tableDataIsSameAsScreener: {
+        type: Boolean,
+        default: true,
       },
     },
     data() {
@@ -165,6 +180,7 @@
   .results_wrapper
     min-width: 600px
     padding: 0 90px
+
     > .results_title_wrapper
       display: flex
       width: 100%
@@ -178,6 +194,10 @@
     > table
       +table
       > tbody
+        > .error
+          color: $ERROR_COLOR
+          padding: 40px
+          text-align: center
         > tr
           > td.gene_expression_patterns
             > img
