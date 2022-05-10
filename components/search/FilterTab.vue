@@ -45,7 +45,7 @@
     },
     data() {
       return {
-        tableDataIsSameAsScreener: true,
+        tableDataIsSameAsScreener: false,
         isDisplaySettings: false,
         filters: this.$store.getters.active_dataset[this.$vnode.key].filter || [
           ...this.$store.getters.active_filter.filter,
