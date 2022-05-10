@@ -11,6 +11,7 @@
       @click="select(item.id)"
     >
       <font-awesome-icon
+        v-if="displayInfoButton"
         class="info"
         icon="info-circle"
         @click="$emit('showModal', item.id)"
@@ -41,6 +42,10 @@
           key: '',
           order: 'down',
         }),
+      },
+      displayInfoButton: {
+        type: Boolean,
+        default: false,
       },
     },
     computed: {

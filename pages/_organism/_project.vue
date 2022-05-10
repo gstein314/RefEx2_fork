@@ -3,6 +3,7 @@
     <div ref="chartWrapper" class="chart_wrapper">
       <h1 class="header_title">
         <font-awesome-icon
+          v-if="filterType === 'gene'"
           icon="info-circle"
           @click="setGeneModal(items[0].id)"
         />
@@ -18,9 +19,11 @@
         :items="items"
         :active-id="selectedId"
         :active-sort="resultsSort"
+        :display-info-button="filterType === 'gene'"
         @select="updateSelectedItem"
         @showModal="setGeneModal"
-      />
+      >
+      </item-comparison>
       <a class="display_settings" @click="toggleDisplaySettings">
         <font-awesome-icon icon="eye" />
         Display settings
@@ -149,7 +152,6 @@
         filters,
         results,
         ageRange,
-
         medianRange,
         selectedId: items[0].id,
       };

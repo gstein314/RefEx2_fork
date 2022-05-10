@@ -147,7 +147,7 @@
           .then(data => {
             this.data = data;
           })
-          .catch(function (_error) {
+          .catch(_error => {
             this.setAlertModal({
               msg: 'Failed to get data in Modal View Gene',
             });
