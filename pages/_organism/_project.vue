@@ -66,6 +66,14 @@
       .map(x => parseInt(x) || 'out of filter bounds')
       .sort();
 
+  const logMedianFilter = {
+    column: 'LogMedian',
+    label: 'Log Median',
+    is_displayed: true,
+    is_displayed: true,
+    filterModal: '',
+  };
+
   export default {
     components: {
       ItemComparison,
@@ -114,14 +122,28 @@
           ageRange[1] = n.pop();
         }
       }
+      // set filters
+      // In case of Gene, use dataset filters (sample values)
+      // In case of Sample, use fixed gene filters with exception of geneDataFromGeneInfo (gene values)
+      const geneDataFromGeneInfo = [
+        'annotation',
+        'gene expression patterns',
+        'geneid',
+      ];
+      const filters = [
+        ...(filterType === 'gene'
+          ? store.getters.active_dataset['sample']['filter']
+          : store.getters.filter_by_name('gene')?.filter || []),
+      ].filter(x => !geneDataFromGeneInfo.includes(x.column));
+      filters.splice(1, 0, logMedianFilter);
+
       return {
         filterType,
         items,
-        filters:
-          store.getters.active_dataset[filterType]?.filter ??
-          store.getters.filter_by_name(filterType)?.filter,
+        filters,
         results,
         ageRange,
+
         medianRange,
         selectedId: items[0].id,
       };

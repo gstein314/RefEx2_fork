@@ -4,20 +4,6 @@
       <thead>
         <tr>
           <th
-            v-show="logMedianFilter.is_displayed"
-            :style="{ top: heightChartWrapper + 'px' }"
-          >
-            <table-header
-              id="LogMedian"
-              :current-sort="sort"
-              v-bind="logMedianFilter"
-              @switchSort="switchSort"
-            >
-              <median-scale />
-            </table-header>
-          </th>
-
-          <th
             v-for="(filter, filterIndex) of filters"
             v-show="filter.is_displayed"
             :key="`filterIndex-${filterIndex}`"
@@ -30,13 +16,13 @@
               :class="filter.column"
               @switchSort="switchSort"
             >
+              <median-scale v-if="filter.column === 'LogMedian'" />
             </table-header>
           </th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="(result, resultIndex) in filteredData" :key="resultIndex">
-          <MedianBar :median-info="result.combinedMedianData" />
           <template v-for="(filter, filterIndex) of filters">
             <td
               v-if="filter.is_displayed"
@@ -47,6 +33,27 @@
                 v-if="filter.column === 'LogMedian'"
                 :median-info="result.combinedMedianData"
               />
+              <template
+                v-else-if="
+                  filter.column === 'alias' && JSON.parse(result[filter.column])
+                "
+              >
+                <span
+                  v-for="(alias, alias_index) in JSON.parse(
+                    result[filter.column]
+                  )"
+                  :key="alias_index"
+                >
+                  <span>{{ alias }}</span>
+                  <span
+                    v-if="
+                      alias_index < JSON.parse(result[filter.column]).length - 1
+                    "
+                    class="comma"
+                    >,
+                  </span>
+                </span>
+              </template>
               <template v-else>
                 {{ result[filter.column] }}
               </template>
@@ -63,14 +70,6 @@
 
   const inRange = (x, [min, max]) => {
     return typeof x !== 'number' || (x - min) * (x - max) <= 0;
-  };
-
-  const logMedianFilter = {
-    column: 'LogMedian',
-    label: 'Log Median',
-    is_displayed: true,
-    is_displayed: true,
-    filterModal: '',
   };
 
   const createNumberList = str =>
@@ -100,7 +99,6 @@
     },
     data() {
       return {
-        logMedianFilter,
         sort: {
           key: 'LogMedian',
           order: 'down',
@@ -196,5 +194,6 @@
     display: flex
     margin-left: 45px
     table
+      white-space: nowrap
       +table
 </style>
