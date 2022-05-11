@@ -1,16 +1,16 @@
 <template>
-  <modal-view v-if="isOn" @click.native="close">
+  <modal-view v-if="isOn" @click.native="close(null)">
     <div class="modal filter_modal" @click.stop="">
+      obj : {{ filterObj }}
       <p class="modal_title">
         <font-awesome-icon icon="search" />
-        {{
-          filterObj.subLabel
-            ? `${filterObj.label} ${filterObj.subLabel}`
-            : filterObj.label
-        }}
+        {{ filterObj.label }}
+        <span :class="{ tag: filterObj.is_ontology }">{{
+          filterObj.note
+        }}</span>
       </p>
       <template
-        v-if="filterObj.innerKey === 'median' || filterObj.innerKey === 'age'"
+        v-if="filterObj.column === 'LogMedian' || filterObj.column === 'age'"
       >
         <button @click="resetSlider(filterObj.filter_modal)">Reset</button>
         <div class="input_wrapper">
@@ -26,7 +26,7 @@
           v-model="searchValue"
           type="text"
           placeholder="filter by text"
-          @keyup.enter="closeModal"
+          @keyup.enter="close(null)"
         />
         <font-awesome-icon
           v-show="filterObj.filterModal !== ''"
@@ -48,22 +48,24 @@
     },
     data() {
       return {
-        searchValue: this.filterObj?.filterModal,
-        isOn: false,
+        searchValue: '',
       };
     },
     computed: {
       ...mapGetters({
+        filters: 'project_filters',
         filterObj: 'active_filter_modal',
       }),
+      isOn() {
+        return this.filterObj !== null;
+      },
     },
     watch: {
       searchValue() {
         if (this.isOn) this.updateFilterModal('filterModal', this.searchValue);
       },
       filterObj() {
-        this.isOn = this.filterObj !== null;
-        this.searchValue = this.filterObj?.filterModal;
+        this.searchValue = this.filterObj?.filterModal || '';
       },
     },
     created() {

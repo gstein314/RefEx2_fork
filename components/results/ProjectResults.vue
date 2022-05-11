@@ -113,12 +113,13 @@
           this.results
             .filter(result => {
               let isFiltered = false;
-              for (const [key, col] of Object.entries(this.filters)) {
-                if (!col.isDisplayed) continue;
+              for (const filter of this.filters) {
+                const key = filter.column;
+                if (!filter.is_displayed) continue;
                 // number filter
                 else if (
-                  typeof col.filterModal === 'number' ||
-                  Array.isArray(col.filterModal)
+                  typeof filter.filterModal === 'number' ||
+                  Array.isArray(filter.filterModal)
                 ) {
                   // checks if all values are in range. Creates a list in case of Age due to multiple values in string form
                   const n =
@@ -128,16 +129,16 @@
                       ? Object.values(result.combinedMedianData)
                       : [result[key]];
                   isFiltered =
-                    n.find(x => inRange(x, col.filterModal)) === undefined;
+                    n.find(x => inRange(x, filter.filterModal)) === undefined;
                 }
                 // text filter
                 else if (
-                  col.filterModal !== '' &&
-                  !result[key].includes(col.filterModal)
+                  filter.filterModal !== '' &&
+                  !result[key].includes(filter.filterModal)
                 ) {
                   isFiltered =
-                    col.filterModal !== '' &&
-                    !result[key].includes(col.filterModal);
+                    filter.filterModal !== '' &&
+                    !result[key].includes(filter.filterModal);
                 }
               }
               return !isFiltered;

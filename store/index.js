@@ -56,7 +56,9 @@ export const getters = {
     return { limit, offset };
   },
   active_filter_modal(state) {
-    return state.project_filters[state.filter_modal] || null;
+    return (
+      state.project_filters.find(x => x.column === state.filter_modal) || null
+    );
   },
   compare_modal(state) {
     return state.compare_modal;
@@ -112,14 +114,14 @@ export const mutations = {
     const { ageRange, medianRange } = state.project_filter_ranges;
     copy.forEach((entry, index) => {
       let paramsToBeMerged = {};
-      const { column, is_displayed, label } = entry;
+      const column = entry.column;
 
-      if (['Age', 'log2_Median'].includes(column)) {
+      if (['Age', 'LogMedian'].includes(column)) {
         paramsToBeMerged = numberFilterObj(
           column === 'Age' ? ageRange : medianRange
         );
       } else paramsToBeMerged = { filterModal: '' };
-      copy[index] = { column, is_displayed, label, ...paramsToBeMerged };
+      copy[index] = { ...entry, ...paramsToBeMerged };
     });
     state.project_filters = copy;
   },
@@ -130,7 +132,6 @@ export const mutations = {
     const copy = [...state.project_filters];
     const targetObjIndex = copy.findIndex(entry => entry.column === filterKey);
     copy[targetObjIndex][key] = filter;
-    // targetObj[key] = filter;
     state.project_filters = copy;
   },
   set_gene_modal(state, id = null) {
