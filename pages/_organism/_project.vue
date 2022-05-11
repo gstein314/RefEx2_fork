@@ -31,9 +31,7 @@
     </div>
     <ModalViewDisplay
       v-if="isDisplaySettingsOn"
-      :filters="filters"
       @click.native="toggleDisplaySettings"
-      @toggleDisplayOfFilter="toggleDisplayOfFilter"
     />
     <ModalViewFilter />
     <ModalViewGene />
@@ -41,7 +39,6 @@
     <project-results
       ref="results"
       :height-chart-wrapper="heightChartWrapper"
-      :filters="filters"
       :selected-item="selectedId"
       @updateSort="updateResultSort"
     />
