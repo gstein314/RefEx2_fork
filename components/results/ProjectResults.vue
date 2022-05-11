@@ -22,7 +22,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(result, resultIndex) in filteredData" :key="resultIndex">
+        <tr v-for="(result, resultIndex) in pageItems" :key="resultIndex">
           <template v-for="(filter, filterIndex) of filters">
             <td
               v-if="filter.is_displayed"
@@ -73,17 +73,15 @@
         </tr>
       </tbody>
     </table>
-    <ProjectResultsPagination
-      :pages-number="results.length"
-      @change-page="handleChangePage"
-    />
+
+    <ProjectResultsPagination :pages-number="pagesNumber" />
   </section>
 </template>
 
 <script>
   import TableHeader from '~/components/results/TableHeader.vue';
-  import ProjectResultsPagination from '~/components/results/ProjectResultsPagination.vue';
   import { mapGetters, mapMutations } from 'vuex';
+  import ProjectResultsPagination from './ProjectResultsPagination.vue';
 
   const inRange = (x, [min, max]) => {
     return typeof x !== 'number' || (x - min) * (x - max) <= 0;
@@ -128,8 +126,6 @@
           key: 'LogMedian',
           order: 'down',
         },
-        limit: 10,
-        offset: 0,
       };
     },
 
@@ -139,6 +135,7 @@
         paginationObject: 'get_project_pagination',
         filters: 'project_filters',
       }),
+
       filteredData() {
         const copy = [...this.results];
         return (
@@ -184,14 +181,46 @@
                 this.sort.key === 'LogMedian'
                   ? b.combinedMedianData[this.selectedItem]
                   : b[this.sort.key];
-              return this.sortUpOrDown(aVal, bVal);
+              switch (this.sort?.order) {
+                case 'up':
+                  if (aVal < bVal) {
+                    return -1;
+                  } else if (aVal > bVal) {
+                    return 1;
+                  } else {
+                    return 0;
+                  }
+                case 'down':
+                  if (aVal > bVal) {
+                    return -1;
+                  } else if (aVal < bVal) {
+                    return 1;
+                  } else {
+                    return 0;
+                  }
+              }
             })
             // TODO: improve usage of offset and limit
-            .slice(this.paginationObject.offset, this.paginationObject.limit)
+            //.slice(this.paginationObject.offset, this.paginationObject.limit)
         );
       },
       pageItems() {
-        return this.filteredData.slice(this.offset, this.offset + this.limit);
+        return this.filteredData.slice(
+          this.paginationObject.offset,
+          this.paginationObject.offset + this.paginationObject.limit
+        );
+      },
+      pagesNumber() {
+        console.log(
+          'pagesNumber top',
+          Math.ceil(this.filteredData.length / this.paginationObject.limit)
+        );
+        console.log('this.paginationObject.limit', this.paginationObject.limit);
+        console.log('this.filteredData.length', this.filteredData.length);
+
+        return Math.ceil(
+          this.filteredData.length / this.paginationObject.limit
+        );
       },
     },
     mounted() {
@@ -200,6 +229,7 @@
     methods: {
       ...mapMutations({
         setGeneModal: 'set_gene_modal',
+        updatePagination: 'set_project_pagination',
       }),
       geneDescriptionSource(resultItem) {
         return `http://penqe.com/refex_figs/geneid_${this.dataset.toLowerCase()}_${resultItem}.png`;
@@ -235,15 +265,6 @@
           this.sort.order = order;
         }
         this.$emit('updateSort', this.sort);
-      },
-      setLimit(limit) {
-        this.limit = limit;
-      },
-      setOffset(offset) {
-        this.offset = offset;
-      },
-      handleChangePage(page) {
-        this.offset = (page - 1) * this.limit;
       },
     },
   };
