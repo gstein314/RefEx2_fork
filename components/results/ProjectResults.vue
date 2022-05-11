@@ -1,5 +1,9 @@
 <template>
   <section class="table-wrapper">
+    <!-- TODO: remove button after testing -->
+    <button
+      @click="$store.commit('set_project_pagination', { limit: 10, offset: 2 })"
+    ></button>
     <table>
       <thead>
         <tr>
@@ -67,6 +71,7 @@
 
 <script>
   import TableHeader from '~/components/results/TableHeader.vue';
+  import { mapGetters } from 'vuex';
 
   const inRange = (x, [min, max]) => {
     return typeof x !== 'number' || (x - min) * (x - max) <= 0;
@@ -83,10 +88,6 @@
       TableHeader,
     },
     props: {
-      results: {
-        type: Array,
-        default: () => [],
-      },
       filters: { type: Array, default: () => [] },
       selectedItem: {
         type: String,
@@ -107,67 +108,75 @@
     },
 
     computed: {
+      ...mapGetters({
+        results: 'get_project_results',
+        paginationObject: 'get_project_pagination',
+      }),
       filteredData() {
-        return this.results
-          .filter(result => {
-            let isFiltered = false;
-            for (const [key, col] of Object.entries(this.filters)) {
-              if (!col.isDisplayed) continue;
-              // number filter
-              else if (
-                typeof col.filterModal === 'number' ||
-                Array.isArray(col.filterModal)
-              ) {
-                // checks if all values are in range. Creates a list in case of Age due to multiple values in string form
-                const n =
-                  key === 'Age'
-                    ? createNumberList(result[key])
-                    : key === 'LogMedian'
-                    ? Object.values(result.combinedMedianData)
-                    : [result[key]];
-                isFiltered =
-                  n.find(x => inRange(x, col.filterModal)) === undefined;
-              }
-              // text filter
-              else if (
-                col.filterModal !== '' &&
-                !result[key].includes(col.filterModal)
-              ) {
-                isFiltered =
+        return (
+          this.results
+            .filter(result => {
+              let isFiltered = false;
+              for (const [key, col] of Object.entries(this.filters)) {
+                if (!col.isDisplayed) continue;
+                // number filter
+                else if (
+                  typeof col.filterModal === 'number' ||
+                  Array.isArray(col.filterModal)
+                ) {
+                  // checks if all values are in range. Creates a list in case of Age due to multiple values in string form
+                  const n =
+                    key === 'Age'
+                      ? createNumberList(result[key])
+                      : key === 'LogMedian'
+                      ? Object.values(result.combinedMedianData)
+                      : [result[key]];
+                  isFiltered =
+                    n.find(x => inRange(x, col.filterModal)) === undefined;
+                }
+                // text filter
+                else if (
                   col.filterModal !== '' &&
-                  !result[key].includes(col.filterModal);
+                  !result[key].includes(col.filterModal)
+                ) {
+                  isFiltered =
+                    col.filterModal !== '' &&
+                    !result[key].includes(col.filterModal);
+                }
               }
-            }
-            return !isFiltered;
-          })
-          ?.sort((a, b) => {
-            const aVal =
-              this.sort.key === 'LogMedian'
-                ? a.combinedMedianData[this.selectedItem]
-                : a[this.sort.key];
-            const bVal =
-              this.sort.key === 'LogMedian'
-                ? b.combinedMedianData[this.selectedItem]
-                : b[this.sort.key];
-            switch (this.sort?.order) {
-              case 'up':
-                if (aVal < bVal) {
-                  return -1;
-                } else if (aVal > bVal) {
-                  return 1;
-                } else {
-                  return 0;
-                }
-              case 'down':
-                if (aVal > bVal) {
-                  return -1;
-                } else if (aVal < bVal) {
-                  return 1;
-                } else {
-                  return 0;
-                }
-            }
-          });
+              return !isFiltered;
+            })
+            ?.sort((a, b) => {
+              const aVal =
+                this.sort.key === 'LogMedian'
+                  ? a.combinedMedianData[this.selectedItem]
+                  : a[this.sort.key];
+              const bVal =
+                this.sort.key === 'LogMedian'
+                  ? b.combinedMedianData[this.selectedItem]
+                  : b[this.sort.key];
+              switch (this.sort?.order) {
+                case 'up':
+                  if (aVal < bVal) {
+                    return -1;
+                  } else if (aVal > bVal) {
+                    return 1;
+                  } else {
+                    return 0;
+                  }
+                case 'down':
+                  if (aVal > bVal) {
+                    return -1;
+                  } else if (aVal < bVal) {
+                    return 1;
+                  } else {
+                    return 0;
+                  }
+              }
+            })
+            // TODO: improve usage of offset and limit
+            .slice(this.paginationObject.offset, this.paginationObject.limit)
+        );
       },
     },
     mounted() {

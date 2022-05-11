@@ -42,7 +42,6 @@
       ref="results"
       :height-chart-wrapper="heightChartWrapper"
       :filters="filters"
-      :results="resultsWithMedianData.slice(1, 20)"
       :selected-item="selectedId"
       @updateSort="updateResultSort"
     />
@@ -51,7 +50,7 @@
 
 <script>
   import 'vue-slider-component/dist-css/vue-slider-component.css';
-  import { mapMutations } from 'vuex';
+  import { mapGetters, mapMutations } from 'vuex';
   import ItemComparison from '~/components/results/ItemComparison.vue';
   import ModalViewGene from '~/components/ModalView/ModalViewGene.vue';
   import ModalViewCompare from '~/components/ModalView/ModalViewCompare.vue';
@@ -94,11 +93,10 @@
     async asyncData({ $axios, query, store, route }) {
       let results, ageRange, medianRange;
       const filterType = route.params?.project;
-      // const filter = query.id.split(/(?<=\/)\w*?(?=\?)/);
       const items = await Promise.all(
         query.id.split(',').map(async (id, index) => {
           const data = await $axios.$get(
-            `api/${filterType}/${id}?dataset=${store.state.active_dataset.dataset.toLowerCase()}&offset=0&limit=1`
+            `api/${filterType}/${id}?dataset=${store.state.active_dataset.dataset.toLowerCase()}`
           );
           if (index === 0) results = data.refex_info;
           return {
@@ -203,10 +201,13 @@
     },
     mounted() {
       this.heightChartWrapper = this.$refs.chartWrapper.clientHeight;
-      this.$store.commit('set_project_filters', {
-        ageRange: this.ageRange,
-        medianRange: this.medianRange,
-      });
+      this.$store.commit('set_project_results', this.resultsWithMedianData);
+      // TODO: set project filters
+      // this.$store.$commit('set_project_filters', {
+      //   ageRange: this.ageRange,
+      //   medianRange: this.medianRange,
+      //   filters: this.filters,
+      // });
     },
     methods: {
       ...mapMutations({
