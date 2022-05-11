@@ -49,38 +49,62 @@
                   filter.column === 'alias' && JSON.parse(result[filter.column])
                 "
               >
-                <span
-                  v-for="(alias, alias_index) in JSON.parse(
-                    result[filter.column]
-                  )"
-                  :key="alias_index"
+                <median-scale v-if="filter.column === 'LogMedian'" />
+              </table-header>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(result, resultIndex) in pageItems" :key="resultIndex">
+            <template v-for="(filter, filterIndex) of filters">
+              <td
+                v-if="filter.is_displayed"
+                :key="`result-${filterIndex}`"
+                :class="filter.column"
+              >
+                <MedianBar
+                  v-if="filter.column === 'LogMedian'"
+                  :median-info="result.combinedMedianData"
+                />
+                <template
+                  v-else-if="
+                    filter.column === 'alias' &&
+                    JSON.parse(result[filter.column])
+                  "
                 >
-                  <span>{{ alias }}</span>
                   <span
-                    v-if="
-                      alias_index < JSON.parse(result[filter.column]).length - 1
-                    "
-                    class="comma"
-                    >,
+                    v-for="(alias, alias_index) in JSON.parse(
+                      result[filter.column]
+                    )"
+                    :key="alias_index"
+                  >
+                    <span>{{ alias }}</span>
+                    <span
+                      v-if="
+                        alias_index <
+                        JSON.parse(result[filter.column]).length - 1
+                      "
+                      class="comma"
+                      >,
+                    </span>
                   </span>
-                </span>
-              </template>
-              <template v-else>
-                {{ result[filter.column] }}
-              </template>
-            </td>
-          </template>
-        </tr>
-      </tbody>
-    </table>
-
+                </template>
+                <template v-else>
+                  {{ result[filter.column] }}
+                </template>
+              </td>
+            </template>
+          </tr>
+        </tbody>
+      </table>
+    </section>
     <ProjectResultsPagination :pages-number="pagesNumber" />
-  </section>
+  </div>
 </template>
 
 <script>
   import TableHeader from '~/components/results/TableHeader.vue';
-  import { mapGetters, mapMutations } from 'vuex';
+  import { mapGetters } from 'vuex';
   import ProjectResultsPagination from './ProjectResultsPagination.vue';
 
   const inRange = (x, [min, max]) => {
@@ -211,13 +235,6 @@
         );
       },
       pagesNumber() {
-        console.log(
-          'pagesNumber top',
-          Math.ceil(this.filteredData.length / this.paginationObject.limit)
-        );
-        console.log('this.paginationObject.limit', this.paginationObject.limit);
-        console.log('this.filteredData.length', this.filteredData.length);
-
         return Math.ceil(
           this.filteredData.length / this.paginationObject.limit
         );

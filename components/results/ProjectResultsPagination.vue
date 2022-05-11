@@ -1,20 +1,50 @@
 <template>
-  <ul class="pagination-container">
-    <li class="first-page" @click="handleChangePage(1)">&#60;&#60;</li>
-    <li class="previous-page" @click="handleChangePage(currentPage - 1)">
-      &#60;
-    </li>
-    <li
-      v-for="(pageNumber, i) in pagesNumbersShown"
-      :key="i"
-      :class="{ 'pagination-item': true, active: pageNumber === currentPage }"
-      @click="handleChangePage(pageNumber)"
-    >
-      {{ pageNumber }}
-    </li>
-    <li class="next-page" @click="handleChangePage(currentPage + 1)">&#62;</li>
-    <li class="last-page" @click="handleChangePage(pagesNumber)">&#62;&#62;</li>
-  </ul>
+  <div class="pagination-wrapper">
+    <ul>
+      <li
+        :class="{ arrows: true, disabled: currentPage === 1 }"
+        @click="handleChangePage(1)"
+      >
+        <font-awesome-icon icon="angle-double-left" class="angle-double-left" />
+      </li>
+      <li
+        :class="{ arrows: true, disabled: currentPage === 1 }"
+        @click="handleChangePage(currentPage - 1)"
+      >
+        <font-awesome-icon icon="angle-left" class="angle-left" />
+      </li>
+      <li v-if="isHiddenPagesLeft" class="dots">
+        <span>...</span>
+      </li>
+
+      <li
+        v-for="(pageNumber, i) in pagesNumbersShown"
+        :key="i"
+        :class="{ 'pagination-item': true, active: pageNumber === currentPage }"
+        @click="handleChangePage(pageNumber)"
+      >
+        <span> {{ pageNumber }}</span>
+      </li>
+      <li v-if="isHiddenPagesRight" class="dots">
+        <span>...</span>
+      </li>
+      <li
+        :class="{ arrows: true, disabled: currentPage === pagesNumber }"
+        @click="handleChangePage(currentPage + 1)"
+      >
+        <font-awesome-icon icon="angle-right" class="angle-right" />
+      </li>
+      <li
+        :class="{ arrows: true, disabled: currentPage === pagesNumber }"
+        @click="handleChangePage(pagesNumber)"
+      >
+        <font-awesome-icon
+          icon="angle-double-right"
+          class="chevron-double-right"
+        />
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -34,7 +64,6 @@
 
       pagesList() {
         const list = [];
-        console.log('this.pagesNumber', this.pagesNumber);
         for (let i = 1; i <= this.pagesNumber; i++) {
           list.push(i);
         }
@@ -48,6 +77,7 @@
           ) + 1
         );
       },
+
       pagesNumbersShown() {
         const PAGES_LEFT = 2;
         const PAGES_RIGHT = 2;
@@ -70,6 +100,15 @@
             : this.currentPage + PAGES_RIGHT;
         return this.pagesList.slice(minPage, maxPage);
       },
+      isHiddenPagesLeft() {
+        return this.pagesNumbersShown[0] !== 1;
+      },
+      isHiddenPagesRight() {
+        return (
+          this.pagesNumbersShown[this.pagesNumbersShown.length - 1] !==
+          this.pagesNumber
+        );
+      },
     },
 
     methods: {
@@ -91,35 +130,54 @@
 
 <style lang="sass" scoped>
 
-  ul.pagination-container
-      margin-top: 20px
+  .pagination-wrapper
+    display: flex
+    justify-content: center
+    >ul
+      font-size: 1.25rem
+      margin-top: 2rem
       display: flex
       justify-content: center
       flex-direction: row
       align-items: baseline
       list-style: none
-      .pagination-item
-          height: 1.2rem
+      position: relative
+      &::after
+        display: block
+        content: ''
+        width: calc(100% - 3rem)
+        position: absolute
+        bottom: -0.2rem
+        height: 0.04rem
+        background-color: $GRAY
+      li
+        user-select: none
+        width: calc(62/16 * 1rem)
+        >span
+          display: block
           text-align: center
-          margin: 0 10px
+        &.arrows, &.pagination-item
           cursor: pointer
           position: relative
           &.active
-              color: $MAIN_COLOR
-              font-weight: bold
-              &::after
-                  position: absolute
-                  content: ''
-                  display: block
-                  width: 100%
-                  height: 0.1rem
-                  background-color: $COLOR_1
+            font-weight: bold
+            &::after
+              position: absolute
+              content: ''
+              display: block
+              width: 100%
+              height: 0.2rem
+              background-color: $COLOR_1
           &:hover
-              color: $MAIN_COLOR
-              font-weight: bold
-          &:first-child
-              margin-left: 0
-
-          &:last-child
-              margin-right: 0
+            color: $MAIN_COLOR
+            font-weight: bold
+        &.arrows
+          width: 1.5rem
+          color: $COLOR_1
+          text-align: center
+          font-size: 1rem
+  .disabled
+    pointer-events: none
+    color: $GRAY
+    opacity: 0.5
 </style>
