@@ -201,13 +201,12 @@
     },
     mounted() {
       this.heightChartWrapper = this.$refs.chartWrapper.clientHeight;
+      this.$store.commit('set_project_filter_ranges', {
+        ageRange: this.ageRange,
+        medianRange: this.medianRange,
+      });
+      this.$store.commit('set_project_filters', this.filters);
       this.$store.commit('set_project_results', this.resultsWithMedianData);
-      // TODO: set project filters
-      // this.$store.$commit('set_project_filters', {
-      //   ageRange: this.ageRange,
-      //   medianRange: this.medianRange,
-      //   filters: this.filters,
-      // });
     },
     methods: {
       ...mapMutations({

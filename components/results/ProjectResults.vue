@@ -1,9 +1,5 @@
 <template>
   <section class="table-wrapper">
-    <!-- TODO: remove button after testing -->
-    <button
-      @click="$store.commit('set_project_pagination', { limit: 10, offset: 2 })"
-    ></button>
     <table>
       <thead>
         <tr>
@@ -88,7 +84,6 @@
       TableHeader,
     },
     props: {
-      filters: { type: Array, default: () => [] },
       selectedItem: {
         type: String,
         default: '',
@@ -111,6 +106,7 @@
       ...mapGetters({
         results: 'get_project_results',
         paginationObject: 'get_project_pagination',
+        filters: 'project_filters',
       }),
       filteredData() {
         return (

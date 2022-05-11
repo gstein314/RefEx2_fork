@@ -20,22 +20,27 @@
 </template>
 <script>
   import ModalView from '~/components/ModalView/ModalView.vue';
+  import { mapGetters, mapMutations } from 'vuex';
   export default {
     components: {
       ModalView,
     },
-    props: {
-      filters: {
-        type: Array,
-        default: () => [],
-      },
+    computed: {
+      ...mapGetters({
+        filters: 'project_filters',
+      }),
     },
     methods: {
+      ...mapMutations({
+        updateProjectFilters: 'update_project_filters',
+      }),
       toggleDisplayOfFilter(key) {
-        const copy = JSON.parse(JSON.stringify(this.filters));
-        const itemIndex = this.filters.findIndex(item => item.column === key);
-        copy[itemIndex].is_displayed = !copy[itemIndex].is_displayed;
-        this.$emit('toggleDisplayOfFilter', copy);
+        this.updateProjectFilters({
+          key: 'is_displayed',
+          filter:
+            !this.filters.find(x => x.column === key)?.is_displayed || false,
+          filterKey: key,
+        });
       },
       toggleDisplaySettings() {
         this.isDisplaySettings = !this.isDisplaySettings;
