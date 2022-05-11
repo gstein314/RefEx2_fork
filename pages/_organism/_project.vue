@@ -39,6 +39,7 @@
     <project-results
       ref="results"
       :height-chart-wrapper="heightChartWrapper"
+      :items="items"
       :selected-item="selectedId"
       @updateSort="updateResultSort"
     />
@@ -179,7 +180,7 @@
           .map(x => x.LogMedian)
           .reduce((acc, _curr, resultIndex) => {
             const itemToPush = this.items.reduce((obj, item) => {
-              obj[item.id] = item.medianData[resultIndex];
+              obj[item.id] = Number(item.medianData[resultIndex]).toFixed(2);
               return obj;
             }, {});
             acc.push(itemToPush);

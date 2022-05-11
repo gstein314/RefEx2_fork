@@ -1,24 +1,24 @@
 <template>
   <div class="bar_box" :style="`height: ${height}px`">
     <div
-      v-for="(medianData, symbol, index) in medianInfo"
-      :key="symbol"
+      v-for="(item, itemIndex) of items"
+      :key="itemIndex"
       class="bar single_item value"
-      :class="`item_${index + 1}`"
-      :style="`width: ${(medianData * 230) / 16}px;`"
+      :class="`item_${itemIndex + 1}`"
+      :style="`width: ${(medianInfo[item.id] * 230) / 16}px;`"
     ></div>
     <div class="tooltip">
       <span class="title">Expression(log2(TPM+1))</span>
       <span
-        v-for="(medianData, symbol, index) in medianInfo"
-        :key="symbol"
+        v-for="(item, itemIndex) of items"
+        :key="itemIndex"
         class="value single_item align_right"
-        :class="`item_${index + 1}`"
+        :class="`item_${itemIndex + 1}`"
       >
         <span v-if="numberOfItems > 1" class="symbol">{{
-          `${symbol}&nbsp;&nbsp;`
+          `${item.info.symbol}&nbsp;&nbsp;`
         }}</span>
-        {{ Number(medianData).toFixed(2) }}
+        {{ medianInfo[item.id] }}
       </span>
     </div>
   </div>
@@ -31,10 +31,14 @@
         type: Object,
         default: () => {},
       },
+      items: {
+        type: Array,
+        default: () => [],
+      },
     },
     computed: {
       numberOfItems() {
-        return Object.keys(this.medianInfo).length;
+        return this.items.length;
       },
       height() {
         return this.numberOfItems * 15;

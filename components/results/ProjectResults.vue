@@ -31,6 +31,7 @@
             >
               <MedianBar
                 v-if="filter.column === 'LogMedian'"
+                :items="items"
                 :median-info="result.combinedMedianData"
               />
               <template
@@ -87,6 +88,10 @@
       selectedItem: {
         type: String,
         default: '',
+      },
+      items: {
+        type: Array,
+        default: () => [],
       },
       heightChartWrapper: {
         type: Number,
@@ -152,24 +157,7 @@
                 this.sort.key === 'LogMedian'
                   ? b.combinedMedianData[this.selectedItem]
                   : b[this.sort.key];
-              switch (this.sort?.order) {
-                case 'up':
-                  if (aVal < bVal) {
-                    return -1;
-                  } else if (aVal > bVal) {
-                    return 1;
-                  } else {
-                    return 0;
-                  }
-                case 'down':
-                  if (aVal > bVal) {
-                    return -1;
-                  } else if (aVal < bVal) {
-                    return 1;
-                  } else {
-                    return 0;
-                  }
-              }
+              return this.sortUpOrDown(aVal, bVal);
             })
             // TODO: improve usage of offset and limit
             .slice(this.paginationObject.offset, this.paginationObject.limit)
@@ -180,6 +168,26 @@
       this.$emit('updateSort', this.sort);
     },
     methods: {
+      sortUpOrDown(a, b) {
+        switch (this.sort?.order) {
+          case 'up':
+            if (a < b) {
+              return -1;
+            } else if (a > b) {
+              return 1;
+            } else {
+              return 0;
+            }
+          case 'down':
+            if (a > b) {
+              return -1;
+            } else if (a < b) {
+              return 1;
+            } else {
+              return 0;
+            }
+        }
+      },
       switchSort(col_name, order) {
         if (this.sort.key === col_name) {
           this.sort.order = this.sort.order === 'up' ? 'down' : 'up';
