@@ -11,7 +11,7 @@
       <font-awesome-icon
         icon="search"
         :class="{ active: isActiveSearch }"
-        @click="setFilterModal($vnode.key)"
+        @click="setFilterModal(id)"
       />
     </div>
     <slot></slot>

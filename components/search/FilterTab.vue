@@ -13,12 +13,10 @@
           <p class="results_num">{{ resultsNum }}</p>
           <button
             class="find_results_btn"
-            :class="{ update: isNewResult }"
             @click="$refs[`${$vnode.key}_search`].showResults('all')"
           >
             <font-awesome-icon icon="search" />
-            {{ isNewResult ? 'Update' : 'Find' }}
-            {{ $vnode.key }}s
+            Find {{ $vnode.key }}s
           </button>
         </div>
       </div>
@@ -31,6 +29,7 @@
     />
     <index-results
       :key="`${$vnode.key}_results`"
+      :table-data-is-same-as-screener="tableDataIsSameAsScreener"
       :filters="filters"
       @toggleDisplaySettings="toggleDisplaySettings"
     />
@@ -46,7 +45,7 @@
     },
     data() {
       return {
-        tableDataIsSameAsScreener: true,
+        tableDataIsSameAsScreener: false,
         isDisplaySettings: false,
         filters: this.$store.getters.active_dataset[this.$vnode.key].filter || [
           ...this.$store.getters.active_filter.filter,
@@ -59,9 +58,6 @@
         resultsByName: 'results_by_name',
         filterByName: 'filter_by_name',
       }),
-      isNewResult() {
-        return !this.tableDataIsSameAsScreener && this.resultTableLength > 0;
-      },
       isActive() {
         return this.$vnode.key === this.$store.state.active_filter;
       },
@@ -77,12 +73,10 @@
         this.filters = this.activeDataset[this.$vnode.key]?.filter || [
           ...this.filterByName('gene').filter,
         ];
+        this.isFirstSearch = true;
       },
     },
     methods: {
-      updateResults(length = 0) {
-        this.setTableDataIsSameAsScreener(length > 0);
-      },
       setTableDataIsSameAsScreener(bool = false) {
         this.tableDataIsSameAsScreener = bool;
       },

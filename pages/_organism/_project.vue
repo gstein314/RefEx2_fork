@@ -3,6 +3,7 @@
     <div ref="chartWrapper" class="chart_wrapper">
       <h1 class="header_title">
         <font-awesome-icon
+          v-if="filterType === 'gene'"
           icon="info-circle"
           @click="setGeneModal(items[0].id)"
         />
@@ -18,9 +19,11 @@
         :items="items"
         :active-id="selectedId"
         :active-sort="resultsSort"
+        :display-info-button="filterType === 'gene'"
         @select="updateSelectedItem"
         @showModal="setGeneModal"
-      />
+      >
+      </item-comparison>
       <a class="display_settings" @click="toggleDisplaySettings">
         <font-awesome-icon icon="eye" />
         Display settings
@@ -39,7 +42,6 @@
       ref="results"
       :height-chart-wrapper="heightChartWrapper"
       :filters="filters"
-      :results="resultsWithMedianData.slice(1, 20)"
       :selected-item="selectedId"
       @updateSort="updateResultSort"
     />
@@ -48,7 +50,7 @@
 
 <script>
   import 'vue-slider-component/dist-css/vue-slider-component.css';
-  import { mapMutations } from 'vuex';
+  import { mapGetters, mapMutations } from 'vuex';
   import ItemComparison from '~/components/results/ItemComparison.vue';
   import ModalViewGene from '~/components/ModalView/ModalViewGene.vue';
   import ModalViewCompare from '~/components/ModalView/ModalViewCompare.vue';
@@ -65,6 +67,14 @@
       .split(',')
       .map(x => parseInt(x) || 'out of filter bounds')
       .sort();
+
+  const logMedianFilter = {
+    column: 'LogMedian',
+    label: 'Log Median',
+    is_displayed: true,
+    is_displayed: true,
+    filterModal: '',
+  };
 
   export default {
     components: {
@@ -83,11 +93,10 @@
     async asyncData({ $axios, query, store, route }) {
       let results, ageRange, medianRange;
       const filterType = route.params?.project;
-      // const filter = query.id.split(/(?<=\/)\w*?(?=\?)/);
       const items = await Promise.all(
         query.id.split(',').map(async (id, index) => {
           const data = await $axios.$get(
-            `api/${filterType}/${id}?dataset=${store.state.active_dataset.dataset.toLowerCase()}&offset=0&limit=1`
+            `api/${filterType}/${id}?dataset=${store.state.active_dataset.dataset.toLowerCase()}`
           );
           if (index === 0) results = data.refex_info;
           return {
@@ -114,12 +123,31 @@
           ageRange[1] = n.pop();
         }
       }
+      // set filters
+      // In case of Gene, use dataset filters (sample values)
+      // In case of Sample, use fixed gene filters with exception of geneDataFromGeneInfo (gene values)
+      const geneDataFromGeneInfo = ['annotation', 'gene expression patterns'];
+      const infoFromCurrentDataset = store.getters.active_dataset;
+      const filters = [
+        ...(filterType === 'gene'
+          ? infoFromCurrentDataset['sample']['filter']
+          : store.getters.filter_by_name('gene')?.filter || []),
+      ].filter(x => !geneDataFromGeneInfo.includes(x.column));
+
+      let geneIdIndex = filters.findIndex(x => x.column === 'geneid');
+
+      if (geneIdIndex)
+        filters[geneIdIndex] = {
+          ...filters[geneIdIndex],
+          column: infoFromCurrentDataset.gene.key,
+          label: infoFromCurrentDataset.gene.header,
+        };
+      filters.splice(1, 0, logMedianFilter);
+
       return {
         filterType,
         items,
-        filters:
-          store.getters.active_dataset[filterType]?.filter ??
-          store.getters.filter_by_name(filterType)?.filter,
+        filters,
         results,
         ageRange,
         medianRange,
@@ -173,10 +201,13 @@
     },
     mounted() {
       this.heightChartWrapper = this.$refs.chartWrapper.clientHeight;
-      this.$store.commit('set_project_filters', {
-        ageRange: this.ageRange,
-        medianRange: this.medianRange,
-      });
+      this.$store.commit('set_project_results', this.resultsWithMedianData);
+      // TODO: set project filters
+      // this.$store.$commit('set_project_filters', {
+      //   ageRange: this.ageRange,
+      //   medianRange: this.medianRange,
+      //   filters: this.filters,
+      // });
     },
     methods: {
       ...mapMutations({

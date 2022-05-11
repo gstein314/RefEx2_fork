@@ -30,6 +30,11 @@ export const state = () => ({
   gene_modal: null,
   alert_modal: { isOn: false, msg: '' },
   compare_modal: false,
+  project_results: {
+    arr: [],
+    limit: 10,
+    offset: 0,
+  },
   results: filters.reduce((acc, filter) => {
     acc[filter.name] = { results: [], results_num: 0 };
     return acc;
@@ -39,6 +44,13 @@ export const state = () => ({
 export const getters = {
   project_filters(state) {
     return state.project_filters;
+  },
+  get_project_results(state) {
+    return state.project_results.arr || [];
+  },
+  get_project_pagination(state) {
+    const { limit, offset } = state.project_results;
+    return { limit, offset };
   },
   active_filter_modal(state) {
     return state.project_filters[state.filter_modal] || null;
@@ -77,16 +89,21 @@ export const getters = {
 };
 
 export const mutations = {
+  set_project_results(state, newResults) {
+    state.project_results = { ...state.project_results, arr: newResults };
+  },
+  set_project_pagination(state, { limit, offset }) {
+    state.project_results = { ...state.project_results, limit, offset };
+  },
   set_filter_modal(state, filterKey = null) {
     state.filter_modal = filterKey;
   },
   set_compare_modal(state) {
     state.compare_modal = !state.compare_modal;
   },
-  set_project_filters(state, { ageRange, medianRange }) {
+  set_project_filters(state, { ageRange, medianRange, filters }) {
     const copy = {
-      ...(getters.active_filter(state).filters ??
-        getters.active_dataset(state)?.sample?.filter),
+      ...filters,
     };
     Object.entries(copy).forEach(([key, value]) => {
       if (['Age', 'log2_Median'].includes(key)) {
