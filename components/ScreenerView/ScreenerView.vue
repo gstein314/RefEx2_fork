@@ -86,6 +86,7 @@
       display: flex
       gap: .5rem
       margin-bottom: 0.5rem
+      align-items: center
       > span
         +sample_query
     input
