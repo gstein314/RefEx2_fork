@@ -90,23 +90,25 @@
     // TODO: add sample option
     async asyncData({ $axios, query, store, route }) {
       let results, ageRange, medianRange;
-      const filterType = route.params?.project;
+      console.log(route);
+      const { project } = route.params;
+      const { id, type } = query;
       const items = await Promise.all(
-        query.id.split(',').map(async (id, index) => {
+        id.split(',').map(async (id, index) => {
           const data = await $axios.$get(
-            `api/${filterType}/${id}?dataset=${store.state.active_dataset.dataset.toLowerCase()}`
+            `api/${type}/${id}?dataset=${project.toLowerCase()}`
           );
           if (index === 0) results = data.refex_info;
           return {
             id,
-            info: data[`${filterType}_info`],
+            info: data[`${type}_info`],
             medianData: data.refex_info?.map(x => x.LogMedian),
           };
         })
       );
       // set ranges based on the results. Results are gained from the first ID item
       medianRange = [0, 0];
-      ageRange = [0, 0];
+      ageRange = [0, 10];
       for (const [resultIndex, result] of results.entries()) {
         for (const item of items) {
           if (item.medianData[resultIndex] > medianRange[1]) {
@@ -115,7 +117,7 @@
         }
 
         // set age range
-        if ('age' in result) {
+        if ('Age' in result) {
           const n = createNumberList(result.Age);
           if (n.find(x => inRange(x, ageRange))) continue;
           ageRange[1] = n.pop();
@@ -125,9 +127,9 @@
       // In case of Gene, use dataset filters (sample values)
       // In case of Sample, use fixed gene filters with exception of geneDataFromGeneInfo (gene values)
       const geneDataFromGeneInfo = ['annotation', 'gene expression patterns'];
-      const infoFromCurrentDataset = store.getters.active_dataset;
+      const infoFromCurrentDataset = store.getters.dataset_by_name(project);
       const filters = [
-        ...(filterType === 'gene'
+        ...(type === 'gene'
           ? infoFromCurrentDataset['sample']['filter']
           : store.getters.filter_by_name('gene')?.filter || []),
       ].filter(x => !geneDataFromGeneInfo.includes(x.column));
@@ -143,7 +145,7 @@
       filters.splice(1, 0, logMedianFilter);
 
       return {
-        filterType,
+        filterType: type,
         items,
         filters,
         results,

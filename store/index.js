@@ -65,10 +65,13 @@ export const getters = {
   },
   route_to_project_page: state => ids => {
     if (Array.isArray(ids)) ids = ids.join(',');
-    return `${state.active_specie.species}/${state.active_filter}?id=${ids}`;
+    return `${state.active_specie.species}/${state.active_dataset.dataset}?type=${state.active_filter}&id=${ids}`;
   },
   gene_modal(state) {
     return state.gene_modal;
+  },
+  dataset_by_name: state => name => {
+    return state.active_specie.datasets.find(x => x.dataset === name);
   },
   active_dataset(state) {
     return state.active_dataset;
