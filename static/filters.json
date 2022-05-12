@@ -41,8 +41,7 @@
         "note": "",
         "is_checkbox": false,
         "is_displayed": true,
-        "is_ontology": false,
-        "special_class": "annotation"
+        "is_ontology": false
       },
       {
         "column": "gene expression patterns",
@@ -50,8 +49,7 @@
         "note": "",
         "is_checkbox": false,
         "is_displayed": true,
-        "is_ontology": false,
-        "special_class": "gene_expression_patterns"
+        "is_ontology": false
       }
     ]
   },

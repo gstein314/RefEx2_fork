@@ -40,6 +40,8 @@
       ref="results"
       :height-chart-wrapper="heightChartWrapper"
       :items="items"
+      :gene-id-key="geneIdKey"
+      :dataset="dataset"
       :selected-item="selectedId"
       @updateSort="updateResultSort"
     />
@@ -125,13 +127,12 @@
       // set filters
       // In case of Gene, use dataset filters (sample values)
       // In case of Sample, use fixed gene filters with exception of geneDataFromGeneInfo (gene values)
-      const geneDataFromGeneInfo = ['annotation', 'gene expression patterns'];
       const infoFromCurrentDataset = store.getters.dataset_by_name(project);
       const filters = [
         ...(type === 'gene'
           ? infoFromCurrentDataset['sample']['filter']
           : store.getters.filter_by_name('gene')?.filter || []),
-      ].filter(x => !geneDataFromGeneInfo.includes(x.column));
+      ];
 
       let geneIdIndex = filters.findIndex(x => x.column === 'geneid');
 
@@ -146,8 +147,10 @@
       return {
         filterType: type,
         items,
+        geneIdKey: infoFromCurrentDataset.gene.key,
         filters,
         results,
+        dataset: project,
         ageRange,
         medianRange,
         selectedId: items[0].id,
@@ -234,16 +237,17 @@
 <style lang="sass">
   .wrapper
     display: flex
-    min-width: 800px
+    min-width: clamp(800px, 100vw, 4000px)
+    max-width: max-content
     flex-direction: column
     margin-bottom: 50px
+    padding-right: 60px
     .chart_wrapper
       grid-template-columns: 1fr auto
       grid-template-rows: auto auto
       gap: 20px
-      padding: 10px 60px
+      padding: 10px 0 10px 60px
       display: grid
-      max-width: 100vw
       position: sticky
       background-color: white
       top: 0

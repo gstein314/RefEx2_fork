@@ -63,15 +63,15 @@
             v-for="(filter, index) of filters"
             v-show="filter.is_displayed"
             :key="index"
-            :class="filter.special_class"
+            :class="filter.column"
           >
             <font-awesome-icon
-              v-if="filter.special_class === 'annotation'"
+              v-if="filter.column === 'annotation'"
               icon="info-circle"
               @click.stop="setGeneModal(result.geneid)"
             />
             <img
-              v-else-if="filter.special_class === 'gene_expression_patterns'"
+              v-else-if="filter.column === 'gene expression patterns'"
               :src="geneDescriptionSource(result.geneid)"
               :alt="result.geneid"
             />

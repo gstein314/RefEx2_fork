@@ -34,6 +34,16 @@
                 :items="items"
                 :median-info="result.combinedMedianData"
               />
+              <font-awesome-icon
+                v-else-if="filter.column === 'annotation'"
+                icon="info-circle"
+                @click.stop="setGeneModal(result[geneIdKey])"
+              />
+              <img
+                v-else-if="filter.column === 'gene expression patterns'"
+                :src="geneDescriptionSource(result[geneIdKey])"
+                :alt="result[geneIdKey]"
+              />
               <template
                 v-else-if="
                   filter.column === 'alias' && JSON.parse(result[filter.column])
@@ -68,7 +78,7 @@
 
 <script>
   import TableHeader from '~/components/results/TableHeader.vue';
-  import { mapGetters } from 'vuex';
+  import { mapGetters, mapMutations } from 'vuex';
 
   const inRange = (x, [min, max]) => {
     return typeof x !== 'number' || (x - min) * (x - max) <= 0;
@@ -86,6 +96,14 @@
     },
     props: {
       selectedItem: {
+        type: String,
+        default: '',
+      },
+      geneIdKey: {
+        type: String,
+        default: 'geneid',
+      },
+      dataset: {
         type: String,
         default: '',
       },
@@ -169,6 +187,12 @@
       this.$emit('updateSort', this.sort);
     },
     methods: {
+      ...mapMutations({
+        setGeneModal: 'set_gene_modal',
+      }),
+      geneDescriptionSource(resultItem) {
+        return `http://penqe.com/refex_figs/geneid_${this.dataset.toLowerCase()}_${resultItem}.png`;
+      },
       sortUpOrDown(a, b) {
         switch (this.sort?.order) {
           case 'up':
