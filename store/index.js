@@ -5,11 +5,10 @@ const maxInTenth = x => {
   return Math.ceil(x / 10) * 10;
 };
 
-const numberFilterObj = ([min, max], value) => {
+const numberFilterObj = ([min, max]) => {
   [min, max] = [maxInTenth(min), maxInTenth(max)];
   const isInTenths = max > 20;
   return {
-    ...value,
     filterModal: [0, max],
     numberValue: {
       min: 0,
@@ -25,7 +24,11 @@ export const state = () => ({
   active_specie: specieSets[0],
   active_filter: 'gene',
   active_dataset: specieSets[0].datasets[0],
-  project_filters: {},
+  project_filters: [],
+  project_filter_ranges: {
+    ageRange: [0, 100],
+    medianRange: [0, 16],
+  },
   filter_modal: null,
   gene_modal: null,
   alert_modal: { isOn: false, msg: '' },
@@ -53,17 +56,22 @@ export const getters = {
     return { limit, offset };
   },
   active_filter_modal(state) {
-    return state.project_filters[state.filter_modal] || null;
+    return (
+      state.project_filters.find(x => x.column === state.filter_modal) || null
+    );
   },
   compare_modal(state) {
     return state.compare_modal;
   },
   route_to_project_page: state => ids => {
     if (Array.isArray(ids)) ids = ids.join(',');
-    return `${state.active_specie.species}/${state.active_filter}?id=${ids}`;
+    return `${state.active_specie.species}/${state.active_dataset.dataset}?type=${state.active_filter}&id=${ids}`;
   },
   gene_modal(state) {
     return state.gene_modal;
+  },
+  dataset_by_name: state => name => {
+    return state.active_specie.datasets.find(x => x.dataset === name);
   },
   active_dataset(state) {
     return state.active_dataset;
@@ -101,26 +109,32 @@ export const mutations = {
   set_compare_modal(state) {
     state.compare_modal = !state.compare_modal;
   },
-  set_project_filters(state, { ageRange, medianRange, filters }) {
-    const copy = {
-      ...filters,
-    };
-    Object.entries(copy).forEach(([key, value]) => {
-      if (['Age', 'log2_Median'].includes(key)) {
-        copy[key] = numberFilterObj(
-          key === 'Age' ? ageRange : medianRange,
-          value
+  set_project_filter_ranges(state, { ageRange, medianRange }) {
+    state.project_filter_ranges = { ageRange, medianRange };
+  },
+  set_project_filters(state, filters) {
+    const copy = [...filters];
+    const { ageRange, medianRange } = state.project_filter_ranges;
+    copy.forEach((entry, index) => {
+      let paramsToBeMerged = {};
+      const column = entry.column;
+
+      if (['Age', 'LogMedian'].includes(column)) {
+        paramsToBeMerged = numberFilterObj(
+          column === 'Age' ? ageRange : medianRange
         );
-      } else value.filterModal = '';
+      } else paramsToBeMerged = { filterModal: '' };
+      copy[index] = { ...entry, ...paramsToBeMerged };
     });
     state.project_filters = copy;
   },
   update_project_filters(
     state,
-    { key, filter, filterKey = state.filter_modal }
+    { key = 'filterModal', filter, filterKey = state.filter_modal }
   ) {
-    const copy = { ...state.project_filters };
-    copy[filterKey][key] = filter;
+    const copy = [...state.project_filters];
+    const targetObjIndex = copy.findIndex(entry => entry.column === filterKey);
+    copy[targetObjIndex][key] = filter;
     state.project_filters = copy;
   },
   set_gene_modal(state, id = null) {

@@ -1,9 +1,5 @@
 <template>
   <section class="table-wrapper">
-    <!-- TODO: remove button after testing -->
-    <button
-      @click="$store.commit('set_project_pagination', { limit: 10, offset: 2 })"
-    ></button>
     <table>
       <thead>
         <tr>
@@ -35,7 +31,18 @@
             >
               <MedianBar
                 v-if="filter.column === 'LogMedian'"
+                :items="items"
                 :median-info="result.combinedMedianData"
+              />
+              <font-awesome-icon
+                v-else-if="filter.column === 'annotation'"
+                icon="info-circle"
+                @click.stop="setGeneModal(result[geneIdKey])"
+              />
+              <img
+                v-else-if="filter.column === 'gene expression patterns'"
+                :src="geneDescriptionSource(result[geneIdKey])"
+                :alt="result[geneIdKey]"
               />
               <template
                 v-else-if="
@@ -71,7 +78,7 @@
 
 <script>
   import TableHeader from '~/components/results/TableHeader.vue';
-  import { mapGetters } from 'vuex';
+  import { mapGetters, mapMutations } from 'vuex';
 
   const inRange = (x, [min, max]) => {
     return typeof x !== 'number' || (x - min) * (x - max) <= 0;
@@ -88,10 +95,21 @@
       TableHeader,
     },
     props: {
-      filters: { type: Array, default: () => [] },
       selectedItem: {
         type: String,
         default: '',
+      },
+      geneIdKey: {
+        type: String,
+        default: 'geneid',
+      },
+      dataset: {
+        type: String,
+        default: '',
+      },
+      items: {
+        type: Array,
+        default: () => [],
       },
       heightChartWrapper: {
         type: Number,
@@ -111,18 +129,21 @@
       ...mapGetters({
         results: 'get_project_results',
         paginationObject: 'get_project_pagination',
+        filters: 'project_filters',
       }),
       filteredData() {
+        const copy = [...this.results];
         return (
-          this.results
+          copy
             .filter(result => {
               let isFiltered = false;
-              for (const [key, col] of Object.entries(this.filters)) {
-                if (!col.isDisplayed) continue;
+              for (const filter of this.filters) {
+                const key = filter.column;
+                if (!filter.is_displayed) continue;
                 // number filter
                 else if (
-                  typeof col.filterModal === 'number' ||
-                  Array.isArray(col.filterModal)
+                  typeof filter.filterModal === 'number' ||
+                  Array.isArray(filter.filterModal)
                 ) {
                   // checks if all values are in range. Creates a list in case of Age due to multiple values in string form
                   const n =
@@ -131,17 +152,17 @@
                       : key === 'LogMedian'
                       ? Object.values(result.combinedMedianData)
                       : [result[key]];
-                  isFiltered =
-                    n.find(x => inRange(x, col.filterModal)) === undefined;
+                  if (n.find(x => inRange(x, filter.filterModal)) === undefined)
+                    isFiltered = true;
                 }
                 // text filter
                 else if (
-                  col.filterModal !== '' &&
-                  !result[key].includes(col.filterModal)
+                  filter.filterModal !== '' &&
+                  !result[key].includes(filter.filterModal)
                 ) {
                   isFiltered =
-                    col.filterModal !== '' &&
-                    !result[key].includes(col.filterModal);
+                    filter.filterModal !== '' &&
+                    !result[key].includes(filter.filterModal);
                 }
               }
               return !isFiltered;
@@ -155,24 +176,7 @@
                 this.sort.key === 'LogMedian'
                   ? b.combinedMedianData[this.selectedItem]
                   : b[this.sort.key];
-              switch (this.sort?.order) {
-                case 'up':
-                  if (aVal < bVal) {
-                    return -1;
-                  } else if (aVal > bVal) {
-                    return 1;
-                  } else {
-                    return 0;
-                  }
-                case 'down':
-                  if (aVal > bVal) {
-                    return -1;
-                  } else if (aVal < bVal) {
-                    return 1;
-                  } else {
-                    return 0;
-                  }
-              }
+              return this.sortUpOrDown(aVal, bVal);
             })
             // TODO: improve usage of offset and limit
             .slice(this.paginationObject.offset, this.paginationObject.limit)
@@ -183,6 +187,32 @@
       this.$emit('updateSort', this.sort);
     },
     methods: {
+      ...mapMutations({
+        setGeneModal: 'set_gene_modal',
+      }),
+      geneDescriptionSource(resultItem) {
+        return `http://penqe.com/refex_figs/geneid_${this.dataset.toLowerCase()}_${resultItem}.png`;
+      },
+      sortUpOrDown(a, b) {
+        switch (this.sort?.order) {
+          case 'up':
+            if (a < b) {
+              return -1;
+            } else if (a > b) {
+              return 1;
+            } else {
+              return 0;
+            }
+          case 'down':
+            if (a > b) {
+              return -1;
+            } else if (a < b) {
+              return 1;
+            } else {
+              return 0;
+            }
+        }
+      },
       switchSort(col_name, order) {
         if (this.sort.key === col_name) {
           this.sort.order = this.sort.order === 'up' ? 'down' : 'up';
