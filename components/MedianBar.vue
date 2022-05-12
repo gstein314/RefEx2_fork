@@ -18,7 +18,7 @@
         <span v-if="numberOfItems > 1" class="symbol">{{
           `${item.info.symbol || item.info.sample_id}&nbsp;&nbsp;`
         }}</span>
-        {{ medianInfo[item.id].toFixed(2) }}
+        {{ tooltipNumberDisplay(medianInfo[item.id]) }}
       </span>
     </div>
   </div>
@@ -42,6 +42,11 @@
       },
       height() {
         return this.numberOfItems * 15;
+      },
+    },
+    methods: {
+      tooltipNumberDisplay(val) {
+        return val ? val?.toFixed(2) : 'NA';
       },
     },
   };

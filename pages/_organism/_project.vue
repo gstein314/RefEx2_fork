@@ -236,6 +236,7 @@
     display: flex
     min-width: 800px
     flex-direction: column
+    margin-bottom: 50px
     .chart_wrapper
       grid-template-columns: 1fr auto
       grid-template-rows: auto auto

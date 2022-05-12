@@ -1,7 +1,6 @@
 <template>
   <modal-view v-if="isOn" @click.native="close(null)">
     <div class="modal filter_modal" @click.stop="">
-      obj : {{ filterObj }}
       <p class="modal_title">
         <font-awesome-icon icon="search" />
         {{ filterObj.label }}
