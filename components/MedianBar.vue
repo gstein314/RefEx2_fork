@@ -16,9 +16,9 @@
         :class="`item_${itemIndex + 1}`"
       >
         <span v-if="numberOfItems > 1" class="symbol">{{
-          `${item.info.symbol}&nbsp;&nbsp;`
+          `${item.info.symbol || item.info.sample_id}&nbsp;&nbsp;`
         }}</span>
-        {{ medianInfo[item.id] }}
+        {{ medianInfo[item.id].toFixed(2) }}
       </span>
     </div>
   </div>

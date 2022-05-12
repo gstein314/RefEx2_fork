@@ -10,7 +10,7 @@
         }}</span>
       </p>
       <template
-        v-if="filterObj.column === 'LogMedian' || filterObj.column === 'age'"
+        v-if="filterObj.column === 'LogMedian' || filterObj.column === 'Age'"
       >
         <button @click="resetSlider(filterObj.filter_modal)">Reset</button>
         <div class="input_wrapper">

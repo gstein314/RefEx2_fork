@@ -90,7 +90,6 @@
     // TODO: add sample option
     async asyncData({ $axios, query, store, route }) {
       let results, ageRange, medianRange;
-      console.log(route);
       const { project } = route.params;
       const { id, type } = query;
       const items = await Promise.all(
@@ -182,7 +181,7 @@
           .map(x => x.LogMedian)
           .reduce((acc, _curr, resultIndex) => {
             const itemToPush = this.items.reduce((obj, item) => {
-              obj[item.id] = Number(item.medianData[resultIndex]).toFixed(2);
+              obj[item.id] = +item.medianData[resultIndex];
               return obj;
             }, {});
             acc.push(itemToPush);

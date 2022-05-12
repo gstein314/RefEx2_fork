@@ -114,8 +114,9 @@
         filters: 'project_filters',
       }),
       filteredData() {
+        const copy = [...this.results];
         return (
-          this.results
+          copy
             .filter(result => {
               let isFiltered = false;
               for (const filter of this.filters) {
@@ -133,8 +134,8 @@
                       : key === 'LogMedian'
                       ? Object.values(result.combinedMedianData)
                       : [result[key]];
-                  isFiltered =
-                    n.find(x => inRange(x, filter.filterModal)) === undefined;
+                  if (n.find(x => inRange(x, filter.filterModal)) === undefined)
+                    isFiltered = true;
                 }
                 // text filter
                 else if (
