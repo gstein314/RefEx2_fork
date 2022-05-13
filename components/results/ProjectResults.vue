@@ -98,14 +98,14 @@
         </tbody>
       </table>
     </section>
-    <ProjectResultsPagination :pages-number="pagesNumber" />
+    <ResultsPagination :pages-number="pagesNumber" />
   </div>
 </template>
 
 <script>
   import TableHeader from '~/components/results/TableHeader.vue';
   import { mapGetters } from 'vuex';
-  import ProjectResultsPagination from './ProjectResultsPagination.vue';
+  import ResultsPagination from './ResultsPagination.vue';
 
   const inRange = (x, [min, max]) => {
     return typeof x !== 'number' || (x - min) * (x - max) <= 0;
@@ -120,7 +120,7 @@
   export default {
     components: {
       TableHeader,
-      ProjectResultsPagination,
+      ResultsPagination,
     },
     props: {
       selectedItem: {

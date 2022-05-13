@@ -134,7 +134,6 @@
     display: flex
     justify-content: center
     >ul
-      font-size: 1.25rem
       margin-top: 2rem
       display: flex
       justify-content: center
@@ -178,6 +177,5 @@
           font-size: 1rem
   .disabled
     pointer-events: none
-    color: $GRAY
     opacity: 0.5
 </style>
