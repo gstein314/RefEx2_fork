@@ -41,10 +41,6 @@
     computed: {
       ...mapGetters({
         filters: 'project_filters',
-      }),
-    },
-    computed: {
-      ...mapGetters({
         paginationObject: 'get_project_pagination',
       }),
       currentLimit() {
@@ -56,7 +52,6 @@
         updateProjectFilters: 'update_project_filters',
         updatePagination: 'set_project_pagination',
       }),
-       
       toggleDisplayOfFilter(key) {
         this.updateProjectFilters({
           key: 'is_displayed',

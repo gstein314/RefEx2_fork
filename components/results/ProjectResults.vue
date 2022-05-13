@@ -49,62 +49,37 @@
                   filter.column === 'alias' && JSON.parse(result[filter.column])
                 "
               >
-                <median-scale v-if="filter.column === 'LogMedian'" />
-              </table-header>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(result, resultIndex) in pageItems" :key="resultIndex">
-            <template v-for="(filter, filterIndex) of filters">
-              <td
-                v-if="filter.is_displayed"
-                :key="`result-${filterIndex}`"
-                :class="filter.column"
-              >
-                <MedianBar
-                  v-if="filter.column === 'LogMedian'"
-                  :median-info="result.combinedMedianData"
-                />
-                <template
-                  v-else-if="
-                    filter.column === 'alias' &&
-                    JSON.parse(result[filter.column])
-                  "
+                <span
+                  v-for="(alias, alias_index) in JSON.parse(
+                    result[filter.column]
+                  )"
+                  :key="alias_index"
                 >
+                  <span>{{ alias }}</span>
                   <span
-                    v-for="(alias, alias_index) in JSON.parse(
-                      result[filter.column]
-                    )"
-                    :key="alias_index"
-                  >
-                    <span>{{ alias }}</span>
-                    <span
-                      v-if="
-                        alias_index <
-                        JSON.parse(result[filter.column]).length - 1
-                      "
-                      class="comma"
-                      >,
-                    </span>
+                    v-if="
+                      alias_index < JSON.parse(result[filter.column]).length - 1
+                    "
+                    class="comma"
+                    >,
                   </span>
-                </template>
-                <template v-else>
-                  {{ result[filter.column] }}
-                </template>
-              </td>
-            </template>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+                </span>
+              </template>
+              <template v-else>
+                {{ result[filter.column] }}
+              </template>
+            </td>
+          </template>
+        </tr>
+      </tbody>
+    </table>
     <ResultsPagination :pages-number="pagesNumber" />
-  </div>
+  </section>
 </template>
 
 <script>
   import TableHeader from '~/components/results/TableHeader.vue';
-  import { mapGetters } from 'vuex';
+  import { mapGetters, mapMutations } from 'vuex';
   import ResultsPagination from './ResultsPagination.vue';
 
   const inRange = (x, [min, max]) => {
@@ -162,71 +137,69 @@
 
       filteredData() {
         const copy = [...this.results];
-        return (
-          copy
-            .filter(result => {
-              let isFiltered = false;
-              for (const filter of this.filters) {
-                const key = filter.column;
-                if (!filter.is_displayed) continue;
-                // number filter
-                else if (
-                  typeof filter.filterModal === 'number' ||
-                  Array.isArray(filter.filterModal)
-                ) {
-                  // checks if all values are in range. Creates a list in case of Age due to multiple values in string form
-                  const n =
-                    key === 'Age'
-                      ? createNumberList(result[key])
-                      : key === 'LogMedian'
-                      ? Object.values(result.combinedMedianData)
-                      : [result[key]];
-                  if (n.find(x => inRange(x, filter.filterModal)) === undefined)
-                    isFiltered = true;
-                }
-                // text filter
-                else if (
+        return copy
+          .filter(result => {
+            let isFiltered = false;
+            for (const filter of this.filters) {
+              const key = filter.column;
+              if (!filter.is_displayed) continue;
+              // number filter
+              else if (
+                typeof filter.filterModal === 'number' ||
+                Array.isArray(filter.filterModal)
+              ) {
+                // checks if all values are in range. Creates a list in case of Age due to multiple values in string form
+                const n =
+                  key === 'Age'
+                    ? createNumberList(result[key])
+                    : key === 'LogMedian'
+                    ? Object.values(result.combinedMedianData)
+                    : [result[key]];
+                if (n.find(x => inRange(x, filter.filterModal)) === undefined)
+                  isFiltered = true;
+              }
+              // text filter
+              else if (
+                filter.filterModal !== '' &&
+                !result[key].includes(filter.filterModal)
+              ) {
+                isFiltered =
                   filter.filterModal !== '' &&
-                  !result[key].includes(filter.filterModal)
-                ) {
-                  isFiltered =
-                    filter.filterModal !== '' &&
-                    !result[key].includes(filter.filterModal);
+                  !result[key].includes(filter.filterModal);
+              }
+            }
+            return !isFiltered;
+          })
+          ?.sort((a, b) => {
+            const aVal =
+              this.sort.key === 'LogMedian'
+                ? a.combinedMedianData[this.selectedItem]
+                : a[this.sort.key];
+            const bVal =
+              this.sort.key === 'LogMedian'
+                ? b.combinedMedianData[this.selectedItem]
+                : b[this.sort.key];
+            switch (this.sort?.order) {
+              case 'up':
+                if (aVal < bVal) {
+                  return -1;
+                } else if (aVal > bVal) {
+                  return 1;
+                } else {
+                  return 0;
                 }
-              }
-              return !isFiltered;
-            })
-            ?.sort((a, b) => {
-              const aVal =
-                this.sort.key === 'LogMedian'
-                  ? a.combinedMedianData[this.selectedItem]
-                  : a[this.sort.key];
-              const bVal =
-                this.sort.key === 'LogMedian'
-                  ? b.combinedMedianData[this.selectedItem]
-                  : b[this.sort.key];
-              switch (this.sort?.order) {
-                case 'up':
-                  if (aVal < bVal) {
-                    return -1;
-                  } else if (aVal > bVal) {
-                    return 1;
-                  } else {
-                    return 0;
-                  }
-                case 'down':
-                  if (aVal > bVal) {
-                    return -1;
-                  } else if (aVal < bVal) {
-                    return 1;
-                  } else {
-                    return 0;
-                  }
-              }
-            })
-            // TODO: improve usage of offset and limit
-            //.slice(this.paginationObject.offset, this.paginationObject.limit)
-        );
+              case 'down':
+                if (aVal > bVal) {
+                  return -1;
+                } else if (aVal < bVal) {
+                  return 1;
+                } else {
+                  return 0;
+                }
+            }
+          });
+        // TODO: improve usage of offset and limit
+        //.slice(this.paginationObject.offset, this.paginationObject.limit)
       },
       pageItems() {
         return this.filteredData.slice(
@@ -288,7 +261,7 @@
 </script>
 <style lang="sass" scoped>
   .table-wrapper
-    display: flex
+    //display: flex
     margin-left: 45px
     table
       white-space: nowrap
