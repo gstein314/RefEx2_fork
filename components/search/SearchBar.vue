@@ -27,19 +27,19 @@
     <vue-simple-suggest
       v-model="parameters.text"
       :debounce="500"
-      display-attribute="name"
-      value-attribute="name"
-      :list="getSuggestionList"
-      :max-suggestions="100"
-      class="text_search_gene_name"
+      :display-attribute="paramsForSuggestions[1]"
+      :value-attribute="paramsForSuggestions[0]"
+      :list="getSuggestions"
+      :max-suggestions="20"
+      class="text_search_name"
       :placeholder="filterType === 'gene' ? 'transcription factor' : 'liver'"
       @input="showResults('numfound')"
       @select="moveDetailpage"
     >
       <template slot="misc-item-above">
-        <button class="show_all_btn" @click="showResults()">
+        <button class="show_all_btn" @click="showResults">
           <font-awesome-icon icon="list" />
-          Show all genes that match your query
+          Show all {{ filterType }}s that match your query
         </button>
       </template>
       <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
@@ -48,13 +48,11 @@
         slot="suggestion-item"
         slot-scope="{ suggestion }"
         v-html="
-          `<b>${suggestion.symbol}</b>&nbsp;
-          (${$boldenSuggestion(suggestion.name, parameters.text)}
-          ${$boldenSuggestion(suggestion.alias, parameters.text)}
-          , GeneID: ${$boldenSuggestion(
-            suggestion.entrezgene,
+          `<b>${suggestion[paramsForSuggestions[0]]}</b>&nbsp;
+          ${$boldenSuggestion(
+            suggestion[paramsForSuggestions[1]],
             parameters.text
-          )})`
+          )}`
         "
       >
         <font-awesome-icon
@@ -131,24 +129,19 @@
       filterObj() {
         return this.activeDataset[this.filterType];
       },
-      title() {
-        return this.searchCondition
-          .map((condition, index) => {
-            return index < this.searchCondition.length - 1
-              ? index === this.searchCondition.length - 2
-                ? condition.label + ' or '
-                : condition.label + ', '
-              : condition.label;
-          })
-          .join('');
-      },
       isNum() {
         return this.typeOfQuery.includes('numfound');
       },
       queryPrefix() {
         return `${this.activeDataset.dataset}${this.$firstLetterUppercase(
           this.filterType
-        )}${this.isNum ? 'Numfound' : ''}`;
+        )}`;
+      },
+      // TODO: set label key[1] to one of datasets.json
+      paramsForSuggestions() {
+        return this.filterType === 'gene'
+          ? ['geneid', 'name']
+          : ['refexSampleId', 'NcitLabel'];
       },
       keyForID() {
         const fixedResultParamsForGene = 'symbol name alias geneid';
@@ -156,7 +149,7 @@
           ? fixedResultParamsForGene
           : 'refexSampleId';
       },
-      suggest_query() {
+      suggestQuery() {
         let params = Object.entries(this.parameters)
           .filter(([_key, value]) => value !== '')
           .map(
@@ -173,7 +166,9 @@
               .filter(param => !['text', 'go'].includes(param))
               .join(' ')} ${this.keyForID}}`;
         const suffix = this.isNum ? '' : ` ${this.queryPrefix}Numfound`;
-        return `{${this.queryPrefix}${params}${resultParams}${suffix}}`;
+        return `{${this.queryPrefix}${
+          this.isNum ? 'Numfound' : ''
+        }${params}${resultParams}${suffix}}`;
       },
     },
     watch: {
@@ -200,17 +195,26 @@
 
         this.showResults('numfound');
       },
-      // TODO: check if suggestions needs to be changed for sample
-      getSuggestionList(suggest) {
-        let url = `http://refex2-api.bhx.jp/api/suggest?query=${suggest}`;
-        this.isLoading = true;
-        return this.$axios.$get(url).then(results => {
-          this.isLoading = false;
-          return results.results;
-        });
-      },
       moveDetailpage(suggestion) {
-        this.$router.push(this.routeToProjectPage(suggestion.entrezgene));
+        this.$router.push(
+          this.routeToProjectPage(suggestion[this.paramsForSuggestions[0]])
+        );
+      },
+      getSuggestions() {
+        this.isLoading = true;
+        const suggestion = this.parameters.text;
+        if (suggestion === '') return;
+        const query = `{${
+          this.queryPrefix
+        }(text: "${suggestion}") {${this.paramsForSuggestions.join(' ')}}}`;
+        return this.$axios
+          .$post('gql', {
+            query,
+          })
+          .then(results => {
+            this.isLoading = false;
+            return results.data[this.queryPrefix];
+          });
       },
       showResults(type = 'all') {
         this.typeOfQuery = type;
@@ -218,7 +222,7 @@
         let results_num = 0;
         this.$axios
           .$post('gql', {
-            query: this.suggest_query,
+            query: this.suggestQuery,
           })
           .then(result => {
             const prefix = this.queryPrefix.replace('Numfound', '');
@@ -286,7 +290,7 @@
                           &::after
                             content: none
   ::v-deep
-      .text_search_gene_name
+      .text_search_name
           input
               +text_input
               font-size: 34px
