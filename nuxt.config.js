@@ -50,7 +50,16 @@ export default {
           // you must have it in your node_modules to actually import
           {
             set: '@fortawesome/pro-regular-svg-icons',
-            icons: ['faSort', 'faSortUp', 'faSortDown', 'faSearch'],
+            icons: [
+              'faSort',
+              'faSortUp',
+              'faSortDown',
+              'faSearch',
+              'faAngleLeft',
+              'faAngleRight',
+              'faAngleDoubleLeft',
+              'faAngleDoubleRight',
+            ],
           },
         ],
       },

@@ -15,6 +15,19 @@
           <label :for="value.innerKey"> {{ value.label }} </label>
         </div>
       </div>
+      <div class="display_pagination">
+        <label for="pagination">Items per page</label>
+        <select id="pagination" name="pagination" @change="setLimit">
+          <option
+            v-for="n in [10, 20, 50, 100]"
+            :key="`pagination-limit-${n}`"
+            :value="n"
+            :selected="n === currentLimit"
+          >
+            {{ n }}
+          </option>
+        </select>
+      </div>
     </div>
   </modal-view>
 </template>
@@ -28,11 +41,16 @@
     computed: {
       ...mapGetters({
         filters: 'project_filters',
+        paginationObject: 'get_project_pagination',
       }),
+      currentLimit() {
+        return this.paginationObject.limit;
+      },
     },
     methods: {
       ...mapMutations({
         updateProjectFilters: 'update_project_filters',
+        updatePagination: 'set_project_pagination',
       }),
       toggleDisplayOfFilter(key) {
         this.updateProjectFilters({
@@ -45,11 +63,21 @@
       toggleDisplaySettings() {
         this.isDisplaySettings = !this.isDisplaySettings;
       },
+      setLimit(e) {
+        const newLimit = +e.target.value;
+        const newPage = Math.max(
+          Math.ceil(this.paginationObject.offset / newLimit),
+          1
+        );
+        const newOffset = (newPage - 1) * newLimit;
+
+        this.updatePagination({ limit: newLimit, offset: newOffset });
+      },
     },
   };
 </script>
 <style lang="sass" scoped>
-  .display_settigs_modal
+  .display_settings_modal
     width: 400px
     > .display_checkboxes
       column-count: 2
@@ -59,4 +87,6 @@
         line-height: 26px
         > label
           font-size: 14px
+    > .display_pagination
+      margin-top: 1rem
 </style>
