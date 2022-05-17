@@ -15,7 +15,7 @@
           <label :for="value.innerKey"> {{ value.label }} </label>
         </div>
       </div>
-      <div class="display-pagination">
+      <div class="display_pagination">
         <label for="pagination">Items per page</label>
         <select id="pagination" name="pagination" @change="setLimit">
           <option
@@ -77,7 +77,7 @@
   };
 </script>
 <style lang="sass" scoped>
-  .display_settigs_modal
+  .display_settings_modal
     width: 400px
     > .display_checkboxes
       column-count: 2
@@ -87,4 +87,6 @@
         line-height: 26px
         > label
           font-size: 14px
+    > .display_pagination
+      margin-top: 1rem
 </style>
