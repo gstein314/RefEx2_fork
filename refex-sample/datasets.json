@@ -179,5 +179,112 @@
         }
       }
     ]
+  },
+  {
+    "species": "Mouse",
+    "search_conditions": [
+      { "label": "Gene Name", "examples": ["transcription factor"] },
+      { "label": "Symbol", "examples": ["ITG"] },
+      { "label": "Summary", "examples": ["Breast cancer"] }
+    ],
+    "datasets": [
+      {
+        "dataset": "mouseFantom5",
+        "label": "FANTOM5",
+        "gene": {
+          "key": "ncbiGeneId",
+          "header": "NCBI Gene ID",
+          "item_comparison_example": [
+            {
+              "route": "17869,16600,20674,18999",
+              "label": "Yamanaka Factors (OCT3/4, SOX2, KLF4 and C-MYC-OSKM)"
+            }
+          ]
+        },
+        "sample": {
+          "filter": [
+            {
+              "column": "SampleTypeCategory",
+              "label": "Sample type",
+              "note": "FANTOM5",
+              "is_checkbox": true,
+              "is_displayed": true,
+              "is_ontology": false
+            },
+            {
+              "column": "ExperimentCategory",
+              "label": "Experiment",
+              "note": "FANTOM5",
+              "is_checkbox": true,
+              "is_displayed": false,
+              "is_ontology": false
+            },
+            {
+              "column": "UberonLabel",
+              "label": "Tissue",
+              "note": "UBERON",
+              "is_checkbox": false,
+              "examples": ["skin", "liver"],
+              "is_displayed": true,
+              "is_ontology": true
+            },
+            {
+              "column": "ClLabel",
+              "label": "Cell type",
+              "note": "Cell Ontology",
+              "is_checkbox": false,
+              "examples": ["macrophage", "hepatocyte"],
+              "is_displayed": true,
+              "is_ontology": true
+            },
+            {
+              "column": "NcitLabel",
+              "label": "Disease",
+              "note": "NCI Thesaurus",
+              "is_checkbox": false,
+              "examples": ["erythroid neoplasm"],
+              "is_displayed": true,
+              "is_ontology": true
+            },
+            {
+              "column": "DevelopmentalStage",
+              "label": "Developmental stage",
+              "note": "",
+              "is_checkbox": true,
+              "is_displayed": false,
+              "is_ontology": false
+            },
+            {
+              "column": "Sex",
+              "label": "Sex",
+              "note": "",
+              "is_checkbox": true,
+              "is_displayed": false,
+              "is_ontology": false
+            }
+          ],
+          "item_comparison_example": [
+            {
+              "route": "RES00003272,RES00003273,RES00003274,RES00003271",
+              "label": "Bone development"
+            },
+            {
+              "route": "RES00003193,RES00003194,RES00003195,RES00003196",
+              "label": "Neurons from various tissues"
+            },
+            {
+              "route": "RES00003624,RES00003627",
+              "label": "Visual cortex - Mecp KO vs WT"
+            }
+          ],
+          "search_conditions": [
+            {
+              "label": "Sample Name",
+              "examples": ["liver", "lung"]
+            }
+          ]
+        }
+      }
+    ]
   }
 ]
