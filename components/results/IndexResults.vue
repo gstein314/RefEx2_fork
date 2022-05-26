@@ -39,7 +39,7 @@
       <tbody>
         <td
           v-if="!tableDataIsSameAsScreener"
-          class="error"
+          class="warning"
           :colspan="filters.filter(x => x.is_displayed).length"
         >
           <font-awesome-icon icon="exclamation-triangle" />
@@ -194,10 +194,11 @@
     > table
       +table
       > tbody
-        > .error
-          color: $ERROR_COLOR
+        > .warning
           padding: 40px
           text-align: center
+          > .fa-exclamation-triangle
+            color: $WARNING_COLOR
         > tr
           > td.gene_expression_patterns
             > img
