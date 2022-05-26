@@ -73,7 +73,6 @@
         this.filters = this.activeDataset[this.$vnode.key]?.filter || [
           ...this.filterByName('gene').filter,
         ];
-        this.isFirstSearch = true;
       },
     },
     methods: {

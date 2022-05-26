@@ -1,6 +1,6 @@
 export default ({ app }, inject) => {
   inject('boldenSuggestion', (fullText, highlightedPart) => {
-    if (!fullText || !highlightedPart) return text;
+    if (!fullText || !highlightedPart) return fullText;
     return fullText.replace(highlightedPart, `<b>${highlightedPart}</b>`);
   });
   inject(

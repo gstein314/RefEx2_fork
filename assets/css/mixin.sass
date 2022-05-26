@@ -3,9 +3,9 @@ $MAIN_COLOR_PALE: #F5F7F9
 $BLACK: #3E4652
 $GRAY: #7C7C7C
 $ERROR_COLOR: #FF4C5E
-$ACTIVE_COLOR: #FFE100
+$ACTIVE_COLOR: #fad275 
 $ACTIVE_COLOR_HOVER: rgba(255, 255, 0, .1)
-$ACCENT_COLOR: #fad275
+$ACCENT_COLOR: #FFE100
 $BUTTON_HOVER_COLOR: #366c96
 $COLOR_1: #488EC4
 $COLOR_2: #FF8A17
@@ -56,10 +56,17 @@ $TOOLTIP_LAYER: 2
   position: absolute
   background-color: #ffffff
   z-index: 100
+
   > li
     font-size: 16px
     line-height: 24px
     padding: 0 20px
+    > div
+      display: flex
+      align-items: center
+      > .external-link-alt
+        margin-left: auto
+        padding-left: 2rem
     &.hover
       color: #ffffff
       background-color: $MAIN_COLOR
