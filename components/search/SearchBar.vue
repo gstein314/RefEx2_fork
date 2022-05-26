@@ -36,25 +36,23 @@
       @input="showResults('numfound')"
       @select="moveDetailpage"
     >
-      <template slot="misc-item-above">
-        <button class="show_all_btn" @click="showResults">
-          <font-awesome-icon icon="list" />
-          Show all {{ filterType }}s that match your query
-        </button>
-      </template>
       <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
       <!-- eslint-disable vue/no-unused-vars -->
-      <div
-        slot="suggestion-item"
-        slot-scope="{ suggestion }"
-        v-html="
-          `<b>${suggestion[paramsForSuggestions[0]]}</b>&nbsp;
-          ${$boldenSuggestion(
-            suggestion[paramsForSuggestions[1]],
-            parameters.text
-          )}`
-        "
-      >
+      <div slot="suggestion-item" slot-scope="{ suggestion }">
+        <template v-if="filterType === 'gene'">
+          <strong class="title">
+            {{ suggestion[paramsForSuggestions[0]] }}</strong
+          >&nbsp; -&nbsp;
+        </template>
+
+        <span
+          v-html="
+            $boldenSuggestion(
+              suggestion[paramsForSuggestions[1]],
+              parameters.text
+            )
+          "
+        ></span>
         <font-awesome-icon
           icon="external-link-alt"
           class="external-link-alt"
@@ -137,11 +135,10 @@
           this.filterType
         )}`;
       },
-      // TODO: set label key[1] to one of datasets.json
       paramsForSuggestions() {
         return this.filterType === 'gene'
           ? ['geneid', 'name']
-          : ['refexSampleId', 'NcitLabel'];
+          : ['refexSampleId', 'Description'];
       },
       keyForID() {
         const fixedResultParamsForGene = 'symbol name alias geneid';
@@ -217,6 +214,7 @@
           });
       },
       showResults(type = 'all') {
+        if (typeof type !== 'string') return;
         this.typeOfQuery = type;
         let results;
         let results_num = 0;
