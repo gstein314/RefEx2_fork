@@ -7,7 +7,7 @@
         :class="{
           active: activeSpecie.species === specie.species,
         }"
-        @click="$store.commit('set_specie', specie.species)"
+        @click="updateSpecie(specie.species)"
       >
         <icon-base :icon-name="specie.species" />
         <div class="specie_wrapper">
