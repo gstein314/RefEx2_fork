@@ -92,7 +92,8 @@
     // TODO: add sample option
     async asyncData({ $axios, query, store, route }) {
       let results, ageRange, medianRange;
-      const { project } = route.params;
+      const { project, organism } = route.params;
+      store.commit('set_specie', organism);
       const { id, type } = query;
       const items = await Promise.all(
         id.split(',').map(async (id, index) => {
