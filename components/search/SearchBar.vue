@@ -29,11 +29,11 @@
       :debounce="500"
       :display-attribute="paramsForSuggestions[1]"
       :value-attribute="paramsForSuggestions[0]"
-      :list="getSuggestions"
+      :list="suggestions"
       :max-suggestions="20"
       class="text_search_name"
       :placeholder="filterType === 'gene' ? 'transcription factor' : 'liver'"
-      @input="typeOfQuery.includes('reset') ? '' : showResults('numfound')"
+      @input="updateSuggestions"
       @select="moveDetailpage"
     >
       <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
@@ -53,6 +53,29 @@
             )
           "
         ></span>
+        <template v-if="isSummaryIncluded">
+          <strong>Summary:</strong>
+          <ul v-if="suggestion.alias && JSON.parse(suggestion.alias)" 　>
+            <li
+              v-for="(alias, aliasIndex) in JSON.parse(suggestion.alias)"
+              :key="aliasIndex"
+            >
+              {{ alias }}
+            </li>
+          </ul>
+        </template>
+        <!-- <ul v-if="isSummaryIncluded">
+          <li
+            v-for="(suggestions, aliasIndex) in suggestion.alias"
+            :key="aliasIndex"
+          >
+            {{ alias }}
+          </li>
+          {{
+            suggestion.alias
+          }}
+        </ul> -->
+
         <font-awesome-icon
           icon="external-link-alt"
           class="external-link-alt"
@@ -68,7 +91,10 @@
         <span>Loading...</span>
       </div>
     </vue-simple-suggest>
-    <div :class="['summary_check_wrapper', { hide: parameters.text === '' }]">
+    <div
+      v-if="filterType === 'gene'"
+      :class="['summary_check_wrapper', { hide: parameters.text === '' }]"
+    >
       <input
         id="summary_check"
         v-model="isSummaryIncluded"
@@ -102,6 +128,7 @@
         parameters: {
           text: '',
         },
+        suggestions: [],
         onEvent: false,
         isSummaryIncluded: false,
         isReloadActive: false,
@@ -136,7 +163,7 @@
       },
       paramsForSuggestions() {
         return this.filterType === 'gene'
-          ? ['geneid', 'name']
+          ? ['symbol', 'name']
           : ['refexSampleId', 'Description'];
       },
       keyForID() {
@@ -172,6 +199,9 @@
         this.$set(this.parameters, 'text', '');
         this.typeOfQuery = 'reset numfound';
       },
+      isSummaryIncluded() {
+        this.getSuggestions();
+      },
     },
     methods: {
       ...mapMutations({
@@ -188,20 +218,26 @@
           this.routeToProjectPage(suggestion[this.paramsForSuggestions[0]])
         );
       },
+      updateSuggestions() {
+        this.getSuggestions();
+        if (this.typeOfQuery.includes('reset')) showResults('numfound');
+      },
       getSuggestions() {
         this.isLoading = true;
         const suggestion = this.parameters.text;
         if (suggestion === '') return;
         const query = `{${
           this.queryPrefix
-        }(text: "${suggestion}") {${this.paramsForSuggestions.join(' ')}}}`;
+        }(text: "${suggestion}") {${this.paramsForSuggestions.join(' ')} ${
+          this.isSummaryIncluded ? 'alias' : ''
+        }}}`;
         return this.$axios
           .$post('gql', {
             query,
           })
           .then(results => {
             this.isLoading = false;
-            return results.data[this.queryPrefix];
+            this.suggestions = results.data[this.queryPrefix];
           });
       },
       showResults(type = 'all') {
