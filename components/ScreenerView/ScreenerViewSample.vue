@@ -45,36 +45,23 @@
             :label="option"
           ></option>
         </select>
-        <vue-simple-suggest
+        <input
           v-else
           :key="`${filterIndex + 1}_gene_tags`"
           v-model="parameters[filter.column]"
-          :filter-by-query="true"
-          :list="autoComplete[filter.column]"
-          :max-suggestions="100"
           class="text_search_sample_types"
           :placeholder="filter.examples ? filter.examples[0] : ''"
           @input="updateParameter(filter.column, parameters[filter.column])"
-        >
-          <div
-            slot="suggestion-item"
-            slot-scope="{ suggestion }"
-            v-html="$boldenSuggestion(suggestion, parameters[filter.column])"
-          ></div>
-        </vue-simple-suggest>
+        />
       </div>
     </div>
   </div>
 </template>
 <script>
   import { mapGetters } from 'vuex';
-  import VueSimpleSuggest from 'vue-simple-suggest';
   import { mapMutations } from 'vuex';
 
   export default {
-    components: {
-      VueSimpleSuggest,
-    },
     data() {
       return {
         // passed down to API

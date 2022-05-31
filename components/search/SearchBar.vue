@@ -24,85 +24,66 @@
         </dl>
       </span>
     </h3>
-    <vue-simple-suggest
-      v-model="parameters.text"
-      :debounce="500"
-      :display-attribute="paramsForSuggestions[1]"
-      :value-attribute="paramsForSuggestions[0]"
-      :list="suggestions"
-      :max-suggestions="20"
-      class="text_search_name"
-      :placeholder="filterType === 'gene' ? 'transcription factor' : 'liver'"
-      @input="updateSuggestions"
-      @select="moveDetailpage"
-    >
-      <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
-      <!-- eslint-disable vue/no-unused-vars -->
-      <div slot="suggestion-item" slot-scope="{ suggestion }">
-        <template v-if="filterType === 'gene'">
+    <template v-if="filterType === 'gene'">
+      <vue-simple-suggest
+        v-model="parameters.text"
+        :debounce="500"
+        :display-attribute="paramsForSuggestions[1]"
+        :value-attribute="paramsForSuggestions[0]"
+        :list="suggestions"
+        :max-suggestions="20"
+        class="text_search_name"
+        placeholder="transcription factor"
+        @input="updateSuggestions"
+        @select="moveDetailpage"
+      >
+        <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
+        <!-- eslint-disable vue/no-unused-vars -->
+        <div slot="suggestion-item" slot-scope="{ suggestion }">
           <strong class="title">
             {{ suggestion[paramsForSuggestions[0]] }}</strong
           >&nbsp; -&nbsp;
-        </template>
-
-        <span
-          v-html="
-            $boldenSuggestion(
-              suggestion[paramsForSuggestions[1]],
-              parameters.text
-            )
-          "
-        ></span>
-        <template v-if="isSummaryIncluded">
-          <strong>Summary:</strong>
-          <ul v-if="suggestion.alias && JSON.parse(suggestion.alias)" 　>
-            <li
-              v-for="(alias, aliasIndex) in JSON.parse(suggestion.alias)"
-              :key="aliasIndex"
-            >
-              {{ alias }}
-            </li>
-          </ul>
-        </template>
-        <!-- <ul v-if="isSummaryIncluded">
-          <li
-            v-for="(suggestions, aliasIndex) in suggestion.alias"
-            :key="aliasIndex"
-          >
-            {{ alias }}
-          </li>
-          {{
-            suggestion.alias
-          }}
-        </ul> -->
-
-        <font-awesome-icon
-          icon="external-link-alt"
-          class="external-link-alt"
-          style="font-size: 12px"
+          <span
+            v-html="
+              $boldenSuggestion(
+                suggestion[paramsForSuggestions[1]],
+                parameters.text
+              )
+            "
+          ></span>
+          <font-awesome-icon
+            icon="external-link-alt"
+            class="external-link-alt"
+            style="font-size: 12px"
+          />
+        </div>
+        <div
+          v-if="isLoading"
+          slot="misc-item-below"
+          slot-scope="{ suggestion }"
+          class="misc-item"
+        >
+          <span>Loading...</span>
+        </div>
+      </vue-simple-suggest>
+      <div :class="['summary_check_wrapper', { hide: parameters.text === '' }]">
+        <input
+          id="summary_check"
+          v-model="isSummaryIncluded"
+          type="checkbox"
+          name="summary_check"
+          @click="showResults('numfound')"
         />
+        <label for="summary_check">Include gene summaries in search</label>
       </div>
-      <div
-        v-if="isLoading"
-        slot="misc-item-below"
-        slot-scope="{ suggestion }"
-        class="misc-item"
-      >
-        <span>Loading...</span>
-      </div>
-    </vue-simple-suggest>
-    <div
-      v-if="filterType === 'gene'"
-      :class="['summary_check_wrapper', { hide: parameters.text === '' }]"
-    >
+    </template>
+    <div v-else class="text_search_name">
       <input
-        id="summary_check"
-        v-model="isSummaryIncluded"
-        type="checkbox"
-        name="summary_check"
-        @click="showResults('numfound')"
+        v-model="parameters.text"
+        placeholder="liver"
+        class="text_search_name"
+        @input="showResults('numfound')"
       />
-      <label for="summary_check">Include this field in search</label>
     </div>
     <ScreenerView>
       <component
@@ -174,7 +155,7 @@
       },
       suggestQuery() {
         let params = Object.entries(this.parameters)
-          .filter(([_key, value]) => value !== '')
+          .filter(([_key, value]) => value.length > 0)
           .map(
             ([key, value], index) =>
               `${key}:"${value}"${
@@ -200,7 +181,8 @@
         this.typeOfQuery = 'reset numfound';
       },
       isSummaryIncluded() {
-        this.getSuggestions();
+        //TODO: set summary param when API is updated
+        this.showResults('numfound');
       },
     },
     methods: {
@@ -221,7 +203,7 @@
       },
       updateSuggestions() {
         this.getSuggestions();
-        if (this.typeOfQuery.includes('reset')) showResults('numfound');
+        this.showResults('numfound');
       },
       getSuggestions() {
         this.isLoading = true;
@@ -229,9 +211,7 @@
         if (suggestion === '') return;
         const query = `{${
           this.queryPrefix
-        }(text: "${suggestion}") {${this.paramsForSuggestions.join(' ')} ${
-          this.isSummaryIncluded ? 'alias' : ''
-        }}}`;
+        }(text: "${suggestion}") {${this.paramsForSuggestions.join(' ')}}}`;
         return this.$axios
           .$post('gql', {
             query,
