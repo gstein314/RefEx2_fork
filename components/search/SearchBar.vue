@@ -214,6 +214,7 @@
         this.showResults('numfound');
       },
       moveDetailpage(suggestion) {
+        this.$nuxt.$loading.start();
         this.$router.push(
           this.routeToProjectPage(suggestion[this.paramsForSuggestions[0]])
         );

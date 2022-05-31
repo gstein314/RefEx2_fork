@@ -6,7 +6,7 @@
       <span class="example">e.g.</span>
       <span
         class="sample_value"
-        @click="$router.push(routeToProjectPage(examples[0].route))"
+        @click="moveToProjectPage(examples[0].route)"
         >{{ examples[0].label }}</span
       >
       <div class="display_settings_wrapper">
@@ -50,7 +50,7 @@
           v-for="(result, resultIndex) in results"
           v-else
           :key="`result_${resultIndex}`"
-          @click="$router.push(routeToProjectPage(result[keyForID]))"
+          @click="moveToProjectPage(result[keyForID])"
         >
           <td class="checkbox" @click="e => e.stopPropagation()">
             <input
@@ -159,6 +159,10 @@
       ...mapMutations({
         setGeneModal: 'set_gene_modal',
       }),
+      moveToProjectPage(route) {
+        this.$nuxt.$loading.start();
+        this.$router.push(this.routeToProjectPage(route));
+      },
       isArray(str) {
         return str?.startsWith('[');
       },

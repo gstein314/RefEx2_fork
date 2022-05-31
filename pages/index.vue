@@ -34,9 +34,3 @@
     },
   };
 </script>
-
-<style lang="sass">
-  .index_wrapper
-    > .modal_bg
-      +modal_bg
-</style>
