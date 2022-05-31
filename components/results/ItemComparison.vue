@@ -80,6 +80,7 @@
     display: flex
     font-size: 16px
     > .item_box
+      word-break: break-all
       width: 100px
       padding: 6px 0 0 0
       font-weight: 500

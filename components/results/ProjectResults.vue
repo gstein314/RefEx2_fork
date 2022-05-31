@@ -46,7 +46,8 @@
               />
               <template
                 v-else-if="
-                  filter.column === 'alias' && JSON.parse(result[filter.column])
+                  filter.column === 'alias' &&
+                  Array.isArray(JSON.parse(result[filter.column]))
                 "
               >
                 <span
@@ -261,8 +262,7 @@
 </script>
 <style lang="sass" scoped>
   .table-wrapper
-    //display: flex
-    margin-left: 45px
+    margin: 0 45px
     table
       white-space: nowrap
       +table

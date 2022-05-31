@@ -92,7 +92,8 @@
     // TODO: add sample option
     async asyncData({ $axios, query, store, route }) {
       let results, ageRange, medianRange;
-      const { project } = route.params;
+      const { project, organism } = route.params;
+      store.commit('set_specie', organism);
       const { id, type } = query;
       const items = await Promise.all(
         id.split(',').map(async (id, index) => {
@@ -237,16 +238,18 @@
 <style lang="sass">
   .wrapper
     display: flex
-    min-width: clamp(800px, 100vw, 4000px)
-    max-width: max-content
+    min-width: fit-content
     flex-direction: column
     margin-bottom: 50px
-    padding-right: 60px
     .chart_wrapper
+      position: sticky
+      left: 0
+      min-width: fit-content
+      width: calc(100vw - 130px)
       grid-template-columns: 1fr auto
       grid-template-rows: auto auto
       gap: 20px
-      padding: 10px 0 10px 60px
+      padding: 10px 15px 10px 60px
       display: grid
       position: sticky
       background-color: white

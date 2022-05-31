@@ -33,7 +33,7 @@
       :max-suggestions="20"
       class="text_search_name"
       :placeholder="filterType === 'gene' ? 'transcription factor' : 'liver'"
-      @input="showResults('numfound')"
+      @input="typeOfQuery.includes('reset') ? '' : showResults('numfound')"
       @select="moveDetailpage"
     >
       <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
@@ -123,7 +123,6 @@
       filterType() {
         return this.$vnode.key.split('_')[0];
       },
-      // TODO: turn into qql query
       filterObj() {
         return this.activeDataset[this.filterType];
       },
@@ -172,14 +171,6 @@
       activeDataset() {
         this.$set(this.parameters, 'text', '');
         this.typeOfQuery = 'reset numfound';
-        // if (this.activeFilter.name !== this.filterType) return;
-        this.showResults('reset numfound');
-      },
-      // TODO: check if neccesary to watch both
-      activeSpecie() {
-        this.$set(this.parameters, 'text', '');
-        this.typeOfQuery = 'reset numfound';
-        this.showResults('numfound');
       },
     },
     methods: {

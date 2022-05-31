@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="root">
     <header>
       <h1>
         <nuxt-link to="/">
@@ -25,14 +25,19 @@
 
 <style lang="sass">
   html
-    border-top: 8px solid $MAIN_COLOR
     font-family: Helvetica,sans-serif
     font-weight: 400
     color: $BLACK
     box-sizing: border-box
+    .root
+      height: 100vh
+      overflow: auto
     ul
       list-style: none
     header
+      border-top: 8px solid $MAIN_COLOR
+      left: 0
+      position: sticky
       width: 100%
       text-align: center
       > h1
