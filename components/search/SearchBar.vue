@@ -30,11 +30,10 @@
         :debounce="500"
         :display-attribute="paramsForSuggestions[1]"
         :value-attribute="paramsForSuggestions[0]"
-        :list="suggestions"
+        :list="updateSuggestions"
         :max-suggestions="20"
         class="text_search_name"
         placeholder="transcription factor"
-        @input="updateSuggestions"
         @select="moveDetailpage"
       >
         <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
@@ -109,7 +108,6 @@
         parameters: {
           text: '',
         },
-        suggestions: [],
         onEvent: false,
         isSummaryIncluded: false,
         isReloadActive: false,
@@ -185,6 +183,9 @@
         this.showResults('numfound');
       },
     },
+    created() {
+      this.showResults('numfound');
+    },
     methods: {
       ...mapMutations({
         setAlertModal: 'set_alert_modal',
@@ -202,8 +203,8 @@
         );
       },
       updateSuggestions() {
-        this.getSuggestions();
         this.showResults('numfound');
+        return this.getSuggestions();
       },
       getSuggestions() {
         this.isLoading = true;
@@ -218,7 +219,7 @@
           })
           .then(results => {
             this.isLoading = false;
-            this.suggestions = results.data[this.queryPrefix];
+            return results.data[this.queryPrefix];
           });
       },
       showResults(type = 'all') {
