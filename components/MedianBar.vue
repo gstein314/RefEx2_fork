@@ -46,7 +46,7 @@
     },
     methods: {
       tooltipNumberDisplay(val) {
-        return val ? val?.toFixed(2) : 'NA';
+        return val >= 0 ? val?.toFixed(2) : 'NA';
       },
     },
   };
