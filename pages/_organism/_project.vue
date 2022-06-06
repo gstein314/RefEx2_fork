@@ -70,7 +70,7 @@
 
   const logMedianFilter = {
     column: 'LogMedian',
-    label: 'Log Median',
+    label: 'MEDIAN [LOG2(TPM+1)]',
     is_displayed: true,
     is_displayed: true,
     filterModal: '',
