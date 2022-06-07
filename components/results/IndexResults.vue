@@ -27,6 +27,7 @@
               @click="toggleAllCheckbox"
             />
           </th>
+          <th v-if="filterType === 'sample'">Description</th>
           <th
             v-for="(filter, index) of filters"
             v-show="filter.is_displayed"
@@ -58,6 +59,9 @@
               type="checkbox"
               :value="result[keyForID]"
             />
+          </td>
+          <td v-if="filterType === 'sample'">
+            {{ result.Description }}
           </td>
           <td
             v-for="(filter, index) of filters"
@@ -175,7 +179,8 @@
           : (this.checkedResults = this.resultsUniqueKeys);
       },
       geneDescriptionSource(resultItem) {
-        return `http://penqe.com/refex_figs/geneid_${this.activeDataset.dataset.toLowerCase()}_${resultItem}.png`;
+        const dataSetName = this.activeDataset.dataset;
+        return `@/static/geneSummaries/${dataSetName}/${dataSetName}_${1}.png`;
       },
     },
   };

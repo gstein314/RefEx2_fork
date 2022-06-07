@@ -140,16 +140,16 @@
           this.filterType
         )}`;
       },
+      // TODO: see if sample can be removed since only gene has suggestions atm
       paramsForSuggestions() {
         return this.filterType === 'gene'
-          ? ['symbol', 'name']
+          ? ['symbol', 'name', 'geneid']
           : ['refexSampleId', 'Description'];
       },
-      keyForID() {
-        const fixedResultParamsForGene = 'symbol name alias geneid';
+      extraVariablesToBeDsiplayedInResults() {
         return this.filterType === 'gene'
-          ? fixedResultParamsForGene
-          : 'refexSampleId';
+          ? 'symbol name alias geneid'
+          : 'refexSampleId Description';
       },
       suggestQuery() {
         let params = Object.entries(this.parameters)
@@ -166,7 +166,7 @@
           ? ''
           : `{${Object.keys(this.parameters)
               .filter(param => !['text', 'go'].includes(param))
-              .join(' ')} ${this.keyForID}}`;
+              .join(' ')} ${this.extraVariablesToBeDsiplayedInResults}}`;
         const suffix = this.isNum ? '' : ` ${this.queryPrefix}Numfound`;
         return `{${this.queryPrefix}${
           this.isNum ? 'Numfound' : ''
@@ -199,7 +199,7 @@
       moveDetailpage(suggestion) {
         this.$nuxt.$loading.start();
         this.$router.push(
-          this.routeToProjectPage(suggestion[this.paramsForSuggestions[0]])
+          this.routeToProjectPage(suggestion[this.paramsForSuggestions[2]])
         );
       },
       updateSuggestions() {
