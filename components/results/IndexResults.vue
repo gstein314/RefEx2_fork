@@ -189,7 +189,7 @@
   .results_wrapper
     min-width: 600px
     padding: 0 90px
-
+    margin-bottom: 60px
     > .results_title_wrapper
       display: flex
       width: 100%
@@ -209,6 +209,8 @@
           > .fa-exclamation-triangle
             color: $WARNING_COLOR
         > tr
+          &:hover
+            cursor: pointer
           > td.gene_expression_patterns
             > img
               width: 292px
