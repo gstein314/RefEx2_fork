@@ -99,6 +99,14 @@ $TOOLTIP_LAYER: 2
 @mixin table
   width: 100%
   border-collapse: collapse
+  .checkbox
+    text-align: center
+    > input[type="checkbox"]
+      cursor: pointer
+      z-index: 1
+      position: relative
+      width: 15px
+      height: 15px
   > thead
     font-size: 14px
     > tr
@@ -139,19 +147,15 @@ $TOOLTIP_LAYER: 2
         line-height: 18px
         padding: 12px 0 12px 10px
         position: relative
-        &.checkbox
-          text-align: center
-          > input[type="checkbox"]
-            z-index: 1
-            position: relative
-            width: 15px
-            height: 15px
         &.annotation
           color: $MAIN_COLOR
-          &:hover
+          > svg:hover
             cursor: pointer
+            color: $BUTTON_HOVER_COLOR
       &:nth-of-type(even)
         background-color: $MAIN_COLOR_PALE
+      &:hover
+        background-color: $ACTIVE_COLOR_HOVER
 
 @mixin select
   cursor: pointer

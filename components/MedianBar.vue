@@ -7,7 +7,7 @@
       :class="`item_${itemIndex + 1}`"
       :style="`width: ${(medianInfo[item.id] * 230) / 16}px;`"
     ></div>
-    <div class="tooltip">
+    <div class="tooltip" :style="`left: ${maxWidth + 30}px`">
       <span class="title">Expression(log2(TPM+1))</span>
       <span
         v-for="(item, itemIndex) of items"
@@ -39,6 +39,9 @@
     computed: {
       numberOfItems() {
         return this.items.length;
+      },
+      maxWidth() {
+        return (Math.max(...Object.values(this.medianInfo)) * 230) / 16;
       },
       height() {
         return this.numberOfItems * 15;
@@ -81,7 +84,6 @@
       border-radius: 3px
       box-shadow: 0 1px 4px rgba(62, 70, 82, .22)
       position: absolute
-      left: calc(100% + 10px)
       top: 0
       z-index: $TOOLTIP_LAYER
       > span

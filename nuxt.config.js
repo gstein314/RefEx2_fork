@@ -3,6 +3,11 @@ import { exponentialDelay } from 'axios-retry';
 
 export default {
   mode: 'spa',
+  loading: '~/components/ModalView/ModalViewLoading.vue',
+  loadingIndicator: {
+    color: '#488EC4',
+    background: 'white',
+  },
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     title: 'Refex',
@@ -81,7 +86,7 @@ export default {
       },
       {
         set: '@fortawesome/pro-duotone-svg-icons',
-        icons: ['faTimesCircle'],
+        icons: ['faTimesCircle', 'faSpinnerThird'],
       },
     ],
   },

@@ -10,7 +10,7 @@
       <div class="results_num_wrapper">
         <div class="results_num_inner">
           <h2>Estimated Results</h2>
-          <p class="results_num">{{ resultsNum }}</p>
+          <p class="results_num">{{ resultsNum.toLocaleString() }}</p>
           <button
             class="find_results_btn"
             @click="$refs[`${$vnode.key}_search`].showResults('all')"
@@ -23,7 +23,8 @@
     </main>
     <ModalViewDisplay
       v-if="isDisplaySettings"
-      :filters="filters"
+      :index-filters="filters"
+      @updateDisplaySettings="toggleDisplayFilter"
       @click.native="toggleDisplaySettings"
       @toggleDisplayOfFilter="toggleDisplayOfFilter"
     />
@@ -47,8 +48,10 @@
       return {
         tableDataIsSameAsScreener: false,
         isDisplaySettings: false,
-        filters: this.$store.getters.active_dataset[this.$vnode.key].filter || [
-          ...this.$store.getters.active_filter.filter,
+        filters: [
+          ...(this.$store.getters.active_dataset[this.$vnode.key].filter ??
+            this.$store.getters.active_filter.filter ??
+            []),
         ],
       };
     },
@@ -70,12 +73,19 @@
     },
     watch: {
       activeDataset() {
-        this.filters = this.activeDataset[this.$vnode.key]?.filter || [
-          ...this.filterByName('gene').filter,
-        ];
+        if (this.$vnode.key === 'gene') return;
+        this.filters = this.activeDataset[this.$vnode.key]?.filter;
       },
     },
     methods: {
+      toggleDisplayFilter(key) {
+        const index = this.filters.findIndex(filter => filter.column === key);
+        if (index < 0) return;
+        this.$set(this.filters, index, {
+          ...this.filters[index],
+          is_displayed: !this.filters[index].is_displayed,
+        });
+      },
       setTableDataIsSameAsScreener(bool = false) {
         this.tableDataIsSameAsScreener = bool;
       },

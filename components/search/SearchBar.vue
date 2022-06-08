@@ -24,59 +24,65 @@
         </dl>
       </span>
     </h3>
-    <vue-simple-suggest
-      v-model="parameters.text"
-      :debounce="500"
-      :display-attribute="paramsForSuggestions[1]"
-      :value-attribute="paramsForSuggestions[0]"
-      :list="getSuggestions"
-      :max-suggestions="20"
-      class="text_search_name"
-      :placeholder="filterType === 'gene' ? 'transcription factor' : 'liver'"
-      @input="typeOfQuery.includes('reset') ? '' : showResults('numfound')"
-      @select="moveDetailpage"
-    >
-      <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
-      <!-- eslint-disable vue/no-unused-vars -->
-      <div slot="suggestion-item" slot-scope="{ suggestion }">
-        <template v-if="filterType === 'gene'">
+    <template v-if="filterType === 'gene'">
+      <vue-simple-suggest
+        v-model="parameters.text"
+        :debounce="500"
+        :display-attribute="paramsForSuggestions[1]"
+        :value-attribute="paramsForSuggestions[0]"
+        :list="updateSuggestions"
+        :max-suggestions="20"
+        class="text_search_name"
+        placeholder="transcription factor"
+        @select="moveDetailpage"
+      >
+        <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
+        <!-- eslint-disable vue/no-unused-vars -->
+        <div slot="suggestion-item" slot-scope="{ suggestion }">
           <strong class="title">
             {{ suggestion[paramsForSuggestions[0]] }}</strong
           >&nbsp; -&nbsp;
-        </template>
-
-        <span
-          v-html="
-            $boldenSuggestion(
-              suggestion[paramsForSuggestions[1]],
-              parameters.text
-            )
-          "
-        ></span>
-        <font-awesome-icon
-          icon="external-link-alt"
-          class="external-link-alt"
-          style="font-size: 12px"
+          <span
+            v-html="
+              $boldenSuggestion(
+                suggestion[paramsForSuggestions[1]],
+                parameters.text
+              )
+            "
+          ></span>
+          <font-awesome-icon
+            icon="external-link-alt"
+            class="external-link-alt"
+            style="font-size: 12px"
+          />
+        </div>
+        <div
+          v-if="isLoading"
+          slot="misc-item-below"
+          slot-scope="{ suggestion }"
+          class="misc-item"
+        >
+          <span>Loading...</span>
+        </div>
+      </vue-simple-suggest>
+      <div :class="['summary_check_wrapper', { hide: parameters.text === '' }]">
+        <input
+          id="summary_check"
+          v-model="isSummaryIncluded"
+          type="checkbox"
+          name="summary_check"
+          @click="showResults('numfound')"
         />
+        <label for="summary_check">Include gene summaries in search</label>
       </div>
-      <div
-        v-if="isLoading"
-        slot="misc-item-below"
-        slot-scope="{ suggestion }"
-        class="misc-item"
-      >
-        <span>Loading...</span>
-      </div>
-    </vue-simple-suggest>
-    <div :class="['summary_check_wrapper', { hide: parameters.text === '' }]">
+    </template>
+    <div v-else class="text_search_name">
       <input
-        id="summary_check"
-        v-model="isSummaryIncluded"
-        type="checkbox"
-        name="summary_check"
-        @click="showResults('numfound')"
+        v-model="parameters.text"
+        placeholder="liver"
+        class="text_search_name"
+        @input="showResults('numfound')"
       />
-      <label for="summary_check">Include this field in search</label>
     </div>
     <ScreenerView>
       <component
@@ -134,20 +140,20 @@
           this.filterType
         )}`;
       },
+      // TODO: see if sample can be removed since only gene has suggestions atm
       paramsForSuggestions() {
         return this.filterType === 'gene'
-          ? ['geneid', 'name']
+          ? ['symbol', 'name', 'geneid']
           : ['refexSampleId', 'Description'];
       },
-      keyForID() {
-        const fixedResultParamsForGene = 'symbol name alias geneid';
+      extraVariablesToBeDsiplayedInResults() {
         return this.filterType === 'gene'
-          ? fixedResultParamsForGene
-          : 'refexSampleId';
+          ? 'symbol name alias geneid'
+          : 'refexSampleId Description';
       },
       suggestQuery() {
         let params = Object.entries(this.parameters)
-          .filter(([_key, value]) => value !== '')
+          .filter(([_key, value]) => value.length > 0)
           .map(
             ([key, value], index) =>
               `${key}:"${value}"${
@@ -160,7 +166,7 @@
           ? ''
           : `{${Object.keys(this.parameters)
               .filter(param => !['text', 'go'].includes(param))
-              .join(' ')} ${this.keyForID}}`;
+              .join(' ')} ${this.extraVariablesToBeDsiplayedInResults}}`;
         const suffix = this.isNum ? '' : ` ${this.queryPrefix}Numfound`;
         return `{${this.queryPrefix}${
           this.isNum ? 'Numfound' : ''
@@ -172,6 +178,13 @@
         this.$set(this.parameters, 'text', '');
         this.typeOfQuery = 'reset numfound';
       },
+      isSummaryIncluded() {
+        //TODO: set summary param when API is updated
+        this.showResults('numfound');
+      },
+    },
+    created() {
+      this.showResults('numfound');
     },
     methods: {
       ...mapMutations({
@@ -184,9 +197,14 @@
         this.showResults('numfound');
       },
       moveDetailpage(suggestion) {
+        this.$nuxt.$loading.start();
         this.$router.push(
-          this.routeToProjectPage(suggestion[this.paramsForSuggestions[0]])
+          this.routeToProjectPage(suggestion[this.paramsForSuggestions[2]])
         );
+      },
+      updateSuggestions() {
+        this.showResults('numfound');
+        return this.getSuggestions();
       },
       getSuggestions() {
         this.isLoading = true;

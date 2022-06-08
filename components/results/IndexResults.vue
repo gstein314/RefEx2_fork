@@ -6,7 +6,7 @@
       <span class="example">e.g.</span>
       <span
         class="sample_value"
-        @click="$router.push(routeToProjectPage(examples[0].route))"
+        @click="moveToProjectPage(examples[0].route)"
         >{{ examples[0].label }}</span
       >
       <div class="display_settings_wrapper">
@@ -27,6 +27,7 @@
               @click="toggleAllCheckbox"
             />
           </th>
+          <th v-if="filterType === 'sample'">Description</th>
           <th
             v-for="(filter, index) of filters"
             v-show="filter.is_displayed"
@@ -50,7 +51,7 @@
           v-for="(result, resultIndex) in results"
           v-else
           :key="`result_${resultIndex}`"
-          @click="$router.push(routeToProjectPage(result[keyForID]))"
+          @click="moveToProjectPage(result[keyForID])"
         >
           <td class="checkbox" @click="e => e.stopPropagation()">
             <input
@@ -58,6 +59,9 @@
               type="checkbox"
               :value="result[keyForID]"
             />
+          </td>
+          <td v-if="filterType === 'sample'">
+            {{ result.Description }}
           </td>
           <td
             v-for="(filter, index) of filters"
@@ -159,6 +163,10 @@
       ...mapMutations({
         setGeneModal: 'set_gene_modal',
       }),
+      moveToProjectPage(route) {
+        this.$nuxt.$loading.start();
+        this.$router.push(this.routeToProjectPage(route));
+      },
       isArray(str) {
         return str?.startsWith('[');
       },
@@ -171,7 +179,8 @@
           : (this.checkedResults = this.resultsUniqueKeys);
       },
       geneDescriptionSource(resultItem) {
-        return `http://penqe.com/refex_figs/geneid_${this.activeDataset.dataset.toLowerCase()}_${resultItem}.png`;
+        const dataSetName = this.activeDataset.dataset;
+        return `@/static/geneSummaries/${dataSetName}/${dataSetName}_${1}.png`;
       },
     },
   };
@@ -180,7 +189,7 @@
   .results_wrapper
     min-width: 600px
     padding: 0 90px
-
+    margin-bottom: 60px
     > .results_title_wrapper
       display: flex
       width: 100%
@@ -200,6 +209,8 @@
           > .fa-exclamation-triangle
             color: $WARNING_COLOR
         > tr
+          &:hover
+            cursor: pointer
           > td.gene_expression_patterns
             > img
               width: 292px

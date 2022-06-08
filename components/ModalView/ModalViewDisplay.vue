@@ -6,7 +6,7 @@
         Display settings
       </p>
       <div class="display_checkboxes">
-        <div v-for="value of filters" :key="value.column">
+        <div v-for="(value, filterIndex) of filters" :key="filterIndex">
           <input
             :checked="value.is_displayed"
             type="checkbox"
@@ -38,11 +38,21 @@
     components: {
       ModalView,
     },
+    props: {
+      // eslint-disable-next-line vue/require-default-prop
+      indexFilters: {
+        type: Array,
+        required: false,
+      },
+    },
     computed: {
       ...mapGetters({
-        filters: 'project_filters',
+        projectFilters: 'project_filters',
         paginationObject: 'get_project_pagination',
       }),
+      filters() {
+        return this.indexFilters ?? this.projectFilters;
+      },
       currentLimit() {
         return this.paginationObject.limit;
       },
@@ -53,12 +63,18 @@
         updatePagination: 'set_project_pagination',
       }),
       toggleDisplayOfFilter(key) {
-        this.updateProjectFilters({
-          key: 'is_displayed',
-          filter:
-            !this.filters.find(x => x.column === key)?.is_displayed || false,
-          filterKey: key,
-        });
+        // in case of indexFilters , call parent element
+        // in case of project filters, call upon store mutation
+        if (this.indexFilters) {
+          this.$emit('updateDisplaySettings', key);
+        } else {
+          this.updateProjectFilters({
+            key: 'is_displayed',
+            filter:
+              !this.filters.find(x => x.column === key)?.is_displayed || false,
+            filterKey: key,
+          });
+        }
       },
       toggleDisplaySettings() {
         this.isDisplaySettings = !this.isDisplaySettings;

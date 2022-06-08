@@ -1,15 +1,5 @@
 <template>
   <div class="index_wrapper">
-    <!-- TODO: remove after testing
-    <button
-      @click="
-        $store.commit('set_alert_modal', {
-          msg: 'PENQE',
-        })
-      "
-    >
-      test
-    </button> -->
     <SpeciesNavigation />
     <FilterNavigation />
     <FilterTab v-for="filter of filters" :key="filter.name" />
@@ -44,9 +34,3 @@
     },
   };
 </script>
-
-<style lang="sass">
-  .index_wrapper
-    > .modal_bg
-      +modal_bg
-</style>
