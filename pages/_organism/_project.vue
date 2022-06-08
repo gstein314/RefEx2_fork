@@ -50,23 +50,13 @@
 
 <script>
   import 'vue-slider-component/dist-css/vue-slider-component.css';
-  import { mapGetters, mapMutations } from 'vuex';
+  import { mapMutations } from 'vuex';
   import ItemComparison from '~/components/results/ItemComparison.vue';
   import ModalViewGene from '~/components/ModalView/ModalViewGene.vue';
   import ModalViewCompare from '~/components/ModalView/ModalViewCompare.vue';
   import ModalViewDisplay from '~/components/ModalView/ModalViewDisplay.vue';
   import ModalViewFilter from '~/components/ModalView/ModalViewFilter.vue';
   import ProjectResults from '~/components/results/ProjectResults.vue';
-
-  const inRange = (x, [min, max]) => {
-    return typeof x !== 'number' || (x - min) * (x - max) <= 0;
-  };
-  const createNumberList = str =>
-    str
-      .replace('-', ',')
-      .split(',')
-      .map(x => parseInt(x) || 'out of filter bounds')
-      .sort();
 
   const logMedianFilter = {
     column: 'LogMedian',
@@ -91,7 +81,7 @@
     // TODO: refactor
     // TODO: add sample option
     async asyncData({ $axios, query, store, route }) {
-      let results, ageRange, medianRange;
+      let results;
       const { project, organism } = route.params;
       store.commit('set_specie', organism);
       const { id, type } = query;
@@ -108,23 +98,6 @@
           };
         })
       );
-      // set ranges based on the results. Results are gained from the first ID item
-      medianRange = [0, 0];
-      ageRange = [0, 10];
-      for (const [resultIndex, result] of results.entries()) {
-        for (const item of items) {
-          if (item.medianData[resultIndex] > medianRange[1]) {
-            medianRange[1] = item.medianData[resultIndex];
-          }
-        }
-
-        // set age range
-        if ('Age' in result) {
-          const n = createNumberList(result.Age);
-          if (n.find(x => inRange(x, ageRange))) continue;
-          ageRange[1] = n.pop();
-        }
-      }
       // set filters
       // In case of Gene, use dataset filters (sample values)
       // In case of Sample, use fixed gene filters with exception of geneDataFromGeneInfo (gene values)
@@ -152,8 +125,6 @@
         filters,
         results,
         dataset: project,
-        ageRange,
-        medianRange,
         selectedId: items[0].id,
       };
     },
@@ -204,10 +175,6 @@
     },
     mounted() {
       this.heightChartWrapper = this.$refs.chartWrapper.clientHeight;
-      this.$store.commit('set_project_filter_ranges', {
-        ageRange: this.ageRange,
-        medianRange: this.medianRange,
-      });
       this.$store.commit('set_project_filters', this.filters);
       this.$store.commit('set_project_results', this.resultsWithMedianData);
     },
