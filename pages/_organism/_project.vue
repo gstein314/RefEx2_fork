@@ -108,6 +108,18 @@
           : store.getters.filter_by_name('gene')?.filter || []),
       ];
 
+      // get fixed options for search
+      const optionsStaticData = await $axios.$get(`api/cv`);
+      if (project in optionsStaticData) {
+        for (const [key, value] of Object.entries(optionsStaticData[project])) {
+          console.log(optionsStaticData[project]);
+          const filterIndex = filters.findIndex(x => x.column === key);
+          if (filterIndex > -1) {
+            filters[filterIndex].options = value;
+          }
+        }
+      }
+
       let geneIdIndex = filters.findIndex(x => x.column === 'geneid');
 
       if (geneIdIndex)
@@ -134,6 +146,7 @@
           key: '',
           order: 'down',
         },
+        optionsStaticData: {},
         isDisplaySettingsOn: false,
         heightChartWrapper: 200,
       };

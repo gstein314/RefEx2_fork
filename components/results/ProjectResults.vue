@@ -160,13 +160,12 @@
                   isFiltered = true;
               }
               // text filter
-              else if (
-                filter.filterModal !== '' &&
-                !result[key].includes(filter.filterModal)
-              ) {
-                isFiltered =
-                  filter.filterModal !== '' &&
-                  !result[key].includes(filter.filterModal);
+              else if (filter.filterModal !== '' && !isFiltered) {
+                // excact match if filter is based on API options
+                const isMatch = filter.options
+                  ? result[key] === filter.filterModal
+                  : result[key].includes(filter.filterModal);
+                isFiltered = filter.filterModal !== '' && !isMatch;
               }
             }
             return !isFiltered;
