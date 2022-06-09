@@ -2,7 +2,7 @@ import datasets from './refex-sample/datasets.json';
 import { exponentialDelay } from 'axios-retry';
 
 export default {
-  mode: 'spa',
+  ssr: false,
   loading: '~/components/ModalView/ModalViewLoading.vue',
   loadingIndicator: {
     color: '#488EC4',
@@ -21,7 +21,7 @@ export default {
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
-  css: ['normalize.css'],
+  css: ['normalize.css', '@fortawesome/fontawesome-svg-core/styles.css'],
 
   styleResources: {
     sass: ['~/assets/css/mixin.sass'],
@@ -41,35 +41,7 @@ export default {
   buildModules: ['@nuxtjs/eslint-module'],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
-  modules: [
-    '@nuxtjs/style-resources',
-    'nuxt-fontawesome',
-    '@nuxtjs/axios',
-    [
-      'nuxt-fontawesome',
-      {
-        component: 'fa',
-        imports: [
-          //import 2 icons from set
-          // please note this is PRO set in this example,
-          // you must have it in your node_modules to actually import
-          {
-            set: '@fortawesome/pro-regular-svg-icons',
-            icons: [
-              'faSort',
-              'faSortUp',
-              'faSortDown',
-              'faSearch',
-              'faAngleLeft',
-              'faAngleRight',
-              'faAngleDoubleLeft',
-              'faAngleDoubleRight',
-            ],
-          },
-        ],
-      },
-    ],
-  ],
+  modules: ['@nuxtjs/style-resources', '@nuxtjs/fontawesome', '@nuxtjs/axios'],
 
   axios: {
     baseURL: 'http://refex2-api.bhx.jp/',
@@ -79,16 +51,13 @@ export default {
     },
   },
   fontawesome: {
-    imports: [
-      {
-        set: '@fortawesome/free-solid-svg-icons',
-        icons: ['fas'],
-      },
-      {
-        set: '@fortawesome/pro-duotone-svg-icons',
-        icons: ['faTimesCircle', 'faSpinnerThird'],
-      },
-    ],
+    proIcons: {
+      duotone: ['faTimesCircle', 'faSpinnerThird'],
+    },
+    icons: {
+      solid: true,
+    },
+    addCss: true,
   },
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
