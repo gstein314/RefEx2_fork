@@ -76,7 +76,7 @@
             />
             <img
               v-else-if="filter.column === 'gene expression patterns'"
-              :src="geneDescriptionSource(result.geneid)"
+              :src="geneSummarySource(result.geneid)"
               :alt="result.geneid"
             />
             <span
@@ -128,6 +128,7 @@
         activeSpecie: 'active_specie',
         activeDataset: 'active_dataset',
         routeToProjectPage: 'route_to_project_page',
+        geneSummarySource: 'gene_summary_source',
       }),
       examples() {
         return this.activeDataset[this.filterType].item_comparison_example;
@@ -177,10 +178,6 @@
         this.isAllChecked
           ? (this.checkedResults = [])
           : (this.checkedResults = this.resultsUniqueKeys);
-      },
-      geneDescriptionSource(resultItem) {
-        const dataSetName = this.activeDataset.dataset;
-        return `@/static/geneSummaries/${dataSetName}/${dataSetName}_${1}.png`;
       },
     },
   };

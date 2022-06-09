@@ -41,7 +41,7 @@
               />
               <img
                 v-else-if="filter.column === 'gene expression patterns'"
-                :src="geneDescriptionSource(result[geneIdKey])"
+                :src="geneSummarySource(result[geneIdKey])"
                 :alt="result[geneIdKey]"
               />
               <template
@@ -134,6 +134,7 @@
         results: 'get_project_results',
         paginationObject: 'get_project_pagination',
         filters: 'project_filters',
+        geneSummarySource: 'gene_summary_source',
       }),
 
       filteredData() {
@@ -221,9 +222,6 @@
         setGeneModal: 'set_gene_modal',
         updatePagination: 'set_project_pagination',
       }),
-      geneDescriptionSource(resultItem) {
-        return `http://penqe.com/refex_figs/geneid_${this.dataset.toLowerCase()}_${resultItem}.png`;
-      },
       sortUpOrDown(a, b) {
         switch (this.sort?.order) {
           case 'up':

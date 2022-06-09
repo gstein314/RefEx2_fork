@@ -88,6 +88,10 @@ export const getters = {
   results_by_name(state) {
     return filterName => state.results[filterName];
   },
+  gene_summary_source: state => resultItem => {
+    const datasetName = state.active_dataset.dataset;
+    return `http://refex2-api.bhx.jp/static/${datasetName}/${datasetName}_${resultItem}.png`;
+  },
 };
 
 export const mutations = {
