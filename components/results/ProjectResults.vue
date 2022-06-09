@@ -27,7 +27,7 @@
             <td
               v-if="filter.is_displayed"
               :key="`result-${filterIndex}`"
-              :class="filter.column"
+              :class="filter.column.replaceAll(' ', '_')"
             >
               <MedianBar
                 v-if="filter.column === 'LogMedian'"

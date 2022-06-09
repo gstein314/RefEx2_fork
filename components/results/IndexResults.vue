@@ -67,7 +67,7 @@
             v-for="(filter, index) of filters"
             v-show="filter.is_displayed"
             :key="index"
-            :class="filter.column"
+            :class="filter.column.replaceAll(' ', '_')"
           >
             <font-awesome-icon
               v-if="filter.column === 'annotation'"
@@ -208,7 +208,4 @@
         > tr
           &:hover
             cursor: pointer
-          > td.gene_expression_patterns
-            > img
-              width: 292px
 </style>
