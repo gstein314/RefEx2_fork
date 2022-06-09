@@ -13,7 +13,7 @@
     props: {
       intervals: {
         type: Array,
-        default: () => [2, 4, 6, 8, 10, 12, 14],
+        default: () => [2, 4, 6, 8, 10, 12, 14, 16],
       },
     },
   };
@@ -21,7 +21,7 @@
 
 <style lang="sass">
   .median_scale
-      width: 230px
+      width: 260px
       > ul
           display: flex
           margin: 12px 0 0 0
@@ -43,7 +43,7 @@
               bottom: 100%
               left: -3px
           &:after
-              content: '16'
+              content: '18'
               bottom: 100%
               right: -6px
           > li
@@ -56,7 +56,7 @@
               bottom: 100%
               left: 50%
               transform: translateX(-50%)
-          @for $i from 0 through 6
+          @for $i from 0 through 7
             li:nth-child(#{$i + 1})
               left: #{($i + 1) * 28.75}px
 </style>
