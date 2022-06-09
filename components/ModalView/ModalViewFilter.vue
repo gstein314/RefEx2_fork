@@ -129,6 +129,7 @@
       overflow-y: visible
       display: flex
       flex-direction: column
+      overflow: visible
       > .select
         display: flex
         align-items: center
