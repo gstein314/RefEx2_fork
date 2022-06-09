@@ -1,33 +1,35 @@
 <template>
   <div class="wrapper">
     <div ref="chartWrapper" class="chart_wrapper">
-      <h1 class="header_title">
-        <font-awesome-icon
-          v-if="filterType === 'gene'"
-          icon="info-circle"
-          @click="setGeneModal(items[0].id)"
-        />
-        <span class="title">
-          {{ infoForMainItem.Description || infoForMainItem.name }}
-          <span v-if="filterType === 'gene'" class="metadata">{{
-            `(${infoForMainItem.name}, Gene ID: ${infoForMainItem.id})`
-          }}</span>
-        </span>
-      </h1>
-      <ComparisonButton />
-      <item-comparison
-        :items="items"
-        :active-id="selectedId"
-        :active-sort="resultsSort"
-        :display-info-button="filterType === 'gene'"
-        @select="updateSelectedItem"
-        @showModal="setGeneModal"
-      >
-      </item-comparison>
-      <a class="display_settings" @click="toggleDisplaySettings">
-        <font-awesome-icon icon="eye" />
-        Display settings
-      </a>
+      <div class="content">
+        <h1 class="header_title">
+          <font-awesome-icon
+            v-if="filterType === 'gene'"
+            icon="info-circle"
+            @click="setGeneModal(items[0].id)"
+          />
+          <span class="title">
+            {{ infoForMainItem.Description || infoForMainItem.name }}
+            <span v-if="filterType === 'gene'" class="metadata">{{
+              `(${infoForMainItem.name}, Gene ID: ${infoForMainItem.id})`
+            }}</span>
+          </span>
+        </h1>
+        <ComparisonButton />
+        <item-comparison
+          :items="items"
+          :active-id="selectedId"
+          :active-sort="resultsSort"
+          :display-info-button="filterType === 'gene'"
+          @select="updateSelectedItem"
+          @showModal="setGeneModal"
+        >
+        </item-comparison>
+        <a class="display_settings" @click="toggleDisplaySettings">
+          <font-awesome-icon icon="eye" />
+          Display settings
+        </a>
+      </div>
     </div>
     <ModalViewDisplay
       v-if="isDisplaySettingsOn"
@@ -222,40 +224,44 @@
     flex-direction: column
     margin-bottom: 50px
     .chart_wrapper
+      display: flex
       position: sticky
       left: 0
-      min-width: fit-content
-      width: calc(100vw - 130px)
-      grid-template-columns: 1fr auto
-      grid-template-rows: auto auto
-      gap: 20px
-      padding: 10px 15px 10px 60px
-      display: grid
+      min-width: 100vw
+      max-width: fit-content
       position: sticky
       background-color: white
       top: 0
       z-index: 1
-      > .comparison_btn
-        margin-left: 0
-        height: fit-content
-        place-self: flex-end
-      > .header_title
-        display: flex
-        align-items: flex-start
-        margin: 0
-        > .fa-info-circle
-          color: $MAIN_COLOR
-          font-size: 24px
-          margin-right: 6px
-          margin-top: 4px
-          &:hover
-            cursor: pointer
-        .metadata
-          font-size: 20px
-          display: block
-          margin-top: -2px
-          font-weight: normal
-      > .display_settings
-        +display_settings
-        place-self: flex-end
+      > .content
+        gap: 20px
+        padding: 10px 15px 10px 60px
+        display: grid
+        min-width: fit-content
+        grid-template-columns: 1fr auto
+        grid-template-rows: auto auto
+        width: calc(100vw - 130px)
+        > .comparison_btn
+          margin-left: 0
+          height: fit-content
+          place-self: flex-end
+        > .header_title
+          display: flex
+          align-items: flex-start
+          margin: 0
+          > .fa-info-circle
+            color: $MAIN_COLOR
+            font-size: 24px
+            margin-right: 6px
+            margin-top: 4px
+            &:hover
+              cursor: pointer
+          .metadata
+            font-size: 20px
+            display: block
+            margin-top: -2px
+            font-weight: normal
+        > .display_settings
+          +display_settings
+          place-self: flex-end
 </style>
