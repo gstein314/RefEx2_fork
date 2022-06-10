@@ -1,33 +1,35 @@
 <template>
   <div class="wrapper">
     <div ref="chartWrapper" class="chart_wrapper">
-      <h1 class="header_title">
-        <font-awesome-icon
-          v-if="filterType === 'gene'"
-          icon="info-circle"
-          @click="setGeneModal(items[0].id)"
-        />
-        <span class="title">
-          {{ infoForMainItem.Description || infoForMainItem.name }}
-          <span v-if="filterType === 'gene'" class="metadata">{{
-            `(${infoForMainItem.name}, Gene ID: ${infoForMainItem.id})`
-          }}</span>
-        </span>
-      </h1>
-      <ComparisonButton />
-      <item-comparison
-        :items="items"
-        :active-id="selectedId"
-        :active-sort="resultsSort"
-        :display-info-button="filterType === 'gene'"
-        @select="updateSelectedItem"
-        @showModal="setGeneModal"
-      >
-      </item-comparison>
-      <a class="display_settings" @click="toggleDisplaySettings">
-        <font-awesome-icon icon="eye" />
-        Display settings
-      </a>
+      <div class="content">
+        <h1 class="header_title">
+          <font-awesome-icon
+            v-if="filterType === 'gene'"
+            icon="info-circle"
+            @click="setGeneModal(items[0].id)"
+          />
+          <span class="title">
+            {{ infoForMainItem.Description || infoForMainItem.name }}
+            <span v-if="filterType === 'gene'" class="metadata">{{
+              `(${infoForMainItem.name}, Gene ID: ${infoForMainItem.id})`
+            }}</span>
+          </span>
+        </h1>
+        <ComparisonButton />
+        <item-comparison
+          :items="items"
+          :active-id="selectedId"
+          :active-sort="resultsSort"
+          :display-info-button="filterType === 'gene'"
+          @select="updateSelectedItem"
+          @showModal="setGeneModal"
+        >
+        </item-comparison>
+        <a class="display_settings" @click="toggleDisplaySettings">
+          <font-awesome-icon icon="eye" />
+          Display settings
+        </a>
+      </div>
     </div>
     <ModalViewDisplay
       v-if="isDisplaySettingsOn"
@@ -50,23 +52,13 @@
 
 <script>
   import 'vue-slider-component/dist-css/vue-slider-component.css';
-  import { mapGetters, mapMutations } from 'vuex';
+  import { mapMutations } from 'vuex';
   import ItemComparison from '~/components/results/ItemComparison.vue';
   import ModalViewGene from '~/components/ModalView/ModalViewGene.vue';
   import ModalViewCompare from '~/components/ModalView/ModalViewCompare.vue';
   import ModalViewDisplay from '~/components/ModalView/ModalViewDisplay.vue';
   import ModalViewFilter from '~/components/ModalView/ModalViewFilter.vue';
   import ProjectResults from '~/components/results/ProjectResults.vue';
-
-  const inRange = (x, [min, max]) => {
-    return typeof x !== 'number' || (x - min) * (x - max) <= 0;
-  };
-  const createNumberList = str =>
-    str
-      .replace('-', ',')
-      .split(',')
-      .map(x => parseInt(x) || 'out of filter bounds')
-      .sort();
 
   const logMedianFilter = {
     column: 'LogMedian',
@@ -91,7 +83,7 @@
     // TODO: refactor
     // TODO: add sample option
     async asyncData({ $axios, query, store, route }) {
-      let results, ageRange, medianRange;
+      let results;
       const { project, organism } = route.params;
       store.commit('set_specie', organism);
       const { id, type } = query;
@@ -108,23 +100,6 @@
           };
         })
       );
-      // set ranges based on the results. Results are gained from the first ID item
-      medianRange = [0, 0];
-      ageRange = [0, 10];
-      for (const [resultIndex, result] of results.entries()) {
-        for (const item of items) {
-          if (item.medianData[resultIndex] > medianRange[1]) {
-            medianRange[1] = item.medianData[resultIndex];
-          }
-        }
-
-        // set age range
-        if ('Age' in result) {
-          const n = createNumberList(result.Age);
-          if (n.find(x => inRange(x, ageRange))) continue;
-          ageRange[1] = n.pop();
-        }
-      }
       // set filters
       // In case of Gene, use dataset filters (sample values)
       // In case of Sample, use fixed gene filters with exception of geneDataFromGeneInfo (gene values)
@@ -134,6 +109,18 @@
           ? infoFromCurrentDataset['sample']['filter']
           : store.getters.filter_by_name('gene')?.filter || []),
       ];
+
+      // get fixed options for search
+      const optionsStaticData = await $axios.$get(`api/cv`);
+      if (project in optionsStaticData) {
+        for (const [key, value] of Object.entries(optionsStaticData[project])) {
+          console.log(optionsStaticData[project]);
+          const filterIndex = filters.findIndex(x => x.column === key);
+          if (filterIndex > -1) {
+            filters[filterIndex].options = value;
+          }
+        }
+      }
 
       let geneIdIndex = filters.findIndex(x => x.column === 'geneid');
 
@@ -152,8 +139,6 @@
         filters,
         results,
         dataset: project,
-        ageRange,
-        medianRange,
         selectedId: items[0].id,
       };
     },
@@ -163,6 +148,7 @@
           key: '',
           order: 'down',
         },
+        optionsStaticData: {},
         isDisplaySettingsOn: false,
         heightChartWrapper: 200,
       };
@@ -204,10 +190,6 @@
     },
     mounted() {
       this.heightChartWrapper = this.$refs.chartWrapper.clientHeight;
-      this.$store.commit('set_project_filter_ranges', {
-        ageRange: this.ageRange,
-        medianRange: this.medianRange,
-      });
       this.$store.commit('set_project_filters', this.filters);
       this.$store.commit('set_project_results', this.resultsWithMedianData);
     },
@@ -242,40 +224,44 @@
     flex-direction: column
     margin-bottom: 50px
     .chart_wrapper
+      display: flex
       position: sticky
       left: 0
-      min-width: fit-content
-      width: calc(100vw - 130px)
-      grid-template-columns: 1fr auto
-      grid-template-rows: auto auto
-      gap: 20px
-      padding: 10px 15px 10px 60px
-      display: grid
+      min-width: 100vw
+      max-width: fit-content
       position: sticky
       background-color: white
       top: 0
       z-index: 1
-      > .comparison_btn
-        margin-left: 0
-        height: fit-content
-        place-self: flex-end
-      > .header_title
-        display: flex
-        align-items: flex-start
-        margin: 0
-        > .fa-info-circle
-          color: $MAIN_COLOR
-          font-size: 24px
-          margin-right: 6px
-          margin-top: 4px
-          &:hover
-            cursor: pointer
-        .metadata
-          font-size: 20px
-          display: block
-          margin-top: -2px
-          font-weight: normal
-      > .display_settings
-        +display_settings
-        place-self: flex-end
+      > .content
+        gap: 20px
+        padding: 10px 15px 10px 60px
+        display: grid
+        min-width: fit-content
+        grid-template-columns: 1fr auto
+        grid-template-rows: auto auto
+        width: calc(100vw - 130px)
+        > .comparison_btn
+          margin-left: 0
+          height: fit-content
+          place-self: flex-end
+        > .header_title
+          display: flex
+          align-items: flex-start
+          margin: 0
+          > .fa-info-circle
+            color: $MAIN_COLOR
+            font-size: 24px
+            margin-right: 6px
+            margin-top: 4px
+            &:hover
+              cursor: pointer
+          .metadata
+            font-size: 20px
+            display: block
+            margin-top: -2px
+            font-weight: normal
+        > .display_settings
+          +display_settings
+          place-self: flex-end
 </style>

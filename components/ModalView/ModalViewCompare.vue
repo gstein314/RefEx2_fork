@@ -72,6 +72,7 @@
 </script>
 <style lang="sass" scoped>
   .compare_modal
+    width: 600px
     > div
       display: flex
       align-items: center

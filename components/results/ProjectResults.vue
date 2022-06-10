@@ -27,7 +27,7 @@
             <td
               v-if="filter.is_displayed"
               :key="`result-${filterIndex}`"
-              :class="filter.column"
+              :class="filter.column.replaceAll(' ', '_')"
             >
               <MedianBar
                 v-if="filter.column === 'LogMedian'"
@@ -41,7 +41,7 @@
               />
               <img
                 v-else-if="filter.column === 'gene expression patterns'"
-                :src="geneDescriptionSource(result[geneIdKey])"
+                :src="geneSummarySource(result[geneIdKey])"
                 :alt="result[geneIdKey]"
               />
               <template
@@ -134,6 +134,7 @@
         results: 'get_project_results',
         paginationObject: 'get_project_pagination',
         filters: 'project_filters',
+        geneSummarySource: 'gene_summary_source',
       }),
 
       filteredData() {
@@ -160,13 +161,12 @@
                   isFiltered = true;
               }
               // text filter
-              else if (
-                filter.filterModal !== '' &&
-                !result[key].includes(filter.filterModal)
-              ) {
-                isFiltered =
-                  filter.filterModal !== '' &&
-                  !result[key].includes(filter.filterModal);
+              else if (filter.filterModal !== '' && !isFiltered) {
+                // excact match if filter is based on API options
+                const isMatch = filter.options
+                  ? result[key] === filter.filterModal
+                  : result[key].includes(filter.filterModal);
+                isFiltered = filter.filterModal !== '' && !isMatch;
               }
             }
             return !isFiltered;
@@ -222,9 +222,6 @@
         setGeneModal: 'set_gene_modal',
         updatePagination: 'set_project_pagination',
       }),
-      geneDescriptionSource(resultItem) {
-        return `http://penqe.com/refex_figs/geneid_${this.dataset.toLowerCase()}_${resultItem}.png`;
-      },
       sortUpOrDown(a, b) {
         switch (this.sort?.order) {
           case 'up':

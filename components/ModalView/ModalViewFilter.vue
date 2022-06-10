@@ -1,6 +1,10 @@
 <template>
   <modal-view v-if="isOn" @click.native="close(null)">
-    <div class="modal filter_modal" @click.stop="">
+    <div
+      class="modal filter_modal"
+      :class="{ '-flex': options.length > 1 }"
+      @click.stop=""
+    >
       <p class="modal_title">
         <font-awesome-icon icon="search" />
         {{ filterObj.label }}
@@ -8,9 +12,7 @@
           filterObj.note
         }}</span>
       </p>
-      <template
-        v-if="filterObj.column === 'LogMedian' || filterObj.column === 'Age'"
-      >
+      <template v-if="filterObj.column === 'LogMedian'">
         <button @click="resetSlider(filterObj.filter_modal)">Reset</button>
         <div class="input_wrapper">
           <vue-slider
@@ -20,6 +22,19 @@
           ></vue-slider>
         </div>
       </template>
+      <div v-else-if="options.length > 1" class="select">
+        <model-select
+          v-model="selectedOption"
+          placeholder="Select an option"
+          :options="options"
+        ></model-select>
+        <font-awesome-icon
+          class="reset-btn"
+          :icon="['fad', 'circle-xmark']"
+          @click="selectedOption = options[0]"
+        />
+      </div>
+
       <div v-else class="input_wrapper">
         <input
           v-model="searchValue"
@@ -39,15 +54,18 @@
 </template>
 <script>
   import ModalView from '~/components/ModalView/ModalView.vue';
+  import { ModelSelect } from 'vue-search-select';
   import { mapMutations, mapGetters } from 'vuex';
 
   export default {
     components: {
       ModalView,
+      ModelSelect,
     },
     data() {
       return {
         searchValue: '',
+        selectedOption: {},
       };
     },
     computed: {
@@ -58,8 +76,21 @@
       isOn() {
         return this.filterObj !== null;
       },
+      options() {
+        return [
+          { value: '', text: 'all' },
+          ...(this.filterObj?.options?.map(x => ({
+            value: x,
+            text: x,
+          })) || []),
+        ];
+      },
     },
     watch: {
+      selectedOption() {
+        this.searchValue = this.selectedOption.value;
+      },
+
       searchValue() {
         if (this.isOn) this.updateFilterModal('filterModal', this.searchValue);
       },
@@ -69,6 +100,7 @@
     },
     created() {
       this.searchValue = this.filterObj?.filterModal ?? '';
+      this.selectedOption = this.options[0];
     },
     methods: {
       ...mapMutations({
@@ -93,21 +125,31 @@
 <style lang="sass" scoped>
   .filter_modal
     width: 500px
+    &.-flex
+      overflow-y: visible
+      display: flex
+      flex-direction: column
+      overflow: visible
+      > .select
+        display: flex
+        align-items: center
+        gap: 50px
+    .reset-btn
+        --fa-secondary-opacity: 0.3
+        cursor: pointer !important
+        &:hover
+          --fa-secondary-opacity: 1
+          --fa-primary-color: white
+          --fa-secondary-color: #488EC4
     > .input_wrapper
       display: flex
       align-items: center
       position: relative
       > input[type="text"]
         +text_input
-      > .reset-btn
-        position: absolute
-        right: 1rem
-        --fa-secondary-opacity: 0.3
-        cursor: pointer
-        &:hover
-          --fa-secondary-opacity: 1
-          --fa-primary-color: white
-          --fa-secondary-color: #488EC4
+        > .reset-btn
+          position: absolute
+          right: 1rem
       > .vue-slider
         width: 100% !important
         margin-top: 25px

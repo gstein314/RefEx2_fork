@@ -69,7 +69,7 @@ typings/
 .nuxt
 
 # Nuxt generate
-dist
+refex
 
 # vuepress build output
 .vuepress/dist

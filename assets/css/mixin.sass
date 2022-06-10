@@ -111,7 +111,6 @@ $TOOLTIP_LAYER: 2
     font-size: 14px
     > tr
       &:hover
-        cursor: pointer
         background-color: $ACTIVE_COLOR_HOVER
       > th
         position: sticky
@@ -152,6 +151,10 @@ $TOOLTIP_LAYER: 2
           > svg:hover
             cursor: pointer
             color: $BUTTON_HOVER_COLOR
+        &.gene_expression_patterns
+          min-width: 200px
+          img
+            width: 100%
       &:nth-of-type(even)
         background-color: $MAIN_COLOR_PALE
       &:hover

@@ -1,17 +1,12 @@
 import specieSets from '../refex-sample/datasets.json';
 import filters from '../static/filters.json';
 
-const maxInTenth = x => {
-  return Math.ceil(x / 10) * 10;
-};
-
 const numberFilterObj = ([min, max]) => {
-  [min, max] = [maxInTenth(min), maxInTenth(max)];
   const isInTenths = max > 20;
   return {
     filterModal: [0, max],
     numberValue: {
-      min: 0,
+      min,
       max,
       marks: Array(isInTenths ? max / 10 : max)
         .fill(null)
@@ -26,8 +21,7 @@ export const state = () => ({
   active_dataset: specieSets[0].datasets[0],
   project_filters: [],
   project_filter_ranges: {
-    ageRange: [0, 100],
-    medianRange: [0, 16],
+    LogMedian: [0, 18],
   },
   filter_modal: null,
   gene_modal: null,
@@ -94,6 +88,10 @@ export const getters = {
   results_by_name(state) {
     return filterName => state.results[filterName];
   },
+  gene_summary_source: state => resultItem => {
+    const datasetName = state.active_dataset.dataset;
+    return `http://refex2-api.bhx.jp/static/${datasetName}/${datasetName}_${resultItem}.png`;
+  },
 };
 
 export const mutations = {
@@ -109,20 +107,13 @@ export const mutations = {
   set_compare_modal(state) {
     state.compare_modal = !state.compare_modal;
   },
-  set_project_filter_ranges(state, { ageRange, medianRange }) {
-    state.project_filter_ranges = { ageRange, medianRange };
-  },
   set_project_filters(state, filters) {
     const copy = [...filters];
-    const { ageRange, medianRange } = state.project_filter_ranges;
     copy.forEach((entry, index) => {
       let paramsToBeMerged = {};
       const column = entry.column;
-
-      if (['Age', 'LogMedian'].includes(column)) {
-        paramsToBeMerged = numberFilterObj(
-          column === 'Age' ? ageRange : medianRange
-        );
+      if (Object.keys(state.project_filter_ranges).includes(column)) {
+        paramsToBeMerged = numberFilterObj(state.project_filter_ranges[column]);
       } else paramsToBeMerged = { filterModal: '' };
       copy[index] = { ...entry, ...paramsToBeMerged };
     });

@@ -15,7 +15,7 @@
           <label :for="value.innerKey"> {{ value.label }} </label>
         </div>
       </div>
-      <div class="display_pagination">
+      <div v-if="!indexFilters" class="display_pagination">
         <label for="pagination">Items per page</label>
         <select id="pagination" name="pagination" @change="setLimit">
           <option
