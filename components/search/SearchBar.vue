@@ -28,6 +28,7 @@
       <vue-simple-suggest
         v-model="parameters.text"
         :debounce="500"
+        :min-length="0"
         :display-attribute="paramsForSuggestions[1]"
         :value-attribute="paramsForSuggestions[0]"
         :list="updateSuggestions"
@@ -71,7 +72,6 @@
           v-model="isSummaryIncluded"
           type="checkbox"
           name="summary_check"
-          @click="showResults('numfound')"
         />
         <label for="summary_check">Include gene summaries in search</label>
       </div>
@@ -161,12 +161,15 @@
               }`
           )
           .join('');
-        if (params !== '') params = `(${params})`;
+        if (params !== '')
+          params = `(${params} ${
+            this.isSummaryIncluded ? 'summary: "true"' : ''
+          })`;
         const resultParams = this.isNum
           ? ''
           : `{${Object.keys(this.parameters)
               .filter(param => !['text', 'go'].includes(param))
-              .join(' ')} ${this.extraVariablesToBeDsiplayedInResults}}`;
+              .join('')} ${this.extraVariablesToBeDsiplayedInResults}}`;
         const suffix = this.isNum ? '' : ` ${this.queryPrefix}Numfound`;
         return `{${this.queryPrefix}${
           this.isNum ? 'Numfound' : ''
@@ -179,8 +182,7 @@
         this.typeOfQuery = 'reset numfound';
       },
       isSummaryIncluded() {
-        //TODO: set summary param when API is updated
-        this.showResults('numfound');
+        this.updateSuggestions();
       },
     },
     created() {
@@ -209,10 +211,9 @@
       getSuggestions() {
         this.isLoading = true;
         const suggestion = this.parameters.text;
-        if (suggestion === '') return;
-        const query = `{${
-          this.queryPrefix
-        }(text: "${suggestion}") {${this.paramsForSuggestions.join(' ')}}}`;
+        const query = `{${this.queryPrefix}(text: "${suggestion}" ${
+          this.isSummaryIncluded ? 'summary: "true"' : ''
+        }) {${this.paramsForSuggestions.join(' ')}}}`;
         return this.$axios
           .$post('gql', {
             query,
@@ -227,6 +228,8 @@
         this.typeOfQuery = type;
         let results;
         let results_num = 0;
+        if (this.isSummaryIncluded && this.parameters.text.length === 0)
+          this.isSummaryIncluded = false;
         this.$axios
           .$post('gql', {
             query: this.suggestQuery,
