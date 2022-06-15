@@ -132,8 +132,10 @@ export const mutations = {
     state.gene_modal = id;
   },
   set_alert_modal(state, { msg = '' }) {
-    (state.alert_modal.isOn = !state.alert_modal.isOn),
-      (state.alert_modal.msg = msg);
+    state.alert_modal.msg = msg;
+    if (state.alert_modal.isOn) return;
+
+    state.alert_modal.isOn = !state.alert_modal.isOn;
   },
   set_specie(state, specieId) {
     state.active_specie = specieSets.find(
