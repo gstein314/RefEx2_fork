@@ -107,7 +107,11 @@ export const mutations = {
   },
   // type: 'index' or 'project'
   set_pagination(state, { limit, offset, type = 'project' }) {
-    if (type === 'index') state.index_pagination = { limit, offset };
+    if (type === 'index')
+      state.index_pagination = {
+        limit: limit ?? state.index_pagination.limit,
+        offset,
+      };
     else state.project_results = { ...state.project_results, limit, offset };
   },
   set_filter_modal(state, filterKey = null) {
@@ -162,7 +166,7 @@ export const mutations = {
     state.results = {
       ...state.results,
       [filterType]: {
-        results: results ?? state.results[filterType].results,
+        results: results ?? [],
         results_num,
       },
     };

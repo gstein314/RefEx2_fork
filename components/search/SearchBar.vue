@@ -191,6 +191,7 @@
     methods: {
       ...mapMutations({
         setAlertModal: 'set_alert_modal',
+        updatePagination: 'set_pagination',
       }),
       updateParams(params) {
         this.$emit('updateScreener');
@@ -246,6 +247,7 @@
           })
           .finally(() => {
             if (type === 'all') this.$emit('updateResults');
+            this.updatePagination({ offset: 0, type: 'index' });
 
             this.onEvent = false;
             this.isReloadActive = false;

@@ -15,7 +15,7 @@
           <label :for="value.innerKey"> {{ value.label }} </label>
         </div>
       </div>
-      <div v-if="!indexFilters" class="display_pagination">
+      <div class="display_pagination">
         <label for="pagination">Items per page</label>
         <select id="pagination" name="pagination" @change="setLimit">
           <option
@@ -48,8 +48,14 @@
     computed: {
       ...mapGetters({
         projectFilters: 'project_filters',
-        paginationObject: 'get_project_pagination',
+        projectPaginationObject: 'get_project_pagination',
+        indexPaginationObject: 'index_pagination',
       }),
+      paginationObject() {
+        return this.indexFilters
+          ? this.indexPaginationObject
+          : this.projectPaginationObject;
+      },
       filters() {
         return this.indexFilters ?? this.projectFilters;
       },
@@ -60,7 +66,7 @@
     methods: {
       ...mapMutations({
         updateProjectFilters: 'update_project_filters',
-        updatePagination: 'set_project_pagination',
+        updatePagination: 'set_pagination',
       }),
       toggleDisplayOfFilter(key) {
         // in case of indexFilters , call parent element
@@ -86,8 +92,11 @@
           1
         );
         const newOffset = (newPage - 1) * newLimit;
-
-        this.updatePagination({ limit: newLimit, offset: newOffset });
+        this.updatePagination({
+          limit: newLimit,
+          offset: newOffset,
+          type: this.indexFilters ? 'index' : 'project',
+        });
       },
     },
   };
