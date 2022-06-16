@@ -1,12 +1,12 @@
 <template>
-  <modal-view v-if="error.isOn" @click.native="close">
+  <modal-view v-if="error.isOn" @click.native="close({ bool: false })">
     <div class="modal" @click.stop>
       <div class="title">
         <p><font-awesome-icon icon="exclamation-triangle" />Error</p>
       </div>
       <div class="content">
         <p>An error has occured {{ error.msg }} Please try again later.</p>
-        <button @click="close">OK</button>
+        <button @click="close({ bool: false })">OK</button>
       </div>
     </div>
   </modal-view>

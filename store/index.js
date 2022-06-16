@@ -32,6 +32,10 @@ export const state = () => ({
     limit: 10,
     offset: 0,
   },
+  index_pagination: {
+    limit: 10,
+    offset: 0,
+  },
   results: filters.reduce((acc, filter) => {
     acc[filter.name] = { results: [], results_num: 0 };
     return acc;
@@ -48,6 +52,9 @@ export const getters = {
   get_project_pagination(state) {
     const { limit, offset } = state.project_results;
     return { limit, offset };
+  },
+  index_pagination(state) {
+    return state.index_pagination;
   },
   active_filter_modal(state) {
     return (
@@ -98,8 +105,10 @@ export const mutations = {
   set_project_results(state, newResults) {
     state.project_results = { ...state.project_results, arr: newResults };
   },
-  set_project_pagination(state, { limit, offset }) {
-    state.project_results = { ...state.project_results, limit, offset };
+  // type: 'index' or 'project'
+  set_pagination(state, { limit, offset, type = 'project' }) {
+    if (type === 'index') state.index_pagination = { limit, offset };
+    else state.project_results = { ...state.project_results, limit, offset };
   },
   set_filter_modal(state, filterKey = null) {
     state.filter_modal = filterKey;
@@ -131,11 +140,9 @@ export const mutations = {
   set_gene_modal(state, id = null) {
     state.gene_modal = id;
   },
-  set_alert_modal(state, { msg = '' }) {
+  set_alert_modal(state, { msg = '', bool = true }) {
     state.alert_modal.msg = msg;
-    if (state.alert_modal.isOn) return;
-
-    state.alert_modal.isOn = !state.alert_modal.isOn;
+    state.alert_modal.isOn = bool;
   },
   set_specie(state, specieId) {
     state.active_specie = specieSets.find(
