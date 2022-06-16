@@ -169,7 +169,7 @@
           ? ''
           : `{${Object.keys(this.parameters)
               .filter(param => !['text', 'go'].includes(param))
-              .join('')} ${this.extraVariablesToBeDsiplayedInResults}}`;
+              .join(' ')} ${this.extraVariablesToBeDsiplayedInResults}}`;
         const suffix = this.isNum ? '' : ` ${this.queryPrefix}Numfound`;
         return `{${this.queryPrefix}${
           this.isNum ? 'Numfound' : ''
