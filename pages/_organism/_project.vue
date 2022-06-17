@@ -227,7 +227,7 @@
       display: flex
       position: sticky
       left: 0
-      min-width: 100vw
+      min-width: calc(100vw - 15px)
       max-width: fit-content
       position: sticky
       background-color: white

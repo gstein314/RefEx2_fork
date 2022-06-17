@@ -29,6 +29,13 @@
     font-weight: 400
     color: $BLACK
     box-sizing: border-box
+    *
+      &::-webkit-scrollbar-thumb
+        box-shadow: inset 0 0 8px 8px rgb(188, 188, 188, 0.8)
+        border-radius: 15px
+        border: solid 5px transparent
+      &::-webkit-scrollbar
+        width: 15px
     .root
       height: 100vh
       overflow: auto
