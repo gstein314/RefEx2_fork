@@ -141,7 +141,7 @@
           this.filterType
         )}`;
       },
-      // TODO: see if sample can be removed since only gene has suggestions atm
+      // only gene has suggestions atm but it can be extended to sample
       paramsForSuggestions() {
         return this.filterType === 'gene'
           ? ['symbol', 'name', 'geneid']

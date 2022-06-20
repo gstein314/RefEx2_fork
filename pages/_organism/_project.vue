@@ -80,8 +80,6 @@
     beforeRouteUpdate(to, from, next) {
       this.$forceUpdate();
     },
-    // TODO: refactor
-    // TODO: add sample option
     async asyncData({ $axios, query, store, route }) {
       let results;
       const { project, organism } = route.params;
@@ -114,7 +112,6 @@
       const optionsStaticData = await $axios.$get(`api/cv`);
       if (project in optionsStaticData) {
         for (const [key, value] of Object.entries(optionsStaticData[project])) {
-          console.log(optionsStaticData[project]);
           const filterIndex = filters.findIndex(x => x.column === key);
           if (filterIndex > -1) {
             filters[filterIndex].options = value;
@@ -154,7 +151,6 @@
       };
     },
     computed: {
-      // TODO: see if needs refactoring
       resultsWithMedianData() {
         return this.results.map((result, index) => {
           return {

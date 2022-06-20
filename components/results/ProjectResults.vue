@@ -199,8 +199,6 @@
                 }
             }
           });
-        // TODO: improve usage of offset and limit
-        //.slice(this.paginationObject.offset, this.paginationObject.limit)
       },
       pageItems() {
         return this.filteredData.slice(
