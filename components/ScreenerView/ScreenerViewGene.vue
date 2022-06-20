@@ -25,7 +25,7 @@
         v-model="temporaryParameters.goTerm"
         :tags="parameters.go"
         :autocomplete-items="autoComplete.go"
-        :add-only-from-autocomplete="true"
+        add-only-from-autocomplete
         :placeholder="placeholderGOTerm"
         @input="updateAutoComplete"
         @tags-changed="setTags($event, 'go')"
