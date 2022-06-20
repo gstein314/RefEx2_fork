@@ -216,10 +216,8 @@
       +table
       > tbody
         > .warning
+          +warning
           padding: 40px
-          text-align: center
-          > .fa-exclamation-triangle
-            color: $WARNING_COLOR
         > tr
           &:hover
             cursor: pointer
