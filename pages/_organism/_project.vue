@@ -1,6 +1,11 @@
 <template>
   <div class="wrapper">
-    <div ref="chartWrapper" class="chart_wrapper">
+    <p v-if="isError" class="error">
+      <font-awesome-icon icon="exclamation-triangle" />
+      An error has occured while fecthing the data. Please check wheter the URL
+      contains the correct information.
+    </p>
+    <div v-else ref="chartWrapper" class="chart_wrapper">
       <div class="content">
         <h1 class="header_title">
           <font-awesome-icon
@@ -82,6 +87,7 @@
     },
     async asyncData({ $axios, query, store, route }) {
       let results;
+      let isError = false;
       const { project, organism } = route.params;
       store.commit('set_specie', organism);
       const { id, type } = query;
@@ -90,6 +96,10 @@
           const data = await $axios.$get(
             `api/${type}/${id}?dataset=${project.toLowerCase()}`
           );
+          if (data[`${type}_info`]?.error) {
+            isError = true;
+          }
+
           if (index === 0) results = data.refex_info;
           return {
             id,
@@ -98,6 +108,7 @@
           };
         })
       );
+      if (isError) return { isError };
       // set filters
       // In case of Gene, use dataset filters (sample values)
       // In case of Sample, use fixed gene filters with exception of geneDataFromGeneInfo (gene values)
@@ -132,6 +143,7 @@
       return {
         filterType: type,
         items,
+        isError,
         geneIdKey: infoFromCurrentDataset.gene.key,
         filters,
         results,
@@ -175,7 +187,7 @@
           }, []);
       },
       mainItem() {
-        return this.items[0];
+        return this.items[0] || {};
       },
       infoForMainItem() {
         return this.mainItem?.info;
@@ -185,6 +197,7 @@
       },
     },
     mounted() {
+      if (this.isError) return;
       this.heightChartWrapper = this.$refs.chartWrapper.clientHeight;
       this.$store.commit('set_project_filters', this.filters);
       this.$store.commit('set_project_results', this.resultsWithMedianData);
@@ -219,6 +232,17 @@
     min-width: fit-content
     flex-direction: column
     margin-bottom: 50px
+    > .error
+      display: flex
+      color: $ERROR_COLOR
+      justify-content: center
+      align-items: center
+      height: 100%
+      width: 100%
+      font-size: 20px
+      margin: 40px
+      > .fa-exclamation-triangle
+        margin-right: 6px
     .chart_wrapper
       display: flex
       position: sticky
