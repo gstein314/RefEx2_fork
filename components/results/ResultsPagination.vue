@@ -1,5 +1,5 @@
 <template>
-  <div class="pagination-wrapper">
+  <div v-if="pagesList.length > 0" class="pagination-wrapper">
     <ul>
       <li
         :class="{ arrows: true, disabled: currentPage === 1 }"
@@ -51,6 +51,10 @@
   import { mapGetters, mapMutations } from 'vuex';
   export default {
     props: {
+      tableType: {
+        type: String,
+        default: 'project',
+      },
       pagesNumber: {
         type: Number,
         default: 1,
@@ -59,15 +63,19 @@
 
     computed: {
       ...mapGetters({
-        paginationObject: 'get_project_pagination',
+        projectPaginationObject: 'get_project_pagination',
+        indexPaginationObject: 'index_pagination',
       }),
-
+      paginationObject() {
+        return this.tableType === 'index'
+          ? this.indexPaginationObject
+          : this.projectPaginationObject;
+      },
       pagesList() {
         const list = [];
         for (let i = 1; i <= this.pagesNumber; i++) {
           list.push(i);
         }
-
         return list;
       },
       currentPage() {
@@ -77,7 +85,6 @@
           ) + 1
         );
       },
-
       pagesNumbersShown() {
         const PAGES_LEFT = 2;
         const PAGES_RIGHT = 2;
@@ -113,10 +120,14 @@
 
     methods: {
       ...mapMutations({
-        updatePagination: 'set_project_pagination',
+        updatePagination: 'set_pagination',
       }),
       setOffset(offset) {
-        this.updatePagination({ ...this.paginationObject, offset });
+        this.updatePagination({
+          ...this.paginationObject,
+          offset,
+          type: this.tableType,
+        });
       },
       handleChangePage(page) {
         if (page < 1 || page > this.pagesNumber) {

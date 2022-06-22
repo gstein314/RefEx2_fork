@@ -4,6 +4,7 @@
       <SearchBar
         :key="`${$vnode.key}_search`"
         :ref="`${$vnode.key}_search`"
+        @updateValiditySearch="validSearch = $event"
         @updateScreener="setTableDataIsSameAsScreener(false)"
         @updateResults="setTableDataIsSameAsScreener(true)"
       />
@@ -13,11 +14,17 @@
           <p class="results_num">{{ resultsNum.toLocaleString() }}</p>
           <button
             class="find_results_btn"
+            :class="{ disabled: !validSearch }"
+            :disabled="!validSearch"
             @click="$refs[`${$vnode.key}_search`].showResults('all')"
           >
             <font-awesome-icon icon="search" />
             Find {{ $vnode.key }}s
           </button>
+          <p v-show="!validSearch" class="warning">
+            <font-awesome-icon icon="exclamation-triangle" />
+            Please set search condition(s)
+          </p>
         </div>
       </div>
     </main>
@@ -48,6 +55,7 @@
       return {
         tableDataIsSameAsScreener: false,
         isDisplaySettings: false,
+        validSearch: false,
         filters: [
           ...(this.$store.getters.active_dataset[this.$vnode.key].filter ??
             this.$store.getters.active_filter.filter ??
@@ -117,6 +125,8 @@
             font-size: 48px
             font-weight: bold
             margin: 18px 0 14px
+          > .warning
+             +warning
           > button
             +button
 </style>

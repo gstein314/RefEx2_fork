@@ -2,7 +2,7 @@
   <!-- v-html setup neccesary for plugin, does NOT use user input/API data and is therefore safe to use -->
   <!-- eslint-disable vue/no-v-html -->
   <div class="text_search_area">
-    <h2>Search searchCondition</h2>
+    <h2>Search Conditions</h2>
     <h3>
       <span class="example"
         >e.g.
@@ -112,6 +112,7 @@
         isSummaryIncluded: false,
         isReloadActive: false,
         isLoading: false,
+        validSearch: false,
         // either 'all' or 'numfound'
         typeOfQuery: 'numfound',
       };
@@ -140,7 +141,7 @@
           this.filterType
         )}`;
       },
-      // TODO: see if sample can be removed since only gene has suggestions atm
+      // only gene has suggestions atm but it can be extended to sample
       paramsForSuggestions() {
         return this.filterType === 'gene'
           ? ['symbol', 'name', 'geneid']
@@ -169,7 +170,7 @@
           ? ''
           : `{${Object.keys(this.parameters)
               .filter(param => !['text', 'go'].includes(param))
-              .join('')} ${this.extraVariablesToBeDsiplayedInResults}}`;
+              .join(' ')} ${this.extraVariablesToBeDsiplayedInResults}}`;
         const suffix = this.isNum ? '' : ` ${this.queryPrefix}Numfound`;
         return `{${this.queryPrefix}${
           this.isNum ? 'Numfound' : ''
@@ -177,6 +178,15 @@
       },
     },
     watch: {
+      parameters: {
+        handler: function () {
+          this.validSearch = !Object.values(this.parameters).every(
+            value => value === ''
+          );
+          this.$emit('updateValiditySearch', this.validSearch);
+        },
+        deep: true,
+      },
       activeDataset() {
         this.$set(this.parameters, 'text', '');
         this.typeOfQuery = 'reset numfound';
@@ -191,6 +201,7 @@
     methods: {
       ...mapMutations({
         setAlertModal: 'set_alert_modal',
+        updatePagination: 'set_pagination',
       }),
       updateParams(params) {
         this.$emit('updateScreener');
@@ -246,6 +257,7 @@
           })
           .finally(() => {
             if (type === 'all') this.$emit('updateResults');
+            this.updatePagination({ offset: 0, type: 'index' });
 
             this.onEvent = false;
             this.isReloadActive = false;

@@ -25,7 +25,7 @@
         v-model="temporaryParameters.goTerm"
         :tags="parameters.go"
         :autocomplete-items="autoComplete.go"
-        :add-only-from-autocomplete="true"
+        add-only-from-autocomplete
         :placeholder="placeholderGOTerm"
         @input="updateAutoComplete"
         @tags-changed="setTags($event, 'go')"
@@ -34,7 +34,7 @@
           slot="autocomplete-item"
           slot-scope="{ item }"
           class="my-item"
-          @click="props.performAdd(props.item)"
+          @click="handleSingleTagUpdate(item.id, item.text)"
           v-html="$boldenSuggestion(item.text, temporaryParameters.goTerm)"
         ></div>
       </vue-tags-input>
@@ -89,23 +89,20 @@
       },
     },
     methods: {
-      // TODO: check if multiple go terms can be set
       updateAutoComplete() {
         clearTimeout(this.debounce);
+        const query = `{ goSuggest (text: "${this.temporaryParameters.goTerm}", dataset: "${this.activeDataset.dataset}") { goId, goTerm }}`;
         this.debounce = setTimeout(() => {
           this.$axios
-            .$get(
-              this.$getSuggestionURL(
-                this.temporaryParameters.goTerm,
-                '&go=True'
-              )
-            )
+            .$post('gql', {
+              query,
+            })
             .then(response => {
               this.$set(
                 this.autoComplete,
                 'go',
-                response.results.map(a => {
-                  return { text: a.term, id: a.id };
+                response.data?.goSuggest?.map(a => {
+                  return { text: a.goTerm, id: a.goId };
                 })
               );
             })
@@ -116,6 +113,7 @@
         if (this.parameters[key].find(tag => tag.id === id)) {
           return;
         }
+        this.$set(this.temporaryParameters, 'goTerm', '');
         this.setTags([{ id, text, tiClasses }], key);
       },
       setTags(newTags, key) {

@@ -81,7 +81,7 @@
 <script>
   import TableHeader from '~/components/results/TableHeader.vue';
   import { mapGetters, mapMutations } from 'vuex';
-  import ResultsPagination from './ResultsPagination.vue';
+  import ResultsPagination from '~/components/results/ResultsPagination.vue';
 
   const inRange = (x, [min, max]) => {
     return typeof x !== 'number' || (x - min) * (x - max) <= 0;
@@ -199,8 +199,6 @@
                 }
             }
           });
-        // TODO: improve usage of offset and limit
-        //.slice(this.paginationObject.offset, this.paginationObject.limit)
       },
       pageItems() {
         return this.filteredData.slice(

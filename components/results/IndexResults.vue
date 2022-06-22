@@ -48,7 +48,7 @@
           to the current screener settings.
         </td>
         <tr
-          v-for="(result, resultIndex) in results"
+          v-for="(result, resultIndex) in pageItems"
           v-else
           :key="`result_${resultIndex}`"
           @click="moveToProjectPage(result[keyForID])"
@@ -100,12 +100,17 @@
         </tr>
       </tbody>
     </table>
+    <ResultsPagination :pages-number="pagesNumber" table-type="index" />
   </div>
 </template>
 <script>
   import { mapGetters, mapMutations } from 'vuex';
+  import ResultsPagination from '~/components/results/ResultsPagination.vue';
 
   export default {
+    components: {
+      ResultsPagination,
+    },
     props: {
       filters: {
         type: Array,
@@ -123,6 +128,7 @@
     },
     computed: {
       ...mapGetters({
+        paginationObject: 'index_pagination',
         resultsByName: 'results_by_name',
         filterByName: 'filter_by_name',
         activeSpecie: 'active_specie',
@@ -153,6 +159,15 @@
       },
       results() {
         return this.resultsByName(this.filterType).results;
+      },
+      pageItems() {
+        return this.results.slice(
+          this.paginationObject.offset,
+          this.paginationObject.offset + this.paginationObject.limit
+        );
+      },
+      pagesNumber() {
+        return Math.ceil(this.results.length / this.paginationObject.limit);
       },
     },
     watch: {
@@ -201,10 +216,8 @@
       +table
       > tbody
         > .warning
+          +warning
           padding: 40px
-          text-align: center
-          > .fa-exclamation-triangle
-            color: $WARNING_COLOR
         > tr
           &:hover
             cursor: pointer

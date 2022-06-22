@@ -21,7 +21,7 @@ export default {
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
-  css: ['normalize.css', '@fortawesome/fontawesome-svg-core/styles.css'],
+  css: ['normalize.css', '~/assets/css/fontawesome_styles.css'],
 
   styleResources: {
     sass: ['~/assets/css/mixin.sass'],
@@ -57,7 +57,7 @@ export default {
     icons: {
       solid: true,
     },
-    addCss: true,
+    addCss: false,
   },
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
@@ -74,11 +74,6 @@ export default {
         });
       });
       return routes;
-      // return client.getEntries({
-      //   'content_type': 'category'
-      // }).then((categories) => {
-      //   return [...categories.items.map(category => `/news/category/${category.sys.id}`)]
-      // })
     },
   },
 
