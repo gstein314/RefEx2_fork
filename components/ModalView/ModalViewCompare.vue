@@ -61,7 +61,6 @@
         this.itemIdsForComparisonStr = route;
       },
       comparisonSearch() {
-        // TODO: add error handling for invalid comparison input
         if (this.itemIdsForComparisonStr === '') return;
         this.$nuxt.$loading.start();
         location.href = this.routeToProjectPage(this.itemIdsForComparisonStr);
