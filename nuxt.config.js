@@ -8,6 +8,7 @@ export default {
     color: '#488EC4',
     background: 'white',
   },
+  target: 'static',
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     title: 'Refex',
@@ -78,6 +79,6 @@ export default {
   },
 
   router: {
-    base: process.env.NODE_ENV === 'dev' ? '/' : '/dbcls/refex/',
+    base: process.env.NODE_ENV === 'dev' ? '/' : '/RefEx2/',
   },
 };
