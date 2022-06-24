@@ -51,6 +51,11 @@
         default: '',
       },
       // eslint-disable-next-line vue/require-default-prop
+      options: {
+        type: [Array],
+        required: false,
+      },
+      // eslint-disable-next-line vue/require-default-prop
       numberValue: {
         type: Object,
         required: false,
@@ -65,9 +70,14 @@
         return this.heightChartWrapper + 'px';
       },
       isActiveSearch() {
+        // if number, returns true when number within min max range is set
+        //　if fixed options (is_checkbox), return true if 1 or more options are unset
+        // else check if not empty string
         return this.numberValue
           ? this.filterModal[0] !== this.numberValue.min ||
               this.filterModal[1] !== this.numberValue.max
+          : this.options
+          ? this.options.some(item => !this.filterModal.includes(item))
           : this.filterModal !== '';
       },
     },

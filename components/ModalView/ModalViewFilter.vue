@@ -2,7 +2,7 @@
   <modal-view v-if="isOn" @click.native="close(null)">
     <div
       class="modal filter_modal"
-      :class="{ '-flex': options.length > 1 }"
+      :class="{ '-flex': filterObj.options }"
       @click.stop=""
     >
       <p class="modal_title">
@@ -22,16 +22,43 @@
           ></vue-slider>
         </div>
       </template>
-      <div v-else-if="options.length > 1" class="select">
-        <model-select
-          v-model="selectedOption"
-          placeholder="Select an option"
-          :options="options"
-        ></model-select>
+      <div v-else-if="filterObj.options" class="select">
+        <multi-select
+          v-model="searchValue"
+          multiple
+          :allow-empty="false"
+          :close-on-select="false"
+          placeholder="Search"
+          :options="filterObj.options"
+        >
+          <template slot="option" slot-scope="props">
+            <div class="option">
+              <input
+                type="checkbox"
+                :checked="searchValue.includes(props.option)"
+              />
+              <span class="option__small">{{ props.option }}</span>
+              <!-- <font-awesome-icon icon="exclamation-triangle" /> -->
+            </div>
+          </template>
+          <template slot="selection" slot-scope="{ values }">
+            <span
+              v-if="values.length &amp;&amp; values.length > 3"
+              class="multiselect__single"
+            >
+              {{
+                values.length === filterObj.options.length
+                  ? 'all'
+                  : values.length
+              }}
+              options selected
+            </span>
+          </template>
+        </multi-select>
         <font-awesome-icon
           class="reset-btn"
           :icon="['fad', 'circle-xmark']"
-          @click="selectedOption = options[0]"
+          @click="searchValue = [...filterObj.options]"
         />
       </div>
 
@@ -54,18 +81,17 @@
 </template>
 <script>
   import ModalView from '~/components/ModalView/ModalView.vue';
-  import { ModelSelect } from 'vue-search-select';
+  import MultiSelect from 'vue-multiselect';
   import { mapMutations, mapGetters } from 'vuex';
 
   export default {
     components: {
       ModalView,
-      ModelSelect,
+      MultiSelect,
     },
     data() {
       return {
         searchValue: '',
-        selectedOption: {},
       };
     },
     computed: {
@@ -76,23 +102,10 @@
       isOn() {
         return this.filterObj !== null;
       },
-      options() {
-        return [
-          { value: '', text: 'all' },
-          ...(this.filterObj?.options?.map(x => ({
-            value: x,
-            text: x,
-          })) || []),
-        ];
-      },
     },
     watch: {
-      selectedOption() {
-        this.searchValue = this.selectedOption.value;
-      },
-
       searchValue() {
-        if (this.isOn) this.updateFilterModal('filterModal', this.searchValue);
+        if (this.isOn) this.updateStore();
       },
       filterObj() {
         this.searchValue = this.filterObj?.filterModal || '';
@@ -100,13 +113,15 @@
     },
     created() {
       this.searchValue = this.filterObj?.filterModal ?? '';
-      this.selectedOption = this.options[0];
     },
     methods: {
       ...mapMutations({
         updateProjectFilters: 'update_project_filters',
         close: 'set_filter_modal',
       }),
+      updateStore(filter = this.searchValue) {
+        this.updateFilterModal('filterModal', filter);
+      },
       resetSlider() {
         const numberValue = this.filterObj?.numberValue;
         if (!numberValue) return;
@@ -130,12 +145,37 @@
       display: flex
       flex-direction: column
       overflow: visible
+      min-height: 150px
+      ::v-deep
+        .multiselect
+          input[type="text"]
+            +text_input
+          .multiselect__tag
+            background: $MAIN_COLOR
+            > .multiselect__tag-icon
+              background: none
+              &:after
+                color: white
+          .multiselect__option
+            background: none
+            > .option
+              display: flex
+              align-items: center
+              gap: 10px
+              > input[type="checkbox"]
+                cursor: pointer
+
+          .multiselect__option--highlight
+            background: $MAIN_COLOR
+          *[class^="multiselect__option"]
+            &:after
+              content: none
       > .select
         display: flex
-        align-items: center
-        gap: 50px
+        gap: 10px
     .reset-btn
         --fa-secondary-opacity: 0.3
+        margin-top: 10px
         cursor: pointer !important
         &:hover
           --fa-secondary-opacity: 1
