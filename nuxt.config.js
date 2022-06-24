@@ -21,7 +21,11 @@ export default {
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
-  css: ['normalize.css', '~/assets/css/fontawesome_styles.css'],
+  css: [
+    'normalize.css',
+    '~/assets/css/fontawesome_styles.css',
+    'vue-multiselect/dist/vue-multiselect.min.css',
+  ],
 
   styleResources: {
     sass: ['~/assets/css/mixin.sass'],
