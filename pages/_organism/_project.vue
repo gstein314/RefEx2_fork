@@ -69,6 +69,12 @@
     column: 'LogMedian',
     label: 'MEDIAN [LOG2(TPM+1)]',
     is_displayed: true,
+    filterModal: '',
+  };
+
+  const description = {
+    column: 'Description',
+    label: 'Description',
     is_displayed: true,
     filterModal: '',
   };
@@ -113,7 +119,7 @@
       // In case of Gene, use dataset filters (sample values)
       // In case of Sample, use fixed gene filters with exception of geneDataFromGeneInfo (gene values)
       const infoFromCurrentDataset = store.getters.dataset_by_name(project);
-      const filters = [
+      let filters = [
         ...(type === 'gene'
           ? infoFromCurrentDataset['sample']['filter']
           : store.getters.filter_by_name('gene')?.filter || []),
@@ -138,7 +144,8 @@
           column: infoFromCurrentDataset.gene.key,
           label: infoFromCurrentDataset.gene.header,
         };
-      filters.splice(1, 0, logMedianFilter);
+      if (type === 'gene') filters = [description, logMedianFilter, ...filters];
+      else filters.splice(1, 0, logMedianFilter);
 
       return {
         filterType: type,

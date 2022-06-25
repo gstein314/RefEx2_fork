@@ -127,7 +127,10 @@ export const mutations = {
       const column = entry.column;
       if (Object.keys(state.project_filter_ranges).includes(column)) {
         paramsToBeMerged = numberFilterObj(state.project_filter_ranges[column]);
-      } else paramsToBeMerged = { filterModal: '' };
+      } else if (entry.options) {
+        const options = [...entry.options];
+        paramsToBeMerged = { filterModal: options, options };
+      } else paramsToBeMerged = { filterModal: entry.options ? [] : '' };
       copy[index] = { ...entry, ...paramsToBeMerged };
     });
     state.project_filters = copy;
