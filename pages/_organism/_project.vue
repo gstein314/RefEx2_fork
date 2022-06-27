@@ -205,9 +205,15 @@
     },
     mounted() {
       if (this.isError) return;
-      this.heightChartWrapper = this.$refs.chartWrapper.clientHeight;
       this.$store.commit('set_project_filters', this.filters);
       this.$store.commit('set_project_results', this.resultsWithMedianData);
+      this.heightChartWrapper = this.$refs.chartWrapper.clientHeight;
+      console.log('mounted');
+      console.log(this.$refs.chartWrapper.clientHeight);
+    },
+    updated() {
+      console.log('updated');
+      console.log(this.$refs.chartWrapper.clientHeight);
     },
     methods: {
       ...mapMutations({
