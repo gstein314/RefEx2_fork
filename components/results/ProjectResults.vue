@@ -144,7 +144,13 @@
             let isFiltered = false;
             for (const filter of this.filters) {
               const key = filter.column;
+
               if (!filter.is_displayed) continue;
+              // options filter
+              else if (filter.options) {
+                if (!filter.filterModal.includes(result[key]))
+                  isFiltered = true;
+              }
               // number filter
               else if (
                 typeof filter.filterModal === 'number' ||
@@ -163,9 +169,7 @@
               // text filter
               else if (filter.filterModal !== '' && !isFiltered) {
                 // excact match if filter is based on API options
-                const isMatch = filter.options
-                  ? result[key] === filter.filterModal
-                  : result[key].includes(filter.filterModal);
+                const isMatch = result[key].includes(filter.filterModal);
                 isFiltered = filter.filterModal !== '' && !isMatch;
               }
             }

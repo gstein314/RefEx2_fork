@@ -97,7 +97,7 @@ export const getters = {
   },
   gene_summary_source: state => resultItem => {
     const datasetName = state.active_dataset.dataset;
-    return `http://refex2-api.bhx.jp/static/${datasetName}/${datasetName}_${resultItem}.png`;
+    return `https://refex2-api.dbcls.jp/static/${datasetName}/${datasetName}_${resultItem}.png`;
   },
 };
 
@@ -127,7 +127,10 @@ export const mutations = {
       const column = entry.column;
       if (Object.keys(state.project_filter_ranges).includes(column)) {
         paramsToBeMerged = numberFilterObj(state.project_filter_ranges[column]);
-      } else paramsToBeMerged = { filterModal: '' };
+      } else if (entry.options) {
+        const options = [...entry.options];
+        paramsToBeMerged = { filterModal: options, options };
+      } else paramsToBeMerged = { filterModal: entry.options ? [] : '' };
       copy[index] = { ...entry, ...paramsToBeMerged };
     });
     state.project_filters = copy;
