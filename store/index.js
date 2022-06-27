@@ -97,7 +97,7 @@ export const getters = {
   },
   gene_summary_source: state => resultItem => {
     const datasetName = state.active_dataset.dataset;
-    return `http://refex2-api.bhx.jp/static/${datasetName}/${datasetName}_${resultItem}.png`;
+    return `https://refex2-api.dbcls.jp/static/${datasetName}/${datasetName}_${resultItem}.png`;
   },
 };
 

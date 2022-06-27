@@ -151,7 +151,7 @@ A specie consists of the following attributes:
 
 ## Main API callings in front-end app
 
-＊all API callings are done by Axios and have a default base of 'http://refex2-api.bhx.jp/' as set in `nuxt.config.js`
+＊all API callings are done by Axios and have a default base of 'https://refex2-api.dbcls.jp/' as set in `nuxt.config.js`
 
 1. ### Auto suggestions - upon creation
 
@@ -239,7 +239,7 @@ A specie consists of the following attributes:
      `gql`
     ```
 
-    see more and test[http://refex2-api.bhx.jp/gql]
+    see more and test[https://refex2-api.dbcls.jp/gql]
 
     ***
 
