@@ -86,7 +86,6 @@
       font-weight: 500
       margin-right: 10px
       border-top: 8px solid
-      transition: width .3s
       &.active
         width: 200px
         font-weight: bold
