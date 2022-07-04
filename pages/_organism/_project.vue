@@ -207,13 +207,9 @@
       if (this.isError) return;
       this.$store.commit('set_project_filters', this.filters);
       this.$store.commit('set_project_results', this.resultsWithMedianData);
-      this.heightChartWrapper = this.$refs.chartWrapper.clientHeight;
-      console.log('mounted');
-      console.log(this.$refs.chartWrapper.clientHeight);
     },
     updated() {
-      console.log('updated');
-      console.log(this.$refs.chartWrapper.clientHeight);
+      this.heightChartWrapper = this.$refs.chartWrapper.clientHeight;
     },
     methods: {
       ...mapMutations({
@@ -234,6 +230,9 @@
       updateSelectedItem({ id, sortOrder = 'down' }) {
         this.selectedId = id;
         this.$refs.results.switchSort('LogMedian', sortOrder);
+        requestAnimationFrame(
+          () => (this.heightChartWrapper = this.$refs.chartWrapper.clientHeight)
+        );
       },
     },
   };
