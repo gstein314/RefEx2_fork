@@ -1,10 +1,21 @@
 <template>
   <div class="root">
-    // TODO: add common header
+    <script
+      id="common-header-and-footer__script"
+      type="text/javascript"
+      src="https://dbcls.rois.ac.jp/DBCLS-common-header-footer/v2/script/common-header-and-footer.js"
+      style="display: block"
+      data-header-menu-type="deployed"
+      data-show-footer="true"
+      data-show-footer-license="true"
+      data-show-footer-links="true"
+      data-width="auto"
+      data-color="mono"
+    ></script>
     <header>
       <div class="nav_wrapper">
         <div class="title">
-          <h3>Reference Expression Dataset</h3>
+          <h3><em>Ref</em>erence <em>Ex</em>pression Dataset</h3>
           <div class="select_language">
             <a href="">日本語</a>
             <a href="">English</a>
@@ -78,6 +89,12 @@
             margin: 0
             font-weight: bold
             font-family: "Times New Roman"
+            font-weight: normal
+            font-size: 24px
+            color: $GRAY
+            > em
+              color: $BLACK
+              font-style: normal
           > .select_language
             text-align: left
             > a
@@ -88,6 +105,7 @@
           > ul
             display: flex
             gap: 1rem
+            padding: 0
             > li
               > a
                 text-decoration: none
