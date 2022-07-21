@@ -91,10 +91,17 @@ $TOOLTIP_LAYER: 2
   > svg
     font-size: 14px
     margin-right: 4px
+  &.update
+    background: $COLOR_2
+    &:hover
+      background: #ab6e00
+      transition: 0.6s
   &.disabled
     background: #cccccc
     color: #ffffff
     cursor: not-allowed
+    &:hover
+      background: #cccccc
 
 @mixin table
   width: 100%
