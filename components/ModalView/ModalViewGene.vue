@@ -61,8 +61,8 @@
               >
             </span>
           </p>
-          <p class="title">GO</p>
-          <p class="sub_title">BP</p>
+          <p class="title">Gene Ontology</p>
+          <p class="sub_title">Biological Process</p>
           <p v-if="data.go" class="contents">
             <span v-for="(bp, index) in data.go['BP']" :key="index">
               <a
@@ -76,7 +76,7 @@
               <br />
             </span>
           </p>
-          <p class="sub_title">CC</p>
+          <p class="sub_title">Cellular Component</p>
           <p v-if="data.go" class="contents">
             <span v-for="(cc, index) in data.go['CC']" :key="index">
               <a
@@ -90,7 +90,7 @@
               <br />
             </span>
           </p>
-          <p class="sub_title">MF</p>
+          <p class="sub_title">Molecular Function</p>
           <p v-if="data.go" class="contents">
             <span v-for="(mf, index) in data.go['MF']" :key="index">
               <a
