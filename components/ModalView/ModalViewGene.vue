@@ -51,21 +51,13 @@
               >
             </span>
           </p>
-          <p class="title">Ensembl</p>
+          <p class="title">Ensembl gene</p>
           <p v-if="data.ensembl" class="contents">
-            <span
-              v-for="(transcript, index) in data.ensembl.transcript"
-              :key="index"
-            >
+            <span>
               <a
-                :href="`http://asia.ensembl.org/Multi/Search/Results?q=${transcript};site=enssembl`"
+                :href="`http://asia.ensembl.org/Multi/Search/Results?q=${data.ensembl.gene};site=enssembl`"
                 target="_blank"
-                >{{ transcript }}</a
-              >
-              <span
-                v-if="index !== data.ensembl.transcript.length - 1"
-                class="comma"
-                >,</span
+                >{{ data.ensembl.gene }}</a
               >
             </span>
           </p>
