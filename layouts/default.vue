@@ -1,15 +1,42 @@
 <template>
   <div class="root">
+    <script
+      id="common-header-and-footer__script"
+      type="text/javascript"
+      src="https://dbcls.rois.ac.jp/DBCLS-common-header-footer/v2/script/common-header-and-footer.js"
+      style="display: block"
+      data-header-menu-type="deployed"
+      data-show-footer="true"
+      data-show-footer-license="true"
+      data-show-footer-links="true"
+      data-width="auto"
+      data-color="mono"
+    ></script>
     <header>
-      <h1>
-        <nuxt-link to="/">
-          <img
-            class="logotype"
-            src="~/assets/img/refex-logotype.png"
-            alt="Refex"
-          />
-        </nuxt-link>
-      </h1>
+      <div class="nav_wrapper">
+        <div class="title">
+          <h3><em>Ref</em>erence <em>Ex</em>pression Dataset</h3>
+          <div class="select_language">
+            <a href="">日本語</a>
+            <a href="">English</a>
+          </div>
+        </div>
+        <h1>
+          <nuxt-link to="/">
+            <img
+              class="logotype"
+              src="~/assets/img/refex-logotype.png"
+              alt="Refex"
+            />
+          </nuxt-link>
+        </h1>
+        <nav>
+          <ul>
+            <li><a href="about">About</a></li>
+            <li><a href="citation">Citation</a></li>
+          </ul>
+        </nav>
+      </div>
     </header>
     <Nuxt />
   </div>
@@ -47,11 +74,44 @@
       position: sticky
       width: 100%
       text-align: center
-      > h1
-        margin-bottom: 0
-        > a
-          > img.logotype
-            width: 60px
+      > .nav_wrapper
+        padding: 0 90px
+        display: flex
+        justify-content: space-between
+        > h1
+          margin-bottom: 0
+          > a
+            > img.logotype
+              width: 60px
+        > .title
+          margin: auto 0
+          > h3
+            margin: 0
+            font-weight: bold
+            font-family: "Times New Roman"
+            font-weight: normal
+            font-size: 24px
+            color: $GRAY
+            > em
+              color: $BLACK
+              font-style: normal
+          > .select_language
+            text-align: left
+            > a
+              color: $BLACK
+              font-size: 12px
+        > nav
+          margin: auto 0
+          > ul
+            display: flex
+            gap: 1rem
+            padding: 0
+            > li
+              > a
+                text-decoration: none
+                font-weight: bold
+                font-size: 18px
+                color: $BLACK
     h2
       font-size: 20px
       font-weight:600

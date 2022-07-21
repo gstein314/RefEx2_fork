@@ -14,7 +14,10 @@
           <p class="results_num">{{ resultsNum.toLocaleString() }}</p>
           <button
             class="find_results_btn"
-            :class="{ disabled: !validSearch }"
+            :class="{
+              disabled: !validSearch,
+              update: !tableDataIsSameAsScreener,
+            }"
             :disabled="!validSearch"
             @click="$refs[`${$vnode.key}_search`].showResults('all')"
           >
@@ -126,7 +129,7 @@
             font-weight: bold
             margin: 18px 0 14px
           > .warning
-             +warning
+            +warning
           > button
             +button
 </style>
