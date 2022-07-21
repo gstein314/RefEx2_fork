@@ -1,5 +1,6 @@
 <template>
   <div class="root">
+    test
     <script
       id="common-header-and-footer__script"
       type="text/javascript"
