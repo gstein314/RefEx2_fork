@@ -6,9 +6,6 @@
       src="https://dbcls.rois.ac.jp/DBCLS-common-header-footer/v2/script/common-header-and-footer.js"
       style="display: block"
       data-header-menu-type="deployed"
-      data-show-footer="true"
-      data-show-footer-license="true"
-      data-show-footer-links="true"
       data-width="auto"
       data-color="mono"
     ></script>
@@ -16,10 +13,6 @@
       <div class="nav_wrapper">
         <div class="title">
           <h3><em>Ref</em>erence <em>Ex</em>pression Dataset</h3>
-          <div class="select_language">
-            <a href="">日本語</a>
-            <a href="">English</a>
-          </div>
         </div>
         <h1>
           <nuxt-link to="/">
@@ -33,7 +26,7 @@
         <nav>
           <ul>
             <li><a href="about">About</a></li>
-            <li><a href="citation">Citation</a></li>
+            <li><a href="citation">Help</a></li>
           </ul>
         </nav>
       </div>
@@ -95,11 +88,6 @@
             > em
               color: $BLACK
               font-style: normal
-          > .select_language
-            text-align: left
-            > a
-              color: $BLACK
-              font-size: 12px
         > nav
           margin: auto 0
           > ul
