@@ -4,9 +4,31 @@
   <div class="text_search_area">
     <h2>Search Conditions</h2>
     <h3>
-      <span class="example"
+      <span v-if="filterType === 'gene'" class="example"
         >e.g.
         <dl v-for="(condition, index) of searchCondition" :key="index">
+          <dt>{{ condition.label }}:</dt>
+          <dd
+            v-for="(example, example_index) of condition.examples"
+            :key="example_index"
+            class="sample_value"
+            @click="
+              updateParams({
+                ...parameters,
+                text: example,
+              })
+            "
+          >
+            {{ example }}
+          </dd>
+        </dl>
+      </span>
+      <span v-else class="example"
+        >e.g.
+        <dl
+          v-for="(condition, index) of activeDataset.sample.search_conditions"
+          :key="index"
+        >
           <dt>{{ condition.label }}:</dt>
           <dd
             v-for="(example, example_index) of condition.examples"
