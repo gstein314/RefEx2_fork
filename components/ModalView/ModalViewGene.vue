@@ -52,7 +52,19 @@
             </span>
           </p>
           <p class="title">Ensembl gene</p>
-          <p v-if="data.ensembl" class="contents">
+          <p v-if="Array.isArray(data.ensembl)" class="contents">
+            <span v-for="index in data.ensembl.length" :key="index">
+              <a
+                :href="`http://asia.ensembl.org/Multi/Search/Results?q=${
+                  data.ensembl[index - 1].gene
+                };site=enssembl`"
+                target="_blank"
+                >{{ data.ensembl[index - 1].gene }}</a
+              >
+              <span v-if="index !== data.ensembl.length" class="comma">,</span>
+            </span>
+          </p>
+          <p v-else class="contents">
             <span>
               <a
                 :href="`http://asia.ensembl.org/Multi/Search/Results?q=${data.ensembl.gene};site=enssembl`"
