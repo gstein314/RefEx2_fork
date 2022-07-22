@@ -4,31 +4,9 @@
   <div class="text_search_area">
     <h2>Search Conditions</h2>
     <h3>
-      <span v-if="filterType === 'gene'" class="example"
+      <span class="example"
         >e.g.
-        <dl v-for="(condition, index) of searchCondition" :key="index">
-          <dt>{{ condition.label }}:</dt>
-          <dd
-            v-for="(example, example_index) of condition.examples"
-            :key="example_index"
-            class="sample_value"
-            @click="
-              updateParams({
-                ...parameters,
-                text: example,
-              })
-            "
-          >
-            {{ example }}
-          </dd>
-        </dl>
-      </span>
-      <span v-else class="example"
-        >e.g.
-        <dl
-          v-for="(condition, index) of activeDataset.sample.search_conditions"
-          :key="index"
-        >
+        <dl v-for="(condition, index) of currentSearchCondition" :key="index">
           <dt>{{ condition.label }}:</dt>
           <dd
             v-for="(example, example_index) of condition.examples"
@@ -137,6 +115,7 @@
         validSearch: false,
         // either 'all' or 'numfound'
         typeOfQuery: 'numfound',
+        currentSearchCondition: '',
       };
     },
     computed: {
@@ -219,12 +198,21 @@
     },
     created() {
       this.showResults('numfound');
+      this.updateSearchCondition();
     },
     methods: {
       ...mapMutations({
         setAlertModal: 'set_alert_modal',
         updatePagination: 'set_pagination',
       }),
+      updateSearchCondition() {
+        if (this.filterType === 'gene') {
+          this.currentSearchCondition = this.searchCondition;
+        } else {
+          this.currentSearchCondition =
+            this.activeDataset.sample.search_conditions;
+        }
+      },
       updateParams(params) {
         this.$emit('updateScreener');
         this.parameters = { text: this.parameters.text, ...params };
