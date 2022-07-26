@@ -6,7 +6,7 @@
     <h3>
       <span class="example"
         >e.g.
-        <dl v-for="(condition, index) of searchCondition" :key="index">
+        <dl v-for="(condition, index) of currentSearchCondition" :key="index">
           <dt>{{ condition.label }}:</dt>
           <dd
             v-for="(example, example_index) of condition.examples"
@@ -115,6 +115,7 @@
         validSearch: false,
         // either 'all' or 'numfound'
         typeOfQuery: 'numfound',
+        currentSearchCondition: '',
       };
     },
     computed: {
@@ -197,12 +198,21 @@
     },
     created() {
       this.showResults('numfound');
+      this.updateSearchCondition();
     },
     methods: {
       ...mapMutations({
         setAlertModal: 'set_alert_modal',
         updatePagination: 'set_pagination',
       }),
+      updateSearchCondition() {
+        if (this.filterType === 'gene') {
+          this.currentSearchCondition = this.searchCondition;
+        } else {
+          this.currentSearchCondition =
+            this.activeDataset.sample.search_conditions;
+        }
+      },
       updateParams(params) {
         this.$emit('updateScreener');
         this.parameters = { text: this.parameters.text, ...params };
