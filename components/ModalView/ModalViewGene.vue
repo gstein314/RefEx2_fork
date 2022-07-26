@@ -234,7 +234,7 @@
           font-size: 16px
           font-weight: bold
           margin: 10px 0 0px
-        > .contents
+        .contents
           font-size: 14px
           margin: 0
           line-height: 20px
