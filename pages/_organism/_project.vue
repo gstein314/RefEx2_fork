@@ -222,9 +222,10 @@
         this.filters = arr;
       },
       updateResultSort(sort) {
+        // NOTE: this code is left commented out as it may be needed
         // reset selectedItem if sort other then median is changed
-        if (sort.key !== 'LogMedian')
-          this.selectedId = this.mainItem[this.sampleIdKey];
+        // if (sort.key !== 'LogMedian')
+        //   this.selectedId = this.mainItem[this.sampleIdKey];
         this.resultsSort = sort;
       },
       updateSelectedItem({ id, sortOrder = 'down' }) {
