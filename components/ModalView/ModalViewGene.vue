@@ -51,27 +51,31 @@
               >
             </span>
           </p>
-          <p class="title">Ensembl</p>
-          <p v-if="data.ensembl" class="contents">
-            <span
-              v-for="(transcript, index) in data.ensembl.transcript"
-              :key="index"
-            >
+          <p class="title">Ensembl gene</p>
+          <p v-if="Array.isArray(data.ensembl)" class="contents">
+            <span v-for="index in data.ensembl.length" :key="index">
               <a
-                :href="`http://asia.ensembl.org/Multi/Search/Results?q=${transcript};site=enssembl`"
+                :href="`http://asia.ensembl.org/Multi/Search/Results?q=${
+                  data.ensembl[index - 1].gene
+                };site=enssembl`"
                 target="_blank"
-                >{{ transcript }}</a
+                >{{ data.ensembl[index - 1].gene }}</a
               >
-              <span
-                v-if="index !== data.ensembl.transcript.length - 1"
-                class="comma"
-                >,</span
+              <span v-if="index !== data.ensembl.length" class="comma">,</span>
+            </span>
+          </p>
+          <p v-else class="contents">
+            <span>
+              <a
+                :href="`http://asia.ensembl.org/Multi/Search/Results?q=${data.ensembl.gene};site=enssembl`"
+                target="_blank"
+                >{{ data.ensembl.gene }}</a
               >
             </span>
           </p>
-          <p class="title">GO</p>
-          <p class="sub_title">BP</p>
-          <p v-if="data.go" class="contents">
+          <p class="title">Gene Ontology</p>
+          <p class="sub_title">Biological Process</p>
+          <p v-if="Array.isArray(data.go['BP'])" class="contents">
             <span v-for="(bp, index) in data.go['BP']" :key="index">
               <a
                 :href="`http://amigo.geneontology.org/amigo/term/${bp.id}`"
@@ -84,8 +88,18 @@
               <br />
             </span>
           </p>
-          <p class="sub_title">CC</p>
-          <p v-if="data.go" class="contents">
+          <p v-else class="contents">
+            <span>
+              <a
+                :href="`http://amigo.geneontology.org/amigo/term/${data.go['BP'].id}`"
+                target="_blank"
+                >{{ `${data.go['BP'].id}: ${data.go['BP'].term}` }}</a
+              >
+              <br />
+            </span>
+          </p>
+          <p class="sub_title">Cellular Component</p>
+          <p v-if="Array.isArray(data.go['CC'])" class="contents">
             <span v-for="(cc, index) in data.go['CC']" :key="index">
               <a
                 :href="`http://amigo.geneontology.org/amigo/term/${cc.id}`"
@@ -98,8 +112,18 @@
               <br />
             </span>
           </p>
-          <p class="sub_title">MF</p>
-          <p v-if="data.go" class="contents">
+          <p v-else class="contents">
+            <span>
+              <a
+                :href="`http://amigo.geneontology.org/amigo/term/${data.go['CC'].id}`"
+                target="_blank"
+                >{{ `${data.go['CC'].id}: ${data.go['CC'].term}` }}</a
+              >
+              <br />
+            </span>
+          </p>
+          <p class="sub_title">Molecular Function</p>
+          <p v-if="Array.isArray(data.go['MF'])" class="contents">
             <span v-for="(mf, index) in data.go['MF']" :key="index">
               <a
                 :href="`http://amigo.geneontology.org/amigo/term/${mf.id}`"
@@ -108,6 +132,16 @@
               >
               <span v-if="index !== data.go['MF'].length - 1" class="comma"
                 >,</span
+              >
+              <br />
+            </span>
+          </p>
+          <p v-else class="contents">
+            <span>
+              <a
+                :href="`http://amigo.geneontology.org/amigo/term/${data.go['MF'].id}`"
+                target="_blank"
+                >{{ `${data.go['MF'].id}: ${data.go['MF'].term}` }}</a
               >
               <br />
             </span>
