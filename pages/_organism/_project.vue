@@ -32,7 +32,7 @@
         </item-comparison>
         <a class="display_settings" @click="toggleDisplaySettings">
           <font-awesome-icon icon="eye" />
-          Display settings
+          Show/hide columns
         </a>
       </div>
     </div>

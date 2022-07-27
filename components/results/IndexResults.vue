@@ -12,7 +12,7 @@
       <div class="display_settings_wrapper">
         <a class="display_settings" @click="$emit('toggleDisplaySettings')">
           <font-awesome-icon icon="eye" />
-          Display settings
+          Show/hide columns
         </a>
       </div>
     </div>

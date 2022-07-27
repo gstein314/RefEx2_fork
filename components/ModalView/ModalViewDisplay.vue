@@ -3,7 +3,7 @@
     <div class="modal display_settings_modal" @click.stop="">
       <p class="modal_title">
         <font-awesome-icon icon="eye" />
-        Display settings
+        Show/hide columns
       </p>
       <div class="display_checkboxes">
         <div v-for="(value, filterIndex) of filters" :key="filterIndex">
