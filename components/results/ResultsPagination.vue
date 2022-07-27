@@ -143,7 +143,7 @@
 
   .pagination-wrapper
     display: flex
-    justify-content: center
+    justify-content: left
     >ul
       margin-top: 2rem
       display: flex
