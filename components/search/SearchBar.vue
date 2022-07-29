@@ -40,12 +40,20 @@
         <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
         <!-- eslint-disable vue/no-unused-vars -->
         <div slot="suggestion-item" slot-scope="{ suggestion }">
-          <strong class="title">
-            {{ suggestion[paramsForSuggestions[0]] }}</strong
+          <strong
+            class="title"
+            v-html="
+              $highlightedSuggestion(
+                suggestion[paramsForSuggestions[0]],
+                parameters.text
+              )
+            "
+          >
+          </strong
           >&nbsp; -&nbsp;
           <span
             v-html="
-              $boldenSuggestion(
+              $highlightedSuggestion(
                 suggestion[paramsForSuggestions[1]],
                 parameters.text
               )
