@@ -1,9 +1,9 @@
 export default ({ app }, inject) => {
   inject('highlightedSuggestion', (fullText, highlightedPart) => {
     const reg = new RegExp(highlightedPart, 'gi');
-    const match = fullText.match(reg);
-    if (match) {
-      return fullText.replace(match, `<mark>${match}</mark>`);
+    const isHighlight = reg.test(highlightedPart);
+    if (highlightedPart.length > 2 && isHighlight) {
+      return fullText.replaceAll(reg, `<mark>$&</mark>`);
     } else {
       return fullText;
     }
