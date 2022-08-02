@@ -15,19 +15,6 @@
           <label :for="value.innerKey"> {{ value.label }} </label>
         </div>
       </div>
-      <div class="display_pagination">
-        <label for="pagination">Items per page</label>
-        <select id="pagination" name="pagination" @change="setLimit">
-          <option
-            v-for="n in [10, 20, 50, 100]"
-            :key="`pagination-limit-${n}`"
-            :value="n"
-            :selected="n === currentLimit"
-          >
-            {{ n }}
-          </option>
-        </select>
-      </div>
     </div>
   </modal-view>
 </template>
@@ -85,19 +72,6 @@
       toggleDisplaySettings() {
         this.isDisplaySettings = !this.isDisplaySettings;
       },
-      setLimit(e) {
-        const newLimit = +e.target.value;
-        const newPage = Math.max(
-          Math.ceil(this.paginationObject.offset / newLimit),
-          1
-        );
-        const newOffset = (newPage - 1) * newLimit;
-        this.updatePagination({
-          limit: newLimit,
-          offset: newOffset,
-          type: this.indexFilters ? 'index' : 'project',
-        });
-      },
     },
   };
 </script>
@@ -112,6 +86,4 @@
         line-height: 26px
         > label
           font-size: 14px
-    > .display_pagination
-      margin-top: 1rem
 </style>

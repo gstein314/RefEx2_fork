@@ -1,5 +1,18 @@
 <template>
   <div v-if="pagesList.length > 0" class="pagination-wrapper">
+    <div class="display_pagination">
+      <label for="pagination">Items per page</label>
+      <select id="pagination" name="pagination" @change="setLimit">
+        <option
+          v-for="n in [10, 20, 50, 100]"
+          :key="`pagination-limit-${n}`"
+          :value="n"
+          :selected="n === currentLimit"
+        >
+          {{ n }}
+        </option>
+      </select>
+    </div>
     <ul>
       <li
         :class="{ arrows: true, disabled: currentPage === 1 }"
@@ -63,6 +76,7 @@
 
     computed: {
       ...mapGetters({
+        projectFilters: 'project_filters',
         projectPaginationObject: 'get_project_pagination',
         indexPaginationObject: 'index_pagination',
       }),
@@ -70,6 +84,9 @@
         return this.tableType === 'index'
           ? this.indexPaginationObject
           : this.projectPaginationObject;
+      },
+      currentLimit() {
+        return this.paginationObject.limit;
       },
       pagesList() {
         const list = [];
@@ -135,6 +152,19 @@
         }
         this.setOffset((page - 1) * this.paginationObject.limit);
       },
+      setLimit(e) {
+        const newLimit = +e.target.value;
+        const newPage = Math.max(
+          Math.ceil(this.paginationObject.offset / newLimit),
+          1
+        );
+        const newOffset = (newPage - 1) * newLimit;
+        this.updatePagination({
+          limit: newLimit,
+          offset: newOffset,
+          type: this.tableType === 'index' ? 'index' : 'project',
+        });
+      },
     },
   };
 </script>
@@ -142,9 +172,12 @@
 <style lang="sass" scoped>
 
   .pagination-wrapper
-    display: flex
+    display: grid
     justify-content: left
+    > .display_pagination
+      margin-top: 1rem
     >ul
+      padding: 0
       margin-top: 2rem
       display: flex
       justify-content: center
