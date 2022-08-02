@@ -40,12 +40,20 @@
         <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
         <!-- eslint-disable vue/no-unused-vars -->
         <div slot="suggestion-item" slot-scope="{ suggestion }">
-          <strong class="title">
-            {{ suggestion[paramsForSuggestions[0]] }}</strong
+          <strong
+            class="title"
+            v-html="
+              $highlightedSuggestion(
+                suggestion[paramsForSuggestions[0]],
+                parameters.text
+              )
+            "
+          >
+          </strong
           >&nbsp; -&nbsp;
           <span
             v-html="
-              $boldenSuggestion(
+              $highlightedSuggestion(
                 suggestion[paramsForSuggestions[1]],
                 parameters.text
               )
@@ -76,14 +84,57 @@
         <label for="summary_check">Include gene summaries in search</label>
       </div>
     </template>
-    <div v-else class="text_search_name">
-      <input
+    <template v-else-if="filterType === 'sample'">
+      <vue-simple-suggest
         v-model="parameters.text"
-        placeholder="liver"
+        :debounce="500"
+        :min-length="0"
+        :display-attribute="paramsForSuggestions[1]"
+        :value-attribute="paramsForSuggestions[0]"
+        :list="updateSuggestions"
+        :max-suggestions="20"
         class="text_search_name"
-        @input="showResults('numfound')"
-      />
-    </div>
+        placeholder="liver"
+        @select="moveDetailpage"
+      >
+        <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
+        <!-- eslint-disable vue/no-unused-vars -->
+        <div slot="suggestion-item" slot-scope="{ suggestion }">
+          <strong
+            class="title"
+            v-html="
+              $highlightedSuggestion(
+                suggestion[paramsForSuggestions[0]],
+                parameters.text
+              )
+            "
+          >
+          </strong
+          >&nbsp; -&nbsp;
+          <span
+            v-html="
+              $highlightedSuggestion(
+                suggestion[paramsForSuggestions[1]],
+                parameters.text
+              )
+            "
+          ></span>
+          <font-awesome-icon
+            icon="external-link-alt"
+            class="external-link-alt"
+            style="font-size: 12px"
+          />
+        </div>
+        <div
+          v-if="isLoading"
+          slot="misc-item-below"
+          slot-scope="{ suggestion }"
+          class="misc-item"
+        >
+          <span>Loading...</span>
+        </div>
+      </vue-simple-suggest>
+    </template>
     <ScreenerView>
       <component
         :is="`screener-view-${filterType}`"
@@ -221,9 +272,15 @@
       },
       moveDetailpage(suggestion) {
         this.$nuxt.$loading.start();
-        this.$router.push(
-          this.routeToProjectPage(suggestion[this.paramsForSuggestions[2]])
-        );
+        if (this.filterType === 'gene') {
+          this.$router.push(
+            this.routeToProjectPage(suggestion[this.paramsForSuggestions[2]])
+          );
+        } else if (this.filterType === 'sample') {
+          this.$router.push(
+            this.routeToProjectPage(suggestion[this.paramsForSuggestions[0]])
+          );
+        }
       },
       updateSuggestions() {
         this.showResults('numfound');
