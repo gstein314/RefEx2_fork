@@ -1,5 +1,17 @@
 <template>
   <div v-if="pagesList.length > 0" class="pagination-wrapper">
+    <div>
+      {{
+        `Showing ${(
+          1 +
+          (currentPage - 1) * currentLimit
+        ).toLocaleString()} to ${
+          currentPage * currentLimit > resultsNum
+            ? resultsNum.toLocaleString()
+            : (currentPage * currentLimit).toLocaleString()
+        } of ${resultsNum.toLocaleString()} ${activeFilter.name}s`
+      }}
+    </div>
     <div class="display_pagination">
       <label for="pagination">Items per page</label>
       <select id="pagination" name="pagination" @change="setLimit">
@@ -76,10 +88,14 @@
 
     computed: {
       ...mapGetters({
-        projectFilters: 'project_filters',
         projectPaginationObject: 'get_project_pagination',
         indexPaginationObject: 'index_pagination',
+        resultsByName: 'results_by_name',
+        activeFilter: 'active_filter',
       }),
+      resultsNum() {
+        return this.resultsByName(this.activeFilter.name).results_num;
+      },
       paginationObject() {
         return this.tableType === 'index'
           ? this.indexPaginationObject
