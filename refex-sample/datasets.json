@@ -13,6 +13,7 @@
         "gene": {
           "key": "ncbiGeneId",
           "header": "NCBI Gene ID",
+          "url_prefix": "http://identifiers.org/ncbigene/",
           "item_comparison_example": [
             {
               "route": "5460,6657,9314,4609",
@@ -110,6 +111,7 @@
         "gene": {
           "key": "ensemblGeneId",
           "header": "Ensembl Gene ID",
+          "url_prefix": "http://identifiers.org/ensembl/",
           "item_comparison_example": [
             {
               "route": "ENSG00000204531,ENSG00000181449,ENSG00000136826,ENSG00000136997",
@@ -194,6 +196,7 @@
         "gene": {
           "key": "ncbiGeneId",
           "header": "NCBI Gene ID",
+          "url_prefix": "http://identifiers.org/ncbigene/",
           "item_comparison_example": [
             {
               "route": "17869,16600,20674,18999",

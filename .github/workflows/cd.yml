@@ -27,7 +27,6 @@ jobs:
         run: |
           npm config set '//npm.fontawesome.com/:_authToken' "${{ secrets.ICON_TOKEN }}"
           npm install
-
       - name: Generate
         run: npm run generate
 

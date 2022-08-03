@@ -51,67 +51,111 @@
               >
             </span>
           </p>
-          <p class="title">Ensembl</p>
-          <p v-if="data.ensembl" class="contents">
-            <span
-              v-for="(transcript, index) in data.ensembl.transcript"
-              :key="index"
-            >
-              <a
-                :href="`http://asia.ensembl.org/Multi/Search/Results?q=${transcript};site=enssembl`"
-                target="_blank"
-                >{{ transcript }}</a
-              >
-              <span
-                v-if="index !== data.ensembl.transcript.length - 1"
-                class="comma"
-                >,</span
-              >
-            </span>
-          </p>
-          <p class="title">GO</p>
-          <p class="sub_title">BP</p>
-          <p v-if="data.go" class="contents">
-            <span v-for="(bp, index) in data.go['BP']" :key="index">
-              <a
-                :href="`http://amigo.geneontology.org/amigo/term/${bp.id}`"
-                target="_blank"
-                >{{ `${bp.id}: ${bp.term}` }}</a
-              >
-              <span v-if="index !== data.go['BP'].length - 1" class="comma"
-                >,</span
-              >
-              <br />
-            </span>
-          </p>
-          <p class="sub_title">CC</p>
-          <p v-if="data.go" class="contents">
-            <span v-for="(cc, index) in data.go['CC']" :key="index">
-              <a
-                :href="`http://amigo.geneontology.org/amigo/term/${cc.id}`"
-                target="_blank"
-                >{{ `${cc.id}: ${cc.term}` }}</a
-              >
-              <span v-if="index !== data.go['CC'].length - 1" class="comma"
-                >,</span
-              >
-              <br />
-            </span>
-          </p>
-          <p class="sub_title">MF</p>
-          <p v-if="data.go" class="contents">
-            <span v-for="(mf, index) in data.go['MF']" :key="index">
-              <a
-                :href="`http://amigo.geneontology.org/amigo/term/${mf.id}`"
-                target="_blank"
-                >{{ `${mf.id}: ${mf.term}` }}</a
-              >
-              <span v-if="index !== data.go['MF'].length - 1" class="comma"
-                >,</span
-              >
-              <br />
-            </span>
-          </p>
+          <p class="title">Ensembl gene</p>
+          <div v-if="data.ensembl">
+            <p v-if="Array.isArray(data.ensembl)" class="contents">
+              <span v-for="index in data.ensembl.length" :key="index">
+                <a
+                  :href="`http://asia.ensembl.org/Multi/Search/Results?q=${
+                    data.ensembl[index - 1].gene
+                  };site=enssembl`"
+                  target="_blank"
+                  >{{ data.ensembl[index - 1].gene }}</a
+                >
+                <span v-if="index !== data.ensembl.length" class="comma"
+                  >,</span
+                >
+              </span>
+            </p>
+            <p v-else class="contents">
+              <span>
+                <a
+                  :href="`http://asia.ensembl.org/Multi/Search/Results?q=${data.ensembl.gene};site=enssembl`"
+                  target="_blank"
+                  >{{ data.ensembl.gene }}</a
+                >
+              </span>
+            </p>
+          </div>
+          <p class="title">Gene Ontology</p>
+          <p class="sub_title">Biological Process</p>
+          <div v-if="data.go">
+            <p v-if="Array.isArray(data.go['BP'])" class="contents">
+              <span v-for="(bp, index) in data.go['BP']" :key="index">
+                <a
+                  :href="`http://amigo.geneontology.org/amigo/term/${bp.id}`"
+                  target="_blank"
+                  >{{ `${bp.id}: ${bp.term}` }}</a
+                >
+                <span v-if="index !== data.go['BP'].length - 1" class="comma"
+                  >,</span
+                >
+                <br />
+              </span>
+            </p>
+            <p v-else-if="data.go['BP']" class="contents">
+              <span>
+                <a
+                  :href="`http://amigo.geneontology.org/amigo/term/${data.go['BP'].id}`"
+                  target="_blank"
+                  >{{ `${data.go['BP'].id}: ${data.go['BP'].term}` }}</a
+                >
+                <br />
+              </span>
+            </p>
+          </div>
+          <p class="sub_title">Cellular Component</p>
+          <div v-if="data.go">
+            <p v-if="Array.isArray(data.go['CC'])" class="contents">
+              <span v-for="(cc, index) in data.go['CC']" :key="index">
+                <a
+                  :href="`http://amigo.geneontology.org/amigo/term/${cc.id}`"
+                  target="_blank"
+                  >{{ `${cc.id}: ${cc.term}` }}</a
+                >
+                <span v-if="index !== data.go['CC'].length - 1" class="comma"
+                  >,</span
+                >
+                <br />
+              </span>
+            </p>
+            <p v-else-if="data.go['CC']" class="contents">
+              <span>
+                <a
+                  :href="`http://amigo.geneontology.org/amigo/term/${data.go['CC'].id}`"
+                  target="_blank"
+                  >{{ `${data.go['CC'].id}: ${data.go['CC'].term}` }}</a
+                >
+                <br />
+              </span>
+            </p>
+          </div>
+          <p class="sub_title">Molecular Function</p>
+          <div v-if="data.go">
+            <p v-if="Array.isArray(data.go['MF'])" class="contents">
+              <span v-for="(mf, index) in data.go['MF']" :key="index">
+                <a
+                  :href="`http://amigo.geneontology.org/amigo/term/${mf.id}`"
+                  target="_blank"
+                  >{{ `${mf.id}: ${mf.term}` }}</a
+                >
+                <span v-if="index !== data.go['MF'].length - 1" class="comma"
+                  >,</span
+                >
+                <br />
+              </span>
+            </p>
+            <p v-else-if="data.go['MF']" class="contents">
+              <span>
+                <a
+                  :href="`http://amigo.geneontology.org/amigo/term/${data.go['MF'].id}`"
+                  target="_blank"
+                  >{{ `${data.go['MF'].id}: ${data.go['MF'].term}` }}</a
+                >
+                <br />
+              </span>
+            </p>
+          </div>
         </div>
       </div>
       <p v-else class="loading">Loading...</p>
@@ -190,7 +234,7 @@
           font-size: 16px
           font-weight: bold
           margin: 10px 0 0px
-        > .contents
+        .contents
           font-size: 14px
           margin: 0
           line-height: 20px

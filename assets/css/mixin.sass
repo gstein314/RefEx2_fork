@@ -7,6 +7,8 @@ $WARNING_COLOR: #efd512
 $ACTIVE_COLOR: #fad275 
 $ACTIVE_COLOR_HOVER: rgba(255, 255, 0, .1)
 $BUTTON_HOVER_COLOR: #366c96
+$WARNING_BUTTON_COLOR: #FF8A17
+$WARNING_BUTTON_COLOR_HOVER: #F06A06
 $COLOR_1: #488EC4
 $COLOR_2: #FF8A17
 $COLOR_3: #67C1C7
@@ -91,10 +93,17 @@ $TOOLTIP_LAYER: 2
   > svg
     font-size: 14px
     margin-right: 4px
+  &.update
+    background: $WARNING_BUTTON_COLOR
+    &:hover
+      background: $WARNING_BUTTON_COLOR_HOVER
+      transition: 0.6s
   &.disabled
     background: #cccccc
     color: #ffffff
     cursor: not-allowed
+    &:hover
+      background: #cccccc
 
 @mixin table
   width: 100%
@@ -205,6 +214,7 @@ $TOOLTIP_LAYER: 2
     color: $GRAY
     font-weight: 100
   .sample_value
+    position: relative
     color: $MAIN_COLOR
     font-size: 14px
     font-weight: 600
