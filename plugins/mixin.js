@@ -1,7 +1,12 @@
 export default ({ app }, inject) => {
-  inject('boldenSuggestion', (fullText, highlightedPart) => {
-    if (!fullText || !highlightedPart) return fullText;
-    return fullText.replace(highlightedPart, `<b>${highlightedPart}</b>`);
+  inject('highlightedSuggestion', (fullText, highlightedPart) => {
+    const reg = new RegExp(highlightedPart, 'gi');
+    const isHighlight = reg.test(highlightedPart);
+    if (highlightedPart.length > 2 && isHighlight) {
+      return fullText.replaceAll(reg, `<mark>$&</mark>`);
+    } else {
+      return fullText;
+    }
   });
   inject('firstLetterUppercase', str => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();

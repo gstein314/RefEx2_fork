@@ -35,7 +35,7 @@
           slot-scope="{ item }"
           class="my-item"
           @click="handleSingleTagUpdate(item.id, item.text)"
-          v-html="$boldenSuggestion(item.text, temporaryParameters.goTerm)"
+          v-html="$highlightedSuggestion(item.text, temporaryParameters.goTerm)"
         ></div>
       </vue-tags-input>
     </no-ssr>
