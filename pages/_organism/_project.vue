@@ -14,7 +14,7 @@
             @click="setGeneModal(items[0].id)"
           />
           <span class="title">
-            {{ infoForMainItem.Description || infoForMainItem.name }}
+            {{ infoForMainItem.symbol || infoForMainItem.name }}
             <span v-if="filterType === 'gene'" class="metadata">{{
               `(${infoForMainItem.name}, Gene ID: ${infoForMainItem.id})`
             }}</span>
