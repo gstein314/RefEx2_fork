@@ -12,7 +12,7 @@
     <header>
       <div class="nav_wrapper">
         <div class="title">
-          <h3><em>Ref</em>erence <em>Ex</em>pression Dataset</h3>
+          <p><em>Ref</em>erence <em>Ex</em>pression Dataset</p>
         </div>
         <h1>
           <nuxt-link to="/">
@@ -68,32 +68,38 @@
       width: 100%
       text-align: center
       > .nav_wrapper
-        padding: 0 90px
+        padding: $PADDING_WRAPPER
         display: flex
         justify-content: space-between
         > h1
           margin-bottom: 0
+          width: 100%
+          text-align: center
           > a
             > img.logotype
               width: 60px
         > .title
           margin: auto 0
-          > h3
+          width: 100%
+          text-align: left
+          > p
             margin: 0
             font-weight: bold
             font-family: "Times New Roman"
             font-weight: normal
-            font-size: 24px
+            font-size: 21px
             color: $GRAY
             > em
               color: $BLACK
               font-style: normal
         > nav
           margin: auto 0
+          width: 100%
           > ul
             display: flex
             gap: 1rem
             padding: 0
+            flex-direction: row-reverse
             > li
               > a
                 text-decoration: none

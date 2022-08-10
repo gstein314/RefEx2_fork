@@ -22,6 +22,7 @@ $COLOR_10: #A8A8A8
 
 $PADDING_SLIM: 0.1rem 0.4rem
 $PADDING_LARGE: 0.4rem 0.8rem
+$PADDING_WRAPPER: 0 20px
 
 $BORDER_RADIUS_DEFAULT: 0.2rem
 
@@ -112,7 +113,6 @@ $TOOLTIP_LAYER: 2
     text-align: center
     > input[type="checkbox"]
       cursor: pointer
-      z-index: 1
       position: relative
       width: 15px
       height: 15px
@@ -234,7 +234,6 @@ $TOOLTIP_LAYER: 2
 @mixin display_settings_wrapper
   display: flex
   justify-content: flex-end
-  position: sticky
   margin-left: auto
   top: 119px
   background-color: #ffffff

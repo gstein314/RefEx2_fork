@@ -1,16 +1,7 @@
 <template>
   <div v-if="pagesList.length > 0" class="pagination-wrapper">
     <div>
-      {{
-        `Showing ${(
-          1 +
-          (currentPage - 1) * currentLimit
-        ).toLocaleString()} to ${
-          currentPage * currentLimit > resultsNum
-            ? resultsNum.toLocaleString()
-            : (currentPage * currentLimit).toLocaleString()
-        } of ${resultsNum.toLocaleString()} ${activeFilter.name}s`
-      }}
+      {{ showingPage() }}
     </div>
     <div class="display_pagination">
       <label for="pagination">Items per page</label>
@@ -92,6 +83,7 @@
         indexPaginationObject: 'index_pagination',
         resultsByName: 'results_by_name',
         activeFilter: 'active_filter',
+        projectResults: 'get_project_results',
       }),
       resultsNum() {
         return this.resultsByName(this.activeFilter.name).results_num;
@@ -161,6 +153,27 @@
           offset,
           type: this.tableType,
         });
+      },
+      showingPage() {
+        if (this.tableType === 'index') {
+          return `Showing ${(
+            1 +
+            (this.currentPage - 1) * this.currentLimit
+          ).toLocaleString()} to ${
+            this.currentPage * this.currentLimit > this.resultsNum
+              ? this.resultsNum.toLocaleString()
+              : (this.currentPage * this.currentLimit).toLocaleString()
+          } of ${this.resultsNum.toLocaleString()}`;
+        } else if (this.tableType === 'project') {
+          return `Showing ${(
+            1 +
+            (this.currentPage - 1) * this.currentLimit
+          ).toLocaleString()} to ${
+            this.currentPage * this.currentLimit > this.projectResults.length
+              ? this.projectResults.length.toLocaleString()
+              : (this.currentPage * this.currentLimit).toLocaleString()
+          } of ${this.projectResults.length.toLocaleString()}`;
+        }
       },
       handleChangePage(page) {
         if (page < 1 || page > this.pagesNumber) {

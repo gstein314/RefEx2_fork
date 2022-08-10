@@ -200,7 +200,7 @@
 <style lang="sass" scoped>
   .results_wrapper
     min-width: 600px
-    padding: 0 90px
+    padding: $PADDING_WRAPPER
     margin-bottom: 60px
     > .results_title_wrapper
       display: flex
