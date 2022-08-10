@@ -1,21 +1,5 @@
 <template>
-  <div v-if="pagesList.length > 0" class="pagination-wrapper">
-    <div>
-      {{ showingPage() }}
-    </div>
-    <div class="display_pagination">
-      <label for="pagination">Items per page</label>
-      <select id="pagination" name="pagination" @change="setLimit">
-        <option
-          v-for="n in [10, 20, 50, 100]"
-          :key="`pagination-limit-${n}`"
-          :value="n"
-          :selected="n === currentLimit"
-        >
-          {{ n }}
-        </option>
-      </select>
-    </div>
+  <div v-if="pagesList.length > 0" class="pagination_wrapper">
     <ul>
       <li
         :class="{ arrows: true, disabled: currentPage === 1 }"
@@ -36,7 +20,7 @@
       <li
         v-for="(pageNumber, i) in pagesNumbersShown"
         :key="i"
-        :class="{ 'pagination-item': true, active: pageNumber === currentPage }"
+        :class="{ pagination_item: true, active: pageNumber === currentPage }"
         @click="handleChangePage(pageNumber)"
       >
         <span> {{ pageNumber }}</span>
@@ -60,6 +44,43 @@
         />
       </li>
     </ul>
+    <div class="showing_page">
+      <div v-if="tableType === 'index'">
+        <b>{{ (1 + (currentPage - 1) * currentLimit).toLocaleString() }}</b>
+        -
+        <b>{{
+          currentPage * currentLimit > resultsNum
+            ? resultsNum.toLocaleString()
+            : (currentPage * currentLimit).toLocaleString()
+        }}</b>
+        of
+        {{ resultsNum.toLocaleString() }}
+      </div>
+      <div v-else-if="tableType === 'project'">
+        <b>{{ (1 + (currentPage - 1) * currentLimit).toLocaleString() }}</b>
+        -
+        <b>{{
+          currentPage * currentLimit > projectResults.length
+            ? projectResults.length.toLocaleString()
+            : (currentPage * currentLimit).toLocaleString()
+        }}</b>
+        of
+        {{ projectResults.length.toLocaleString() }}
+      </div>
+      <div class="display_pagination">
+        <label for="pagination">Show</label>
+        <select id="pagination" name="pagination" @change="setLimit">
+          <option
+            v-for="n in [10, 20, 50, 100]"
+            :key="`pagination-limit-${n}`"
+            :value="n"
+            :selected="n === currentLimit"
+          >
+            {{ n }}
+          </option>
+        </select>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -154,27 +175,6 @@
           type: this.tableType,
         });
       },
-      showingPage() {
-        if (this.tableType === 'index') {
-          return `Showing ${(
-            1 +
-            (this.currentPage - 1) * this.currentLimit
-          ).toLocaleString()} to ${
-            this.currentPage * this.currentLimit > this.resultsNum
-              ? this.resultsNum.toLocaleString()
-              : (this.currentPage * this.currentLimit).toLocaleString()
-          } of ${this.resultsNum.toLocaleString()}`;
-        } else if (this.tableType === 'project') {
-          return `Showing ${(
-            1 +
-            (this.currentPage - 1) * this.currentLimit
-          ).toLocaleString()} to ${
-            this.currentPage * this.currentLimit > this.projectResults.length
-              ? this.projectResults.length.toLocaleString()
-              : (this.currentPage * this.currentLimit).toLocaleString()
-          } of ${this.projectResults.length.toLocaleString()}`;
-        }
-      },
       handleChangePage(page) {
         if (page < 1 || page > this.pagesNumber) {
           return;
@@ -200,55 +200,64 @@
 
 <style lang="sass" scoped>
 
-  .pagination-wrapper
-    display: grid
-    justify-content: left
+  .pagination_wrapper
+    display: flex
+    justify-content: center
+    align-items: center
+    position: relative
+    > .showing_page
+      font-size: 14px
+      display: flex
+      gap: 10px
+      align-items: center
+      position: absolute
+      right: 0
     > .display_pagination
       margin-top: 1rem
     >ul
       padding: 0
-      margin-top: 2rem
       display: flex
+      gap: 2px
       justify-content: center
       flex-direction: row
       align-items: baseline
       list-style: none
       position: relative
-      &::after
-        display: block
-        content: ''
-        width: calc(100% - 3rem)
-        position: absolute
-        bottom: -0.2rem
-        height: 0.04rem
-        background-color: $GRAY
+      align-items: center
       li
         user-select: none
-        width: calc(62/16 * 1rem)
         >span
-          display: block
-          text-align: center
-        &.arrows, &.pagination-item
+          display: flex
+          align-items: center
+          justify-content: center
+          width: 25px
+          height: 25px
+        &.pagination_item
+          >span
+            border: 1px rgba($GRAY, 0.3) solid
+            border-radius: 3px
+            box-sizing: border-box
+        &.arrows, &.pagination_item
           cursor: pointer
           position: relative
           &.active
-            font-weight: bold
-            &::after
-              position: absolute
-              content: ''
-              display: block
-              width: 100%
-              height: 0.2rem
-              background-color: $COLOR_1
+            color: #fff
+            >span
+              border: 1px $MAIN_COLOR solid
+              background-color: $MAIN_COLOR
           &:hover
-            color: $MAIN_COLOR
             font-weight: bold
+        &.dots
+          >span
+            display: block
+            text-align: center
         &.arrows
           width: 1.5rem
           color: $COLOR_1
           text-align: center
           font-size: 1rem
+          line-height: normal
   .disabled
     pointer-events: none
-    opacity: 0.5
+    opacity: 0.3
 </style>
