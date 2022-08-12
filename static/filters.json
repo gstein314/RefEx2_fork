@@ -5,7 +5,7 @@
     "filter": [
       {
         "column": "symbol",
-        "label": "GeneSymbol",
+        "label": "Symbol",
         "note": "",
         "is_checkbox": false,
         "is_displayed": true,
@@ -13,7 +13,7 @@
       },
       {
         "column": "name",
-        "label": "GeneName",
+        "label": "Name",
         "note": "",
         "is_checkbox": false,
         "is_displayed": true,
@@ -24,7 +24,7 @@
         "label": "Alias",
         "note": "",
         "is_checkbox": false,
-        "is_displayed": true,
+        "is_displayed": false,
         "is_ontology": false
       },
       {

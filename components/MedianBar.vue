@@ -15,9 +15,6 @@
         class="value single_item align_right"
         :class="`item_${itemIndex + 1}`"
       >
-        <span v-if="numberOfItems > 1" class="symbol">{{
-          `${item.info.symbol || item.info.sample_id}&nbsp;&nbsp;`
-        }}</span>
         {{ tooltipNumberDisplay(medianInfo[item.id]) }}
       </span>
     </div>
