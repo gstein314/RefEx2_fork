@@ -202,27 +202,29 @@
 
   .pagination_wrapper
     display: flex
-    justify-content: center
     align-items: center
-    position: relative
     > .showing_page
       font-size: 14px
       display: flex
       gap: 10px
-      align-items: center
-      position: absolute
+      width: 20vw
+      position: sticky
       right: 0
+      align-items: center
+      justify-content: flex-end
     > .display_pagination
       margin-top: 1rem
     >ul
       padding: 0
       display: flex
       gap: 2px
-      justify-content: center
+      width: 100vw
       flex-direction: row
       align-items: baseline
+      justify-content: center
       list-style: none
-      position: relative
+      position: sticky
+      left: 0
       align-items: center
       li
         user-select: none
