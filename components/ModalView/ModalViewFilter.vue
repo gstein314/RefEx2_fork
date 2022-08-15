@@ -55,10 +55,10 @@
             </span>
           </template>
         </multi-select>
-        <div class="all-btn" @click="searchValue = [...filterObj.options]">
+        <button class="all-btn" @click="searchValue = [...filterObj.options]">
           all
-        </div>
-        <div class="clear-btn" @click="searchValue = ''">clear</div>
+        </button>
+        <button class="clear-btn" @click="searchValue = ''">clear</button>
       </div>
 
       <div v-else class="input_wrapper">
@@ -181,12 +181,8 @@
           --fa-primary-color: white
           --fa-secondary-color: #488EC4
     .all-btn, .clear-btn
-      cursor: pointer
-      border: 1px solid gray
-      border-radius: 3px
-      display: flex
-      align-items: center
-      padding: 0 20px
+      +button
+
     > .input_wrapper
       display: flex
       align-items: center
