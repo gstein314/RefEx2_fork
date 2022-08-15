@@ -55,11 +55,10 @@
             </span>
           </template>
         </multi-select>
-        <font-awesome-icon
-          class="reset-btn"
-          :icon="['fad', 'circle-xmark']"
-          @click="searchValue = [...filterObj.options]"
-        />
+        <div class="all-btn" @click="searchValue = [...filterObj.options]">
+          all
+        </div>
+        <div class="clear-btn" @click="searchValue = ''">clear</div>
       </div>
 
       <div v-else class="input_wrapper">
@@ -175,12 +174,19 @@
         gap: 10px
     .reset-btn
         --fa-secondary-opacity: 0.3
-        margin-top: 10px
+        margin-left: 10px
         cursor: pointer !important
         &:hover
           --fa-secondary-opacity: 1
           --fa-primary-color: white
           --fa-secondary-color: #488EC4
+    .all-btn, .clear-btn
+      cursor: pointer
+      border: 1px solid gray
+      border-radius: 3px
+      display: flex
+      align-items: center
+      padding: 0 20px
     > .input_wrapper
       display: flex
       align-items: center
