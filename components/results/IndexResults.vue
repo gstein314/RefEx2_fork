@@ -51,7 +51,6 @@
           v-for="(result, resultIndex) in pageItems"
           v-else
           :key="`result_${resultIndex}`"
-          @click="moveToProjectPage(result[keyForID])"
         >
           <td class="checkbox" @click="e => e.stopPropagation()">
             <input
@@ -61,7 +60,10 @@
             />
           </td>
           <td v-if="filterType === 'sample'">
-            {{ result.Description }}
+            <a @click="moveToProjectPage(result['refexSampleId'])">
+              <font-awesome-icon icon="flask" />
+              {{ result.Description }}
+            </a>
           </td>
           <td
             v-for="(filter, index) of filters"
@@ -79,6 +81,12 @@
               :src="geneSummarySource(result.geneid)"
               :alt="result.geneid"
             />
+            <a
+              v-else-if="filter.column === 'symbol'"
+              @click="moveToProjectPage(result['geneid'])"
+              ><font-awesome-icon icon="dna" />
+              {{ result[filter.column] }}
+            </a>
             <span
               v-for="(value, value_index) of JSON.parse(result[filter.column])"
               v-else-if="isArray(result[filter.column])"
@@ -219,6 +227,9 @@
           +warning
           padding: 40px
         > tr
-          &:hover
-            cursor: pointer
+          > td
+            > a
+              text-decoration: underline
+              cursor: pointer
+              color: $MAIN_COLOR
 </style>
