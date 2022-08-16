@@ -25,8 +25,8 @@
         </h1>
         <nav>
           <ul>
-            <li><a href="about">About</a></li>
-            <li><a href="citation">Help</a></li>
+            <li><nuxt-link to="/about">About</nuxt-link></li>
+            <li><nuxt-link to="/help">Help</nuxt-link></li>
           </ul>
         </nav>
       </div>
