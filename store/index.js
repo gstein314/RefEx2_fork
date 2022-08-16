@@ -178,7 +178,7 @@ export const mutations = {
       },
     };
   },
-  set_checked_results (state, checked_results) {
-    state.checked_results = checked_results
+  set_checked_results(state, checked_results) {
+    state.checked_results = checked_results;
   },
 };

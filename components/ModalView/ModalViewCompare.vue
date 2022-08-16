@@ -1,10 +1,11 @@
 <template>
-  <modal-view v-if="isOn" @click.native="toggleCompareModal">
+  <modal-view v-if="isOn" @click.native="closeModalView">
     <div class="modal compare_modal" @click.stop="">
       <p class="modal_title">
         <font-awesome-icon icon="search" />
         Compare with comma separated ID list
       </p>
+      {{ setSearchField }}
       <div
         v-for="(example, exampleIndex) of examples"
         :key="exampleIndex"
@@ -40,6 +41,7 @@
     data() {
       return {
         itemIdsForComparisonStr: '',
+        inputItemIds: [],
       };
     },
     computed: {
@@ -47,20 +49,21 @@
         activeDataset: 'active_dataset',
         routeToProjectPage: 'route_to_project_page',
         isOn: 'compare_modal',
-        getCheckedResults: 'get_checked_results'
+        getCheckedResults: 'get_checked_results',
       }),
       examples() {
         return this.activeDataset[this.$store.state.active_filter]
           .item_comparison_example;
       },
+      setSearchField() {
+        return this.setExample(this.getCheckedResults.join(','));
+      },
     },
     methods: {
       ...mapMutations({
         toggleCompareModal: 'set_compare_modal',
+        setCheckedResults: 'set_checked_results',
       }),
-      setSearchField() {
-        this.itemIdsForComparisonStr = this.getCheckedResults.join(',')
-      },
       setExample(route) {
         this.itemIdsForComparisonStr = route;
       },
@@ -68,6 +71,13 @@
         if (this.itemIdsForComparisonStr === '') return;
         this.$nuxt.$loading.start();
         location.href = this.routeToProjectPage(this.itemIdsForComparisonStr);
+        this.toggleCompareModal();
+      },
+      closeModalView() {
+        // this.inputItemIds = this.itemIdsForComparisonStr
+        //   .replace(/ /g, '')
+        //   .split(',');
+        // console.log(this.inputItemIds);
         this.toggleCompareModal();
       },
     },

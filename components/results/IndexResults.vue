@@ -192,15 +192,15 @@
         return str?.startsWith('"') && str?.endsWith('"');
       },
       toggleAllCheckbox() {
-        this.isAllChecked
-          ? (this.checkedResults = [])
-          : (this.checkedResults = this.resultsUniqueKeys);
+        if (this.isAllChecked) {
+          this.checkedResults = [];
+        } else {
+          this.checkedResults = this.resultsUniqueKeys;
+        }
+        this.handleChange();
       },
       handleChange() {
-          this.setCheckedResults(this.checkedResults)
-          console.log(this.checkedResults);
-          console.log(this.$refs)
-          // this.$refs.ModalViewComapare.setSearchField()
+        this.setCheckedResults(this.checkedResults);
       },
     },
   };
