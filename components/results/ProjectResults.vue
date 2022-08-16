@@ -29,8 +29,24 @@
               :key="`result-${filterIndex}`"
               :class="filter.column.replaceAll(' ', '_')"
             >
+              <a
+                v-if="filter.column === 'symbol'"
+                @click="
+                  moveToProjectPage(result['ncbiGeneId' || 'ensemblGeneId'])
+                "
+              >
+                <font-awesome-icon icon="dna" />
+                {{ result.symbol }}
+              </a>
+              <a
+                v-else-if="filter.column === 'Description'"
+                @click="moveToProjectPage(result['RefexSampleId'])"
+              >
+                <font-awesome-icon icon="flask" />
+                {{ result.Description }}
+              </a>
               <MedianBar
-                v-if="filter.column === 'LogMedian'"
+                v-else-if="filter.column === 'LogMedian'"
                 :items="items"
                 :median-info="result.combinedMedianData"
               />
@@ -135,6 +151,7 @@
         paginationObject: 'get_project_pagination',
         filters: 'project_filters',
         geneSummarySource: 'gene_summary_source',
+        routeToOtherProjectPage: 'route_to_other_project_page',
       }),
 
       filteredData() {
@@ -224,6 +241,10 @@
         setGeneModal: 'set_gene_modal',
         updatePagination: 'set_project_pagination',
       }),
+      moveToProjectPage(route) {
+        this.$nuxt.$loading.start();
+        window.location.href = this.routeToOtherProjectPage(route);
+      },
       sortUpOrDown(a, b) {
         switch (this.sort?.order) {
           case 'up':
@@ -265,4 +286,11 @@
     table
       white-space: nowrap
       +table
+      > tbody
+        > tr
+          > td
+            > a
+              text-decoration: underline
+              cursor: pointer
+              color: $MAIN_COLOR
 </style>
