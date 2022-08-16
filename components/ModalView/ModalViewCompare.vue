@@ -3,7 +3,7 @@
     <div class="modal compare_modal" @click.stop="">
       <p class="modal_title">
         <font-awesome-icon icon="search" />
-        Compare with comma separated ID list
+        {{ `Compare with comma separated ${getActiveDatasetHeader()} list` }}
       </p>
       <div
         v-for="(example, exampleIndex) of examples"
@@ -65,6 +65,15 @@
         this.$nuxt.$loading.start();
         location.href = this.routeToProjectPage(this.itemIdsForComparisonStr);
         this.toggleCompareModal();
+      },
+      getActiveDatasetHeader() {
+        if (this.activeDataset.dataset === "humanFantom5") {
+          return this.activeDataset.gene.header
+        } else if (this.activeDataset.dataset === "gtexV8") {
+          return this.activeDataset.gene.header
+        } else if (this.activeDataset.dataset === "mouseFantom5") {
+          return "RES ID"
+        }
       },
     },
   };
