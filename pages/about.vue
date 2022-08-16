@@ -57,7 +57,7 @@
     margin-top: 15px
     border-top: 3px solid $MAIN_COLOR
     display: flex
-    padding: 90px
+    padding: 60px 160px 0
   .category_title
     color: $MAIN_COLOR
     padding-right: 150px
