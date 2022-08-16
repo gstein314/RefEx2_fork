@@ -45,6 +45,8 @@
     computed: {
       ...mapGetters({
         activeDataset: 'active_dataset',
+        activeSpecie: 'active_specie',
+        activeFilter: 'active_filter',
         routeToProjectPage: 'route_to_project_page',
         isOn: 'compare_modal',
       }),
@@ -67,12 +69,24 @@
         this.toggleCompareModal();
       },
       getActiveDatasetHeader() {
-        if (this.activeDataset.dataset === "humanFantom5") {
-          return this.activeDataset.gene.header
-        } else if (this.activeDataset.dataset === "gtexV8") {
-          return this.activeDataset.gene.header
-        } else if (this.activeDataset.dataset === "mouseFantom5") {
-          return "RES ID"
+        if (this.activeSpecie.species === "Human") {
+          switch (this.activeFilter.name) {
+            case "gene":
+              return this.activeDataset.gene.header;
+              break;
+            case "sample":
+              return "RES ID";
+              break;
+          }
+        } else if (this.activeSpecie.species === "Mouse") {
+          switch (this.activeFilter.name) {
+            case "gene":
+              return this.activeDataset.gene.header;
+              break;
+            case "sample":
+              return "RES ID";
+              break;
+          }
         }
       },
     },
