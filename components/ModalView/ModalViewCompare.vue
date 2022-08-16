@@ -47,6 +47,7 @@
         activeDataset: 'active_dataset',
         routeToProjectPage: 'route_to_project_page',
         isOn: 'compare_modal',
+        getCheckedResults: 'get_checked_results'
       }),
       examples() {
         return this.activeDataset[this.$store.state.active_filter]
@@ -57,6 +58,9 @@
       ...mapMutations({
         toggleCompareModal: 'set_compare_modal',
       }),
+      setSearchField() {
+        this.itemIdsForComparisonStr = this.getCheckedResults.join(',')
+      },
       setExample(route) {
         this.itemIdsForComparisonStr = route;
       },

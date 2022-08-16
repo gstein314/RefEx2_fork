@@ -4,7 +4,7 @@
     <FilterNavigation />
     <FilterTab v-for="filter of filters" :key="filter.name" />
     <ModalViewGene />
-    <ModalViewCompare />
+    <ModalViewCompare ref="ModalViewCompare"/>
     <ModalViewAlert />
   </div>
 </template>

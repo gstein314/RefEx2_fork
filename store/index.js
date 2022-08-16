@@ -36,6 +36,7 @@ export const state = () => ({
     limit: 10,
     offset: 0,
   },
+  checked_results: [],
   results: filters.reduce((acc, filter) => {
     acc[filter.name] = { results: [], results_num: 0 };
     return acc;
@@ -52,6 +53,9 @@ export const getters = {
   get_project_pagination(state) {
     const { limit, offset } = state.project_results;
     return { limit, offset };
+  },
+  get_checked_results(state) {
+    return state.checked_results;
   },
   index_pagination(state) {
     return state.index_pagination;
@@ -173,5 +177,8 @@ export const mutations = {
         results_num,
       },
     };
+  },
+  set_checked_results (state, checked_results) {
+    state.checked_results = checked_results
   },
 };

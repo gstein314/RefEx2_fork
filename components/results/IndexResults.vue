@@ -58,6 +58,7 @@
               v-model="checkedResults"
               type="checkbox"
               :value="result[keyForID]"
+              @change="handleChange"
             />
           </td>
           <td v-if="filterType === 'sample'">
@@ -178,6 +179,7 @@
     methods: {
       ...mapMutations({
         setGeneModal: 'set_gene_modal',
+        setCheckedResults: 'set_checked_results',
       }),
       moveToProjectPage(route) {
         this.$nuxt.$loading.start();
@@ -193,6 +195,12 @@
         this.isAllChecked
           ? (this.checkedResults = [])
           : (this.checkedResults = this.resultsUniqueKeys);
+      },
+      handleChange() {
+          this.setCheckedResults(this.checkedResults)
+          console.log(this.checkedResults);
+          console.log(this.$refs)
+          // this.$refs.ModalViewComapare.setSearchField()
       },
     },
   };
