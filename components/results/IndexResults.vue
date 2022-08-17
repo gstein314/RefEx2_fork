@@ -183,9 +183,13 @@
         this.checkedResults = [];
       },
     },
+    created() {
+      this.setPageType('index');
+    },
     methods: {
       ...mapMutations({
         setGeneModal: 'set_gene_modal',
+        setPageType: 'set_page_type',
       }),
       moveToProjectPage(route) {
         this.$nuxt.$loading.start();
