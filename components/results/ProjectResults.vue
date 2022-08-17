@@ -216,6 +216,9 @@
         );
       },
     },
+    created() {
+      this.setPageType('project');
+    },
     mounted() {
       this.$emit('updateSort', this.sort);
     },
@@ -223,6 +226,7 @@
       ...mapMutations({
         setGeneModal: 'set_gene_modal',
         updatePagination: 'set_project_pagination',
+        setPageType: 'set_page_type',
       }),
       sortUpOrDown(a, b) {
         switch (this.sort?.order) {

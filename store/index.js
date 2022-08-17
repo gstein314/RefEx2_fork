@@ -40,6 +40,7 @@ export const state = () => ({
     acc[filter.name] = { results: [], results_num: 0 };
     return acc;
   }, {}),
+  page_type: '',
 });
 
 export const getters = {
@@ -98,6 +99,9 @@ export const getters = {
   gene_summary_source: state => resultItem => {
     const datasetName = state.active_dataset.dataset;
     return `https://refex2-api.dbcls.jp/static/${datasetName}/${datasetName}_${resultItem}.png`;
+  },
+  get_page_type(state) {
+    return state.page_type;
   },
 };
 
@@ -173,5 +177,8 @@ export const mutations = {
         results_num,
       },
     };
+  },
+  set_page_type(state, type) {
+    state.page_type = type;
   },
 };
