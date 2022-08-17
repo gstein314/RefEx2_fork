@@ -74,6 +74,7 @@
         this.toggleCompareModal();
       },
       closeModalView() {
+        // TODO: need function about change checkbox status
         // this.inputItemIds = this.itemIdsForComparisonStr
         //   .replace(/ /g, '')
         //   .split(',');
