@@ -70,15 +70,16 @@
       comparisonSearch() {
         if (this.itemIdsForComparisonStr === '') return;
         this.$nuxt.$loading.start();
-        location.href = this.routeToProjectPage(this.itemIdsForComparisonStr);
+        location.href = this.routeToProjectPage(
+          this.itemIdsForComparisonStr.replace(/^,/, '').replace(/ /g, '')
+        );
         this.toggleCompareModal();
       },
       closeModalView() {
-        // TODO: need function about change checkbox status
-        // this.inputItemIds = this.itemIdsForComparisonStr
-        //   .replace(/ /g, '')
-        //   .split(',');
-        // console.log(this.inputItemIds);
+        this.inputItemIds = this.itemIdsForComparisonStr
+          .replace(/ /g, '')
+          .split(',');
+        this.setCheckedResults(this.inputItemIds);
         this.toggleCompareModal();
       },
     },

@@ -136,6 +136,8 @@
         activeDataset: 'active_dataset',
         routeToProjectPage: 'route_to_project_page',
         geneSummarySource: 'gene_summary_source',
+        getCheckedResults: 'get_checked_results',
+        isOn: 'compare_modal',
       }),
       examples() {
         return this.activeDataset[this.filterType].item_comparison_example;
@@ -174,6 +176,12 @@
     watch: {
       activeDataset() {
         this.checkedResults = [];
+      },
+      isOn() {
+        if (!this.isOn) {
+          this.setCheckedResults(this.getCheckedResults.filter(Boolean));
+          this.checkedResults = this.getCheckedResults;
+        }
       },
     },
     methods: {
