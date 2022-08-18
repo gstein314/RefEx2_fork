@@ -11,6 +11,14 @@
         <span :class="{ tag: filterObj.is_ontology }">{{
           filterObj.note
         }}</span>
+        <span v-if="filterObj.options" class="modal_btns">
+          <button class="all_btn" @click="searchValue = [...filterObj.options]">
+            all
+          </button>
+          <button class="clear_btn" @click="searchValue = ''">
+            clear
+          </button></span
+        >
       </p>
       <template v-if="filterObj.column === 'LogMedian'">
         <button @click="resetSlider(filterObj.filter_modal)">Reset</button>
@@ -25,8 +33,8 @@
       <div v-else-if="filterObj.options" class="select">
         <multi-select
           v-model="searchValue"
-          multiple
-          :allow-empty="false"
+          :multiple="true"
+          :allow-empty="true"
           :close-on-select="false"
           placeholder="Search"
           :options="filterObj.options"
@@ -55,10 +63,6 @@
             </span>
           </template>
         </multi-select>
-        <button class="all-btn" @click="searchValue = [...filterObj.options]">
-          all
-        </button>
-        <button class="clear-btn" @click="searchValue = ''">clear</button>
       </div>
 
       <div v-else class="input_wrapper">
@@ -70,7 +74,7 @@
         />
         <font-awesome-icon
           v-show="filterObj.filterModal !== ''"
-          class="reset-btn"
+          class="reset_btn"
           :icon="['fad', 'circle-xmark']"
           @click="searchValue = ''"
         />
@@ -172,7 +176,12 @@
       > .select
         display: flex
         gap: 10px
-    .reset-btn
+    .modal_btns
+      display: flex
+      gap: 10px
+      position: absolute
+      right: 0
+    .reset_btn
         --fa-secondary-opacity: 0.3
         margin-left: 10px
         cursor: pointer !important
@@ -180,7 +189,7 @@
           --fa-secondary-opacity: 1
           --fa-primary-color: white
           --fa-secondary-color: #488EC4
-    .all-btn, .clear-btn
+    .all_btn, .clear_btn
       +button
 
     > .input_wrapper
@@ -189,7 +198,7 @@
       position: relative
       > input[type="text"]
         +text_input
-        > .reset-btn
+        > .reset_btn
           position: absolute
           right: 1rem
       > .vue-slider
