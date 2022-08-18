@@ -41,6 +41,7 @@ export const state = () => ({
     return acc;
   }, {}),
   page_type: '',
+  filter_search_value: '',
 });
 
 export const getters = {
@@ -110,6 +111,9 @@ export const getters = {
   },
   get_page_type(state) {
     return state.page_type;
+  },
+  get_filter_search_value(state) {
+    return state.filter_search_value;
   },
 };
 
@@ -188,5 +192,8 @@ export const mutations = {
   },
   set_page_type(state, type) {
     state.page_type = type;
+  },
+  set_filter_search_value(state, value) {
+    state.filter_search_value = value;
   },
 };

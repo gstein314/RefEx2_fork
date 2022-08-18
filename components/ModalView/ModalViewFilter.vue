@@ -101,12 +101,16 @@
       ...mapGetters({
         filters: 'project_filters',
         filterObj: 'active_filter_modal',
+        getFilterSearchValue: 'get_filter_search_value',
       }),
       isOn() {
         return this.filterObj !== null;
       },
     },
     watch: {
+      getFilterSearchValue() {
+        this.searchValue = this.getFilterSearchValue;
+      },
       searchValue() {
         if (this.isOn) this.updateStore();
       },

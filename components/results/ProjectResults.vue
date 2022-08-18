@@ -83,7 +83,14 @@
                 </span>
               </template>
               <template v-else>
-                {{ result[filter.column] }}
+                <span
+                  class="filter_culumn"
+                  @click="
+                    setFilterSearchValue(result[filter.column]);
+                    setFilterModal(filter.column);
+                  "
+                  >{{ result[filter.column] }}</span
+                >
               </template>
             </td>
           </template>
@@ -152,6 +159,8 @@
         filters: 'project_filters',
         geneSummarySource: 'gene_summary_source',
         routeToOtherProjectPage: 'route_to_other_project_page',
+        getFilterSearchValue: 'get_filter_search_value',
+        filterObj: 'active_filter_modal',
       }),
 
       filteredData() {
@@ -244,6 +253,8 @@
         setGeneModal: 'set_gene_modal',
         updatePagination: 'set_project_pagination',
         setPageType: 'set_page_type',
+        setFilterSearchValue: 'set_filter_search_value',
+        setFilterModal: 'set_filter_modal',
       }),
       moveToProjectPage(route) {
         this.$nuxt.$loading.start();
@@ -295,6 +306,9 @@
           > td
             > a
               text-decoration: underline
+              cursor: pointer
+              color: $MAIN_COLOR
+            > .filter_culumn
               cursor: pointer
               color: $MAIN_COLOR
 </style>
