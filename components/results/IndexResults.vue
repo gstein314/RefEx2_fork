@@ -91,7 +91,7 @@
               v-else-if="filter.column === 'geneid'"
               target="_blank"
               :href="datasetInfo.url_prefix + result.geneid"
-              ><font-awesome-icon icon="hashtag" />
+              ><font-awesome-icon icon="external-link-alt" />
               {{ result[filter.column] }}
             </a>
             <span
