@@ -84,7 +84,7 @@
               </template>
               <template v-else>
                 <span
-                  class="filter_culumn"
+                  class="filter_column"
                   @click="
                     setFilterSearchValue(result[filter.column]);
                     setFilterModal(filter.column);
@@ -195,7 +195,10 @@
               // text filter
               else if (filter.filterModal !== '' && !isFiltered) {
                 // excact match if filter is based on API options
-                const isMatch = result[key].includes(filter.filterModal);
+                const isMatch = this.textFilter(
+                  result[key],
+                  filter.filterModal
+                );
                 isFiltered = filter.filterModal !== '' && !isMatch;
               }
             }
@@ -292,6 +295,11 @@
         }
         this.$emit('updateSort', this.sort);
       },
+      textFilter(fullText, inputText) {
+        const reg = new RegExp(inputText, 'gi');
+        const isMatch = reg.test(fullText);
+        if (inputText.length > 2 && isMatch) return fullText.replaceAll(reg);
+      },
     },
   };
 </script>
@@ -308,7 +316,7 @@
               text-decoration: underline
               cursor: pointer
               color: $MAIN_COLOR
-            > .filter_culumn
+            > .filter_column
               cursor: pointer
               color: $MAIN_COLOR
 </style>
