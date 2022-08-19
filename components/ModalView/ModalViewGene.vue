@@ -85,7 +85,7 @@
                 <a
                   :href="`http://amigo.geneontology.org/amigo/term/${bp.id}`"
                   target="_blank"
-                  >{{ `${bp.id}: ${bp.term}` }}</a
+                  >{{ `${bp.id}: ${bp.term}: ${bp.evidence}: ${bp.qualifier}`}}</a
                 >
                 <span v-if="index !== data.go['BP'].length - 1" class="comma"
                   >,</span
@@ -98,7 +98,7 @@
                 <a
                   :href="`http://amigo.geneontology.org/amigo/term/${data.go['BP'].id}`"
                   target="_blank"
-                  >{{ `${data.go['BP'].id}: ${data.go['BP'].term}` }}</a
+                  >{{ `${data.go['BP'].id}: ${data.go['BP'].term}: ${bp.evidence}: ${bp.qualifier}` }}</a
                 >
                 <br />
               </span>
@@ -111,7 +111,7 @@
                 <a
                   :href="`http://amigo.geneontology.org/amigo/term/${cc.id}`"
                   target="_blank"
-                  >{{ `${cc.id}: ${cc.term}` }}</a
+                  >{{ `${cc.id}: ${cc.term}: ${cc.evidence}: ${cc.qualifier}` }}</a
                 >
                 <span v-if="index !== data.go['CC'].length - 1" class="comma"
                   >,</span
@@ -124,7 +124,7 @@
                 <a
                   :href="`http://amigo.geneontology.org/amigo/term/${data.go['CC'].id}`"
                   target="_blank"
-                  >{{ `${data.go['CC'].id}: ${data.go['CC'].term}` }}</a
+                  >{{ `${data.go['CC'].id}: ${data.go['CC'].term}: ${cc.evidence}: ${cc.qualifier}` }}</a
                 >
                 <br />
               </span>
@@ -137,7 +137,7 @@
                 <a
                   :href="`http://amigo.geneontology.org/amigo/term/${mf.id}`"
                   target="_blank"
-                  >{{ `${mf.id}: ${mf.term}` }}</a
+                  >{{ `${mf.id}: ${mf.term}: ${mf.evidence}: ${mf.qualifier}` }}</a
                 >
                 <span v-if="index !== data.go['MF'].length - 1" class="comma"
                   >,</span
@@ -150,7 +150,7 @@
                 <a
                   :href="`http://amigo.geneontology.org/amigo/term/${data.go['MF'].id}`"
                   target="_blank"
-                  >{{ `${data.go['MF'].id}: ${data.go['MF'].term}` }}</a
+                  >{{ `${data.go['MF'].id}: ${data.go['MF'].term}: ${mf.evidence}: ${mf.qualifier}` }}</a
                 >
                 <br />
               </span>
