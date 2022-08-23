@@ -89,8 +89,9 @@
                     setFilterSearchValue(result[filter.column]);
                     setFilterModal(filter.column);
                   "
-                  >{{ result[filter.column] }}</span
-                >
+                  >{{ result[filter.column]
+                  }}<font-awesome-icon icon="plus-circle"
+                /></span>
               </template>
             </td>
           </template>
@@ -317,4 +318,9 @@
             > .filter_column
               cursor: pointer
               color: $MAIN_COLOR
+            > span
+              > svg
+                padding-left: 4px
+                font-size: 11px
+                vertical-align: middle
 </style>
