@@ -313,9 +313,7 @@
         > tr
           > td
             > a
-              text-decoration: underline
-              cursor: pointer
-              color: $MAIN_COLOR
+              +text_with_icon
             > .filter_column
               cursor: pointer
               color: $MAIN_COLOR
