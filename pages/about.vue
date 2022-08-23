@@ -63,9 +63,9 @@
     padding-right: 150px
     font-size: 34px
     margin: 0
-  p
-    padding-bottom: 20px
-    font-size: 18px
-    line-height: 2em
-    margin: 0
+    > p
+      padding-bottom: 20px
+      font-size: 18px
+      line-height: 2em
+      margin: 0
 </style>
