@@ -19,9 +19,16 @@
             clear
           </button></span
         >
+        <span v-if="filterObj.column === 'LogMedian'" class="modal_btns">
+          <button
+            class="reset_btn"
+            @click="resetSlider(filterObj.filter_modal)"
+          >
+            Reset
+          </button>
+        </span>
       </p>
       <template v-if="filterObj.column === 'LogMedian'">
-        <button @click="resetSlider(filterObj.filter_modal)">Reset</button>
         <div class="input_wrapper">
           <vue-slider
             ref="slider"
@@ -193,7 +200,7 @@
           --fa-secondary-opacity: 1
           --fa-primary-color: white
           --fa-secondary-color: #488EC4
-    .all_btn, .clear_btn
+    .all_btn, .clear_btn, .reset_btn
       +button
 
     > .input_wrapper
