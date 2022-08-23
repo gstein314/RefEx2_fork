@@ -235,6 +235,8 @@
             border: 1px rgba($GRAY, 0.3) solid
             border-radius: 3px
             box-sizing: border-box
+            min-width: 25px
+            width: auto
         &.arrows, &.pagination_item
           cursor: pointer
           position: relative
