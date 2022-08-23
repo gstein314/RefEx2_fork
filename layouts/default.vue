@@ -95,7 +95,7 @@
           > p
             margin: 0
             font-weight: bold
-            font-family: "Times New Roman"
+            font-family: "Georgia"
             font-weight: normal
             font-size: 21px
             color: $GRAY
