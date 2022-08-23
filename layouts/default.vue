@@ -25,8 +25,12 @@
         </h1>
         <nav>
           <ul>
-            <li><a href="about">About</a></li>
-            <li><a href="citation">Help</a></li>
+            <li>
+              <nuxt-link to="/about" class="category">About</nuxt-link>
+            </li>
+            <li>
+              <nuxt-link to="/help" class="category">Help</nuxt-link>
+            </li>
           </ul>
         </nav>
       </div>
@@ -37,6 +41,12 @@
 
 <script>
   export default {
+    data() {
+      return {
+        isAbout: true,
+        isHelp: false,
+      };
+    },
     mounted() {
       Typekit.load({ async: true });
     },
@@ -105,7 +115,9 @@
                 text-decoration: none
                 font-weight: bold
                 font-size: 18px
-                color: $BLACK
+                color: #C5C7CBs
+                &.nuxt-link-exact-active.nuxt-link-active
+                  color: $MAIN_COLOR
     h2
       font-size: 20px
       font-weight:600
@@ -115,4 +127,6 @@
     h4
       font-size: 14px
       font-weight:500
+    .category
+      color: gray
 </style>
