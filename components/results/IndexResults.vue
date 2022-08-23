@@ -57,6 +57,7 @@
               v-model="checkedResults"
               type="checkbox"
               :value="result[keyForID]"
+              @change="handleChange"
             />
           </td>
           <td v-if="filterType === 'sample'">
@@ -143,6 +144,8 @@
         activeDataset: 'active_dataset',
         routeToProjectPage: 'route_to_project_page',
         geneSummarySource: 'gene_summary_source',
+        getCheckedResults: 'get_checked_results',
+        isOn: 'compare_modal',
       }),
       examples() {
         return this.activeDataset[this.filterType].item_comparison_example;
@@ -182,6 +185,12 @@
       activeDataset() {
         this.checkedResults = [];
       },
+      isOn() {
+        if (!this.isOn) {
+          this.setCheckedResults(this.getCheckedResults.filter(Boolean));
+          this.checkedResults = this.getCheckedResults;
+        }
+      },
     },
     created() {
       this.setPageType('index');
@@ -190,6 +199,7 @@
       ...mapMutations({
         setGeneModal: 'set_gene_modal',
         setPageType: 'set_page_type',
+        setCheckedResults: 'set_checked_results',
       }),
       moveToProjectPage(route) {
         this.$nuxt.$loading.start();
@@ -202,9 +212,15 @@
         return str?.startsWith('"') && str?.endsWith('"');
       },
       toggleAllCheckbox() {
-        this.isAllChecked
-          ? (this.checkedResults = [])
-          : (this.checkedResults = this.resultsUniqueKeys);
+        if (this.isAllChecked) {
+          this.checkedResults = [];
+        } else {
+          this.checkedResults = this.resultsUniqueKeys;
+        }
+        this.handleChange();
+      },
+      handleChange() {
+        this.setCheckedResults(this.checkedResults);
       },
     },
   };
