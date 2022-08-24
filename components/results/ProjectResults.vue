@@ -299,7 +299,7 @@
       textFilter(fullText, inputText) {
         const reg = new RegExp(inputText, 'gi');
         const isMatch = reg.test(fullText);
-        if (inputText.length > 2 && isMatch) return fullText.replaceAll(reg);
+        if (inputText.length > 0 && isMatch) return fullText.replaceAll(reg);
       },
     },
   };
