@@ -196,12 +196,12 @@
       // only gene has suggestions atm but it can be extended to sample
       paramsForSuggestions() {
         return this.filterType === 'gene'
-          ? ['symbol', 'name', 'geneid']
+          ? ['symbol', 'name', 'geneid', 'chromosomePosition', 'typeOfGene']
           : ['refexSampleId', 'Description'];
       },
       extraVariablesToBeDsiplayedInResults() {
         return this.filterType === 'gene'
-          ? 'symbol name alias geneid'
+          ? 'symbol name alias geneid chromosomePosition typeOfGene'
           : 'refexSampleId Description';
       },
       suggestQuery() {

@@ -88,6 +88,13 @@
               ><font-awesome-icon icon="dna" />
               {{ result[filter.column] }}
             </a>
+            <a
+              v-else-if="filter.column === 'geneid'"
+              target="_blank"
+              :href="datasetInfo.url_prefix + result.geneid"
+              ><font-awesome-icon icon="external-link-alt" />
+              {{ result[filter.column] }}
+            </a>
             <span
               v-for="(value, value_index) of JSON.parse(result[filter.column])"
               v-else-if="isArray(result[filter.column])"
