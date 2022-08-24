@@ -22,6 +22,7 @@ $COLOR_10: #A8A8A8
 
 $PADDING_SLIM: 0.1rem 0.4rem
 $PADDING_LARGE: 0.4rem 0.8rem
+$PADDING_WRAPPER: 0 20px
 
 $BORDER_RADIUS_DEFAULT: 0.2rem
 
@@ -112,7 +113,6 @@ $TOOLTIP_LAYER: 2
     text-align: center
     > input[type="checkbox"]
       cursor: pointer
-      z-index: 1
       position: relative
       width: 15px
       height: 15px
@@ -153,7 +153,7 @@ $TOOLTIP_LAYER: 2
       > td
         font-size: 14px
         line-height: 18px
-        padding: 12px 0 12px 10px
+        padding: 12px 10px
         position: relative
         &.annotation
           color: $MAIN_COLOR
@@ -162,9 +162,9 @@ $TOOLTIP_LAYER: 2
             color: $BUTTON_HOVER_COLOR
         &.gene_expression_patterns
           min-width: 200px
-          max-width: 30vw
+          max-width: 400px
           img
-            width: 100%
+            max-width: 400px
       &:nth-of-type(even)
         background-color: $MAIN_COLOR_PALE
       &:hover
@@ -234,7 +234,6 @@ $TOOLTIP_LAYER: 2
 @mixin display_settings_wrapper
   display: flex
   justify-content: flex-end
-  position: sticky
   margin-left: auto
   top: 119px
   background-color: #ffffff
@@ -249,3 +248,14 @@ $TOOLTIP_LAYER: 2
     margin: 5px 0
     &:hover
       cursor: pointer
+
+@mixin text_with_icon
+  text-decoration: underline
+  cursor: pointer
+  color: $MAIN_COLOR
+  position: relative
+  padding-left: 1.1rem
+  >svg
+    position: absolute
+    top: 2px
+    left: 0

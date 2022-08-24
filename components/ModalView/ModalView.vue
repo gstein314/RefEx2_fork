@@ -15,7 +15,9 @@
         +modal
         > p.modal_title
           font-size: 18px
-          display: inline-block
+          display: flex
+          position: relative
+          align-items: center
         > button
           +button
           display: inline-block

@@ -12,7 +12,7 @@
       <div class="display_settings_wrapper">
         <a class="display_settings" @click="$emit('toggleDisplaySettings')">
           <font-awesome-icon icon="eye" />
-          Display settings
+          Show/hide columns
         </a>
       </div>
     </div>
@@ -51,17 +51,20 @@
           v-for="(result, resultIndex) in pageItems"
           v-else
           :key="`result_${resultIndex}`"
-          @click="moveToProjectPage(result[keyForID])"
         >
           <td class="checkbox" @click="e => e.stopPropagation()">
             <input
               v-model="checkedResults"
               type="checkbox"
               :value="result[keyForID]"
+              @change="handleChange"
             />
           </td>
           <td v-if="filterType === 'sample'">
-            {{ result.Description }}
+            <a @click="moveToProjectPage(result['refexSampleId'])">
+              <font-awesome-icon icon="flask" />
+              {{ result.Description }}
+            </a>
           </td>
           <td
             v-for="(filter, index) of filters"
@@ -79,6 +82,19 @@
               :src="geneSummarySource(result.geneid)"
               :alt="result.geneid"
             />
+            <a
+              v-else-if="filter.column === 'symbol'"
+              @click="moveToProjectPage(result['geneid'])"
+              ><font-awesome-icon icon="dna" />
+              {{ result[filter.column] }}
+            </a>
+            <a
+              v-else-if="filter.column === 'geneid'"
+              target="_blank"
+              :href="datasetInfo.url_prefix + result.geneid"
+              ><font-awesome-icon icon="external-link-alt" />
+              {{ result[filter.column] }}
+            </a>
             <span
               v-for="(value, value_index) of JSON.parse(result[filter.column])"
               v-else-if="isArray(result[filter.column])"
@@ -135,6 +151,8 @@
         activeDataset: 'active_dataset',
         routeToProjectPage: 'route_to_project_page',
         geneSummarySource: 'gene_summary_source',
+        getCheckedResults: 'get_checked_results',
+        isOn: 'compare_modal',
       }),
       examples() {
         return this.activeDataset[this.filterType].item_comparison_example;
@@ -174,10 +192,21 @@
       activeDataset() {
         this.checkedResults = [];
       },
+      isOn() {
+        if (!this.isOn) {
+          this.setCheckedResults(this.getCheckedResults.filter(Boolean));
+          this.checkedResults = this.getCheckedResults;
+        }
+      },
+    },
+    created() {
+      this.setPageType('index');
     },
     methods: {
       ...mapMutations({
         setGeneModal: 'set_gene_modal',
+        setPageType: 'set_page_type',
+        setCheckedResults: 'set_checked_results',
       }),
       moveToProjectPage(route) {
         this.$nuxt.$loading.start();
@@ -190,9 +219,15 @@
         return str?.startsWith('"') && str?.endsWith('"');
       },
       toggleAllCheckbox() {
-        this.isAllChecked
-          ? (this.checkedResults = [])
-          : (this.checkedResults = this.resultsUniqueKeys);
+        if (this.isAllChecked) {
+          this.checkedResults = [];
+        } else {
+          this.checkedResults = this.resultsUniqueKeys;
+        }
+        this.handleChange();
+      },
+      handleChange() {
+        this.setCheckedResults(this.checkedResults);
       },
     },
   };
@@ -200,7 +235,7 @@
 <style lang="sass" scoped>
   .results_wrapper
     min-width: 600px
-    padding: 0 90px
+    padding: $PADDING_WRAPPER
     margin-bottom: 60px
     > .results_title_wrapper
       display: flex
@@ -219,6 +254,7 @@
           +warning
           padding: 40px
         > tr
-          &:hover
-            cursor: pointer
+          > td
+            > a
+              +text_with_icon
 </style>

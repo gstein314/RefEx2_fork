@@ -36,10 +36,13 @@ export const state = () => ({
     limit: 10,
     offset: 0,
   },
+  checked_results: [],
   results: filters.reduce((acc, filter) => {
     acc[filter.name] = { results: [], results_num: 0 };
     return acc;
   }, {}),
+  page_type: '',
+  filter_search_value: '',
 });
 
 export const getters = {
@@ -52,6 +55,9 @@ export const getters = {
   get_project_pagination(state) {
     const { limit, offset } = state.project_results;
     return { limit, offset };
+  },
+  get_checked_results(state) {
+    return state.checked_results;
   },
   index_pagination(state) {
     return state.index_pagination;
@@ -67,6 +73,13 @@ export const getters = {
   route_to_project_page: state => ids => {
     if (Array.isArray(ids)) ids = ids.join(',');
     return `${state.active_specie.species}/${state.active_dataset.dataset}?type=${state.active_filter}&id=${ids}`;
+  },
+  route_to_other_project_page: state => ids => {
+    if (Array.isArray(ids)) ids = ids.join(',');
+    if (location.search.match(/=(.*)&/)[1] === 'gene')
+      return `${state.active_specie.species}/${state.active_dataset.dataset}?type=sample&id=${ids}`;
+    else
+      return `${state.active_specie.species}/${state.active_dataset.dataset}?type=gene&id=${ids}`;
   },
   gene_modal(state) {
     return state.gene_modal;
@@ -98,6 +111,12 @@ export const getters = {
   gene_summary_source: state => resultItem => {
     const datasetName = state.active_dataset.dataset;
     return `https://refex2-api.dbcls.jp/static/${datasetName}/${datasetName}_${resultItem}.png`;
+  },
+  get_page_type(state) {
+    return state.page_type;
+  },
+  get_filter_search_value(state) {
+    return state.filter_search_value;
   },
 };
 
@@ -173,5 +192,14 @@ export const mutations = {
         results_num,
       },
     };
+  },
+  set_page_type(state, type) {
+    state.page_type = type;
+  },
+  set_filter_search_value(state, value) {
+    state.filter_search_value = value;
+  },
+  set_checked_results(state, checked_results) {
+    state.checked_results = checked_results;
   },
 };

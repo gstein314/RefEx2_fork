@@ -16,7 +16,7 @@
         icon="info-circle"
         @click="$emit('showModal', item.id)"
       />
-      <span>{{ item.info.Description || item.info.symbol }}</span>
+      <span>{{ item.info.symbol || item.info.Description }}</span>
       <font-awesome-icon
         v-if="activeId === item.id && isMedianSort"
         :icon="`sort-amount-${activeSort.order}`"

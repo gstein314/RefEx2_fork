@@ -14,7 +14,11 @@
             @click="setGeneModal(items[0].id)"
           />
           <span class="title">
-            {{ infoForMainItem.Description || infoForMainItem.name }}
+            {{
+              infoForMainItem.symbol ||
+              infoForMainItem.Description ||
+              infoForMainItem.name
+            }}
             <span v-if="filterType === 'gene'" class="metadata">{{
               `(${infoForMainItem.name}, Gene ID: ${infoForMainItem.id})`
             }}</span>
@@ -32,7 +36,7 @@
         </item-comparison>
         <a class="display_settings" @click="toggleDisplaySettings">
           <font-awesome-icon icon="eye" />
-          Display settings
+          Show/hide columns
         </a>
       </div>
     </div>

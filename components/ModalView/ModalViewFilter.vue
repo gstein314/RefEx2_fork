@@ -11,9 +11,24 @@
         <span :class="{ tag: filterObj.is_ontology }">{{
           filterObj.note
         }}</span>
+        <span v-if="filterObj.options" class="modal_btns">
+          <button class="all_btn" @click="searchValue = [...filterObj.options]">
+            all
+          </button>
+          <button class="clear_btn" @click="searchValue = ''">
+            clear
+          </button></span
+        >
+        <span v-if="filterObj.column === 'LogMedian'" class="modal_btns">
+          <button
+            class="reset_btn"
+            @click="resetSlider(filterObj.filter_modal)"
+          >
+            Reset
+          </button>
+        </span>
       </p>
       <template v-if="filterObj.column === 'LogMedian'">
-        <button @click="resetSlider(filterObj.filter_modal)">Reset</button>
         <div class="input_wrapper">
           <vue-slider
             ref="slider"
@@ -25,8 +40,8 @@
       <div v-else-if="filterObj.options" class="select">
         <multi-select
           v-model="searchValue"
-          multiple
-          :allow-empty="false"
+          :multiple="true"
+          :allow-empty="true"
           :close-on-select="false"
           placeholder="Search"
           :options="filterObj.options"
@@ -55,11 +70,6 @@
             </span>
           </template>
         </multi-select>
-        <font-awesome-icon
-          class="reset-btn"
-          :icon="['fad', 'circle-xmark']"
-          @click="searchValue = [...filterObj.options]"
-        />
       </div>
 
       <div v-else class="input_wrapper">
@@ -71,7 +81,7 @@
         />
         <font-awesome-icon
           v-show="filterObj.filterModal !== ''"
-          class="reset-btn"
+          class="reset_btn"
           :icon="['fad', 'circle-xmark']"
           @click="searchValue = ''"
         />
@@ -98,12 +108,16 @@
       ...mapGetters({
         filters: 'project_filters',
         filterObj: 'active_filter_modal',
+        getFilterSearchValue: 'get_filter_search_value',
       }),
       isOn() {
         return this.filterObj !== null;
       },
     },
     watch: {
+      getFilterSearchValue() {
+        this.searchValue = this.getFilterSearchValue;
+      },
       searchValue() {
         if (this.isOn) this.updateStore();
       },
@@ -173,21 +187,29 @@
       > .select
         display: flex
         gap: 10px
-    .reset-btn
+    .modal_btns
+      display: flex
+      gap: 10px
+      position: absolute
+      right: 0
+    .reset_btn
         --fa-secondary-opacity: 0.3
-        margin-top: 10px
+        margin-left: 10px
         cursor: pointer !important
         &:hover
           --fa-secondary-opacity: 1
           --fa-primary-color: white
           --fa-secondary-color: #488EC4
+    .all_btn, .clear_btn, .reset_btn
+      +button
+
     > .input_wrapper
       display: flex
       align-items: center
       position: relative
       > input[type="text"]
         +text_input
-        > .reset-btn
+        > .reset_btn
           position: absolute
           right: 1rem
       > .vue-slider
