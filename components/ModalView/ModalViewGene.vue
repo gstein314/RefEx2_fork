@@ -101,7 +101,7 @@
                   :href="`http://amigo.geneontology.org/amigo/term/${data.go['BP'].id}`"
                   target="_blank"
                   >{{
-                    `${data.go['BP'].id}: ${data.go['BP'].term}: ${bp.evidence}: ${bp.qualifier}`
+                    `${data.go['BP'].id}: ${data.go['BP'].term}: ${data.go['BP'].evidence}: ${data.go['BP'].qualifier}`
                   }}</a
                 >
                 <br />
@@ -131,7 +131,7 @@
                   :href="`http://amigo.geneontology.org/amigo/term/${data.go['CC'].id}`"
                   target="_blank"
                   >{{
-                    `${data.go['CC'].id}: ${data.go['CC'].term}: ${cc.evidence}: ${cc.qualifier}`
+                    `${data.go['CC'].id}: ${data.go['CC'].term}: ${data.go['CC'].evidence}: ${data.go['CC'].qualifier}`
                   }}</a
                 >
                 <br />
@@ -161,7 +161,7 @@
                   :href="`http://amigo.geneontology.org/amigo/term/${data.go['MF'].id}`"
                   target="_blank"
                   >{{
-                    `${data.go['MF'].id}: ${data.go['MF'].term}: ${mf.evidence}: ${mf.qualifier}`
+                    `${data.go['MF'].id}: ${data.go['MF'].term}: ${data.go['MF'].evidence}: ${data.go['MF'].qualifier}`
                   }}</a
                 >
                 <br />

@@ -1,6 +1,9 @@
 import datasets from './refex-sample/datasets.json';
 import { exponentialDelay } from 'axios-retry';
 
+const isProduction = process.env.NODE_ENV == 'production';
+const href = isProduction ? '/RefEx2/favicon.ico' : '/favicon.ico';
+
 export default {
   ssr: false,
   loading: '~/components/ModalView/ModalViewLoading.vue',
@@ -17,7 +20,7 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: href }],
     script: [{ src: 'https://use.typekit.net/duq8dbh.js' }],
   },
 
