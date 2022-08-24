@@ -3,30 +3,30 @@
     <div class="modal display_settings_modal" @click.stop="">
       <p class="modal_title">
         <font-awesome-icon icon="eye" />
-        Display settings
+        Show/hide columns
       </p>
       <div class="display_checkboxes">
-        <div v-for="(value, filterIndex) of filters" :key="filterIndex">
-          <input
-            :checked="value.is_displayed"
-            type="checkbox"
-            @click="toggleDisplayOfFilter(value.column)"
-          />
-          <label :for="value.innerKey"> {{ value.label }} </label>
-        </div>
-      </div>
-      <div class="display_pagination">
-        <label for="pagination">Items per page</label>
-        <select id="pagination" name="pagination" @change="setLimit">
-          <option
-            v-for="n in [10, 20, 50, 100]"
-            :key="`pagination-limit-${n}`"
-            :value="n"
-            :selected="n === currentLimit"
+        <template v-for="(value, filterIndex) of filters">
+          <div
+            v-if="
+              !(
+                value.label === 'Symbol' ||
+                value.label === 'Description' ||
+                value.label === 'MEDIAN [LOG2(TPM+1)]'
+              )
+            "
+            :key="filterIndex"
           >
-            {{ n }}
-          </option>
-        </select>
+            <input
+              :checked="value.is_displayed"
+              type="checkbox"
+              @click="toggleDisplayOfFilter(value.column)"
+            />
+            <label :for="value.innerKey">
+              {{ value.label }}
+            </label>
+          </div>
+        </template>
       </div>
     </div>
   </modal-view>
@@ -85,19 +85,6 @@
       toggleDisplaySettings() {
         this.isDisplaySettings = !this.isDisplaySettings;
       },
-      setLimit(e) {
-        const newLimit = +e.target.value;
-        const newPage = Math.max(
-          Math.ceil(this.paginationObject.offset / newLimit),
-          1
-        );
-        const newOffset = (newPage - 1) * newLimit;
-        this.updatePagination({
-          limit: newLimit,
-          offset: newOffset,
-          type: this.indexFilters ? 'index' : 'project',
-        });
-      },
     },
   };
 </script>
@@ -112,6 +99,4 @@
         line-height: 26px
         > label
           font-size: 14px
-    > .display_pagination
-      margin-top: 1rem
 </style>

@@ -1,10 +1,11 @@
 <template>
-  <modal-view v-if="isOn" @click.native="toggleCompareModal">
+  <modal-view v-if="isOn" @click.native="closeModalView">
     <div class="modal compare_modal" @click.stop="">
       <p class="modal_title">
         <font-awesome-icon icon="search" />
-        Compare with comma separated ID list
+        {{ `Compare with comma separated ${getActiveDatasetHeader()} list` }}
       </p>
+      {{ setSearchField }}
       <div
         v-for="(example, exampleIndex) of examples"
         :key="exampleIndex"
@@ -40,22 +41,30 @@
     data() {
       return {
         itemIdsForComparisonStr: '',
+        inputItemIds: [],
       };
     },
     computed: {
       ...mapGetters({
         activeDataset: 'active_dataset',
+        activeSpecie: 'active_specie',
+        activeFilter: 'active_filter',
         routeToProjectPage: 'route_to_project_page',
         isOn: 'compare_modal',
+        getCheckedResults: 'get_checked_results',
       }),
       examples() {
         return this.activeDataset[this.$store.state.active_filter]
           .item_comparison_example;
       },
+      setSearchField() {
+        return this.setExample(this.getCheckedResults.join(','));
+      },
     },
     methods: {
       ...mapMutations({
         toggleCompareModal: 'set_compare_modal',
+        setCheckedResults: 'set_checked_results',
       }),
       setExample(route) {
         this.itemIdsForComparisonStr = route;
@@ -63,8 +72,38 @@
       comparisonSearch() {
         if (this.itemIdsForComparisonStr === '') return;
         this.$nuxt.$loading.start();
-        location.href = this.routeToProjectPage(this.itemIdsForComparisonStr);
+        location.href = this.routeToProjectPage(
+          this.itemIdsForComparisonStr.replace(/^,/, '').replace(/ /g, '')
+        );
         this.toggleCompareModal();
+      },
+      closeModalView() {
+        this.inputItemIds = this.itemIdsForComparisonStr
+          .replace(/ /g, '')
+          .split(',');
+        this.setCheckedResults(this.inputItemIds);
+        this.toggleCompareModal();
+      },
+      getActiveDatasetHeader() {
+        if (this.activeSpecie.species === 'Human') {
+          switch (this.activeFilter.name) {
+            case 'gene':
+              return this.activeDataset.gene.header;
+              break;
+            case 'sample':
+              return 'RES ID';
+              break;
+          }
+        } else if (this.activeSpecie.species === 'Mouse') {
+          switch (this.activeFilter.name) {
+            case 'gene':
+              return this.activeDataset.gene.header;
+              break;
+            case 'sample':
+              return 'RES ID';
+              break;
+          }
+        }
       },
     },
   };

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="pagesList.length > 0" class="pagination-wrapper">
+  <div v-if="pagesList.length > 0" class="pagination_wrapper">
     <ul>
       <li
         :class="{ arrows: true, disabled: currentPage === 1 }"
@@ -20,7 +20,7 @@
       <li
         v-for="(pageNumber, i) in pagesNumbersShown"
         :key="i"
-        :class="{ 'pagination-item': true, active: pageNumber === currentPage }"
+        :class="{ pagination_item: true, active: pageNumber === currentPage }"
         @click="handleChangePage(pageNumber)"
       >
         <span> {{ pageNumber }}</span>
@@ -44,6 +44,43 @@
         />
       </li>
     </ul>
+    <div class="showing_page">
+      <div v-if="tableType === 'index'">
+        <b>{{ (1 + (currentPage - 1) * currentLimit).toLocaleString() }}</b>
+        -
+        <b>{{
+          currentPage * currentLimit > resultsNum
+            ? resultsNum.toLocaleString()
+            : (currentPage * currentLimit).toLocaleString()
+        }}</b>
+        of
+        {{ resultsNum.toLocaleString() }}
+      </div>
+      <div v-else-if="tableType === 'project'">
+        <b>{{ (1 + (currentPage - 1) * currentLimit).toLocaleString() }}</b>
+        -
+        <b>{{
+          currentPage * currentLimit > projectResults.length
+            ? projectResults.length.toLocaleString()
+            : (currentPage * currentLimit).toLocaleString()
+        }}</b>
+        of
+        {{ projectResults.length.toLocaleString() }}
+      </div>
+      <div class="display_pagination">
+        <label for="pagination">Show</label>
+        <select id="pagination" name="pagination" @change="setLimit">
+          <option
+            v-for="n in [10, 20, 50, 100]"
+            :key="`pagination-limit-${n}`"
+            :value="n"
+            :selected="n === currentLimit"
+          >
+            {{ n }}
+          </option>
+        </select>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -65,11 +102,20 @@
       ...mapGetters({
         projectPaginationObject: 'get_project_pagination',
         indexPaginationObject: 'index_pagination',
+        resultsByName: 'results_by_name',
+        activeFilter: 'active_filter',
+        projectResults: 'get_project_results',
       }),
+      resultsNum() {
+        return this.resultsByName(this.activeFilter.name).results_num;
+      },
       paginationObject() {
         return this.tableType === 'index'
           ? this.indexPaginationObject
           : this.projectPaginationObject;
+      },
+      currentLimit() {
+        return this.paginationObject.limit;
       },
       pagesList() {
         const list = [];
@@ -135,58 +181,83 @@
         }
         this.setOffset((page - 1) * this.paginationObject.limit);
       },
+      setLimit(e) {
+        const newLimit = +e.target.value;
+        const newPage = Math.max(
+          Math.ceil(this.paginationObject.offset / newLimit),
+          1
+        );
+        const newOffset = (newPage - 1) * newLimit;
+        this.updatePagination({
+          limit: newLimit,
+          offset: newOffset,
+          type: this.tableType === 'index' ? 'index' : 'project',
+        });
+      },
     },
   };
 </script>
 
 <style lang="sass" scoped>
 
-  .pagination-wrapper
+  .pagination_wrapper
     display: flex
-    justify-content: center
-    >ul
-      margin-top: 2rem
+    align-items: center
+    width: calc(100vw - 110px)
+    > .showing_page
+      font-size: 14px
       display: flex
-      justify-content: center
+      gap: 10px
+      right: 0
+      align-items: center
+    > .display_pagination
+      margin-top: 1rem
+    >ul
+      padding: 0
+      display: flex
+      gap: 2px
       flex-direction: row
       align-items: baseline
+      justify-content: center
       list-style: none
-      position: relative
-      &::after
-        display: block
-        content: ''
-        width: calc(100% - 3rem)
-        position: absolute
-        bottom: -0.2rem
-        height: 0.04rem
-        background-color: $GRAY
+      align-items: center
+      flex-grow: 1
       li
         user-select: none
-        width: calc(62/16 * 1rem)
         >span
-          display: block
-          text-align: center
-        &.arrows, &.pagination-item
+          display: flex
+          align-items: center
+          justify-content: center
+          width: 25px
+          height: 25px
+        &.pagination_item
+          >span
+            border: 1px rgba($GRAY, 0.3) solid
+            border-radius: 3px
+            box-sizing: border-box
+            min-width: 25px
+            width: auto
+        &.arrows, &.pagination_item
           cursor: pointer
           position: relative
           &.active
-            font-weight: bold
-            &::after
-              position: absolute
-              content: ''
-              display: block
-              width: 100%
-              height: 0.2rem
-              background-color: $COLOR_1
+            color: #fff
+            >span
+              border: 1px $MAIN_COLOR solid
+              background-color: $MAIN_COLOR
           &:hover
-            color: $MAIN_COLOR
             font-weight: bold
+        &.dots
+          >span
+            display: block
+            text-align: center
         &.arrows
           width: 1.5rem
           color: $COLOR_1
           text-align: center
           font-size: 1rem
+          line-height: normal
   .disabled
     pointer-events: none
-    opacity: 0.5
+    opacity: 0.3
 </style>

@@ -78,9 +78,9 @@
 
 <style lang="sass" scoped>
   .nav_wrapper
-    margin: -10px 0 0px
+    margin: -0px 0 0px
     .species_navi
-      padding: 0 90px
+      padding: $PADDING_WRAPPER
       margin: 0
       gap: 3rem
       display: flex

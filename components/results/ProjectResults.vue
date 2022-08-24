@@ -29,8 +29,24 @@
               :key="`result-${filterIndex}`"
               :class="filter.column.replaceAll(' ', '_')"
             >
+              <a
+                v-if="filter.column === 'symbol'"
+                @click="
+                  moveToProjectPage(result['ncbiGeneId' || 'ensemblGeneId'])
+                "
+              >
+                <font-awesome-icon icon="dna" />
+                {{ result.symbol }}
+              </a>
+              <a
+                v-else-if="filter.column === 'Description'"
+                @click="moveToProjectPage(result['RefexSampleId'])"
+              >
+                <font-awesome-icon icon="flask" />
+                {{ result.Description }}
+              </a>
               <MedianBar
-                v-if="filter.column === 'LogMedian'"
+                v-else-if="filter.column === 'LogMedian'"
                 :items="items"
                 :median-info="result.combinedMedianData"
               />
@@ -67,7 +83,15 @@
                 </span>
               </template>
               <template v-else>
-                {{ result[filter.column] }}
+                <span
+                  class="filter_column"
+                  @click="
+                    setFilterSearchValue(result[filter.column]);
+                    setFilterModal(filter.column);
+                  "
+                  >{{ result[filter.column]
+                  }}<font-awesome-icon icon="plus-circle"
+                /></span>
               </template>
             </td>
           </template>
@@ -135,6 +159,9 @@
         paginationObject: 'get_project_pagination',
         filters: 'project_filters',
         geneSummarySource: 'gene_summary_source',
+        routeToOtherProjectPage: 'route_to_other_project_page',
+        getFilterSearchValue: 'get_filter_search_value',
+        filterObj: 'active_filter_modal',
       }),
 
       filteredData() {
@@ -169,7 +196,10 @@
               // text filter
               else if (filter.filterModal !== '' && !isFiltered) {
                 // excact match if filter is based on API options
-                const isMatch = result[key].includes(filter.filterModal);
+                const isMatch = this.textFilter(
+                  result[key],
+                  filter.filterModal
+                );
                 isFiltered = filter.filterModal !== '' && !isMatch;
               }
             }
@@ -216,6 +246,9 @@
         );
       },
     },
+    created() {
+      this.setPageType('project');
+    },
     mounted() {
       this.$emit('updateSort', this.sort);
     },
@@ -223,7 +256,14 @@
       ...mapMutations({
         setGeneModal: 'set_gene_modal',
         updatePagination: 'set_project_pagination',
+        setPageType: 'set_page_type',
+        setFilterSearchValue: 'set_filter_search_value',
+        setFilterModal: 'set_filter_modal',
       }),
+      moveToProjectPage(route) {
+        this.$nuxt.$loading.start();
+        window.location.href = this.routeToOtherProjectPage(route);
+      },
       sortUpOrDown(a, b) {
         switch (this.sort?.order) {
           case 'up':
@@ -256,6 +296,11 @@
         }
         this.$emit('updateSort', this.sort);
       },
+      textFilter(fullText, inputText) {
+        const reg = new RegExp(inputText, 'gi');
+        const isMatch = reg.test(fullText);
+        if (inputText.length > 0 && isMatch) return fullText.replaceAll(reg);
+      },
     },
   };
 </script>
@@ -265,4 +310,16 @@
     table
       white-space: nowrap
       +table
+      > tbody
+        > tr
+          > td
+            > a
+              +text_with_icon
+            > .filter_column
+              cursor: pointer
+            > span
+              > svg
+                padding-left: 4px
+                font-size: 11px
+                vertical-align: middle
 </style>

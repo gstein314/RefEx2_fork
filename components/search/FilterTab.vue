@@ -113,7 +113,7 @@
   .filter_tab
     > main
       min-width: 600px
-      padding: 0 90px
+      padding: $PADDING_WRAPPER
       display: flex
       > .results_num_wrapper
         margin-left: 15px
@@ -129,7 +129,7 @@
             font-weight: bold
             margin: 18px 0 14px
           > .warning
-             +warning
+            +warning
           > button
             +button
 </style>

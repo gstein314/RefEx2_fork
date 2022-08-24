@@ -7,6 +7,8 @@
         :class="{ active: activeFilter === filter }"
         @click="$store.commit('set_active_filter', filter)"
       >
+        <font-awesome-icon v-if="filter === 'gene'" icon="dna" />
+        <font-awesome-icon v-else-if="filter === 'sample'" icon="flask" />
         {{ filter }}
       </li>
     </ul>

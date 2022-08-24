@@ -12,9 +12,9 @@
     <header>
       <div class="nav_wrapper">
         <div class="title">
-          <h3><em>Ref</em>erence <em>Ex</em>pression Dataset</h3>
+          <p><em>Ref</em>erence <em>Ex</em>pression Dataset</p>
         </div>
-        <h1>
+        <h1 @click="$store.commit('set_active_filter', 'gene')">
           <nuxt-link to="/">
             <img
               class="logotype"
@@ -25,8 +25,12 @@
         </h1>
         <nav>
           <ul>
-            <li><a href="about">About</a></li>
-            <li><a href="citation">Help</a></li>
+            <li>
+              <nuxt-link to="/about" class="category">About</nuxt-link>
+            </li>
+            <li>
+              <nuxt-link to="/help" class="category">Help</nuxt-link>
+            </li>
           </ul>
         </nav>
       </div>
@@ -37,6 +41,12 @@
 
 <script>
   export default {
+    data() {
+      return {
+        isAbout: true,
+        isHelp: false,
+      };
+    },
     mounted() {
       Typekit.load({ async: true });
     },
@@ -68,38 +78,46 @@
       width: 100%
       text-align: center
       > .nav_wrapper
-        padding: 0 90px
+        padding: $PADDING_WRAPPER
         display: flex
         justify-content: space-between
         > h1
           margin-bottom: 0
+          width: 100%
+          text-align: center
           > a
             > img.logotype
               width: 60px
         > .title
           margin: auto 0
-          > h3
+          width: 100%
+          text-align: left
+          > p
             margin: 0
             font-weight: bold
-            font-family: "Times New Roman"
+            font-family: "Georgia"
             font-weight: normal
-            font-size: 24px
+            font-size: 21px
             color: $GRAY
             > em
               color: $BLACK
               font-style: normal
         > nav
           margin: auto 0
+          width: 100%
           > ul
             display: flex
             gap: 1rem
             padding: 0
+            flex-direction: row-reverse
             > li
               > a
                 text-decoration: none
                 font-weight: bold
                 font-size: 18px
-                color: $BLACK
+                color: #C5C7CBs
+                &.nuxt-link-exact-active.nuxt-link-active
+                  color: $MAIN_COLOR
     h2
       font-size: 20px
       font-weight:600
@@ -109,4 +127,6 @@
     h4
       font-size: 14px
       font-weight:500
+    .category
+      color: gray
 </style>
