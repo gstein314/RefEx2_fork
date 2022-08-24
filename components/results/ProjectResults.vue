@@ -318,6 +318,8 @@
             > .filter_column
               cursor: pointer
               color: $MAIN_COLOR
+              display: flex
+              align-items: center
             > span
               > svg
                 padding-left: 4px

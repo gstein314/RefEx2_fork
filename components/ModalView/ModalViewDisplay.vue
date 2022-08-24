@@ -6,14 +6,27 @@
         Show/hide columns
       </p>
       <div class="display_checkboxes">
-        <div v-for="(value, filterIndex) of filters" :key="filterIndex">
-          <input
-            :checked="value.is_displayed"
-            type="checkbox"
-            @click="toggleDisplayOfFilter(value.column)"
-          />
-          <label :for="value.innerKey"> {{ value.label }} </label>
-        </div>
+        <template v-for="(value, filterIndex) of filters">
+          <div
+            v-if="
+              !(
+                value.label === 'Symbol' ||
+                value.label === 'Description' ||
+                value.label === 'MEDIAN [LOG2(TPM+1)]'
+              )
+            "
+            :key="filterIndex"
+          >
+            <input
+              :checked="value.is_displayed"
+              type="checkbox"
+              @click="toggleDisplayOfFilter(value.column)"
+            />
+            <label :for="value.innerKey">
+              {{ value.label }}
+            </label>
+          </div>
+        </template>
       </div>
     </div>
   </modal-view>
