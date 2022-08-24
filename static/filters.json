@@ -58,6 +58,14 @@
         "is_checkbox": false,
         "is_displayed": false,
         "is_ontology": false
+      },
+      {
+        "column": "typeOfGene",
+        "label": "Type of Gene",
+        "note": "",
+        "is_checkbox": false,
+        "is_displayed": false,
+        "is_ontology": false
       }
     ]
   },
