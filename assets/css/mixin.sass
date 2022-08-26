@@ -249,13 +249,20 @@ $TOOLTIP_LAYER: 2
     &:hover
       cursor: pointer
 
-@mixin text_with_icon
+@mixin link_with_icon
   text-decoration: underline
   cursor: pointer
   color: $MAIN_COLOR
   position: relative
-  padding-left: 1.1rem
-  >svg
+  &.left
+    padding-left: 1rem
+  > svg
     position: absolute
-    top: 2px
-    left: 0
+    top: 0.1rem
+    &.left
+     left: 0
+    &.right
+     right: -1rem
+    &.smaller
+     top: 0.2rem
+     font-size: 0.7rem

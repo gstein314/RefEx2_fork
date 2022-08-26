@@ -84,15 +84,20 @@
             />
             <a
               v-else-if="filter.column === 'symbol'"
+              class="left"
               @click="moveToProjectPage(result['geneid'])"
-              ><font-awesome-icon icon="dna" />
+              ><font-awesome-icon class="left" icon="dna" />
               {{ result[filter.column] }}
             </a>
             <a
               v-else-if="filter.column === 'geneid'"
+              class="right"
               target="_blank"
               :href="datasetInfo.url_prefix + result.geneid"
-              ><font-awesome-icon icon="external-link-alt" />
+              ><font-awesome-icon
+                class="right smaller"
+                icon="external-link-alt"
+              />
               {{ result[filter.column] }}
             </a>
             <span
@@ -256,5 +261,5 @@
         > tr
           > td
             > a
-              +text_with_icon
+              +link_with_icon
 </style>
