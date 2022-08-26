@@ -85,9 +85,7 @@
                 <a
                   :href="`http://amigo.geneontology.org/amigo/term/${bp.id}`"
                   target="_blank"
-                  >{{
-                    `${bp.id}: ${bp.term}: ${bp.evidence}: ${bp.qualifier}`
-                  }}</a
+                  >{{ isArrayExpression(bp) }}</a
                 >
                 <span v-if="index !== data.go['BP'].length - 1" class="comma"
                   >,</span
@@ -100,9 +98,7 @@
                 <a
                   :href="`http://amigo.geneontology.org/amigo/term/${data.go['BP'].id}`"
                   target="_blank"
-                  >{{
-                    `${data.go['BP'].id}: ${data.go['BP'].term}: ${data.go['BP'].evidence}: ${data.go['BP'].qualifier}`
-                  }}</a
+                  >{{ notArrayExpression('BP') }}</a
                 >
                 <br />
               </span>
@@ -115,9 +111,7 @@
                 <a
                   :href="`http://amigo.geneontology.org/amigo/term/${cc.id}`"
                   target="_blank"
-                  >{{
-                    `${cc.id}: ${cc.term}: ${cc.evidence}: ${cc.qualifier}`
-                  }}</a
+                  >{{ isArrayExpression(cc) }}</a
                 >
                 <span v-if="index !== data.go['CC'].length - 1" class="comma"
                   >,</span
@@ -130,9 +124,7 @@
                 <a
                   :href="`http://amigo.geneontology.org/amigo/term/${data.go['CC'].id}`"
                   target="_blank"
-                  >{{
-                    `${data.go['CC'].id}: ${data.go['CC'].term}: ${data.go['CC'].evidence}: ${data.go['CC'].qualifier}`
-                  }}</a
+                  >{{ notArrayExpression('CC') }}</a
                 >
                 <br />
               </span>
@@ -145,9 +137,7 @@
                 <a
                   :href="`http://amigo.geneontology.org/amigo/term/${mf.id}`"
                   target="_blank"
-                  >{{
-                    `${mf.id}: ${mf.term}: ${mf.evidence}: ${mf.qualifier}`
-                  }}</a
+                  >{{ isArrayExpression(mf) }}</a
                 >
                 <span v-if="index !== data.go['MF'].length - 1" class="comma"
                   >,</span
@@ -160,9 +150,7 @@
                 <a
                   :href="`http://amigo.geneontology.org/amigo/term/${data.go['MF'].id}`"
                   target="_blank"
-                  >{{
-                    `${data.go['MF'].id}: ${data.go['MF'].term}: ${data.go['MF'].evidence}: ${data.go['MF'].qualifier}`
-                  }}</a
+                  >{{ notArrayExpression('MF') }}</a
                 >
                 <br />
               </span>
@@ -217,6 +205,12 @@
         setGeneModal: 'set_gene_modal',
         setAlertModal: 'set_alert_modal',
       }),
+      isArrayExpression(type) {
+        return `${type.id}: ${type.term}: ${type.evidence}: ${type.qualifier}`;
+      },
+      notArrayExpression(type) {
+        return `${this.data.go[type].id}: ${this.data.go[type].term}: ${this.data.go[type].evidence}: ${this.data.go[type].qualifier}`;
+      },
     },
   };
 </script>
