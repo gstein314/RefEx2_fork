@@ -216,6 +216,8 @@
 </script>
 
 <style lang="sass">
+  a
+    color: $MAIN_COLOR
   .modal_wrapper
     +modal
     padding: 60px 0
