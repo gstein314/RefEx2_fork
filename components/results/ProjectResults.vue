@@ -40,10 +40,10 @@
               </a>
               <a
                 v-else-if="filter.column === 'Description'"
-                class="left"
+                class="icon_on_left"
                 @click="moveToProjectPage(result['RefexSampleId'])"
               >
-                <font-awesome-icon class="left" icon="flask" />
+                <font-awesome-icon icon="flask" />
                 {{ result.Description }}
               </a>
               <MedianBar

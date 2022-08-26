@@ -170,6 +170,26 @@ $TOOLTIP_LAYER: 2
       &:hover
         background-color: $ACTIVE_COLOR_HOVER
 
+@mixin link_with_icon
+  text-decoration: underline
+  cursor: pointer
+  color: $MAIN_COLOR
+  position: relative
+  &.icon_on_left
+    padding-left: 1rem
+    > svg
+      position: absolute
+      top: 0.1rem
+      left: 0
+  &.icon_on_right
+    > svg
+      position: absolute
+      top: 0.1rem
+      right: -1rem
+      &.smaller
+        top: 0.2rem
+        font-size: 0.7rem
+
 @mixin select
   cursor: pointer
   width: 70%
@@ -248,21 +268,3 @@ $TOOLTIP_LAYER: 2
     margin: 5px 0
     &:hover
       cursor: pointer
-
-@mixin link_with_icon
-  text-decoration: underline
-  cursor: pointer
-  color: $MAIN_COLOR
-  position: relative
-  &.left
-    padding-left: 1rem
-  > svg
-    position: absolute
-    top: 0.1rem
-    &.left
-     left: 0
-    &.right
-     right: -1rem
-    &.smaller
-     top: 0.2rem
-     font-size: 0.7rem
