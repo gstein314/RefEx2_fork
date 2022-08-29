@@ -79,83 +79,23 @@
           </div>
           <p class="title">Gene Ontology</p>
           <p class="sub_title">Biological Process</p>
-          <div v-if="data.go">
-            <p v-if="Array.isArray(data.go['BP'])" class="contents">
-              <span v-for="(bp, index) in data.go['BP']" :key="index">
-                <a
-                  :href="`http://amigo.geneontology.org/amigo/term/${bp.id}`"
-                  target="_blank"
-                  >{{ isArrayExpression(bp) }}</a
-                >
-                <span v-if="index !== data.go['BP'].length - 1" class="comma"
-                  >,</span
-                >
-                <br />
-              </span>
-            </p>
-            <p v-else-if="data.go['BP']" class="contents">
-              <span>
-                <a
-                  :href="`http://amigo.geneontology.org/amigo/term/${data.go['BP'].id}`"
-                  target="_blank"
-                  >{{ notArrayExpression('BP') }}</a
-                >
-                <br />
-              </span>
-            </p>
-          </div>
+          <TableGeneOntology
+            :data-source="data.go"
+            :type-upper="'BP'"
+            :type-lower="'bp'"
+          ></TableGeneOntology>
           <p class="sub_title">Cellular Component</p>
-          <div v-if="data.go">
-            <p v-if="Array.isArray(data.go['CC'])" class="contents">
-              <span v-for="(cc, index) in data.go['CC']" :key="index">
-                <a
-                  :href="`http://amigo.geneontology.org/amigo/term/${cc.id}`"
-                  target="_blank"
-                  >{{ isArrayExpression(cc) }}</a
-                >
-                <span v-if="index !== data.go['CC'].length - 1" class="comma"
-                  >,</span
-                >
-                <br />
-              </span>
-            </p>
-            <p v-else-if="data.go['CC']" class="contents">
-              <span>
-                <a
-                  :href="`http://amigo.geneontology.org/amigo/term/${data.go['CC'].id}`"
-                  target="_blank"
-                  >{{ notArrayExpression('CC') }}</a
-                >
-                <br />
-              </span>
-            </p>
-          </div>
+          <TableGeneOntology
+            :data-source="data.go"
+            :type-upper="'CC'"
+            :type-lower="'cc'"
+          ></TableGeneOntology>
           <p class="sub_title">Molecular Function</p>
-          <div v-if="data.go">
-            <p v-if="Array.isArray(data.go['MF'])" class="contents">
-              <span v-for="(mf, index) in data.go['MF']" :key="index">
-                <a
-                  :href="`http://amigo.geneontology.org/amigo/term/${mf.id}`"
-                  target="_blank"
-                  >{{ isArrayExpression(mf) }}</a
-                >
-                <span v-if="index !== data.go['MF'].length - 1" class="comma"
-                  >,</span
-                >
-                <br />
-              </span>
-            </p>
-            <p v-else-if="data.go['MF']" class="contents">
-              <span>
-                <a
-                  :href="`http://amigo.geneontology.org/amigo/term/${data.go['MF'].id}`"
-                  target="_blank"
-                  >{{ notArrayExpression('MF') }}</a
-                >
-                <br />
-              </span>
-            </p>
-          </div>
+          <TableGeneOntology
+            :data-source="data.go"
+            :type-upper="'MF'"
+            :type-lower="'mf'"
+          ></TableGeneOntology>
         </div>
       </div>
       <p v-else class="loading">Loading...</p>
@@ -165,11 +105,13 @@
 
 <script>
   import ModalView from '~/components/ModalView/ModalView.vue';
+  import TableGeneOntology from '~/components/results/TableGeneOntology.vue';
   import { mapGetters, mapMutations } from 'vuex';
 
   export default {
     components: {
       ModalView,
+      TableGeneOntology,
     },
     data() {
       return {
@@ -222,7 +164,7 @@
     +modal
     padding: 60px 0
     width: 60vw
-    max-width: 800px
+    max-width: 1000px
     min-width: 610px
     > .gene_detail
       > .gene_name
