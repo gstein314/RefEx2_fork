@@ -61,7 +61,10 @@
             />
           </td>
           <td v-if="filterType === 'sample'">
-            <a @click="moveToProjectPage(result['refexSampleId'])">
+            <a
+              class="icon_on_left"
+              @click="moveToProjectPage(result['refexSampleId'])"
+            >
               <font-awesome-icon icon="flask" />
               {{ result.Description }}
             </a>

@@ -31,6 +31,7 @@
             >
               <a
                 v-if="filter.column === 'symbol'"
+                class="icon_on_left"
                 @click="
                   moveToProjectPage(result['ncbiGeneId' || 'ensemblGeneId'])
                 "
