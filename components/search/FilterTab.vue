@@ -25,7 +25,7 @@
             Find {{ $vnode.key }}s
           </button>
           <p v-show="!validSearch" class="warning">
-            <font-awesome-icon icon="exclamation-triangle" /><br/>
+            <font-awesome-icon icon="exclamation-triangle" />
             Please set search condition(s)
           </p>
         </div>
