@@ -9,8 +9,10 @@
         @updateResults="setTableDataIsSameAsScreener(true)"
       />
       <div class="results_num_wrapper">
-        <div class="results_num_inner">
+        <div class="results_title_inner">
           <h2>Estimated Results</h2>
+        </div>
+        <div class="results_num_inner">
           <p class="results_num">{{ resultsNum.toLocaleString() }}</p>
           <button
             class="find_results_btn"
@@ -118,6 +120,9 @@
       > .results_num_wrapper
         margin-left: 15px
         width: 15%
+        > .results_title_inner
+          display: flex
+          justify-content: flex-end
         > .results_num_inner
           position: sticky
           top: 0
