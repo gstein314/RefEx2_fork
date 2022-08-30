@@ -308,7 +308,7 @@
 </script>
 <style lang="sass" scoped>
   .table-wrapper
-    margin: 0 45px
+    margin: 0 20px
     table
       white-space: nowrap
       +table
