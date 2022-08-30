@@ -337,7 +337,7 @@
   .vue-simple-suggest
       position: relative
   .text_search_area
-      width: 85%
+      width: 100%
       > h3
           display: flex
           gap: 0.5rem

@@ -9,10 +9,8 @@
         @updateResults="setTableDataIsSameAsScreener(true)"
       />
       <div class="results_num_wrapper">
-        <div class="results_title_inner">
-          <h2>Estimated Results</h2>
-        </div>
         <div class="results_num_inner">
+          <h2>Estimated Results</h2>
           <p class="results_num">{{ resultsNum.toLocaleString() }}</p>
           <button
             class="find_results_btn"
@@ -27,7 +25,7 @@
             Find {{ $vnode.key }}s
           </button>
           <p v-show="!validSearch" class="warning">
-            <font-awesome-icon icon="exclamation-triangle" />
+            <font-awesome-icon icon="exclamation-triangle" /><br/>
             Please set search condition(s)
           </p>
         </div>
@@ -117,9 +115,10 @@
       min-width: 600px
       padding: $PADDING_WRAPPER
       display: flex
+      justify-content: space-between
       > .results_num_wrapper
+        min-width: 175px
         margin-left: 15px
-        width: 15%
         > .results_title_inner
           display: flex
           justify-content: flex-end
