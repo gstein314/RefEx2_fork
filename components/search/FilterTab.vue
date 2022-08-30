@@ -24,7 +24,7 @@
             <font-awesome-icon icon="search" />
             Find {{ $vnode.key }}s
           </button>
-          <p v-show="!validSearch" class="warning">
+          <p v-show="!validSearch" class="warning small">
             <font-awesome-icon icon="exclamation-triangle" />
             Please set search condition(s)
           </p>
@@ -134,6 +134,8 @@
             margin: 18px 0 14px
           > .warning
             +warning
+          > .small
+            font-size: 0.7rem
           > button
             +button
 </style>
