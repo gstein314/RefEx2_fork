@@ -82,6 +82,9 @@
                   </span>
                 </span>
               </template>
+              <template v-else-if="hasStringQuotes(result[filter.column])">
+                {{ result[filter.column].replaceAll('"', '') }}
+              </template>
               <a
                 v-else-if="filter.column === 'ncbiGeneId'"
                 class="icon_on_right"
@@ -330,6 +333,9 @@
         } else if (this.dataset === 'gtexV8') {
           this.setActiveDataset(specieSets[0].datasets[1]);
         }
+      },
+      hasStringQuotes(str) {
+        return str?.startsWith('"') && str?.endsWith('"');
       },
     },
   };
