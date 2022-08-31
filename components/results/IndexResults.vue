@@ -41,7 +41,7 @@
         <td
           v-if="!tableDataIsSameAsScreener"
           class="warning"
-          :colspan="filters.filter(x => x.is_displayed).length + 1"
+          :colspan="filters.filter(x => x.is_displayed).length + 2"
         >
           <font-awesome-icon icon="exclamation-triangle" />
           Please press the 'Find {{ filterType }}s' button to update the results
