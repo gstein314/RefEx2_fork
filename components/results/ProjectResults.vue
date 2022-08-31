@@ -82,6 +82,22 @@
                   </span>
                 </span>
               </template>
+              <a
+                v-else-if="filter.column === 'ncbiGeneId'"
+                class="icon_on_right"
+                target="_blank"
+                :href="datasetInfo.url_prefix + result.ncbiGeneId"
+                ><font-awesome-icon icon="external-link-alt" class="smaller" />
+                {{ result[filter.column] }}
+              </a>
+              <a
+                v-else-if="filter.column === 'ensemblGeneId'"
+                class="icon_on_right"
+                target="_blank"
+                :href="datasetInfo.url_prefix + result.ensemblGeneId"
+                ><font-awesome-icon icon="external-link-alt" class="smaller" />
+                {{ result[filter.column] }}
+              </a>
               <template v-else>
                 {{ result[filter.column] }}
                 <span
@@ -105,6 +121,7 @@
   import TableHeader from '~/components/results/TableHeader.vue';
   import { mapGetters, mapMutations } from 'vuex';
   import ResultsPagination from '~/components/results/ResultsPagination.vue';
+  import specieSets from '~/refex-sample/datasets.json';
 
   const inRange = (x, [min, max]) => {
     return typeof x !== 'number' || (x - min) * (x - max) <= 0;
@@ -161,6 +178,8 @@
         routeToOtherProjectPage: 'route_to_other_project_page',
         getFilterSearchValue: 'get_filter_search_value',
         filterObj: 'active_filter_modal',
+        activeDataset: 'active_dataset',
+        activeSpecie: 'active_specie',
       }),
 
       filteredData() {
@@ -244,12 +263,16 @@
           this.filteredData.length / this.paginationObject.limit
         );
       },
+      datasetInfo() {
+        return this.activeDataset['gene'];
+      },
     },
     created() {
       this.setPageType('project');
     },
     mounted() {
       this.$emit('updateSort', this.sort);
+      this.setDataset();
     },
     methods: {
       ...mapMutations({
@@ -258,6 +281,7 @@
         setPageType: 'set_page_type',
         setFilterSearchValue: 'set_filter_search_value',
         setFilterModal: 'set_filter_modal',
+        setActiveDataset: 'set_active_dataset',
       }),
       moveToProjectPage(route) {
         this.$nuxt.$loading.start();
@@ -299,6 +323,13 @@
         const reg = new RegExp(inputText, 'gi');
         const isMatch = reg.test(fullText);
         if (inputText.length > 0 && isMatch) return fullText.replaceAll(reg);
+      },
+      setDataset() {
+        if (this.dataset === 'humanFantom5') {
+          this.setActiveDataset(specieSets[0].datasets[0]);
+        } else if (this.dataset === 'gtexV8') {
+          this.setActiveDataset(specieSets[0].datasets[1]);
+        }
       },
     },
   };
