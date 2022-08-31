@@ -83,14 +83,13 @@
                 </span>
               </template>
               <template v-else>
+                {{ result[filter.column] }}
                 <span
-                  class="filter_column"
                   @click="
                     setFilterSearchValue(result[filter.column]);
                     setFilterModal(filter.column);
                   "
-                  >{{ result[filter.column]
-                  }}<font-awesome-icon icon="plus-circle"
+                  ><font-awesome-icon icon="plus-circle"
                 /></span>
               </template>
             </td>
@@ -315,11 +314,13 @@
           > td
             > a
               +text_with_icon
-            > .filter_column
-              cursor: pointer
             > span
+              position: relative
               > svg
+                top: 3px
+                position: absolute
                 padding-left: 4px
                 font-size: 11px
-                vertical-align: middle
+                color: $MAIN_COLOR
+                cursor: pointer
 </style>
