@@ -88,7 +88,7 @@
         display: grid
         grid-template-columns: auto 1fr
         opacity: .3
-        padding: 10px 0 0 10px
+        padding: 10px 10px 0
         > .specie_wrapper
           > form
             > .specie_select
@@ -125,7 +125,7 @@
           display: flex
           flex-direction: column
           align-self: flex-end
-          margin: 6px 15px 6px 10px
+          margin: 6px 0 6px 10px
           font-size: 18px
           > p
             margin: 0
