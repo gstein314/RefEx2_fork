@@ -15,8 +15,61 @@
         class="value single_item align_right"
         :class="`item_${itemIndex + 1}`"
       >
-        {{ tooltipNumberDisplay(medianInfo[item.id]) }}
+        {{
+          tooltipNumberDisplay(resultsStat.combinedFirstQuartileData[item.id])
+        }}
+        {{ tooltipNumberDisplay(resultsStat.combinedMedianData[item.id]) }}
+        {{
+          tooltipNumberDisplay(resultsStat.combinedThirdQuartileData[item.id])
+        }}
+        {{ tooltipNumberDisplay(resultsStat.combinedSdData[item.id]) }}
+        {{ resultsStat.combinedNumberOfSamplesData[item.id] }}
       </span>
+      <table>
+        <col style="width: 15%" />
+        <col style="width: 15%" />
+        <col style="width: 15%" />
+        <col style="width: 15%" />
+        <col style="width: 30%" />
+        <thead>
+          <tr>
+            <th>1<sup>st</sup>Qu</th>
+            <th>Median</th>
+            <th>3<sup>rd</sup>Qu</th>
+            <th>SD</th>
+            <th>No. of Samples</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item, itemIndex) of items" :key="itemIndex">
+            <td>
+              {{
+                tooltipNumberDisplay(
+                  resultsStat.combinedFirstQuartileData[item.id]
+                )
+              }}
+            </td>
+            <td>
+              {{
+                tooltipNumberDisplay(resultsStat.combinedMedianData[item.id])
+              }}
+            </td>
+            <td>
+              {{
+                tooltipNumberDisplay(
+                  resultsStat.combinedThirdQuartileData[item.id]
+                )
+              }}
+            </td>
+            <td>
+              {{ tooltipNumberDisplay(resultsStat.combinedSdData[item.id]) }}
+            </td>
+            <td>
+              {{ resultsStat.combinedNumberOfSamplesData[item.id] }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </template>
@@ -25,6 +78,10 @@
   export default {
     props: {
       medianInfo: {
+        type: Object,
+        default: () => {},
+      },
+      resultsStat: {
         type: Object,
         default: () => {},
       },
@@ -81,7 +138,6 @@
       border-radius: 3px
       box-shadow: 0 1px 4px rgba(62, 70, 82, .22)
       position: absolute
-      top: 0
       z-index: $TOOLTIP_LAYER
       > span
         display: block
@@ -107,6 +163,9 @@
         text-align: right
         width: 100%
         margin-left: 10px
+      > table
+        width: 400px
+        text-align: center
     &:hover
       > .tooltip
         display: block

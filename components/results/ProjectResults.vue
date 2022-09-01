@@ -49,6 +49,7 @@
                 v-else-if="filter.column === 'LogMedian'"
                 :items="items"
                 :median-info="result.combinedMedianData"
+                :results-stat="result"
               />
               <font-awesome-icon
                 v-else-if="filter.column === 'annotation'"

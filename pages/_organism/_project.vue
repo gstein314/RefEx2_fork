@@ -114,7 +114,11 @@
           return {
             id,
             info: data[`${type}_info`],
+            firstQuartileData: data.refex_info?.map(x => x.Log1stQu),
             medianData: data.refex_info?.map(x => x.LogMedian),
+            thirdQuartileData: data.refex_info?.map(x => x.Log3rdQu),
+            sdData: data.refex_info?.map(x => x.LogSd),
+            numberOfSamplesData: data.refex_info?.map(x => x.NumberOfSamples),
           };
         })
       );
@@ -178,12 +182,29 @@
         return this.results.map((result, index) => {
           return {
             ...result,
+            combinedFirstQuartileData: this.firstQuartileDataBySymbol[index],
             combinedMedianData: this.medianDataBySymbol[index],
+            combinedThirdQuartileData: this.thirdQuartileDataBySymbol[index],
+            combinedSdData: this.sdDataBySymbol[index],
+            combinedNumberOfSamplesData:
+              this.numberOfSamplesDataBySymbol[index],
           };
         });
       },
       sampleIdKey() {
         return this.filterType === 'gene' ? 'sample_id' : 'id';
+      },
+      firstQuartileDataBySymbol() {
+        return this.results
+          .map(x => x.Log1stQu)
+          .reduce((acc, _curr, resultIndex) => {
+            const itemToPush = this.items.reduce((obj, item) => {
+              obj[item.id] = +item.firstQuartileData[resultIndex];
+              return obj;
+            }, {});
+            acc.push(itemToPush);
+            return acc;
+          }, []);
       },
       medianDataBySymbol() {
         return this.results
@@ -191,6 +212,42 @@
           .reduce((acc, _curr, resultIndex) => {
             const itemToPush = this.items.reduce((obj, item) => {
               obj[item.id] = +item.medianData[resultIndex];
+              return obj;
+            }, {});
+            acc.push(itemToPush);
+            return acc;
+          }, []);
+      },
+      thirdQuartileDataBySymbol() {
+        return this.results
+          .map(x => x.Log3rdQu)
+          .reduce((acc, _curr, resultIndex) => {
+            const itemToPush = this.items.reduce((obj, item) => {
+              obj[item.id] = +item.thirdQuartileData[resultIndex];
+              return obj;
+            }, {});
+            acc.push(itemToPush);
+            return acc;
+          }, []);
+      },
+      sdDataBySymbol() {
+        return this.results
+          .map(x => x.LogSd)
+          .reduce((acc, _curr, resultIndex) => {
+            const itemToPush = this.items.reduce((obj, item) => {
+              obj[item.id] = +item.sdData[resultIndex];
+              return obj;
+            }, {});
+            acc.push(itemToPush);
+            return acc;
+          }, []);
+      },
+      numberOfSamplesDataBySymbol() {
+        return this.results
+          .map(x => x.NumberOfSamples)
+          .reduce((acc, _curr, resultIndex) => {
+            const itemToPush = this.items.reduce((obj, item) => {
+              obj[item.id] = +item.numberOfSamplesData[resultIndex];
               return obj;
             }, {});
             acc.push(itemToPush);
