@@ -99,4 +99,6 @@
         line-height: 26px
         > label
           font-size: 14px
+          > input
+            vertical-align: -0.1rem
 </style>
