@@ -43,6 +43,8 @@ export const state = () => ({
   }, {}),
   page_type: '',
   filter_search_value: '',
+  index_gene_pages_number: 0,
+  index_sample_pages_number: 0,
   project_pages_number: 0,
 });
 
@@ -118,6 +120,12 @@ export const getters = {
   },
   get_filter_search_value(state) {
     return state.filter_search_value;
+  },
+  get_index_gene_pages_number(state) {
+    return state.index_gene_pages_number;
+  },
+  get_index_sample_pages_number(state) {
+    return state.index_sample_pages_number;
   },
   get_project_pages_number(state) {
     return state.project_pages_number;
@@ -205,6 +213,12 @@ export const mutations = {
   },
   set_checked_results(state, checked_results) {
     state.checked_results = checked_results;
+  },
+  set_index_gene_pages_number(state, index_gene_pages_number) {
+    state.index_gene_pages_number = index_gene_pages_number;
+  },
+  set_index_sample_pages_number(state, index_sample_pages_number) {
+    state.index_sample_pages_number = index_sample_pages_number;
   },
   set_project_pages_number(state, project_pages_number) {
     state.project_pages_number = project_pages_number;
