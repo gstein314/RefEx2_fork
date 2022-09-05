@@ -24,7 +24,7 @@
         "label": "Alias",
         "note": "",
         "is_checkbox": false,
-        "is_displayed": false,
+        "is_displayed": true,
         "is_ontology": false
       },
       {
