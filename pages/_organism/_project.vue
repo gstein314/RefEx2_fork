@@ -245,8 +245,7 @@
       },
       checkSampleAlias() {
         if (this.filterType === 'sample') {
-          const filters = [...this.filters];
-          filters.forEach(function (filter) {
+          this.filters.forEach(function (filter) {
             if (filter.column === 'alias') {
               filter.is_displayed = false;
             }
@@ -255,8 +254,7 @@
       },
       setSampleAlias() {
         if (this.filterType === 'sample') {
-          const filters = [...this.filters];
-          filters.forEach(function (filter) {
+          this.filters.forEach(function (filter) {
             if (filter.column === 'alias') {
               filter.is_displayed = true;
             }
