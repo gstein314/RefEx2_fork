@@ -100,15 +100,12 @@
         </tr>
       </tbody>
     </table>
-    <ResultsPagination :pages-number="pagesNumber" />
   </section>
 </template>
 
 <script>
   import TableHeader from '~/components/results/TableHeader.vue';
   import { mapGetters, mapMutations } from 'vuex';
-  import ResultsPagination from '~/components/results/ResultsPagination.vue';
-
   const inRange = (x, [min, max]) => {
     return typeof x !== 'number' || (x - min) * (x - max) <= 0;
   };
@@ -122,7 +119,6 @@
   export default {
     components: {
       TableHeader,
-      ResultsPagination,
     },
     props: {
       selectedItem: {
@@ -243,9 +239,10 @@
         );
       },
       pagesNumber() {
-        return Math.ceil(
+        let pagesNumber = Math.ceil(
           this.filteredData.length / this.paginationObject.limit
         );
+        return pagesNumber;
       },
     },
     created() {
@@ -254,6 +251,9 @@
     mounted() {
       this.$emit('updateSort', this.sort);
     },
+    updated() {
+      this.setProjectPagesNumber(this.pagesNumber);
+    },
     methods: {
       ...mapMutations({
         setGeneModal: 'set_gene_modal',
@@ -261,6 +261,7 @@
         setPageType: 'set_page_type',
         setFilterSearchValue: 'set_filter_search_value',
         setFilterModal: 'set_filter_modal',
+        setProjectPagesNumber: 'set_project_pages_number',
       }),
       moveToProjectPage(route) {
         this.$nuxt.$loading.start();

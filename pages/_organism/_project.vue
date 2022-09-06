@@ -56,6 +56,11 @@
       :selected-item="selectedId"
       @updateSort="updateResultSort"
     />
+    <ResultsPagination
+      :pages-number="$store.state.project_pages_number"
+      table-type="project"
+      class="pagination"
+    />
   </div>
 </template>
 
@@ -68,6 +73,7 @@
   import ModalViewDisplay from '~/components/ModalView/ModalViewDisplay.vue';
   import ModalViewFilter from '~/components/ModalView/ModalViewFilter.vue';
   import ProjectResults from '~/components/results/ProjectResults.vue';
+  import ResultsPagination from '~/components/results/ResultsPagination.vue';
 
   const logMedianFilter = {
     column: 'LogMedian',
@@ -91,6 +97,7 @@
       ModalViewDisplay,
       ModalViewFilter,
       ProjectResults,
+      ResultsPagination,
     },
     beforeRouteUpdate(to, from, next) {
       this.$forceUpdate();
@@ -301,4 +308,14 @@
         > .display_settings
           +display_settings
           place-self: flex-end
+    .pagination
+      display: flex
+      position: sticky
+      left: 0
+      min-width: calc(100vw - 55px)
+      max-width: fit-content
+      position: sticky
+      background-color: white
+      top: 0
+      padding: $PADDING_WRAPPER
 </style>
