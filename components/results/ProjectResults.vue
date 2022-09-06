@@ -123,9 +123,7 @@
 <script>
   import TableHeader from '~/components/results/TableHeader.vue';
   import { mapGetters, mapMutations } from 'vuex';
-  import ResultsPagination from '~/components/results/ResultsPagination.vue';
   import specieSets from '~/refex-sample/datasets.json';
-
   const inRange = (x, [min, max]) => {
     return typeof x !== 'number' || (x - min) * (x - max) <= 0;
   };
@@ -139,7 +137,6 @@
   export default {
     components: {
       TableHeader,
-      ResultsPagination,
     },
     props: {
       selectedItem: {
@@ -262,9 +259,10 @@
         );
       },
       pagesNumber() {
-        return Math.ceil(
+        let pagesNumber = Math.ceil(
           this.filteredData.length / this.paginationObject.limit
         );
+        return pagesNumber;
       },
       datasetInfo() {
         return this.activeDataset['gene'];
@@ -277,6 +275,9 @@
       this.$emit('updateSort', this.sort);
       this.setDataset();
     },
+    updated() {
+      this.setProjectPagesNumber(this.pagesNumber);
+    },
     methods: {
       ...mapMutations({
         setGeneModal: 'set_gene_modal',
@@ -285,6 +286,7 @@
         setFilterSearchValue: 'set_filter_search_value',
         setFilterModal: 'set_filter_modal',
         setActiveDataset: 'set_active_dataset',
+        setProjectPagesNumber: 'set_project_pages_number',
       }),
       moveToProjectPage(route) {
         this.$nuxt.$loading.start();
@@ -342,7 +344,7 @@
 </script>
 <style lang="sass" scoped>
   .table-wrapper
-    margin: 0 45px
+    margin: 0 20px
     table
       white-space: nowrap
       +table
@@ -350,7 +352,9 @@
         > tr
           > td
             > a
-              +text_with_icon
+              +link_with_icon
+            > .filter_column
+              cursor: pointer
             > span
               position: relative
               > svg
