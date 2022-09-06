@@ -41,7 +41,7 @@
         <td
           v-if="!tableDataIsSameAsScreener"
           class="warning"
-          :colspan="filters.filter(x => x.is_displayed).length"
+          :colspan="filters.filter(x => x.is_displayed).length + 2"
         >
           <font-awesome-icon icon="exclamation-triangle" />
           Please press the 'Find {{ filterType }}s' button to update the results
@@ -61,7 +61,10 @@
             />
           </td>
           <td v-if="filterType === 'sample'">
-            <a @click="moveToProjectPage(result['refexSampleId'])">
+            <a
+              class="icon_on_left"
+              @click="moveToProjectPage(result['refexSampleId'])"
+            >
               <font-awesome-icon icon="flask" />
               {{ result.Description }}
             </a>
@@ -84,15 +87,17 @@
             />
             <a
               v-else-if="filter.column === 'symbol'"
+              class="icon_on_left"
               @click="moveToProjectPage(result['geneid'])"
               ><font-awesome-icon icon="dna" />
               {{ result[filter.column] }}
             </a>
             <a
               v-else-if="filter.column === 'geneid'"
+              class="icon_on_right"
               target="_blank"
               :href="datasetInfo.url_prefix + result.geneid"
-              ><font-awesome-icon icon="external-link-alt" />
+              ><font-awesome-icon icon="external-link-alt" class="smaller" />
               {{ result[filter.column] }}
             </a>
             <span
@@ -256,5 +261,5 @@
         > tr
           > td
             > a
-              +text_with_icon
+              +link_with_icon
 </style>

@@ -17,12 +17,12 @@
             "
             :key="filterIndex"
           >
-            <input
-              :checked="value.is_displayed"
-              type="checkbox"
-              @click="toggleDisplayOfFilter(value.column)"
-            />
             <label :for="value.innerKey">
+              <input
+                :checked="value.is_displayed"
+                type="checkbox"
+                @click="toggleDisplayOfFilter(value.column)"
+              />
               {{ value.label }}
             </label>
           </div>
@@ -99,4 +99,6 @@
         line-height: 26px
         > label
           font-size: 14px
+          > input
+            vertical-align: -0.1rem
 </style>

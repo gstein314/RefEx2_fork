@@ -88,18 +88,28 @@
         display: grid
         grid-template-columns: auto 1fr
         opacity: .3
+        padding: 10px 10px 0
         > .specie_wrapper
           > form
             > .specie_select
               color: $BLACK
         &.active
-          color: $MAIN_COLOR
+          color: $WHITE
+          background-color: $MAIN_COLOR
+          border-top-left-radius: 10px
+          border-top-right-radius: 10px
           opacity: 1
           > .specie_wrapper
             > form
               > .specie_select
+                color: $WHITE
+        &.active:hover
+          > .specie_wrapper
+            > form
+              > .specie_select
                 color: $MAIN_COLOR
-        &:hover
+                background-color: $WHITE
+        &:hover:not(.active)
           opacity: 1
           cursor: pointer
           color: $MAIN_COLOR
@@ -107,14 +117,15 @@
           > .specie_wrapper
             > form
               > .specie_select
-                color: $MAIN_COLOR
+                color: $WHITE
+                background-color: $MAIN_COLOR
         > svg
           align-self: flex-end
         > .specie_wrapper
           display: flex
           flex-direction: column
           align-self: flex-end
-          margin: 6px 15px 6px 10px
+          margin: 6px 0 6px 10px
           font-size: 18px
           > p
             margin: 0

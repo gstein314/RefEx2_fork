@@ -111,36 +111,44 @@
       > .tooltip
         display: block
         z-index: 100
-    .single_item
-      &.item_1
-        &:after
-          background-color: $COLOR_1 !important
-      &.item_2
-        &:after
-          background-color: $COLOR_2 !important
-      &.item_3
-        &:after
-          background-color: $COLOR_3 !important
-      &.item_4
-        &:after
-          background-color: $COLOR_4 !important
-      &.item_5
-        &:after
-          background-color: $COLOR_5 !important
-      &.item_6
-        &:after
-          background-color: $COLOR_6 !important
-      &.item_7
-        &:after
-          background-color: $COLOR_7 !important
-      &.item_8
-        &:after
-          background-color: $COLOR_8 !important
-      &.item_9
-        &:after
-          background-color: $COLOR_9 !important
-      &.item_10
-        &:after
-          background-color: $COLOR_10 !important
+
+    @for $i from 0 through 10
+      .single_item
+        &.item_#{12 * $i + 1}
+          &:after
+            background-color: $COLOR_1 !important
+        &.item_#{12 * $i + 2}
+          &:after
+            background-color: $COLOR_2 !important
+        &.item_#{12 * $i + 3}
+          &:after
+            background-color: $COLOR_3 !important
+        &.item_#{12 * $i + 4}
+          &:after
+            background-color: $COLOR_4 !important
+        &.item_#{12 * $i + 5}
+          &:after
+            background-color: $COLOR_5 !important
+        &.item_#{12 * $i + 6}
+          &:after
+            background-color: $COLOR_6 !important
+        &.item_#{12 * $i + 7}
+          &:after
+            background-color: $COLOR_7 !important
+        &.item_#{12 * $i + 8}
+          &:after
+            background-color: $COLOR_8 !important
+        &.item_#{12 * $i + 9}
+          &:after
+            background-color: $COLOR_9 !important
+        &.item_#{12 * $i + 10}
+          &:after
+            background-color: $COLOR_10 !important
+        &.item_#{12 * $i + 11}
+          &:after
+            background-color: $COLOR_11 !important
+        &.item_#{12 * $i + 12}
+          &:after
+            background-color: $COLOR_12 !important
 </style>
 >

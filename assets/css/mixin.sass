@@ -1,5 +1,6 @@
 $MAIN_COLOR: #488EC4
 $MAIN_COLOR_PALE: #F5F7F9
+$WHITE: #FFFFFF
 $BLACK: #3E4652
 $GRAY: #7C7C7C
 $ERROR_COLOR: #FF4C5E
@@ -18,7 +19,9 @@ $COLOR_6: #EDC339
 $COLOR_7: #B97CBF
 $COLOR_8: #A3735E
 $COLOR_9: #FF98A6
-$COLOR_10: #A8A8A8
+$COLOR_10: #6A3D9A
+$COLOR_11: #B15928
+$COLOR_12: #A8A8A8
 
 $PADDING_SLIM: 0.1rem 0.4rem
 $PADDING_LARGE: 0.4rem 0.8rem
@@ -67,9 +70,6 @@ $TOOLTIP_LAYER: 2
     > div
       display: flex
       align-items: center
-      > .external-link-alt
-        margin-left: auto
-        padding-left: 2rem
     &.hover
       color: #ffffff
       background-color: $MAIN_COLOR
@@ -170,6 +170,26 @@ $TOOLTIP_LAYER: 2
       &:hover
         background-color: $ACTIVE_COLOR_HOVER
 
+@mixin link_with_icon
+  text-decoration: underline
+  cursor: pointer
+  color: $MAIN_COLOR
+  position: relative
+  &.icon_on_left
+    padding-left: 1rem
+    > svg
+      position: absolute
+      top: 0.1rem
+      left: 0
+  &.icon_on_right
+    > svg
+      position: absolute
+      top: 0.1rem
+      right: -1rem
+      &.smaller
+        top: 0.2rem
+        font-size: 0.7rem
+
 @mixin select
   cursor: pointer
   width: 70%
@@ -246,16 +266,10 @@ $TOOLTIP_LAYER: 2
     color: $MAIN_COLOR
     text-decoration: underline
     margin: 5px 0
+    position: relative
+    padding-left: 1.3rem
+    > svg
+      position: absolute
+      left: 0
     &:hover
       cursor: pointer
-
-@mixin text_with_icon
-  text-decoration: underline
-  cursor: pointer
-  color: $MAIN_COLOR
-  position: relative
-  padding-left: 1.1rem
-  >svg
-    position: absolute
-    top: 2px
-    left: 0

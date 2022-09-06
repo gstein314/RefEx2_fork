@@ -94,24 +94,29 @@
         color: $MAIN_COLOR
       &:hover
         cursor: pointer
-      &.item_1
-        border-color: $COLOR_1
-      &.item_2
-        border-color: $COLOR_2
-      &.item_3
-        border-color: $COLOR_3
-      &.item_4
-        border-color: $COLOR_4
-      &.item_5
-        border-color: $COLOR_5
-      &.item_6
-        border-color: $COLOR_6
-      &.item_7
-        border-color: $COLOR_7
-      &.item_8
-        border-color: $COLOR_8
-      &.item_9
-        border-color: $COLOR_9
-      &.item_10
-        border-color: $COLOR_10
+      @for $i from 0 through 10
+        &.item_#{12 * $i + 1}
+          border-color: $COLOR_1
+        &.item_#{12 * $i + 2}
+          border-color: $COLOR_2
+        &.item_#{12 * $i + 3}
+          border-color: $COLOR_3
+        &.item_#{12 * $i + 4}
+          border-color: $COLOR_4
+        &.item_#{12 * $i + 5}
+          border-color: $COLOR_5
+        &.item_#{12 * $i + 6}
+          border-color: $COLOR_6
+        &.item_#{12 * $i + 7}
+          border-color: $COLOR_7
+        &.item_#{12 * $i + 8}
+          border-color: $COLOR_8
+        &.item_#{12 * $i + 9}
+          border-color: $COLOR_9
+        &.item_#{12 * $i + 10}
+          border-color: $COLOR_10
+        &.item_#{12 * $i + 11}
+          border-color: $COLOR_11
+        &.item_#{12 * $i + 12}
+          border-color: $COLOR_12
 </style>

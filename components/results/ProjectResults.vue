@@ -31,6 +31,7 @@
             >
               <a
                 v-if="filter.column === 'symbol'"
+                class="icon_on_left"
                 @click="
                   moveToProjectPage(result['ncbiGeneId' || 'ensemblGeneId'])
                 "
@@ -40,6 +41,7 @@
               </a>
               <a
                 v-else-if="filter.column === 'Description'"
+                class="icon_on_left"
                 @click="moveToProjectPage(result['RefexSampleId'])"
               >
                 <font-awesome-icon icon="flask" />
@@ -116,7 +118,6 @@
         </tr>
       </tbody>
     </table>
-    <ResultsPagination :pages-number="pagesNumber" />
   </section>
 </template>
 
@@ -274,6 +275,9 @@
     mounted() {
       this.$emit('updateSort', this.sort);
       this.setDataset();
+    },
+    updated() {
+      this.setProjectPagesNumber(this.pagesNumber);
     },
     updated() {
       this.setProjectPagesNumber(this.pagesNumber);
