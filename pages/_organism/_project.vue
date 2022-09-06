@@ -272,12 +272,12 @@
       z-index: 1
       > .content
         gap: 20px
-        padding: 10px 15px 10px 60px
+        padding: 10px 20px
         display: grid
         min-width: fit-content
         grid-template-columns: 1fr auto
         grid-template-rows: auto auto
-        width: calc(100vw - 130px)
+        width: 100%
         > .comparison_btn
           margin-left: 0
           height: fit-content

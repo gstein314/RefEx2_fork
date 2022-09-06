@@ -31,6 +31,7 @@
             >
               <a
                 v-if="filter.column === 'symbol'"
+                class="icon_on_left"
                 @click="
                   moveToProjectPage(result['ncbiGeneId' || 'ensemblGeneId'])
                 "
@@ -40,6 +41,7 @@
               </a>
               <a
                 v-else-if="filter.column === 'Description'"
+                class="icon_on_left"
                 @click="moveToProjectPage(result['RefexSampleId'])"
               >
                 <font-awesome-icon icon="flask" />
@@ -306,7 +308,7 @@
 </script>
 <style lang="sass" scoped>
   .table-wrapper
-    margin: 0 45px
+    margin: 0 20px
     table
       white-space: nowrap
       +table
@@ -314,7 +316,7 @@
         > tr
           > td
             > a
-              +text_with_icon
+              +link_with_icon
             > .filter_column
               cursor: pointer
             > span

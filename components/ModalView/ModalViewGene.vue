@@ -79,95 +79,23 @@
           </div>
           <p class="title">Gene Ontology</p>
           <p class="sub_title">Biological Process</p>
-          <div v-if="data.go">
-            <p v-if="Array.isArray(data.go['BP'])" class="contents">
-              <span v-for="(bp, index) in data.go['BP']" :key="index">
-                <a
-                  :href="`http://amigo.geneontology.org/amigo/term/${bp.id}`"
-                  target="_blank"
-                  >{{
-                    `${bp.id}: ${bp.term}: ${bp.evidence}: ${bp.qualifier}`
-                  }}</a
-                >
-                <span v-if="index !== data.go['BP'].length - 1" class="comma"
-                  >,</span
-                >
-                <br />
-              </span>
-            </p>
-            <p v-else-if="data.go['BP']" class="contents">
-              <span>
-                <a
-                  :href="`http://amigo.geneontology.org/amigo/term/${data.go['BP'].id}`"
-                  target="_blank"
-                  >{{
-                    `${data.go['BP'].id}: ${data.go['BP'].term}: ${data.go['BP'].evidence}: ${data.go['BP'].qualifier}`
-                  }}</a
-                >
-                <br />
-              </span>
-            </p>
-          </div>
+          <TableGeneOntology
+            :data-source="data.go"
+            :type-upper="'BP'"
+            :type-lower="'bp'"
+          ></TableGeneOntology>
           <p class="sub_title">Cellular Component</p>
-          <div v-if="data.go">
-            <p v-if="Array.isArray(data.go['CC'])" class="contents">
-              <span v-for="(cc, index) in data.go['CC']" :key="index">
-                <a
-                  :href="`http://amigo.geneontology.org/amigo/term/${cc.id}`"
-                  target="_blank"
-                  >{{
-                    `${cc.id}: ${cc.term}: ${cc.evidence}: ${cc.qualifier}`
-                  }}</a
-                >
-                <span v-if="index !== data.go['CC'].length - 1" class="comma"
-                  >,</span
-                >
-                <br />
-              </span>
-            </p>
-            <p v-else-if="data.go['CC']" class="contents">
-              <span>
-                <a
-                  :href="`http://amigo.geneontology.org/amigo/term/${data.go['CC'].id}`"
-                  target="_blank"
-                  >{{
-                    `${data.go['CC'].id}: ${data.go['CC'].term}: ${data.go['CC'].evidence}: ${data.go['CC'].qualifier}`
-                  }}</a
-                >
-                <br />
-              </span>
-            </p>
-          </div>
+          <TableGeneOntology
+            :data-source="data.go"
+            :type-upper="'CC'"
+            :type-lower="'cc'"
+          ></TableGeneOntology>
           <p class="sub_title">Molecular Function</p>
-          <div v-if="data.go">
-            <p v-if="Array.isArray(data.go['MF'])" class="contents">
-              <span v-for="(mf, index) in data.go['MF']" :key="index">
-                <a
-                  :href="`http://amigo.geneontology.org/amigo/term/${mf.id}`"
-                  target="_blank"
-                  >{{
-                    `${mf.id}: ${mf.term}: ${mf.evidence}: ${mf.qualifier}`
-                  }}</a
-                >
-                <span v-if="index !== data.go['MF'].length - 1" class="comma"
-                  >,</span
-                >
-                <br />
-              </span>
-            </p>
-            <p v-else-if="data.go['MF']" class="contents">
-              <span>
-                <a
-                  :href="`http://amigo.geneontology.org/amigo/term/${data.go['MF'].id}`"
-                  target="_blank"
-                  >{{
-                    `${data.go['MF'].id}: ${data.go['MF'].term}: ${data.go['MF'].evidence}: ${data.go['MF'].qualifier}`
-                  }}</a
-                >
-                <br />
-              </span>
-            </p>
-          </div>
+          <TableGeneOntology
+            :data-source="data.go"
+            :type-upper="'MF'"
+            :type-lower="'mf'"
+          ></TableGeneOntology>
         </div>
       </div>
       <p v-else class="loading">Loading...</p>
@@ -177,11 +105,13 @@
 
 <script>
   import ModalView from '~/components/ModalView/ModalView.vue';
+  import TableGeneOntology from '~/components/results/TableGeneOntology.vue';
   import { mapGetters, mapMutations } from 'vuex';
 
   export default {
     components: {
       ModalView,
+      TableGeneOntology,
     },
     data() {
       return {
@@ -217,16 +147,24 @@
         setGeneModal: 'set_gene_modal',
         setAlertModal: 'set_alert_modal',
       }),
+      isArrayExpression(type) {
+        return `${type.id}: ${type.term}: ${type.evidence}: ${type.qualifier}`;
+      },
+      notArrayExpression(type) {
+        return `${this.data.go[type].id}: ${this.data.go[type].term}: ${this.data.go[type].evidence}: ${this.data.go[type].qualifier}`;
+      },
     },
   };
 </script>
 
 <style lang="sass">
+  a
+    color: $MAIN_COLOR
   .modal_wrapper
     +modal
     padding: 60px 0
     width: 60vw
-    max-width: 800px
+    max-width: 1000px
     min-width: 610px
     > .gene_detail
       > .gene_name
