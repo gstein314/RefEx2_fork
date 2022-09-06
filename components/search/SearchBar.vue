@@ -114,11 +114,6 @@
               )
             "
           ></span>
-          <font-awesome-icon
-            icon="external-link-alt"
-            class="external-link-alt"
-            style="font-size: 12px"
-          />
         </div>
         <div
           v-if="isLoading"

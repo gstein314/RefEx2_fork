@@ -91,6 +91,9 @@
 <style lang="sass" scoped>
   .display_settings_modal
     width: 400px
+    > .modal_title
+      > svg
+        margin-right: 4px
     > .display_checkboxes
       column-count: 2
       > div
