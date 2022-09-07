@@ -216,11 +216,15 @@
     },
     mounted() {
       if (this.isError) return;
+      this.checkSampleAlias();
       this.$store.commit('set_project_filters', this.filters);
       this.$store.commit('set_project_results', this.resultsWithMedianData);
     },
     updated() {
       this.heightChartWrapper = this.$refs.chartWrapper.clientHeight;
+    },
+    destroyed() {
+      this.setSampleAlias();
     },
     methods: {
       ...mapMutations({
@@ -245,6 +249,24 @@
         requestAnimationFrame(
           () => (this.heightChartWrapper = this.$refs.chartWrapper.clientHeight)
         );
+      },
+      checkSampleAlias() {
+        if (this.filterType === 'sample') {
+          this.filters.forEach(function (filter) {
+            if (filter.column === 'alias') {
+              filter.is_displayed = false;
+            }
+          });
+        }
+      },
+      setSampleAlias() {
+        if (this.filterType === 'sample') {
+          this.filters.forEach(function (filter) {
+            if (filter.column === 'alias') {
+              filter.is_displayed = true;
+            }
+          });
+        }
       },
     },
   };

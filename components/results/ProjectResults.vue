@@ -84,15 +84,33 @@
                   </span>
                 </span>
               </template>
+              <template v-else-if="hasStringQuotes(result[filter.column])">
+                {{ result[filter.column].replaceAll('"', '') }}
+              </template>
+              <a
+                v-else-if="filter.column === 'ncbiGeneId'"
+                class="icon_on_right"
+                target="_blank"
+                :href="datasetInfo.url_prefix + result.ncbiGeneId"
+                ><font-awesome-icon icon="external-link-alt" class="smaller" />
+                {{ result[filter.column] }}
+              </a>
+              <a
+                v-else-if="filter.column === 'ensemblGeneId'"
+                class="icon_on_right"
+                target="_blank"
+                :href="datasetInfo.url_prefix + result.ensemblGeneId"
+                ><font-awesome-icon icon="external-link-alt" class="smaller" />
+                {{ result[filter.column] }}
+              </a>
               <template v-else>
+                {{ result[filter.column] }}
                 <span
-                  class="filter_column"
                   @click="
                     setFilterSearchValue(result[filter.column]);
                     setFilterModal(filter.column);
                   "
-                  >{{ result[filter.column]
-                  }}<font-awesome-icon icon="plus-circle"
+                  ><font-awesome-icon icon="plus-circle"
                 /></span>
               </template>
             </td>
@@ -106,6 +124,7 @@
 <script>
   import TableHeader from '~/components/results/TableHeader.vue';
   import { mapGetters, mapMutations } from 'vuex';
+  import specieSets from '~/refex-sample/datasets.json';
   const inRange = (x, [min, max]) => {
     return typeof x !== 'number' || (x - min) * (x - max) <= 0;
   };
@@ -160,6 +179,8 @@
         routeToOtherProjectPage: 'route_to_other_project_page',
         getFilterSearchValue: 'get_filter_search_value',
         filterObj: 'active_filter_modal',
+        activeDataset: 'active_dataset',
+        activeSpecie: 'active_specie',
       }),
 
       filteredData() {
@@ -244,12 +265,19 @@
         );
         return pagesNumber;
       },
+      datasetInfo() {
+        return this.activeDataset['gene'];
+      },
     },
     created() {
       this.setPageType('project');
     },
     mounted() {
       this.$emit('updateSort', this.sort);
+      this.setDataset();
+    },
+    updated() {
+      this.setProjectPagesNumber(this.pagesNumber);
     },
     updated() {
       this.setProjectPagesNumber(this.pagesNumber);
@@ -261,6 +289,7 @@
         setPageType: 'set_page_type',
         setFilterSearchValue: 'set_filter_search_value',
         setFilterModal: 'set_filter_modal',
+        setActiveDataset: 'set_active_dataset',
         setProjectPagesNumber: 'set_project_pages_number',
       }),
       moveToProjectPage(route) {
@@ -304,6 +333,16 @@
         const isMatch = reg.test(fullText);
         if (inputText.length > 0 && isMatch) return fullText.replaceAll(reg);
       },
+      setDataset() {
+        if (this.dataset === 'humanFantom5') {
+          this.setActiveDataset(specieSets[0].datasets[0]);
+        } else if (this.dataset === 'gtexV8') {
+          this.setActiveDataset(specieSets[0].datasets[1]);
+        }
+      },
+      hasStringQuotes(str) {
+        return str?.startsWith('"') && str?.endsWith('"');
+      },
     },
   };
 </script>
@@ -321,8 +360,12 @@
             > .filter_column
               cursor: pointer
             > span
+              position: relative
               > svg
+                top: 3px
+                position: absolute
                 padding-left: 4px
                 font-size: 11px
-                vertical-align: middle
+                color: $MAIN_COLOR
+                cursor: pointer
 </style>
