@@ -100,9 +100,12 @@
           border-top-right-radius: 10px
           opacity: 1
           > .specie_wrapper
+            > p
+              font-weight: bold
             > form
               > .specie_select
                 color: $WHITE
+                font-weight: bold
         &.active:hover
           > .specie_wrapper
             > form
