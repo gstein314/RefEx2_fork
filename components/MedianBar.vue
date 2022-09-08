@@ -8,68 +8,50 @@
       :style="`width: ${(medianInfo[item.id] * 230) / 16}px;`"
     ></div>
     <div class="tooltip" :style="`left: ${maxWidth + 30}px`">
-      <span class="title">Expression(log2(TPM+1))</span>
-      <span
-        v-for="(item, itemIndex) of items"
-        :key="itemIndex"
-        class="value single_item align_right"
-        :class="`item_${itemIndex + 1}`"
-      >
-        {{
-          tooltipNumberDisplay(resultsStat.combinedFirstQuartileData[item.id])
-        }}
-        {{ tooltipNumberDisplay(resultsStat.combinedMedianData[item.id]) }}
-        {{
-          tooltipNumberDisplay(resultsStat.combinedThirdQuartileData[item.id])
-        }}
-        {{ tooltipNumberDisplay(resultsStat.combinedSdData[item.id]) }}
-        {{ resultsStat.combinedNumberOfSamplesData[item.id] }}
-      </span>
-      <table>
-        <col style="width: 15%" />
-        <col style="width: 15%" />
-        <col style="width: 15%" />
-        <col style="width: 15%" />
-        <col style="width: 30%" />
-        <thead>
-          <tr>
-            <th>1<sup>st</sup>Qu</th>
-            <th>Median</th>
-            <th>3<sup>rd</sup>Qu</th>
-            <th>SD</th>
-            <th>No. of Samples</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(item, itemIndex) of items" :key="itemIndex">
-            <td>
-              {{
-                tooltipNumberDisplay(
-                  resultsStat.combinedFirstQuartileData[item.id]
-                )
-              }}
-            </td>
-            <td>
-              {{
-                tooltipNumberDisplay(resultsStat.combinedMedianData[item.id])
-              }}
-            </td>
-            <td>
-              {{
-                tooltipNumberDisplay(
-                  resultsStat.combinedThirdQuartileData[item.id]
-                )
-              }}
-            </td>
-            <td>
-              {{ tooltipNumberDisplay(resultsStat.combinedSdData[item.id]) }}
-            </td>
-            <td>
-              {{ resultsStat.combinedNumberOfSamplesData[item.id] }}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="title">Expression(log2(TPM+1))</div>
+      <div class="header"></div>
+      <div class="header">1<sup>st</sup>Qu</div>
+      <div class="header">Median</div>
+      <div class="header">3<sup>rd</sup>Qu</div>
+      <div class="header">SD</div>
+      <div class="header">No. of Samples</div>
+      <div class="dot">
+        <p
+          v-for="(item, itemIndex) of items"
+          :key="itemIndex"
+          class="single_item"
+          :class="`item_${itemIndex + 1}`"
+        ></p>
+      </div>
+      <div class="data">
+        <p v-for="(item, itemIndex) of items" :key="itemIndex">
+          {{
+            tooltipNumberDisplay(resultsStat.combinedFirstQuartileData[item.id])
+          }}
+        </p>
+      </div>
+      <div class="data bold">
+        <p v-for="(item, itemIndex) of items" :key="itemIndex">
+          {{ tooltipNumberDisplay(resultsStat.combinedMedianData[item.id]) }}
+        </p>
+      </div>
+      <div class="data">
+        <p v-for="(item, itemIndex) of items" :key="itemIndex">
+          {{
+            tooltipNumberDisplay(resultsStat.combinedThirdQuartileData[item.id])
+          }}
+        </p>
+      </div>
+      <div class="data">
+        <p v-for="(item, itemIndex) of items" :key="itemIndex">
+          {{ tooltipNumberDisplay(resultsStat.combinedSdData[item.id]) }}
+        </p>
+      </div>
+      <div class="data">
+        <p v-for="(item, itemIndex) of items" :key="itemIndex">
+          {{ resultsStat.combinedNumberOfSamplesData[item.id] }}
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -139,37 +121,34 @@
       box-shadow: 0 1px 4px rgba(62, 70, 82, .22)
       position: absolute
       z-index: $TOOLTIP_LAYER
-      > span
-        display: block
-        white-space: nowrap
-        &.title
-          font-size: 10px
-        &.value
-          font-weight: bold
-          position: relative
-          padding-left: 12px
-          line-height: 20px
-          display: flex
-          &:after
-            content: ''
-            width: 10px
-            height: 10px
-            border-radius: 100px
-            position: absolute
-            left: 0
-            top: 50%
-            transform: translateY(-50%)
-      span.align_right
-        text-align: right
-        width: 100%
-        margin-left: 10px
-      > table
-        width: 400px
-        text-align: center
+      min-width:300px
     &:hover
       > .tooltip
-        display: block
+        display: grid
+        grid-template-areas: 'top top top top top top' 'header header header header header header''dot data data data data data'
+        grid-template-columns: 1fr
+        grid-row-gap: 1px
+        grid-column-gap: 1rem
+        padding: 10px
         z-index: 100
+        > .title
+          grid-area: top
+          text-align: left
+          margin-bottom: 5px
+        & p
+          margin: 0.2rem 0
+        & .single_item:after
+          content: ''
+          width: 10px
+          height: 10px
+          border-radius: 50%
+          background-color: #00ff00
+          display: inline-block
+          margin: 0 10px
+        > .header, .bold
+          font-weight: bold
+        > div
+          text-align: center
     .single_item
       &.item_1
         &:after
