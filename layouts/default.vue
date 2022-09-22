@@ -12,7 +12,7 @@
     <header>
       <div class="nav_wrapper">
         <div class="title">
-          <p><em>Ref</em>erence <em>Ex</em>pression Dataset</p>
+          <p><em>Ref</em>erence <em>Ex</em>pression Dataset 2</p>
         </div>
         <h1 @click="$store.commit('set_active_filter', 'gene')">
           <nuxt-link to="/">
