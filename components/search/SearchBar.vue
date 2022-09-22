@@ -59,11 +59,6 @@
               )
             "
           ></span>
-          <font-awesome-icon
-            icon="external-link-alt"
-            class="external-link-alt"
-            style="font-size: 12px"
-          />
         </div>
         <div
           v-if="isLoading"
@@ -119,11 +114,6 @@
               )
             "
           ></span>
-          <font-awesome-icon
-            icon="external-link-alt"
-            class="external-link-alt"
-            style="font-size: 12px"
-          />
         </div>
         <div
           v-if="isLoading"
@@ -134,6 +124,7 @@
           <span>Loading...</span>
         </div>
       </vue-simple-suggest>
+      <div class="summary_check_wrapper"></div>
     </template>
     <ScreenerView>
       <component
@@ -342,7 +333,7 @@
   .vue-simple-suggest
       position: relative
   .text_search_area
-      width: 85%
+      width: 100%
       > h3
           display: flex
           gap: 0.5rem
@@ -389,11 +380,12 @@
       .vue-simple-suggest.designed .suggestions
           +suggestions
       > .summary_check_wrapper
+          min-height: 30px
           font-size: 14px
           font-weight: 100
           display: flex
           align-items: center
-          margin-top: 6px
+          margin: 3px 0
           opacity: 1
           transition: .3s
           > label

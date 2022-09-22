@@ -32,7 +32,6 @@
     padding: 10px 34px
     box-shadow: 0 1px 4px rgba(62, 70, 82, .22)
     border-radius: 3px
-    margin-top: 27px
     height: 42px
     overflow: hidden
     box-sizing: border-box

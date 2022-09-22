@@ -1,84 +1,92 @@
 <template>
   <div v-if="pagesList.length > 0" class="pagination_wrapper">
-    <ul>
-      <li
-        :class="{ arrows: true, disabled: currentPage === 1 }"
-        @click="handleChangePage(1)"
-      >
-        <font-awesome-icon icon="angle-double-left" class="angle-double-left" />
-      </li>
-      <li
-        :class="{ arrows: true, disabled: currentPage === 1 }"
-        @click="handleChangePage(currentPage - 1)"
-      >
-        <font-awesome-icon icon="angle-left" class="angle-left" />
-      </li>
-      <li v-if="isHiddenPagesLeft" class="dots">
-        <span>...</span>
-      </li>
+    <div class="wrapper_item_left"></div>
+    <div class="wrapper_item_middle">
+      <ul>
+        <li
+          :class="{ arrows: true, disabled: currentPage === 1 }"
+          @click="handleChangePage(1)"
+        >
+          <font-awesome-icon
+            icon="angle-double-left"
+            class="angle-double-left"
+          />
+        </li>
+        <li
+          :class="{ arrows: true, disabled: currentPage === 1 }"
+          @click="handleChangePage(currentPage - 1)"
+        >
+          <font-awesome-icon icon="angle-left" class="angle-left" />
+        </li>
+        <li v-if="isHiddenPagesLeft" class="dots">
+          <span>...</span>
+        </li>
 
-      <li
-        v-for="(pageNumber, i) in pagesNumbersShown"
-        :key="i"
-        :class="{ pagination_item: true, active: pageNumber === currentPage }"
-        @click="handleChangePage(pageNumber)"
-      >
-        <span> {{ pageNumber }}</span>
-      </li>
-      <li v-if="isHiddenPagesRight" class="dots">
-        <span>...</span>
-      </li>
-      <li
-        :class="{ arrows: true, disabled: currentPage === pagesNumber }"
-        @click="handleChangePage(currentPage + 1)"
-      >
-        <font-awesome-icon icon="angle-right" class="angle-right" />
-      </li>
-      <li
-        :class="{ arrows: true, disabled: currentPage === pagesNumber }"
-        @click="handleChangePage(pagesNumber)"
-      >
-        <font-awesome-icon
-          icon="angle-double-right"
-          class="chevron-double-right"
-        />
-      </li>
-    </ul>
-    <div class="showing_page">
-      <div v-if="tableType === 'index'">
-        <b>{{ (1 + (currentPage - 1) * currentLimit).toLocaleString() }}</b>
-        -
-        <b>{{
-          currentPage * currentLimit > resultsNum
-            ? resultsNum.toLocaleString()
-            : (currentPage * currentLimit).toLocaleString()
-        }}</b>
-        of
-        {{ resultsNum.toLocaleString() }}
-      </div>
-      <div v-else-if="tableType === 'project'">
-        <b>{{ (1 + (currentPage - 1) * currentLimit).toLocaleString() }}</b>
-        -
-        <b>{{
-          currentPage * currentLimit > projectResults.length
-            ? projectResults.length.toLocaleString()
-            : (currentPage * currentLimit).toLocaleString()
-        }}</b>
-        of
-        {{ projectResults.length.toLocaleString() }}
-      </div>
-      <div class="display_pagination">
-        <label for="pagination">Show</label>
-        <select id="pagination" name="pagination" @change="setLimit">
-          <option
-            v-for="n in [10, 20, 50, 100]"
-            :key="`pagination-limit-${n}`"
-            :value="n"
-            :selected="n === currentLimit"
-          >
-            {{ n }}
-          </option>
-        </select>
+        <li
+          v-for="(pageNumber, i) in pagesNumbersShown"
+          :key="i"
+          :class="{ pagination_item: true, active: pageNumber === currentPage }"
+          @click="handleChangePage(pageNumber)"
+        >
+          <span> {{ pageNumber }}</span>
+        </li>
+        <li v-if="isHiddenPagesRight" class="dots">
+          <span>...</span>
+        </li>
+        <li
+          :class="{ arrows: true, disabled: currentPage === pagesNumber }"
+          @click="handleChangePage(currentPage + 1)"
+        >
+          <font-awesome-icon icon="angle-right" class="angle-right" />
+        </li>
+        <li
+          :class="{ arrows: true, disabled: currentPage === pagesNumber }"
+          @click="handleChangePage(pagesNumber)"
+        >
+          <font-awesome-icon
+            icon="angle-double-right"
+            class="chevron-double-right"
+          />
+        </li>
+      </ul>
+    </div>
+    <div class="wrapper_item_right">
+      <div class="showing_page">
+        <div v-if="tableType === 'index'">
+          <b>{{ (1 + (currentPage - 1) * currentLimit).toLocaleString() }}</b>
+          -
+          <b>{{
+            currentPage * currentLimit > resultsNum
+              ? resultsNum.toLocaleString()
+              : (currentPage * currentLimit).toLocaleString()
+          }}</b>
+          of
+          {{ resultsNum.toLocaleString() }}
+        </div>
+        <div v-else-if="tableType === 'project'">
+          <b>{{ (1 + (currentPage - 1) * currentLimit).toLocaleString() }}</b>
+          -
+          <b>{{
+            currentPage * currentLimit > projectResults.length
+              ? projectResults.length.toLocaleString()
+              : (currentPage * currentLimit).toLocaleString()
+          }}</b>
+          of
+          {{ projectResults.length.toLocaleString() }}
+        </div>
+        <div class="display_pagination">
+          <label for="pagination">Show</label>
+          <select id="pagination" name="pagination" @change="setLimit">
+            <option
+              v-for="n in [10, 20, 50, 100]"
+              :key="`pagination-limit-${n}`"
+              :value="n"
+              :selected="n === currentLimit"
+            >
+              {{ n }}
+            </option>
+          </select>
+        </div>
       </div>
     </div>
   </div>
@@ -203,60 +211,65 @@
   .pagination_wrapper
     display: flex
     align-items: center
-    width: calc(100vw - 110px)
-    > .showing_page
-      font-size: 14px
-      display: flex
-      gap: 10px
-      right: 0
-      align-items: center
+    justify-content: space-between
+    & .wrapper_item_left, .wrapper_item_middle, .wrapper_item_right
+      width: 100%
+    > .wrapper_item_left
+      display: block
+    > .wrapper_item_right
+      > .showing_page
+        justify-content: flex-end
+        font-size: 14px
+        display: flex
+        gap: 10px
+        align-items: center
     > .display_pagination
       margin-top: 1rem
-    >ul
-      padding: 0
-      display: flex
-      gap: 2px
-      flex-direction: row
-      align-items: baseline
-      justify-content: center
-      list-style: none
-      align-items: center
-      flex-grow: 1
-      li
-        user-select: none
-        >span
-          display: flex
-          align-items: center
-          justify-content: center
-          width: 25px
-          height: 25px
-        &.pagination_item
+    > .wrapper_item_middle
+      > ul
+        padding: 0
+        display: flex
+        gap: 2px
+        flex-direction: row
+        align-items: baseline
+        justify-content: center
+        list-style: none
+        align-items: center
+        li
+          user-select: none
           >span
-            border: 1px rgba($GRAY, 0.3) solid
-            border-radius: 3px
-            box-sizing: border-box
-            min-width: 25px
-            width: auto
-        &.arrows, &.pagination_item
-          cursor: pointer
-          position: relative
-          &.active
-            color: #fff
+            display: flex
+            align-items: center
+            justify-content: center
+            width: 25px
+            height: 25px
+          &.pagination_item
             >span
-              border: 1px $MAIN_COLOR solid
-              background-color: $MAIN_COLOR
-          &:hover
-            font-weight: bold
-        &.dots
-          >span
-            display: block
+              border: 1px rgba($GRAY, 0.3) solid
+              border-radius: 3px
+              box-sizing: border-box
+              min-width: 25px
+              width: auto
+          &.arrows, &.pagination_item
+            cursor: pointer
+            position: relative
+            &.active
+              color: #fff
+              >span
+                border: 1px $MAIN_COLOR solid
+                background-color: $MAIN_COLOR
+            &:hover
+              font-weight: bold
+          &.dots
+            >span
+              display: block
+              text-align: center
+          &.arrows
+            width: 1.5rem
+            color: $COLOR_1
             text-align: center
-        &.arrows
-          width: 1.5rem
-          color: $COLOR_1
-          text-align: center
-          font-size: 1rem
-          line-height: normal
+            font-size: 1rem
+            line-height: normal
   .disabled
     pointer-events: none
     opacity: 0.3
