@@ -45,5 +45,4 @@
 <style lang="sass" scoped>
   .comparison_btn
       +button
-      margin-left: 20px
 </style>

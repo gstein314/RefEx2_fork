@@ -247,6 +247,8 @@
       width: 100%
       align-items: center
       +sample_query
+      > h2
+        min-width: 190px
       > .display_settings_wrapper
         +display_settings_wrapper
       > button.show_all_btn

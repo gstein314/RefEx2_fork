@@ -67,7 +67,7 @@
       &::-webkit-scrollbar
         width: 15px
     .root
-      height: 100vh
+      height: calc(100vh - 24px)
       overflow: auto
     ul
       list-style: none
