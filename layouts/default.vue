@@ -12,7 +12,7 @@
     <header>
       <div class="nav_wrapper">
         <div class="title">
-          <p><em>Ref</em>erence <em>Ex</em>pression Dataset</p>
+          <p><em>Ref</em>erence <em>Ex</em>pression Dataset 2</p>
         </div>
         <h1 @click="$store.commit('set_active_filter', 'gene')">
           <nuxt-link to="/">
@@ -67,7 +67,7 @@
       &::-webkit-scrollbar
         width: 15px
     .root
-      height: 100vh
+      height: calc(100vh - 24px)
       overflow: auto
     ul
       list-style: none

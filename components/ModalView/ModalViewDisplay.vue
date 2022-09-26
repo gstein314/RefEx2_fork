@@ -17,12 +17,12 @@
             "
             :key="filterIndex"
           >
-            <input
-              :checked="value.is_displayed"
-              type="checkbox"
-              @click="toggleDisplayOfFilter(value.column)"
-            />
             <label :for="value.innerKey">
+              <input
+                :checked="value.is_displayed"
+                type="checkbox"
+                @click="toggleDisplayOfFilter(value.column)"
+              />
               {{ value.label }}
             </label>
           </div>
@@ -91,6 +91,9 @@
 <style lang="sass" scoped>
   .display_settings_modal
     width: 400px
+    > .modal_title
+      > svg
+        margin-right: 4px
     > .display_checkboxes
       column-count: 2
       > div
@@ -99,4 +102,6 @@
         line-height: 26px
         > label
           font-size: 14px
+          > input
+            vertical-align: -0.1rem
 </style>

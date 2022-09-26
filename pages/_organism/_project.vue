@@ -56,6 +56,11 @@
       :selected-item="selectedId"
       @updateSort="updateResultSort"
     />
+    <ResultsPagination
+      :pages-number="$store.state.project_pages_number"
+      table-type="project"
+      class="pagination"
+    />
   </div>
 </template>
 
@@ -68,10 +73,11 @@
   import ModalViewDisplay from '~/components/ModalView/ModalViewDisplay.vue';
   import ModalViewFilter from '~/components/ModalView/ModalViewFilter.vue';
   import ProjectResults from '~/components/results/ProjectResults.vue';
+  import ResultsPagination from '~/components/results/ResultsPagination.vue';
 
   const logMedianFilter = {
     column: 'LogMedian',
-    label: 'MEDIAN [LOG2(TPM+1)]',
+    label: 'log2(TPM+1)',
     is_displayed: true,
     filterModal: '',
   };
@@ -91,6 +97,7 @@
       ModalViewDisplay,
       ModalViewFilter,
       ProjectResults,
+      ResultsPagination,
     },
     beforeRouteUpdate(to, from, next) {
       this.$forceUpdate();
@@ -114,7 +121,11 @@
           return {
             id,
             info: data[`${type}_info`],
+            firstQuartileData: data.refex_info?.map(x => x.Log1stQu),
             medianData: data.refex_info?.map(x => x.LogMedian),
+            thirdQuartileData: data.refex_info?.map(x => x.Log3rdQu),
+            sdData: data.refex_info?.map(x => x.LogSd),
+            numberOfSamplesData: data.refex_info?.map(x => x.NumberOfSamples),
           };
         })
       );
@@ -178,12 +189,29 @@
         return this.results.map((result, index) => {
           return {
             ...result,
+            combinedFirstQuartileData: this.firstQuartileDataBySymbol[index],
             combinedMedianData: this.medianDataBySymbol[index],
+            combinedThirdQuartileData: this.thirdQuartileDataBySymbol[index],
+            combinedSdData: this.sdDataBySymbol[index],
+            combinedNumberOfSamplesData:
+              this.numberOfSamplesDataBySymbol[index],
           };
         });
       },
       sampleIdKey() {
         return this.filterType === 'gene' ? 'sample_id' : 'id';
+      },
+      firstQuartileDataBySymbol() {
+        return this.results
+          .map(x => x.Log1stQu)
+          .reduce((acc, _curr, resultIndex) => {
+            const itemToPush = this.items.reduce((obj, item) => {
+              obj[item.id] = +item.firstQuartileData[resultIndex];
+              return obj;
+            }, {});
+            acc.push(itemToPush);
+            return acc;
+          }, []);
       },
       medianDataBySymbol() {
         return this.results
@@ -191,6 +219,42 @@
           .reduce((acc, _curr, resultIndex) => {
             const itemToPush = this.items.reduce((obj, item) => {
               obj[item.id] = +item.medianData[resultIndex];
+              return obj;
+            }, {});
+            acc.push(itemToPush);
+            return acc;
+          }, []);
+      },
+      thirdQuartileDataBySymbol() {
+        return this.results
+          .map(x => x.Log3rdQu)
+          .reduce((acc, _curr, resultIndex) => {
+            const itemToPush = this.items.reduce((obj, item) => {
+              obj[item.id] = +item.thirdQuartileData[resultIndex];
+              return obj;
+            }, {});
+            acc.push(itemToPush);
+            return acc;
+          }, []);
+      },
+      sdDataBySymbol() {
+        return this.results
+          .map(x => x.LogSd)
+          .reduce((acc, _curr, resultIndex) => {
+            const itemToPush = this.items.reduce((obj, item) => {
+              obj[item.id] = +item.sdData[resultIndex];
+              return obj;
+            }, {});
+            acc.push(itemToPush);
+            return acc;
+          }, []);
+      },
+      numberOfSamplesDataBySymbol() {
+        return this.results
+          .map(x => x.NumberOfSamples)
+          .reduce((acc, _curr, resultIndex) => {
+            const itemToPush = this.items.reduce((obj, item) => {
+              obj[item.id] = +item.numberOfSamplesData[resultIndex];
               return obj;
             }, {});
             acc.push(itemToPush);
@@ -209,11 +273,15 @@
     },
     mounted() {
       if (this.isError) return;
+      this.checkSampleAlias();
       this.$store.commit('set_project_filters', this.filters);
       this.$store.commit('set_project_results', this.resultsWithMedianData);
     },
     updated() {
       this.heightChartWrapper = this.$refs.chartWrapper.clientHeight;
+    },
+    destroyed() {
+      this.setSampleAlias();
     },
     methods: {
       ...mapMutations({
@@ -238,6 +306,24 @@
         requestAnimationFrame(
           () => (this.heightChartWrapper = this.$refs.chartWrapper.clientHeight)
         );
+      },
+      checkSampleAlias() {
+        if (this.filterType === 'sample') {
+          this.filters.forEach(function (filter) {
+            if (filter.column === 'alias') {
+              filter.is_displayed = false;
+            }
+          });
+        }
+      },
+      setSampleAlias() {
+        if (this.filterType === 'sample') {
+          this.filters.forEach(function (filter) {
+            if (filter.column === 'alias') {
+              filter.is_displayed = true;
+            }
+          });
+        }
       },
     },
   };
@@ -272,12 +358,12 @@
       z-index: 1
       > .content
         gap: 20px
-        padding: 10px 15px 10px 60px
+        padding: 10px 20px
         display: grid
         min-width: fit-content
         grid-template-columns: 1fr auto
         grid-template-rows: auto auto
-        width: calc(100vw - 130px)
+        width: 100%
         > .comparison_btn
           margin-left: 0
           height: fit-content
@@ -301,4 +387,14 @@
         > .display_settings
           +display_settings
           place-self: flex-end
+    .pagination
+      display: flex
+      position: sticky
+      left: 0
+      min-width: calc(100vw - 55px)
+      max-width: fit-content
+      position: sticky
+      background-color: white
+      top: 0
+      padding: $PADDING_WRAPPER
 </style>

@@ -27,6 +27,9 @@
         return this.$store.state.active_filter;
       },
     },
+    beforeCreate() {
+      this.$store.commit('set_active_filter', 'gene');
+    },
   };
 </script>
 <style lang="sass" scoped>

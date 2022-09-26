@@ -31,6 +31,7 @@
             >
               <a
                 v-if="filter.column === 'symbol'"
+                class="icon_on_left"
                 @click="
                   moveToProjectPage(result['ncbiGeneId' || 'ensemblGeneId'])
                 "
@@ -40,6 +41,7 @@
               </a>
               <a
                 v-else-if="filter.column === 'Description'"
+                class="icon_on_left"
                 @click="moveToProjectPage(result['RefexSampleId'])"
               >
                 <font-awesome-icon icon="flask" />
@@ -49,6 +51,7 @@
                 v-else-if="filter.column === 'LogMedian'"
                 :items="items"
                 :median-info="result.combinedMedianData"
+                :results-stat="result"
               />
               <font-awesome-icon
                 v-else-if="filter.column === 'annotation'"
@@ -82,15 +85,33 @@
                   </span>
                 </span>
               </template>
+              <template v-else-if="hasStringQuotes(result[filter.column])">
+                {{ result[filter.column].replaceAll('"', '') }}
+              </template>
+              <a
+                v-else-if="filter.column === 'ncbiGeneId'"
+                class="icon_on_right"
+                target="_blank"
+                :href="datasetInfo.url_prefix + result.ncbiGeneId"
+                ><font-awesome-icon icon="external-link-alt" class="smaller" />
+                {{ result[filter.column] }}
+              </a>
+              <a
+                v-else-if="filter.column === 'ensemblGeneId'"
+                class="icon_on_right"
+                target="_blank"
+                :href="datasetInfo.url_prefix + result.ensemblGeneId"
+                ><font-awesome-icon icon="external-link-alt" class="smaller" />
+                {{ result[filter.column] }}
+              </a>
               <template v-else>
+                {{ result[filter.column] }}
                 <span
-                  class="filter_column"
                   @click="
                     setFilterSearchValue(result[filter.column]);
                     setFilterModal(filter.column);
                   "
-                  >{{ result[filter.column]
-                  }}<font-awesome-icon icon="plus-circle"
+                  ><font-awesome-icon icon="plus-circle"
                 /></span>
               </template>
             </td>
@@ -98,15 +119,13 @@
         </tr>
       </tbody>
     </table>
-    <ResultsPagination :pages-number="pagesNumber" />
   </section>
 </template>
 
 <script>
   import TableHeader from '~/components/results/TableHeader.vue';
   import { mapGetters, mapMutations } from 'vuex';
-  import ResultsPagination from '~/components/results/ResultsPagination.vue';
-
+  import specieSets from '~/refex-sample/datasets.json';
   const inRange = (x, [min, max]) => {
     return typeof x !== 'number' || (x - min) * (x - max) <= 0;
   };
@@ -120,7 +139,6 @@
   export default {
     components: {
       TableHeader,
-      ResultsPagination,
     },
     props: {
       selectedItem: {
@@ -162,6 +180,8 @@
         routeToOtherProjectPage: 'route_to_other_project_page',
         getFilterSearchValue: 'get_filter_search_value',
         filterObj: 'active_filter_modal',
+        activeDataset: 'active_dataset',
+        activeSpecie: 'active_specie',
       }),
 
       filteredData() {
@@ -241,9 +261,13 @@
         );
       },
       pagesNumber() {
-        return Math.ceil(
+        let pagesNumber = Math.ceil(
           this.filteredData.length / this.paginationObject.limit
         );
+        return pagesNumber;
+      },
+      datasetInfo() {
+        return this.activeDataset['gene'];
       },
     },
     created() {
@@ -251,6 +275,13 @@
     },
     mounted() {
       this.$emit('updateSort', this.sort);
+      this.setDataset();
+    },
+    updated() {
+      this.setProjectPagesNumber(this.pagesNumber);
+    },
+    updated() {
+      this.setProjectPagesNumber(this.pagesNumber);
     },
     methods: {
       ...mapMutations({
@@ -259,6 +290,8 @@
         setPageType: 'set_page_type',
         setFilterSearchValue: 'set_filter_search_value',
         setFilterModal: 'set_filter_modal',
+        setActiveDataset: 'set_active_dataset',
+        setProjectPagesNumber: 'set_project_pages_number',
       }),
       moveToProjectPage(route) {
         this.$nuxt.$loading.start();
@@ -301,12 +334,22 @@
         const isMatch = reg.test(fullText);
         if (inputText.length > 0 && isMatch) return fullText.replaceAll(reg);
       },
+      setDataset() {
+        if (this.dataset === 'humanFantom5') {
+          this.setActiveDataset(specieSets[0].datasets[0]);
+        } else if (this.dataset === 'gtexV8') {
+          this.setActiveDataset(specieSets[0].datasets[1]);
+        }
+      },
+      hasStringQuotes(str) {
+        return str?.startsWith('"') && str?.endsWith('"');
+      },
     },
   };
 </script>
 <style lang="sass" scoped>
   .table-wrapper
-    margin: 0 45px
+    margin: 0 20px
     table
       white-space: nowrap
       +table
@@ -314,12 +357,16 @@
         > tr
           > td
             > a
-              +text_with_icon
+              +link_with_icon
             > .filter_column
               cursor: pointer
             > span
+              position: relative
               > svg
+                top: 3px
+                position: absolute
                 padding-left: 4px
                 font-size: 11px
-                vertical-align: middle
+                color: $MAIN_COLOR
+                cursor: pointer
 </style>
