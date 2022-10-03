@@ -10,9 +10,11 @@
     <div class="tooltip" :style="`left: ${maxWidth + 30}px`">
       <div class="title">Expression(log2(TPM+1))</div>
       <div class="header"></div>
+      <div class="header">Min</div>
       <div class="header">1<sup>st</sup>Qu</div>
       <div class="header">Median</div>
       <div class="header">3<sup>rd</sup>Qu</div>
+      <div class="header">Max</div>
       <div class="header">SD</div>
       <div class="header">No. of Samples</div>
       <div class="dot">
@@ -22,6 +24,11 @@
           class="single_item"
           :class="`item_${itemIndex + 1}`"
         ></p>
+      </div>
+      <div class="data">
+        <p v-for="(item, itemIndex) of items" :key="itemIndex">
+          {{ tooltipNumberDisplay(resultsStat.combinedMinData[item.id]) }}
+        </p>
       </div>
       <div class="data">
         <p v-for="(item, itemIndex) of items" :key="itemIndex">
@@ -40,6 +47,11 @@
           {{
             tooltipNumberDisplay(resultsStat.combinedThirdQuartileData[item.id])
           }}
+        </p>
+      </div>
+      <div class="data">
+        <p v-for="(item, itemIndex) of items" :key="itemIndex">
+          {{ tooltipNumberDisplay(resultsStat.combinedMaxData[item.id]) }}
         </p>
       </div>
       <div class="data">
@@ -125,7 +137,7 @@
     &:hover
       > .tooltip
         display: grid
-        grid-template-areas: 'top top top top top top' 'header header header header header header''dot data data data data data'
+        grid-template-areas: 'top top top top top top top top' 'header header header header header header header header''dot data data data data data data data'
         grid-template-columns: 1fr
         grid-row-gap: 1px
         grid-column-gap: 1rem

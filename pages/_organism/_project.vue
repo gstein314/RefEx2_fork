@@ -122,6 +122,8 @@
             id,
             info: data[`${type}_info`],
             firstQuartileData: data.refex_info?.map(x => x.Log1stQu),
+            minData: data.refex_info?.map(x => x.LogMin),
+            maxData: data.refex_info?.map(x => x.LogMax),
             medianData: data.refex_info?.map(x => x.LogMedian),
             thirdQuartileData: data.refex_info?.map(x => x.Log3rdQu),
             sdData: data.refex_info?.map(x => x.LogSd),
@@ -195,6 +197,8 @@
             combinedSdData: this.sdDataBySymbol[index],
             combinedNumberOfSamplesData:
               this.numberOfSamplesDataBySymbol[index],
+            combinedMinData: this.minDataBySymbol[index],
+            combinedMaxData: this.maxDataBySymbol[index],
           };
         });
       },
@@ -255,6 +259,30 @@
           .reduce((acc, _curr, resultIndex) => {
             const itemToPush = this.items.reduce((obj, item) => {
               obj[item.id] = +item.numberOfSamplesData[resultIndex];
+              return obj;
+            }, {});
+            acc.push(itemToPush);
+            return acc;
+          }, []);
+      },
+      minDataBySymbol() {
+        return this.results
+          .map(x => x.min)
+          .reduce((acc, _curr, resultIndex) => {
+            const itemToPush = this.items.reduce((obj, item) => {
+              obj[item.id] = +item.minData[resultIndex];
+              return obj;
+            }, {});
+            acc.push(itemToPush);
+            return acc;
+          }, []);
+      },
+      maxDataBySymbol() {
+        return this.results
+          .map(x => x.max)
+          .reduce((acc, _curr, resultIndex) => {
+            const itemToPush = this.items.reduce((obj, item) => {
+              obj[item.id] = +item.maxData[resultIndex];
               return obj;
             }, {});
             acc.push(itemToPush);
