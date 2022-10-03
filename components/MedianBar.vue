@@ -138,9 +138,9 @@
       > .tooltip
         display: grid
         grid-template-areas: 'top top top top top top top top' 'header header header header header header header header''dot data data data data data data data'
-        grid-template-columns: 1fr
+        grid-auto-columns: 15px 50px 50px 50px 50px 50px 50px 100px
         grid-row-gap: 1px
-        grid-column-gap: 1rem
+        grid-column-gap: 0.2rem
         padding: 10px
         z-index: 100
         > .title
@@ -156,7 +156,7 @@
           border-radius: 50%
           background-color: #00ff00
           display: inline-block
-          margin: 0 10px
+          margin: 0 5px
         > .header, .bold
           font-weight: bold
         > div
