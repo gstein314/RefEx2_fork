@@ -185,7 +185,7 @@
       };
     },
     computed: {
-      resultsWithMedianData() {
+      resultsWithStatData() {
         return this.results.map((result, index) => {
           return {
             ...result,
@@ -275,7 +275,7 @@
       if (this.isError) return;
       this.checkSampleAlias();
       this.$store.commit('set_project_filters', this.filters);
-      this.$store.commit('set_project_results', this.resultsWithMedianData);
+      this.$store.commit('set_project_results', this.resultsWithStatData);
     },
     updated() {
       this.heightChartWrapper = this.$refs.chartWrapper.clientHeight;
