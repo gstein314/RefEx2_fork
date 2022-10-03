@@ -159,7 +159,7 @@ export const mutations = {
       if (Object.keys(state.project_filter_ranges).includes(column)) {
         paramsToBeMerged = numberFilterObj(state.project_filter_ranges[column]);
       } else if (entry.options) {
-        const options = [...entry.options];
+        const options = [...entry.options.sort((a, b) => a - b)];
         paramsToBeMerged = { filterModal: options, options };
       } else paramsToBeMerged = { filterModal: entry.options ? [] : '' };
       copy[index] = { ...entry, ...paramsToBeMerged };
