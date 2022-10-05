@@ -41,6 +41,9 @@
   ::v-deep
     .vue-tags-input
       max-width: initial !important
+      .ti-autocomplete
+        height: 240px
+        overflow-y: scroll
       .ti-input
         +text_input
         padding: 10px
