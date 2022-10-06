@@ -41,6 +41,20 @@
   ::v-deep
     .vue-tags-input
       max-width: initial !important
+      > .ti-autocomplete
+        max-height: 252px
+        overflow: auto
+        white-space: nowrap
+        resize: vertical
+        &[style*="height"]
+          max-height: unset
+        &::-webkit-scrollbar-track
+          background: $MAIN_COLOR_PALE
+        &::-webkit-scrollbar-thumb
+          all: initial
+          background: #7C7C7C3F
+        &::-webkit-scrollbar-thumb:hover
+          background: $GRAY
       .ti-input
         +text_input
         padding: 10px
