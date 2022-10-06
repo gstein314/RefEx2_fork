@@ -8,7 +8,7 @@
       :style="`width: ${(medianInfo[item.id] * 230) / 16}px;`"
     ></div>
     <div class="tooltip" :style="`left: ${maxWidth + 30}px`">
-      <div class="title">Expression(log2(TPM+1))</div>
+      <div class="title">Expression (log2(TPM+1))</div>
       <div class="header"></div>
       <div class="header">Min</div>
       <div class="header">1<sup>st</sup>Qu</div>
