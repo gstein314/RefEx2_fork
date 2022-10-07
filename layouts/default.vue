@@ -18,7 +18,7 @@
           <nuxt-link to="/">
             <img
               class="logotype"
-              src="~/assets/img/refex-logotype.png"
+              src="~/assets/img/refex-logotype.svg"
               alt="Refex"
             />
           </nuxt-link>
