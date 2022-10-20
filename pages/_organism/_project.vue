@@ -187,107 +187,21 @@
       };
     },
     computed: {
-      resultsWithStatData() {
+      resultsWithItemNum() {
         return this.results.map((result, index) => {
           return {
             ...result,
-            combinedFirstQuartileData: this.firstQuartileDataBySymbol[index],
-            combinedMedianData: this.medianDataBySymbol[index],
-            combinedThirdQuartileData: this.thirdQuartileDataBySymbol[index],
-            combinedSdData: this.sdDataBySymbol[index],
-            combinedNumberOfSamplesData:
-              this.numberOfSamplesDataBySymbol[index],
-            combinedMinData: this.minDataBySymbol[index],
-            combinedMaxData: this.maxDataBySymbol[index],
+            itemNum: index,
           };
         });
       },
+      projectItems() {
+        return {
+          items: this.items,
+        };
+      },
       sampleIdKey() {
         return this.filterType === 'gene' ? 'sample_id' : 'id';
-      },
-      firstQuartileDataBySymbol() {
-        return this.results
-          .map(x => x.Log1stQu)
-          .reduce((acc, _curr, resultIndex) => {
-            const itemToPush = this.items.reduce((obj, item) => {
-              obj[item.id] = +item.firstQuartileData[resultIndex];
-              return obj;
-            }, {});
-            acc.push(itemToPush);
-            return acc;
-          }, []);
-      },
-      medianDataBySymbol() {
-        return this.results
-          .map(x => x.LogMedian)
-          .reduce((acc, _curr, resultIndex) => {
-            const itemToPush = this.items.reduce((obj, item) => {
-              obj[item.id] = +item.medianData[resultIndex];
-              return obj;
-            }, {});
-            acc.push(itemToPush);
-            return acc;
-          }, []);
-      },
-      thirdQuartileDataBySymbol() {
-        return this.results
-          .map(x => x.Log3rdQu)
-          .reduce((acc, _curr, resultIndex) => {
-            const itemToPush = this.items.reduce((obj, item) => {
-              obj[item.id] = +item.thirdQuartileData[resultIndex];
-              return obj;
-            }, {});
-            acc.push(itemToPush);
-            return acc;
-          }, []);
-      },
-      sdDataBySymbol() {
-        return this.results
-          .map(x => x.LogSd)
-          .reduce((acc, _curr, resultIndex) => {
-            const itemToPush = this.items.reduce((obj, item) => {
-              obj[item.id] = +item.sdData[resultIndex];
-              return obj;
-            }, {});
-            acc.push(itemToPush);
-            return acc;
-          }, []);
-      },
-      numberOfSamplesDataBySymbol() {
-        return this.results
-          .map(x => x.NumberOfSamples)
-          .reduce((acc, _curr, resultIndex) => {
-            const itemToPush = this.items.reduce((obj, item) => {
-              obj[item.id] = +item.numberOfSamplesData[resultIndex];
-              return obj;
-            }, {});
-            acc.push(itemToPush);
-            return acc;
-          }, []);
-      },
-      minDataBySymbol() {
-        return this.results
-          .map(x => x.min)
-          .reduce((acc, _curr, resultIndex) => {
-            const itemToPush = this.items.reduce((obj, item) => {
-              obj[item.id] = +item.minData[resultIndex];
-              return obj;
-            }, {});
-            acc.push(itemToPush);
-            return acc;
-          }, []);
-      },
-      maxDataBySymbol() {
-        return this.results
-          .map(x => x.max)
-          .reduce((acc, _curr, resultIndex) => {
-            const itemToPush = this.items.reduce((obj, item) => {
-              obj[item.id] = +item.maxData[resultIndex];
-              return obj;
-            }, {});
-            acc.push(itemToPush);
-            return acc;
-          }, []);
       },
       mainItem() {
         return this.items[0] || {};
@@ -299,11 +213,14 @@
         return this.items.find(item => item.id === this.selectedId);
       },
     },
+    created() {
+      this.$store.commit('set_project_items', this.projectItems);
+    },
     mounted() {
       if (this.isError) return;
       this.checkSampleAlias();
       this.$store.commit('set_project_filters', this.filters);
-      this.$store.commit('set_project_results', this.resultsWithStatData);
+      this.$store.commit('set_project_results', this.resultsWithItemNum);
     },
     updated() {
       this.heightChartWrapper = this.$refs.chartWrapper.clientHeight;

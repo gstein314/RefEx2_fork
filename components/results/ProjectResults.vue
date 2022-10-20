@@ -70,8 +70,7 @@
               <MedianBar
                 v-else-if="filter.column === 'LogMedian'"
                 :items="items"
-                :median-info="result.combinedMedianData"
-                :results-stat="result"
+                :stat-info="combinedData(items, result.itemNum)"
               />
               <font-awesome-icon
                 v-else-if="filter.column === 'annotation'"
@@ -199,6 +198,7 @@
     computed: {
       ...mapGetters({
         results: 'get_project_results',
+        projectItems: 'get_project_items',
         paginationObject: 'get_project_pagination',
         filters: 'project_filters',
         geneSummarySource: 'gene_summary_source',
@@ -245,9 +245,6 @@
     updated() {
       this.setProjectPagesNumber(this.pagesNumber);
     },
-    updated() {
-      this.setProjectPagesNumber(this.pagesNumber);
-    },
     methods: {
       ...mapMutations({
         setGeneModal: 'set_gene_modal',
@@ -258,6 +255,44 @@
         setActiveDataset: 'set_active_dataset',
         setProjectPagesNumber: 'set_project_pages_number',
       }),
+      combinedData(items, itemNum) {
+        const combinedStatData = {};
+        let tmp = {
+          firstQuartileData: {},
+          minData: {},
+          maxData: {},
+          medianData: {},
+          thirdQuartileData: {},
+          sdData: {},
+          numberOfSamplesData: {},
+        };
+        const projectItems = this.projectItems.items;
+        const ids = [];
+        items.forEach(item => ids.push(item.id));
+        for (let i = 0; i < items.length; i++) {
+          tmp['firstQuartileData'][ids[i]] =
+            projectItems[i].firstQuartileData[itemNum];
+          tmp['minData'][ids[i]] = projectItems[i].minData[itemNum];
+          tmp['maxData'][ids[i]] = projectItems[i].maxData[itemNum];
+          tmp['medianData'][ids[i]] = projectItems[i].medianData[itemNum];
+          tmp['thirdQuartileData'][ids[i]] =
+            projectItems[i].thirdQuartileData[itemNum];
+          tmp['sdData'][ids[i]] = projectItems[i].sdData[itemNum];
+          tmp['numberOfSamplesData'][ids[i]] =
+            projectItems[i].numberOfSamplesData[itemNum];
+          if (i === items.length - 1) {
+            combinedStatData['firstQuartileData'] = tmp['firstQuartileData'];
+            combinedStatData['minData'] = tmp['minData'];
+            combinedStatData['maxData'] = tmp['maxData'];
+            combinedStatData['medianData'] = tmp['medianData'];
+            combinedStatData['thirdQuartileData'] = tmp['thirdQuartileData'];
+            combinedStatData['sdData'] = tmp['sdData'];
+            combinedStatData['numberOfSamplesData'] =
+              tmp['numberOfSamplesData'];
+          }
+        }
+        return combinedStatData;
+      },
       moveToProjectPage(route) {
         this.$nuxt.$loading.start();
         window.location.href = this.routeToOtherProjectPage(route);
