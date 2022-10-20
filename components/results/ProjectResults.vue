@@ -1,5 +1,25 @@
 <template>
   <section class="table-wrapper">
+    <label for="cars">Primary Sort:</label>
+    <select v-model="primarySort" id="columns" name="columns">
+      <option value="Description">Description</option>
+      <option value="LogMedian">LogMedian</option>
+      <option value="NumberOfSamples">NumberOfSamples</option>
+    </select>
+    <select v-model="primaryOrder" id="columns" name="columns">
+      <option value="asc">Ascending</option>
+      <option value="desc">Descending</option>
+    </select>
+    <label for="cars">Secondary Sort:</label>
+    <select v-model="secondarySort" id="columns" name="columns">
+      <option value="Description">Description</option>
+      <option value="LogMedian">LogMedian</option>
+      <option value="NumberOfSamples">NumberOfSamples</option>
+    </select>
+    <select v-model="secondaryOrder" id="columns" name="columns">
+      <option value="asc">Ascending</option>
+      <option value="desc">Descending</option>
+    </select>
     <table>
       <thead>
         <tr>
@@ -126,6 +146,7 @@
   import TableHeader from '~/components/results/TableHeader.vue';
   import { mapGetters, mapMutations } from 'vuex';
   import specieSets from '~/refex-sample/datasets.json';
+  import _ from 'lodash';
   const inRange = (x, [min, max]) => {
     return typeof x !== 'number' || (x - min) * (x - max) <= 0;
   };
@@ -168,6 +189,10 @@
           key: 'LogMedian',
           order: 'down',
         },
+        primarySort: '',
+        secondarySort: '',
+        primaryOrder: '',
+        secondaryOrder: '',
       };
     },
 
@@ -186,73 +211,8 @@
 
       filteredData() {
         const copy = [...this.results];
-        return copy
-          .filter(result => {
-            let isFiltered = false;
-            for (const filter of this.filters) {
-              const key = filter.column;
-
-              if (!filter.is_displayed) continue;
-              // options filter
-              else if (filter.options) {
-                if (!filter.filterModal.includes(result[key]))
-                  isFiltered = true;
-              }
-              // number filter
-              else if (
-                typeof filter.filterModal === 'number' ||
-                Array.isArray(filter.filterModal)
-              ) {
-                // checks if all values are in range. Creates a list in case of Age due to multiple values in string form
-                const n =
-                  key === 'Age'
-                    ? createNumberList(result[key])
-                    : key === 'LogMedian'
-                    ? Object.values(result.combinedMedianData)
-                    : [result[key]];
-                if (n.find(x => inRange(x, filter.filterModal)) === undefined)
-                  isFiltered = true;
-              }
-              // text filter
-              else if (filter.filterModal !== '' && !isFiltered) {
-                // excact match if filter is based on API options
-                const isMatch = this.textFilter(
-                  result[key],
-                  filter.filterModal
-                );
-                isFiltered = filter.filterModal !== '' && !isMatch;
-              }
-            }
-            return !isFiltered;
-          })
-          ?.sort((a, b) => {
-            const aVal =
-              this.sort.key === 'LogMedian'
-                ? a.combinedMedianData[this.selectedItem]
-                : a[this.sort.key];
-            const bVal =
-              this.sort.key === 'LogMedian'
-                ? b.combinedMedianData[this.selectedItem]
-                : b[this.sort.key];
-            switch (this.sort?.order) {
-              case 'up':
-                if (aVal < bVal) {
-                  return -1;
-                } else if (aVal > bVal) {
-                  return 1;
-                } else {
-                  return 0;
-                }
-              case 'down':
-                if (aVal > bVal) {
-                  return -1;
-                } else if (aVal < bVal) {
-                  return 1;
-                } else {
-                  return 0;
-                }
-            }
-          });
+        return _.orderBy(copy, [this.primarySort, this.secondarySort], [this.primaryOrder, this.secondaryOrder]
+        );
       },
       pageItems() {
         return this.filteredData.slice(
@@ -269,6 +229,11 @@
       datasetInfo() {
         return this.activeDataset['gene'];
       },
+      // test() {
+      //   const copy = [...this.results];
+      //   let secondSort = _.orderBy(this.filteredData, [this.primarySort, this.secondarySort], ['desc', 'desc']);
+      //   return console.log(secondSort);
+      // },
     },
     created() {
       this.setPageType('project');
