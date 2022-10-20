@@ -2,9 +2,9 @@
   <section class="table-wrapper">
     <label for="cars">Primary Sort:</label>
     <select v-model="primarySort" id="columns" name="columns">
-      <option value="Description">Description</option>
+      <option value="typeOfGene">typeOfGene</option>
+      <option value="chromosomePosition">chromosomePosition</option>
       <option value="LogMedian">LogMedian</option>
-      <option value="NumberOfSamples">NumberOfSamples</option>
     </select>
     <select v-model="primaryOrder" id="columns" name="columns">
       <option value="asc">Ascending</option>
@@ -12,9 +12,9 @@
     </select>
     <label for="cars">Secondary Sort:</label>
     <select v-model="secondarySort" id="columns" name="columns">
-      <option value="Description">Description</option>
+      <option value="typeOfGene">typeOfGene</option>
+      <option value="chromosomePosition">chromosomePosition</option>
       <option value="LogMedian">LogMedian</option>
-      <option value="NumberOfSamples">NumberOfSamples</option>
     </select>
     <select v-model="secondaryOrder" id="columns" name="columns">
       <option value="asc">Ascending</option>
@@ -210,9 +210,9 @@
       }),
 
       filteredData() {
-        const copy = [...this.results];
-        return _.orderBy(copy, [this.primarySort, this.secondarySort], [this.primaryOrder, this.secondaryOrder]
-        );
+        const copy = _.orderBy([...this.results], [this.primarySort, this.secondarySort], [this.primaryOrder, this.secondaryOrder]);
+        console.log(copy);
+        return copy;
       },
       pageItems() {
         return this.filteredData.slice(
