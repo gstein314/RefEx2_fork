@@ -126,6 +126,7 @@
   import TableHeader from '~/components/results/TableHeader.vue';
   import { mapGetters, mapMutations } from 'vuex';
   import specieSets from '~/refex-sample/datasets.json';
+  import _ from 'lodash';
   const inRange = (x, [min, max]) => {
     return typeof x !== 'number' || (x - min) * (x - max) <= 0;
   };
