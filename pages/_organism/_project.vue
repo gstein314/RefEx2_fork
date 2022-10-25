@@ -372,7 +372,7 @@
       width: 100%
       font-size: 20px
       margin: 40px
-      > .fa-exclamation-triangle
+      > .fa-triangle-exclamation
         margin-right: 6px
     .chart_wrapper
       display: flex
@@ -400,7 +400,7 @@
           display: flex
           align-items: flex-start
           margin: 0
-          > .fa-info-circle
+          > .fa-circle-info
             color: $MAIN_COLOR
             font-size: 24px
             margin-right: 6px

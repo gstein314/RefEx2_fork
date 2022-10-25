@@ -41,7 +41,7 @@
         font-size: 18px
         color: $ERROR_COLOR
         margin: 0
-        > .fa-exclamation-triangle
+        > .fa-triangle-exclamation
             font-size: 18px
             margin-right: 6px
             margin-top: 4px
