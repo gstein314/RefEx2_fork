@@ -183,77 +183,47 @@
         filterObj: 'active_filter_modal',
         activeDataset: 'active_dataset',
         activeSpecie: 'active_specie',
+        getProjectSortColumns: 'get_project_sort_columns',
       }),
 
       filteredData() {
         const copy = [...this.results];
-        return copy
-          .filter(result => {
-            let isFiltered = false;
-            for (const filter of this.filters) {
-              const key = filter.column;
+        const filtered = copy.filter(result => {
+          let isFiltered = false;
+          for (const filter of this.filters) {
+            const key = filter.column;
 
-              if (!filter.is_displayed) continue;
-              // options filter
-              else if (filter.options) {
-                if (!filter.filterModal.includes(result[key]))
-                  isFiltered = true;
-              }
-              // number filter
-              else if (
-                typeof filter.filterModal === 'number' ||
-                Array.isArray(filter.filterModal)
-              ) {
-                // checks if all values are in range. Creates a list in case of Age due to multiple values in string form
-                const n =
-                  key === 'Age'
-                    ? createNumberList(result[key])
-                    : key === 'LogMedian'
-                    ? Object.values(result.combinedMedianData)
-                    : [result[key]];
-                if (n.find(x => inRange(x, filter.filterModal)) === undefined)
-                  isFiltered = true;
-              }
-              // text filter
-              else if (filter.filterModal !== '' && !isFiltered) {
-                // excact match if filter is based on API options
-                const isMatch = this.textFilter(
-                  result[key],
-                  filter.filterModal
-                );
-                isFiltered = filter.filterModal !== '' && !isMatch;
-              }
+            if (!filter.is_displayed) continue;
+            // options filter
+            else if (filter.options) {
+              if (!filter.filterModal.includes(result[key])) isFiltered = true;
             }
-            return !isFiltered;
-          })
-          ?.sort((a, b) => {
-            const aVal =
-              this.sort.key === 'LogMedian'
-                ? a.combinedMedianData[this.selectedItem]
-                : a[this.sort.key];
-            const bVal =
-              this.sort.key === 'LogMedian'
-                ? b.combinedMedianData[this.selectedItem]
-                : b[this.sort.key];
-            switch (this.sort?.order) {
-              case 'up':
-                if (aVal < bVal) {
-                  return -1;
-                } else if (aVal > bVal) {
-                  return 1;
-                } else {
-                  return 0;
-                }
-              case 'down':
-                if (aVal > bVal) {
-                  return -1;
-                } else if (aVal < bVal) {
-                  return 1;
-                } else {
-                  return 0;
-                }
+            // number filter
+            else if (
+              typeof filter.filterModal === 'number' ||
+              Array.isArray(filter.filterModal)
+            ) {
+              // checks if all values are in range. Creates a list in case of Age due to multiple values in string form
+              const n =
+                key === 'Age'
+                  ? createNumberList(result[key])
+                  : key === 'LogMedian'
+                  ? Object.values(result.combinedMedianData)
+                  : [result[key]];
+              if (n.find(x => inRange(x, filter.filterModal)) === undefined)
+                isFiltered = true;
             }
-          });
+            // text filter
+            else if (filter.filterModal !== '' && !isFiltered) {
+              // excact match if filter is based on API options
+              const isMatch = this.textFilter(result[key], filter.filterModal);
+              isFiltered = filter.filterModal !== '' && !isMatch;
+            }
+          }
+          return !isFiltered;
+        });
+        const withSort = _.orderBy(filtered, ...this.getProjectSortColumns);
+        return withSort;
       },
       pageItems() {
         return this.filteredData.slice(
