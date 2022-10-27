@@ -26,6 +26,8 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
+
   export default {
     props: {
       items: {
@@ -36,21 +38,17 @@
         type: String,
         default: '',
       },
-      activeSort: {
-        type: Object,
-        default: () => ({
-          key: '',
-          order: 'down',
-        }),
-      },
       displayInfoButton: {
         type: Boolean,
         default: false,
       },
     },
     computed: {
+      ...mapGetters({
+        getProjectSortColumns: 'get_project_sort_columns',
+      }),
       isMedianSort() {
-        return this.activeSort.key === 'LogMedian';
+        return this.getProjectSortColumns[0].includes('LogMedian');
       },
       filterType() {
         return window.location.pathname.split('/')[1];

@@ -28,7 +28,6 @@
         <item-comparison
           :items="items"
           :active-id="selectedId"
-          :active-sort="resultsSort"
           :display-info-button="filterType === 'gene'"
           @select="updateSelectedItem"
           @showModal="setGeneModal"
@@ -54,7 +53,6 @@
       :gene-id-key="geneIdKey"
       :dataset="dataset"
       :selected-item="selectedId"
-      @updateSort="updateResultSort"
     />
     <ResultsPagination
       :pages-number="$store.state.project_pages_number"
@@ -177,10 +175,6 @@
     },
     data() {
       return {
-        resultsSort: {
-          key: '',
-          order: 'down',
-        },
         optionsStaticData: {},
         isDisplaySettingsOn: false,
         heightChartWrapper: 200,
@@ -314,19 +308,13 @@
     methods: {
       ...mapMutations({
         setGeneModal: 'set_gene_modal',
+        setProjectPrimarySort: 'set_project_primary_sort',
       }),
       toggleDisplaySettings() {
         this.isDisplaySettingsOn = !this.isDisplaySettingsOn;
       },
       toggleDisplayOfFilter(arr) {
         this.filters = arr;
-      },
-      updateResultSort(sort) {
-        // NOTE: this code is left commented out as it may be needed
-        // reset selectedItem if sort other then median is changed
-        // if (sort.key !== 'LogMedian')
-        //   this.selectedId = this.mainItem[this.sampleIdKey];
-        this.resultsSort = sort;
       },
       updateSelectedItem({ id, sortOrder = 'down' }) {
         this.selectedId = id;
