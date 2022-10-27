@@ -316,9 +316,9 @@
       toggleDisplayOfFilter(arr) {
         this.filters = arr;
       },
-      updateSelectedItem({ id, sortOrder = 'down' }) {
+      updateSelectedItem(id) {
+        this.setProjectPrimarySort(id);
         this.selectedId = id;
-        this.$refs.results.switchSort('LogMedian', sortOrder);
         requestAnimationFrame(
           () => (this.heightChartWrapper = this.$refs.chartWrapper.clientHeight)
         );

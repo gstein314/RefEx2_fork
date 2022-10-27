@@ -19,7 +19,7 @@
       <span>{{ item.info.symbol || item.info.Description }}</span>
       <font-awesome-icon
         v-if="activeId === item.id && isMedianSort"
-        :icon="`sort-amount-${activeSort.order}`"
+        :icon="sort-amount-up"
       />
     </li>
   </ul>
@@ -57,15 +57,7 @@
     methods: {
       // only switch to 'up' order if the same item is selected and it was already a median sort
       select(id) {
-        this.$emit('select', {
-          id,
-          sortOrder:
-            this.activeId === id &&
-            this.isMedianSort &&
-            this.activeSort.order === 'down'
-              ? 'up'
-              : 'down',
-        });
+        this.$emit('select', id);
       },
     },
   };

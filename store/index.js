@@ -242,19 +242,19 @@ export const mutations = {
       ordersArray.splice(columnIndex, 1);
     }
   },
-  set_project_primary_sort(state, column) {
+  set_project_primary_sort(state, id) {
     const copy = state.project_sort_columns;
     const columnsArray = copy[0];
     const ordersArray = copy[1];
-    let columnIndex = columnsArray.indexOf(column);
-    if (columnIndex === -1) {
-      columnsArray.unshift(column);
-      ordersArray.push('desc');
-    } else if (columnIndex !== -1 && ordersArray[columnIndex] === 'desc') {
-      ordersArray.splice(columnIndex, 1, 'asc');
+    const active = 'primarySortActive';
+    if (columnsArray[0] !== active) {
+      columnsArray.unshift(active, `combinedMedianData[${id}]`);
+      ordersArray.unshift(active, 'desc');
+    } else if (columnsArray[0] === active && ordersArray[1] === 'desc') {
+      ordersArray.splice(1, 1, 'asc');
     } else {
-      columnsArray.splice(columnIndex, 1);
-      ordersArray.splice(columnIndex, 1);
+      columnsArray.splice(0, 2);
+      ordersArray.splice(0, 2);
     }
   },
 };
