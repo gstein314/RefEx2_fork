@@ -47,6 +47,7 @@ export const state = () => ({
   index_sample_pages_number: 0,
   project_pages_number: 0,
   project_sort_columns: [[], []],
+  project_primary_sort_icon: '',
 });
 
 export const getters = {
@@ -133,6 +134,9 @@ export const getters = {
   },
   get_project_sort_columns(state) {
     return state.project_sort_columns;
+  },
+  get_project_primary_sort_icon(state) {
+    return state.project_primary_sort_icon;
   },
 };
 
@@ -227,12 +231,19 @@ export const mutations = {
   set_project_pages_number(state, project_pages_number) {
     state.project_pages_number = project_pages_number;
   },
-  set_project_sort_column(state, column) {
+  set_project_sort_column(state, { column, selectedItem }) {
     const copy = state.project_sort_columns;
     const columnsArray = copy[0];
     const ordersArray = copy[1];
     let columnIndex = columnsArray.indexOf(column);
-    if (columnIndex === -1) {
+    if (column === 'LogMedian') {
+      this.commit('set_project_primary_sort', selectedItem);
+    } else if (
+      columnsArray[0] === 'primarySortActive' &&
+      column === 'LogMedian'
+    ) {
+      this.commit('set_project_primary_sort', selectedItem);
+    } else if (columnIndex === -1) {
       columnsArray.push(column);
       ordersArray.push('desc');
     } else if (columnIndex !== -1 && ordersArray[columnIndex] === 'desc') {
@@ -248,19 +259,30 @@ export const mutations = {
     const ordersArray = copy[1];
     const active = 'primarySortActive';
     const sortId = `combinedMedianData[${id}]`;
-    const addMedian = 'LogMedian';
-    if (columnsArray[0] !== active) {
-      columnsArray.unshift(active, sortId, addMedian);
+    const medianColumn = 'LogMedian';
+    if (columnsArray[0] !== active && columnsArray.includes(medianColumn)) {
+      let medianColumnIndex = columnsArray.indexOf(medianColumn);
+      columnsArray.splice(medianColumnIndex, 1);
+      ordersArray.splice(medianColumnIndex, 1);
+      columnsArray.unshift(active, sortId, medianColumn);
       ordersArray.unshift(active, 'desc', 'desc');
+      state.project_primary_sort_icon = 'arrow-down-wide-short';
+    } else if (columnsArray[0] !== active) {
+      columnsArray.unshift(active, sortId, medianColumn);
+      ordersArray.unshift(active, 'desc', 'desc');
+      state.project_primary_sort_icon = 'arrow-down-wide-short';
     } else if (columnsArray[1] !== sortId) {
       columnsArray.splice(1, 1, sortId);
       ordersArray.splice(1, 2, 'desc', 'desc');
+      state.project_primary_sort_icon = 'arrow-down-wide-short';
     } else if (columnsArray[0] === active && ordersArray[1] === 'desc') {
       columnsArray.splice(1, 1, sortId);
       ordersArray.splice(1, 2, 'asc', 'asc');
+      state.project_primary_sort_icon = 'arrow-down-short-wide';
     } else {
       columnsArray.splice(0, 3);
       ordersArray.splice(0, 3);
+      state.project_primary_sort_icon = undefined;
     }
   },
 };

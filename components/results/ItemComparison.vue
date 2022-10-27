@@ -4,7 +4,7 @@
       v-for="(item, index) of items"
       :key="index"
       class="item_box"
-      :class="[`item_${index + 1}`, { active: isMedianSort(item.id) }]"
+      :class="[`item_${index + 1}`, { active: isMedianSort(item.id, index) }]"
       @click="select(item.id)"
     >
       <font-awesome-icon
@@ -16,14 +16,14 @@
       <span>{{ item.info.symbol || item.info.Description }}</span>
       <font-awesome-icon
         v-if="isMedianSort(item.id)"
-        :icon="primarySortIcon(item.id)"
+        :icon="getProjectPrimarySortIcon"
       />
     </li>
   </ul>
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
+  import { mapGetters, mapMutations } from 'vuex';
 
   export default {
     props: {
@@ -43,6 +43,7 @@
     computed: {
       ...mapGetters({
         getProjectSortColumns: 'get_project_sort_columns',
+        getProjectPrimarySortIcon: 'get_project_primary_sort_icon',
       }),
       filterType() {
         return window.location.pathname.split('/')[1];
@@ -53,22 +54,16 @@
       select(id) {
         this.$emit('select', id);
       },
-      primarySortIcon(id) {
-        const sortArray = this.getProjectSortColumns;
-        const activeID = sortArray[0].includes(`combinedMedianData[${id}]`);
-        const activeDesc = sortArray[1][1] === 'desc';
-        const activeAsc = sortArray[1][1] === 'asc';
-
-        return activeID && activeDesc
-          ? 'arrow-down-wide-short'
-          : activeID && activeAsc
-          ? 'arrow-down-short-wide'
-          : undefined;
-      },
-      isMedianSort(id) {
+      isMedianSort(id, index) {
         return (
-          this.getProjectSortColumns[0].includes('primarySortActive') &&
-          this.getProjectSortColumns[0].includes(`combinedMedianData[${id}]`)
+          (!this.getProjectSortColumns[0].includes('primarySortActive') &&
+            !this.getProjectSortColumns[0].includes(
+              `combinedMedianData[${id}]`
+            ) &&
+            this.getProjectSortColumns[0].includes('LogMedian') &&
+            index === 0) ||
+          (this.getProjectSortColumns[0].includes('primarySortActive') &&
+            this.getProjectSortColumns[0].includes(`combinedMedianData[${id}]`))
         );
       },
     },

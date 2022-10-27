@@ -260,7 +260,10 @@
         window.location.href = this.routeToOtherProjectPage(route);
       },
       addSort(col_name) {
-        this.setProjectSortColumn(col_name);
+        this.setProjectSortColumn({
+          column: col_name,
+          selectedItem: this.selectedItem,
+        });
       },
       textFilter(fullText, inputText) {
         const reg = new RegExp(inputText, 'gi');
