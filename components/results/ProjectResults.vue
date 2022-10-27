@@ -263,6 +263,7 @@
         setFilterModal: 'set_filter_modal',
         setActiveDataset: 'set_active_dataset',
         setProjectPagesNumber: 'set_project_pages_number',
+        setProjectSortColumn: 'set_project_sort_column',
       }),
       moveToProjectPage(route) {
         this.$nuxt.$loading.start();
