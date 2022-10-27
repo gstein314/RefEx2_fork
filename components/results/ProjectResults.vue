@@ -289,17 +289,18 @@
             }
         }
       },
-      switchSort(col_name, order) {
-        if (this.sort.key === col_name) {
-          this.sort.order = this.sort.order === 'up' ? 'down' : 'up';
-        } else {
-          this.sort.key = col_name;
-          this.sort.order = 'up';
-        }
-        if (order) {
-          this.sort.order = order;
-        }
+      switchSort(col_name) {
+        this.setProjectSortColumn(col_name);
         this.$emit('updateSort', this.sort);
+        // if (this.sort.key === col_name) {
+        //   this.sort.order = this.sort.order === 'up' ? 'down' : 'up';
+        // } else {
+        //   this.sort.key = col_name;
+        //   this.sort.order = 'up';
+        // }
+        // if (order) {
+        //   this.sort.order = order;
+        // }
       },
       textFilter(fullText, inputText) {
         const reg = new RegExp(inputText, 'gi');
