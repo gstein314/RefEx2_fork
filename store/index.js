@@ -46,6 +46,7 @@ export const state = () => ({
   index_gene_pages_number: 0,
   index_sample_pages_number: 0,
   project_pages_number: 0,
+  project_sort_columns: [[], []],
 });
 
 export const getters = {
@@ -129,6 +130,9 @@ export const getters = {
   },
   get_project_pages_number(state) {
     return state.project_pages_number;
+  },
+  get_project_sort_columns(state) {
+    return state.project_sort_columns;
   },
 };
 
@@ -222,5 +226,21 @@ export const mutations = {
   },
   set_project_pages_number(state, project_pages_number) {
     state.project_pages_number = project_pages_number;
+  },
+  set_project_sort_column(state, column) {
+    const copy = state.project_sort_columns;
+    const columnsArray = copy[0];
+    const ordersArray = copy[1];
+    let columnIndex = columnsArray.indexOf(column);
+    if (columnIndex <= -1) {
+      columnsArray.push(column);
+      ordersArray.push('desc');
+    } else if (columnIndex !== -1 && ordersArray[columnIndex] === 'desc') {
+      ordersArray.splice(columnIndex, 1, 'asc');
+    } else {
+      columnsArray.splice(columnIndex, 1);
+      ordersArray.splice(columnIndex, 1);
+    }
+    console.log('clicked');
   },
 };
