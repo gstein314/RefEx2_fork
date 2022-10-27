@@ -247,10 +247,15 @@ export const mutations = {
     const columnsArray = copy[0];
     const ordersArray = copy[1];
     const active = 'primarySortActive';
+    const sortId = `combinedMedianData[${id}]`;
     if (columnsArray[0] !== active) {
-      columnsArray.unshift(active, `combinedMedianData[${id}]`);
+      columnsArray.unshift(active, sortId);
       ordersArray.unshift(active, 'desc');
+    } else if (columnsArray[1] !== sortId) {
+      columnsArray.splice(1, 1, sortId);
+      ordersArray.splice(1, 1, 'desc');
     } else if (columnsArray[0] === active && ordersArray[1] === 'desc') {
+      columnsArray.splice(1, 1, sortId);
       ordersArray.splice(1, 1, 'asc');
     } else {
       columnsArray.splice(0, 2);
