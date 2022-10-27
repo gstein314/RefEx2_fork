@@ -4,7 +4,7 @@
     :style="[isProjectSample ? { visibility: 'hidden' } : '']"
     @click="toggleCompareModal"
   >
-    <font-awesome-icon icon="chart-bar" />
+    <font-awesome-icon icon="chart-column" />
     Comparison
   </button>
 </template>

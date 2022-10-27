@@ -101,7 +101,7 @@
         &[data-icon="sort"]
           color: $GRAY
           opacity: .3
-        &[data-icon="search"]
+        &[data-icon="magnifying-glass"]
           font-size: 12px
           color: $MAIN_COLOR
           &.active
