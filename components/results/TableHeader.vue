@@ -3,11 +3,7 @@
     <span class="label"> {{ label }} </span>
     <div class="details">
       <span v-if="note" class="tag">{{ note }}</span>
-
-      <font-awesome-icon
-        :icon="currentSort.key === id ? `sort-${currentSort.order}` : 'sort'"
-        @click="switchSort"
-      />
+      <font-awesome-icon icon="sort" @click="addSort" />
       <font-awesome-icon
         icon="search"
         :class="{ active: isActiveSearch }"
@@ -60,10 +56,6 @@
         type: Object,
         required: false,
       },
-      currentSort: {
-        type: Object,
-        required: true,
-      },
     },
     computed: {
       height() {
@@ -82,8 +74,8 @@
       },
     },
     methods: {
-      switchSort() {
-        this.$emit('switchSort', this.id);
+      addSort() {
+        this.$emit('addSort', this.id);
       },
       ...mapMutations({
         setFilterModal: 'set_filter_modal',
@@ -109,7 +101,7 @@
         &[data-icon="sort"]
           color: $GRAY
           opacity: .3
-        &[data-icon="magnifying-glass"]
+        &[data-icon="search"]
           font-size: 12px
           color: $MAIN_COLOR
           &.active

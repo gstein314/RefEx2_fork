@@ -11,10 +11,9 @@
           >
             <table-header
               :id="filter.column"
-              :current-sort="sort"
               v-bind="filter"
               :class="filter.column"
-              @switchSort="switchSort"
+              @addSort="addSort"
             >
               <median-scale v-if="filter.column === 'LogMedian'" />
             </table-header>
@@ -163,14 +162,6 @@
         default: 200,
       },
     },
-    data() {
-      return {
-        sort: {
-          key: 'LogMedian',
-          order: 'down',
-        },
-      };
-    },
 
     computed: {
       ...mapGetters({
@@ -245,7 +236,6 @@
       this.setPageType('project');
     },
     mounted() {
-      this.$emit('updateSort', this.sort);
       this.setDataset();
     },
     updated() {
@@ -269,38 +259,8 @@
         this.$nuxt.$loading.start();
         window.location.href = this.routeToOtherProjectPage(route);
       },
-      sortUpOrDown(a, b) {
-        switch (this.sort?.order) {
-          case 'up':
-            if (a < b) {
-              return -1;
-            } else if (a > b) {
-              return 1;
-            } else {
-              return 0;
-            }
-          case 'down':
-            if (a > b) {
-              return -1;
-            } else if (a < b) {
-              return 1;
-            } else {
-              return 0;
-            }
-        }
-      },
-      switchSort(col_name) {
+      addSort(col_name) {
         this.setProjectSortColumn(col_name);
-        this.$emit('updateSort', this.sort);
-        // if (this.sort.key === col_name) {
-        //   this.sort.order = this.sort.order === 'up' ? 'down' : 'up';
-        // } else {
-        //   this.sort.key = col_name;
-        //   this.sort.order = 'up';
-        // }
-        // if (order) {
-        //   this.sort.order = order;
-        // }
       },
       textFilter(fullText, inputText) {
         const reg = new RegExp(inputText, 'gi');
