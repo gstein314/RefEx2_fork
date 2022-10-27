@@ -232,7 +232,7 @@ export const mutations = {
     const columnsArray = copy[0];
     const ordersArray = copy[1];
     let columnIndex = columnsArray.indexOf(column);
-    if (columnIndex <= -1) {
+    if (columnIndex === -1) {
       columnsArray.push(column);
       ordersArray.push('desc');
     } else if (columnIndex !== -1 && ordersArray[columnIndex] === 'desc') {
