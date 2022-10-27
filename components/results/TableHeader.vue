@@ -3,7 +3,7 @@
     <span class="label"> {{ label }} </span>
     <div class="details">
       <span v-if="note" class="tag">{{ note }}</span>
-      <font-awesome-icon icon="sort" @click="addSort" />
+      <font-awesome-icon :icon="sortIcon(id)" @click="addSort" />
       <font-awesome-icon
         icon="search"
         :class="{ active: isActiveSearch }"
@@ -16,7 +16,7 @@
 
 <script>
   /* eslint-disable vue/prop-name-casing */
-  import { mapMutations } from 'vuex';
+  import { mapGetters, mapMutations } from 'vuex';
 
   export default {
     props: {
@@ -58,6 +58,9 @@
       },
     },
     computed: {
+      ...mapGetters({
+        getProjectSortColumns: 'get_project_sort_columns',
+      }),
       height() {
         return this.heightChartWrapper + 'px';
       },
@@ -80,6 +83,18 @@
       ...mapMutations({
         setFilterModal: 'set_filter_modal',
       }),
+      sortIcon(id) {
+        const sortArray = this.getProjectSortColumns;
+        const activeColumn = sortArray[0].includes(id);
+        const columnIndex = sortArray[0].indexOf(id);
+        const activeDesc = sortArray[1][columnIndex] === 'desc';
+        const activeAsc = sortArray[1][columnIndex] === 'asc';
+        return activeColumn && activeDesc
+          ? 'sort-down'
+          : activeColumn && activeAsc
+          ? 'sort-up'
+          : 'sort';
+      },
     },
   };
 </script>

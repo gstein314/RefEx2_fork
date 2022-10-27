@@ -248,18 +248,19 @@ export const mutations = {
     const ordersArray = copy[1];
     const active = 'primarySortActive';
     const sortId = `combinedMedianData[${id}]`;
+    const addMedian = 'LogMedian';
     if (columnsArray[0] !== active) {
-      columnsArray.unshift(active, sortId);
-      ordersArray.unshift(active, 'desc');
+      columnsArray.unshift(active, sortId, addMedian);
+      ordersArray.unshift(active, 'desc', 'desc');
     } else if (columnsArray[1] !== sortId) {
       columnsArray.splice(1, 1, sortId);
-      ordersArray.splice(1, 1, 'desc');
+      ordersArray.splice(1, 2, 'desc', 'desc');
     } else if (columnsArray[0] === active && ordersArray[1] === 'desc') {
       columnsArray.splice(1, 1, sortId);
-      ordersArray.splice(1, 1, 'asc');
+      ordersArray.splice(1, 2, 'asc', 'asc');
     } else {
-      columnsArray.splice(0, 2);
-      ordersArray.splice(0, 2);
+      columnsArray.splice(0, 3);
+      ordersArray.splice(0, 3);
     }
   },
 };

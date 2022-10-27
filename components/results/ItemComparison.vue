@@ -16,7 +16,7 @@
       <span>{{ item.info.symbol || item.info.Description }}</span>
       <font-awesome-icon
         v-if="isMedianSort(item.id)"
-        :icon="sortIcon(item.id)"
+        :icon="primarySortIcon(item.id)"
       />
     </li>
   </ul>
@@ -53,7 +53,7 @@
       select(id) {
         this.$emit('select', id);
       },
-      sortIcon(id) {
+      primarySortIcon(id) {
         const sortArray = this.getProjectSortColumns;
         const activeID = sortArray[0].includes(`combinedMedianData[${id}]`);
         const activeDesc = sortArray[1][1] === 'desc';
