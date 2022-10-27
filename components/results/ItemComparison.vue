@@ -4,10 +4,7 @@
       v-for="(item, index) of items"
       :key="index"
       class="item_box"
-      :class="[
-        `item_${index + 1}`,
-        { active: activeId === item.id && isMedianSort },
-      ]"
+      :class="[`item_${index + 1}`, { active: isMedianSort(item.id) }]"
       @click="select(item.id)"
     >
       <font-awesome-icon
@@ -18,8 +15,8 @@
       />
       <span>{{ item.info.symbol || item.info.Description }}</span>
       <font-awesome-icon
-        v-if="activeId === item.id && isMedianSort"
-        :icon="sort-amount-up"
+        v-if="isMedianSort(item.id)"
+        :icon="sortIcon(item.id)"
       />
     </li>
   </ul>
@@ -47,9 +44,6 @@
       ...mapGetters({
         getProjectSortColumns: 'get_project_sort_columns',
       }),
-      isMedianSort() {
-        return this.getProjectSortColumns[0].includes('LogMedian');
-      },
       filterType() {
         return window.location.pathname.split('/')[1];
       },
@@ -58,6 +52,24 @@
       // only switch to 'up' order if the same item is selected and it was already a median sort
       select(id) {
         this.$emit('select', id);
+      },
+      sortIcon(id) {
+        const sortArray = this.getProjectSortColumns;
+        const activeID = sortArray[0].includes(`combinedMedianData[${id}]`);
+        const activeDesc = sortArray[1][1] === 'desc';
+        const activeAsc = sortArray[1][1] === 'asc';
+
+        return activeID && activeDesc
+          ? 'arrow-down-wide-short'
+          : activeID && activeAsc
+          ? 'arrow-down-short-wide'
+          : undefined;
+      },
+      isMedianSort(id) {
+        return (
+          this.getProjectSortColumns[0].includes('primarySortActive') &&
+          this.getProjectSortColumns[0].includes(`combinedMedianData[${id}]`)
+        );
       },
     },
   };
