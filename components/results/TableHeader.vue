@@ -1,9 +1,9 @@
 <template>
-  <div class="inner" :class="{ '-column': note }">
+  <div class="inner" :class="{ '-column': note }" @click="addSort">
     <span class="label"> {{ label }} </span>
     <div class="details">
       <span v-if="note" class="tag">{{ note }}</span>
-      <font-awesome-icon :icon="sortIcon(id)" @click="addSort" />
+      <font-awesome-icon :icon="sortIcon(id)" />
       <font-awesome-icon
         icon="search"
         :class="{ active: isActiveSearch }"
@@ -100,6 +100,8 @@
 </script>
 <style lang="sass" scoped>
   .inner
+    &:hover
+      cursor: pointer
     display: grid
     gap: 0.5rem
     grid-template-columns: auto 1fr
