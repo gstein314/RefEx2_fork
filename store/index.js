@@ -241,6 +241,20 @@ export const mutations = {
       columnsArray.splice(columnIndex, 1);
       ordersArray.splice(columnIndex, 1);
     }
-    console.log('clicked');
+  },
+  set_project_primary_sort(state, column) {
+    const copy = state.project_sort_columns;
+    const columnsArray = copy[0];
+    const ordersArray = copy[1];
+    let columnIndex = columnsArray.indexOf(column);
+    if (columnIndex === -1) {
+      columnsArray.unshift(column);
+      ordersArray.push('desc');
+    } else if (columnIndex !== -1 && ordersArray[columnIndex] === 'desc') {
+      ordersArray.splice(columnIndex, 1, 'asc');
+    } else {
+      columnsArray.splice(columnIndex, 1);
+      ordersArray.splice(columnIndex, 1);
+    }
   },
 };
