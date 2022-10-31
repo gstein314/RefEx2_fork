@@ -50,7 +50,7 @@
               <MedianBar
                 v-else-if="filter.column === 'LogMedian'"
                 :items="items"
-                :stat-info="combinedData(items, result.itemNum)"
+                :stat-info="tooltipData(items, result.itemNum)"
               />
               <font-awesome-icon
                 v-else-if="filter.column === 'annotation'"
@@ -280,8 +280,8 @@
         setActiveDataset: 'set_active_dataset',
         setProjectPagesNumber: 'set_project_pages_number',
       }),
-      combinedData(items, itemNum) {
-        const combinedStatData = {};
+      tooltipData(items, itemNum) {
+        const statData = {};
         let tmp = {
           firstQuartileData: {},
           minData: {},
@@ -291,32 +291,16 @@
           sdData: {},
           numberOfSamplesData: {},
         };
-        const projectItems = this.projectItems.items;
         const ids = [];
         items.forEach(item => ids.push(item.id));
-        for (let i = 0; i < items.length; i++) {
-          tmp['firstQuartileData'][ids[i]] =
-            projectItems[i].firstQuartileData[itemNum];
-          tmp['minData'][ids[i]] = projectItems[i].minData[itemNum];
-          tmp['maxData'][ids[i]] = projectItems[i].maxData[itemNum];
-          tmp['medianData'][ids[i]] = projectItems[i].medianData[itemNum];
-          tmp['thirdQuartileData'][ids[i]] =
-            projectItems[i].thirdQuartileData[itemNum];
-          tmp['sdData'][ids[i]] = projectItems[i].sdData[itemNum];
-          tmp['numberOfSamplesData'][ids[i]] =
-            projectItems[i].numberOfSamplesData[itemNum];
-          if (i === items.length - 1) {
-            combinedStatData['firstQuartileData'] = tmp['firstQuartileData'];
-            combinedStatData['minData'] = tmp['minData'];
-            combinedStatData['maxData'] = tmp['maxData'];
-            combinedStatData['medianData'] = tmp['medianData'];
-            combinedStatData['thirdQuartileData'] = tmp['thirdQuartileData'];
-            combinedStatData['sdData'] = tmp['sdData'];
-            combinedStatData['numberOfSamplesData'] =
-              tmp['numberOfSamplesData'];
+        for (let i = 0; i < ids.length; i++) {
+          for (const statName in tmp) {
+            tmp[statName][ids[i]] =
+              this.projectItems.items[i][statName][itemNum];
+            if (i === ids.length - 1) statData[statName] = tmp[statName];
           }
         }
-        return combinedStatData;
+        return statData;
       },
       moveToProjectPage(route) {
         this.$nuxt.$loading.start();

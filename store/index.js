@@ -32,6 +32,7 @@ export const state = () => ({
     limit: 10,
     offset: 0,
   },
+  project_results_all: {},
   index_pagination: {
     limit: 10,
     offset: 0,
@@ -55,6 +56,9 @@ export const getters = {
   },
   get_project_results(state) {
     return state.project_results.arr || [];
+  },
+  get_project_results_all(state) {
+    return state.project_results_all;
   },
   get_project_items(state) {
     return state.project_items;
@@ -139,6 +143,9 @@ export const getters = {
 export const mutations = {
   set_project_results(state, newResults) {
     state.project_results = { ...state.project_results, arr: newResults };
+  },
+  set_project_results_all(state, newResults) {
+    state.project_results_all = newResults;
   },
   set_project_items(state, newItems) {
     state.project_items = newItems;

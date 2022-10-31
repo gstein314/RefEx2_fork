@@ -66,7 +66,7 @@
 
 <script>
   import 'vue-slider-component/dist-css/vue-slider-component.css';
-  import { mapMutations } from 'vuex';
+  import { mapGetters, mapMutations } from 'vuex';
   import ItemComparison from '~/components/results/ItemComparison.vue';
   import ModalViewGene from '~/components/ModalView/ModalViewGene.vue';
   import ModalViewCompare from '~/components/ModalView/ModalViewCompare.vue';
@@ -89,6 +89,8 @@
     filterModal: '',
   };
 
+  const self = this;
+
   export default {
     components: {
       ItemComparison,
@@ -104,6 +106,7 @@
     },
     async asyncData({ $axios, query, store, route }) {
       let results;
+      let resultsAll = {};
       let isError = false;
       const { project, organism } = route.params;
       store.commit('set_specie', organism);
@@ -116,8 +119,13 @@
           if (data[`${type}_info`]?.error) {
             isError = true;
           }
-
-          if (index === 0) results = data.refex_info;
+          resultsAll[id] = data.refex_info.map((result, index) => {
+            return {
+              ...result,
+              itemNum: index,
+            };
+          });
+          store.commit('set_project_results_all', resultsAll);
           return {
             id,
             info: data[`${type}_info`],
@@ -187,14 +195,9 @@
       };
     },
     computed: {
-      resultsWithItemNum() {
-        return this.results.map((result, index) => {
-          return {
-            ...result,
-            itemNum: index,
-          };
-        });
-      },
+      ...mapGetters({
+        projectResultsAll: 'get_project_results_all',
+      }),
       projectItems() {
         return {
           items: this.items,
@@ -220,7 +223,10 @@
       if (this.isError) return;
       this.checkSampleAlias();
       this.$store.commit('set_project_filters', this.filters);
-      this.$store.commit('set_project_results', this.resultsWithItemNum);
+      this.$store.commit(
+        'set_project_results',
+        this.projectResultsAll[this.selectedId]
+      );
     },
     updated() {
       this.heightChartWrapper = this.$refs.chartWrapper.clientHeight;
