@@ -38,6 +38,10 @@
         type: Array,
         default: () => [],
       },
+      projectSortColumnsWithLogMedian: {
+        type: Array,
+        default: () => [],
+      },
     },
     computed: {
       filterType() {
@@ -53,15 +57,10 @@
         return this.activeId === id;
       },
       sortOrder() {
-        const sortArray = this.projectSortColumns;
+        const sortArray = this.projectSortColumnsWithLogMedian;
         const columnsArray = sortArray[0];
         const ordersArray = sortArray[1];
-        const copy = [...columnsArray].map(x => {
-          if (x.substring(0, x.indexOf('[')) === 'combinedMedianData') {
-            return 'combinedMedianData';
-          } else return x;
-        });
-        const medianIndex = copy.indexOf('combinedMedianData');
+        const medianIndex = columnsArray.indexOf('LogMedian');
         return ordersArray[medianIndex] === 'desc'
           ? 'fa-duotone fa-sort-down'
           : ordersArray[medianIndex] === 'asc'

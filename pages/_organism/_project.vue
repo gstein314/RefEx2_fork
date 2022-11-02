@@ -1,5 +1,6 @@
 <template>
   <div class="wrapper">
+    {{ projectSortColumnsWithLogMedian }}
     <p v-if="isError" class="error">
       <font-awesome-icon icon="exclamation-triangle" />
       An error has occured while fecthing the data. Please check wheter the URL
@@ -30,6 +31,9 @@
           :active-id="selectedId"
           :display-info-button="filterType === 'gene'"
           :project-sort-columns="projectSortColumns"
+          :project-sort-columns-with-log-median="
+            projectSortColumnsWithLogMedian
+          "
           @select="updateSelectedItem"
           @showModal="setGeneModal"
         >
@@ -61,6 +65,7 @@
       :dataset="dataset"
       :selected-item="selectedId"
       :project-sort-columns="projectSortColumns"
+      :project-sort-columns-with-log-median="projectSortColumnsWithLogMedian"
       @activeSort="setProjectSortColumn"
     />
     <ResultsPagination
@@ -304,6 +309,18 @@
       },
       isNoSort() {
         return this.projectSortColumns[0].length === 0 ? false : true;
+      },
+      projectSortColumnsWithLogMedian() {
+        const sortArray = this.projectSortColumns;
+        const columnsArray = sortArray[0];
+        const ordersArray = sortArray[1];
+        const copy = [...columnsArray].map(x => {
+          if (x.substring(0, x.indexOf('[')) === 'combinedMedianData') {
+            return 'LogMedian';
+          } else return x;
+        });
+        let newarr = [copy, ordersArray];
+        return newarr;
       },
     },
     mounted() {

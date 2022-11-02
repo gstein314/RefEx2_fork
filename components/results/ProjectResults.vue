@@ -14,10 +14,13 @@
               v-bind="filter"
               :class="filter.column"
               :project-sort-columns="projectSortColumns"
+              :project-sort-columns-with-log-median="
+                projectSortColumnsWithLogMedian
+              "
               @activeSort="activeSort"
             >
-          </table-header>
-          <median-scale v-if="filter.column === 'LogMedian'" />
+            </table-header>
+            <median-scale v-if="filter.column === 'LogMedian'" />
           </th>
         </tr>
       </thead>
@@ -163,6 +166,10 @@
         default: 200,
       },
       projectSortColumns: {
+        type: Array,
+        default: () => [],
+      },
+      projectSortColumnsWithLogMedian: {
         type: Array,
         default: () => [],
       },

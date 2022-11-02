@@ -62,6 +62,10 @@
         type: Array,
         default: () => [],
       },
+      projectSortColumnsWithLogMedian: {
+        type: Array,
+        default: () => [],
+      },
     },
     computed: {
       height() {
@@ -87,26 +91,13 @@
         setFilterModal: 'set_filter_modal',
       }),
       sortIcon(id) {
-        const sortArray = this.projectSortColumns;
+        const sortArray = this.projectSortColumnsWithLogMedian;
         const columnsArray = sortArray[0];
         const ordersArray = sortArray[1];
-        const activeColumn = sortArray[0].includes(id);
-        const columnIndex = sortArray[0].indexOf(id);
-        const activeDesc = sortArray[1][columnIndex] === 'desc';
-        const activeAsc = sortArray[1][columnIndex] === 'asc';
-        const copy = [...columnsArray].map(x => {
-          if (x.substring(0, x.indexOf('[')) === 'combinedMedianData') {
-            return 'combinedMedianData';
-          } else return x;
-        });
-        const medianIndex = copy.indexOf('combinedMedianData');
-        if (id === 'LogMedian') {
-          return ordersArray[medianIndex] === 'desc'
-            ? 'fa-duotone fa-sort-down'
-            : ordersArray[medianIndex] === 'asc'
-            ? 'fa-duotone fa-sort-up'
-            : 'sort';
-        }
+        const activeColumn = columnsArray.includes(id);
+        const columnIndex = columnsArray.indexOf(id);
+        const activeDesc = ordersArray[columnIndex] === 'desc';
+        const activeAsc = ordersArray[columnIndex] === 'asc';
         return activeColumn && activeDesc
           ? 'fa-duotone fa-sort-down'
           : activeColumn && activeAsc
@@ -117,7 +108,8 @@
         return this.sortIcon(id) === 'sort' ? false : true;
       },
       orderNumber(id) {
-        const position = this.projectSortColumns[0].indexOf(id);
+        console.log(this.projectSortColumnsWithLogMedian);
+        const position = this.projectSortColumnsWithLogMedian[0].indexOf(id);
         return position === -1 ? undefined : `circle-${position + 1}`;
       },
     },
