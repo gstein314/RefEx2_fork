@@ -13,7 +13,7 @@
               :id="filter.column"
               v-bind="filter"
               :class="filter.column"
-              @addSort="addSort"
+              @activeSort="activeSort"
             >
               <median-scale v-if="filter.column === 'LogMedian'" />
             </table-header>
@@ -161,6 +161,10 @@
         type: Number,
         default: 200,
       },
+      projectSortColumns: {
+        type: Array,
+        default: () => [],
+      },
     },
 
     computed: {
@@ -174,7 +178,6 @@
         filterObj: 'active_filter_modal',
         activeDataset: 'active_dataset',
         activeSpecie: 'active_specie',
-        getProjectSortColumns: 'get_project_sort_columns',
       }),
 
       filteredData() {
@@ -213,7 +216,7 @@
           }
           return !isFiltered;
         });
-        const withSort = _.orderBy(filtered, ...this.getProjectSortColumns);
+        const withSort = _.orderBy(filtered, ...this.projectSortColumns);
         return withSort;
       },
       pageItems() {
@@ -253,14 +256,13 @@
         setFilterModal: 'set_filter_modal',
         setActiveDataset: 'set_active_dataset',
         setProjectPagesNumber: 'set_project_pages_number',
-        setProjectSortColumn: 'set_project_sort_column',
       }),
       moveToProjectPage(route) {
         this.$nuxt.$loading.start();
         window.location.href = this.routeToOtherProjectPage(route);
       },
-      addSort(col_name) {
-        this.setProjectSortColumn({
+      activeSort(col_name) {
+        this.$emit('activeSort', {
           column: col_name,
           selectedItem: this.selectedItem,
         });

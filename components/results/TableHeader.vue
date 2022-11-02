@@ -1,5 +1,5 @@
 <template>
-  <div class="inner" :class="{ '-column': note }" @click="addSort">
+  <div class="inner" :class="{ '-column': note }" @click="activeSort">
     <span class="label"> {{ label }} </span>
     <div class="details">
       <span v-if="note" class="tag">{{ note }}</span>
@@ -77,8 +77,8 @@
       },
     },
     methods: {
-      addSort() {
-        this.$emit('addSort', this.id);
+      activeSort() {
+        this.$emit('activeSort', this.id);
       },
       ...mapMutations({
         setFilterModal: 'set_filter_modal',
