@@ -108,7 +108,6 @@
         return this.sortIcon(id) === 'sort' ? false : true;
       },
       orderNumber(id) {
-        console.log(this.projectSortColumnsWithLogMedian);
         const position = this.projectSortColumnsWithLogMedian[0].indexOf(id);
         return position === -1 ? undefined : `circle-${position + 1}`;
       },
