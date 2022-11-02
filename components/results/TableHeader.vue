@@ -100,15 +100,15 @@
         const medianIndex = copy.indexOf('combinedMedianData');
         if (id === 'LogMedian') {
           return ordersArray[medianIndex] === 'desc'
-            ? 'sort-down'
+            ? 'fa-duotone fa-sort-down'
             : ordersArray[medianIndex] === 'asc'
-            ? 'sort-up'
+            ? 'fa-duotone fa-sort-up'
             : 'sort';
         }
         return activeColumn && activeDesc
-          ? 'sort-down'
+          ? 'fa-duotone fa-sort-down'
           : activeColumn && activeAsc
-          ? 'sort-up'
+          ? 'fa-duotone fa-sort-up'
           : 'sort';
       },
     },

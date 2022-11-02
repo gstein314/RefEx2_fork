@@ -63,9 +63,9 @@
         });
         const medianIndex = copy.indexOf('combinedMedianData');
         return ordersArray[medianIndex] === 'desc'
-          ? 'arrow-down-wide-short'
+          ? 'fa-duotone fa-sort-down'
           : ordersArray[medianIndex] === 'asc'
-          ? 'arrow-down-short-wide'
+          ? 'fa-duotone fa-sort-up'
           : 'check';
       },
     },
