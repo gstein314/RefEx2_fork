@@ -1,6 +1,5 @@
 <template>
   <div class="wrapper">
-    {{ projectSortColumnsWithLogMedian }}
     <p v-if="isError" class="error">
       <font-awesome-icon icon="exclamation-triangle" />
       An error has occured while fecthing the data. Please check wheter the URL

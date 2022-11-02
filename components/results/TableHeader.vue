@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <div class="table_header">
     <div class="inner" :class="{ '-column': note }" @click="activeSort">
       <div class="details">
         <div class="label">{{ label }}</div>
         <div v-if="note" class="tag">{{ note }}</div>
       </div>
-      <font-awesome-icon :icon="sortIcon(id)" />
       <font-awesome-icon v-if="sortOrder(id)" :icon="orderNumber(id)" />
+      <font-awesome-icon :icon="sortIcon(id)" />
     </div>
     <font-awesome-icon
       icon="search"
@@ -116,31 +116,39 @@
   };
 </script>
 <style lang="sass" scoped>
-  .inner
-    &:hover
-      cursor: pointer
-    display: grid
-    gap: 0.5rem
-    grid-template-columns: auto 1fr
-    grid-template-rows: auto 1fr
-    &.-column
-      grid-template-columns: 1fr
-    > .details
-      // display: flex
-      // gap: 0.5rem
-      // align-items: center
-      svg
-        &:hover
-          cursor: pointer
-        &[data-icon="sort"]
-          color: $GRAY
-          opacity: .3
-        &[data-icon="magnifying-glass"]
-          font-size: 12px
-          color: $MAIN_COLOR
-          &.active
-            color: $ACTIVE_COLOR
+  .table_header
+    display: flex
+    align-items: center
+    .inner
+      padding: 5px
+      margin-left: -5px
+      transition: background-color 0.3s ease-in-out
+      display: flex
+      align-items: center
+      gap: 0.5rem
+      &:hover
+        cursor: pointer
+        background-color: rgba($MAIN_COLOR, .2)
+        border-radius: 0.2rem
     .tag
       +ontology_tag
       width: fit-content
+    svg
+      font-size: 16px
+      &[data-icon^="circle"]
+        color: $MAIN_COLOR
+      &[data-icon^="sort"]
+        color: $MAIN_COLOR
+      &[data-icon="magnifying-glass"]
+        cursor: pointer
+        font-size: 12px
+        color: $MAIN_COLOR
+        margin-left: 0.5em
+        transition: transform 0.2s ease-in-out
+        &:hover
+          cursor: pointer
+          transform: scale(1.5)
+        &.active
+          color: $ACTIVE_COLOR
+
 </style>
