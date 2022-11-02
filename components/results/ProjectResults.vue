@@ -16,8 +16,8 @@
               :project-sort-columns="projectSortColumns"
               @activeSort="activeSort"
             >
-              <median-scale v-if="filter.column === 'LogMedian'" />
-            </table-header>
+          </table-header>
+          <median-scale v-if="filter.column === 'LogMedian'" />
           </th>
         </tr>
       </thead>

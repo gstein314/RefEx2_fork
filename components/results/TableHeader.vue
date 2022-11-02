@@ -1,16 +1,18 @@
 <template>
-  <div class="inner" :class="{ '-column': note }" @click="activeSort">
-    <span class="label"> {{ label }} </span>
-    <div class="details">
-      <span v-if="note" class="tag">{{ note }}</span>
+  <div>
+    <div class="inner" :class="{ '-column': note }" @click="activeSort">
+      <div class="details">
+        <div class="label">{{ label }}</div>
+        <div v-if="note" class="tag">{{ note }}</div>
+      </div>
       <font-awesome-icon :icon="sortIcon(id)" />
-      <font-awesome-icon
-        icon="search"
-        :class="{ active: isActiveSearch }"
-        @click="setFilterModal(id)"
-      />
+      <font-awesome-icon v-if="sortOrder(id)" :icon="orderNumber(id)" />
     </div>
-    <slot></slot>
+    <font-awesome-icon
+      icon="search"
+      :class="{ active: isActiveSearch }"
+      @click="setFilterModal(id)"
+    />
   </div>
 </template>
 
@@ -111,6 +113,13 @@
           ? 'fa-duotone fa-sort-up'
           : 'sort';
       },
+      sortOrder(id) {
+        return this.sortIcon(id) === 'sort' ? false : true;
+      },
+      orderNumber(id) {
+        const position = this.projectSortColumns[0].indexOf(id);
+        return position === -1 ? undefined : `circle-${position + 1}`;
+      },
     },
   };
 </script>
@@ -125,9 +134,9 @@
     &.-column
       grid-template-columns: 1fr
     > .details
-      display: flex
-      gap: 0.5rem
-      align-items: center
+      // display: flex
+      // gap: 0.5rem
+      // align-items: center
       svg
         &:hover
           cursor: pointer
