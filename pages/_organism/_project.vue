@@ -308,7 +308,7 @@
     methods: {
       ...mapMutations({
         setGeneModal: 'set_gene_modal',
-        setProjectPrimarySort: 'set_project_primary_sort',
+        setProjectSortColumn: 'set_project_sort_column',
       }),
       toggleDisplaySettings() {
         this.isDisplaySettingsOn = !this.isDisplaySettingsOn;
@@ -317,7 +317,10 @@
         this.filters = arr;
       },
       updateSelectedItem(id) {
-        this.setProjectPrimarySort(id);
+        this.setProjectSortColumn({
+          column: 'LogMedian',
+          selectedItem: id,
+        });
         this.selectedId = id;
         requestAnimationFrame(
           () => (this.heightChartWrapper = this.$refs.chartWrapper.clientHeight)

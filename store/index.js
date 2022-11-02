@@ -232,21 +232,39 @@ export const mutations = {
     state.project_pages_number = project_pages_number;
   },
   set_project_sort_column(state, { column, selectedItem }) {
-    const copy = state.project_sort_columns;
-    const columnsArray = copy[0];
-    const ordersArray = copy[1];
-    let columnIndex = columnsArray.indexOf(column);
+    const sortArray = state.project_sort_columns;
+    const columnsArray = sortArray[0];
+    const ordersArray = sortArray[1];
+    const columnIndex = columnsArray.indexOf(column);
+    const combinedMedianData = `combinedMedianData[${selectedItem}]`;
     if (column === 'LogMedian') {
-      this.commit('set_project_primary_sort', selectedItem);
-    } else if (
-      columnsArray[0] === 'primarySortActive' &&
-      column === 'LogMedian'
-    ) {
-      this.commit('set_project_primary_sort', selectedItem);
+      // looking for combinedMedianData[n] index in the original array
+      let copy = [...columnsArray].map(x => {
+        if (x.substring(0, x.indexOf('[')) === 'combinedMedianData') {
+          return 'combinedMedianData';
+        } else return x;
+      });
+      let medianIndex = copy.indexOf('combinedMedianData');
+      if (medianIndex === -1) {
+        columnsArray.push(combinedMedianData);
+        ordersArray.push('desc');
+      } else {
+        if (columnsArray[medianIndex] !== combinedMedianData) {
+          columnsArray.splice(medianIndex, 1, combinedMedianData);
+          ordersArray.splice(medianIndex, 1, 'desc');
+        } else {
+          if (ordersArray[medianIndex] === 'desc') {
+            ordersArray.splice(medianIndex, 1, 'asc');
+          } else {
+            columnsArray.splice(medianIndex, 1);
+            ordersArray.splice(medianIndex, 1);
+          }
+        }
+      }
     } else if (columnIndex === -1) {
       columnsArray.push(column);
       ordersArray.push('desc');
-    } else if (columnIndex !== -1 && ordersArray[columnIndex] === 'desc') {
+    } else if (ordersArray[columnIndex] === 'desc') {
       ordersArray.splice(columnIndex, 1, 'asc');
     } else {
       columnsArray.splice(columnIndex, 1);
