@@ -237,70 +237,48 @@ export const mutations = {
     const ordersArray = sortArray[1];
     const columnIndex = columnsArray.indexOf(column);
     const combinedMedianData = `combinedMedianData[${selectedItem}]`;
-    if (column === 'LogMedian') {
-      // looking for combinedMedianData[n] index in the original array
-      let copy = [...columnsArray].map(x => {
-        if (x.substring(0, x.indexOf('[')) === 'combinedMedianData') {
-          return 'combinedMedianData';
-        } else return x;
-      });
-      let medianIndex = copy.indexOf('combinedMedianData');
-      if (medianIndex === -1) {
+    const copy = [...columnsArray].map(x => {
+      if (x.substring(0, x.indexOf('[')) === 'combinedMedianData') {
+        return 'combinedMedianData';
+      } else return x;
+    });
+    const medianIndex = copy.indexOf('combinedMedianData');
+    function addSort(column) {
+      if (column === 'LogMedian') {
         columnsArray.push(combinedMedianData);
-        ordersArray.push('desc');
+      } else {
+        columnsArray.push(column);
+      }
+      ordersArray.push('desc');
+    }
+    function switchSort(index) {
+      ordersArray.splice(index, 1, 'asc');
+    }
+    function deleteSort(index) {
+      columnsArray.splice(index, 1);
+      ordersArray.splice(index, 1);
+    }
+    if (column === 'LogMedian') {
+      if (medianIndex === -1) {
+        addSort(column);
       } else {
         if (columnsArray[medianIndex] !== combinedMedianData) {
           columnsArray.splice(medianIndex, 1, combinedMedianData);
           ordersArray.splice(medianIndex, 1, 'desc');
         } else {
           if (ordersArray[medianIndex] === 'desc') {
-            ordersArray.splice(medianIndex, 1, 'asc');
+            switchSort(medianIndex);
           } else {
-            columnsArray.splice(medianIndex, 1);
-            ordersArray.splice(medianIndex, 1);
+            deleteSort(medianIndex);
           }
         }
       }
     } else if (columnIndex === -1) {
-      columnsArray.push(column);
-      ordersArray.push('desc');
+      addSort(column);
     } else if (ordersArray[columnIndex] === 'desc') {
-      ordersArray.splice(columnIndex, 1, 'asc');
+      switchSort(columnIndex);
     } else {
-      columnsArray.splice(columnIndex, 1);
-      ordersArray.splice(columnIndex, 1);
-    }
-  },
-  set_project_primary_sort(state, id) {
-    const copy = state.project_sort_columns;
-    const columnsArray = copy[0];
-    const ordersArray = copy[1];
-    const active = 'primarySortActive';
-    const sortId = `combinedMedianData[${id}]`;
-    const medianColumn = 'LogMedian';
-    if (columnsArray[0] !== active && columnsArray.includes(medianColumn)) {
-      let medianColumnIndex = columnsArray.indexOf(medianColumn);
-      columnsArray.splice(medianColumnIndex, 1);
-      ordersArray.splice(medianColumnIndex, 1);
-      columnsArray.unshift(active, sortId, medianColumn);
-      ordersArray.unshift(active, 'desc', 'desc');
-      state.project_primary_sort_icon = 'arrow-down-wide-short';
-    } else if (columnsArray[0] !== active) {
-      columnsArray.unshift(active, sortId, medianColumn);
-      ordersArray.unshift(active, 'desc', 'desc');
-      state.project_primary_sort_icon = 'arrow-down-wide-short';
-    } else if (columnsArray[1] !== sortId) {
-      columnsArray.splice(1, 1, sortId);
-      ordersArray.splice(1, 2, 'desc', 'desc');
-      state.project_primary_sort_icon = 'arrow-down-wide-short';
-    } else if (columnsArray[0] === active && ordersArray[1] === 'desc') {
-      columnsArray.splice(1, 1, sortId);
-      ordersArray.splice(1, 2, 'asc', 'asc');
-      state.project_primary_sort_icon = 'arrow-down-short-wide';
-    } else {
-      columnsArray.splice(0, 3);
-      ordersArray.splice(0, 3);
-      state.project_primary_sort_icon = undefined;
+      deleteSort(columnIndex);
     }
   },
 };
