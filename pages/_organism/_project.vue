@@ -89,8 +89,6 @@
     filterModal: '',
   };
 
-  const self = this;
-
   export default {
     components: {
       ItemComparison,
