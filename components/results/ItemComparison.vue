@@ -4,7 +4,7 @@
       v-for="(item, index) of items"
       :key="index"
       class="item_box"
-      :class="[`item_${index + 1}`, { active: isMedianSort(item.id, index) }]"
+      :class="[`item_${index + 1}`, { active: isMedianSort(item.id) }]"
       @click="select(item.id)"
     >
       <font-awesome-icon
@@ -14,17 +14,12 @@
         @click="$emit('showModal', item.id)"
       />
       <span>{{ item.info.symbol || item.info.Description }}</span>
-      <font-awesome-icon
-        v-if="isMedianSort(item.id)"
-        :icon="getProjectPrimarySortIcon"
-      />
+      <font-awesome-icon v-if="isMedianSort(item.id)" :icon="sortOrder()" />
     </li>
   </ul>
 </template>
 
 <script>
-  import { mapGetters, mapMutations } from 'vuex';
-
   export default {
     props: {
       items: {
@@ -39,12 +34,12 @@
         type: Boolean,
         default: false,
       },
+      projectSortColumns: {
+        type: Array,
+        default: () => [],
+      },
     },
     computed: {
-      ...mapGetters({
-        getProjectSortColumns: 'get_project_sort_columns',
-        getProjectPrimarySortIcon: 'get_project_primary_sort_icon',
-      }),
       filterType() {
         return window.location.pathname.split('/')[1];
       },
@@ -54,17 +49,24 @@
       select(id) {
         this.$emit('select', id);
       },
-      isMedianSort(id, index) {
-        return (
-          (!this.getProjectSortColumns[0].includes('primarySortActive') &&
-            !this.getProjectSortColumns[0].includes(
-              `combinedMedianData[${id}]`
-            ) &&
-            this.getProjectSortColumns[0].includes('LogMedian') &&
-            index === 0) ||
-          (this.getProjectSortColumns[0].includes('primarySortActive') &&
-            this.getProjectSortColumns[0].includes(`combinedMedianData[${id}]`))
-        );
+      isMedianSort(id) {
+        return this.activeId === id;
+      },
+      sortOrder() {
+        const sortArray = this.projectSortColumns;
+        const columnsArray = sortArray[0];
+        const ordersArray = sortArray[1];
+        const copy = [...columnsArray].map(x => {
+          if (x.substring(0, x.indexOf('[')) === 'combinedMedianData') {
+            return 'combinedMedianData';
+          } else return x;
+        });
+        const medianIndex = copy.indexOf('combinedMedianData');
+        return ordersArray[medianIndex] === 'desc'
+          ? 'arrow-down-wide-short'
+          : ordersArray[medianIndex] === 'asc'
+          ? 'arrow-down-short-wide'
+          : 'check';
       },
     },
   };

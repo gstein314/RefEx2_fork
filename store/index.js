@@ -46,8 +46,6 @@ export const state = () => ({
   index_gene_pages_number: 0,
   index_sample_pages_number: 0,
   project_pages_number: 0,
-  project_sort_columns: [[], []],
-  project_primary_sort_icon: '',
 });
 
 export const getters = {
@@ -131,12 +129,6 @@ export const getters = {
   },
   get_project_pages_number(state) {
     return state.project_pages_number;
-  },
-  get_project_sort_columns(state) {
-    return state.project_sort_columns;
-  },
-  get_project_primary_sort_icon(state) {
-    return state.project_primary_sort_icon;
   },
 };
 

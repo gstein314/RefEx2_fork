@@ -16,7 +16,7 @@
 
 <script>
   /* eslint-disable vue/prop-name-casing */
-  import { mapGetters, mapMutations } from 'vuex';
+  import { mapMutations } from 'vuex';
 
   export default {
     props: {
@@ -56,11 +56,12 @@
         type: Object,
         required: false,
       },
+      projectSortColumns: {
+        type: Array,
+        default: () => [],
+      },
     },
     computed: {
-      ...mapGetters({
-        getProjectSortColumns: 'get_project_sort_columns',
-      }),
       height() {
         return this.heightChartWrapper + 'px';
       },
@@ -84,11 +85,26 @@
         setFilterModal: 'set_filter_modal',
       }),
       sortIcon(id) {
-        const sortArray = this.getProjectSortColumns;
+        const sortArray = this.projectSortColumns;
+        const columnsArray = sortArray[0];
+        const ordersArray = sortArray[1];
         const activeColumn = sortArray[0].includes(id);
         const columnIndex = sortArray[0].indexOf(id);
         const activeDesc = sortArray[1][columnIndex] === 'desc';
         const activeAsc = sortArray[1][columnIndex] === 'asc';
+        const copy = [...columnsArray].map(x => {
+          if (x.substring(0, x.indexOf('[')) === 'combinedMedianData') {
+            return 'combinedMedianData';
+          } else return x;
+        });
+        const medianIndex = copy.indexOf('combinedMedianData');
+        if (id === 'LogMedian') {
+          return ordersArray[medianIndex] === 'desc'
+            ? 'sort-down'
+            : ordersArray[medianIndex] === 'asc'
+            ? 'sort-up'
+            : 'sort';
+        }
         return activeColumn && activeDesc
           ? 'sort-down'
           : activeColumn && activeAsc

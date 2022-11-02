@@ -13,6 +13,7 @@
               :id="filter.column"
               v-bind="filter"
               :class="filter.column"
+              :project-sort-columns="projectSortColumns"
               @activeSort="activeSort"
             >
               <median-scale v-if="filter.column === 'LogMedian'" />

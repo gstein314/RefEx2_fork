@@ -29,6 +29,7 @@
           :items="items"
           :active-id="selectedId"
           :display-info-button="filterType === 'gene'"
+          :project-sort-columns="projectSortColumns"
           @select="updateSelectedItem"
           @showModal="setGeneModal"
         >
