@@ -34,10 +34,16 @@
           @showModal="setGeneModal"
         >
         </item-comparison>
-        <a class="display_settings" @click="toggleDisplaySettings">
-          <font-awesome-icon icon="eye" />
-          Show/hide columns
-        </a>
+        <div class="display_settings">
+          <a v-if="isNoSort" class="reset_sort" @click="clearSortArray">
+            <font-awesome-icon icon="xmark" />
+            Reset sorting column(s)
+          </a>
+          <a @click="toggleDisplaySettings">
+            <font-awesome-icon icon="eye" />
+            Show/hide columns
+          </a>
+        </div>
       </div>
     </div>
     <ModalViewDisplay
@@ -296,6 +302,9 @@
       selectedItem() {
         return this.items.find(item => item.id === this.selectedId);
       },
+      isNoSort() {
+        return this.projectSortColumns[0].length === 0 ? false : true;
+      },
     },
     mounted() {
       if (this.isError) return;
@@ -397,6 +406,9 @@
           deleteSort(columnIndex);
         }
       },
+      clearSortArray() {
+        this.projectSortColumns = [[], []];
+      },
     },
   };
 </script>
@@ -459,6 +471,10 @@
         > .display_settings
           +display_settings
           place-self: flex-end
+          > a + a
+            margin-left: 20px
+          > .reset_sort
+            color: $ERROR_COLOR
     .pagination
       display: flex
       position: sticky
