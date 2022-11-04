@@ -134,13 +134,10 @@
       width: fit-content
     svg
       font-size: 16px
-      &[data-icon^="circle"]
-        color: $MAIN_COLOR
+      color: $MAIN_COLOR
       &[data-prefix="fas"].fa-sort
         color: $GRAY
         opacity: .3
-      &[data-prefix="fad"]
-        color: $MAIN_COLOR
       &[data-icon="magnifying-glass"]
         cursor: pointer
         font-size: 12px
