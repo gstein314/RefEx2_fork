@@ -26,6 +26,8 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
+
   export default {
     props: {
       items: {
@@ -49,6 +51,9 @@
       },
     },
     computed: {
+      ...mapGetters({
+        projectResultsAll: 'get_project_results_all',
+      }),
       isMedianSort() {
         return this.activeSort.key === 'LogMedian';
       },
@@ -59,6 +64,8 @@
     methods: {
       // only switch to 'up' order if the same item is selected and it was already a median sort
       select(id) {
+        if (this.activeId !== id)
+          this.$store.commit('set_project_results', this.projectResultsAll[id]);
         this.$emit('select', {
           id,
           sortOrder:

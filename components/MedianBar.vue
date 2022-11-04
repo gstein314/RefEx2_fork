@@ -5,7 +5,7 @@
       :key="itemIndex"
       class="bar single_item value"
       :class="`item_${itemIndex + 1}`"
-      :style="`width: ${(medianInfo[item.id] * 230) / 16}px;`"
+      :style="`width: ${(statInfo.medianData[item.id] * 230) / 16}px;`"
     ></div>
     <div class="tooltip" :style="`left: ${maxWidth + 30}px`">
       <div class="title">Expression (log2(TPM+1))</div>
@@ -27,41 +27,37 @@
       </div>
       <div class="data">
         <p v-for="(item, itemIndex) of items" :key="itemIndex">
-          {{ tooltipNumberDisplay(resultsStat.combinedMinData[item.id]) }}
+          {{ tooltipNumberDisplay(statInfo.minData[item.id]) }}
         </p>
       </div>
       <div class="data">
         <p v-for="(item, itemIndex) of items" :key="itemIndex">
-          {{
-            tooltipNumberDisplay(resultsStat.combinedFirstQuartileData[item.id])
-          }}
+          {{ tooltipNumberDisplay(statInfo.firstQuartileData[item.id]) }}
         </p>
       </div>
       <div class="data bold">
         <p v-for="(item, itemIndex) of items" :key="itemIndex">
-          {{ tooltipNumberDisplay(resultsStat.combinedMedianData[item.id]) }}
+          {{ tooltipNumberDisplay(statInfo.medianData[item.id]) }}
         </p>
       </div>
       <div class="data">
         <p v-for="(item, itemIndex) of items" :key="itemIndex">
-          {{
-            tooltipNumberDisplay(resultsStat.combinedThirdQuartileData[item.id])
-          }}
+          {{ tooltipNumberDisplay(statInfo.thirdQuartileData[item.id]) }}
         </p>
       </div>
       <div class="data">
         <p v-for="(item, itemIndex) of items" :key="itemIndex">
-          {{ tooltipNumberDisplay(resultsStat.combinedMaxData[item.id]) }}
+          {{ tooltipNumberDisplay(statInfo.maxData[item.id]) }}
         </p>
       </div>
       <div class="data">
         <p v-for="(item, itemIndex) of items" :key="itemIndex">
-          {{ tooltipNumberDisplay(resultsStat.combinedSdData[item.id]) }}
+          {{ tooltipNumberDisplay(statInfo.sdData[item.id]) }}
         </p>
       </div>
       <div class="data">
         <p v-for="(item, itemIndex) of items" :key="itemIndex">
-          {{ resultsStat.combinedNumberOfSamplesData[item.id] }}
+          {{ statInfo.numberOfSamplesData[item.id] }}
         </p>
       </div>
     </div>
@@ -71,7 +67,7 @@
 <script>
   export default {
     props: {
-      medianInfo: {
+      statInfo: {
         type: Object,
         default: () => {},
       },
@@ -89,7 +85,9 @@
         return this.items.length;
       },
       maxWidth() {
-        return (Math.max(...Object.values(this.medianInfo)) * 230) / 16;
+        return (
+          (Math.max(...Object.values(this.statInfo.medianData)) * 230) / 16
+        );
       },
       height() {
         return this.numberOfItems * 15;
