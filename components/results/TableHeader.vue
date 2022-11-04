@@ -138,6 +138,8 @@
         color: $MAIN_COLOR
       &[data-icon^="sort"]
         color: $MAIN_COLOR
+      &[data-icon="sort"]
+        opacity: 0.3
       &[data-icon="magnifying-glass"]
         cursor: pointer
         font-size: 12px
