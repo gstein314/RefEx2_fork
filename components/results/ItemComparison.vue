@@ -14,7 +14,11 @@
         @click="$emit('showModal', item.id)"
       />
       <span>{{ item.info.symbol || item.info.Description }}</span>
-      <font-awesome-icon v-if="isMedianSort(item.id)" :icon="sortOrder()" />
+      <font-awesome-icon
+        v-if="isMedianSort(item.id)"
+        :icon="sortIcon()"
+        :flip="sortOrder()"
+      />
     </li>
   </ul>
 </template>
@@ -47,6 +51,12 @@
       filterType() {
         return window.location.pathname.split('/')[1];
       },
+      columnsArray() {
+        return this.projectSortColumnsWithLogMedian[0];
+      },
+      ordersArray() {
+        return this.projectSortColumnsWithLogMedian[1];
+      },
     },
     methods: {
       // only switch to 'up' order if the same item is selected and it was already a median sort
@@ -56,16 +66,15 @@
       isMedianSort(id) {
         return this.activeId === id;
       },
+      sortIcon() {
+        return this.columnsArray.includes('LogMedian')
+          ? 'fa-duotone fa-sort'
+          : 'sort';
+      },
       sortOrder() {
-        const sortArray = this.projectSortColumnsWithLogMedian;
-        const columnsArray = sortArray[0];
-        const ordersArray = sortArray[1];
-        const medianIndex = columnsArray.indexOf('LogMedian');
-        return ordersArray[medianIndex] === 'desc'
-          ? 'fa-duotone fa-sort-down'
-          : ordersArray[medianIndex] === 'asc'
-          ? 'fa-duotone fa-sort-up'
-          : 'check';
+        const activeDesc =
+          this.ordersArray[this.columnsArray.indexOf('LogMedian')] === 'desc';
+        return activeDesc ? 'vertical' : undefined;
       },
     },
   };
@@ -90,6 +99,9 @@
       > svg
         font-size: 14px
         color: $MAIN_COLOR
+        &[data-prefix="fas"].fa-sort
+          color: $GRAY
+          opacity: .3
       &:hover
         cursor: pointer
       @for $i from 0 through 10
