@@ -5,8 +5,8 @@
         <div class="label">{{ label }}</div>
         <div v-if="note" class="tag">{{ note }}</div>
       </div>
-      <font-awesome-icon v-if="sortOrder(id)" :icon="orderNumber(id)" />
-      <font-awesome-icon :icon="sortIcon(id)" />
+      <font-awesome-icon v-if="isSort(id)" :icon="orderNumber(id)" />
+      <font-awesome-icon :icon="sortIcon(id)" :flip="sortOrder(id)" />
     </div>
     <font-awesome-icon
       icon="search"
@@ -82,6 +82,12 @@
           ? this.options.some(item => !this.filterModal.includes(item))
           : this.filterModal !== '';
       },
+      columnsArray() {
+        return this.projectSortColumnsWithLogMedian[0];
+      },
+      ordersArray() {
+        return this.projectSortColumnsWithLogMedian[1];
+      },
     },
     methods: {
       activeSort() {
@@ -91,20 +97,14 @@
         setFilterModal: 'set_filter_modal',
       }),
       sortIcon(id) {
-        const sortArray = this.projectSortColumnsWithLogMedian;
-        const columnsArray = sortArray[0];
-        const ordersArray = sortArray[1];
-        const activeColumn = columnsArray.includes(id);
-        const columnIndex = columnsArray.indexOf(id);
-        const activeDesc = ordersArray[columnIndex] === 'desc';
-        const activeAsc = ordersArray[columnIndex] === 'asc';
-        return activeColumn && activeDesc
-          ? 'fa-duotone fa-sort-down'
-          : activeColumn && activeAsc
-          ? 'fa-duotone fa-sort-up'
-          : 'sort';
+        return this.columnsArray.includes(id) ? 'fa-duotone fa-sort' : 'sort';
       },
       sortOrder(id) {
+        const activeDesc =
+          this.ordersArray[this.columnsArray.indexOf(id)] === 'desc';
+        return activeDesc ? 'vertical' : undefined;
+      },
+      isSort(id) {
         return this.sortIcon(id) === 'sort' ? false : true;
       },
       orderNumber(id) {
@@ -136,20 +136,20 @@
       font-size: 16px
       &[data-icon^="circle"]
         color: $MAIN_COLOR
-      &[data-icon^="sort"]
+      &[data-prefix="fas"].fa-sort
+        color: $GRAY
+        opacity: .3
+      &[data-prefix="fad"]
         color: $MAIN_COLOR
-      &[data-icon="sort"]
-        opacity: 0.3
       &[data-icon="magnifying-glass"]
         cursor: pointer
         font-size: 12px
-        color: $MAIN_COLOR
+        color: $GRAY
         margin-left: 0.5em
         transition: transform 0.2s ease-in-out
         &:hover
           cursor: pointer
           transform: scale(1.5)
         &.active
-          color: $ACTIVE_COLOR
-
+          color: $MAIN_COLOR
 </style>
