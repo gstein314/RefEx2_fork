@@ -62,10 +62,6 @@
         type: Array,
         default: () => [],
       },
-      projectSortColumnsWithLogMedian: {
-        type: Array,
-        default: () => [],
-      },
     },
     computed: {
       height() {
@@ -83,10 +79,10 @@
           : this.filterModal !== '';
       },
       columnsArray() {
-        return this.projectSortColumnsWithLogMedian[0];
+        return this.projectSortColumns[0];
       },
       ordersArray() {
-        return this.projectSortColumnsWithLogMedian[1];
+        return this.projectSortColumns[1];
       },
     },
     methods: {
@@ -108,7 +104,7 @@
         return this.sortIcon(id) === 'sort' ? false : true;
       },
       orderNumber(id) {
-        const position = this.projectSortColumnsWithLogMedian[0].indexOf(id);
+        const position = this.projectSortColumns[0].indexOf(id);
         return position === -1 ? undefined : `circle-${position + 1}`;
       },
     },

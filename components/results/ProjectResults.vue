@@ -14,9 +14,6 @@
               v-bind="filter"
               :class="filter.column"
               :project-sort-columns="projectSortColumns"
-              :project-sort-columns-with-log-median="
-                projectSortColumnsWithLogMedian
-              "
               @activeSort="activeSort"
             >
             </table-header>
@@ -53,8 +50,7 @@
               <MedianBar
                 v-else-if="filter.column === 'LogMedian'"
                 :items="items"
-                :median-info="result.combinedMedianData"
-                :results-stat="result"
+                :stat-info="tooltipData(items, result.itemNum)"
               />
               <font-awesome-icon
                 v-else-if="filter.column === 'annotation'"
@@ -169,15 +165,12 @@
         type: Array,
         default: () => [],
       },
-      projectSortColumnsWithLogMedian: {
-        type: Array,
-        default: () => [],
-      },
     },
 
     computed: {
       ...mapGetters({
         results: 'get_project_results',
+        projectItems: 'get_project_items',
         paginationObject: 'get_project_pagination',
         filters: 'project_filters',
         geneSummarySource: 'gene_summary_source',
@@ -207,11 +200,7 @@
             ) {
               // checks if all values are in range. Creates a list in case of Age due to multiple values in string form
               const n =
-                key === 'Age'
-                  ? createNumberList(result[key])
-                  : key === 'LogMedian'
-                  ? Object.values(result.combinedMedianData)
-                  : [result[key]];
+                key === 'Age' ? createNumberList(result[key]) : [result[key]];
               if (n.find(x => inRange(x, filter.filterModal)) === undefined)
                 isFiltered = true;
             }
@@ -252,9 +241,6 @@
     updated() {
       this.setProjectPagesNumber(this.pagesNumber);
     },
-    updated() {
-      this.setProjectPagesNumber(this.pagesNumber);
-    },
     methods: {
       ...mapMutations({
         setGeneModal: 'set_gene_modal',
@@ -265,6 +251,28 @@
         setActiveDataset: 'set_active_dataset',
         setProjectPagesNumber: 'set_project_pages_number',
       }),
+      tooltipData(items, itemNum) {
+        const statData = {};
+        let tmp = {
+          firstQuartileData: {},
+          minData: {},
+          maxData: {},
+          medianData: {},
+          thirdQuartileData: {},
+          sdData: {},
+          numberOfSamplesData: {},
+        };
+        const ids = [];
+        items.forEach(item => ids.push(item.id));
+        for (let i = 0; i < ids.length; i++) {
+          for (const statName in tmp) {
+            tmp[statName][ids[i]] =
+              this.projectItems.items[i][statName][itemNum];
+            if (i === ids.length - 1) statData[statName] = tmp[statName];
+          }
+        }
+        return statData;
+      },
       moveToProjectPage(route) {
         this.$nuxt.$loading.start();
         window.location.href = this.routeToOtherProjectPage(route);

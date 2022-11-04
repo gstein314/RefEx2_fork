@@ -22,8 +22,8 @@
     </li>
   </ul>
 </template>
-
 <script>
+  import { mapGetters } from 'vuex';
   export default {
     props: {
       items: {
@@ -42,26 +42,27 @@
         type: Array,
         default: () => [],
       },
-      projectSortColumnsWithLogMedian: {
-        type: Array,
-        default: () => [],
-      },
     },
     computed: {
+      ...mapGetters({
+        projectResultsAll: 'get_project_results_all',
+      }),
       filterType() {
         return window.location.pathname.split('/')[1];
       },
       columnsArray() {
-        return this.projectSortColumnsWithLogMedian[0];
+        return this.projectSortColumns[0];
       },
       ordersArray() {
-        return this.projectSortColumnsWithLogMedian[1];
+        return this.projectSortColumns[1];
       },
     },
     methods: {
       // only switch to 'up' order if the same item is selected and it was already a median sort
       select(id) {
         this.$emit('select', id);
+        if (this.activeId !== id)
+          this.$store.commit('set_project_results', this.projectResultsAll[id]);
       },
       isMedianSort(id) {
         return this.activeId === id;
@@ -79,7 +80,6 @@
     },
   };
 </script>
-
 <style lang="sass" scoped>
   .item_comparison
     padding: 0

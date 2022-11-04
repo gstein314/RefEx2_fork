@@ -30,9 +30,6 @@
           :active-id="selectedId"
           :display-info-button="filterType === 'gene'"
           :project-sort-columns="projectSortColumns"
-          :project-sort-columns-with-log-median="
-            projectSortColumnsWithLogMedian
-          "
           @select="updateSelectedItem"
           @showModal="setGeneModal"
         >
@@ -64,7 +61,6 @@
       :dataset="dataset"
       :selected-item="selectedId"
       :project-sort-columns="projectSortColumns"
-      :project-sort-columns-with-log-median="projectSortColumnsWithLogMedian"
       @activeSort="setProjectSortColumn"
     />
     <ResultsPagination
@@ -77,7 +73,7 @@
 
 <script>
   import 'vue-slider-component/dist-css/vue-slider-component.css';
-  import { mapMutations } from 'vuex';
+  import { mapGetters, mapMutations } from 'vuex';
   import ItemComparison from '~/components/results/ItemComparison.vue';
   import ModalViewGene from '~/components/ModalView/ModalViewGene.vue';
   import ModalViewCompare from '~/components/ModalView/ModalViewCompare.vue';
@@ -115,6 +111,7 @@
     },
     async asyncData({ $axios, query, store, route }) {
       let results;
+      let resultsAll = {};
       let isError = false;
       const { project, organism } = route.params;
       store.commit('set_specie', organism);
@@ -127,8 +124,13 @@
           if (data[`${type}_info`]?.error) {
             isError = true;
           }
-
-          if (index === 0) results = data.refex_info;
+          resultsAll[id] = data.refex_info.map((result, index) => {
+            return {
+              ...result,
+              itemNum: index,
+            };
+          });
+          store.commit('set_project_results_all', resultsAll);
           return {
             id,
             info: data[`${type}_info`],
@@ -195,107 +197,16 @@
       };
     },
     computed: {
-      resultsWithStatData() {
-        return this.results.map((result, index) => {
-          return {
-            ...result,
-            combinedFirstQuartileData: this.firstQuartileDataBySymbol[index],
-            combinedMedianData: this.medianDataBySymbol[index],
-            combinedThirdQuartileData: this.thirdQuartileDataBySymbol[index],
-            combinedSdData: this.sdDataBySymbol[index],
-            combinedNumberOfSamplesData:
-              this.numberOfSamplesDataBySymbol[index],
-            combinedMinData: this.minDataBySymbol[index],
-            combinedMaxData: this.maxDataBySymbol[index],
-          };
-        });
+      ...mapGetters({
+        projectResultsAll: 'get_project_results_all',
+      }),
+      projectItems() {
+        return {
+          items: this.items,
+        };
       },
       sampleIdKey() {
         return this.filterType === 'gene' ? 'sample_id' : 'id';
-      },
-      firstQuartileDataBySymbol() {
-        return this.results
-          .map(x => x.Log1stQu)
-          .reduce((acc, _curr, resultIndex) => {
-            const itemToPush = this.items.reduce((obj, item) => {
-              obj[item.id] = +item.firstQuartileData[resultIndex];
-              return obj;
-            }, {});
-            acc.push(itemToPush);
-            return acc;
-          }, []);
-      },
-      medianDataBySymbol() {
-        return this.results
-          .map(x => x.LogMedian)
-          .reduce((acc, _curr, resultIndex) => {
-            const itemToPush = this.items.reduce((obj, item) => {
-              obj[item.id] = +item.medianData[resultIndex];
-              return obj;
-            }, {});
-            acc.push(itemToPush);
-            return acc;
-          }, []);
-      },
-      thirdQuartileDataBySymbol() {
-        return this.results
-          .map(x => x.Log3rdQu)
-          .reduce((acc, _curr, resultIndex) => {
-            const itemToPush = this.items.reduce((obj, item) => {
-              obj[item.id] = +item.thirdQuartileData[resultIndex];
-              return obj;
-            }, {});
-            acc.push(itemToPush);
-            return acc;
-          }, []);
-      },
-      sdDataBySymbol() {
-        return this.results
-          .map(x => x.LogSd)
-          .reduce((acc, _curr, resultIndex) => {
-            const itemToPush = this.items.reduce((obj, item) => {
-              obj[item.id] = +item.sdData[resultIndex];
-              return obj;
-            }, {});
-            acc.push(itemToPush);
-            return acc;
-          }, []);
-      },
-      numberOfSamplesDataBySymbol() {
-        return this.results
-          .map(x => x.NumberOfSamples)
-          .reduce((acc, _curr, resultIndex) => {
-            const itemToPush = this.items.reduce((obj, item) => {
-              obj[item.id] = +item.numberOfSamplesData[resultIndex];
-              return obj;
-            }, {});
-            acc.push(itemToPush);
-            return acc;
-          }, []);
-      },
-      minDataBySymbol() {
-        return this.results
-          .map(x => x.min)
-          .reduce((acc, _curr, resultIndex) => {
-            const itemToPush = this.items.reduce((obj, item) => {
-              obj[item.id] = +item.minData[resultIndex];
-              return obj;
-            }, {});
-            acc.push(itemToPush);
-            return acc;
-          }, []);
-      },
-      maxDataBySymbol() {
-        return this.results
-          .map(x => x.max)
-          .reduce((acc, _curr, resultIndex) => {
-            const itemToPush = this.items.reduce((obj, item) => {
-              obj[item.id] = +item.maxData[resultIndex];
-              return obj;
-            }, {});
-            acc.push(itemToPush);
-            return acc;
-          }, []);
       },
       mainItem() {
         return this.items[0] || {};
@@ -309,24 +220,18 @@
       isNoSort() {
         return this.projectSortColumns[0].length === 0 ? false : true;
       },
-      projectSortColumnsWithLogMedian() {
-        const sortArray = this.projectSortColumns;
-        const columnsArray = sortArray[0];
-        const ordersArray = sortArray[1];
-        const copy = [...columnsArray].map(x => {
-          if (x.substring(0, x.indexOf('[')) === 'combinedMedianData') {
-            return 'LogMedian';
-          } else return x;
-        });
-        let newarr = [copy, ordersArray];
-        return newarr;
-      },
+    },
+    created() {
+      this.$store.commit('set_project_items', this.projectItems);
     },
     mounted() {
       if (this.isError) return;
       this.checkSampleAlias();
       this.$store.commit('set_project_filters', this.filters);
-      this.$store.commit('set_project_results', this.resultsWithStatData);
+      this.$store.commit(
+        'set_project_results',
+        this.projectResultsAll[this.selectedId]
+      );
     },
     updated() {
       this.heightChartWrapper = this.$refs.chartWrapper.clientHeight;
@@ -377,49 +282,14 @@
         const columnsArray = sortArray[0];
         const ordersArray = sortArray[1];
         const columnIndex = columnsArray.indexOf(column);
-        const combinedMedianData = `combinedMedianData[${selectedItem}]`;
-        const copy = [...columnsArray].map(x => {
-          if (x.substring(0, x.indexOf('[')) === 'combinedMedianData') {
-            return 'combinedMedianData';
-          } else return x;
-        });
-        const medianIndex = copy.indexOf('combinedMedianData');
-        function addSort(column) {
-          if (column === 'LogMedian') {
-            columnsArray.push(combinedMedianData);
-          } else {
-            columnsArray.push(column);
-          }
+        if (columnIndex === -1) {
+          columnsArray.push(column);
           ordersArray.push('desc');
-        }
-        function switchSort(index) {
-          ordersArray.splice(index, 1, 'asc');
-        }
-        function deleteSort(index) {
-          columnsArray.splice(index, 1);
-          ordersArray.splice(index, 1);
-        }
-        if (column === 'LogMedian') {
-          if (medianIndex === -1) {
-            addSort(column);
-          } else {
-            if (columnsArray[medianIndex] !== combinedMedianData) {
-              columnsArray.splice(medianIndex, 1, combinedMedianData);
-              ordersArray.splice(medianIndex, 1, 'desc');
-            } else {
-              if (ordersArray[medianIndex] === 'desc') {
-                switchSort(medianIndex);
-              } else {
-                deleteSort(medianIndex);
-              }
-            }
-          }
-        } else if (columnIndex === -1) {
-          addSort(column);
         } else if (ordersArray[columnIndex] === 'desc') {
-          switchSort(columnIndex);
+          ordersArray.splice(columnIndex, 1, 'asc');
         } else {
-          deleteSort(columnIndex);
+          columnsArray.splice(columnIndex, 1);
+          ordersArray.splice(columnIndex, 1);
         }
       },
       clearSortArray() {
