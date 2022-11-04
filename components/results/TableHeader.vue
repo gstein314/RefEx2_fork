@@ -144,9 +144,11 @@
         color: $GRAY
         margin-left: 0.5em
         transition: transform 0.2s ease-in-out
+        opacity: .3
         &:hover
           cursor: pointer
           transform: scale(1.5)
         &.active
+          opacity: unset
           color: $MAIN_COLOR
 </style>
