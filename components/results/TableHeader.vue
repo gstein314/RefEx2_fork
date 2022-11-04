@@ -5,8 +5,8 @@
         <div class="label">{{ label }}</div>
         <div v-if="note" class="tag">{{ note }}</div>
       </div>
-      <font-awesome-icon v-if="isSort(id)" :icon="orderNumber(id)" />
       <font-awesome-icon :icon="sortIcon(id)" :flip="sortOrder(id)" />
+      <font-awesome-icon v-if="isSort(id)" :icon="orderNumber(id)" />
     </div>
     <font-awesome-icon
       icon="search"
