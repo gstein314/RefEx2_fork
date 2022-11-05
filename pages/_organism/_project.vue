@@ -282,14 +282,13 @@
         }
       },
       setProjectSortColumn({ column, selectedItem }) {
-        const sortArray = this.projectSortColumns;
-        const columnsArray = sortArray[0];
-        const ordersArray = sortArray[1];
+        const columnsArray = this.projectSortColumns[0];
+        const ordersArray = this.projectSortColumns[1];
         const columnIndex = columnsArray.indexOf(column);
         if (columnIndex === -1) {
           columnsArray.push(column);
           ordersArray.push('desc');
-        } else if (column === 'LogMedian' && this.selectId === selectedItem) {
+        } else if (column === 'LogMedian' && this.selectedId !== selectedItem) {
           ordersArray.splice(columnIndex, 1, 'desc');
         } else if (ordersArray[columnIndex] === 'desc') {
           ordersArray.splice(columnIndex, 1, 'asc');
