@@ -232,6 +232,10 @@
         'set_project_results',
         this.projectResultsAll[this.selectedId]
       );
+      this.setProjectSortColumn({
+        column: 'LogMedian',
+        selectedItem: this.selectedId,
+      });
     },
     updated() {
       this.heightChartWrapper = this.$refs.chartWrapper.clientHeight;
@@ -285,6 +289,8 @@
         if (columnIndex === -1) {
           columnsArray.push(column);
           ordersArray.push('desc');
+        } else if (column === 'LogMedian' && this.selectId === selectedItem) {
+          ordersArray.splice(columnIndex, 1, 'desc');
         } else if (ordersArray[columnIndex] === 'desc') {
           ordersArray.splice(columnIndex, 1, 'asc');
         } else {
