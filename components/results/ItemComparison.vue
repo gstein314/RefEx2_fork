@@ -65,12 +65,12 @@
           this.$store.commit('set_project_results', this.projectResultsAll[id]);
       },
       isMedianSort(id) {
-        return this.activeId === id;
+        return this.activeId === id && this.columnsArray.includes('LogMedian');
       },
       sortIcon() {
         return this.columnsArray.includes('LogMedian')
           ? 'fa-duotone fa-sort'
-          : 'sort';
+          : undefined;
       },
       sortOrder() {
         const activeDesc =
