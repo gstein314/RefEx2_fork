@@ -11,13 +11,13 @@
           >
             <table-header
               :id="filter.column"
-              :current-sort="sort"
               v-bind="filter"
               :class="filter.column"
-              @switchSort="switchSort"
+              :project-sort-columns="projectSortColumns"
+              @activeSort="activeSort"
             >
-              <median-scale v-if="filter.column === 'LogMedian'" />
             </table-header>
+            <median-scale v-if="filter.column === 'LogMedian'" />
           </th>
         </tr>
       </thead>
@@ -125,6 +125,7 @@
   import TableHeader from '~/components/results/TableHeader.vue';
   import { mapGetters, mapMutations } from 'vuex';
   import specieSets from '~/refex-sample/datasets.json';
+  import _ from 'lodash';
   const inRange = (x, [min, max]) => {
     return typeof x !== 'number' || (x - min) * (x - max) <= 0;
   };
@@ -160,14 +161,10 @@
         type: Number,
         default: 200,
       },
-    },
-    data() {
-      return {
-        sort: {
-          key: 'LogMedian',
-          order: 'down',
-        },
-      };
+      projectSortColumns: {
+        type: Array,
+        default: () => [],
+      },
     },
 
     computed: {
@@ -186,63 +183,38 @@
 
       filteredData() {
         const copy = [...this.results];
-        return copy
-          .filter(result => {
-            let isFiltered = false;
-            for (const filter of this.filters) {
-              const key = filter.column;
+        const filtered = copy.filter(result => {
+          let isFiltered = false;
+          for (const filter of this.filters) {
+            const key = filter.column;
 
-              if (!filter.is_displayed) continue;
-              // options filter
-              else if (filter.options) {
-                if (!filter.filterModal.includes(result[key]))
-                  isFiltered = true;
-              }
-              // number filter
-              else if (
-                typeof filter.filterModal === 'number' ||
-                Array.isArray(filter.filterModal)
-              ) {
-                // checks if all values are in range. Creates a list in case of Age due to multiple values in string form
-                const n =
-                  key === 'Age' ? createNumberList(result[key]) : [result[key]];
-                if (n.find(x => inRange(x, filter.filterModal)) === undefined)
-                  isFiltered = true;
-              }
-              // text filter
-              else if (filter.filterModal !== '' && !isFiltered) {
-                // excact match if filter is based on API options
-                const isMatch = this.textFilter(
-                  result[key],
-                  filter.filterModal
-                );
-                isFiltered = filter.filterModal !== '' && !isMatch;
-              }
+            if (!filter.is_displayed) continue;
+            // options filter
+            else if (filter.options) {
+              if (!filter.filterModal.includes(result[key])) isFiltered = true;
             }
-            return !isFiltered;
-          })
-          ?.sort((a, b) => {
-            const aVal = a[this.sort.key];
-            const bVal = b[this.sort.key];
-            switch (this.sort?.order) {
-              case 'up':
-                if (aVal < bVal) {
-                  return -1;
-                } else if (aVal > bVal) {
-                  return 1;
-                } else {
-                  return 0;
-                }
-              case 'down':
-                if (aVal > bVal) {
-                  return -1;
-                } else if (aVal < bVal) {
-                  return 1;
-                } else {
-                  return 0;
-                }
+            // number filter
+            else if (
+              typeof filter.filterModal === 'number' ||
+              Array.isArray(filter.filterModal)
+            ) {
+              // checks if all values are in range. Creates a list in case of Age due to multiple values in string form
+              const n =
+                key === 'Age' ? createNumberList(result[key]) : [result[key]];
+              if (n.find(x => inRange(x, filter.filterModal)) === undefined)
+                isFiltered = true;
             }
-          });
+            // text filter
+            else if (filter.filterModal !== '' && !isFiltered) {
+              // excact match if filter is based on API options
+              const isMatch = this.textFilter(result[key], filter.filterModal);
+              isFiltered = filter.filterModal !== '' && !isMatch;
+            }
+          }
+          return !isFiltered;
+        });
+        const withSort = _.orderBy(filtered, ...this.projectSortColumns);
+        return withSort;
       },
       pageItems() {
         return this.filteredData.slice(
@@ -264,7 +236,6 @@
       this.setPageType('project');
     },
     mounted() {
-      this.$emit('updateSort', this.sort);
       this.setDataset();
     },
     updated() {
@@ -306,37 +277,11 @@
         this.$nuxt.$loading.start();
         window.location.href = this.routeToOtherProjectPage(route);
       },
-      sortUpOrDown(a, b) {
-        switch (this.sort?.order) {
-          case 'up':
-            if (a < b) {
-              return -1;
-            } else if (a > b) {
-              return 1;
-            } else {
-              return 0;
-            }
-          case 'down':
-            if (a > b) {
-              return -1;
-            } else if (a < b) {
-              return 1;
-            } else {
-              return 0;
-            }
-        }
-      },
-      switchSort(col_name, order) {
-        if (this.sort.key === col_name) {
-          this.sort.order = this.sort.order === 'up' ? 'down' : 'up';
-        } else {
-          this.sort.key = col_name;
-          this.sort.order = 'up';
-        }
-        if (order) {
-          this.sort.order = order;
-        }
-        this.$emit('updateSort', this.sort);
+      activeSort(col_name) {
+        this.$emit('activeSort', {
+          column: col_name,
+          selectedItem: this.selectedItem,
+        });
       },
       textFilter(fullText, inputText) {
         const reg = new RegExp(inputText, 'gi');

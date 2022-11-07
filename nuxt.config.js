@@ -29,6 +29,7 @@ export default {
     'normalize.css',
     '~/assets/css/fontawesome_styles.css',
     'vue-multiselect/dist/vue-multiselect.min.css',
+    '@fortawesome/fontawesome-svg-core/styles.css'
   ],
 
   styleResources: {
@@ -40,6 +41,7 @@ export default {
     { src: '~/plugins/vue-tags-input', ssr: false },
     { src: '@/plugins/plugin', mode: 'client' },
     '~/plugins/mixin.js',
+    '~/plugins/fontawesome.js',
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
