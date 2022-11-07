@@ -28,16 +28,22 @@
         <item-comparison
           :items="items"
           :active-id="selectedId"
-          :active-sort="resultsSort"
           :display-info-button="filterType === 'gene'"
+          :project-sort-columns="projectSortColumns"
           @select="updateSelectedItem"
           @showModal="setGeneModal"
         >
         </item-comparison>
-        <a class="display_settings" @click="toggleDisplaySettings">
-          <font-awesome-icon icon="eye" />
-          Show/hide columns
-        </a>
+        <div class="display_settings">
+          <a v-if="isNoSort" class="reset_sort" @click="clearSortArray">
+            <font-awesome-icon icon="xmark" />
+            Reset sorting column(s)
+          </a>
+          <a @click="toggleDisplaySettings">
+            <font-awesome-icon icon="eye" />
+            Show/hide columns
+          </a>
+        </div>
       </div>
     </div>
     <ModalViewDisplay
@@ -54,7 +60,8 @@
       :gene-id-key="geneIdKey"
       :dataset="dataset"
       :selected-item="selectedId"
-      @updateSort="updateResultSort"
+      :project-sort-columns="projectSortColumns"
+      @activeSort="setProjectSortColumn"
     />
     <ResultsPagination
       :pages-number="$store.state.project_pages_number"
@@ -66,7 +73,7 @@
 
 <script>
   import 'vue-slider-component/dist-css/vue-slider-component.css';
-  import { mapMutations } from 'vuex';
+  import { mapGetters, mapMutations } from 'vuex';
   import ItemComparison from '~/components/results/ItemComparison.vue';
   import ModalViewGene from '~/components/ModalView/ModalViewGene.vue';
   import ModalViewCompare from '~/components/ModalView/ModalViewCompare.vue';
@@ -104,6 +111,7 @@
     },
     async asyncData({ $axios, query, store, route }) {
       let results;
+      let resultsAll = {};
       let isError = false;
       const { project, organism } = route.params;
       store.commit('set_specie', organism);
@@ -116,12 +124,19 @@
           if (data[`${type}_info`]?.error) {
             isError = true;
           }
-
-          if (index === 0) results = data.refex_info;
+          resultsAll[id] = data.refex_info.map((result, index) => {
+            return {
+              ...result,
+              itemNum: index,
+            };
+          });
+          store.commit('set_project_results_all', resultsAll);
           return {
             id,
             info: data[`${type}_info`],
             firstQuartileData: data.refex_info?.map(x => x.Log1stQu),
+            minData: data.refex_info?.map(x => x.LogMin),
+            maxData: data.refex_info?.map(x => x.LogMax),
             medianData: data.refex_info?.map(x => x.LogMedian),
             thirdQuartileData: data.refex_info?.map(x => x.Log3rdQu),
             sdData: data.refex_info?.map(x => x.LogSd),
@@ -175,91 +190,23 @@
     },
     data() {
       return {
-        resultsSort: {
-          key: '',
-          order: 'down',
-        },
         optionsStaticData: {},
         isDisplaySettingsOn: false,
         heightChartWrapper: 200,
+        projectSortColumns: [[], []],
       };
     },
     computed: {
-      resultsWithMedianData() {
-        return this.results.map((result, index) => {
-          return {
-            ...result,
-            combinedFirstQuartileData: this.firstQuartileDataBySymbol[index],
-            combinedMedianData: this.medianDataBySymbol[index],
-            combinedThirdQuartileData: this.thirdQuartileDataBySymbol[index],
-            combinedSdData: this.sdDataBySymbol[index],
-            combinedNumberOfSamplesData:
-              this.numberOfSamplesDataBySymbol[index],
-          };
-        });
+      ...mapGetters({
+        projectResultsAll: 'get_project_results_all',
+      }),
+      projectItems() {
+        return {
+          items: this.items,
+        };
       },
       sampleIdKey() {
         return this.filterType === 'gene' ? 'sample_id' : 'id';
-      },
-      firstQuartileDataBySymbol() {
-        return this.results
-          .map(x => x.Log1stQu)
-          .reduce((acc, _curr, resultIndex) => {
-            const itemToPush = this.items.reduce((obj, item) => {
-              obj[item.id] = +item.firstQuartileData[resultIndex];
-              return obj;
-            }, {});
-            acc.push(itemToPush);
-            return acc;
-          }, []);
-      },
-      medianDataBySymbol() {
-        return this.results
-          .map(x => x.LogMedian)
-          .reduce((acc, _curr, resultIndex) => {
-            const itemToPush = this.items.reduce((obj, item) => {
-              obj[item.id] = +item.medianData[resultIndex];
-              return obj;
-            }, {});
-            acc.push(itemToPush);
-            return acc;
-          }, []);
-      },
-      thirdQuartileDataBySymbol() {
-        return this.results
-          .map(x => x.Log3rdQu)
-          .reduce((acc, _curr, resultIndex) => {
-            const itemToPush = this.items.reduce((obj, item) => {
-              obj[item.id] = +item.thirdQuartileData[resultIndex];
-              return obj;
-            }, {});
-            acc.push(itemToPush);
-            return acc;
-          }, []);
-      },
-      sdDataBySymbol() {
-        return this.results
-          .map(x => x.LogSd)
-          .reduce((acc, _curr, resultIndex) => {
-            const itemToPush = this.items.reduce((obj, item) => {
-              obj[item.id] = +item.sdData[resultIndex];
-              return obj;
-            }, {});
-            acc.push(itemToPush);
-            return acc;
-          }, []);
-      },
-      numberOfSamplesDataBySymbol() {
-        return this.results
-          .map(x => x.NumberOfSamples)
-          .reduce((acc, _curr, resultIndex) => {
-            const itemToPush = this.items.reduce((obj, item) => {
-              obj[item.id] = +item.numberOfSamplesData[resultIndex];
-              return obj;
-            }, {});
-            acc.push(itemToPush);
-            return acc;
-          }, []);
       },
       mainItem() {
         return this.items[0] || {};
@@ -270,12 +217,25 @@
       selectedItem() {
         return this.items.find(item => item.id === this.selectedId);
       },
+      isNoSort() {
+        return this.projectSortColumns[0].length === 0 ? false : true;
+      },
+    },
+    created() {
+      this.$store.commit('set_project_items', this.projectItems);
     },
     mounted() {
       if (this.isError) return;
       this.checkSampleAlias();
       this.$store.commit('set_project_filters', this.filters);
-      this.$store.commit('set_project_results', this.resultsWithMedianData);
+      this.$store.commit(
+        'set_project_results',
+        this.projectResultsAll[this.selectedId]
+      );
+      this.setProjectSortColumn({
+        column: 'LogMedian',
+        selectedItem: this.selectedId,
+      });
     },
     updated() {
       this.heightChartWrapper = this.$refs.chartWrapper.clientHeight;
@@ -293,16 +253,12 @@
       toggleDisplayOfFilter(arr) {
         this.filters = arr;
       },
-      updateResultSort(sort) {
-        // NOTE: this code is left commented out as it may be needed
-        // reset selectedItem if sort other then median is changed
-        // if (sort.key !== 'LogMedian')
-        //   this.selectedId = this.mainItem[this.sampleIdKey];
-        this.resultsSort = sort;
-      },
-      updateSelectedItem({ id, sortOrder = 'down' }) {
+      updateSelectedItem(id) {
+        this.setProjectSortColumn({
+          column: 'LogMedian',
+          selectedItem: id,
+        });
         this.selectedId = id;
-        this.$refs.results.switchSort('LogMedian', sortOrder);
         requestAnimationFrame(
           () => (this.heightChartWrapper = this.$refs.chartWrapper.clientHeight)
         );
@@ -325,6 +281,25 @@
           });
         }
       },
+      setProjectSortColumn({ column, selectedItem }) {
+        const columnsArray = this.projectSortColumns[0];
+        const ordersArray = this.projectSortColumns[1];
+        const columnIndex = columnsArray.indexOf(column);
+        if (columnIndex === -1) {
+          columnsArray.push(column);
+          ordersArray.push('desc');
+        } else if (column === 'LogMedian' && this.selectedId !== selectedItem) {
+          ordersArray.splice(columnIndex, 1, 'desc');
+        } else if (ordersArray[columnIndex] === 'desc') {
+          ordersArray.splice(columnIndex, 1, 'asc');
+        } else {
+          columnsArray.splice(columnIndex, 1);
+          ordersArray.splice(columnIndex, 1);
+        }
+      },
+      clearSortArray() {
+        this.projectSortColumns = [[], []];
+      },
     },
   };
 </script>
@@ -344,7 +319,7 @@
       width: 100%
       font-size: 20px
       margin: 40px
-      > .fa-exclamation-triangle
+      > .fa-triangle-exclamation
         margin-right: 6px
     .chart_wrapper
       display: flex
@@ -372,7 +347,7 @@
           display: flex
           align-items: flex-start
           margin: 0
-          > .fa-info-circle
+          > .fa-circle-info
             color: $MAIN_COLOR
             font-size: 24px
             margin-right: 6px
@@ -387,6 +362,10 @@
         > .display_settings
           +display_settings
           place-self: flex-end
+          > a + a
+            margin-left: 20px
+          > .reset_sort
+            color: $ERROR_COLOR
     .pagination
       display: flex
       position: sticky

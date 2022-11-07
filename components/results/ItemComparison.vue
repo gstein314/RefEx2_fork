@@ -4,10 +4,7 @@
       v-for="(item, index) of items"
       :key="index"
       class="item_box"
-      :class="[
-        `item_${index + 1}`,
-        { active: activeId === item.id && isMedianSort },
-      ]"
+      :class="[`item_${index + 1}`, { active: isMedianSort(item.id) }]"
       @click="select(item.id)"
     >
       <font-awesome-icon
@@ -18,14 +15,15 @@
       />
       <span>{{ item.info.symbol || item.info.Description }}</span>
       <font-awesome-icon
-        v-if="activeId === item.id && isMedianSort"
-        :icon="`sort-amount-${activeSort.order}`"
+        v-if="isMedianSort(item.id)"
+        :icon="sortIcon()"
+        :flip="sortOrder()"
       />
     </li>
   </ul>
 </template>
-
 <script>
+  import { mapGetters } from 'vuex';
   export default {
     props: {
       items: {
@@ -36,43 +34,52 @@
         type: String,
         default: '',
       },
-      activeSort: {
-        type: Object,
-        default: () => ({
-          key: '',
-          order: 'down',
-        }),
-      },
       displayInfoButton: {
         type: Boolean,
         default: false,
       },
+      projectSortColumns: {
+        type: Array,
+        default: () => [],
+      },
     },
     computed: {
-      isMedianSort() {
-        return this.activeSort.key === 'LogMedian';
-      },
+      ...mapGetters({
+        projectResultsAll: 'get_project_results_all',
+      }),
       filterType() {
         return window.location.pathname.split('/')[1];
+      },
+      columnsArray() {
+        return this.projectSortColumns[0];
+      },
+      ordersArray() {
+        return this.projectSortColumns[1];
       },
     },
     methods: {
       // only switch to 'up' order if the same item is selected and it was already a median sort
       select(id) {
-        this.$emit('select', {
-          id,
-          sortOrder:
-            this.activeId === id &&
-            this.isMedianSort &&
-            this.activeSort.order === 'down'
-              ? 'up'
-              : 'down',
-        });
+        this.$emit('select', id);
+        if (this.activeId !== id)
+          this.$store.commit('set_project_results', this.projectResultsAll[id]);
+      },
+      isMedianSort(id) {
+        return this.activeId === id && this.columnsArray.includes('LogMedian');
+      },
+      sortIcon() {
+        return this.columnsArray.includes('LogMedian')
+          ? 'fa-duotone fa-sort'
+          : undefined;
+      },
+      sortOrder() {
+        const activeDesc =
+          this.ordersArray[this.columnsArray.indexOf('LogMedian')] === 'desc';
+        return activeDesc ? 'vertical' : undefined;
       },
     },
   };
 </script>
-
 <style lang="sass" scoped>
   .item_comparison
     padding: 0
@@ -92,6 +99,9 @@
       > svg
         font-size: 14px
         color: $MAIN_COLOR
+        &[data-prefix="fas"].fa-sort
+          color: $GRAY
+          opacity: .3
       &:hover
         cursor: pointer
       @for $i from 0 through 10

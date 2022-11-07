@@ -5,14 +5,16 @@
       :key="itemIndex"
       class="bar single_item value"
       :class="`item_${itemIndex + 1}`"
-      :style="`width: ${(medianInfo[item.id] * 230) / 16}px;`"
+      :style="`width: ${(statInfo.medianData[item.id] * 230) / 16}px;`"
     ></div>
     <div class="tooltip" :style="`left: ${maxWidth + 30}px`">
-      <div class="title">Expression(log2(TPM+1))</div>
+      <div class="title">Expression (log2(TPM+1))</div>
       <div class="header"></div>
+      <div class="header">Min</div>
       <div class="header">1<sup>st</sup>Qu</div>
       <div class="header">Median</div>
       <div class="header">3<sup>rd</sup>Qu</div>
+      <div class="header">Max</div>
       <div class="header">SD</div>
       <div class="header">No. of Samples</div>
       <div class="dot">
@@ -25,31 +27,37 @@
       </div>
       <div class="data">
         <p v-for="(item, itemIndex) of items" :key="itemIndex">
-          {{
-            tooltipNumberDisplay(resultsStat.combinedFirstQuartileData[item.id])
-          }}
+          {{ tooltipNumberDisplay(statInfo.minData[item.id]) }}
+        </p>
+      </div>
+      <div class="data">
+        <p v-for="(item, itemIndex) of items" :key="itemIndex">
+          {{ tooltipNumberDisplay(statInfo.firstQuartileData[item.id]) }}
         </p>
       </div>
       <div class="data bold">
         <p v-for="(item, itemIndex) of items" :key="itemIndex">
-          {{ tooltipNumberDisplay(resultsStat.combinedMedianData[item.id]) }}
+          {{ tooltipNumberDisplay(statInfo.medianData[item.id]) }}
         </p>
       </div>
       <div class="data">
         <p v-for="(item, itemIndex) of items" :key="itemIndex">
-          {{
-            tooltipNumberDisplay(resultsStat.combinedThirdQuartileData[item.id])
-          }}
+          {{ tooltipNumberDisplay(statInfo.thirdQuartileData[item.id]) }}
         </p>
       </div>
       <div class="data">
         <p v-for="(item, itemIndex) of items" :key="itemIndex">
-          {{ tooltipNumberDisplay(resultsStat.combinedSdData[item.id]) }}
+          {{ tooltipNumberDisplay(statInfo.maxData[item.id]) }}
         </p>
       </div>
       <div class="data">
         <p v-for="(item, itemIndex) of items" :key="itemIndex">
-          {{ resultsStat.combinedNumberOfSamplesData[item.id] }}
+          {{ tooltipNumberDisplay(statInfo.sdData[item.id]) }}
+        </p>
+      </div>
+      <div class="data">
+        <p v-for="(item, itemIndex) of items" :key="itemIndex">
+          {{ statInfo.numberOfSamplesData[item.id] }}
         </p>
       </div>
     </div>
@@ -59,7 +67,7 @@
 <script>
   export default {
     props: {
-      medianInfo: {
+      statInfo: {
         type: Object,
         default: () => {},
       },
@@ -77,7 +85,9 @@
         return this.items.length;
       },
       maxWidth() {
-        return (Math.max(...Object.values(this.medianInfo)) * 230) / 16;
+        return (
+          (Math.max(...Object.values(this.statInfo.medianData)) * 230) / 16
+        );
       },
       height() {
         return this.numberOfItems * 15;
@@ -125,10 +135,10 @@
     &:hover
       > .tooltip
         display: grid
-        grid-template-areas: 'top top top top top top' 'header header header header header header''dot data data data data data'
-        grid-template-columns: 1fr
+        grid-template-areas: 'top top top top top top top top' 'header header header header header header header header''dot data data data data data data data'
+        grid-auto-columns: 15px 50px 50px 50px 50px 50px 50px 100px
         grid-row-gap: 1px
-        grid-column-gap: 1rem
+        grid-column-gap: 0.2rem
         padding: 10px
         z-index: 100
         > .title
@@ -144,7 +154,7 @@
           border-radius: 50%
           background-color: #00ff00
           display: inline-block
-          margin: 0 10px
+          margin: 0 5px
         > .header, .bold
           font-weight: bold
         > div

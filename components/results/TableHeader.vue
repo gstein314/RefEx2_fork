@@ -1,20 +1,18 @@
 <template>
-  <div class="inner" :class="{ '-column': note }">
-    <span class="label"> {{ label }} </span>
-    <div class="details">
-      <span v-if="note" class="tag">{{ note }}</span>
-
-      <font-awesome-icon
-        :icon="currentSort.key === id ? `sort-${currentSort.order}` : 'sort'"
-        @click="switchSort"
-      />
-      <font-awesome-icon
-        icon="search"
-        :class="{ active: isActiveSearch }"
-        @click="setFilterModal(id)"
-      />
+  <div class="table_header">
+    <div class="inner" :class="{ '-column': note }" @click="activeSort">
+      <div class="details">
+        <div class="label">{{ label }}</div>
+        <div v-if="note" class="tag">{{ note }}</div>
+      </div>
+      <font-awesome-icon :icon="sortIcon(id)" :flip="sortOrder(id)" />
+      <font-awesome-icon v-if="isSort(id)" :icon="orderNumber(id)" />
     </div>
-    <slot></slot>
+    <font-awesome-icon
+      icon="search"
+      :class="{ active: isActiveSearch }"
+      @click="setFilterModal(id)"
+    />
   </div>
 </template>
 
@@ -60,9 +58,9 @@
         type: Object,
         required: false,
       },
-      currentSort: {
-        type: Object,
-        required: true,
+      projectSortColumns: {
+        type: Array,
+        default: () => [],
       },
     },
     computed: {
@@ -80,41 +78,73 @@
           ? this.options.some(item => !this.filterModal.includes(item))
           : this.filterModal !== '';
       },
+      columnsArray() {
+        return this.projectSortColumns[0];
+      },
+      ordersArray() {
+        return this.projectSortColumns[1];
+      },
     },
     methods: {
-      switchSort() {
-        this.$emit('switchSort', this.id);
+      activeSort() {
+        this.$emit('activeSort', this.id);
       },
       ...mapMutations({
         setFilterModal: 'set_filter_modal',
       }),
+      sortIcon(id) {
+        return this.columnsArray.includes(id) ? 'fa-duotone fa-sort' : 'sort';
+      },
+      sortOrder(id) {
+        const activeDesc =
+          this.ordersArray[this.columnsArray.indexOf(id)] === 'desc';
+        return activeDesc ? 'vertical' : undefined;
+      },
+      isSort(id) {
+        return this.sortIcon(id) === 'sort' ? false : true;
+      },
+      orderNumber(id) {
+        const position = this.projectSortColumns[0].indexOf(id);
+        return position === -1 ? undefined : `circle-${position + 1}`;
+      },
     },
   };
 </script>
 <style lang="sass" scoped>
-  .inner
-    display: grid
-    gap: 0.5rem
-    grid-template-columns: auto 1fr
-    grid-template-rows: auto 1fr
-    &.-column
-      grid-template-columns: 1fr
-    > .details
+  .table_header
+    display: flex
+    align-items: center
+    .inner
+      padding: 5px
+      margin-left: -5px
+      transition: background-color 0.3s ease-in-out
       display: flex
-      gap: 0.5rem
       align-items: center
-      svg
-        &:hover
-          cursor: pointer
-        &[data-icon="sort"]
-          color: $GRAY
-          opacity: .3
-        &[data-icon="search"]
-          font-size: 12px
-          color: $MAIN_COLOR
-          &.active
-            color: $ACTIVE_COLOR
+      gap: 0.5rem
+      &:hover
+        cursor: pointer
+        background-color: rgba($MAIN_COLOR, .2)
+        border-radius: 0.2rem
     .tag
       +ontology_tag
       width: fit-content
+    svg
+      font-size: 16px
+      color: $MAIN_COLOR
+      &[data-prefix="fas"].fa-sort
+        color: $GRAY
+        opacity: .3
+      &[data-icon="magnifying-glass"]
+        cursor: pointer
+        font-size: 12px
+        color: $GRAY
+        margin-left: 0.5em
+        transition: transform 0.2s ease-in-out
+        opacity: .3
+        &:hover
+          cursor: pointer
+          transform: scale(1.5)
+        &.active
+          opacity: unset
+          color: $MAIN_COLOR
 </style>
