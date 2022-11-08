@@ -35,11 +35,15 @@
         >
         </item-comparison>
         <div class="display_settings">
-          <a v-if="isNoSort" class="reset_sort" @click="clearSortArray">
+          <a
+            v-if="isNoSort"
+            class="icon_on_left reset_sort"
+            @click="clearSortArray"
+          >
             <font-awesome-icon icon="xmark" />
             Reset sorting column(s)
           </a>
-          <a @click="toggleDisplaySettings">
+          <a class="icon_on_left" @click="toggleDisplaySettings">
             <font-awesome-icon icon="eye" />
             Show/hide columns
           </a>
@@ -362,6 +366,15 @@
         > .display_settings
           +display_settings
           place-self: flex-end
+          > a
+            +link_with_icon
+            > svg
+              &[data-icon="xmark"]
+                font-size: 20px
+                top: -1px
+                left: -2px
+              &[data-icon="eye"]
+                left: -6px
           > a + a
             margin-left: 20px
           > .reset_sort
