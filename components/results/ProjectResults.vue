@@ -62,28 +62,9 @@
                 :src="geneSummarySource(result[geneIdKey])"
                 :alt="result[geneIdKey]"
               />
-              <template
-                v-else-if="
-                  filter.column === 'alias' &&
-                  Array.isArray(JSON.parse(result[filter.column]))
-                "
-              >
-                <span
-                  v-for="(alias, alias_index) in JSON.parse(
-                    result[filter.column]
-                  )"
-                  :key="alias_index"
-                >
-                  <span>{{ alias }}</span>
-                  <span
-                    v-if="
-                      alias_index < JSON.parse(result[filter.column]).length - 1
-                    "
-                    class="comma"
-                    >,
-                  </span>
-                </span>
-              </template>
+              <span v-else-if="filter.column === 'alias'">
+                {{ result.alias }}
+              </span>
               <template v-else-if="hasStringQuotes(result[filter.column])">
                 {{ result[filter.column].replaceAll('"', '') }}
               </template>
