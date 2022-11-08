@@ -63,7 +63,7 @@
                 :alt="result[geneIdKey]"
               />
               <span v-else-if="filter.column === 'alias'">
-                {{ result.alias }}
+                {{ formatAlias(result.alias) }}
               </span>
               <template v-else-if="hasStringQuotes(result[filter.column])">
                 {{ result[filter.column].replaceAll('"', '') }}
@@ -278,6 +278,15 @@
       },
       hasStringQuotes(str) {
         return str?.startsWith('"') && str?.endsWith('"');
+      },
+      formatAlias(str) {
+        if (str) {
+          try {
+            return JSON.parse(str).join(', ');
+          } catch (e) {
+            return str.replaceAll('"', '');
+          }
+        }
       },
     },
   };
