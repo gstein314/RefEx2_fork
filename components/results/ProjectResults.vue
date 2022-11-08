@@ -280,12 +280,10 @@
         return str?.startsWith('"') && str?.endsWith('"');
       },
       formatAlias(str) {
-        if (str) {
-          try {
-            return JSON.parse(str).join(', ');
-          } catch (e) {
-            return str.replaceAll('"', '');
-          }
+        try {
+          return JSON.parse(str).join(', ');
+        } catch (e) {
+          return str.replaceAll('"', '');
         }
       },
     },
