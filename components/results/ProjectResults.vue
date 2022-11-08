@@ -282,7 +282,7 @@
       formatAlias(str) {
         try {
           return JSON.parse(str).join(', ');
-        } catch (e) {
+        } catch {
           return str.replaceAll('"', '');
         }
       },
