@@ -117,6 +117,9 @@
   .table_header
     display: flex
     align-items: center
+    min-width: 150px
+    &.Description
+      min-width: 450px
     .inner
       padding: 5px
       margin-left: -5px
