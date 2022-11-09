@@ -5,8 +5,14 @@
         <div class="label">{{ label }}</div>
         <div v-if="note" class="tag">{{ note }}</div>
       </div>
-      <font-awesome-icon :icon="sortIcon(id)" :flip="sortOrder(id)" />
-      <font-awesome-icon v-if="isSort(id)" :icon="orderNumber(id)" />
+      <font-awesome-icon
+        :icon="sortIcon(convertedId(id))"
+        :flip="sortOrder(convertedId(id))"
+      />
+      <font-awesome-icon
+        v-if="isSort(convertedId(id))"
+        :icon="orderNumber(convertedId(id))"
+      />
     </div>
     <font-awesome-icon
       icon="search"
@@ -106,6 +112,12 @@
       orderNumber(id) {
         const position = this.projectSortColumns[0].indexOf(id);
         return position === -1 ? undefined : `circle-${position + 1}`;
+      },
+      convertedId(id) {
+        if (id === 'ncbiGeneId' || id === 'chromosomePosition') {
+          id += 'Int';
+          return id;
+        } else return id;
       },
     },
   };
