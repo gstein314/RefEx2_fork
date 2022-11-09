@@ -215,12 +215,8 @@
         });
         // create number type keys for "ncbiGeneId" and "chromosomePosition" before sorting
         const intFiltered = filtered.map(item => {
-          if (item.hasOwnProperty('ncbiGeneId')) {
-            item.ncbiGeneIdInt = parseInt(item.ncbiGeneId);
-          }
-          if (item.hasOwnProperty('chromosomePosition')) {
-            item.chromosomePositionInt = parseInt(item.chromosomePosition);
-          }
+          item.ncbiGeneIdInt = parseInt(item.ncbiGeneId);
+          item.chromosomePositionInt = parseInt(item.chromosomePosition);
           return item;
         });
         const withSort = _.orderBy(intFiltered, ...this.projectSortColumns);
