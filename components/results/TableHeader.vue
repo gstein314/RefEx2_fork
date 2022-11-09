@@ -6,12 +6,12 @@
         <div v-if="note" class="tag">{{ note }}</div>
       </div>
       <font-awesome-icon
-        :icon="sortIcon(convertedId(id))"
-        :flip="sortOrder(convertedId(id))"
+        :style="{ visibility: isSort(convertedId(id)) }"
+        :icon="orderNumber(convertedId(id))"
       />
       <font-awesome-icon
-        v-if="isSort(convertedId(id))"
-        :icon="orderNumber(convertedId(id))"
+        :icon="sortIcon(convertedId(id))"
+        :flip="sortOrder(convertedId(id))"
       />
     </div>
     <font-awesome-icon
@@ -107,11 +107,11 @@
         return activeDesc ? 'vertical' : undefined;
       },
       isSort(id) {
-        return this.sortIcon(id) === 'sort' ? false : true;
+        return this.sortIcon(id) === 'sort' ? 'hidden' : 'visible';
       },
       orderNumber(id) {
         const position = this.projectSortColumns[0].indexOf(id);
-        return position === -1 ? undefined : `circle-${position + 1}`;
+        return position === -1 ? 'circle' : `circle-${position + 1}`;
       },
       convertedId(id) {
         if (id === 'ncbiGeneId' || id === 'chromosomePosition') {
@@ -126,6 +126,13 @@
   .table_header
     display: flex
     align-items: center
+    min-width: 150px
+    &.Description
+      min-width: 450px
+    &.symbol
+      min-width: 150px
+    &.name
+      min-width: 300px
     .inner
       padding: 5px
       margin-left: -5px

@@ -313,6 +313,10 @@
     table
       white-space: nowrap
       +table
+      > thead
+        > tr
+          > th:last-child
+            width: 100%
       > tbody
         > tr
           > td
@@ -329,4 +333,7 @@
                 font-size: 11px
                 color: $MAIN_COLOR
                 cursor: pointer
+          > td:last-child
+            width: 100%
+
 </style>
