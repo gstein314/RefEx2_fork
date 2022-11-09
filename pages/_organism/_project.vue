@@ -286,6 +286,11 @@
         }
       },
       setProjectSortColumn({ column, selectedItem }) {
+        if (column === 'ncbiGeneId') {
+          column = 'ncbiGeneIdInt';
+        } else if (column === 'chromosomePosition') {
+          column = 'chromosomePositionInt';
+        }
         const columnsArray = this.projectSortColumns[0];
         const ordersArray = this.projectSortColumns[1];
         const columnIndex = columnsArray.indexOf(column);
