@@ -5,8 +5,11 @@
         <div class="label">{{ label }}</div>
         <div v-if="note" class="tag">{{ note }}</div>
       </div>
+      <font-awesome-icon
+        :style="{ visibility: isSort(id) }"
+        :icon="orderNumber(id)"
+      />
       <font-awesome-icon :icon="sortIcon(id)" :flip="sortOrder(id)" />
-      <font-awesome-icon v-if="isSort(id)" :icon="orderNumber(id)" />
     </div>
     <font-awesome-icon
       icon="search"
@@ -101,11 +104,11 @@
         return activeDesc ? 'vertical' : undefined;
       },
       isSort(id) {
-        return this.sortIcon(id) === 'sort' ? false : true;
+        return this.sortIcon(id) === 'sort' ? 'hidden' : 'visible';
       },
       orderNumber(id) {
         const position = this.projectSortColumns[0].indexOf(id);
-        return position === -1 ? undefined : `circle-${position + 1}`;
+        return position === -1 ? 'circle' : `circle-${position + 1}`;
       },
     },
   };
