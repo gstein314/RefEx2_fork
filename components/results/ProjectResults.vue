@@ -323,5 +323,4 @@
                 cursor: pointer
           > td:last-child
             width: 100%
-
 </style>

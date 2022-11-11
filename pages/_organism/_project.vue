@@ -35,6 +35,35 @@
         >
         </item-comparison>
         <div class="display_settings">
+          <vue-json-to-csv
+            :json-data="[
+              {
+                name: 'John',
+                surname: 'Doe',
+                age: 20,
+                salary: 20.0,
+                hours: 37.4,
+              },
+              {
+                name: 'John',
+                surname: 'Roe',
+                age: 40,
+                salary: 40.0,
+                hours: 35.2,
+              },
+              {
+                name: 'Jane',
+                surname: 'Woe',
+                age: 50,
+                salary: 52.0,
+                hours: 30.4,
+              },
+            ]"
+            :csv-title="'title'"
+          >
+            <button>Download .csv</button>
+          </vue-json-to-csv>
+
           <a
             v-if="isNoSort"
             class="icon_on_left reset_sort"
@@ -369,6 +398,8 @@
         > .display_settings
           +display_settings
           place-self: flex-end
+          > #json-to-csv-52
+            display: block
           > a
             +link_with_icon
             > svg
