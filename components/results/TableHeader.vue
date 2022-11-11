@@ -1,24 +1,45 @@
 <template>
   <div class="table_header">
-    <div class="inner" :class="{ '-column': note }" @click="activeSort">
-      <div class="details">
-        <div class="label">{{ label }}</div>
-        <div v-if="note" class="tag">{{ note }}</div>
+    <template>
+      <div
+        v-if="
+          id === 'gene expression patterns' ||
+          id === 'annotation' ||
+          id === 'alias'
+        "
+        :class="{ '-column': note }"
+      >
+        <div class="details">
+          <div class="label">{{ label }}</div>
+          <div v-if="note" class="tag">{{ note }}</div>
+        </div>
+      </div>
+      <div
+        v-else-if="true"
+        class="inner"
+        :class="{ '-column': note }"
+        @click="activeSort"
+      >
+        <div class="details">
+          <div class="label">{{ label }}</div>
+          <div v-if="note" class="tag">{{ note }}</div>
+        </div>
+        <font-awesome-icon
+          :style="{ visibility: isSort(convertedId(id)) }"
+          :icon="orderNumber(convertedId(id))"
+        />
+        <font-awesome-icon
+          :icon="sortIcon(convertedId(id))"
+          :flip="sortOrder(convertedId(id))"
+        />
       </div>
       <font-awesome-icon
-        :style="{ visibility: isSort(convertedId(id)) }"
-        :icon="orderNumber(convertedId(id))"
+        v-if="!(id === 'gene expression patterns' || id === 'annotation')"
+        icon="search"
+        :class="{ active: isActiveSearch }"
+        @click="setFilterModal(id)"
       />
-      <font-awesome-icon
-        :icon="sortIcon(convertedId(id))"
-        :flip="sortOrder(convertedId(id))"
-      />
-    </div>
-    <font-awesome-icon
-      icon="search"
-      :class="{ active: isActiveSearch }"
-      @click="setFilterModal(id)"
-    />
+    </template>
   </div>
 </template>
 
