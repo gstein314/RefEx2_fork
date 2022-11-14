@@ -38,7 +38,7 @@
           <vue-json-to-csv
             :json-data="getProjectResultsView"
             :csv-title="'title'"
-            :labels="tableHeading"
+            :labels="getProjectTableHeading"
           >
             <button>Download .csv</button>
           </vue-json-to-csv>
@@ -61,6 +61,7 @@
     <ModalViewDisplay
       v-if="isDisplaySettingsOn"
       @click.native="toggleDisplaySettings"
+      @set-table-heading="test"
     />
     <ModalViewFilter />
     <ModalViewGene />
@@ -213,6 +214,7 @@
         projectResultsAll: 'get_project_results_all',
         filters: 'project_filters',
         getProjectResultsView: 'get_project_results_view',
+        getProjectTableHeading: 'get_project_table_heading',
       }),
       projectItems() {
         return {
@@ -263,6 +265,7 @@
         column: 'LogMedian',
         selectedItem: this.selectedId,
       });
+      this.$store.commit('set_project_table_heading', this.tableHeading);
     },
     updated() {
       this.heightChartWrapper = this.$refs.chartWrapper.clientHeight;

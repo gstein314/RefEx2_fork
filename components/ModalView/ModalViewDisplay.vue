@@ -67,6 +67,7 @@
       ...mapMutations({
         updateProjectFilters: 'update_project_filters',
         updatePagination: 'set_pagination',
+        setProjectTableHeading: 'set_project_table_heading',
       }),
       toggleDisplayOfFilter(key) {
         // in case of indexFilters , call parent element
@@ -80,6 +81,17 @@
               !this.filters.find(x => x.column === key)?.is_displayed || false,
             filterKey: key,
           });
+          const obj = {};
+          for (const filter of this.filters) {
+            if (!filter.is_displayed) continue;
+            const subObj = {};
+            const title = label => {
+              return (subObj.title = label);
+            };
+            title(filter.label);
+            obj[filter.column] = subObj;
+          }
+          this.setProjectTableHeading(obj);
         }
       },
       toggleDisplaySettings() {
