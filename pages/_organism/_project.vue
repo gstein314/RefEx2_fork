@@ -36,29 +36,7 @@
         </item-comparison>
         <div class="display_settings">
           <vue-json-to-csv
-            :json-data="[
-              {
-                name: 'John',
-                surname: 'Doe',
-                age: 20,
-                salary: 20.0,
-                hours: 37.4,
-              },
-              {
-                name: 'John',
-                surname: 'Roe',
-                age: 40,
-                salary: 40.0,
-                hours: 35.2,
-              },
-              {
-                name: 'Jane',
-                surname: 'Woe',
-                age: 50,
-                salary: 52.0,
-                hours: 30.4,
-              },
-            ]"
+            :json-data="getProjectResultsView"
             :csv-title="'title'"
           >
             <button>Download .csv</button>
@@ -232,6 +210,7 @@
     computed: {
       ...mapGetters({
         projectResultsAll: 'get_project_results_all',
+        getProjectResultsView:'get_project_results_view',
       }),
       projectItems() {
         return {

@@ -201,6 +201,22 @@
           return item;
         });
         const withSort = _.orderBy(intFiltered, ...this.projectSortColumns);
+        const displayed = [];
+        for (const filter of this.filters) {
+          if (filter.is_displayed) displayed.push(filter.column);
+        }
+        const resultsOnScreen = [];
+
+        for (const item of withSort) {
+          const filtered = Object.keys(item)
+            .filter(key => displayed.includes(key))
+            .reduce((obj, key) => {
+              obj[key] = item[key];
+              return obj;
+            }, {});
+          resultsOnScreen.push(filtered);
+        }
+        this.setProjectResultsView(resultsOnScreen);
         return withSort;
       },
       pageItems() {
@@ -237,6 +253,7 @@
         setFilterModal: 'set_filter_modal',
         setActiveDataset: 'set_active_dataset',
         setProjectPagesNumber: 'set_project_pages_number',
+        setProjectResultsView: 'set_project_results_view',
       }),
       tooltipData(items, itemNum) {
         const statData = {};
