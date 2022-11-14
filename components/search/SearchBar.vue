@@ -75,6 +75,7 @@
           v-model="isSummaryIncluded"
           type="checkbox"
           name="summary_check"
+          @input="updateSummaryCheck"
         />
         <label for="summary_check">Include gene summaries in search</label>
       </div>
@@ -168,6 +169,7 @@
         activeDataset: 'active_dataset',
         activeSpecie: 'active_specie',
         searchCondition: 'search_condition_by_specie',
+        getIndexConditions: 'get_index_conditions',
       }),
       // returns either gene or sample
       filterType() {
@@ -239,13 +241,16 @@
       },
     },
     created() {
-      this.showResults('numfound');
+      if (!this.getIndexConditions[this.filterType]['estimatedResults'])
+        this.showResults('numfound');
       this.updateSearchCondition();
+      this.checkConditions();
     },
     methods: {
       ...mapMutations({
         setAlertModal: 'set_alert_modal',
         updatePagination: 'set_pagination',
+        indexConditions: 'set_index_conditions',
       }),
       updateSearchCondition() {
         if (this.filterType === 'gene') {
@@ -280,6 +285,11 @@
       getSuggestions() {
         this.isLoading = true;
         const suggestion = this.parameters.text;
+        this.indexConditions({
+          type: this.filterType,
+          item: 'name',
+          value: suggestion,
+        });
         const query = `{${this.queryPrefix}(text: "${suggestion}" ${
           this.isSummaryIncluded ? 'summary: "true"' : ''
         }) {${this.paramsForSuggestions.join(' ')}}}`;
@@ -306,6 +316,11 @@
           .then(result => {
             const prefix = this.queryPrefix.replace('Numfound', '');
             if (`${prefix}Numfound` in result.data) {
+              this.indexConditions({
+                type: this.filterType,
+                item: 'estimatedResults',
+                value: result.data[prefix + 'Numfound'],
+              });
               results_num = result.data[prefix + 'Numfound'];
             }
             if (prefix in result.data) results = result.data[prefix] || [];
@@ -325,6 +340,23 @@
               filterType: this.filterType,
             });
           });
+      },
+      checkConditions() {
+        if (this.getIndexConditions[this.filterType]['name']) {
+          this.parameters.text =
+            this.getIndexConditions[this.filterType]['name'];
+        }
+        if (this.getIndexConditions['gene']['includeGeneSummariesInSearch']) {
+          this.isSummaryIncluded =
+            this.getIndexConditions['gene']['includeGeneSummariesInSearch'];
+        }
+      },
+      updateSummaryCheck() {
+        this.indexConditions({
+          type: 'gene',
+          item: 'includeGeneSummariesInSearch',
+          value: !this.isSummaryIncluded,
+        });
       },
     },
   };

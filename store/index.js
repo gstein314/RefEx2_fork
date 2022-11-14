@@ -48,6 +48,25 @@ export const state = () => ({
   index_sample_pages_number: 0,
   project_pages_number: 0,
   project_items: {},
+  index_conditions: {
+    gene: {
+      name: '',
+      estimatedResults: '',
+      goTerm: '',
+      includeGeneSummariesInSearch: '',
+    },
+    sample: {
+      name: '',
+      estimatedResults: '',
+      sampleType: '',
+      experiment: '',
+      tissue: '',
+      cellType: '',
+      disease: '',
+      developmentalStage: '',
+      sex: '',
+    },
+  },
 });
 
 export const getters = {
@@ -137,6 +156,9 @@ export const getters = {
   },
   get_project_pages_number(state) {
     return state.project_pages_number;
+  },
+  get_index_conditions(state) {
+    return state.index_conditions;
   },
 };
 
@@ -236,5 +258,8 @@ export const mutations = {
   },
   set_project_pages_number(state, project_pages_number) {
     state.project_pages_number = project_pages_number;
+  },
+  set_index_conditions(state, condition) {
+    state.index_conditions[condition.type][condition.item] = condition.value;
   },
 };
