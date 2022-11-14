@@ -38,6 +38,7 @@
           <vue-json-to-csv
             :json-data="getProjectResultsView"
             :csv-title="'title'"
+            :labels="tableHeading"
           >
             <button>Download .csv</button>
           </vue-json-to-csv>
@@ -210,7 +211,8 @@
     computed: {
       ...mapGetters({
         projectResultsAll: 'get_project_results_all',
-        getProjectResultsView:'get_project_results_view',
+        filters: 'project_filters',
+        getProjectResultsView: 'get_project_results_view',
       }),
       projectItems() {
         return {
@@ -231,6 +233,19 @@
       },
       isNoSort() {
         return this.projectSortColumns[0].length === 0 ? false : true;
+      },
+      tableHeading() {
+        const obj = {};
+        for (const filter of this.filters) {
+          if (!filter.is_displayed) continue;
+          const subObj = {};
+          const title = label => {
+            return (subObj.title = label);
+          };
+          title(filter.label);
+          obj[filter.column] = subObj;
+        }
+        return obj;
       },
     },
     created() {
