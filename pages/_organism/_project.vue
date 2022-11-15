@@ -37,7 +37,7 @@
         <div class="display_settings">
           <vue-json-to-csv
             :json-data="getProjectResultsView"
-            :csv-title="selectedItem.info.symbol"
+            :csv-title="csvTitle"
             :labels="projectTableHeading"
           >
             <button>Download .csv</button>
@@ -235,6 +235,11 @@
       },
       isNoSort() {
         return this.projectSortColumns[0].length === 0 ? false : true;
+      },
+      csvTitle() {
+        return (
+          this.selectedItem.info.symbol || this.selectedItem.info.sample_id
+        );
       },
     },
     created() {
