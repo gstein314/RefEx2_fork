@@ -304,7 +304,7 @@
       },
       formatAlias(str) {
         try {
-          return JSON.parse(str).join(', ');
+          return JSON.parse(str).join(' / ');
         } catch {
           return str.replaceAll('"', '');
         }

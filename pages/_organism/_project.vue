@@ -37,8 +37,8 @@
         <div class="display_settings">
           <vue-json-to-csv
             :json-data="getProjectResultsView"
-            :csv-title="'title'"
-            :labels="getProjectTableHeading"
+            :csv-title="selectedItem.info.symbol"
+            :labels="projectTableHeading"
           >
             <button>Download .csv</button>
           </vue-json-to-csv>
@@ -61,7 +61,7 @@
     <ModalViewDisplay
       v-if="isDisplaySettingsOn"
       @click.native="toggleDisplaySettings"
-      @set-table-heading="test"
+      @updateProjectResultsView="updateProjectResultsView"
     />
     <ModalViewFilter />
     <ModalViewGene />
@@ -207,14 +207,15 @@
         isDisplaySettingsOn: false,
         heightChartWrapper: 200,
         projectSortColumns: [[], []],
+        projectTableHeading: {},
       };
     },
     computed: {
       ...mapGetters({
         projectResultsAll: 'get_project_results_all',
-        filters: 'project_filters',
         getProjectResultsView: 'get_project_results_view',
         getProjectTableHeading: 'get_project_table_heading',
+        projectFilters: 'project_filters',
       }),
       projectItems() {
         return {
@@ -236,19 +237,19 @@
       isNoSort() {
         return this.projectSortColumns[0].length === 0 ? false : true;
       },
-      tableHeading() {
-        const obj = {};
-        for (const filter of this.filters) {
-          if (!filter.is_displayed) continue;
-          const subObj = {};
-          const title = label => {
-            return (subObj.title = label);
-          };
-          title(filter.label);
-          obj[filter.column] = subObj;
-        }
-        return obj;
-      },
+      // tableHeading() {
+      //   const obj = {};
+      //   for (const filter of this.filters) {
+      //     if (!filter.is_displayed) continue;
+      //     const subObj = {};
+      //     const title = label => {
+      //       return (subObj.title = label);
+      //     };
+      //     title(filter.label);
+      //     obj[filter.column] = subObj;
+      //   }
+      //   return obj;
+      // },
     },
     created() {
       this.$store.commit('set_project_items', this.projectItems);
@@ -332,6 +333,19 @@
       },
       clearSortArray() {
         this.projectSortColumns = [[], []];
+      },
+      updateProjectResultsView() {
+        const obj = {};
+        for (const filter of this.projectFilters) {
+          if (!filter.is_displayed) continue;
+          const subObj = {};
+          const title = label => {
+            return (subObj.title = label);
+          };
+          title(filter.label);
+          obj[filter.column] = subObj;
+        }
+        this.projectTableHeading = obj;
       },
     },
   };

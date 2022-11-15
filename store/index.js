@@ -48,7 +48,7 @@ export const state = () => ({
   index_sample_pages_number: 0,
   project_pages_number: 0,
   project_items: {},
-  project_results_view: {},
+  project_results_view: [],
   project_table_heading: {},
 });
 

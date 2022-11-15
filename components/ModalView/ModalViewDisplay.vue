@@ -92,6 +92,7 @@
             obj[filter.column] = subObj;
           }
           this.setProjectTableHeading(obj);
+          this.$emit('updateProjectResultsView');
         }
       },
       toggleDisplaySettings() {
