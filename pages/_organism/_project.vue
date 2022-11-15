@@ -241,8 +241,8 @@
         let today = new Date();
         let dd = String(today.getDate()).padStart(2, '0');
         let mm = String(today.getMonth() + 1).padStart(2, '0');
-        let yyyy = today.getFullYear();
-        today = yyyy + mm + dd;
+        let yy = today.getFullYear() % 100;
+        today = yy + mm + dd;
 
         if (this.selectedItem.info.symbol !== undefined) {
           return `${this.selectedItem.info.symbol}_${today}`;
