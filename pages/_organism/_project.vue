@@ -214,7 +214,6 @@
       ...mapGetters({
         projectResultsAll: 'get_project_results_all',
         getProjectResultsView: 'get_project_results_view',
-        getProjectTableHeading: 'get_project_table_heading',
         projectFilters: 'project_filters',
       }),
       projectItems() {
@@ -237,19 +236,6 @@
       isNoSort() {
         return this.projectSortColumns[0].length === 0 ? false : true;
       },
-      // tableHeading() {
-      //   const obj = {};
-      //   for (const filter of this.filters) {
-      //     if (!filter.is_displayed) continue;
-      //     const subObj = {};
-      //     const title = label => {
-      //       return (subObj.title = label);
-      //     };
-      //     title(filter.label);
-      //     obj[filter.column] = subObj;
-      //   }
-      //   return obj;
-      // },
     },
     created() {
       this.$store.commit('set_project_items', this.projectItems);
@@ -266,7 +252,7 @@
         column: 'LogMedian',
         selectedItem: this.selectedId,
       });
-      this.$store.commit('set_project_table_heading', this.tableHeading);
+      this.updateProjectResultsView();
     },
     updated() {
       this.heightChartWrapper = this.$refs.chartWrapper.clientHeight;

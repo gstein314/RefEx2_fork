@@ -49,7 +49,6 @@ export const state = () => ({
   project_pages_number: 0,
   project_items: {},
   project_results_view: [],
-  project_table_heading: {},
 });
 
 export const getters = {
@@ -142,9 +141,6 @@ export const getters = {
   },
   get_project_results_view(state) {
     return state.project_results_view;
-  },
-  get_project_table_heading(state) {
-    return state.project_table_heading;
   },
 };
 
@@ -247,8 +243,5 @@ export const mutations = {
   },
   set_project_results_view(state, project_results_view) {
     state.project_results_view = project_results_view;
-  },
-  set_project_table_heading(state, obj) {
-    state.project_table_heading = obj;
   },
 };
