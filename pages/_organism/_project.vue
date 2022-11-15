@@ -332,9 +332,11 @@
           if (!filter.is_displayed) continue;
           const subObj = {};
           const title = label => {
-            return (subObj.title = label);
+            if (filter.note) {
+              return (subObj.title = `${filter.label} (${filter.note})`);
+            } else return (subObj.title = filter.label);
           };
-          title(filter.label);
+          title(filter);
           obj[filter.column] = subObj;
         }
         this.projectTableHeading = obj;
