@@ -240,13 +240,13 @@
       csvTitle() {
         let today = new Date();
         let dd = String(today.getDate()).padStart(2, '0');
-        let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        let mm = String(today.getMonth() + 1).padStart(2, '0');
         let yyyy = today.getFullYear();
         today = yyyy + mm + dd;
-        return (
-          `${this.selectedItem.info.symbol}_${today}` ||
-          `${this.selectedItem.info.sample_id}_${today}`
-        );
+
+        if (this.selectedItem.info.symbol !== undefined) {
+          return `${this.selectedItem.info.symbol}_${today}`;
+        } else return `${this.selectedItem.info.sample_id}_${today}`;
       },
     },
     created() {

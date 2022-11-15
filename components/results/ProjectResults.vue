@@ -220,6 +220,13 @@
                 obj['LogMax'] = item['LogMax'];
                 obj['LogSd'] = item['LogSd'];
                 obj['NumberOfSamples'] = item['NumberOfSamples'];
+              } else if (key === 'alias') {
+                // format alias data to avoid csv data conflict ("," problem)
+                try {
+                  obj[key] = JSON.parse(item[key]).join(' / ');
+                } catch {
+                  obj[key] = item[key].replaceAll('"', '');
+                }
               } else obj[key] = item[key];
               return obj;
             }, {});
