@@ -238,8 +238,14 @@
         return this.projectSortColumns[0].length === 0 ? false : true;
       },
       csvTitle() {
+        let today = new Date();
+        let dd = String(today.getDate()).padStart(2, '0');
+        let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        let yyyy = today.getFullYear();
+        today = yyyy + mm + dd;
         return (
-          this.selectedItem.info.symbol || this.selectedItem.info.sample_id
+          `${this.selectedItem.info.symbol}_${today}` ||
+          `${this.selectedItem.info.sample_id}_${today}`
         );
       },
     },
@@ -331,18 +337,18 @@
         for (const filter of this.projectFilters) {
           if (!filter.is_displayed) continue;
           if (filter.column === 'LogMedian') {
-            const addStatData = stat => {
+            const addStatData = (objKey, csvTableTitle) => {
               const subObj = {};
-              subObj.title = stat;
-              return subObj;
+              subObj.title = csvTableTitle;
+              obj[objKey] = subObj;
             };
-            obj['LogMin'] = addStatData('Min');
-            obj['Log1stQu'] = addStatData('1stQu');
-            obj['LogMedian'] = addStatData('Median');
-            obj['Log3rdQu'] = addStatData('3rdQu');
-            obj['LogMax'] = addStatData('Max');
-            obj['LogSd'] = addStatData('SD');
-            obj['NumberOfSamples'] = addStatData('No. of samples');
+            addStatData('LogMin', 'Min');
+            addStatData('Log1stQu', '1stQu');
+            addStatData('LogMedian', 'Median (log2(TPM+1))');
+            addStatData('Log3rdQu', '3rdQu');
+            addStatData('LogMax', 'Max');
+            addStatData('LogSd', 'SD');
+            addStatData('NumberOfSamples', 'No. of samples');
           } else {
             const subObj = {};
             const setTitle = filter => {
