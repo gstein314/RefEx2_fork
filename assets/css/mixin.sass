@@ -178,19 +178,17 @@ $TOOLTIP_LAYER: 2
   color: $MAIN_COLOR
   position: relative
   &.icon_on_left
-    padding-left: 1rem
+    padding-left: 16px
     > svg
       position: absolute
-      top: 0.1rem
       left: 0
   &.icon_on_right
     > svg
       position: absolute
-      top: 0.1rem
-      right: -1rem
+      right: -16px
       &.smaller
         top: 0.2rem
-        font-size: 0.7rem
+        font-size: 0.8em
 
 @mixin select
   cursor: pointer

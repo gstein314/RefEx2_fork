@@ -24,7 +24,6 @@
             }}</span>
           </span>
         </h1>
-        <ComparisonButton />
         <item-comparison
           :items="items"
           :active-id="selectedId"
@@ -34,27 +33,33 @@
           @showModal="setGeneModal"
         >
         </item-comparison>
-        <div class="display_settings">
-          <vue-json-to-csv
-            :json-data="projectResultsView"
-            :csv-title="csvTitle"
-            :labels="projectTableHeading"
-          >
-            <button>Download .csv</button>
-          </vue-json-to-csv>
-
-          <a
-            v-if="isNoSort"
-            class="icon_on_left reset_sort"
-            @click="clearSortArray"
-          >
-            <font-awesome-icon icon="xmark" />
-            Reset sorting column(s)
-          </a>
-          <a class="icon_on_left" @click="toggleDisplaySettings">
-            <font-awesome-icon icon="eye" />
-            Show/hide columns
-          </a>
+        <div class="results_title_wrapper">
+          <div class="align_left">
+            <vue-json-to-csv
+              :json-data="projectResultsView"
+              :csv-title="csvTitle"
+              :labels="projectTableHeading"
+            >
+              <button class="icon_on_left">
+                <font-awesome-icon icon="arrow-down-to-line" />Download .csv
+              </button>
+            </vue-json-to-csv>
+            <ComparisonButton />
+          </div>
+          <div class="align_right">
+            <a
+              v-if="isNoSort"
+              class="icon_on_left reset_sort"
+              @click="clearSortArray"
+            >
+              <font-awesome-icon icon="xmark" />
+              Reset sorting column(s)
+            </a>
+            <a class="icon_on_left" @click="toggleDisplaySettings">
+              <font-awesome-icon icon="eye" />
+              Show/hide columns
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -399,15 +404,10 @@
       > .content
         gap: 20px
         padding: 10px 20px
-        display: grid
+        display: flex
+        flex-direction: column
         min-width: fit-content
-        grid-template-columns: 1fr auto
-        grid-template-rows: auto auto
         width: 100%
-        > .comparison_btn
-          margin-left: 0
-          height: fit-content
-          place-self: flex-end
         > .header_title
           display: flex
           align-items: flex-start
@@ -424,24 +424,47 @@
             display: block
             margin-top: -2px
             font-weight: normal
-        > .display_settings
-          +display_settings
-          place-self: flex-end
-          > #json-to-csv-52
-            display: block
-          > a
-            +link_with_icon
-            > svg
-              &[data-icon="xmark"]
-                font-size: 20px
-                top: -1px
-                left: -2px
-              &[data-icon="eye"]
-                left: -6px
-          > a + a
-            margin-left: 20px
-          > .reset_sort
-            color: $ERROR_COLOR
+        > .results_title_wrapper
+          display: grid
+          grid-template-columns: 1fr 1fr
+          width: 100%
+          align-items: center
+          > .align_left
+            display: flex
+            position: relative
+            justify-content: flex-start
+            > [id^=json-to-csv]
+              display: flex
+              justify-content: flex-end
+              > button
+                +link_with_icon
+                padding: 0
+                border: none
+                background: none
+                margin-right: 20px
+                &.icon_on_left
+                  padding-left: 18px
+                  > svg
+                    font-size: 1.2rem
+                    top: 5px
+                    margin-right: 5px
+          > .align_right
+            display: flex
+            justify-content: flex-end
+            > a
+              +link_with_icon
+              place-self: none
+              > svg
+                &[data-icon="xmark"]
+                  font-size: 20px
+                  top: -1px
+                  left: -2px
+                &[data-icon="eye"]
+                  left: -6px
+            > a + a
+              margin-left: 20px
+            > .reset_sort
+              color: $ERROR_COLOR
     .pagination
       display: flex
       position: sticky

@@ -264,4 +264,7 @@
           > td
             > a
               +link_with_icon
+              &.icon_on_left
+                > svg
+                  top: 2px
 </style>
