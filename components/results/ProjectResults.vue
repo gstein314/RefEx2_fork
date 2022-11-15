@@ -211,7 +211,16 @@
           const filtered = Object.keys(item)
             .filter(key => displayed.includes(key))
             .reduce((obj, key) => {
-              obj[key] = item[key];
+              // add other statistic data if LogMedian is displayed
+              if (key === 'LogMedian') {
+                obj['LogMin'] = item['LogMin'];
+                obj['Log1stQu'] = item['Log1stQu'];
+                obj['LogMedian'] = item['LogMedian'];
+                obj['Log3rdQu'] = item['Log3rdQu'];
+                obj['LogMax'] = item['LogMax'];
+                obj['LogSd'] = item['LogSd'];
+                obj['NumberOfSamples'] = item['NumberOfSamples'];
+              } else obj[key] = item[key];
               return obj;
             }, {});
           resultsOnScreen.push(filtered);

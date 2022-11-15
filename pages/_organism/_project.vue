@@ -148,11 +148,11 @@
           return {
             id,
             info: data[`${type}_info`],
-            firstQuartileData: data.refex_info?.map(x => x.Log1stQu),
             minData: data.refex_info?.map(x => x.LogMin),
-            maxData: data.refex_info?.map(x => x.LogMax),
+            firstQuartileData: data.refex_info?.map(x => x.Log1stQu),
             medianData: data.refex_info?.map(x => x.LogMedian),
             thirdQuartileData: data.refex_info?.map(x => x.Log3rdQu),
+            maxData: data.refex_info?.map(x => x.LogMax),
             sdData: data.refex_info?.map(x => x.LogSd),
             numberOfSamplesData: data.refex_info?.map(x => x.NumberOfSamples),
           };
@@ -330,14 +330,29 @@
         const obj = {};
         for (const filter of this.projectFilters) {
           if (!filter.is_displayed) continue;
-          const subObj = {};
-          const title = label => {
-            if (filter.note) {
-              return (subObj.title = `${filter.label} (${filter.note})`);
-            } else return (subObj.title = filter.label);
-          };
-          title(filter);
-          obj[filter.column] = subObj;
+          if (filter.column === 'LogMedian') {
+            const addStatData = stat => {
+              const subObj = {};
+              subObj.title = stat;
+              return subObj;
+            };
+            obj['LogMin'] = addStatData('Min');
+            obj['Log1stQu'] = addStatData('1stQu');
+            obj['LogMedian'] = addStatData('Median');
+            obj['Log3rdQu'] = addStatData('3rdQu');
+            obj['LogMax'] = addStatData('Max');
+            obj['LogSd'] = addStatData('SD');
+            obj['NumberOfSamples'] = addStatData('No. of samples');
+          } else {
+            const subObj = {};
+            const setTitle = filter => {
+              if (filter.note) {
+                return (subObj.title = `${filter.label} (${filter.note})`);
+              } else return (subObj.title = filter.label);
+            };
+            setTitle(filter);
+            obj[filter.column] = subObj;
+          }
         }
         this.projectTableHeading = obj;
       },
