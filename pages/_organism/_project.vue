@@ -36,7 +36,7 @@
         </item-comparison>
         <div class="display_settings">
           <vue-json-to-csv
-            :json-data="getProjectResultsView"
+            :json-data="projectResultsView"
             :csv-title="csvTitle"
             :labels="projectTableHeading"
           >
@@ -61,7 +61,7 @@
     <ModalViewDisplay
       v-if="isDisplaySettingsOn"
       @click.native="toggleDisplaySettings"
-      @updateProjectResultsView="updateProjectResultsView"
+      @updateProjectTableHeading="updateProjectTableHeading"
     />
     <ModalViewFilter />
     <ModalViewGene />
@@ -75,6 +75,7 @@
       :selected-item="selectedId"
       :project-sort-columns="projectSortColumns"
       @activeSort="setProjectSortColumn"
+      @setProjectResultsView="setProjectResultsView"
     />
     <ResultsPagination
       :pages-number="$store.state.project_pages_number"
@@ -208,12 +209,12 @@
         heightChartWrapper: 200,
         projectSortColumns: [[], []],
         projectTableHeading: {},
+        projectResultsView: [],
       };
     },
     computed: {
       ...mapGetters({
         projectResultsAll: 'get_project_results_all',
-        getProjectResultsView: 'get_project_results_view',
         projectFilters: 'project_filters',
       }),
       projectItems() {
@@ -257,7 +258,7 @@
         column: 'LogMedian',
         selectedItem: this.selectedId,
       });
-      this.updateProjectResultsView();
+      this.updateProjectTableHeading();
     },
     updated() {
       this.heightChartWrapper = this.$refs.chartWrapper.clientHeight;
@@ -325,7 +326,7 @@
       clearSortArray() {
         this.projectSortColumns = [[], []];
       },
-      updateProjectResultsView() {
+      updateProjectTableHeading() {
         const obj = {};
         for (const filter of this.projectFilters) {
           if (!filter.is_displayed) continue;
@@ -337,6 +338,9 @@
           obj[filter.column] = subObj;
         }
         this.projectTableHeading = obj;
+      },
+      setProjectResultsView(arr) {
+        this.projectResultsView = arr;
       },
     },
   };

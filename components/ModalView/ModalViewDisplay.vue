@@ -80,7 +80,7 @@
               !this.filters.find(x => x.column === key)?.is_displayed || false,
             filterKey: key,
           });
-          this.$emit('updateProjectResultsView');
+          this.$emit('updateProjectTableHeading');
         }
       },
       toggleDisplaySettings() {

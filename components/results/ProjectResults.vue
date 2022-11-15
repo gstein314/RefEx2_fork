@@ -216,7 +216,7 @@
             }, {});
           resultsOnScreen.push(filtered);
         }
-        this.setProjectResultsView(resultsOnScreen);
+        this.$emit('setProjectResultsView', resultsOnScreen);
         return withSort;
       },
       pageItems() {
