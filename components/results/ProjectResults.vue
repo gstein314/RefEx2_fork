@@ -228,6 +228,10 @@
                   obj[key] = item[key].replaceAll('"', '');
                 }
               } else obj[key] = item[key];
+              // add png url option in exported csv
+              obj['gene expression patterns'] = this.geneSummarySource(
+                item.ncbiGeneId
+              );
               return obj;
             }, {});
           resultsOnScreen.push(filtered);
