@@ -70,10 +70,6 @@ export default {
     },
     addCss: false,
   },
-  // Build Configuration (https://go.nuxtjs.dev/config-build)
-  build: {
-    vendor: ['@johmun/vue-tags-input'],
-  },
 
   generate: {
     dir: 'refex',
