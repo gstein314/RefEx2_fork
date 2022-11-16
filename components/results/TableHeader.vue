@@ -27,7 +27,7 @@
         <font-awesome-icon :icon="sortIcon" :flip="sortOrder" />
       </div>
       <font-awesome-icon
-        v-if="!(id === 'gene expression patterns' || id === 'annotation')"
+        v-if="!['gene expression patterns', 'annotation'].includes(id)"
         icon="search"
         :class="{ active: isActiveSearch }"
         @click="setFilterModal(id)"
