@@ -2,11 +2,7 @@
   <div class="table_header">
     <template>
       <div
-        v-if="
-          id === 'gene expression patterns' ||
-          id === 'annotation' ||
-          id === 'alias'
-        "
+        v-if="['gene expression patterns', 'annotation', 'alias'].includes(id)"
         :class="{ '-column': note }"
       >
         <div class="details">
@@ -25,13 +21,10 @@
           <div v-if="note" class="tag">{{ note }}</div>
         </div>
         <font-awesome-icon
-          :style="{ visibility: isSort(convertedId(id)) }"
-          :icon="orderNumber(convertedId(id))"
+          :style="{ visibility: isSort }"
+          :icon="orderNumber"
         />
-        <font-awesome-icon
-          :icon="sortIcon(convertedId(id))"
-          :flip="sortOrder(convertedId(id))"
-        />
+        <font-awesome-icon :icon="sortIcon" :flip="sortOrder" />
       </div>
       <font-awesome-icon
         v-if="!(id === 'gene expression patterns' || id === 'annotation')"
@@ -111,6 +104,29 @@
       ordersArray() {
         return this.projectSortColumns[1];
       },
+      idForSort() {
+        if (['ncbiGeneId', 'chromosomePosition'].includes(this.id)) {
+          return this.id + 'Int';
+        } else return this.id;
+      },
+      sortIcon() {
+        return this.columnsArray.includes(this.idForSort)
+          ? 'fa-duotone fa-sort'
+          : 'sort';
+      },
+      isSort() {
+        return this.sortIcon === 'sort' ? 'hidden' : 'visible';
+      },
+      sortOrder() {
+        const activeDesc =
+          this.ordersArray[this.columnsArray.indexOf(this.idForSort)] ===
+          'desc';
+        return activeDesc ? 'vertical' : undefined;
+      },
+      orderNumber() {
+        const position = this.projectSortColumns[0].indexOf(this.idForSort);
+        return position === -1 ? 'circle' : `circle-${position + 1}`;
+      },
     },
     methods: {
       activeSort() {
@@ -119,27 +135,6 @@
       ...mapMutations({
         setFilterModal: 'set_filter_modal',
       }),
-      sortIcon(id) {
-        return this.columnsArray.includes(id) ? 'fa-duotone fa-sort' : 'sort';
-      },
-      sortOrder(id) {
-        const activeDesc =
-          this.ordersArray[this.columnsArray.indexOf(id)] === 'desc';
-        return activeDesc ? 'vertical' : undefined;
-      },
-      isSort(id) {
-        return this.sortIcon(id) === 'sort' ? 'hidden' : 'visible';
-      },
-      orderNumber(id) {
-        const position = this.projectSortColumns[0].indexOf(id);
-        return position === -1 ? 'circle' : `circle-${position + 1}`;
-      },
-      convertedId(id) {
-        if (id === 'ncbiGeneId' || id === 'chromosomePosition') {
-          id += 'Int';
-          return id;
-        } else return id;
-      },
     },
   };
 </script>
