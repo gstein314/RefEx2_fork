@@ -1,38 +1,30 @@
 <template>
   <div class="table_header">
-    <template>
-      <div
-        v-if="['gene expression patterns', 'annotation', 'alias'].includes(id)"
-        :class="{ '-column': note }"
-      >
-        <div class="details">
-          <div class="label">{{ label }}</div>
-          <div v-if="note" class="tag">{{ note }}</div>
-        </div>
+    <div v-if="columnNotSort.includes(id)" :class="{ '-column': note }">
+      <div class="details">
+        <div class="label">{{ label }}</div>
+        <div v-if="note" class="tag">{{ note }}</div>
       </div>
-      <div
-        v-else-if="true"
-        class="inner"
-        :class="{ '-column': note }"
-        @click="activeSort"
-      >
-        <div class="details">
-          <div class="label">{{ label }}</div>
-          <div v-if="note" class="tag">{{ note }}</div>
-        </div>
-        <font-awesome-icon
-          :style="{ visibility: isSort }"
-          :icon="orderNumber"
-        />
-        <font-awesome-icon :icon="sortIcon" :flip="sortOrder" />
+    </div>
+    <div
+      v-else-if="true"
+      class="inner"
+      :class="{ '-column': note }"
+      @click="activeSort"
+    >
+      <div class="details">
+        <div class="label">{{ label }}</div>
+        <div v-if="note" class="tag">{{ note }}</div>
       </div>
-      <font-awesome-icon
-        v-if="!['gene expression patterns', 'annotation'].includes(id)"
-        icon="search"
-        :class="{ active: isActiveSearch }"
-        @click="setFilterModal(id)"
-      />
-    </template>
+      <font-awesome-icon :style="{ visibility: isSort }" :icon="orderNumber" />
+      <font-awesome-icon :icon="sortIcon" :flip="sortOrder" />
+    </div>
+    <font-awesome-icon
+      v-if="!columnNotSearch.includes(id)"
+      icon="search"
+      :class="{ active: isActiveSearch }"
+      @click="setFilterModal(id)"
+    />
   </div>
 </template>
 
@@ -82,6 +74,12 @@
         type: Array,
         default: () => [],
       },
+    },
+    data() {
+      return {
+        columnNotSort: ['gene expression patterns', 'annotation', 'alias'],
+        columnNotSearch: ['gene expression patterns', 'annotation'],
+      };
     },
     computed: {
       height() {
