@@ -79,6 +79,7 @@
       :dataset="dataset"
       :selected-item="selectedId"
       :project-sort-columns="projectSortColumns"
+      :csv-table-stat-title="csvTableStatTitle"
       @activeSort="setProjectSortColumn"
       @setProjectResultsView="setProjectResultsView"
     />
@@ -215,6 +216,15 @@
         projectSortColumns: [[], []],
         projectTableHeading: {},
         projectResultsView: [],
+        csvTableStatTitle: {
+          LogMin: 'Min',
+          Log1stQu: '1stQu',
+          LogMedian: 'Median (log2(TPM+1))',
+          Log3rdQu: '3rdQu',
+          LogMax: 'Max',
+          LogSd: 'SD',
+          NumberOfSamples: 'No. of samples',
+        },
       };
     },
     computed: {
@@ -342,26 +352,19 @@
         for (const filter of this.projectFilters) {
           if (!filter.is_displayed) continue;
           if (filter.column === 'LogMedian') {
-            const addStatData = (objKey, csvTableTitle) => {
+            for (const item of Object.entries(this.csvTableStatTitle)) {
+              const [oldName, newName] = [item[0], item[1]];
               const subObj = {};
-              subObj.title = csvTableTitle;
-              obj[objKey] = subObj;
-            };
-            addStatData('LogMin', 'Min');
-            addStatData('Log1stQu', '1stQu');
-            addStatData('LogMedian', 'Median (log2(TPM+1))');
-            addStatData('Log3rdQu', '3rdQu');
-            addStatData('LogMax', 'Max');
-            addStatData('LogSd', 'SD');
-            addStatData('NumberOfSamples', 'No. of samples');
+              subObj.title = newName;
+              obj[oldName] = subObj;
+              console.log(typeof oldName, typeof newName);
+              console.log(obj, subObj);
+            }
           } else {
             const subObj = {};
-            const setTitle = filter => {
-              if (filter.note) {
-                return (subObj.title = `${filter.label} (${filter.note})`);
-              } else return (subObj.title = filter.label);
-            };
-            setTitle(filter);
+            if (filter.note) {
+              subObj.title = `${filter.label} (${filter.note})`;
+            } else subObj.title = filter.label;
             obj[filter.column] = subObj;
           }
         }
