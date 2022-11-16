@@ -146,6 +146,10 @@
         type: Array,
         default: () => [],
       },
+      csvTableStatTitle: {
+        type: Object,
+        default: () => {},
+      },
     },
 
     computed: {
@@ -213,13 +217,9 @@
             .reduce((obj, key) => {
               // add other statistic data if LogMedian is displayed
               if (key === 'LogMedian') {
-                obj['LogMin'] = item['LogMin'];
-                obj['Log1stQu'] = item['Log1stQu'];
-                obj['LogMedian'] = item['LogMedian'];
-                obj['Log3rdQu'] = item['Log3rdQu'];
-                obj['LogMax'] = item['LogMax'];
-                obj['LogSd'] = item['LogSd'];
-                obj['NumberOfSamples'] = item['NumberOfSamples'];
+                for (const key of Object.keys(this.csvTableStatTitle)) {
+                  obj[key] = item[key];
+                }
               } else if (key === 'alias') {
                 // format alias data to avoid csv data conflict ("," problem)
                 try {
