@@ -43,7 +43,7 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
+  import { mapGetters, mapMutations } from 'vuex';
 
   export default {
     data() {
@@ -66,6 +66,7 @@
     computed: {
       ...mapGetters({
         activeDataset: 'active_dataset',
+        getIndexConditions: 'get_index_conditions',
       }),
       goTermString() {
         return this.parameters.go.map(tag => tag.id).join(', ');
@@ -88,10 +89,25 @@
         this.$emit('updateParameters', { go: this.goTermString });
       },
     },
+    created() {
+      if (
+        this.getIndexConditions['gene']['goId'] &&
+        this.getIndexConditions['gene']['goTerm']
+      ) {
+        this.handleSingleTagUpdate(
+          this.getIndexConditions['gene']['goId'],
+          this.getIndexConditions['gene']['goTerm']
+        );
+      }
+    },
     methods: {
+      ...mapMutations({
+        indexConditions: 'set_index_conditions',
+      }),
       updateAutoComplete() {
         clearTimeout(this.debounce);
         const query = `{ goSuggest (text: "${this.temporaryParameters.goTerm}", dataset: "${this.activeDataset.dataset}") { goId, goTerm }}`;
+
         this.debounce = setTimeout(() => {
           this.$axios
             .$post('gql', {
@@ -114,6 +130,16 @@
           return;
         }
         this.$set(this.temporaryParameters, 'goTerm', '');
+        this.indexConditions({
+          type: 'gene',
+          item: 'goId',
+          value: id,
+        });
+        this.indexConditions({
+          type: 'gene',
+          item: 'goTerm',
+          value: text,
+        });
         this.setTags([{ id, text, tiClasses }], key);
       },
       setTags(newTags, key) {

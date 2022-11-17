@@ -52,6 +52,7 @@ export const state = () => ({
     gene: {
       name: '',
       estimatedResults: '',
+      goId: '',
       goTerm: '',
       includeGeneSummariesInSearch: '',
     },
