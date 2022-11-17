@@ -76,6 +76,7 @@
       ...mapGetters({
         filterByName: 'filter_by_name',
         activeDataset: 'active_dataset',
+        getIndexConditions: 'get_index_conditions',
       }),
       description() {
         return this.filterByName('sample').description;
@@ -98,11 +99,25 @@
       this.getAutoCompleteData().then(() => {
         this.initiateParametersDataset();
         this.setAutoComplete();
+        Object.keys(this.parameters).map(condition => {
+          if (
+            this.getIndexConditions['sample'][
+              condition.charAt(0).toLowerCase() + condition.slice(1)
+            ]
+          ) {
+            this.parameters[condition] =
+              this.getIndexConditions['sample'][
+                condition.charAt(0).toLowerCase() + condition.slice(1)
+              ];
+          }
+        });
+        this.$emit('updateParameters', { ...this.parameters });
       });
     },
     methods: {
       ...mapMutations({
         setAlertModal: 'set_alert_modal',
+        indexConditions: 'set_index_conditions',
       }),
       initiateParametersDataset() {
         for (const filter of this.filters) {
@@ -144,6 +159,13 @@
       updateParameter(key, value) {
         if (key && value) this.$set(this.parameters, key, value);
         this.$emit('updateParameters', this.parameters);
+        Object.keys(this.parameters).map(condition => {
+          this.indexConditions({
+            type: 'sample',
+            item: condition.charAt(0).toLowerCase() + condition.slice(1),
+            value: this.parameters[condition],
+          });
+        });
       },
     },
   };
