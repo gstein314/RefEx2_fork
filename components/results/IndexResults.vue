@@ -265,9 +265,4 @@
             > a
               +link_with_icon
               &.icon_on_left
-                > svg
-                  top: 2px
-              > [data-icon=up-right-from-square]
-                top: 0.2rem
-                font-size: 0.8em
 </style>
