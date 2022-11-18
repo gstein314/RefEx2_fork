@@ -263,6 +263,11 @@
           return `${this.selectedItem.info.symbol}_${today}`;
         } else return `${this.selectedItem.info.sample_id}_${today}`;
       },
+      roundDownClientHeight() {
+        return Math.floor(
+          this.$refs.chartWrapper.getBoundingClientRect().height
+        );
+      },
     },
     created() {
       this.$store.commit('set_project_items', this.projectItems);
@@ -282,7 +287,7 @@
       this.updateProjectTableHeading();
     },
     updated() {
-      this.heightChartWrapper = this.$refs.chartWrapper.clientHeight;
+      this.heightChartWrapper = this.roundDownClientHeight;
     },
     destroyed() {
       this.setSampleAlias();
@@ -304,7 +309,7 @@
         });
         this.selectedId = id;
         requestAnimationFrame(
-          () => (this.heightChartWrapper = this.$refs.chartWrapper.clientHeight)
+          () => (this.heightChartWrapper = this.roundDownClientHeight)
         );
       },
       checkSampleAlias() {
@@ -357,8 +362,6 @@
               const subObj = {};
               subObj.title = newName;
               obj[oldName] = subObj;
-              console.log(typeof oldName, typeof newName);
-              console.log(obj, subObj);
             }
           } else {
             const subObj = {};
