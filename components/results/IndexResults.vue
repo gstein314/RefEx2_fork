@@ -264,5 +264,4 @@
           > td
             > a
               +link_with_icon
-              &.icon_on_left
 </style>
