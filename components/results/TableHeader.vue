@@ -16,8 +16,14 @@
         <div class="label">{{ label }}</div>
         <div v-if="note" class="tag">{{ note }}</div>
       </div>
-      <font-awesome-icon :style="{ visibility: isSort }" :icon="orderNumber" />
-      <font-awesome-icon :icon="sortIcon" :flip="sortOrder" />
+      <div class="sort_icon">
+        <font-awesome-icon :icon="sortIcon" :flip="sortOrder" />
+        <font-awesome-icon
+          class="sort_number"
+          :style="{ visibility: isSort }"
+          :icon="orderNumber"
+        />
+      </div>
     </div>
     <font-awesome-icon
       v-if="!columnNotSearch.includes(id)"
@@ -123,7 +129,7 @@
       },
       orderNumber() {
         const position = this.projectSortColumns[0].indexOf(this.idForSort);
-        return position === -1 ? 'circle' : `circle-${position + 1}`;
+        return `fa-solid fa-${position + 1}`;
       },
     },
     methods: {
@@ -148,7 +154,7 @@
     &.name
       min-width: 300px
     .inner
-      padding: 5px
+      padding: 5px 12px 5px 8px
       margin-left: -5px
       transition: background-color 0.3s ease-in-out
       display: flex
@@ -158,6 +164,13 @@
         cursor: pointer
         background-color: rgba($MAIN_COLOR, .2)
         border-radius: 0.2rem
+      .sort_icon
+        position: relative
+        > .sort_number
+          position: absolute
+          font-size: 8px
+          top: 10px
+          left: 12px
     .tag
       +ontology_tag
       width: fit-content
