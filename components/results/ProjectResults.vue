@@ -63,7 +63,7 @@
                 :alt="result[geneIdKey]"
               />
               <span v-else-if="filter.column === 'alias'">
-                {{ formatAlias(result.alias) }}
+                {{ result.alias }}
               </span>
               <template v-else-if="hasStringQuotes(result[filter.column])">
                 {{ result[filter.column].replaceAll('"', '') }}
@@ -220,13 +220,6 @@
                 for (const key of Object.keys(this.csvTableStatTitle)) {
                   obj[key] = item[key];
                 }
-              } else if (key === 'alias') {
-                // format alias data to avoid csv data conflict ("," problem)
-                try {
-                  obj[key] = JSON.parse(item[key]).join(' / ');
-                } catch {
-                  obj[key] = item[key].replaceAll('"', '');
-                }
               } else obj[key] = item[key];
               // add png url option in exported csv
               obj['gene expression patterns'] = this.geneSummarySource(
@@ -321,13 +314,6 @@
       },
       hasStringQuotes(str) {
         return str?.startsWith('"') && str?.endsWith('"');
-      },
-      formatAlias(str) {
-        try {
-          return JSON.parse(str).join(' / ');
-        } catch {
-          return str.replaceAll('"', '');
-        }
       },
     },
   };
