@@ -40,25 +40,25 @@
               :csv-title="csvTitle"
               :labels="projectTableHeading"
             >
-              <button class="icon_on_left">
+              <button>
                 <font-awesome-icon icon="arrow-down-to-line" />Download .csv
               </button>
             </vue-json-to-csv>
             <ComparisonButton />
           </div>
           <div class="align_right">
-            <a
+            <button
               v-if="isNoSort"
-              class="icon_on_left reset_sort"
+              class="sub reset_sort"
               @click="clearSortArray"
             >
               <font-awesome-icon icon="xmark" />
               Reset sorting column(s)
-            </a>
-            <a class="icon_on_left" @click="toggleDisplaySettings">
+            </button>
+            <button class="sub" @click="toggleDisplaySettings">
               <font-awesome-icon icon="eye" />
               Show/hide columns
-            </a>
+            </button>
           </div>
         </div>
       </div>
@@ -439,38 +439,19 @@
             display: flex
             position: relative
             justify-content: flex-start
+            gap: 10px
             > [id^=json-to-csv]
               display: flex
               justify-content: flex-end
               > button
-                +link_with_icon
-                padding: 0
-                border: none
-                background: none
-                margin-right: 20px
-                &.icon_on_left
-                  padding-left: 18px
-                  > svg
-                    font-size: 1.2rem
-                    top: 5px
-                    margin-right: 5px
+                +button
           > .align_right
             display: flex
             justify-content: flex-end
-            > a
-              +link_with_icon
-              place-self: none
-              > svg
-                &[data-icon="xmark"]
-                  font-size: 20px
-                  top: -1px
-                  left: -2px
-                &[data-icon="eye"]
-                  left: -6px
-            > a + a
-              margin-left: 20px
-            > .reset_sort
-              color: $ERROR_COLOR
+            align-self: end
+            gap: 10px
+            > button
+              +button
     .pagination
       display: flex
       position: sticky
