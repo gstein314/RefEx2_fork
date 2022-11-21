@@ -62,9 +62,24 @@
                 :src="geneSummarySource(result[geneIdKey])"
                 :alt="result[geneIdKey]"
               />
-              <span v-else-if="filter.column === 'alias'">
-                {{ result.alias }}
-              </span>
+              <template v-else-if="isAliasArray(result, filter)">
+                <span
+                  v-for="(alias, alias_index) in JSON.parse(
+                    result[filter.column]
+                  )"
+                  :key="alias_index"
+                >
+                  <span>{{ alias }}</span>
+                  <span
+                    v-if="
+                      alias_index < JSON.parse(result[filter.column]).length - 1
+                    "
+                    class="comma"
+                    >,
+                  </span>
+                </span>
+              </template>
+
               <template v-else-if="hasStringQuotes(result[filter.column])">
                 {{ result[filter.column].replaceAll('"', '') }}
               </template>
@@ -220,6 +235,13 @@
                 for (const key of Object.keys(this.csvTableStatTitle)) {
                   obj[key] = item[key];
                 }
+              } else if (key === 'alias') {
+                // format alias data to avoid csv data conflict ("," problem)
+                try {
+                  obj[key] = JSON.parse(item[key]).join(' , ');
+                } catch {
+                  obj[key] = item[key].replaceAll('"', '');
+                }
               } else obj[key] = item[key];
               // add png url option in exported csv
               obj['gene expression patterns'] = this.geneSummarySource(
@@ -314,6 +336,14 @@
       },
       hasStringQuotes(str) {
         return str?.startsWith('"') && str?.endsWith('"');
+      },
+      isAliasArray(result, filter) {
+        if (filter.column !== 'alias') return;
+        try {
+          return Array.isArray(JSON.parse(result[filter.column]));
+        } catch {
+          return false;
+        }
       },
     },
   };
