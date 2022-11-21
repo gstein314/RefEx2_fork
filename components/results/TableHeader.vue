@@ -1,36 +1,35 @@
 <template>
   <div class="table_header">
     <div v-if="columnNotSort.includes(id)" :class="{ '-column': note }">
-      <div class="details">
+      <div>
         <div class="label">{{ label }}</div>
         <div v-if="note" class="tag">{{ note }}</div>
       </div>
     </div>
-    <div
-      v-else-if="true"
-      class="inner"
-      :class="{ '-column': note }"
-      @click="activeSort"
-    >
-      <div class="details">
-        <div class="label">{{ label }}</div>
-        <div v-if="note" class="tag">{{ note }}</div>
+    <div v-else-if="true" class="inner" :class="{ '-column': note }">
+      <div class="table_button sort" @click="activeSort">
+        <div>
+          <div class="label">{{ label }}</div>
+          <div v-if="note" class="tag">{{ note }}</div>
+        </div>
+        <div class="sort_icon">
+          <font-awesome-icon :icon="sortIcon" :flip="sortOrder" />
+          <font-awesome-icon
+            class="sort_number"
+            :style="{ visibility: isSort }"
+            :icon="orderNumber"
+          />
+        </div>
       </div>
-      <div class="sort_icon">
-        <font-awesome-icon :icon="sortIcon" :flip="sortOrder" />
+      <div class="table_button search">
         <font-awesome-icon
-          class="sort_number"
-          :style="{ visibility: isSort }"
-          :icon="orderNumber"
+          v-if="!columnNotSearch.includes(id)"
+          icon="search"
+          :class="{ active: isActiveSearch }"
+          @click="setFilterModal(id)"
         />
       </div>
     </div>
-    <font-awesome-icon
-      v-if="!columnNotSearch.includes(id)"
-      icon="search"
-      :class="{ active: isActiveSearch }"
-      @click="setFilterModal(id)"
-    />
   </div>
 </template>
 
@@ -146,6 +145,7 @@
   .table_header
     display: flex
     align-items: center
+    justify-content: flex-start
     min-width: 150px
     &.Description
       min-width: 450px
@@ -154,23 +154,33 @@
     &.name
       min-width: 300px
     .inner
-      padding: 5px 12px 5px 8px
-      margin-left: -5px
-      transition: background-color 0.3s ease-in-out
       display: flex
-      align-items: center
-      gap: 0.5rem
-      &:hover
-        cursor: pointer
-        background-color: rgba($MAIN_COLOR, .2)
-        border-radius: 0.2rem
-      .sort_icon
-        position: relative
-        > .sort_number
-          position: absolute
-          font-size: 8px
-          top: 10px
-          left: 12px
+      margin-left: -10px
+      .table_button
+        transition: background-color 0.3s ease-in-out
+        &:hover
+          cursor: pointer
+          background-color: rgba($MAIN_COLOR, .2)
+          border-radius: 0.2rem
+        &.sort
+          display: flex
+          align-items: center
+          padding: 5px 8px
+          gap: 5px
+        .sort_icon
+          box-sizing: border-box
+          padding: 0 5px
+          position: relative
+          > .sort_number
+            position: absolute
+            font-size: 0.6em
+            top: 10px
+        &.search
+          display: flex
+          align-items: center
+          padding: 5px
+          > [data-icon="magnifying-glass"]
+            display: inline-block
     .tag
       +ontology_tag
       width: fit-content
@@ -184,12 +194,7 @@
         cursor: pointer
         font-size: 12px
         color: $GRAY
-        margin-left: 0.5em
-        transition: transform 0.2s ease-in-out
         opacity: .3
-        &:hover
-          cursor: pointer
-          transform: scale(1.5)
         &.active
           opacity: unset
           color: $MAIN_COLOR
