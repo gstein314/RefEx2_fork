@@ -7,7 +7,7 @@
       </div>
     </div>
     <div v-else-if="true" class="inner" :class="{ '-column': note }">
-      <div class="table_button sort" @click="activeSort">
+      <div class="table_btn sort" @click="activeSort">
         <div>
           <div class="label">{{ label }}</div>
           <div v-if="note" class="tag">{{ note }}</div>
@@ -21,7 +21,7 @@
           />
         </div>
       </div>
-      <div class="table_button search">
+      <div class="table_btn search">
         <font-awesome-icon
           v-if="!columnNotSearch.includes(id)"
           icon="search"
@@ -156,7 +156,7 @@
     .inner
       display: flex
       margin-left: -10px
-      .table_button
+      .table_btn
         transition: background-color 0.3s ease-in-out
         &:hover
           cursor: pointer
