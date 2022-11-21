@@ -352,8 +352,6 @@
             > span
               position: relative
               > svg
-                top: 3px
-                position: absolute
                 padding-left: 4px
                 font-size: 11px
                 color: $MAIN_COLOR
