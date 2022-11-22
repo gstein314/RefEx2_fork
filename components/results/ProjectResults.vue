@@ -62,28 +62,9 @@
                 :src="geneSummarySource(result[geneIdKey])"
                 :alt="result[geneIdKey]"
               />
-              <template
-                v-else-if="
-                  filter.column === 'alias' &&
-                  Array.isArray(JSON.parse(result[filter.column]))
-                "
-              >
-                <span
-                  v-for="(alias, alias_index) in JSON.parse(
-                    result[filter.column]
-                  )"
-                  :key="alias_index"
-                >
-                  <span>{{ alias }}</span>
-                  <span
-                    v-if="
-                      alias_index < JSON.parse(result[filter.column]).length - 1
-                    "
-                    class="comma"
-                    >,
-                  </span>
-                </span>
-              </template>
+              <span v-else-if="filter.column === 'alias'">
+                {{ formatAlias(result.alias) }}
+              </span>
               <template v-else-if="hasStringQuotes(result[filter.column])">
                 {{ result[filter.column].replaceAll('"', '') }}
               </template>
@@ -92,7 +73,7 @@
                 class="icon_on_right"
                 target="_blank"
                 :href="datasetInfo.url_prefix + result.ncbiGeneId"
-                ><font-awesome-icon icon="external-link-alt" class="smaller" />
+                ><font-awesome-icon icon="external-link-alt" />
                 {{ result[filter.column] }}
               </a>
               <a
@@ -100,7 +81,7 @@
                 class="icon_on_right"
                 target="_blank"
                 :href="datasetInfo.url_prefix + result.ensemblGeneId"
-                ><font-awesome-icon icon="external-link-alt" class="smaller" />
+                ><font-awesome-icon icon="external-link-alt" />
                 {{ result[filter.column] }}
               </a>
               <template v-else>
@@ -165,6 +146,10 @@
         type: Array,
         default: () => [],
       },
+      csvTableStatTitle: {
+        type: Object,
+        default: () => {},
+      },
     },
 
     computed: {
@@ -213,7 +198,45 @@
           }
           return !isFiltered;
         });
-        const withSort = _.orderBy(filtered, ...this.projectSortColumns);
+        // create number type keys for "ncbiGeneId" and "chromosomePosition" before sorting
+        const intFiltered = filtered.map(item => {
+          item.ncbiGeneIdInt = parseInt(item.ncbiGeneId);
+          item.chromosomePositionInt = parseInt(item.chromosomePosition);
+          return item;
+        });
+        const withSort = _.orderBy(intFiltered, ...this.projectSortColumns);
+        const displayed = [];
+        for (const filter of this.filters) {
+          if (filter.is_displayed) displayed.push(filter.column);
+        }
+        const resultsOnScreen = [];
+
+        for (const item of withSort) {
+          const filtered = Object.keys(item)
+            .filter(key => displayed.includes(key))
+            .reduce((obj, key) => {
+              // add other statistic data if LogMedian is displayed
+              if (key === 'LogMedian') {
+                for (const key of Object.keys(this.csvTableStatTitle)) {
+                  obj[key] = item[key];
+                }
+              } else if (key === 'alias') {
+                // format alias data to avoid csv data conflict ("," problem)
+                try {
+                  obj[key] = JSON.parse(item[key]).join(' / ');
+                } catch {
+                  obj[key] = item[key].replaceAll('"', '');
+                }
+              } else obj[key] = item[key];
+              // add png url option in exported csv
+              obj['gene expression patterns'] = this.geneSummarySource(
+                item.ncbiGeneId
+              );
+              return obj;
+            }, {});
+          resultsOnScreen.push(filtered);
+        }
+        this.$emit('setProjectResultsView', resultsOnScreen);
         return withSort;
       },
       pageItems() {
@@ -250,6 +273,7 @@
         setFilterModal: 'set_filter_modal',
         setActiveDataset: 'set_active_dataset',
         setProjectPagesNumber: 'set_project_pages_number',
+        setProjectResultsView: 'set_project_results_view',
       }),
       tooltipData(items, itemNum) {
         const statData = {};
@@ -298,6 +322,13 @@
       hasStringQuotes(str) {
         return str?.startsWith('"') && str?.endsWith('"');
       },
+      formatAlias(str) {
+        try {
+          return JSON.parse(str).join(' / ');
+        } catch {
+          return str.replaceAll('"', '');
+        }
+      },
     },
   };
 </script>
@@ -307,6 +338,10 @@
     table
       white-space: nowrap
       +table
+      > thead
+        > tr
+          > th:last-child
+            width: 100%
       > tbody
         > tr
           > td
@@ -317,10 +352,10 @@
             > span
               position: relative
               > svg
-                top: 3px
-                position: absolute
                 padding-left: 4px
                 font-size: 11px
                 color: $MAIN_COLOR
                 cursor: pointer
+          > td:last-child
+            width: 100%
 </style>

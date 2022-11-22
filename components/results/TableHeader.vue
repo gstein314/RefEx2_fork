@@ -1,18 +1,35 @@
 <template>
   <div class="table_header">
-    <div class="inner" :class="{ '-column': note }" @click="activeSort">
-      <div class="details">
+    <div v-if="columnNotSort.includes(id)" :class="{ '-column': note }">
+      <div>
         <div class="label">{{ label }}</div>
         <div v-if="note" class="tag">{{ note }}</div>
       </div>
-      <font-awesome-icon :icon="sortIcon(id)" :flip="sortOrder(id)" />
-      <font-awesome-icon v-if="isSort(id)" :icon="orderNumber(id)" />
     </div>
-    <font-awesome-icon
-      icon="search"
-      :class="{ active: isActiveSearch }"
-      @click="setFilterModal(id)"
-    />
+    <div v-else-if="true" class="inner" :class="{ '-column': note }">
+      <div class="table_btn sort" @click="activeSort">
+        <div>
+          <div class="label">{{ label }}</div>
+          <div v-if="note" class="tag">{{ note }}</div>
+        </div>
+        <div class="sort_icon">
+          <font-awesome-icon :icon="sortIcon" :flip="sortOrder" />
+          <font-awesome-icon
+            class="sort_number"
+            :style="{ visibility: isSort }"
+            :icon="orderNumber"
+          />
+        </div>
+      </div>
+      <div class="table_btn search">
+        <font-awesome-icon
+          v-if="!columnNotSearch.includes(id)"
+          icon="search"
+          :class="{ active: isActiveSearch }"
+          @click="setFilterModal(id)"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -63,6 +80,12 @@
         default: () => [],
       },
     },
+    data() {
+      return {
+        columnNotSort: ['gene expression patterns', 'annotation', 'alias'],
+        columnNotSearch: ['gene expression patterns', 'annotation'],
+      };
+    },
     computed: {
       height() {
         return this.heightChartWrapper + 'px';
@@ -84,6 +107,29 @@
       ordersArray() {
         return this.projectSortColumns[1];
       },
+      idForSort() {
+        if (['ncbiGeneId', 'chromosomePosition'].includes(this.id)) {
+          return this.id + 'Int';
+        } else return this.id;
+      },
+      sortIcon() {
+        return this.columnsArray.includes(this.idForSort)
+          ? 'fa-duotone fa-sort'
+          : 'sort';
+      },
+      isSort() {
+        return this.sortIcon === 'sort' ? 'hidden' : 'visible';
+      },
+      sortOrder() {
+        const activeDesc =
+          this.ordersArray[this.columnsArray.indexOf(this.idForSort)] ===
+          'desc';
+        return activeDesc ? 'vertical' : undefined;
+      },
+      orderNumber() {
+        const position = this.projectSortColumns[0].indexOf(this.idForSort);
+        return `fa-solid fa-${position + 1}`;
+      },
     },
     methods: {
       activeSort() {
@@ -92,21 +138,6 @@
       ...mapMutations({
         setFilterModal: 'set_filter_modal',
       }),
-      sortIcon(id) {
-        return this.columnsArray.includes(id) ? 'fa-duotone fa-sort' : 'sort';
-      },
-      sortOrder(id) {
-        const activeDesc =
-          this.ordersArray[this.columnsArray.indexOf(id)] === 'desc';
-        return activeDesc ? 'vertical' : undefined;
-      },
-      isSort(id) {
-        return this.sortIcon(id) === 'sort' ? false : true;
-      },
-      orderNumber(id) {
-        const position = this.projectSortColumns[0].indexOf(id);
-        return position === -1 ? undefined : `circle-${position + 1}`;
-      },
     },
   };
 </script>
@@ -114,17 +145,42 @@
   .table_header
     display: flex
     align-items: center
+    justify-content: flex-start
+    min-width: 150px
+    &.Description
+      min-width: 450px
+    &.symbol
+      min-width: 150px
+    &.name
+      min-width: 300px
     .inner
-      padding: 5px
-      margin-left: -5px
-      transition: background-color 0.3s ease-in-out
       display: flex
-      align-items: center
-      gap: 0.5rem
-      &:hover
-        cursor: pointer
-        background-color: rgba($MAIN_COLOR, .2)
-        border-radius: 0.2rem
+      margin-left: -10px
+      .table_btn
+        transition: background-color 0.3s ease-in-out
+        &:hover
+          cursor: pointer
+          background-color: rgba($MAIN_COLOR, .2)
+          border-radius: 0.2rem
+        &.sort
+          display: flex
+          align-items: center
+          padding: 5px 8px
+          gap: 5px
+        .sort_icon
+          box-sizing: border-box
+          padding: 0 5px
+          position: relative
+          > .sort_number
+            position: absolute
+            font-size: 0.6em
+            top: 10px
+        &.search
+          display: flex
+          align-items: center
+          padding: 5px
+          > [data-icon="magnifying-glass"]
+            display: inline-block
     .tag
       +ontology_tag
       width: fit-content
@@ -138,12 +194,7 @@
         cursor: pointer
         font-size: 12px
         color: $GRAY
-        margin-left: 0.5em
-        transition: transform 0.2s ease-in-out
         opacity: .3
-        &:hover
-          cursor: pointer
-          transform: scale(1.5)
         &.active
           opacity: unset
           color: $MAIN_COLOR

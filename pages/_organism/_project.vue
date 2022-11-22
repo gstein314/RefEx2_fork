@@ -24,7 +24,6 @@
             }}</span>
           </span>
         </h1>
-        <ComparisonButton />
         <item-comparison
           :items="items"
           :active-id="selectedId"
@@ -34,21 +33,40 @@
           @showModal="setGeneModal"
         >
         </item-comparison>
-        <div class="display_settings">
-          <a v-if="isNoSort" class="reset_sort" @click="clearSortArray">
-            <font-awesome-icon icon="xmark" />
-            Reset sorting column(s)
-          </a>
-          <a @click="toggleDisplaySettings">
-            <font-awesome-icon icon="eye" />
-            Show/hide columns
-          </a>
+        <div class="results_title_wrapper">
+          <div class="align_left">
+            <vue-json-to-csv
+              :json-data="projectResultsView"
+              :csv-title="csvTitle"
+              :labels="projectTableHeading"
+            >
+              <button class="icon_on_left">
+                <font-awesome-icon icon="arrow-down-to-line" />Download .csv
+              </button>
+            </vue-json-to-csv>
+            <ComparisonButton />
+          </div>
+          <div class="align_right">
+            <a
+              v-if="isNoSort"
+              class="icon_on_left reset_sort"
+              @click="clearSortArray"
+            >
+              <font-awesome-icon icon="xmark" />
+              Reset sorting column(s)
+            </a>
+            <a class="icon_on_left" @click="toggleDisplaySettings">
+              <font-awesome-icon icon="eye" />
+              Show/hide columns
+            </a>
+          </div>
         </div>
       </div>
     </div>
     <ModalViewDisplay
       v-if="isDisplaySettingsOn"
       @click.native="toggleDisplaySettings"
+      @updateProjectTableHeading="updateProjectTableHeading"
     />
     <ModalViewFilter />
     <ModalViewGene />
@@ -61,7 +79,9 @@
       :dataset="dataset"
       :selected-item="selectedId"
       :project-sort-columns="projectSortColumns"
+      :csv-table-stat-title="csvTableStatTitle"
       @activeSort="setProjectSortColumn"
+      @setProjectResultsView="setProjectResultsView"
     />
     <ResultsPagination
       :pages-number="$store.state.project_pages_number"
@@ -134,11 +154,11 @@
           return {
             id,
             info: data[`${type}_info`],
-            firstQuartileData: data.refex_info?.map(x => x.Log1stQu),
             minData: data.refex_info?.map(x => x.LogMin),
-            maxData: data.refex_info?.map(x => x.LogMax),
+            firstQuartileData: data.refex_info?.map(x => x.Log1stQu),
             medianData: data.refex_info?.map(x => x.LogMedian),
             thirdQuartileData: data.refex_info?.map(x => x.Log3rdQu),
+            maxData: data.refex_info?.map(x => x.LogMax),
             sdData: data.refex_info?.map(x => x.LogSd),
             numberOfSamplesData: data.refex_info?.map(x => x.NumberOfSamples),
           };
@@ -194,11 +214,23 @@
         isDisplaySettingsOn: false,
         heightChartWrapper: 200,
         projectSortColumns: [[], []],
+        projectTableHeading: {},
+        projectResultsView: [],
+        csvTableStatTitle: {
+          LogMin: 'Min',
+          Log1stQu: '1stQu',
+          LogMedian: 'Median (log2(TPM+1))',
+          Log3rdQu: '3rdQu',
+          LogMax: 'Max',
+          LogSd: 'SD',
+          NumberOfSamples: 'No. of samples',
+        },
       };
     },
     computed: {
       ...mapGetters({
         projectResultsAll: 'get_project_results_all',
+        projectFilters: 'project_filters',
       }),
       projectItems() {
         return {
@@ -220,6 +252,22 @@
       isNoSort() {
         return this.projectSortColumns[0].length === 0 ? false : true;
       },
+      csvTitle() {
+        let today = new Date();
+        let dd = String(today.getDate()).padStart(2, '0');
+        let mm = String(today.getMonth() + 1).padStart(2, '0');
+        let yy = today.getFullYear() % 100;
+        today = yy + mm + dd;
+
+        if (this.selectedItem.info.symbol !== undefined) {
+          return `${this.selectedItem.info.symbol}_${today}`;
+        } else return `${this.selectedItem.info.sample_id}_${today}`;
+      },
+      roundDownClientHeight() {
+        return Math.floor(
+          this.$refs.chartWrapper.getBoundingClientRect().height
+        );
+      },
     },
     created() {
       this.$store.commit('set_project_items', this.projectItems);
@@ -236,9 +284,10 @@
         column: 'LogMedian',
         selectedItem: this.selectedId,
       });
+      this.updateProjectTableHeading();
     },
     updated() {
-      this.heightChartWrapper = this.$refs.chartWrapper.clientHeight;
+      this.heightChartWrapper = this.roundDownClientHeight;
     },
     destroyed() {
       this.setSampleAlias();
@@ -260,7 +309,7 @@
         });
         this.selectedId = id;
         requestAnimationFrame(
-          () => (this.heightChartWrapper = this.$refs.chartWrapper.clientHeight)
+          () => (this.heightChartWrapper = this.roundDownClientHeight)
         );
       },
       checkSampleAlias() {
@@ -282,6 +331,9 @@
         }
       },
       setProjectSortColumn({ column, selectedItem }) {
+        if (column === 'ncbiGeneId' || column === 'chromosomePosition') {
+          column += 'Int';
+        }
         const columnsArray = this.projectSortColumns[0];
         const ordersArray = this.projectSortColumns[1];
         const columnIndex = columnsArray.indexOf(column);
@@ -299,6 +351,30 @@
       },
       clearSortArray() {
         this.projectSortColumns = [[], []];
+      },
+      updateProjectTableHeading() {
+        const obj = {};
+        for (const filter of this.projectFilters) {
+          if (!filter.is_displayed) continue;
+          if (filter.column === 'LogMedian') {
+            for (const item of Object.entries(this.csvTableStatTitle)) {
+              const [oldName, newName] = [item[0], item[1]];
+              const subObj = {};
+              subObj.title = newName;
+              obj[oldName] = subObj;
+            }
+          } else {
+            const subObj = {};
+            if (filter.note) {
+              subObj.title = `${filter.label} (${filter.note})`;
+            } else subObj.title = filter.label;
+            obj[filter.column] = subObj;
+          }
+        }
+        this.projectTableHeading = obj;
+      },
+      setProjectResultsView(arr) {
+        this.projectResultsView = arr;
       },
     },
   };
@@ -334,15 +410,10 @@
       > .content
         gap: 20px
         padding: 10px 20px
-        display: grid
+        display: flex
+        flex-direction: column
         min-width: fit-content
-        grid-template-columns: 1fr auto
-        grid-template-rows: auto auto
         width: 100%
-        > .comparison_btn
-          margin-left: 0
-          height: fit-content
-          place-self: flex-end
         > .header_title
           display: flex
           align-items: flex-start
@@ -359,13 +430,47 @@
             display: block
             margin-top: -2px
             font-weight: normal
-        > .display_settings
-          +display_settings
-          place-self: flex-end
-          > a + a
-            margin-left: 20px
-          > .reset_sort
-            color: $ERROR_COLOR
+        > .results_title_wrapper
+          display: grid
+          grid-template-columns: 1fr 1fr
+          width: 100%
+          align-items: center
+          > .align_left
+            display: flex
+            position: relative
+            justify-content: flex-start
+            > [id^=json-to-csv]
+              display: flex
+              justify-content: flex-end
+              > button
+                +link_with_icon
+                padding: 0
+                border: none
+                background: none
+                margin-right: 20px
+                &.icon_on_left
+                  padding-left: 18px
+                  > svg
+                    font-size: 1.2rem
+                    top: 5px
+                    margin-right: 5px
+          > .align_right
+            display: flex
+            justify-content: flex-end
+            > a
+              +link_with_icon
+              place-self: none
+              > svg
+                &[data-icon="xmark"]
+                  font-size: 20px
+                  top: -1px
+                  left: -2px
+                &[data-icon="eye"]
+                  left: -6px
+            > a + a
+              margin-left: 20px
+            > .reset_sort
+              color: $ERROR_COLOR
     .pagination
       display: flex
       position: sticky

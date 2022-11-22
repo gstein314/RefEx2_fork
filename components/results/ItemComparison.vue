@@ -16,8 +16,8 @@
       <span>{{ item.info.symbol || item.info.Description }}</span>
       <font-awesome-icon
         v-if="isMedianSort(item.id)"
-        :icon="sortIcon()"
-        :flip="sortOrder()"
+        :icon="sortIcon"
+        :flip="sortOrder"
       />
     </li>
   </ul>
@@ -56,6 +56,16 @@
       ordersArray() {
         return this.projectSortColumns[1];
       },
+      sortIcon() {
+        return this.columnsArray.includes('LogMedian')
+          ? 'fa-duotone fa-sort'
+          : undefined;
+      },
+      sortOrder() {
+        const activeDesc =
+          this.ordersArray[this.columnsArray.indexOf('LogMedian')] === 'desc';
+        return activeDesc ? 'vertical' : undefined;
+      },
     },
     methods: {
       // only switch to 'up' order if the same item is selected and it was already a median sort
@@ -66,16 +76,6 @@
       },
       isMedianSort(id) {
         return this.activeId === id && this.columnsArray.includes('LogMedian');
-      },
-      sortIcon() {
-        return this.columnsArray.includes('LogMedian')
-          ? 'fa-duotone fa-sort'
-          : undefined;
-      },
-      sortOrder() {
-        const activeDesc =
-          this.ordersArray[this.columnsArray.indexOf('LogMedian')] === 'desc';
-        return activeDesc ? 'vertical' : undefined;
       },
     },
   };

@@ -9,10 +9,8 @@
         <template v-for="(value, filterIndex) of filters">
           <div
             v-if="
-              !(
-                value.label === 'Symbol' ||
-                value.label === 'Description' ||
-                value.label === 'MEDIAN [LOG2(TPM+1)]'
+              !['Symbol', 'Description', 'MEDIAN [LOG2(TPM+1)]'].includes(
+                value.label
               )
             "
             :key="filterIndex"
@@ -80,6 +78,7 @@
               !this.filters.find(x => x.column === key)?.is_displayed || false,
             filterKey: key,
           });
+          this.$emit('updateProjectTableHeading');
         }
       },
       toggleDisplaySettings() {

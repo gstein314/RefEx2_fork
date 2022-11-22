@@ -97,7 +97,7 @@
               class="icon_on_right"
               target="_blank"
               :href="datasetInfo.url_prefix + result.geneid"
-              ><font-awesome-icon icon="external-link-alt" class="smaller" />
+              ><font-awesome-icon icon="external-link-alt" />
               {{ result[filter.column] }}
             </a>
             <span
@@ -110,7 +110,7 @@
                 v-if="
                   value_index < JSON.parse(result[filter.column]).length - 1
                 "
-                >,</span
+                >/</span
               >
             </span>
             <template v-else-if="hasStringQuotes(result[filter.column])">

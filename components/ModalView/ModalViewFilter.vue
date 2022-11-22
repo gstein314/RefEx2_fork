@@ -32,14 +32,16 @@
         <div class="input_wrapper">
           <vue-slider
             ref="slider"
-            v-model="searchValue"
+            v-model.lazy="searchValue"
+            v-debounce="delay"
             v-bind="filterObj.numberValue"
           ></vue-slider>
         </div>
       </template>
       <div v-else-if="filterObj.options" class="select">
         <multi-select
-          v-model="searchValue"
+          v-model.lazy="searchValue"
+          v-debounce="delay"
           :multiple="true"
           :allow-empty="true"
           :close-on-select="false"
@@ -74,7 +76,8 @@
 
       <div v-else class="input_wrapper">
         <input
-          v-model="searchValue"
+          v-model.lazy="searchValue"
+          v-debounce="delay"
           type="text"
           placeholder="filter by text"
           @keyup.enter="close(null)"
@@ -93,8 +96,12 @@
   import ModalView from '~/components/ModalView/ModalView.vue';
   import MultiSelect from 'vue-multiselect';
   import { mapMutations, mapGetters } from 'vuex';
+  import { directive } from 'v-debounce';
 
   export default {
+    directives: {
+      debounce: directive,
+    },
     components: {
       ModalView,
       MultiSelect,
@@ -102,6 +109,7 @@
     data() {
       return {
         searchValue: '',
+        delay: 1000,
       };
     },
     computed: {
