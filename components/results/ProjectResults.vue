@@ -213,13 +213,7 @@
           }
           return !isFiltered;
         });
-        // create number type keys for "ncbiGeneId" and "chromosomePosition" before sorting
-        const intFiltered = filtered.map(item => {
-          item.ncbiGeneIdInt = parseInt(item.ncbiGeneId);
-          item.chromosomePositionInt = parseInt(item.chromosomePosition);
-          return item;
-        });
-        const withSort = _.orderBy(intFiltered, ...this.projectSortColumns);
+        const withSort = _.orderBy(filtered, ...this.projectSortColumns);
         const displayed = [];
         for (const filter of this.filters) {
           if (filter.is_displayed) displayed.push(filter.column);
