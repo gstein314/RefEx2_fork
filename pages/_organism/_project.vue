@@ -145,6 +145,35 @@
             isError = true;
           }
           resultsAll[id] = data.refex_info.map((result, index) => {
+            // create number type keys for "ncbiGeneId" and "chromosomePosition" before sorting
+            const toNum = str => {
+              const num = parseInt(str);
+              return Number.isNaN(num) ? str : num;
+            };
+            result.ncbiGeneIdInt = toNum(result.ncbiGeneId);
+            const chrToNum = str => {
+              if (str === undefined) return;
+              let chr = toNum(str);
+              if (typeof chr === 'string') {
+                chr.toUpperCase();
+                switch (chr) {
+                  case 'MT':
+                    chr = 23;
+                    break;
+                  case 'X':
+                    chr = 24;
+                    break;
+                  case 'Y':
+                    chr = 25;
+                    break;
+                  case '-':
+                    chr = 26;
+                    break;
+                }
+              }
+              return chr;
+            };
+            result.chromosomePositionInt = chrToNum(result.chromosomePosition);
             return {
               ...result,
               itemNum: index,

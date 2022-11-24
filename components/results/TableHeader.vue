@@ -1,13 +1,19 @@
 <template>
   <div class="table_header">
-    <div v-if="columnNotSort.includes(id)" :class="{ '-column': note }">
+    <div v-if="columnNoFunction.includes(id)" :class="{ '-column': note }">
       <div>
         <div class="label">{{ label }}</div>
         <div v-if="note" class="tag">{{ note }}</div>
       </div>
     </div>
     <div v-else-if="true" class="inner" :class="{ '-column': note }">
-      <div class="table_btn sort" @click="activeSort">
+      <div v-if="columnNoSort.includes(id)">
+        <div class="header_text">
+          <div class="label">{{ label }}</div>
+          <div v-if="note" class="tag">{{ note }}</div>
+        </div>
+      </div>
+      <div v-else class="header_btn sort" @click="activeSort">
         <div>
           <div class="label">{{ label }}</div>
           <div v-if="note" class="tag">{{ note }}</div>
@@ -21,9 +27,8 @@
           />
         </div>
       </div>
-      <div class="table_btn search">
+      <div class="header_btn search">
         <font-awesome-icon
-          v-if="!columnNotSearch.includes(id)"
           icon="search"
           :class="{ active: isActiveSearch }"
           @click="setFilterModal(id)"
@@ -82,8 +87,8 @@
     },
     data() {
       return {
-        columnNotSort: ['gene expression patterns', 'annotation', 'alias'],
-        columnNotSearch: ['gene expression patterns', 'annotation'],
+        columnNoFunction: ['gene expression patterns', 'annotation'],
+        columnNoSort: ['alias'],
       };
     },
     computed: {
@@ -153,18 +158,21 @@
       min-width: 150px
     &.name
       min-width: 300px
+    .header_text
+      padding: 5px 8px
     .inner
       display: flex
       margin-left: -10px
-      .table_btn
+      .header_btn
         transition: background-color 0.3s ease-in-out
         &:hover
           cursor: pointer
           background-color: rgba($MAIN_COLOR, .2)
           border-radius: 0.2rem
-        &.sort
+        &.sort, &.search
           display: flex
           align-items: center
+        &.sort
           padding: 5px 8px
           gap: 5px
         .sort_icon
@@ -176,8 +184,6 @@
             font-size: 0.6em
             top: 10px
         &.search
-          display: flex
-          align-items: center
           padding: 5px
           > [data-icon="magnifying-glass"]
             display: inline-block

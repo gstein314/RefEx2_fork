@@ -62,9 +62,24 @@
                 :src="geneSummarySource(result[geneIdKey])"
                 :alt="result[geneIdKey]"
               />
-              <span v-else-if="filter.column === 'alias'">
-                {{ formatAlias(result.alias) }}
-              </span>
+              <template v-else-if="isAliasArray(result, filter)">
+                <span
+                  v-for="(alias, alias_index) in JSON.parse(
+                    result[filter.column]
+                  )"
+                  :key="alias_index"
+                >
+                  <span>{{ alias }}</span>
+                  <span
+                    v-if="
+                      alias_index < JSON.parse(result[filter.column]).length - 1
+                    "
+                    class="comma"
+                    >,
+                  </span>
+                </span>
+              </template>
+
               <template v-else-if="hasStringQuotes(result[filter.column])">
                 {{ result[filter.column].replaceAll('"', '') }}
               </template>
@@ -198,13 +213,7 @@
           }
           return !isFiltered;
         });
-        // create number type keys for "ncbiGeneId" and "chromosomePosition" before sorting
-        const intFiltered = filtered.map(item => {
-          item.ncbiGeneIdInt = parseInt(item.ncbiGeneId);
-          item.chromosomePositionInt = parseInt(item.chromosomePosition);
-          return item;
-        });
-        const withSort = _.orderBy(intFiltered, ...this.projectSortColumns);
+        const withSort = _.orderBy(filtered, ...this.projectSortColumns);
         const displayed = [];
         for (const filter of this.filters) {
           if (filter.is_displayed) displayed.push(filter.column);
@@ -223,7 +232,7 @@
               } else if (key === 'alias') {
                 // format alias data to avoid csv data conflict ("," problem)
                 try {
-                  obj[key] = JSON.parse(item[key]).join(' / ');
+                  obj[key] = JSON.parse(item[key]).join(' , ');
                 } catch {
                   obj[key] = item[key].replaceAll('"', '');
                 }
@@ -322,11 +331,12 @@
       hasStringQuotes(str) {
         return str?.startsWith('"') && str?.endsWith('"');
       },
-      formatAlias(str) {
+      isAliasArray(result, filter) {
+        if (filter.column !== 'alias') return;
         try {
-          return JSON.parse(str).join(' / ');
+          return Array.isArray(JSON.parse(result[filter.column]));
         } catch {
-          return str.replaceAll('"', '');
+          return false;
         }
       },
     },
