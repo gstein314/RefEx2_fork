@@ -353,7 +353,8 @@
               "examples": ["liver", "lung"]
             }
           ]
-        }
+        },
+        "specificity": []
       }
     ]
   }
