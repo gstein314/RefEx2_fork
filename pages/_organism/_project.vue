@@ -157,13 +157,13 @@
               if (typeof chr === 'string') {
                 chr.toUpperCase();
                 switch (chr) {
-                  case 'MT':
+                  case 'X':
                     chr = 23;
                     break;
-                  case 'X':
+                  case 'Y':
                     chr = 24;
                     break;
-                  case 'Y':
+                  case 'MT':
                     chr = 25;
                     break;
                   case '-':
