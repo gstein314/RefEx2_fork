@@ -48,8 +48,8 @@
           </div>
           <div class="align_right">
             <button
-              v-if="isNoSort"
               class="sub reset_sort"
+              :class="isNoSort"
               @click="clearSortArray"
             >
               <font-awesome-icon icon="xmark" />
@@ -279,7 +279,7 @@
         return this.items.find(item => item.id === this.selectedId);
       },
       isNoSort() {
-        return this.projectSortColumns[0].length === 0 ? false : true;
+        return this.projectSortColumns[0].length === 0 ? 'disabled' : '';
       },
       csvTitle() {
         let today = new Date();
