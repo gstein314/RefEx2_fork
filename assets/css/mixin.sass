@@ -86,7 +86,6 @@ $TOOLTIP_LAYER: 2
   display: flex
   align-items: center
   transition: background 0.3s ease-in-out
-  line-height: 0
   &:focus
     outline: none
   &:hover
@@ -105,13 +104,14 @@ $TOOLTIP_LAYER: 2
     cursor: not-allowed
     &:hover
       background: #cccccc
-  &.sub
-    font-size: 12px
-    padding: 0.4em 1.2em
-    > svg
-      font-size: 0.8em
-      margin-right: 4px
 
+
+@mixin sub_button
+  font-size: 12px
+  padding: 0.4em 1.2em
+  > svg
+    font-size: 0.8em
+    margin-right: 4px
 
 @mixin table
   width: 100%

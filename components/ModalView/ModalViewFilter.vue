@@ -12,16 +12,19 @@
           filterObj.note
         }}</span>
         <span v-if="filterObj.options" class="modal_btns">
-          <button class="all_btn" @click="searchValue = [...filterObj.options]">
+          <button
+            class="sub all_btn"
+            @click="searchValue = [...filterObj.options]"
+          >
             all
           </button>
-          <button class="clear_btn" @click="searchValue = ''">
+          <button class="sub clear_btn" @click="searchValue = ''">
             clear
           </button></span
         >
         <span v-if="filterObj.column === 'LogMedian'" class="modal_btns">
           <button
-            class="reset_btn"
+            class="sub reset_btn"
             @click="resetSlider(filterObj.filter_modal)"
           >
             Reset
@@ -210,6 +213,7 @@
           --fa-secondary-color: #488EC4
     .all_btn, .clear_btn, .reset_btn
       +button
+      +sub_button
 
     > .input_wrapper
       display: flex

@@ -47,15 +47,11 @@
             <ComparisonButton />
           </div>
           <div class="align_right">
-            <button
-              class="sub reset_sort"
-              :class="isNoSort"
-              @click="clearSortArray"
-            >
+            <button class="reset_btn" :class="isNoSort" @click="clearSortArray">
               <font-awesome-icon icon="xmark" />
               Reset sorting column(s)
             </button>
-            <button class="sub" @click="toggleDisplaySettings">
+            <button class="show_hide_btn" @click="toggleDisplaySettings">
               <font-awesome-icon icon="eye" />
               Show/hide columns
             </button>
@@ -479,8 +475,9 @@
             justify-content: flex-end
             align-self: end
             gap: 10px
-            > button
+            > .reset_btn, .show_hide_btn
               +button
+              +sub_button
     .pagination
       display: flex
       position: sticky
