@@ -381,6 +381,7 @@
         const obj = {};
         for (const filter of this.projectFilters) {
           if (!filter.is_displayed) continue;
+          if (filter.column === 'gene expression patterns') continue;
           if (filter.column === 'LogMedian') {
             for (const item of Object.entries(this.csvTableStatTitle)) {
               const [oldName, newName] = [item[0], item[1]];

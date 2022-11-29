@@ -238,9 +238,8 @@
                 }
               } else obj[key] = item[key];
               // add png url option in exported csv
-              obj['gene expression patterns'] = this.geneSummarySource(
-                item.ncbiGeneId
-              );
+              // if (obj['gene expression patterns'])
+              //   delete obj['gene expression patterns'];
               return obj;
             }, {});
           resultsOnScreen.push(filtered);
