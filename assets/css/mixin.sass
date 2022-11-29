@@ -80,17 +80,18 @@ $TOOLTIP_LAYER: 2
   background: $MAIN_COLOR
   font-size: 16px
   font-weight: 500
-  padding: 6px 22px
+  padding: 0.4em 1.2em
   border: none
   border-radius: $BORDER_RADIUS_DEFAULT
   display: flex
   align-items: center
+  transition: background 0.3s ease-in-out
+  line-height: 0
   &:focus
     outline: none
   &:hover
     cursor: pointer
     background: $BUTTON_HOVER_COLOR
-    transition: 0.6s
   > svg
     font-size: 14px
     margin-right: 4px
@@ -98,13 +99,19 @@ $TOOLTIP_LAYER: 2
     background: $WARNING_BUTTON_COLOR
     &:hover
       background: $WARNING_BUTTON_COLOR_HOVER
-      transition: 0.6s
   &.disabled
     background: #cccccc
     color: #ffffff
     cursor: not-allowed
     &:hover
       background: #cccccc
+  &.sub
+    font-size: 12px
+    padding: 0.4em 1.2em
+    > svg
+      font-size: 0.8em
+      margin-right: 4px
+
 
 @mixin table
   width: 100%

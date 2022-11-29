@@ -10,10 +10,10 @@
         >{{ examples[0].label }}</span
       >
       <div class="display_settings_wrapper">
-        <a class="display_settings" @click="$emit('toggleDisplaySettings')">
+        <button class="sub" @click="$emit('toggleDisplaySettings')">
           <font-awesome-icon icon="eye" />
           Show/hide columns
-        </a>
+        </button>
       </div>
     </div>
 
@@ -251,6 +251,8 @@
         min-width: 190px
       > .display_settings_wrapper
         +display_settings_wrapper
+        > button
+          +button
       > button.show_all_btn
         +button
         margin-left: 18px
