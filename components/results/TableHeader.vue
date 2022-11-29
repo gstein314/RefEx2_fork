@@ -20,11 +20,6 @@
         </div>
         <div class="sort_icon">
           <font-awesome-icon :icon="sortIcon" :flip="sortOrder" />
-          <font-awesome-icon
-            class="sort_number"
-            :style="{ visibility: isSort }"
-            :icon="orderNumber"
-          />
         </div>
       </div>
       <div class="header_btn search">
@@ -122,18 +117,11 @@
           ? 'fa-duotone fa-sort'
           : 'sort';
       },
-      isSort() {
-        return this.sortIcon === 'sort' ? 'hidden' : 'visible';
-      },
       sortOrder() {
         const activeDesc =
           this.ordersArray[this.columnsArray.indexOf(this.idForSort)] ===
           'desc';
         return activeDesc ? 'vertical' : undefined;
-      },
-      orderNumber() {
-        const position = this.projectSortColumns[0].indexOf(this.idForSort);
-        return `fa-solid fa-${position + 1}`;
       },
     },
     methods: {
@@ -179,10 +167,6 @@
           box-sizing: border-box
           padding: 0 5px
           position: relative
-          > .sort_number
-            position: absolute
-            font-size: 0.6em
-            top: 10px
         &.search
           padding: 5px
           > [data-icon="magnifying-glass"]
