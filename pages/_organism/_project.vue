@@ -363,8 +363,8 @@
         const ordersArray = this.projectSortColumns[1];
         const columnIndex = columnsArray.indexOf(column);
         if (columnIndex === -1) {
-          columnsArray.push(column);
-          ordersArray.push('desc');
+          columnsArray.unshift(column);
+          ordersArray.unshift('desc');
         } else if (column === 'LogMedian' && this.selectedId !== selectedItem) {
           ordersArray.splice(columnIndex, 1, 'desc');
         } else if (ordersArray[columnIndex] === 'desc') {
