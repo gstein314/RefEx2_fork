@@ -35,6 +35,7 @@
         </item-comparison>
         <div class="results_title_wrapper">
           <div class="align_left">
+            <DownloadButton />
             <vue-json-to-csv
               :json-data="projectResultsView"
               :csv-title="csvTitle"
@@ -97,7 +98,7 @@
   import ModalViewFilter from '~/components/ModalView/ModalViewFilter.vue';
   import ProjectResults from '~/components/results/ProjectResults.vue';
   import ResultsPagination from '~/components/results/ResultsPagination.vue';
-  import Papa from 'papaparse';
+  import DownloadButtonVue from '~/components/DownloadButton.vue';
 
   const logMedianFilter = {
     column: 'LogMedian',
