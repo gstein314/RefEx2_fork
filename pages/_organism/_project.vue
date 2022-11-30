@@ -36,7 +36,7 @@
         <div class="results_title_wrapper">
           <div class="align_left">
             <DownloadButton
-              :json-data="projectResultsView"
+              :download-data="projectResultsView"
               :file-name="csvTitle"
             />
             <vue-json-to-csv
@@ -101,7 +101,7 @@
   import ModalViewFilter from '~/components/ModalView/ModalViewFilter.vue';
   import ProjectResults from '~/components/results/ProjectResults.vue';
   import ResultsPagination from '~/components/results/ResultsPagination.vue';
-  import DownloadButtonVue from '~/components/DownloadButton.vue';
+  import DownloadButton from '~/components/DownloadButton.vue';
 
   const logMedianFilter = {
     column: 'LogMedian',
@@ -244,7 +244,7 @@
         isDisplaySettingsOn: false,
         heightChartWrapper: 200,
         projectSortColumns: [[], []],
-        projectTableHeading: {},
+        projectTableHeading: [],
         projectResultsView: [],
         csvTableStatTitle: {
           LogMin: 'Min',
@@ -380,28 +380,54 @@
         this.projectSortColumns = [[], []];
       },
       updateProjectTableHeading() {
-        const obj = {};
+        // const obj = {};
+        // for (const filter of this.projectFilters) {
+        //   if (!filter.is_displayed) continue;
+        //   if (filter.column === 'gene expression patterns') continue;
+        //   if (filter.column === 'LogMedian') {
+        //     for (const item of Object.entries(this.csvTableStatTitle)) {
+        //       const [oldName, newName] = [item[0], item[1]];
+        //       const subObj = {};
+        //       subObj.title = newName;
+        //       obj[oldName] = subObj;
+        //     }
+        //   } else {
+        //     const subObj = {};
+        //     if (filter.note) {
+        //       subObj.title = `${filter.label} (${filter.note})`;
+        //     } else subObj.title = filter.label;
+        //     obj[filter.column] = subObj;
+        //   }
+        // }
+        const arr = [];
         for (const filter of this.projectFilters) {
           if (!filter.is_displayed) continue;
           if (filter.column === 'gene expression patterns') continue;
           if (filter.column === 'LogMedian') {
             for (const item of Object.entries(this.csvTableStatTitle)) {
-              const [oldName, newName] = [item[0], item[1]];
-              const subObj = {};
-              subObj.title = newName;
-              obj[oldName] = subObj;
+              arr.push(item[1]);
             }
           } else {
-            const subObj = {};
             if (filter.note) {
-              subObj.title = `${filter.label} (${filter.note})`;
-            } else subObj.title = filter.label;
-            obj[filter.column] = subObj;
+              arr.push(`${filter.label} (${filter.note})`);
+            } else arr.push(`${filter.label}`);
           }
         }
-        this.projectTableHeading = obj;
+        this.projectTableHeading = arr;
       },
       setProjectResultsView(arr) {
+        // const keyRename = (item, oldKey, newKey) => {
+        //   item[newKey] = item[oldKey];
+        //   delete item[oldKey];
+        //   return item;
+        // };
+        // const toValue = obj => Object.entries(obj)[1];
+        // arr.map(item => {
+        //   // for (const filter of this.projectFilters) {
+        //   // }
+        //   return toValue(item);
+        // });
+        // console.log(arr);
         this.projectResultsView = arr;
       },
     },
