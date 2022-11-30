@@ -97,6 +97,7 @@
   import ModalViewFilter from '~/components/ModalView/ModalViewFilter.vue';
   import ProjectResults from '~/components/results/ProjectResults.vue';
   import ResultsPagination from '~/components/results/ResultsPagination.vue';
+  import Papa from 'papaparse';
 
   const logMedianFilter = {
     column: 'LogMedian',
