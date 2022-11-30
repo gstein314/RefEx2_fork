@@ -47,24 +47,12 @@
     methods: {
       ...mapMutations({}),
       downloadTsv() {
-        var csv = Papa.unparse(
-          [
-            {
-              B: 'foo',
-              A: 'bar',
-            },
-            {
-              A: 'abc',
-              B: 'def',
-            },
-          ],
-          {
-            delimiter: '\t',
-          }
-        );
+        let tsv = Papa.unparse(this.jsonData, {
+          delimiter: this.delimiter,
+        });
 
-        var blob = new Blob([csv], { type: 'text/plain;charset=utf-8' });
-        FileSaver.saveAs(blob, 'hello world.txt');
+        let blob = new Blob([tsv], { type: 'text/plain;charset=utf-8' });
+        FileSaver.saveAs(blob, this.fileName);
       },
     },
   };

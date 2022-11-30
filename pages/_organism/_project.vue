@@ -35,7 +35,10 @@
         </item-comparison>
         <div class="results_title_wrapper">
           <div class="align_left">
-            <DownloadButton />
+            <DownloadButton
+              :json-data="projectResultsView"
+              :file-name="csvTitle"
+            />
             <vue-json-to-csv
               :json-data="projectResultsView"
               :csv-title="csvTitle"
@@ -285,7 +288,7 @@
         let mm = String(today.getMonth() + 1).padStart(2, '0');
         let yyyy = today.getFullYear();
         today = yyyy + mm + dd;
-        return `RefEx2_${this.$store.state.active_specie.species}_${this.$store.state.active_dataset.dataset}_${this.$store.state.active_filter}_comparison_${today}`;
+        return `RefEx2_${this.$store.state.active_specie.species}_${this.$store.state.active_dataset.dataset}_${this.$store.state.active_filter}_comparison_${today}.tsv`;
       },
       roundDownClientHeight() {
         return Math.floor(
