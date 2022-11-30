@@ -1,9 +1,5 @@
 <template>
-  <button
-    class="download_btn"
-    :style="[isProjectSample ? { visibility: 'hidden' } : '']"
-    @click="downloadTsv()"
-  >
+  <button class="download_btn" @click="downloadTsv()">
     <font-awesome-icon icon="arrow-down-to-line" />
     Download .tsv
   </button>
@@ -21,6 +17,10 @@
         default: () => [],
       },
       requiredColumns: {
+        type: Array,
+        default: () => [],
+      },
+      fieldArray: {
         type: Array,
         default: () => [],
       },
@@ -45,9 +45,9 @@
       jsonDataWithLabels() {
         return {};
       },
-      fieldArray() {
-        return Object.keys(this.downloadData[0]);
-      },
+      // fieldArray() {
+      //   return Object.keys(this.downloadData[0]);
+      // },
       dataArray() {
         const arr = [];
         for (const item of this.downloadData) {

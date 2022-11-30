@@ -38,6 +38,7 @@
             <DownloadButton
               :download-data="projectResultsView"
               :file-name="csvTitle"
+              :field-array="projectTableHeading"
             />
             <vue-json-to-csv
               :json-data="projectResultsView"
@@ -401,18 +402,26 @@
         // }
         const arr = [];
         for (const filter of this.projectFilters) {
+          const obj = {};
           if (!filter.is_displayed) continue;
           if (filter.column === 'gene expression patterns') continue;
           if (filter.column === 'LogMedian') {
             for (const item of Object.entries(this.csvTableStatTitle)) {
-              arr.push(item[1]);
+              const [oldName, newName] = [item[0], item[1]];
+              const subObj = {};
+              subObj[oldName] = newName;
+              arr.push(subObj);
             }
-          } else {
-            if (filter.note) {
-              arr.push(`${filter.label} (${filter.note})`);
-            } else arr.push(`${filter.label}`);
+            continue;
           }
+          if (filter.note) {
+            obj[filter.column] = `${filter.label} (${filter.note})`;
+          } else {
+            obj[filter.column] = filter.label;
+          }
+          arr.push(obj);
         }
+        console.log(arr);
         this.projectTableHeading = arr;
       },
       setProjectResultsView(arr) {
