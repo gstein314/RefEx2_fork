@@ -37,7 +37,7 @@
           <div class="align_left">
             <DownloadButton
               :download-data="projectResultsView"
-              :file-name="csvTitle"
+              :file-name="tsvTitle"
               :fields-array="projectTableHeading"
             />
             <ComparisonButton />
@@ -71,7 +71,7 @@
       :dataset="dataset"
       :selected-item="selectedId"
       :project-sort-columns="projectSortColumns"
-      :csv-table-stat-title="csvTableStatTitle"
+      :tsv-table-stat-title="tsvTableStatTitle"
       @activeSort="setProjectSortColumn"
       @setProjectResultsView="setProjectResultsView"
     />
@@ -238,7 +238,7 @@
         projectSortColumns: [[], []],
         projectTableHeading: [],
         projectResultsView: [],
-        csvTableStatTitle: {
+        tsvTableStatTitle: {
           LogMin: 'Min',
           Log1stQu: '1stQu',
           LogMedian: 'Median (log2(TPM+1))',
@@ -274,7 +274,7 @@
       isNoSort() {
         return this.projectSortColumns[0].length === 0 ? 'disabled' : '';
       },
-      csvTitle() {
+      tsvTitle() {
         let today = new Date();
         let dd = String(today.getDate()).padStart(2, '0');
         let mm = String(today.getMonth() + 1).padStart(2, '0');
@@ -377,7 +377,7 @@
         //   if (!filter.is_displayed) continue;
         //   if (filter.column === 'gene expression patterns') continue;
         //   if (filter.column === 'LogMedian') {
-        //     for (const item of Object.entries(this.csvTableStatTitle)) {
+        //     for (const item of Object.entries(this.tsvTableStatTitle)) {
         //       const [oldName, newName] = [item[0], item[1]];
         //       const subObj = {};
         //       subObj.title = newName;
@@ -397,7 +397,7 @@
           if (!filter.is_displayed) continue;
           if (filter.column === 'gene expression patterns') continue;
           if (filter.column === 'LogMedian') {
-            for (const item of Object.entries(this.csvTableStatTitle)) {
+            for (const item of Object.entries(this.tsvTableStatTitle)) {
               const [oldName, newName] = [item[0], item[1]];
               const subObj = {};
               subObj[oldName] = newName;

@@ -161,7 +161,7 @@
         type: Array,
         default: () => [],
       },
-      csvTableStatTitle: {
+      tsvTableStatTitle: {
         type: Object,
         default: () => {},
       },
@@ -226,18 +226,18 @@
             .reduce((obj, key) => {
               // add other statistic data if LogMedian is displayed
               if (key === 'LogMedian') {
-                for (const key of Object.keys(this.csvTableStatTitle)) {
+                for (const key of Object.keys(this.tsvTableStatTitle)) {
                   obj[key] = item[key];
                 }
               } else if (key === 'alias') {
-                // format alias data to avoid csv data conflict ("," problem)
+                // format alias data to avoid tsv data conflict ("," problem)
                 try {
                   obj[key] = JSON.parse(item[key]).join(' , ');
                 } catch {
                   obj[key] = item[key].replaceAll('"', '');
                 }
               } else obj[key] = item[key];
-              // add png url option in exported csv
+              // add png url option in exported tsv
               // if (obj['gene expression patterns'])
               //   delete obj['gene expression patterns'];
               return obj;
