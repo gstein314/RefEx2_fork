@@ -53,15 +53,18 @@
       dataArray() {
         const arr = [];
         for (const item of this.downloadData) {
+          const subArr = [];
           for (const oldField of this.oldFields) {
-            arr.push(item.oldField);
+            subArr.push(item[oldField]);
           }
+          arr.push(subArr);
         }
+
         return arr;
       },
     },
     mounted() {
-      console.log(this.oldFields);
+      // console.log(this.oldFields);
     },
     methods: {
       ...mapMutations({}),
