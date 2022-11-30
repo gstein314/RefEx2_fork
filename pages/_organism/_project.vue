@@ -38,7 +38,7 @@
             <DownloadButton
               :download-data="projectResultsView"
               :file-name="csvTitle"
-              :field-array="projectTableHeading"
+              :fields-array="projectTableHeading"
             />
             <vue-json-to-csv
               :json-data="projectResultsView"

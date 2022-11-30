@@ -20,13 +20,9 @@
         type: Array,
         default: () => [],
       },
-      fieldArray: {
+      fieldsArray: {
         type: Array,
         default: () => [],
-      },
-      fields: {
-        type: Object,
-        default: () => {},
       },
       fileName: {
         type: String,
@@ -45,26 +41,34 @@
       jsonDataWithLabels() {
         return {};
       },
-      // fieldArray() {
+      // fieldsArray() {
       //   return Object.keys(this.downloadData[0]);
       // },
+      oldFields() {
+        return this.fieldsArray.map(item => Object.keys(item)[0]);
+      },
+      newFields() {
+        return this.fieldsArray.map(item => Object.values(item)[0]);
+      },
       dataArray() {
         const arr = [];
         for (const item of this.downloadData) {
-          arr.push(Object.values(item));
+          for (const oldField of this.oldFields) {
+            arr.push(item.oldField);
+          }
         }
         return arr;
       },
     },
     mounted() {
-      console.log(this.dataArray);
+      console.log(this.oldFields);
     },
     methods: {
       ...mapMutations({}),
       downloadTsv() {
         let tsv = Papa.unparse(
           {
-            fields: this.fieldArray,
+            fields: this.newFields,
             data: this.dataArray,
           },
           {
