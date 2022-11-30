@@ -6,7 +6,6 @@
 </template>
 
 <script>
-  import { mapGetters, mapMutations } from 'vuex';
   import Papa from 'papaparse';
   import FileSaver from 'file-saver';
 
@@ -16,31 +15,21 @@
         type: Array,
         default: () => [],
       },
-      requiredColumns: {
-        type: Array,
-        default: () => [],
-      },
       fieldsArray: {
         type: Array,
         default: () => [],
+        // An array of object [{oldField: newField}, ...]
       },
       fileName: {
         type: String,
-        default: 'Refex.tsv',
+        default: 'download.tsv',
       },
       delimiter: {
         type: String,
         default: '\t',
       },
     },
-    data() {
-      return {};
-    },
     computed: {
-      ...mapGetters({}),
-      jsonDataWithLabels() {
-        return {};
-      },
       oldFields() {
         return this.fieldsArray.map(item => Object.keys(item)[0]);
       },
@@ -60,7 +49,6 @@
       },
     },
     methods: {
-      ...mapMutations({}),
       downloadTsv() {
         let tsv = Papa.unparse(
           {

@@ -38,7 +38,7 @@
             <DownloadButton
               :download-data="projectResultsView"
               :file-name="tsvTitle"
-              :fields-array="projectTableHeading"
+              :fields-array="projectTableHead"
             />
             <ComparisonButton />
           </div>
@@ -58,7 +58,7 @@
     <ModalViewDisplay
       v-if="isDisplaySettingsOn"
       @click.native="toggleDisplaySettings"
-      @updateProjectTableHeading="updateProjectTableHeading"
+      @updateProjectTableHead="updateProjectTableHead"
     />
     <ModalViewFilter />
     <ModalViewGene />
@@ -236,7 +236,7 @@
         isDisplaySettingsOn: false,
         heightChartWrapper: 200,
         projectSortColumns: [[], []],
-        projectTableHeading: [],
+        projectTableHead: [],
         projectResultsView: [],
         tsvTableStatTitle: {
           LogMin: 'Min',
@@ -303,7 +303,7 @@
         column: 'LogMedian',
         selectedItem: this.selectedId,
       });
-      this.updateProjectTableHeading();
+      this.updateProjectTableHead();
     },
     updated() {
       this.heightChartWrapper = this.roundDownClientHeight;
@@ -371,26 +371,7 @@
       clearSortArray() {
         this.projectSortColumns = [[], []];
       },
-      updateProjectTableHeading() {
-        // const obj = {};
-        // for (const filter of this.projectFilters) {
-        //   if (!filter.is_displayed) continue;
-        //   if (filter.column === 'gene expression patterns') continue;
-        //   if (filter.column === 'LogMedian') {
-        //     for (const item of Object.entries(this.tsvTableStatTitle)) {
-        //       const [oldName, newName] = [item[0], item[1]];
-        //       const subObj = {};
-        //       subObj.title = newName;
-        //       obj[oldName] = subObj;
-        //     }
-        //   } else {
-        //     const subObj = {};
-        //     if (filter.note) {
-        //       subObj.title = `${filter.label} (${filter.note})`;
-        //     } else subObj.title = filter.label;
-        //     obj[filter.column] = subObj;
-        //   }
-        // }
+      updateProjectTableHead() {
         const arr = [];
         for (const filter of this.projectFilters) {
           const obj = {};
@@ -399,9 +380,9 @@
           if (filter.column === 'LogMedian') {
             for (const item of Object.entries(this.tsvTableStatTitle)) {
               const [oldName, newName] = [item[0], item[1]];
-              const subObj = {};
-              subObj[oldName] = newName;
-              arr.push(subObj);
+              const statObj = {};
+              statObj[oldName] = newName;
+              arr.push(statObj);
             }
             continue;
           }
@@ -412,22 +393,9 @@
           }
           arr.push(obj);
         }
-        console.log(arr);
-        this.projectTableHeading = arr;
+        this.projectTableHead = arr;
       },
       setProjectResultsView(arr) {
-        // const keyRename = (item, oldKey, newKey) => {
-        //   item[newKey] = item[oldKey];
-        //   delete item[oldKey];
-        //   return item;
-        // };
-        // const toValue = obj => Object.entries(obj)[1];
-        // arr.map(item => {
-        //   // for (const filter of this.projectFilters) {
-        //   // }
-        //   return toValue(item);
-        // });
-        // console.log(arr);
         this.projectResultsView = arr;
       },
     },
