@@ -40,15 +40,6 @@
               :file-name="csvTitle"
               :fields-array="projectTableHeading"
             />
-            <vue-json-to-csv
-              :json-data="projectResultsView"
-              :csv-title="csvTitle"
-              :labels="projectTableHeading"
-            >
-              <button>
-                <font-awesome-icon icon="arrow-down-to-line" />Download .csv
-              </button>
-            </vue-json-to-csv>
             <ComparisonButton />
           </div>
           <div class="align_right">
