@@ -503,11 +503,6 @@
             position: relative
             justify-content: flex-start
             gap: 10px
-            > [id^=json-to-csv]
-              display: flex
-              justify-content: flex-end
-              > button
-                +button
           > .align_right
             display: flex
             justify-content: flex-end

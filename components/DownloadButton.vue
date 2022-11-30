@@ -41,9 +41,6 @@
       jsonDataWithLabels() {
         return {};
       },
-      // fieldsArray() {
-      //   return Object.keys(this.downloadData[0]);
-      // },
       oldFields() {
         return this.fieldsArray.map(item => Object.keys(item)[0]);
       },
@@ -59,12 +56,8 @@
           }
           arr.push(subArr);
         }
-
         return arr;
       },
-    },
-    mounted() {
-      // console.log(this.oldFields);
     },
     methods: {
       ...mapMutations({}),
@@ -78,7 +71,6 @@
             delimiter: this.delimiter,
           }
         );
-
         let blob = new Blob([tsv], { type: 'text/plain;charset=utf-8' });
         FileSaver.saveAs(blob, this.fileName);
       },
@@ -86,6 +78,6 @@
   };
 </script>
 <style lang="sass" scoped>
-  .comparison_btn
+  .download_btn
       +button
 </style>
