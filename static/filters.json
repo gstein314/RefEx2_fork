@@ -36,14 +36,6 @@
         "is_ontology": false
       },
       {
-        "column": "annotation",
-        "label": "Annotation",
-        "note": "",
-        "is_checkbox": false,
-        "is_displayed": true,
-        "is_ontology": false
-      },
-      {
         "column": "chromosomePosition",
         "label": "Chr",
         "note": "",
