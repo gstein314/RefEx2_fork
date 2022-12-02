@@ -31,13 +31,17 @@
             >
               <a
                 v-if="filter.column === 'symbol'"
-                class="icon_on_left"
+                class="icon_on_both_sides"
                 @click="
                   moveToProjectPage(result['ncbiGeneId' || 'ensemblGeneId'])
                 "
               >
-                <font-awesome-icon icon="dna" />
+                <font-awesome-icon class="left_icon" icon="dna" />
                 {{ result.symbol }}
+                <font-awesome-icon
+                  class="right_icon info" icon="info-circle"
+                  @click.stop="setGeneModal(result[geneIdKey])"
+                />
               </a>
               <a
                 v-else-if="filter.column === 'Description'"
@@ -51,11 +55,6 @@
                 v-else-if="filter.column === 'LogMedian'"
                 :items="items"
                 :stat-info="tooltipData(items, result.itemNum)"
-              />
-              <font-awesome-icon
-                v-else-if="filter.column === 'annotation'"
-                icon="info-circle"
-                @click.stop="setGeneModal(result[geneIdKey])"
               />
               <img
                 v-else-if="filter.column === 'gene expression patterns'"

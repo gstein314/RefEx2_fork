@@ -75,22 +75,22 @@
             :key="index"
             :class="filter.column.replaceAll(' ', '_')"
           >
-            <font-awesome-icon
-              v-if="filter.column === 'annotation'"
-              icon="info-circle"
-              @click.stop="setGeneModal(result.geneid)"
-            />
             <img
-              v-else-if="filter.column === 'gene expression patterns'"
+              v-if="filter.column === 'gene expression patterns'"
               :src="geneSummarySource(result.geneid)"
               :alt="result.geneid"
             />
             <a
               v-else-if="filter.column === 'symbol'"
-              class="icon_on_left"
+              class="icon_on_both_sides"
               @click="moveToProjectPage(result['geneid'])"
-              ><font-awesome-icon icon="dna" />
+              ><font-awesome-icon class="left_icon" icon="dna" />
               {{ result[filter.column] }}
+              <font-awesome-icon
+                class="right_icon info"
+                icon="info-circle"
+                @click.stop="setGeneModal(result.geneid)"
+              />
             </a>
             <a
               v-else-if="filter.column === 'geneid'"
