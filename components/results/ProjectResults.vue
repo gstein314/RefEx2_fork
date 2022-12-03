@@ -183,10 +183,11 @@
       }),
       comparisonLogMedians() {
         const medianArraysObj = {};
-        for (const [symbol, dataArray] of Object.entries(this.resultsAll)) {
-          medianArraysObj[`LogMedian_${symbol}`] = dataArray.map(
-            item => item.LogMedian
-          );
+        for (const item of Object.values(this.projectItems.items)) {
+          const symbolOrDescription = info =>
+            info.symbol ? info.symbol : info.Description;
+          medianArraysObj[`LogMedian_${symbolOrDescription(item.info)}`] =
+            item.medianData;
         }
         const combinedLogMediansArray = [];
         for (let i = 0; i < this.results.length; i++) {
