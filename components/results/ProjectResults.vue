@@ -181,34 +181,27 @@
         activeDataset: 'active_dataset',
         activeSpecie: 'active_specie',
       }),
-      comparisonMedians() {
-        const obj = {};
-        let length = 0;
-        for (const [symbol, dataArr] of Object.entries(this.resultsAll)) {
-          const newarr = dataArr.map(item => {
-            return item.LogMedian;
-          });
-          obj[symbol] = newarr;
-          length = newarr.length;
+      comparisonLogMedians() {
+        const medianArraysObj = {};
+        for (const [symbol, dataArray] of Object.entries(this.resultsAll)) {
+          medianArraysObj[`LogMedian_${symbol}`] = dataArray.map(
+            item => item.LogMedian
+          );
         }
-        // const arr = [];
-        const newObj = { ...obj };
-        const arr = [];
-        for (let i = 0; i < length; i++) {
-          const subObj = {};
-          for (const [key, mediansArr] of Object.entries(newObj)) {
-            subObj[key] = mediansArr[i];
+        const combinedLogMediansArray = [];
+        for (let i = 0; i < this.results.length; i++) {
+          const combinedLogMediansObj = {};
+          for (const [key, mediansArr] of Object.entries(medianArraysObj)) {
+            combinedLogMediansObj[key] = mediansArr[i];
           }
-          arr.push(subObj);
+          combinedLogMediansArray.push(combinedLogMediansObj);
         }
-
-        const results = { ...this.results };
-        const newnewArr = [];
-        for (const [i, item] of arr.entries()) {
-          results[i] = _.merge(results[i], item);
-          newnewArr.push(results[i]);
+        const copy = { ...this.results };
+        const comparisonLogMedians = [];
+        for (const [i, item] of combinedLogMediansArray.entries()) {
+          comparisonLogMedians.push(_.merge(copy[i], item));
         }
-        return newnewArr;
+        return comparisonLogMedians;
       },
       filteredData() {
         const copy = [...this.results];
