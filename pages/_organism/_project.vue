@@ -74,6 +74,7 @@
       :detailed-stat-title="detailedStatTitle"
       @activeSort="setProjectSortColumn"
       @setProjectResultsView="setProjectResultsView"
+      @updateProjectTableHead="updateProjectTableHead"
     />
     <ResultsPagination
       :pages-number="$store.state.project_pages_number"
@@ -303,7 +304,6 @@
         column: 'LogMedian',
         selectedItem: this.selectedId,
       });
-      this.updateProjectTableHead();
     },
     updated() {
       this.heightChartWrapper = this.roundDownClientHeight;
@@ -371,6 +371,9 @@
       clearSortArray() {
         this.projectSortColumns = [[], []];
       },
+      setProjectResultsView(arr) {
+        this.projectResultsView = arr;
+      },
       updateProjectTableHead() {
         const arr = [];
         for (const filter of this.projectFilters) {
@@ -378,11 +381,15 @@
           if (!filter.is_displayed) continue;
           if (filter.column === 'gene expression patterns') continue;
           if (filter.column === 'LogMedian') {
-            for (const item of Object.entries(this.detailedStatTitle)) {
-              const [oldName, newName] = [item[0], item[1]];
-              const statObj = {};
-              statObj[oldName] = newName;
-              arr.push(statObj);
+            for (const oldName of Object.keys(this.projectResultsView[0])) {
+              const subObj = {};
+              if (oldName.includes('LogMedian_')) {
+                const newName = oldName
+                  .replace('LogMedian_', '')
+                  .concat('_Median (log2(TPM+1))');
+                subObj[oldName] = newName;
+                arr.push(subObj);
+              }
             }
             continue;
           }
@@ -394,9 +401,6 @@
           arr.push(obj);
         }
         this.projectTableHead = arr;
-      },
-      setProjectResultsView(arr) {
-        this.projectResultsView = arr;
       },
     },
   };

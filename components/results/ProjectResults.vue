@@ -270,6 +270,7 @@
           resultsOnScreen.push(filtered);
         }
         this.$emit('setProjectResultsView', resultsOnScreen);
+        this.$emit('updateProjectTableHead');
         return withSort;
       },
       pageItems() {
