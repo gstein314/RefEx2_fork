@@ -170,6 +170,7 @@
     computed: {
       ...mapGetters({
         results: 'get_project_results',
+        resultsAll: 'get_project_results_all',
         projectItems: 'get_project_items',
         paginationObject: 'get_project_pagination',
         filters: 'project_filters',
@@ -180,7 +181,35 @@
         activeDataset: 'active_dataset',
         activeSpecie: 'active_specie',
       }),
+      comparisonMedians() {
+        const obj = {};
+        let length = 0;
+        for (const [symbol, dataArr] of Object.entries(this.resultsAll)) {
+          const newarr = dataArr.map(item => {
+            return item.LogMedian;
+          });
+          obj[symbol] = newarr;
+          length = newarr.length;
+        }
+        // const arr = [];
+        const newObj = { ...obj };
+        const arr = [];
+        for (let i = 0; i < length; i++) {
+          const subObj = {};
+          for (const [key, mediansArr] of Object.entries(newObj)) {
+            subObj[key] = mediansArr[i];
+          }
+          arr.push(subObj);
+        }
 
+        const results = { ...this.results };
+        const newnewArr = [];
+        for (const [i, item] of arr.entries()) {
+          results[i] = _.merge(results[i], item);
+          newnewArr.push(results[i]);
+        }
+        return newnewArr;
+      },
       filteredData() {
         const copy = [...this.results];
         const filtered = copy.filter(result => {
