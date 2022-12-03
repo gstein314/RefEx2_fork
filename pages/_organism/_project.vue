@@ -378,8 +378,11 @@
         const arr = [];
         for (const filter of this.projectFilters) {
           const obj = {};
-          if (!filter.is_displayed) continue;
-          if (filter.column === 'gene expression patterns') continue;
+          if (
+            !filter.is_displayed ||
+            filter.column === 'gene expression patterns'
+          )
+            continue;
           if (filter.column === 'LogMedian') {
             for (const oldName of Object.keys(this.projectResultsView[0])) {
               const subObj = {};
@@ -391,7 +394,6 @@
                 arr.push(subObj);
               }
             }
-            continue;
           }
           if (filter.note) {
             obj[filter.column] = `${filter.label} (${filter.note})`;
