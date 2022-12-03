@@ -248,8 +248,10 @@
             .reduce((obj, key) => {
               // add other statistic data if LogMedian is displayed
               if (key === 'LogMedian') {
-                for (const key of Object.keys(this.detailedStatTitle)) {
-                  obj[key] = item[key];
+                for (const key of Object.keys(this.comparisonLogMedians[0])) {
+                  if (key.startsWith('LogMedian_')) {
+                    obj[key] = item[key];
+                  }
                 }
               } else if (key === 'alias') {
                 // format alias data to avoid tsv data conflict ("," problem)
