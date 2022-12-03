@@ -161,7 +161,7 @@
         type: Array,
         default: () => [],
       },
-      tsvTableStatTitle: {
+      detailedStatTitle: {
         type: Object,
         default: () => {},
       },
@@ -204,7 +204,7 @@
         return comparisonLogMedians;
       },
       filteredData() {
-        const copy = [...this.results];
+        const copy = [...this.comparisonLogMedians];
         const filtered = copy.filter(result => {
           let isFiltered = false;
           for (const filter of this.filters) {
@@ -248,7 +248,7 @@
             .reduce((obj, key) => {
               // add other statistic data if LogMedian is displayed
               if (key === 'LogMedian') {
-                for (const key of Object.keys(this.tsvTableStatTitle)) {
+                for (const key of Object.keys(this.detailedStatTitle)) {
                   obj[key] = item[key];
                 }
               } else if (key === 'alias') {

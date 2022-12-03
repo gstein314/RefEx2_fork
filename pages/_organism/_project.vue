@@ -71,7 +71,7 @@
       :dataset="dataset"
       :selected-item="selectedId"
       :project-sort-columns="projectSortColumns"
-      :tsv-table-stat-title="tsvTableStatTitle"
+      :detailed-stat-title="detailedStatTitle"
       @activeSort="setProjectSortColumn"
       @setProjectResultsView="setProjectResultsView"
     />
@@ -238,7 +238,7 @@
         projectSortColumns: [[], []],
         projectTableHead: [],
         projectResultsView: [],
-        tsvTableStatTitle: {
+        detailedStatTitle: {
           LogMin: 'Min',
           Log1stQu: '1stQu',
           LogMedian: 'Median (log2(TPM+1))',
@@ -378,7 +378,7 @@
           if (!filter.is_displayed) continue;
           if (filter.column === 'gene expression patterns') continue;
           if (filter.column === 'LogMedian') {
-            for (const item of Object.entries(this.tsvTableStatTitle)) {
+            for (const item of Object.entries(this.detailedStatTitle)) {
               const [oldName, newName] = [item[0], item[1]];
               const statObj = {};
               statObj[oldName] = newName;
