@@ -242,7 +242,6 @@
         projectResultsView: [],
         columnsArray: [],
         ordersArray: [],
-        columnSortersArray: [],
         detailedStatTitle: {
           LogMin: 'Min',
           Log1stQu: '1stQu',
@@ -295,18 +294,19 @@
       projectSortColumns() {
         return [this.columnsArray, this.ordersArray];
       },
-      // columnSortersArray() {
-      //   const arr = [];
-      //   for (const column of this.columnsArray) {
-      //     if (column === 'LogMedian') {
-      //       arr.push(column);
-      //     } else {
-      //       const sorter = data => data.column.toLowerCase();
-      //       arr.push(sorter);
-      //     }
-      //   }
-      //   return arr;
-      // },
+      columnSortersArray() {
+        const arr = [];
+        for (const column of this.columnsArray) {
+          const sorter = data =>
+            column === 'ncbiGeneId'
+              ? parseInt(data[column], 10)
+              : typeof data[column] === 'string'
+              ? data[column].toLowerCase()
+              : data[column];
+          arr.push(sorter);
+        }
+        return arr;
+      },
     },
     created() {
       this.$store.commit('set_project_items', this.projectItems);
@@ -369,17 +369,12 @@
         }
       },
       setProjectSortColumn({ column, selectedItem }) {
-        if (column === 'ncbiGeneId' || column === 'chromosomePosition') {
-          column += 'Int';
-        }
+        // if (column === 'ncbiGeneId' || column === 'chromosomePosition') {
+        //   column += 'Int';
+        // }
         const columnIndex = this.columnsArray.indexOf(column);
         if (columnIndex === -1) {
           this.columnsArray.unshift(column);
-          const sorter = data =>
-            typeof data[column] === 'string'
-              ? data[column].toLowerCase()
-              : data[column];
-          this.columnSortersArray.unshift(sorter);
           this.ordersArray.unshift('desc');
         } else if (column === 'LogMedian' && this.selectedId !== selectedItem) {
           this.ordersArray.splice(columnIndex, 1, 'desc');
@@ -387,13 +382,11 @@
           this.ordersArray.splice(columnIndex, 1, 'asc');
         } else {
           this.columnsArray.splice(columnIndex, 1);
-          this.columnSortersArray.splice(columnIndex, 1);
           this.ordersArray.splice(columnIndex, 1);
         }
       },
       clearSortArray() {
         this.columnsArray = [];
-        this.columnSortersArray = [];
         this.ordersArray = [];
       },
       setProjectResultsView(arr) {
