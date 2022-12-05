@@ -184,8 +184,7 @@
       comparisonLogMedians() {
         const medianArraysObj = {};
         for (const item of Object.values(this.projectItems.items)) {
-          const symbolOrDescription = info =>
-            info.symbol ? info.symbol : info.Description;
+          const symbolOrDescription = info => info.symbol || info.Description;
           medianArraysObj[`LogMedian_${symbolOrDescription(item.info)}`] =
             item.medianData;
         }
@@ -202,6 +201,13 @@
         for (const [i, item] of combinedLogMediansArray.entries()) {
           comparisonLogMedians.push(_.merge(copy[i], item));
         }
+        // console.log(
+        //   `1st for: ${this.projectItems.items.length}\n2nd for: ${
+        //     this.results.length
+        //   } x ${Object.keys(medianArraysObj).length}\n3rd for: ${
+        //     combinedLogMediansArray.length
+        //   }`
+        // );
         return comparisonLogMedians;
       },
       filteredData() {
