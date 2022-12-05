@@ -242,6 +242,7 @@
         projectResultsView: [],
         columnsArray: [],
         ordersArray: [],
+        columnSortersArray: [],
         detailedStatTitle: {
           LogMin: 'Min',
           Log1stQu: '1stQu',
@@ -294,9 +295,18 @@
       projectSortColumns() {
         return [this.columnsArray, this.ordersArray];
       },
-      columnSortersArray() {
-        return this.columnsArray;
-      },
+      // columnSortersArray() {
+      //   const arr = [];
+      //   for (const column of this.columnsArray) {
+      //     if (column === 'LogMedian') {
+      //       arr.push(column);
+      //     } else {
+      //       const sorter = data => data.column.toLowerCase();
+      //       arr.push(sorter);
+      //     }
+      //   }
+      //   return arr;
+      // },
     },
     created() {
       this.$store.commit('set_project_items', this.projectItems);
@@ -309,10 +319,10 @@
         'set_project_results',
         this.projectResultsAll[this.selectedId]
       );
-      this.setProjectSortColumn({
-        column: 'LogMedian',
-        selectedItem: this.selectedId,
-      });
+      // this.setProjectSortColumn({
+      //   column: 'LogMedian',
+      //   selectedItem: this.selectedId,
+      // });
     },
     updated() {
       this.heightChartWrapper = this.roundDownClientHeight;
@@ -364,7 +374,9 @@
         }
         const columnIndex = this.columnsArray.indexOf(column);
         if (columnIndex === -1) {
+          const sorter = data => data[column].toLowerCase();
           this.columnsArray.unshift(column);
+          this.columnSortersArray.unshift(sorter);
           this.ordersArray.unshift('desc');
         } else if (column === 'LogMedian' && this.selectedId !== selectedItem) {
           this.ordersArray.splice(columnIndex, 1, 'desc');
@@ -372,6 +384,7 @@
           this.ordersArray.splice(columnIndex, 1, 'asc');
         } else {
           this.columnsArray.splice(columnIndex, 1);
+          this.columnSortersArray.splice(columnIndex, 1);
           this.ordersArray.splice(columnIndex, 1);
         }
       },
