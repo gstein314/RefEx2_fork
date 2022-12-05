@@ -11,7 +11,6 @@
         placeholder=""
         :options="chrOptions"
         :multiple="true"
-        :taggable="true"
         ><template slot="option" slot-scope="props">
           <div class="option">
             <input
@@ -48,7 +47,6 @@
         placeholder=""
         :options="TOGOptions"
         :multiple="true"
-        :taggable="true"
         ><template slot="option" slot-scope="props">
           <div class="option">
             <input
