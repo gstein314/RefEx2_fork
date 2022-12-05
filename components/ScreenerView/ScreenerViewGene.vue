@@ -122,50 +122,12 @@
     components: { MultiSelect },
     data() {
       return {
+        autocompleteStaticData: {},
         chrValue: [],
         TOGValue: [],
         chrCheckedValue: [],
-        chrOptions: [
-          '1',
-          '2',
-          '3',
-          '4',
-          '5',
-          '6',
-          '7',
-          '8',
-          '9',
-          '10',
-          '11',
-          '12',
-          '13',
-          '14',
-          '15',
-          '16',
-          '17',
-          '18',
-          '19',
-          '20',
-          '21',
-          '22',
-          'X',
-          'Y',
-          'MT',
-          '-',
-        ],
-        TOGOptions: [
-          'biological-region',
-          'ncRNA',
-          'other',
-          'protein-coding',
-          'pseudo',
-          'rRNA',
-          'scRNA',
-          'snoRNA',
-          'snRNA',
-          'tRNA',
-          'unknown',
-        ],
+        chrOptions: [],
+        TOGOptions: [],
         // only used in this component
         temporaryParameters: {
           goTerm: '',
@@ -208,8 +170,37 @@
       parameters() {
         this.$emit('updateParameters', { go: this.goTermString });
       },
+      chrValue() {
+        console.log('event');
+        this.handleChrTagsUpdate(this.chrValue);
+      },
+    },
+    async created() {
+      this.getAutoCompleteData().then(() => {});
     },
     methods: {
+      getAutoCompleteData() {
+        return this.$axios
+          .$get(`api/cv`)
+          .then(data => {
+            this.autocompleteStaticData = data;
+            this.chrOptions = data[
+              this.activeDataset.dataset
+            ].chromosomePosition
+              .map(x => (!Number.isNaN(parseInt(x)) ? parseInt(x) : x))
+              .sort(function (a, b) {
+                const a1 = typeof a,
+                  b1 = typeof b;
+                return a1 < b1 ? -1 : a1 > b1 ? 1 : a < b ? -1 : a > b ? 1 : 0;
+              });
+            this.TOGOptions = data[this.activeDataset.dataset].typeOfGene;
+          })
+          .catch(_error => {
+            this.setAlertModal({
+              msg: 'Failed to get data in Screener View Sample',
+            });
+          });
+      },
       updateAutoComplete() {
         clearTimeout(this.debounce);
         const query = `{ goSuggest (text: "${this.temporaryParameters.goTerm}", dataset: "${this.activeDataset.dataset}") { goId, goTerm }}`;
@@ -236,6 +227,9 @@
         }
         this.$set(this.temporaryParameters, 'goTerm', '');
         this.setTags([{ id, text, tiClasses }], key);
+      },
+      handleChrTagsUpdate(tags) {
+        console.log(tags);
       },
       setTags(newTags, key) {
         this.parameters = { ...this.parameters, [key]: newTags };
