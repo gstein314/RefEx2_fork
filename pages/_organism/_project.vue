@@ -319,10 +319,10 @@
         'set_project_results',
         this.projectResultsAll[this.selectedId]
       );
-      // this.setProjectSortColumn({
-      //   column: 'LogMedian',
-      //   selectedItem: this.selectedId,
-      // });
+      this.setProjectSortColumn({
+        column: 'LogMedian',
+        selectedItem: this.selectedId,
+      });
     },
     updated() {
       this.heightChartWrapper = this.roundDownClientHeight;
