@@ -374,8 +374,11 @@
         }
         const columnIndex = this.columnsArray.indexOf(column);
         if (columnIndex === -1) {
-          const sorter = data => data[column].toLowerCase();
           this.columnsArray.unshift(column);
+          const sorter = data =>
+            typeof data[column] === 'string'
+              ? data[column].toLowerCase()
+              : data[column];
           this.columnSortersArray.unshift(sorter);
           this.ordersArray.unshift('desc');
         } else if (column === 'LogMedian' && this.selectedId !== selectedItem) {
@@ -390,6 +393,7 @@
       },
       clearSortArray() {
         this.columnsArray = [];
+        this.columnSortersArray = [];
         this.ordersArray = [];
       },
       setProjectResultsView(arr) {
