@@ -375,31 +375,31 @@
         this.projectResultsView = arr;
       },
       updateProjectTableHead() {
+        // create an array of {oldHead: newHead} objs
         const arr = [];
         for (const filter of this.projectFilters) {
-          const obj = {};
           if (
             !filter.is_displayed ||
             filter.column === 'gene expression patterns'
           )
             continue;
           if (filter.column === 'LogMedian') {
-            for (const oldName of Object.keys(this.projectResultsView[0])) {
-              const subObj = {};
-              if (oldName.includes('LogMedian_')) {
-                const newName = oldName
+            for (const oldHead of Object.keys(this.projectResultsView[0])) {
+              if (oldHead.includes('LogMedian_')) {
+                const medianObj = {};
+                const newHead = oldHead
                   .replace('LogMedian_', '')
                   .concat('_Median (log2(TPM+1))');
-                subObj[oldName] = newName;
-                arr.push(subObj);
+                medianObj[oldHead] = newHead;
+                arr.push(medianObj);
               }
             }
+            continue;
           }
-          if (filter.note) {
-            obj[filter.column] = `${filter.label} (${filter.note})`;
-          } else {
-            obj[filter.column] = filter.label;
-          }
+          const obj = {};
+          obj[filter.column] = filter.note
+            ? `${filter.label} (${filter.note})`
+            : filter.label;
           arr.push(obj);
         }
         this.projectTableHead = arr;
