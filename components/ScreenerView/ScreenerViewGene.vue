@@ -2,6 +2,80 @@
   <!-- v-html setup neccesary for plugin, does NOT use user input/API data and is therefore safe to use -->
   <!-- eslint-disable vue/no-v-html -->
   <div>
+    <h3>Genes with Chr</h3>
+    <no-ssr>
+      <multi-select
+        v-model="chrValue"
+        :allow-empty="true"
+        :close-on-select="false"
+        placeholder=""
+        :options="chrOptions"
+        :multiple="true"
+        :taggable="true"
+        ><template slot="option" slot-scope="props">
+          <div class="option">
+            <input
+              :checked="chrValue.includes(props.option)"
+              type="checkbox"
+              :value="props.option.name"
+            />
+            <span class="option__small">{{ props.option }}</span>
+            <!-- <font-awesome-icon icon="exclamation-triangle" /> -->
+          </div>
+        </template>
+        <!-- <template slot="selection" slot-scope="{ values }">
+          <span
+            v-if="values.length &amp;&amp; values.length > 3"
+            class="multiselect__single"
+          >
+            {{
+              values.length === filterObj.options1.length
+                ? 'all'
+                : values.length
+            }}
+            options selected
+          </span>
+        </template> -->
+      </multi-select>
+    </no-ssr>
+
+    <h3>Genes with Type of Gene</h3>
+    <no-ssr>
+      <multi-select
+        v-model="TOGValue"
+        :allow-empty="true"
+        :close-on-select="false"
+        placeholder=""
+        :options="TOGOptions"
+        :multiple="true"
+        :taggable="true"
+        ><template slot="option" slot-scope="props">
+          <div class="option">
+            <input
+              type="checkbox"
+              :checked="TOGValue.includes(props.option)"
+              :value="props.option.name"
+            />
+            <span class="option__small">{{ props.option }}</span>
+            <!-- <font-awesome-icon icon="exclamation-triangle" /> -->
+          </div>
+        </template>
+        <!-- <template slot="selection" slot-scope="{ values }">
+          <span
+            v-if="values.length &amp;&amp; values.length > 3"
+            class="multiselect__single"
+          >
+            {{
+              values.length === filterObj.options2.length
+                ? 'all'
+                : values.length
+            }}
+            options selected
+          </span>
+        </template> -->
+      </multi-select>
+    </no-ssr>
+
     <h3>
       Genes with GO Term
       <span class="example"
@@ -44,10 +118,56 @@
 
 <script>
   import { mapGetters } from 'vuex';
+  import MultiSelect from 'vue-multiselect';
 
   export default {
+    components: { MultiSelect },
     data() {
       return {
+        chrValue: [],
+        TOGValue: [],
+        chrCheckedValue: [],
+        chrOptions: [
+          '1',
+          '2',
+          '3',
+          '4',
+          '5',
+          '6',
+          '7',
+          '8',
+          '9',
+          '10',
+          '11',
+          '12',
+          '13',
+          '14',
+          '15',
+          '16',
+          '17',
+          '18',
+          '19',
+          '20',
+          '21',
+          '22',
+          'X',
+          'Y',
+          'MT',
+          '-',
+        ],
+        TOGOptions: [
+          'biological-region',
+          'ncRNA',
+          'other',
+          'protein-coding',
+          'pseudo',
+          'rRNA',
+          'scRNA',
+          'snoRNA',
+          'snRNA',
+          'tRNA',
+          'unknown',
+        ],
         // only used in this component
         temporaryParameters: {
           goTerm: '',
@@ -75,6 +195,9 @@
           this.parameters.go.length < 1
           ? 'transcription factor binding'
           : '';
+      },
+      selection() {
+        return this.chrValue.join();
       },
     },
     watch: {
@@ -122,3 +245,36 @@
     },
   };
 </script>
+
+<style lang="sass" scoped>
+  ::v-deep
+    .multiselect
+      input
+        width: auto
+      input[type="text"]
+        +text_input
+      .multiselect__tag
+        background: $MAIN_COLOR
+        > .multiselect__tag-icon
+          background: none
+          &:after
+            color: white
+      .multiselect__tags
+        border: none
+        background: $MAIN_COLOR_PALE
+      .multiselect__option
+        background: none
+        > .option
+          display: flex
+          align-items: center
+          gap: 10px
+          > input[type="checkbox"]
+            cursor: pointer
+      .multiselect__element
+        display: block
+      .multiselect__option--highlight
+        background: $MAIN_COLOR
+      *[class^="multiselect__option"]
+        &:after
+          content: none
+</style>
