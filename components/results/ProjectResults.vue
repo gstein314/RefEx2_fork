@@ -13,7 +13,8 @@
               :id="filter.column"
               v-bind="filter"
               :class="filter.column"
-              :project-sort-columns="projectSortColumns"
+              :columns-array="columnsArray"
+              :orders-array="ordersArray"
               @activeSort="activeSort"
             >
             </table-header>
@@ -157,7 +158,15 @@
         type: Number,
         default: 200,
       },
-      projectSortColumns: {
+      columnsArray: {
+        type: Array,
+        default: () => [],
+      },
+      columnSortersArray: {
+        type: Array,
+        default: () => [],
+      },
+      ordersArray: {
         type: Array,
         default: () => [],
       },
@@ -242,7 +251,11 @@
           }
           return !isFiltered;
         });
-        const withSort = _.orderBy(filtered, ...this.projectSortColumns);
+        const withSort = _.orderBy(
+          filtered,
+          this.columnSortersArray,
+          this.ordersArray
+        );
         const displayed = [];
         for (const filter of this.filters) {
           if (filter.is_displayed) displayed.push(filter.column);

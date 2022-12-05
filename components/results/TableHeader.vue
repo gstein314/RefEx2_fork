@@ -75,7 +75,11 @@
         type: Object,
         required: false,
       },
-      projectSortColumns: {
+      columnsArray: {
+        type: Array,
+        default: () => [],
+      },
+      ordersArray: {
         type: Array,
         default: () => [],
       },
@@ -100,12 +104,6 @@
           : this.options
           ? this.options.some(item => !this.filterModal.includes(item))
           : this.filterModal !== '';
-      },
-      columnsArray() {
-        return this.projectSortColumns[0];
-      },
-      ordersArray() {
-        return this.projectSortColumns[1];
       },
       idForSort() {
         if (['ncbiGeneId', 'chromosomePosition'].includes(this.id)) {

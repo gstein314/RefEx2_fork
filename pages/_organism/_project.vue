@@ -70,7 +70,9 @@
       :gene-id-key="geneIdKey"
       :dataset="dataset"
       :selected-item="selectedId"
-      :project-sort-columns="projectSortColumns"
+      :columns-array="columnsArray"
+      :column-sorters-array="columnSortersArray"
+      :orders-array="ordersArray"
       :detailed-stat-title="detailedStatTitle"
       @activeSort="setProjectSortColumn"
       @setProjectResultsView="setProjectResultsView"
@@ -291,6 +293,9 @@
       },
       projectSortColumns() {
         return [this.columnsArray, this.ordersArray];
+      },
+      columnSortersArray() {
+        return this.columnsArray;
       },
     },
     created() {
