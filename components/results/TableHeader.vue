@@ -106,7 +106,7 @@
           : this.filterModal !== '';
       },
       idForSort() {
-        if (['ncbiGeneId', 'chromosomePosition'].includes(this.id)) {
+        if (['chromosomePosition'].includes(this.id)) {
           return this.id + 'Int';
         } else return this.id;
       },

@@ -319,10 +319,10 @@
         'set_project_results',
         this.projectResultsAll[this.selectedId]
       );
-      // this.setProjectSortColumn({
-      //   column: 'LogMedian',
-      //   selectedItem: this.selectedId,
-      // });
+      this.setProjectSortColumn({
+        column: 'LogMedian',
+        selectedItem: this.selectedId,
+      });
     },
     updated() {
       this.heightChartWrapper = this.roundDownClientHeight;
@@ -369,9 +369,9 @@
         }
       },
       setProjectSortColumn({ column, selectedItem }) {
-        // if (column === 'ncbiGeneId' || column === 'chromosomePosition') {
-        //   column += 'Int';
-        // }
+        if (column === 'chromosomePosition') {
+          column += 'Int';
+        }
         const columnIndex = this.columnsArray.indexOf(column);
         if (columnIndex === -1) {
           this.columnsArray.unshift(column);
@@ -401,20 +401,26 @@
             filter.column === 'gene expression patterns'
           )
             continue;
+          const obj = {};
           if (filter.column === 'LogMedian') {
-            for (const oldHead of Object.keys(this.projectResultsView[0])) {
-              if (oldHead.includes('LogMedian_')) {
-                const medianObj = {};
-                const newHead = oldHead
-                  .replace('LogMedian_', '')
-                  .concat('_Median (log2(TPM+1))');
-                medianObj[oldHead] = newHead;
-                arr.push(medianObj);
-              }
-            }
+            const symbolOrDescription = info => info.symbol || info.Description;
+            obj['LogMedian'] = `${symbolOrDescription(
+              this.items[0].info
+            )}_Median (log2(TPM+1))`;
+            console.log(this.items[0].info);
+            arr.push(obj);
+            // for (const oldHead of Object.keys(this.projectResultsView[0])) {
+            //   if (oldHead.includes('LogMedian_')) {
+            //     const medianObj = {};
+            //     const newHead = oldHead
+            //       .replace('LogMedian_', '')
+            //       .concat('_Median (log2(TPM+1))');
+            //     medianObj[oldHead] = newHead;
+            //     arr.push(medianObj);
+            //   }
+            // }
             continue;
           }
-          const obj = {};
           obj[filter.column] = filter.note
             ? `${filter.label} (${filter.note})`
             : filter.label;

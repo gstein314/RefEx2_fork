@@ -189,37 +189,37 @@
         activeDataset: 'active_dataset',
         activeSpecie: 'active_specie',
       }),
-      comparisonLogMedians() {
-        const medianArraysObj = {};
-        for (const item of Object.values(this.projectItems.items)) {
-          const symbolOrDescription = info => info.symbol || info.Description;
-          medianArraysObj[`LogMedian_${symbolOrDescription(item.info)}`] =
-            item.medianData;
-        }
-        const combinedLogMediansArray = [];
-        for (let i = 0; i < this.results.length; i++) {
-          const combinedLogMediansObj = {};
-          for (const [key, mediansArr] of Object.entries(medianArraysObj)) {
-            combinedLogMediansObj[key] = mediansArr[i];
-          }
-          combinedLogMediansArray.push(combinedLogMediansObj);
-        }
-        const copy = { ...this.results };
-        const comparisonLogMedians = [];
-        for (const [i, item] of combinedLogMediansArray.entries()) {
-          comparisonLogMedians.push(_.merge(copy[i], item));
-        }
-        // console.log(
-        //   `1st for: ${this.projectItems.items.length}\n2nd for: ${
-        //     this.results.length
-        //   } x ${Object.keys(medianArraysObj).length}\n3rd for: ${
-        //     combinedLogMediansArray.length
-        //   }`
-        // );
-        return comparisonLogMedians;
-      },
+      // comparisonLogMedians() {
+      //   const medianArraysObj = {};
+      //   for (const item of Object.values(this.projectItems.items)) {
+      //     const symbolOrDescription = info => info.symbol || info.Description;
+      //     medianArraysObj[`LogMedian_${symbolOrDescription(item.info)}`] =
+      //       item.medianData;
+      //   }
+      //   const combinedLogMediansArray = [];
+      //   for (let i = 0; i < this.results.length; i++) {
+      //     const combinedLogMediansObj = {};
+      //     for (const [key, mediansArr] of Object.entries(medianArraysObj)) {
+      //       combinedLogMediansObj[key] = mediansArr[i];
+      //     }
+      //     combinedLogMediansArray.push(combinedLogMediansObj);
+      //   }
+      //   const copy = { ...this.results };
+      //   const comparisonLogMedians = [];
+      //   for (const [i, item] of combinedLogMediansArray.entries()) {
+      //     comparisonLogMedians.push(_.merge(copy[i], item));
+      //   }
+      //   // console.log(
+      //   //   `1st for: ${this.projectItems.items.length}\n2nd for: ${
+      //   //     this.results.length
+      //   //   } x ${Object.keys(medianArraysObj).length}\n3rd for: ${
+      //   //     combinedLogMediansArray.length
+      //   //   }`
+      //   // );
+      //   return comparisonLogMedians;
+      // },
       filteredData() {
-        const copy = [...this.comparisonLogMedians];
+        const copy = [...this.results];
         const filtered = copy.filter(result => {
           let isFiltered = false;
           for (const filter of this.filters) {
@@ -267,11 +267,7 @@
             .reduce((obj, key) => {
               // add other statistic data if LogMedian is displayed
               if (key === 'LogMedian') {
-                for (const key of Object.keys(this.comparisonLogMedians[0])) {
-                  if (key.startsWith('LogMedian_')) {
-                    obj[key] = item[key];
-                  }
-                }
+                obj[key] = item[key];
               } else if (key === 'alias') {
                 // format alias data to avoid tsv data conflict ("," problem)
                 try {
