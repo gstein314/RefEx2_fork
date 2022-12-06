@@ -143,4 +143,6 @@
           > button
             +button
             background-color: $WARNING_BUTTON_COLOR
+            &:hover
+              background: $WARNING_BUTTON_COLOR_HOVER
 </style>
