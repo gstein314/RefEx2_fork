@@ -1,5 +1,5 @@
 <template>
-  <button class="download_btn" @click="downloadTsv()">
+  <button class="download_btn">
     <font-awesome-icon icon="arrow-down-to-line" />
     Download .tsv
   </button>
