@@ -25,8 +25,10 @@
         v-model="temporaryParameters.goTerm"
         :tags="parameters.go"
         :autocomplete-items="autoComplete.go"
+        :max-tags="1"
         add-only-from-autocomplete
         :placeholder="placeholderGOTerm"
+        :class="{ hide_caret: hideCaret }"
         @input="updateAutoComplete"
         @tags-changed="setTags($event, 'go')"
       >
@@ -61,6 +63,7 @@
           go: [],
         },
         debounce: null,
+        hideCaret: false,
       };
     },
     computed: {
@@ -118,6 +121,7 @@
       },
       setTags(newTags, key) {
         this.parameters = { ...this.parameters, [key]: newTags };
+        this.hideCaret = newTags.length === 0 ? false : true;
       },
     },
   };
