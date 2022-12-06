@@ -202,6 +202,17 @@ $TOOLTIP_LAYER: 2
     > svg
       position: absolute
       right: -16px
+  &.icon_on_both_sides
+    padding-left: 16px
+    > .left_icon
+      position: absolute
+      left: 0
+    > .right_icon
+      position: absolute
+      right: -16px
+    > .info
+      top: 1px
+      right: -20px !important
 
 @mixin select
   cursor: pointer
