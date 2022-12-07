@@ -111,6 +111,86 @@
         ></div>
       </vue-tags-input>
     </no-ssr>
+
+    <h3>Filter by Tissue specificity (ROKU)</h3>
+    <no-ssr>
+      <div class="filter_specificity_ROKU">
+        <table>
+          <tr>
+            <td class="group">Group</td>
+            <td class="sample">Sample</td>
+            <td class="horl">High or Low</td>
+            <td class="entropy">Entropy (min)</td>
+            <td class="entropy">Entropy (max)</td>
+            <td colspan="2" class="delete_all" @click="deleteAll">
+              <font-awesome-icon icon="trash" /> Delete All
+            </td>
+          </tr>
+          <tr v-for="(val, index) in specificityROKU" :key="val.id">
+            <td>
+              <input
+                v-model="val.group"
+                type="text"
+                placeholder="select a group"
+                @input="addIndex(index, val.group)"
+              />
+            </td>
+            <td>
+              <input
+                v-model="val.sample"
+                type="text"
+                placeholder="search samples by text"
+                @input="addIndex(index, val.sample)"
+              />
+            </td>
+            <td>
+              <input
+                v-model="val.horl"
+                type="text"
+                placeholder="High"
+                @input="addIndex(index, val.horl)"
+              />
+            </td>
+            <td>
+              <input
+                v-model="val.emin"
+                type="text"
+                placeholder="1"
+                @input="addIndex(index, val.emin)"
+              />
+            </td>
+            <td>
+              <input
+                v-model="val.emax"
+                type="text"
+                placeholder="5"
+                @input="addIndex(index, val.emax)"
+              />
+            </td>
+            <td class="icon">
+              <button
+                class="check_btn"
+                :class="{ disabled: !val.check }"
+                @click="addSpecificityROKU(index)"
+              >
+                <font-awesome-icon icon="check" />
+              </button>
+            </td>
+            <td class="icon">
+              <button
+                class="delete_btn"
+                :class="{ disabled: !val.delete }"
+                :disabled="!val.delete"
+                @click="delSpecificityROKU(index)"
+              >
+                <font-awesome-icon icon="trash" />
+              </button>
+            </td>
+          </tr>
+          <tr></tr>
+        </table>
+      </div>
+    </no-ssr>
   </div>
 </template>
 
@@ -141,6 +221,17 @@
           go: [],
         },
         debounce: null,
+        specificityROKU: [
+          {
+            group: '',
+            sample: '',
+            horl: '',
+            emin: '',
+            emax: '',
+            check: false,
+            delete: false,
+          },
+        ],
       };
     },
     computed: {
@@ -234,6 +325,42 @@
       setTags(newTags, key) {
         this.parameters = { ...this.parameters, [key]: newTags };
       },
+      addSpecificityROKU(index) {
+        this.specificityROKU[index].check = !this.specificityROKU[index].check;
+      },
+      delSpecificityROKU(index) {
+        this.specificityROKU.splice(index, 1);
+      },
+      addIndex(index, value) {
+        if (value.trim().length > 0) {
+          if (!this.specificityROKU[index + 1]) {
+            this.specificityROKU.push({
+              group: '',
+              sample: '',
+              horl: '',
+              emin: '',
+              emax: '',
+              check: false,
+              delete: false,
+            });
+          }
+          this.specificityROKU[index].check = true;
+          this.specificityROKU[index].delete = true;
+        }
+      },
+      deleteAll() {
+        this.specificityROKU = [
+          {
+            group: '',
+            sample: '',
+            horl: '',
+            emin: '',
+            emax: '',
+            check: false,
+            delete: false,
+          },
+        ];
+      },
     },
   };
 </script>
@@ -269,4 +396,24 @@
       *[class^="multiselect__option"]
         &:after
           content: none
+
+    .filter_specificity_ROKU
+      > table
+        > tr
+          > td
+            font-size: 12px
+            > .check_btn, .delete_btn
+              +button
+              padding: 16px 22px
+            > .check_btn
+              cursor: pointer !important
+          > .delete_all
+            color: $MAIN_COLOR
+            cursor: pointer
+          > .icon
+            text-align: center
+          > .group, .sample
+            width: 30%
+          > .horl, .entropy
+            width: 15%
 </style>
