@@ -122,7 +122,11 @@
             <td class="horl">High or Low</td>
             <td class="entropy">Entropy (min)</td>
             <td class="entropy">Entropy (max)</td>
-            <td colspan="2" class="delete_all" @click="deleteAll">
+            <td
+              colspan="2"
+              class="delete_all"
+              @click="deleteAllSpecificityROKU"
+            >
               <font-awesome-icon icon="trash" /> Delete All
             </td>
           </tr>
@@ -132,7 +136,7 @@
                 v-model="val.group"
                 type="text"
                 placeholder="select a group"
-                @input="addIndex(index, val.group)"
+                @input="addIndexSpecificityROKU(index, val.group)"
               />
             </td>
             <td>
@@ -140,7 +144,7 @@
                 v-model="val.sample"
                 type="text"
                 placeholder="search samples by text"
-                @input="addIndex(index, val.sample)"
+                @input="addIndexSpecificityROKU(index, val.sample)"
               />
             </td>
             <td>
@@ -148,7 +152,7 @@
                 v-model="val.horl"
                 type="text"
                 placeholder="High"
-                @input="addIndex(index, val.horl)"
+                @input="addIndexSpecificityROKU(index, val.horl)"
               />
             </td>
             <td>
@@ -156,7 +160,7 @@
                 v-model="val.emin"
                 type="text"
                 placeholder="1"
-                @input="addIndex(index, val.emin)"
+                @input="addIndexSpecificityROKU(index, val.emin)"
               />
             </td>
             <td>
@@ -164,7 +168,7 @@
                 v-model="val.emax"
                 type="text"
                 placeholder="5"
-                @input="addIndex(index, val.emax)"
+                @input="addIndexSpecificityROKU(index, val.emax)"
               />
             </td>
             <td class="icon">
@@ -182,6 +186,68 @@
                 :class="{ disabled: !val.delete }"
                 :disabled="!val.delete"
                 @click="delSpecificityROKU(index)"
+              >
+                <font-awesome-icon icon="trash" />
+              </button>
+            </td>
+          </tr>
+          <tr></tr>
+        </table>
+      </div>
+    </no-ssr>
+
+    <h3>Filter by Tissue specificity (tau)</h3>
+    <no-ssr>
+      <div class="filter_specificity_tau">
+        <table>
+          <tr>
+            <td class="group">Group</td>
+            <td class="cutoff">Cutoff</td>
+            <td class="condition">Condition</td>
+            <td colspan="2" class="delete_all" @click="deleteAllSpecificityTau">
+              <font-awesome-icon icon="trash" /> Delete All
+            </td>
+          </tr>
+          <tr v-for="(val, index) in specificityTau" :key="val.id">
+            <td>
+              <input
+                v-model="val.group"
+                type="text"
+                placeholder="select a group"
+                @input="addIndexSpecificityTau(index, val.group)"
+              />
+            </td>
+            <td>
+              <input
+                v-model="val.cutoff"
+                type="text"
+                placeholder="0.1"
+                @input="addIndexSpecificityTau(index, val.cutoff)"
+              />
+            </td>
+            <td>
+              <input
+                v-model="val.condition"
+                type="text"
+                placeholder="≧"
+                @input="addIndexSpecificityTau(index, val.condition)"
+              />
+            </td>
+            <td class="icon">
+              <button
+                class="check_btn"
+                :class="{ disabled: !val.check }"
+                @click="addSpecificityTau(index)"
+              >
+                <font-awesome-icon icon="check" />
+              </button>
+            </td>
+            <td class="icon">
+              <button
+                class="delete_btn"
+                :class="{ disabled: !val.delete }"
+                :disabled="!val.delete"
+                @click="delSpecificityTau(index)"
               >
                 <font-awesome-icon icon="trash" />
               </button>
@@ -228,6 +294,15 @@
             horl: '',
             emin: '',
             emax: '',
+            check: false,
+            delete: false,
+          },
+        ],
+        specificityTau: [
+          {
+            group: '',
+            cutoff: '',
+            condition: '',
             check: false,
             delete: false,
           },
@@ -331,7 +406,7 @@
       delSpecificityROKU(index) {
         this.specificityROKU.splice(index, 1);
       },
-      addIndex(index, value) {
+      addIndexSpecificityROKU(index, value) {
         if (value.trim().length > 0) {
           if (!this.specificityROKU[index + 1]) {
             this.specificityROKU.push({
@@ -348,7 +423,7 @@
           this.specificityROKU[index].delete = true;
         }
       },
-      deleteAll() {
+      deleteAllSpecificityROKU() {
         this.specificityROKU = [
           {
             group: '',
@@ -356,6 +431,38 @@
             horl: '',
             emin: '',
             emax: '',
+            check: false,
+            delete: false,
+          },
+        ];
+      },
+      addSpecificityTau(index) {
+        this.specificityTau[index].check = !this.specificityTau[index].check;
+      },
+      delSpecificityTau(index) {
+        this.specificityTau.splice(index, 1);
+      },
+      addIndexSpecificityTau(index, value) {
+        if (value.trim().length > 0) {
+          if (!this.specificityTau[index + 1]) {
+            this.specificityTau.push({
+              group: '',
+              cutoff: '',
+              condition: '',
+              check: false,
+              delete: false,
+            });
+          }
+          this.specificityTau[index].check = true;
+          this.specificityTau[index].delete = true;
+        }
+      },
+      deleteAllSpecificityTau() {
+        this.specificityTau = [
+          {
+            group: '',
+            cutoff: '',
+            condition: '',
             check: false,
             delete: false,
           },
@@ -415,5 +522,24 @@
           > .group, .sample
             width: 30%
           > .horl, .entropy
+            width: 15%
+    .filter_specificity_tau
+      > table
+        > tr
+          > td
+            font-size: 12px
+            > .check_btn, .delete_btn
+              +button
+              padding: 16px 22px
+            > .check_btn
+              cursor: pointer !important
+          > .delete_all
+            color: $MAIN_COLOR
+            cursor: pointer
+          > .icon
+            text-align: center
+          > .group
+            width: 60%
+          > .cutoff, .condition
             width: 15%
 </style>
