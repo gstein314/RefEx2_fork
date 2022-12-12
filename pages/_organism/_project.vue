@@ -8,21 +8,23 @@
     <div v-else ref="chartWrapper" class="chart_wrapper">
       <div class="content">
         <h1 class="header_title">
-          <font-awesome-icon
-            v-if="filterType === 'gene'"
-            icon="info-circle"
-            @click="setGeneModal(items[0].id)"
-          />
-          <span class="title">
-            {{
-              infoForMainItem.symbol ||
-              infoForMainItem.Description ||
-              infoForMainItem.name
-            }}
-            <span v-if="filterType === 'gene'" class="metadata">{{
-              `(${infoForMainItem.name}, Gene ID: ${infoForMainItem.id})`
-            }}</span>
-          </span>
+          <div class="title">
+            <span>
+              {{
+                infoForMainItem.symbol ||
+                infoForMainItem.Description ||
+                infoForMainItem.name
+              }}
+            </span>
+            <font-awesome-icon
+              v-if="filterType === 'gene'"
+              icon="info-circle"
+              @click="setGeneModal(items[0].id)"
+            />
+          </div>
+          <span v-if="filterType === 'gene'" class="metadata">{{
+            `(${infoForMainItem.name}, Gene ID: ${infoForMainItem.id})`
+          }}</span>
         </h1>
         <item-comparison
           :items="items"
@@ -488,16 +490,17 @@
         min-width: fit-content
         width: 100%
         > .header_title
-          display: flex
           align-items: flex-start
           margin: 0
-          > .fa-circle-info
+          .fa-circle-info
             color: $MAIN_COLOR
             font-size: 24px
-            margin-right: 6px
-            margin-top: 4px
             &:hover
               cursor: pointer
+          > .title
+            display: flex
+            align-items: center
+            gap: 5px
           .metadata
             font-size: 20px
             display: block

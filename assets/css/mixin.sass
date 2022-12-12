@@ -85,6 +85,7 @@ $TOOLTIP_LAYER: 2
   border-radius: $BORDER_RADIUS_DEFAULT
   display: flex
   align-items: center
+  gap: 4px
   transition: background 0.3s ease-in-out
   &:focus
     outline: none
@@ -92,8 +93,8 @@ $TOOLTIP_LAYER: 2
     cursor: pointer
     background: $BUTTON_HOVER_COLOR
   > svg
-    font-size: 14px
-    margin-right: 4px
+    display: block
+    align-self: flex-start
   &.update
     background: $WARNING_BUTTON_COLOR
     &:hover
@@ -107,11 +108,10 @@ $TOOLTIP_LAYER: 2
 
 
 @mixin sub_button
-  font-size: 12px
-  padding: 0.4em 1.2em
-  > svg
-    font-size: 0.8em
-    margin-right: 4px
+  // font-size: 12px
+  // padding: 0.4em 1.2em
+  // > svg
+  //   margin-right: 4px
 
 @mixin table
   width: 100%
@@ -183,25 +183,16 @@ $TOOLTIP_LAYER: 2
   text-decoration: underline
   cursor: pointer
   color: $MAIN_COLOR
-  position: relative
   > [data-icon=up-right-from-square]
-    top: 3px
     font-size: 0.8em
   > [data-icon=dna]
-    top: 2px
     font-size: 0.9em
   > [data-icon=flask]
-    top: 2px
     font-size: 0.9em
-  &.icon_on_left
-    padding-left: 16px
-    > svg
-      position: absolute
-      left: 0
-  &.icon_on_right
-    > svg
-      position: absolute
-      right: -16px
+  &.text_with_icon
+    display: flex
+    align-items: center
+    gap: 5px
 
 @mixin select
   cursor: pointer
