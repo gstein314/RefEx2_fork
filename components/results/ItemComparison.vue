@@ -7,13 +7,13 @@
       :class="[`item_${index + 1}`, { active: isMedianSort(item.id) }]"
       @click="select(item.id)"
     >
+      <span>{{ item.info.symbol || item.info.Description }}</span>
       <font-awesome-icon
         v-if="displayInfoButton"
         class="info"
         icon="info-circle"
         @click="$emit('showModal', item.id)"
       />
-      <span>{{ item.info.symbol || item.info.Description }}</span>
       <font-awesome-icon
         v-if="isMedianSort(item.id)"
         :icon="sortIcon"
