@@ -254,6 +254,7 @@
         > .show_all_btn
           +button
           +sub_button
+          white-space: nowrap
     > table
       +table
       > tbody
