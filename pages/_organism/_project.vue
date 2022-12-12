@@ -60,7 +60,6 @@
     <ModalViewDisplay
       v-if="isDisplaySettingsOn"
       @click.native="toggleDisplaySettings"
-      @updateProjectTableHead="updateProjectTableHead"
     />
     <ModalViewFilter />
     <ModalViewGene />
@@ -78,7 +77,6 @@
       :detailed-stat-title="detailedStatTitle"
       @activeSort="setProjectSortColumn"
       @setProjectResultsView="setProjectResultsView"
-      @updateProjectTableHead="updateProjectTableHead"
     />
     <ResultsPagination
       :pages-number="$store.state.project_pages_number"
@@ -412,7 +410,7 @@
             // )}_Median (log2(TPM+1))`;
             // console.log(this.items[0].info);
             // arr.push(obj);
-            for (const oldHead of Object.keys(this.projectResultsView[0])) {
+            for (const oldHead of Object.keys(this.comparisonLogMedians[0])) {
               if (oldHead.includes('LogMedian_')) {
                 const medianObj = {};
                 const newHead = oldHead
@@ -496,9 +494,10 @@
           resultsOnScreen.push(filtered);
         }
         this.comparisonLogMedians = withSort;
+        this.updateProjectTableHead();
         setTimeout(() => {
           this.$refs.downloadButton.downloadTsv();
-        }, 3000);
+        }, 10000);
       },
     },
   };
