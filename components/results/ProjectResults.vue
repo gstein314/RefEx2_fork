@@ -222,6 +222,8 @@
           }
           return !isFiltered;
         });
+        this.$emit('setProjectResultsView', this.getResultsOnScreen(filtered));
+        this.$emit('updateProjectTableHead');
         return this.multisortData(filtered);
       },
       pageItems() {
@@ -316,42 +318,32 @@
         }
       },
       multisortData(data) {
-        const withSort = _.orderBy(
-          data,
-          this.columnSortersArray,
-          this.ordersArray
-        );
+        return _.orderBy(data, this.columnSortersArray, this.ordersArray);
+      },
+      getResultsOnScreen(filteredData) {
         const displayed = [];
         for (const filter of this.filters) {
           if (filter.is_displayed) displayed.push(filter.column);
         }
         const resultsOnScreen = [];
-
-        for (const item of withSort) {
+        for (const item of filteredData) {
           const filtered = Object.keys(item)
             .filter(key => displayed.includes(key))
             .reduce((obj, key) => {
-              // add other statistic data if LogMedian is displayed
               if (key === 'LogMedian') {
                 obj[key] = item[key];
               } else if (key === 'alias') {
-                // format alias data to avoid tsv data conflict ("," problem)
                 try {
                   obj[key] = JSON.parse(item[key]).join(' , ');
                 } catch {
                   obj[key] = item[key].replaceAll('"', '');
                 }
               } else obj[key] = item[key];
-              // add png url option in exported tsv
-              // if (obj['gene expression patterns'])
-              //   delete obj['gene expression patterns'];
               return obj;
             }, {});
           resultsOnScreen.push(filtered);
         }
-        this.$emit('setProjectResultsView', resultsOnScreen);
-        this.$emit('updateProjectTableHead');
-        return withSort;
+        return resultsOnScreen;
       },
     },
   };

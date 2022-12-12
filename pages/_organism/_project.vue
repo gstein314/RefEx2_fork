@@ -394,7 +394,6 @@
         this.projectResultsView = arr;
       },
       updateProjectTableHead() {
-        // create an array of {oldHead: newHead} objs
         const arr = [];
         for (const filter of this.projectFilters) {
           if (
@@ -404,12 +403,6 @@
             continue;
           const obj = {};
           if (filter.column === 'LogMedian') {
-            // const symbolOrDescription = info => info.symbol || info.Description;
-            // obj['LogMedian'] = `${symbolOrDescription(
-            //   this.items[0].info
-            // )}_Median (log2(TPM+1))`;
-            // console.log(this.items[0].info);
-            // arr.push(obj);
             for (const oldHead of Object.keys(this.comparisonLogMedians[0])) {
               if (oldHead.includes('LogMedian_')) {
                 const medianObj = {};
@@ -434,6 +427,14 @@
         this.$refs.downloadButton.downloadTsv();
       },
       addCombinedMedians(items) {
+        const combinedMedians = this.createCombinedMedians(items);
+        console.log(combinedMedians);
+        const withSort = this.$refs.results.multisortData(combinedMedians);
+        this.comparisonLogMedians = withSort;
+        this.updateProjectTableHead();
+        return;
+      },
+      createCombinedMedians(items) {
         const medianArraysObj = {};
         for (const item of Object.values(items)) {
           const symbolOrDescription = info => info.symbol || info.Description;
@@ -452,47 +453,12 @@
           }
           combinedLogMediansArray.push(combinedLogMediansObj);
         }
-        const copy = { ...this.projectResultsAll[this.selectedItem.id] };
-        const comparisonLogMedians = [];
+        const copy = { ...this.projectResultsView };
+        const combinedMedians = [];
         for (const [i, item] of combinedLogMediansArray.entries()) {
-          comparisonLogMedians.push(_.merge(copy[i], item));
+          combinedMedians.push(_.merge(copy[i], item));
         }
-        const withSort = _.orderBy(
-          comparisonLogMedians,
-          this.columnSortersArray,
-          this.ordersArray
-        );
-        const displayed = [];
-        for (const filter of this.filters) {
-          if (filter.is_displayed) displayed.push(filter.column);
-        }
-        const resultsOnScreen = [];
-
-        for (const item of withSort) {
-          const filtered = Object.keys(item)
-            .filter(key => displayed.includes(key))
-            .reduce((obj, key) => {
-              // add other statistic data if LogMedian is displayed
-              if (key === 'LogMedian') {
-                obj[key] = item[key];
-              } else if (key === 'alias') {
-                // format alias data to avoid tsv data conflict ("," problem)
-                try {
-                  obj[key] = JSON.parse(item[key]).join(' , ');
-                } catch {
-                  obj[key] = item[key].replaceAll('"', '');
-                }
-              } else obj[key] = item[key];
-              // add png url option in exported tsv
-              // if (obj['gene expression patterns'])
-              //   delete obj['gene expression patterns'];
-              return obj;
-            }, {});
-          resultsOnScreen.push(filtered);
-        }
-        this.comparisonLogMedians = withSort;
-        this.updateProjectTableHead();
-        return;
+        return combinedMedians;
       },
     },
   };
