@@ -190,35 +190,6 @@
         activeDataset: 'active_dataset',
         activeSpecie: 'active_specie',
       }),
-      // comparisonLogMedians() {
-      //   const medianArraysObj = {};
-      //   for (const item of Object.values(this.projectItems.items)) {
-      //     const symbolOrDescription = info => info.symbol || info.Description;
-      //     medianArraysObj[`LogMedian_${symbolOrDescription(item.info)}`] =
-      //       item.medianData;
-      //   }
-      //   const combinedLogMediansArray = [];
-      //   for (let i = 0; i < this.results.length; i++) {
-      //     const combinedLogMediansObj = {};
-      //     for (const [key, mediansArr] of Object.entries(medianArraysObj)) {
-      //       combinedLogMediansObj[key] = mediansArr[i];
-      //     }
-      //     combinedLogMediansArray.push(combinedLogMediansObj);
-      //   }
-      //   const copy = { ...this.results };
-      //   const comparisonLogMedians = [];
-      //   for (const [i, item] of combinedLogMediansArray.entries()) {
-      //     comparisonLogMedians.push(_.merge(copy[i], item));
-      //   }
-      //   // console.log(
-      //   //   `1st for: ${this.projectItems.items.length}\n2nd for: ${
-      //   //     this.results.length
-      //   //   } x ${Object.keys(medianArraysObj).length}\n3rd for: ${
-      //   //     combinedLogMediansArray.length
-      //   //   }`
-      //   // );
-      //   return comparisonLogMedians;
-      // },
       filteredData() {
         const copy = [...this.results];
         const filtered = copy.filter(result => {
@@ -251,7 +222,7 @@
           }
           return !isFiltered;
         });
-        return this.sortData(filtered);
+        return this.multisortData(filtered);
       },
       pageItems() {
         return this.filteredData.slice(
@@ -344,7 +315,7 @@
           return false;
         }
       },
-      sortData(data) {
+      multisortData(data) {
         const withSort = _.orderBy(
           data,
           this.columnSortersArray,

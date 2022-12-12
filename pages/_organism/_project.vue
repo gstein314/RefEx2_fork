@@ -40,7 +40,7 @@
               :download-data="comparisonLogMedians"
               :file-name="tsvTitle"
               :fields-array="projectTableHead"
-              @click.native="addComparisonLogMedians(items)"
+              @click.native="downloadComparisonMedians(items)"
             />
             <ComparisonButton />
           </div>
@@ -429,7 +429,11 @@
         }
         this.projectTableHead = arr;
       },
-      addComparisonLogMedians(items) {
+      async downloadComparisonMedians(items) {
+        await this.addCombinedMedians(items);
+        this.$refs.downloadButton.downloadTsv();
+      },
+      addCombinedMedians(items) {
         const medianArraysObj = {};
         for (const item of Object.values(items)) {
           const symbolOrDescription = info => info.symbol || info.Description;
@@ -453,13 +457,6 @@
         for (const [i, item] of combinedLogMediansArray.entries()) {
           comparisonLogMedians.push(_.merge(copy[i], item));
         }
-        // console.log(
-        //   `1st for: ${items.length}\n2nd for: ${
-        //     this.results.length
-        //   } x ${Object.keys(medianArraysObj).length}\n3rd for: ${
-        //     combinedLogMediansArray.length
-        //   }`
-        // );
         const withSort = _.orderBy(
           comparisonLogMedians,
           this.columnSortersArray,
@@ -495,9 +492,7 @@
         }
         this.comparisonLogMedians = withSort;
         this.updateProjectTableHead();
-        setTimeout(() => {
-          this.$refs.downloadButton.downloadTsv();
-        }, 10000);
+        return;
       },
     },
   };
