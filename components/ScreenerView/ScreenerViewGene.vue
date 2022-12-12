@@ -539,7 +539,7 @@
           > .icon
             text-align: center
           > .group
-            width: 60%
+            width: 70%
           > .cutoff, .condition
             width: 15%
 </style>
