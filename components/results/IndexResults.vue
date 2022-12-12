@@ -62,7 +62,7 @@
           </td>
           <td v-if="filterType === 'sample'">
             <a
-              class="icon_on_left"
+              class="text_with_icon"
               @click="moveToProjectPage(result['refexSampleId'])"
             >
               <font-awesome-icon icon="flask" />
@@ -82,23 +82,23 @@
             />
             <a
               v-else-if="filter.column === 'symbol'"
-              class="icon_on_both_sides"
+              class="text_with_icon"
               @click="moveToProjectPage(result['geneid'])"
               ><font-awesome-icon class="left_icon" icon="dna" />
               {{ result[filter.column] }}
               <font-awesome-icon
-                class="right_icon info"
                 icon="info-circle"
                 @click.stop="setGeneModal(result.geneid)"
               />
             </a>
             <a
               v-else-if="filter.column === 'geneid'"
-              class="icon_on_right"
+              class="text_with_icon"
               target="_blank"
               :href="datasetInfo.url_prefix + result.geneid"
-              ><font-awesome-icon icon="external-link-alt" />
+            >
               {{ result[filter.column] }}
+              <font-awesome-icon icon="external-link-alt" />
             </a>
             <span
               v-for="(value, value_index) of JSON.parse(result[filter.column])"

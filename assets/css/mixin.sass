@@ -107,10 +107,9 @@ $TOOLTIP_LAYER: 2
 
 
 @mixin sub_button
-  font-size: 12px
+  font-size: 0.8em
   padding: 0.4em 1.2em
   > svg
-    font-size: 0.8em
     margin-right: 4px
 
 @mixin table
@@ -183,36 +182,16 @@ $TOOLTIP_LAYER: 2
   text-decoration: underline
   cursor: pointer
   color: $MAIN_COLOR
-  position: relative
   > [data-icon=up-right-from-square]
-    top: 3px
     font-size: 0.8em
   > [data-icon=dna]
-    top: 2px
     font-size: 0.9em
   > [data-icon=flask]
-    top: 2px
     font-size: 0.9em
-  &.icon_on_left
-    padding-left: 16px
-    > svg
-      position: absolute
-      left: 0
-  &.icon_on_right
-    > svg
-      position: absolute
-      right: -16px
-  &.icon_on_both_sides
-    padding-left: 16px
-    > .left_icon
-      position: absolute
-      left: 0
-    > .right_icon
-      position: absolute
-      right: -16px
-    > .info
-      top: 1px
-      right: -20px !important
+  &.text_with_icon
+    display: flex
+    align-items: center
+    gap: 5px
 
 @mixin select
   cursor: pointer

@@ -32,7 +32,7 @@
             >
               <a
                 v-if="filter.column === 'symbol'"
-                class="icon_on_both_sides"
+                class="text_with_icon"
                 @click="
                   moveToProjectPage(result['ncbiGeneId' || 'ensemblGeneId'])
                 "
@@ -40,13 +40,14 @@
                 <font-awesome-icon class="left_icon" icon="dna" />
                 {{ result.symbol }}
                 <font-awesome-icon
-                  class="right_icon info" icon="info-circle"
+                  class="right_icon info"
+                  icon="info-circle"
                   @click.stop="setGeneModal(result[geneIdKey])"
                 />
               </a>
               <a
                 v-else-if="filter.column === 'Description'"
-                class="icon_on_left"
+                class="text_with_icon"
                 @click="moveToProjectPage(result['RefexSampleId'])"
               >
                 <font-awesome-icon icon="flask" />
@@ -85,19 +86,21 @@
               </template>
               <a
                 v-else-if="filter.column === 'ncbiGeneId'"
-                class="icon_on_right"
+                class="text_with_icon"
                 target="_blank"
                 :href="datasetInfo.url_prefix + result.ncbiGeneId"
-                ><font-awesome-icon icon="external-link-alt" />
+              >
                 {{ result[filter.column] }}
+                <font-awesome-icon icon="external-link-alt" />
               </a>
               <a
                 v-else-if="filter.column === 'ensemblGeneId'"
-                class="icon_on_right"
+                class="text_with_icon"
                 target="_blank"
                 :href="datasetInfo.url_prefix + result.ensemblGeneId"
-                ><font-awesome-icon icon="external-link-alt" />
+              >
                 {{ result[filter.column] }}
+                <font-awesome-icon icon="external-link-alt" />
               </a>
               <template v-else>
                 {{ result[filter.column] }}
