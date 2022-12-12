@@ -74,7 +74,6 @@
       :columns-array="columnsArray"
       :column-sorters-array="columnSortersArray"
       :orders-array="ordersArray"
-      :detailed-stat-title="detailedStatTitle"
       @activeSort="setProjectSortColumn"
       @setProjectResultsView="setProjectResultsView"
     />
@@ -242,15 +241,6 @@
         projectResultsView: [],
         columnsArray: [],
         ordersArray: [],
-        detailedStatTitle: {
-          LogMin: 'Min',
-          Log1stQu: '1stQu',
-          LogMedian: 'Median (log2(TPM+1))',
-          Log3rdQu: '3rdQu',
-          LogMax: 'Max',
-          LogSd: 'SD',
-          NumberOfSamples: 'No. of samples',
-        },
         comparisonLogMedians: [],
       };
     },
@@ -428,7 +418,6 @@
       },
       addCombinedMedians(items) {
         const combinedMedians = this.createCombinedMedians(items);
-        console.log(combinedMedians);
         const withSort = this.$refs.results.multisortData(combinedMedians);
         this.comparisonLogMedians = withSort;
         this.updateProjectTableHead();

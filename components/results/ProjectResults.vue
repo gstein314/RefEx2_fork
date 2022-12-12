@@ -170,10 +170,6 @@
         type: Array,
         default: () => [],
       },
-      detailedStatTitle: {
-        type: Object,
-        default: () => {},
-      },
     },
 
     computed: {
