@@ -159,8 +159,7 @@
 
     computed: {
       ...mapGetters({
-        results: 'get_project_results',
-        resultsAll: 'get_project_results_all',
+        projectResults: 'get_project_results',
         projectItems: 'get_project_items',
         paginationObject: 'get_project_pagination',
         filters: 'project_filters',
@@ -172,7 +171,7 @@
         activeSpecie: 'active_specie',
       }),
       filteredData() {
-        const copy = [...this.results];
+        const copy = [...this.projectResults];
         const filtered = copy.filter(result => {
           let isFiltered = false;
           for (const filter of this.filters) {
