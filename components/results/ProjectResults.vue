@@ -320,7 +320,7 @@
                 obj[key] = item[key];
               } else if (key === 'alias') {
                 try {
-                  obj[key] = JSON.parse(item[key]).join(' , ');
+                  obj[key] = JSON.parse(item[key]).join(', ');
                 } catch {
                   obj[key] = item[key].replaceAll('"', '');
                 }
