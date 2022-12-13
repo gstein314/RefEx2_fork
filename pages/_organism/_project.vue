@@ -2,7 +2,7 @@
   <div class="wrapper">
     <p v-if="isError" class="error">
       <font-awesome-icon icon="exclamation-triangle" />
-      An error has occured while fecthing the data. Please check wheter the URL
+      An error has occured while fetching the data. Please check wheter the URL
       contains the correct information.
     </p>
     <div v-else ref="chartWrapper" class="chart_wrapper">
