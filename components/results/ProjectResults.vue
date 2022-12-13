@@ -64,20 +64,8 @@
                 :alt="result[geneIdKey]"
               />
               <template v-else-if="isAliasArray(result, filter)">
-                <span
-                  v-for="(alias, alias_index) in JSON.parse(
-                    result[filter.column]
-                  )"
-                  :key="alias_index"
-                >
-                  <span>{{ alias }}</span>
-                  <span
-                    v-if="
-                      alias_index < JSON.parse(result[filter.column]).length - 1
-                    "
-                    class="comma"
-                    >,
-                  </span>
+                <span>
+                  {{ JSON.parse(result[filter.column]).join(', ') }}
                 </span>
               </template>
 
