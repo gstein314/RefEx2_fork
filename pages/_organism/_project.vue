@@ -44,7 +44,7 @@
               :fields-array="projectTableHead"
               @click.native="downloadComparisonMedians(items)"
             />
-            <ComparisonButton />
+            <ComparisonButton v-if="filterType === 'gene'" />
           </div>
           <div class="align_right">
             <button class="reset_btn" :class="isNoSort" @click="clearSortArray">
@@ -283,7 +283,8 @@
         let mm = String(today.getMonth() + 1).padStart(2, '0');
         let yyyy = today.getFullYear();
         today = yyyy + mm + dd;
-        return `RefEx2_${this.$store.state.active_specie.species}_${this.$store.state.active_dataset.dataset}_${this.$store.state.active_filter}_comparison_${today}.tsv`;
+        console.log(this.activeFilter);
+        return `RefEx2_${this.activeSpecie.species}_${this.activeDataset.dataset}_${this.filterType}_comparison_${today}.tsv`;
       },
       roundDownClientHeight() {
         return Math.floor(
