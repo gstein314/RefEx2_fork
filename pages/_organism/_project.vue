@@ -424,13 +424,46 @@
       },
       async downloadComparisonMedians(items) {
         await this.addCombinedMedians(items);
+        await this.updateProjectTableHead();
         this.$refs.downloadButton.downloadTsv();
       },
       addCombinedMedians(items) {
         const combinedMedians = this.createCombinedMedians(items);
         const withSort = this.$refs.results.multisortData(combinedMedians);
-        this.comparisonLogMedians = withSort;
-        this.updateProjectTableHead();
+        const inRange = (x, [min, max]) => {
+          return typeof x !== 'number' || (x - min) * (x - max) <= 0;
+        };
+        const dataFilteredSorted = withSort.filter(result => {
+          let isFiltered = false;
+          for (const filter of this.projectFilters) {
+            const key = filter.column;
+
+            if (!filter.is_displayed) continue;
+            // options filter
+            else if (filter.options) {
+              if (!filter.filterModal.includes(result[key])) isFiltered = true;
+            }
+            // number filter
+            else if (
+              typeof filter.filterModal === 'number' ||
+              Array.isArray(filter.filterModal)
+            ) {
+              // checks if all values are in range. Creates a list in case of Age due to multiple values in string form
+              const n =
+                key === 'Age' ? createNumberList(result[key]) : [result[key]];
+              if (n.find(x => inRange(x, filter.filterModal)) === undefined)
+                isFiltered = true;
+            }
+            // text filter
+            else if (filter.filterModal !== '' && !isFiltered) {
+              // excact match if filter is based on API options
+              const isMatch = this.textFilter(result[key], filter.filterModal);
+              isFiltered = filter.filterModal !== '' && !isMatch;
+            }
+          }
+          return !isFiltered;
+        });
+        this.comparisonLogMedians = dataFilteredSorted;
         return;
       },
       createCombinedMedians(items) {
@@ -452,7 +485,7 @@
           }
           combinedLogMediansArray.push(combinedLogMediansObj);
         }
-        const copy = { ...this.projectResultsView };
+        const copy = { ...this.projectResultsAll[this.selectedItem.id] };
         const combinedMedians = [];
         for (const [i, item] of combinedLogMediansArray.entries()) {
           combinedMedians.push(_.merge(copy[i], item));

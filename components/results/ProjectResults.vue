@@ -203,9 +203,10 @@
           }
           return !isFiltered;
         });
+        const dataFilteredSorted = this.multisortData(filtered);
         this.$emit('setProjectResultsView', this.getResultsOnScreen(filtered));
         this.$emit('updateProjectTableHead');
-        return this.multisortData(filtered);
+        return dataFilteredSorted;
       },
       pageItems() {
         return this.filteredData.slice(
