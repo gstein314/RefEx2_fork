@@ -171,6 +171,9 @@
               return chr;
             };
             result.chromosomePositionInt = chrToNum(result.chromosomePosition);
+            if (result.alias && result.alias.startsWith('[')) {
+              result.alias = JSON.parse(result.alias).join(', ');
+            }
             return {
               ...result,
               itemNum: index,
