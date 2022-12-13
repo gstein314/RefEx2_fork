@@ -253,6 +253,9 @@
       ...mapGetters({
         projectResultsAll: 'get_project_results_all',
         projectFilters: 'project_filters',
+        activeSpecie: 'active_specie',
+        activeDataset: 'active_dataset',
+        activeFilter: 'active_filter',
       }),
       projectItems() {
         return {
