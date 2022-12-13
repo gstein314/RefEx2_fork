@@ -81,6 +81,7 @@
     />
     <ResultsPagination
       :pages-number="$store.state.project_pages_number"
+      :project-results-view="projectResultsView"
       table-type="project"
       class="pagination"
     />
