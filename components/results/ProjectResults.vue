@@ -63,12 +63,6 @@
                 :src="geneSummarySource(result[geneIdKey])"
                 :alt="result[geneIdKey]"
               />
-              <template v-else-if="isAliasArray(result, filter)">
-                <span>
-                  {{ JSON.parse(result[filter.column]).join(', ') }}
-                </span>
-              </template>
-
               <template v-else-if="hasStringQuotes(result[filter.column])">
                 {{ result[filter.column].replaceAll('"', '') }}
               </template>
@@ -93,6 +87,7 @@
               <template v-else>
                 {{ result[filter.column] }}
                 <span
+                  v-if="filter.column !== 'alias'"
                   @click="
                     setFilterSearchValue(result[filter.column]);
                     setFilterModal(filter.column);
