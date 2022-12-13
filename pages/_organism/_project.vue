@@ -172,7 +172,13 @@
             result.chromosomePositionInt = createNumberSorter(
               result.chromosomePosition
             );
-            if (result.alias && result.alias.startsWith('[')) {
+            if (
+              result.alias &&
+              result.alias.startsWith('"') &&
+              result.alias.endsWith('"')
+            ) {
+              result.alias = result.alias.replaceAll('"', '');
+            } else if (result.alias && result.alias.startsWith('[')) {
               result.alias = JSON.parse(result.alias).join(', ');
             }
             return {
