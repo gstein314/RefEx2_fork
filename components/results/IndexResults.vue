@@ -101,17 +101,10 @@
               <font-awesome-icon icon="external-link-alt" />
             </a>
             <span
-              v-for="(value, value_index) of JSON.parse(result[filter.column])"
-              v-else-if="isArray(result[filter.column])"
+              v-else-if="isArrayLikeString(result[filter.column])"
               :key="value_index"
             >
-              {{ value }}
-              <span
-                v-if="
-                  value_index < JSON.parse(result[filter.column]).length - 1
-                "
-                >,</span
-              >
+              {{ JSON.parse(result[filter.column]).join(', ') }}
             </span>
             <template v-else-if="hasStringQuotes(result[filter.column])">
               {{ result[filter.column].replaceAll('"', '') }}
@@ -217,7 +210,7 @@
         this.$nuxt.$loading.start();
         this.$router.push(this.routeToProjectPage(route));
       },
-      isArray(str) {
+      isArrayLikeString(str) {
         return str?.startsWith('[');
       },
       hasStringQuotes(str) {
