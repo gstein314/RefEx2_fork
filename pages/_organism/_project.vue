@@ -142,35 +142,35 @@
             isError = true;
           }
           resultsAll[id] = data.refex_info.map((result, index) => {
-            // create number type keys for "ncbiGeneId" and "chromosomePosition" before sorting
-            const toNum = str => {
-              const num = parseInt(str);
-              return Number.isNaN(num) ? str : num;
-            };
-            result.ncbiGeneIdInt = toNum(result.ncbiGeneId);
-            const chrToNum = str => {
+            const createNumberSorter = str => {
               if (str === undefined) return;
-              let chr = toNum(str);
-              if (typeof chr === 'string') {
-                chr.toUpperCase();
-                switch (chr) {
+              const toNum = str => {
+                const numOrStr = parseInt(str);
+                return Number.isNaN(numOrStr) ? str : numOrStr;
+              };
+              let order = toNum(str);
+              if (typeof order === 'string') {
+                order.toUpperCase();
+                switch (order) {
                   case 'X':
-                    chr = 23;
+                    order = 23;
                     break;
                   case 'Y':
-                    chr = 24;
+                    order = 24;
                     break;
                   case 'MT':
-                    chr = 25;
+                    order = 25;
                     break;
                   case '-':
-                    chr = 26;
+                    order = 26;
                     break;
                 }
               }
-              return chr;
+              return order;
             };
-            result.chromosomePositionInt = chrToNum(result.chromosomePosition);
+            result.chromosomePositionInt = createNumberSorter(
+              result.chromosomePosition
+            );
             if (result.alias && result.alias.startsWith('[')) {
               result.alias = JSON.parse(result.alias).join(', ');
             }
