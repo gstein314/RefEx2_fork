@@ -39,10 +39,9 @@
           <div class="align_left">
             <DownloadButton
               ref="downloadButton"
-              :download-data="comparisonLogMedians"
+              :download-data="projectResultsView"
               :file-name="tsvTitle"
               :fields-array="projectTableHead"
-              @click.native="downloadComparisonMedians(items)"
             />
             <ComparisonButton v-if="filterType === 'gene'" />
           </div>
@@ -76,9 +75,8 @@
       :columns-array="columnsArray"
       :column-sorters-array="columnSortersArray"
       :orders-array="ordersArray"
-      :results-with-combined-medians="resultsWithCombinedMedians"
+      :filtered-sorted-data="filteredSortedData"
       @activeSort="setProjectSortColumn"
-      @setProjectResultsView="setProjectResultsView"
     />
     <ResultsPagination
       :pages-number="$store.state.project_pages_number"
@@ -100,6 +98,7 @@
   import ProjectResults from '~/components/results/ProjectResults.vue';
   import ResultsPagination from '~/components/results/ResultsPagination.vue';
   import DownloadButton from '~/components/DownloadButton.vue';
+  import _ from 'lodash';
 
   const logMedianFilter = {
     column: 'LogMedian',
@@ -341,6 +340,84 @@
         }
         return resultsWithCombinedMedians;
       },
+      filteredSortedData() {
+        const copy = [...this.resultsWithCombinedMedians];
+        const inRange = (x, [min, max]) => {
+          return typeof x !== 'number' || (x - min) * (x - max) <= 0;
+        };
+        const filtered = copy.filter(result => {
+          let isFiltered = false;
+          for (const filter of this.projectFilters) {
+            const key = filter.column;
+
+            if (!filter.is_displayed) continue;
+            // options filter
+            else if (filter.options) {
+              if (!filter.filterModal.includes(result[key])) isFiltered = true;
+            }
+            // number filter
+            else if (
+              typeof filter.filterModal === 'number' ||
+              Array.isArray(filter.filterModal)
+            ) {
+              // checks if all values are in range. Creates a list in case of Age due to multiple values in string form
+              const n =
+                key === 'Age' ? createNumberList(result[key]) : [result[key]];
+              if (n.find(x => inRange(x, filter.filterModal)) === undefined)
+                isFiltered = true;
+            }
+            // text filter
+            else if (filter.filterModal !== '' && !isFiltered) {
+              // excact match if filter is based on API options
+              const isMatch = this.textFilter(result[key], filter.filterModal);
+              isFiltered = filter.filterModal !== '' && !isMatch;
+            }
+          }
+          return !isFiltered;
+        });
+        this.updateProjectTableHead();
+        const multisortData = data =>
+          _.orderBy(data, this.columnSortersArray, this.ordersArray);
+        const filteredSortedData = multisortData(filtered);
+        console.log(filteredSortedData);
+        return filteredSortedData;
+      },
+      resultsDisplayed() {
+        const displayed = [];
+        for (const filter of this.projectFilters) {
+          if (filter.is_displayed) displayed.push(filter.column);
+        }
+        const logMedianKeys = [];
+        for (const key of Object.keys(this.filteredSortedData[0])) {
+          if (key.startsWith('LogMedian_')) {
+            logMedianKeys.push(key);
+          }
+        }
+        const resultsDisplayed = [];
+        for (const item of this.filteredSortedData) {
+          const filtered = Object.keys(item)
+            .filter(itemKey => displayed.includes(itemKey))
+            .reduce((resultDisplayed, itemKey) => {
+              if (itemKey === 'LogMedian') {
+                for (const logMediankey of logMedianKeys) {
+                  resultDisplayed[logMediankey] = item[logMediankey];
+                }
+              } else if (itemKey === 'alias') {
+                try {
+                  resultDisplayed[itemKey] = JSON.parse(item[itemKey]).join(
+                    ', '
+                  );
+                } catch {
+                  resultDisplayed[itemKey] = item[itemKey].replaceAll('"', '');
+                }
+              } else resultDisplayed[itemKey] = item[itemKey];
+              return resultDisplayed;
+            }, {});
+          resultsDisplayed.push(filtered);
+        }
+        this.setProjectResultsView(resultsDisplayed);
+        return resultsDisplayed;
+      },
     },
     created() {
       this.$store.commit('set_project_items', this.projectItems);
@@ -424,6 +501,7 @@
         this.ordersArray = [];
       },
       setProjectResultsView(arr) {
+        console.log('set');
         this.projectResultsView = arr;
       },
       updateProjectTableHead() {
@@ -436,7 +514,9 @@
             continue;
           const obj = {};
           if (filter.column === 'LogMedian') {
-            for (const oldHead of Object.keys(this.comparisonLogMedians[0])) {
+            for (const oldHead of Object.keys(
+              this.resultsWithCombinedMedians[0]
+            )) {
               if (oldHead.includes('LogMedian_')) {
                 const medianObj = {};
                 const newHead = oldHead
@@ -454,76 +534,6 @@
           arr.push(obj);
         }
         this.projectTableHead = arr;
-      },
-      async downloadComparisonMedians(items) {
-        await this.addCombinedMedians(items);
-        await this.updateProjectTableHead();
-        this.$refs.downloadButton.downloadTsv();
-      },
-      addCombinedMedians(items) {
-        const combinedMedians = this.createCombinedMedians(items);
-        const withSort = this.$refs.results.multisortData(combinedMedians);
-        const inRange = (x, [min, max]) => {
-          return typeof x !== 'number' || (x - min) * (x - max) <= 0;
-        };
-        const dataFilteredSorted = withSort.filter(result => {
-          let isFiltered = false;
-          for (const filter of this.projectFilters) {
-            const key = filter.column;
-
-            if (!filter.is_displayed) continue;
-            // options filter
-            else if (filter.options) {
-              if (!filter.filterModal.includes(result[key])) isFiltered = true;
-            }
-            // number filter
-            else if (
-              typeof filter.filterModal === 'number' ||
-              Array.isArray(filter.filterModal)
-            ) {
-              // checks if all values are in range. Creates a list in case of Age due to multiple values in string form
-              const n =
-                key === 'Age' ? createNumberList(result[key]) : [result[key]];
-              if (n.find(x => inRange(x, filter.filterModal)) === undefined)
-                isFiltered = true;
-            }
-            // text filter
-            else if (filter.filterModal !== '' && !isFiltered) {
-              // excact match if filter is based on API options
-              const isMatch = this.textFilter(result[key], filter.filterModal);
-              isFiltered = filter.filterModal !== '' && !isMatch;
-            }
-          }
-          return !isFiltered;
-        });
-        this.comparisonLogMedians = dataFilteredSorted;
-        return;
-      },
-      createCombinedMedians(items) {
-        const medianArraysObj = {};
-        for (const item of Object.values(items)) {
-          const symbolOrDescription = info => info.symbol || info.Description;
-          medianArraysObj[`LogMedian_${symbolOrDescription(item.info)}`] =
-            item.medianData;
-        }
-        const combinedLogMediansArray = [];
-        for (
-          let i = 0;
-          i < this.projectResultsAll[this.selectedItem.id].length;
-          i++
-        ) {
-          const combinedLogMediansObj = {};
-          for (const [key, mediansArr] of Object.entries(medianArraysObj)) {
-            combinedLogMediansObj[key] = mediansArr[i];
-          }
-          combinedLogMediansArray.push(combinedLogMediansObj);
-        }
-        const copy = { ...this.projectResultsAll[this.selectedItem.id] };
-        const combinedMedians = [];
-        for (const [i, item] of combinedLogMediansArray.entries()) {
-          combinedMedians.push(_.merge(copy[i], item));
-        }
-        return combinedMedians;
       },
     },
   };

@@ -155,7 +155,7 @@
         type: Array,
         default: () => [],
       },
-      resultsWithCombinedMedians: {
+      filteredSortedData: {
         type: Array,
         default: () => [],
       },
@@ -174,80 +174,6 @@
         activeDataset: 'active_dataset',
         activeSpecie: 'active_specie',
       }),
-      filteredSortedData() {
-        const copy = [...this.resultsWithCombinedMedians];
-        const filtered = copy.filter(result => {
-          let isFiltered = false;
-          for (const filter of this.filters) {
-            const key = filter.column;
-
-            if (!filter.is_displayed) continue;
-            // options filter
-            else if (filter.options) {
-              if (!filter.filterModal.includes(result[key])) isFiltered = true;
-            }
-            // number filter
-            else if (
-              typeof filter.filterModal === 'number' ||
-              Array.isArray(filter.filterModal)
-            ) {
-              // checks if all values are in range. Creates a list in case of Age due to multiple values in string form
-              const n =
-                key === 'Age' ? createNumberList(result[key]) : [result[key]];
-              if (n.find(x => inRange(x, filter.filterModal)) === undefined)
-                isFiltered = true;
-            }
-            // text filter
-            else if (filter.filterModal !== '' && !isFiltered) {
-              // excact match if filter is based on API options
-              const isMatch = this.textFilter(result[key], filter.filterModal);
-              isFiltered = filter.filterModal !== '' && !isMatch;
-            }
-          }
-          return !isFiltered;
-        });
-        this.$emit('updateProjectTableHead');
-        const multisortData = data =>
-          _.orderBy(data, this.columnSortersArray, this.ordersArray);
-        const filteredSortedData = multisortData(filtered);
-        return filteredSortedData;
-      },
-      resultsDisplayed() {
-        const displayed = [];
-        for (const filter of this.filters) {
-          if (filter.is_displayed) displayed.push(filter.column);
-        }
-        const logMedianKeys = [];
-        for (const key of Object.keys(this.filteredSortedData[0])) {
-          if (key.startsWith('LogMedian_')) {
-            logMedianKeys.push(key);
-          }
-        }
-        const resultsDisplayed = [];
-        for (const item of this.filteredSortedData) {
-          const filtered = Object.keys(item)
-            .filter(itemKey => displayed.includes(itemKey))
-            .reduce((resultDisplayed, itemKey) => {
-              if (itemKey === 'LogMedian') {
-                for (const logMediankey of logMedianKeys) {
-                  resultDisplayed[logMediankey] = item[logMediankey];
-                }
-              } else if (itemKey === 'alias') {
-                try {
-                  resultDisplayed[itemKey] = JSON.parse(item[itemKey]).join(
-                    ', '
-                  );
-                } catch {
-                  resultDisplayed[itemKey] = item[itemKey].replaceAll('"', '');
-                }
-              } else resultDisplayed[itemKey] = item[itemKey];
-              return resultDisplayed;
-            }, {});
-          resultsDisplayed.push(filtered);
-        }
-        this.$emit('setProjectResultsView', resultsDisplayed);
-        return resultsDisplayed;
-      },
       pageItems() {
         return this.filteredSortedData.slice(
           this.paginationObject.offset,
