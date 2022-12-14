@@ -76,6 +76,7 @@
       :columns-array="columnsArray"
       :column-sorters-array="columnSortersArray"
       :orders-array="ordersArray"
+      :results-with-combined-medians="resultsWithCombinedMedians"
       @activeSort="setProjectSortColumn"
       @setProjectResultsView="setProjectResultsView"
     />
@@ -258,6 +259,7 @@
     },
     computed: {
       ...mapGetters({
+        projectResults: 'get_project_results',
         projectResultsAll: 'get_project_results_all',
         projectFilters: 'project_filters',
         activeSpecie: 'active_specie',
@@ -313,6 +315,32 @@
           arr.push(sorter);
         }
         return arr;
+      },
+      resultsWithCombinedMedians() {
+        const medianArraysObj = {};
+        for (const item of Object.values(this.items)) {
+          const symbolOrDescription = info => info.symbol || info.Description;
+          medianArraysObj[`LogMedian_${symbolOrDescription(item.info)}`] =
+            item.medianData;
+        }
+        const combinedLogMediansArray = [];
+        for (
+          let i = 0;
+          i < this.projectResultsAll[this.selectedItem.id].length;
+          i++
+        ) {
+          const combinedLogMediansObj = {};
+          for (const [key, mediansArr] of Object.entries(medianArraysObj)) {
+            combinedLogMediansObj[key] = mediansArr[i];
+          }
+          combinedLogMediansArray.push(combinedLogMediansObj);
+        }
+        const copy = { ...this.projectResultsAll[this.selectedItem.id] };
+        const resultsWithCombinedMedians = [];
+        for (const [i, item] of combinedLogMediansArray.entries()) {
+          resultsWithCombinedMedians.push(_.merge(copy[i], item));
+        }
+        return resultsWithCombinedMedians;
       },
     },
     created() {

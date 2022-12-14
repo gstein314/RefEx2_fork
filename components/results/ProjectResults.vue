@@ -155,6 +155,10 @@
         type: Array,
         default: () => [],
       },
+      resultsWithCombinedMedians: {
+        type: Array,
+        default: () => [],
+      },
     },
 
     computed: {
@@ -171,7 +175,7 @@
         activeSpecie: 'active_specie',
       }),
       filteredData() {
-        const copy = [...this.projectResults];
+        const copy = [...this.resultsWithCombinedMedians];
         const filtered = copy.filter(result => {
           let isFiltered = false;
           for (const filter of this.filters) {
