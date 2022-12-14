@@ -217,21 +217,31 @@
         for (const filter of this.filters) {
           if (filter.is_displayed) displayed.push(filter.column);
         }
+        const logMedianKeys = [];
+        for (const key of Object.keys(this.filteredSortedData[0])) {
+          if (key.startsWith('LogMedian_')) {
+            logMedianKeys.push(key);
+          }
+        }
         const resultsDisplayed = [];
         for (const item of this.filteredSortedData) {
           const filtered = Object.keys(item)
-            .filter(key => displayed.includes(key))
-            .reduce((obj, key) => {
-              if (key === 'LogMedian') {
-                obj[key] = item[key];
-              } else if (key === 'alias') {
-                try {
-                  obj[key] = JSON.parse(item[key]).join(', ');
-                } catch {
-                  obj[key] = item[key].replaceAll('"', '');
+            .filter(itemKey => displayed.includes(itemKey))
+            .reduce((resultDisplayed, itemKey) => {
+              if (itemKey === 'LogMedian') {
+                for (const logMediankey of logMedianKeys) {
+                  resultDisplayed[logMediankey] = item[logMediankey];
                 }
-              } else obj[key] = item[key];
-              return obj;
+              } else if (itemKey === 'alias') {
+                try {
+                  resultDisplayed[itemKey] = JSON.parse(item[itemKey]).join(
+                    ', '
+                  );
+                } catch {
+                  resultDisplayed[itemKey] = item[itemKey].replaceAll('"', '');
+                }
+              } else resultDisplayed[itemKey] = item[itemKey];
+              return resultDisplayed;
             }, {});
           resultsDisplayed.push(filtered);
         }
