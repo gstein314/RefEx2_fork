@@ -67,12 +67,12 @@
           <b>{{ (1 + (currentPage - 1) * currentLimit).toLocaleString() }}</b>
           -
           <b>{{
-            currentPage * currentLimit > projectResultsView.length
-              ? projectResultsView.length.toLocaleString()
+            currentPage * currentLimit > resultsDisplayed.length
+              ? resultsDisplayed.length.toLocaleString()
               : (currentPage * currentLimit).toLocaleString()
           }}</b>
           of
-          {{ projectResultsView.length.toLocaleString() }}
+          {{ resultsDisplayed.length.toLocaleString() }}
         </div>
         <div class="display_pagination">
           <label for="pagination">Show</label>
@@ -104,7 +104,7 @@
         type: Number,
         default: 1,
       },
-      projectResultsView: {
+      resultsDisplayed: {
         type: Array,
         default: () => [],
       },

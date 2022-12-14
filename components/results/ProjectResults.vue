@@ -208,7 +208,6 @@
         setFilterModal: 'set_filter_modal',
         setActiveDataset: 'set_active_dataset',
         setProjectPagesNumber: 'set_project_pages_number',
-        setProjectResultsView: 'set_project_results_view',
       }),
       tooltipData(items, itemNum) {
         const statData = {};
@@ -256,14 +255,6 @@
       },
       hasStringQuotes(str) {
         return str?.startsWith('"') && str?.endsWith('"');
-      },
-      isAliasArray(result, filter) {
-        if (filter.column !== 'alias') return;
-        try {
-          return Array.isArray(JSON.parse(result[filter.column]));
-        } catch {
-          return false;
-        }
       },
     },
   };

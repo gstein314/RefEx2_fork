@@ -39,7 +39,7 @@
           <div class="align_left">
             <DownloadButton
               ref="downloadButton"
-              :download-data="projectResultsView"
+              :download-data="resultsDisplayed"
               :file-name="tsvTitle"
               :fields-array="projectTableHead"
             />
@@ -80,7 +80,7 @@
     />
     <ResultsPagination
       :pages-number="$store.state.project_pages_number"
-      :project-results-view="projectResultsView"
+      :results-displayed="resultsDisplayed"
       table-type="project"
       class="pagination"
     />
@@ -250,10 +250,8 @@
         isDisplaySettingsOn: false,
         heightChartWrapper: 200,
         projectTableHead: [],
-        projectResultsView: [],
         columnsArray: [],
         ordersArray: [],
-        comparisonLogMedians: [],
       };
     },
     computed: {
@@ -379,7 +377,6 @@
         const multisortData = data =>
           _.orderBy(data, this.columnSortersArray, this.ordersArray);
         const filteredSortedData = multisortData(filtered);
-        console.log(filteredSortedData);
         return filteredSortedData;
       },
       resultsDisplayed() {
@@ -388,7 +385,7 @@
           if (filter.is_displayed) displayed.push(filter.column);
         }
         const logMedianKeys = [];
-        for (const key of Object.keys(this.filteredSortedData[0])) {
+        for (const key of Object.keys(this.resultsWithCombinedMedians[0])) {
           if (key.startsWith('LogMedian_')) {
             logMedianKeys.push(key);
           }
@@ -415,7 +412,6 @@
             }, {});
           resultsDisplayed.push(filtered);
         }
-        this.setProjectResultsView(resultsDisplayed);
         return resultsDisplayed;
       },
     },
@@ -499,10 +495,6 @@
       clearSortArray() {
         this.columnsArray = [];
         this.ordersArray = [];
-      },
-      setProjectResultsView(arr) {
-        console.log('set');
-        this.projectResultsView = arr;
       },
       updateProjectTableHead() {
         const arr = [];
