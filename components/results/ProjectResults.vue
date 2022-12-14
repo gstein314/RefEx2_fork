@@ -174,7 +174,7 @@
         activeDataset: 'active_dataset',
         activeSpecie: 'active_specie',
       }),
-      filteredData() {
+      filteredSortedData() {
         const copy = [...this.resultsWithCombinedMedians];
         const filtered = copy.filter(result => {
           let isFiltered = false;
@@ -206,20 +206,47 @@
           }
           return !isFiltered;
         });
-        const dataFilteredSorted = this.multisortData(filtered);
-        this.$emit('setProjectResultsView', this.getResultsOnScreen(filtered));
         this.$emit('updateProjectTableHead');
-        return dataFilteredSorted;
+        const multisortData = data =>
+          _.orderBy(data, this.columnSortersArray, this.ordersArray);
+        const filteredSortedData = multisortData(filtered);
+        return filteredSortedData;
+      },
+      resultsDisplayed() {
+        const displayed = [];
+        for (const filter of this.filters) {
+          if (filter.is_displayed) displayed.push(filter.column);
+        }
+        const resultsDisplayed = [];
+        for (const item of this.filteredSortedData) {
+          const filtered = Object.keys(item)
+            .filter(key => displayed.includes(key))
+            .reduce((obj, key) => {
+              if (key === 'LogMedian') {
+                obj[key] = item[key];
+              } else if (key === 'alias') {
+                try {
+                  obj[key] = JSON.parse(item[key]).join(', ');
+                } catch {
+                  obj[key] = item[key].replaceAll('"', '');
+                }
+              } else obj[key] = item[key];
+              return obj;
+            }, {});
+          resultsDisplayed.push(filtered);
+        }
+        this.$emit('setProjectResultsView', resultsDisplayed);
+        return resultsDisplayed;
       },
       pageItems() {
-        return this.filteredData.slice(
+        return this.filteredSortedData.slice(
           this.paginationObject.offset,
           this.paginationObject.offset + this.paginationObject.limit
         );
       },
       pagesNumber() {
         let pagesNumber = Math.ceil(
-          this.filteredData.length / this.paginationObject.limit
+          this.filteredSortedData.length / this.paginationObject.limit
         );
         return pagesNumber;
       },
@@ -301,34 +328,6 @@
         } catch {
           return false;
         }
-      },
-      multisortData(data) {
-        return _.orderBy(data, this.columnSortersArray, this.ordersArray);
-      },
-      getResultsOnScreen(filteredData) {
-        const displayed = [];
-        for (const filter of this.filters) {
-          if (filter.is_displayed) displayed.push(filter.column);
-        }
-        const resultsOnScreen = [];
-        for (const item of filteredData) {
-          const filtered = Object.keys(item)
-            .filter(key => displayed.includes(key))
-            .reduce((obj, key) => {
-              if (key === 'LogMedian') {
-                obj[key] = item[key];
-              } else if (key === 'alias') {
-                try {
-                  obj[key] = JSON.parse(item[key]).join(', ');
-                } catch {
-                  obj[key] = item[key].replaceAll('"', '');
-                }
-              } else obj[key] = item[key];
-              return obj;
-            }, {});
-          resultsOnScreen.push(filtered);
-        }
-        return resultsOnScreen;
       },
     },
   };
