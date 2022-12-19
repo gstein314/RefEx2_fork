@@ -343,6 +343,16 @@
         const inRange = (x, [min, max]) => {
           return typeof x !== 'number' || (x - min) * (x - max) <= 0;
         };
+        const textFilter = (fullText, inputText) => {
+          const reg = new RegExp(inputText, 'gi');
+          const isMatch = reg.test(fullText);
+          if (inputText.length > 0 && isMatch) return fullText.replaceAll(reg);
+        };
+        const createNumberList = str =>
+          str
+            .replace('-', ',')
+            .split(',')
+            .map(x => parseInt(x) || 'out of filter bounds');
         const filtered = copy.filter(result => {
           let isFiltered = false;
           for (const filter of this.projectFilters) {
@@ -367,7 +377,7 @@
             // text filter
             else if (filter.filterModal !== '' && !isFiltered) {
               // excact match if filter is based on API options
-              const isMatch = this.textFilter(result[key], filter.filterModal);
+              const isMatch = textFilter(result[key], filter.filterModal);
               isFiltered = filter.filterModal !== '' && !isMatch;
             }
           }
