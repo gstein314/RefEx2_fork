@@ -22,12 +22,8 @@
           <font-awesome-icon :icon="sortIcon" :flip="sortOrder" />
         </div>
       </div>
-      <div class="header_btn search">
-        <font-awesome-icon
-          icon="search"
-          :class="{ active: isActiveSearch }"
-          @click="setFilterModal(id)"
-        />
+      <div class="header_btn search" @click="setFilterModal(id)">
+        <font-awesome-icon icon="search" :class="{ active: isActiveSearch }" />
       </div>
     </div>
   </div>
@@ -150,11 +146,11 @@
       display: flex
       margin-left: -10px
       .header_btn
+        border-radius: 0.2rem
         transition: background-color 0.3s ease-in-out
         &:hover
           cursor: pointer
           background-color: rgba($MAIN_COLOR, .2)
-          border-radius: 0.2rem
         &.sort, &.search
           display: flex
           align-items: center
