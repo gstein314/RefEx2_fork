@@ -8,9 +8,9 @@
       <p class="modal_title">
         <font-awesome-icon icon="search" />
         {{ filterObj.label }}
-        <span :class="{ tag: filterObj.is_ontology }">{{
-          filterObj.note
-        }}</span>
+        <span :class="{ tag: filterObj.is_ontology }"
+          >&nbsp;{{ filterObj.note }}</span
+        >
         <span v-if="filterObj.options" class="modal_btns">
           <button
             class="sub all_btn"
