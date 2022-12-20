@@ -40,7 +40,6 @@ export default {
   plugins: [
     { src: '~/plugins/vue-tags-input', ssr: false },
     { src: '@/plugins/plugin', mode: 'client' },
-    { src: '@/plugins/vue-json-to-csv.js' },
     '~/plugins/mixin.js',
     '~/plugins/fontawesome.js',
   ],

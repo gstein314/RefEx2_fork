@@ -41,6 +41,11 @@
   ::v-deep
     .vue-tags-input
       max-width: initial !important
+      &.hide_caret
+        input
+          caret-color: transparent
+          color: transparent
+          cursor: default
       > .ti-autocomplete
         max-height: 252px
         overflow: auto
