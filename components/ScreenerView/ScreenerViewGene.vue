@@ -117,6 +117,13 @@
       <div class="filter_specificity_ROKU">
         <table>
           <tr>
+            <td class="check">
+              <input
+                type="checkbox"
+                :checked="isAllChecked_ROKU"
+                @click="toggleAllSpecificityROKU()"
+              />
+            </td>
             <td class="group">Group</td>
             <td class="sample">Sample</td>
             <td class="horl">High or Low</td>
@@ -131,6 +138,13 @@
             </td>
           </tr>
           <tr v-for="(val, index) in specificityROKU" :key="val.id">
+            <td>
+              <input
+                v-model="val.check"
+                type="checkbox"
+                @click="addSpecificityROKU(index)"
+              />
+            </td>
             <td>
               <input
                 v-model="val.group"
@@ -173,21 +187,13 @@
             </td>
             <td class="icon">
               <button
-                class="check_btn"
-                :class="{ disabled: !val.check }"
-                @click="addSpecificityROKU(index)"
-              >
-                <font-awesome-icon icon="check" />
-              </button>
-            </td>
-            <td class="icon">
-              <button
                 class="delete_btn"
                 :class="{ disabled: !val.delete }"
                 :disabled="!val.delete"
                 @click="delSpecificityROKU(index)"
               >
                 <font-awesome-icon icon="trash" />
+                Delete
               </button>
             </td>
           </tr>
@@ -201,6 +207,13 @@
       <div class="filter_specificity_tau">
         <table>
           <tr>
+            <td class="check">
+              <input
+                type="checkbox"
+                :checked="isAllChecked_Tau"
+                @click="toggleAllSpecificityTau()"
+              />
+            </td>
             <td class="group">Group</td>
             <td class="cutoff">Cutoff</td>
             <td class="condition">Condition</td>
@@ -209,6 +222,13 @@
             </td>
           </tr>
           <tr v-for="(val, index) in specificityTau" :key="val.id">
+            <td>
+              <input
+                v-model="val.check"
+                type="checkbox"
+                @click="addSpecificityTau(index)"
+              />
+            </td>
             <td>
               <input
                 v-model="val.group"
@@ -235,21 +255,13 @@
             </td>
             <td class="icon">
               <button
-                class="check_btn"
-                :class="{ disabled: !val.check }"
-                @click="addSpecificityTau(index)"
-              >
-                <font-awesome-icon icon="check" />
-              </button>
-            </td>
-            <td class="icon">
-              <button
                 class="delete_btn"
                 :class="{ disabled: !val.delete }"
                 :disabled="!val.delete"
                 @click="delSpecificityTau(index)"
               >
                 <font-awesome-icon icon="trash" />
+                Delete
               </button>
             </td>
           </tr>
@@ -307,6 +319,8 @@
             delete: false,
           },
         ],
+        isAllChecked_ROKU: false,
+        isAllChecked_Tau: false,
       };
     },
     computed: {
@@ -402,6 +416,30 @@
       },
       addSpecificityROKU(index) {
         this.specificityROKU[index].check = !this.specificityROKU[index].check;
+      },
+      toggleAllSpecificityROKU() {
+        this.isAllChecked_ROKU = !this.isAllChecked_ROKU;
+        if (this.isAllChecked_ROKU) {
+          for (const index in this.specificityROKU) {
+            this.specificityROKU[index].check = true;
+          }
+        } else {
+          for (const index in this.specificityROKU) {
+            this.specificityROKU[index].check = false;
+          }
+        }
+      },
+      toggleAllSpecificityTau() {
+        this.isAllChecked_Tau = !this.isAllChecked_Tau;
+        if (this.isAllChecked_Tau) {
+          for (const index in this.specificityTau) {
+            this.specificityTau[index].check = true;
+          }
+        } else {
+          for (const index in this.specificityTau) {
+            this.specificityTau[index].check = false;
+          }
+        }
       },
       delSpecificityROKU(index) {
         this.specificityROKU.splice(index, 1);
@@ -504,38 +542,35 @@
         &:after
           content: none
 
-    .filter_specificity_ROKU
+    .filter_specificity_ROKU, .filter_specificity_tau
       > table
         > tr
           > td
             font-size: 12px
-            > .check_btn, .delete_btn
+            > input[type="checkbox"]
+              cursor: pointer
+            > .delete_btn
               +button
-              padding: 16px 22px
-            > .check_btn
+              align-items: initial
+              padding: 13.5px 22px
               cursor: pointer !important
           > .delete_all
             color: $MAIN_COLOR
             cursor: pointer
+          > .check
+            width: 5%
+    .filter_specificity_ROKU
+      > table
+        > tr
           > .icon
             text-align: center
           > .group, .sample
             width: 30%
           > .horl, .entropy
-            width: 15%
+            width: 10%
     .filter_specificity_tau
       > table
         > tr
-          > td
-            font-size: 12px
-            > .check_btn, .delete_btn
-              +button
-              padding: 16px 22px
-            > .check_btn
-              cursor: pointer !important
-          > .delete_all
-            color: $MAIN_COLOR
-            cursor: pointer
           > .icon
             text-align: center
           > .group
