@@ -138,7 +138,7 @@
             </td>
           </tr>
           <tr v-for="(val, index) in specificityROKU" :key="val.id">
-            <td>
+            <td class="check">
               <input
                 v-model="val.check"
                 type="checkbox"
@@ -222,7 +222,7 @@
             </td>
           </tr>
           <tr v-for="(val, index) in specificityTau" :key="val.id">
-            <td>
+            <td class="check">
               <input
                 v-model="val.check"
                 type="checkbox"
@@ -558,7 +558,7 @@
             color: $MAIN_COLOR
             cursor: pointer
           > .check
-            width: 5%
+            padding-right: 5px
     .filter_specificity_ROKU
       > table
         > tr
@@ -566,7 +566,9 @@
             text-align: center
           > .group, .sample
             width: 30%
-          > .horl, .entropy
+          > .horl
+            width: 15%
+          > .entropy
             width: 10%
     .filter_specificity_tau
       > table
