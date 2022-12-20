@@ -73,7 +73,7 @@
             >
               {{
                 values.length === filterObj.options.length
-                  ? 'all'
+                  ? 'All'
                   : values.length
               }}
               options selected
