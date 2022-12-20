@@ -52,19 +52,19 @@
     </div>
     <div class="wrapper_item_right">
       <div class="showing_page">
-        <div v-if="tableType === 'index'">
+        <div>
           <b>{{ firstItemOrderInCurrentPage }}</b>
           -
-          <b>{{ lastItemOrderInCurrentPage(resultsNum) }}</b>
-          of
-          {{ resultsNum.toLocaleString() }}
-        </div>
-        <div v-else-if="tableType === 'project'">
-          <b>{{ firstItemOrderInCurrentPage }}</b>
-          -
-          <b>{{ lastItemOrderInCurrentPage(resultsDisplayed.length) }}</b>
-          of
-          {{ resultsDisplayed.length.toLocaleString() }}
+          <template v-if="tableType === 'index'">
+            <b>{{ lastItemOrderInCurrentPage(resultsNum) }}</b>
+            of
+            {{ resultsNum.toLocaleString() }}
+          </template>
+          <template v-else-if="tableType === 'project'">
+            <b>{{ lastItemOrderInCurrentPage(resultsDisplayed.length) }}</b>
+            of
+            {{ resultsDisplayed.length.toLocaleString() }}
+          </template>
         </div>
         <div class="display_pagination">
           <label for="pagination">Show</label>
