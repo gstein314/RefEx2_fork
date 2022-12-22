@@ -102,7 +102,7 @@
             </a>
             <span
               v-else-if="isArrayLikeString(result[filter.column])"
-              :key="value_index"
+              :key="index"
             >
               {{ JSON.parse(result[filter.column]).join(', ') }}
             </span>
