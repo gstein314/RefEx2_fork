@@ -2,27 +2,29 @@
   <div class="wrapper">
     <p v-if="isError" class="error">
       <font-awesome-icon icon="exclamation-triangle" />
-      An error has occured while fecthing the data. Please check wheter the URL
+      An error has occured while fetching the data. Please check wheter the URL
       contains the correct information.
     </p>
     <div v-else ref="chartWrapper" class="chart_wrapper">
       <div class="content">
         <h1 class="header_title">
-          <font-awesome-icon
-            v-if="filterType === 'gene'"
-            icon="info-circle"
-            @click="setGeneModal(items[0].id)"
-          />
-          <span class="title">
-            {{
-              infoForMainItem.symbol ||
-              infoForMainItem.Description ||
-              infoForMainItem.name
-            }}
-            <span v-if="filterType === 'gene'" class="metadata">{{
-              `(${infoForMainItem.name}, Gene ID: ${infoForMainItem.id})`
-            }}</span>
-          </span>
+          <div class="title">
+            <span>
+              {{
+                infoForMainItem.symbol ||
+                infoForMainItem.Description ||
+                infoForMainItem.name
+              }}
+            </span>
+            <font-awesome-icon
+              v-if="filterType === 'gene'"
+              icon="info-circle"
+              @click="setGeneModal(items[0].id)"
+            />
+          </div>
+          <span v-if="filterType === 'gene'" class="metadata">{{
+            `(${infoForMainItem.name}, Gene ID: ${infoForMainItem.id})`
+          }}</span>
         </h1>
         <item-comparison
           :items="items"
@@ -35,30 +37,23 @@
         </item-comparison>
         <div class="results_title_wrapper">
           <div class="align_left">
-            <vue-json-to-csv
-              :json-data="projectResultsView"
-              :csv-title="csvTitle"
-              :labels="projectTableHeading"
-            >
-              <button class="icon_on_left">
-                <font-awesome-icon icon="arrow-down-to-line" />Download .csv
-              </button>
-            </vue-json-to-csv>
-            <ComparisonButton />
+            <DownloadButton
+              ref="downloadButton"
+              :download-data="resultsDisplayed"
+              :file-name="tsvTitle"
+              :fields-array="projectTableHead"
+            />
+            <ComparisonButton v-if="filterType === 'gene'" />
           </div>
           <div class="align_right">
-            <a
-              v-if="isNoSort"
-              class="icon_on_left reset_sort"
-              @click="clearSortArray"
-            >
+            <button class="reset_btn" :class="isNoSort" @click="clearSortArray">
               <font-awesome-icon icon="xmark" />
               Reset sorting column(s)
-            </a>
-            <a class="icon_on_left" @click="toggleDisplaySettings">
+            </button>
+            <button class="show_all_btn" @click="toggleDisplaySettings">
               <font-awesome-icon icon="eye" />
               Show/hide columns
-            </a>
+            </button>
           </div>
         </div>
       </div>
@@ -66,7 +61,6 @@
     <ModalViewDisplay
       v-if="isDisplaySettingsOn"
       @click.native="toggleDisplaySettings"
-      @updateProjectTableHeading="updateProjectTableHeading"
     />
     <ModalViewFilter />
     <ModalViewGene />
@@ -78,13 +72,15 @@
       :gene-id-key="geneIdKey"
       :dataset="dataset"
       :selected-item="selectedId"
-      :project-sort-columns="projectSortColumns"
-      :csv-table-stat-title="csvTableStatTitle"
+      :columns-array="columnsArray"
+      :column-sorters-array="columnSortersArray"
+      :orders-array="ordersArray"
+      :filtered-sorted-data="filteredSortedData"
       @activeSort="setProjectSortColumn"
-      @setProjectResultsView="setProjectResultsView"
     />
     <ResultsPagination
       :pages-number="$store.state.project_pages_number"
+      :results-displayed="resultsDisplayed"
       table-type="project"
       class="pagination"
     />
@@ -101,6 +97,8 @@
   import ModalViewFilter from '~/components/ModalView/ModalViewFilter.vue';
   import ProjectResults from '~/components/results/ProjectResults.vue';
   import ResultsPagination from '~/components/results/ResultsPagination.vue';
+  import DownloadButton from '~/components/DownloadButton.vue';
+  import _ from 'lodash';
 
   const logMedianFilter = {
     column: 'LogMedian',
@@ -145,35 +143,44 @@
             isError = true;
           }
           resultsAll[id] = data.refex_info.map((result, index) => {
-            // create number type keys for "ncbiGeneId" and "chromosomePosition" before sorting
-            const toNum = str => {
-              const num = parseInt(str);
-              return Number.isNaN(num) ? str : num;
-            };
-            result.ncbiGeneIdInt = toNum(result.ncbiGeneId);
-            const chrToNum = str => {
+            const createNumberSorter = str => {
               if (str === undefined) return;
-              let chr = toNum(str);
-              if (typeof chr === 'string') {
-                chr.toUpperCase();
-                switch (chr) {
-                  case 'MT':
-                    chr = 23;
-                    break;
+              const toNum = str => {
+                const numOrStr = parseInt(str);
+                return Number.isNaN(numOrStr) ? str : numOrStr;
+              };
+              let order = toNum(str);
+              if (typeof order === 'string') {
+                order.toUpperCase();
+                switch (order) {
                   case 'X':
-                    chr = 24;
+                    order = 23;
                     break;
                   case 'Y':
-                    chr = 25;
+                    order = 24;
+                    break;
+                  case 'MT':
+                    order = 25;
                     break;
                   case '-':
-                    chr = 26;
+                    order = 26;
                     break;
                 }
               }
-              return chr;
+              return order;
             };
-            result.chromosomePositionInt = chrToNum(result.chromosomePosition);
+            result.chromosomePositionInt = createNumberSorter(
+              result.chromosomePosition
+            );
+            if (
+              result.alias &&
+              result.alias.startsWith('"') &&
+              result.alias.endsWith('"')
+            ) {
+              result.alias = result.alias.replaceAll('"', '');
+            } else if (result.alias && result.alias.startsWith('[')) {
+              result.alias = JSON.parse(result.alias).join(', ');
+            }
             return {
               ...result,
               itemNum: index,
@@ -242,24 +249,19 @@
         optionsStaticData: {},
         isDisplaySettingsOn: false,
         heightChartWrapper: 200,
-        projectSortColumns: [[], []],
-        projectTableHeading: {},
-        projectResultsView: [],
-        csvTableStatTitle: {
-          LogMin: 'Min',
-          Log1stQu: '1stQu',
-          LogMedian: 'Median (log2(TPM+1))',
-          Log3rdQu: '3rdQu',
-          LogMax: 'Max',
-          LogSd: 'SD',
-          NumberOfSamples: 'No. of samples',
-        },
+        projectTableHead: [],
+        columnsArray: [],
+        ordersArray: [],
       };
     },
     computed: {
       ...mapGetters({
+        projectResults: 'get_project_results',
         projectResultsAll: 'get_project_results_all',
         projectFilters: 'project_filters',
+        activeSpecie: 'active_specie',
+        activeDataset: 'active_dataset',
+        activeFilter: 'active_filter',
       }),
       projectItems() {
         return {
@@ -279,23 +281,148 @@
         return this.items.find(item => item.id === this.selectedId);
       },
       isNoSort() {
-        return this.projectSortColumns[0].length === 0 ? false : true;
+        return this.columnsArray.length === 0 ? 'disabled' : '';
       },
-      csvTitle() {
+      tsvTitle() {
         let today = new Date();
         let dd = String(today.getDate()).padStart(2, '0');
         let mm = String(today.getMonth() + 1).padStart(2, '0');
-        let yy = today.getFullYear() % 100;
-        today = yy + mm + dd;
-
-        if (this.selectedItem.info.symbol !== undefined) {
-          return `${this.selectedItem.info.symbol}_${today}`;
-        } else return `${this.selectedItem.info.sample_id}_${today}`;
+        let yyyy = today.getFullYear();
+        today = yyyy + mm + dd;
+        return `RefEx2_${this.activeSpecie.species}_${this.activeDataset.dataset}_${this.filterType}_comparison_${today}.tsv`;
       },
       roundDownClientHeight() {
         return Math.floor(
           this.$refs.chartWrapper.getBoundingClientRect().height
         );
+      },
+      projectSortColumns() {
+        return [this.columnsArray, this.ordersArray];
+      },
+      columnSortersArray() {
+        const arr = [];
+        for (const column of this.columnsArray) {
+          const sorter = data =>
+            column === 'ncbiGeneId'
+              ? parseInt(data[column], 10)
+              : typeof data[column] === 'string'
+              ? data[column].toLowerCase()
+              : data[column];
+          arr.push(sorter);
+        }
+        return arr;
+      },
+      resultsWithCombinedMedians() {
+        const medianArraysObj = {};
+        for (const item of Object.values(this.items)) {
+          const symbolOrDescription = info => info.symbol || info.Description;
+          medianArraysObj[`LogMedian_${symbolOrDescription(item.info)}`] =
+            item.medianData;
+        }
+        const combinedLogMediansArray = [];
+        for (
+          let i = 0;
+          i < this.projectResultsAll[this.selectedItem.id].length;
+          i++
+        ) {
+          const combinedLogMediansObj = {};
+          for (const [key, mediansArr] of Object.entries(medianArraysObj)) {
+            combinedLogMediansObj[key] = mediansArr[i];
+          }
+          combinedLogMediansArray.push(combinedLogMediansObj);
+        }
+        const copy = { ...this.projectResultsAll[this.selectedItem.id] };
+        const resultsWithCombinedMedians = [];
+        for (const [i, item] of combinedLogMediansArray.entries()) {
+          resultsWithCombinedMedians.push(_.merge(copy[i], item));
+        }
+        return resultsWithCombinedMedians;
+      },
+      filteredSortedData() {
+        const copy = [...this.resultsWithCombinedMedians];
+        const inRange = (x, [min, max]) => {
+          return typeof x !== 'number' || (x - min) * (x - max) <= 0;
+        };
+        const textFilter = (fullText, inputText) => {
+          const reg = new RegExp(inputText, 'gi');
+          const isMatch = reg.test(fullText);
+          if (inputText.length > 0 && isMatch) return fullText.replaceAll(reg);
+        };
+        const createNumberList = str =>
+          str
+            .replace('-', ',')
+            .split(',')
+            .map(x => parseInt(x) || 'out of filter bounds');
+        const filtered = copy.filter(result => {
+          let isFiltered = false;
+          for (const filter of this.projectFilters) {
+            const key = filter.column;
+
+            if (!filter.is_displayed) continue;
+            // options filter
+            else if (filter.options) {
+              if (!filter.filterModal.includes(result[key])) isFiltered = true;
+            }
+            // number filter
+            else if (
+              typeof filter.filterModal === 'number' ||
+              Array.isArray(filter.filterModal)
+            ) {
+              // checks if all values are in range. Creates a list in case of Age due to multiple values in string form
+              const n =
+                key === 'Age' ? createNumberList(result[key]) : [result[key]];
+              if (n.find(x => inRange(x, filter.filterModal)) === undefined)
+                isFiltered = true;
+            }
+            // text filter
+            else if (filter.filterModal !== '' && !isFiltered) {
+              // excact match if filter is based on API options
+              const isMatch = textFilter(result[key], filter.filterModal);
+              isFiltered = filter.filterModal !== '' && !isMatch;
+            }
+          }
+          return !isFiltered;
+        });
+        this.updateProjectTableHead();
+        const multisortData = data =>
+          _.orderBy(data, this.columnSortersArray, this.ordersArray);
+        const filteredSortedData = multisortData(filtered);
+        return filteredSortedData;
+      },
+      resultsDisplayed() {
+        const displayed = [];
+        for (const filter of this.projectFilters) {
+          if (filter.is_displayed) displayed.push(filter.column);
+        }
+        const logMedianKeys = [];
+        for (const key of Object.keys(this.resultsWithCombinedMedians[0])) {
+          if (key.startsWith('LogMedian_')) {
+            logMedianKeys.push(key);
+          }
+        }
+        const resultsDisplayed = [];
+        for (const item of this.filteredSortedData) {
+          const filtered = Object.keys(item)
+            .filter(itemKey => displayed.includes(itemKey))
+            .reduce((resultDisplayed, itemKey) => {
+              if (itemKey === 'LogMedian') {
+                for (const logMediankey of logMedianKeys) {
+                  resultDisplayed[logMediankey] = item[logMediankey];
+                }
+              } else if (itemKey === 'alias') {
+                try {
+                  resultDisplayed[itemKey] = JSON.parse(item[itemKey]).join(
+                    ', '
+                  );
+                } catch {
+                  resultDisplayed[itemKey] = item[itemKey].replaceAll('"', '');
+                }
+              } else resultDisplayed[itemKey] = item[itemKey];
+              return resultDisplayed;
+            }, {});
+          resultsDisplayed.push(filtered);
+        }
+        return resultsDisplayed;
       },
     },
     created() {
@@ -313,7 +440,6 @@
         column: 'LogMedian',
         selectedItem: this.selectedId,
       });
-      this.updateProjectTableHeading();
     },
     updated() {
       this.heightChartWrapper = this.roundDownClientHeight;
@@ -360,50 +486,56 @@
         }
       },
       setProjectSortColumn({ column, selectedItem }) {
-        if (column === 'ncbiGeneId' || column === 'chromosomePosition') {
+        if (column === 'chromosomePosition') {
           column += 'Int';
         }
-        const columnsArray = this.projectSortColumns[0];
-        const ordersArray = this.projectSortColumns[1];
-        const columnIndex = columnsArray.indexOf(column);
+        const columnIndex = this.columnsArray.indexOf(column);
         if (columnIndex === -1) {
-          columnsArray.push(column);
-          ordersArray.push('desc');
+          this.columnsArray.unshift(column);
+          this.ordersArray.unshift('desc');
         } else if (column === 'LogMedian' && this.selectedId !== selectedItem) {
-          ordersArray.splice(columnIndex, 1, 'desc');
-        } else if (ordersArray[columnIndex] === 'desc') {
-          ordersArray.splice(columnIndex, 1, 'asc');
+          this.ordersArray.splice(columnIndex, 1, 'desc');
+        } else if (this.ordersArray[columnIndex] === 'desc') {
+          this.ordersArray.splice(columnIndex, 1, 'asc');
         } else {
-          columnsArray.splice(columnIndex, 1);
-          ordersArray.splice(columnIndex, 1);
+          this.columnsArray.splice(columnIndex, 1);
+          this.ordersArray.splice(columnIndex, 1);
         }
       },
       clearSortArray() {
-        this.projectSortColumns = [[], []];
+        this.columnsArray = [];
+        this.ordersArray = [];
       },
-      updateProjectTableHeading() {
-        const obj = {};
+      updateProjectTableHead() {
+        const arr = [];
         for (const filter of this.projectFilters) {
-          if (!filter.is_displayed) continue;
+          if (
+            !filter.is_displayed ||
+            filter.column === 'gene expression patterns'
+          )
+            continue;
+          const obj = {};
           if (filter.column === 'LogMedian') {
-            for (const item of Object.entries(this.csvTableStatTitle)) {
-              const [oldName, newName] = [item[0], item[1]];
-              const subObj = {};
-              subObj.title = newName;
-              obj[oldName] = subObj;
+            for (const oldHead of Object.keys(
+              this.resultsWithCombinedMedians[0]
+            )) {
+              if (oldHead.includes('LogMedian_')) {
+                const medianObj = {};
+                const newHead = oldHead
+                  .replace('LogMedian_', '')
+                  .concat('_Median (log2(TPM+1))');
+                medianObj[oldHead] = newHead;
+                arr.push(medianObj);
+              }
             }
-          } else {
-            const subObj = {};
-            if (filter.note) {
-              subObj.title = `${filter.label} (${filter.note})`;
-            } else subObj.title = filter.label;
-            obj[filter.column] = subObj;
+            continue;
           }
+          obj[filter.column] = filter.note
+            ? `${filter.label} (${filter.note})`
+            : filter.label;
+          arr.push(obj);
         }
-        this.projectTableHeading = obj;
-      },
-      setProjectResultsView(arr) {
-        this.projectResultsView = arr;
+        this.projectTableHead = arr;
       },
     },
   };
@@ -444,16 +576,17 @@
         min-width: fit-content
         width: 100%
         > .header_title
-          display: flex
           align-items: flex-start
           margin: 0
-          > .fa-circle-info
+          .fa-circle-info
             color: $MAIN_COLOR
             font-size: 24px
-            margin-right: 6px
-            margin-top: 4px
             &:hover
               cursor: pointer
+          > .title
+            display: flex
+            align-items: center
+            gap: 5px
           .metadata
             font-size: 20px
             display: block
@@ -468,38 +601,15 @@
             display: flex
             position: relative
             justify-content: flex-start
-            > [id^=json-to-csv]
-              display: flex
-              justify-content: flex-end
-              > button
-                +link_with_icon
-                padding: 0
-                border: none
-                background: none
-                margin-right: 20px
-                &.icon_on_left
-                  padding-left: 18px
-                  > svg
-                    font-size: 1.2rem
-                    top: 5px
-                    margin-right: 5px
+            gap: 10px
           > .align_right
             display: flex
             justify-content: flex-end
-            > a
-              +link_with_icon
-              place-self: none
-              > svg
-                &[data-icon="xmark"]
-                  font-size: 20px
-                  top: -1px
-                  left: -2px
-                &[data-icon="eye"]
-                  left: -6px
-            > a + a
-              margin-left: 20px
-            > .reset_sort
-              color: $ERROR_COLOR
+            align-self: end
+            gap: 10px
+            > .reset_btn, .show_all_btn
+              +button
+              +sub_button
     .pagination
       display: flex
       position: sticky

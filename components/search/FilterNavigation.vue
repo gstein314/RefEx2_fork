@@ -29,6 +29,8 @@
     },
     beforeCreate() {
       this.$store.commit('set_active_filter', 'gene');
+      this.$store.commit('set_project_results', '');
+      this.$store.commit('set_project_results_all', '');
     },
   };
 </script>

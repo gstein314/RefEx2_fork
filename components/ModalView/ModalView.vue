@@ -18,6 +18,8 @@
           display: flex
           position: relative
           align-items: center
+          > svg
+            margin-right: 5px
         > button
           +button
           display: inline-block

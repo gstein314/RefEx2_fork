@@ -10,10 +10,10 @@
         >{{ examples[0].label }}</span
       >
       <div class="display_settings_wrapper">
-        <a class="display_settings" @click="$emit('toggleDisplaySettings')">
+        <button class="show_all_btn" @click="$emit('toggleDisplaySettings')">
           <font-awesome-icon icon="eye" />
           Show/hide columns
-        </a>
+        </button>
       </div>
     </div>
 
@@ -62,7 +62,7 @@
           </td>
           <td v-if="filterType === 'sample'">
             <a
-              class="icon_on_left"
+              class="text_with_icon"
               @click="moveToProjectPage(result['refexSampleId'])"
             >
               <font-awesome-icon icon="flask" />
@@ -75,43 +75,36 @@
             :key="index"
             :class="filter.column.replaceAll(' ', '_')"
           >
-            <font-awesome-icon
-              v-if="filter.column === 'annotation'"
-              icon="info-circle"
-              @click.stop="setGeneModal(result.geneid)"
-            />
             <img
-              v-else-if="filter.column === 'gene expression patterns'"
+              v-if="filter.column === 'gene expression patterns'"
               :src="geneSummarySource(result.geneid)"
               :alt="result.geneid"
             />
             <a
               v-else-if="filter.column === 'symbol'"
-              class="icon_on_left"
+              class="text_with_icon"
               @click="moveToProjectPage(result['geneid'])"
-              ><font-awesome-icon icon="dna" />
+              ><font-awesome-icon class="left_icon" icon="dna" />
               {{ result[filter.column] }}
+              <font-awesome-icon
+                icon="info-circle"
+                @click.stop="setGeneModal(result.geneid)"
+              />
             </a>
             <a
               v-else-if="filter.column === 'geneid'"
-              class="icon_on_right"
+              class="text_with_icon"
               target="_blank"
               :href="datasetInfo.url_prefix + result.geneid"
-              ><font-awesome-icon icon="external-link-alt" />
+            >
               {{ result[filter.column] }}
+              <font-awesome-icon icon="external-link-alt" />
             </a>
             <span
-              v-for="(value, value_index) of JSON.parse(result[filter.column])"
-              v-else-if="isArray(result[filter.column])"
-              :key="value_index"
+              v-else-if="isArrayLikeString(result[filter.column])"
+              :key="index"
             >
-              {{ value }}
-              <span
-                v-if="
-                  value_index < JSON.parse(result[filter.column]).length - 1
-                "
-                >,</span
-              >
+              {{ JSON.parse(result[filter.column]).join(', ') }}
             </span>
             <template v-else-if="hasStringQuotes(result[filter.column])">
               {{ result[filter.column].replaceAll('"', '') }}
@@ -217,7 +210,7 @@
         this.$nuxt.$loading.start();
         this.$router.push(this.routeToProjectPage(route));
       },
-      isArray(str) {
+      isArrayLikeString(str) {
         return str?.startsWith('[');
       },
       hasStringQuotes(str) {
@@ -251,9 +244,10 @@
         min-width: 190px
       > .display_settings_wrapper
         +display_settings_wrapper
-      > button.show_all_btn
-        +button
-        margin-left: 18px
+        > .show_all_btn
+          +button
+          +sub_button
+          white-space: nowrap
     > table
       +table
       > tbody

@@ -13,7 +13,8 @@
               :id="filter.column"
               v-bind="filter"
               :class="filter.column"
-              :project-sort-columns="projectSortColumns"
+              :columns-array="columnsArray"
+              :orders-array="ordersArray"
               @activeSort="activeSort"
             >
             </table-header>
@@ -31,17 +32,22 @@
             >
               <a
                 v-if="filter.column === 'symbol'"
-                class="icon_on_left"
+                class="text_with_icon"
                 @click="
                   moveToProjectPage(result['ncbiGeneId' || 'ensemblGeneId'])
                 "
               >
-                <font-awesome-icon icon="dna" />
+                <font-awesome-icon class="left_icon" icon="dna" />
                 {{ result.symbol }}
+                <font-awesome-icon
+                  class="right_icon info"
+                  icon="info-circle"
+                  @click.stop="setGeneModal(result[geneIdKey])"
+                />
               </a>
               <a
                 v-else-if="filter.column === 'Description'"
-                class="icon_on_left"
+                class="text_with_icon"
                 @click="moveToProjectPage(result['RefexSampleId'])"
               >
                 <font-awesome-icon icon="flask" />
@@ -52,56 +58,36 @@
                 :items="items"
                 :stat-info="tooltipData(items, result.itemNum)"
               />
-              <font-awesome-icon
-                v-else-if="filter.column === 'annotation'"
-                icon="info-circle"
-                @click.stop="setGeneModal(result[geneIdKey])"
-              />
               <img
                 v-else-if="filter.column === 'gene expression patterns'"
                 :src="geneSummarySource(result[geneIdKey])"
                 :alt="result[geneIdKey]"
               />
-              <template v-else-if="isAliasArray(result, filter)">
-                <span
-                  v-for="(alias, alias_index) in JSON.parse(
-                    result[filter.column]
-                  )"
-                  :key="alias_index"
-                >
-                  <span>{{ alias }}</span>
-                  <span
-                    v-if="
-                      alias_index < JSON.parse(result[filter.column]).length - 1
-                    "
-                    class="comma"
-                    >,
-                  </span>
-                </span>
-              </template>
-
               <template v-else-if="hasStringQuotes(result[filter.column])">
                 {{ result[filter.column].replaceAll('"', '') }}
               </template>
               <a
                 v-else-if="filter.column === 'ncbiGeneId'"
-                class="icon_on_right"
+                class="text_with_icon"
                 target="_blank"
                 :href="datasetInfo.url_prefix + result.ncbiGeneId"
-                ><font-awesome-icon icon="external-link-alt" />
+              >
                 {{ result[filter.column] }}
+                <font-awesome-icon icon="external-link-alt" />
               </a>
               <a
                 v-else-if="filter.column === 'ensemblGeneId'"
-                class="icon_on_right"
+                class="text_with_icon"
                 target="_blank"
                 :href="datasetInfo.url_prefix + result.ensemblGeneId"
-                ><font-awesome-icon icon="external-link-alt" />
+              >
                 {{ result[filter.column] }}
+                <font-awesome-icon icon="external-link-alt" />
               </a>
               <template v-else>
                 {{ result[filter.column] }}
                 <span
+                  v-if="filter.column !== 'alias'"
                   @click="
                     setFilterSearchValue(result[filter.column]);
                     setFilterModal(filter.column);
@@ -121,16 +107,6 @@
   import TableHeader from '~/components/results/TableHeader.vue';
   import { mapGetters, mapMutations } from 'vuex';
   import specieSets from '~/refex-sample/datasets.json';
-  import _ from 'lodash';
-  const inRange = (x, [min, max]) => {
-    return typeof x !== 'number' || (x - min) * (x - max) <= 0;
-  };
-
-  const createNumberList = str =>
-    str
-      .replace('-', ',')
-      .split(',')
-      .map(x => parseInt(x) || 'out of filter bounds');
 
   export default {
     components: {
@@ -157,19 +133,27 @@
         type: Number,
         default: 200,
       },
-      projectSortColumns: {
+      columnsArray: {
         type: Array,
         default: () => [],
       },
-      csvTableStatTitle: {
-        type: Object,
-        default: () => {},
+      columnSortersArray: {
+        type: Array,
+        default: () => [],
+      },
+      ordersArray: {
+        type: Array,
+        default: () => [],
+      },
+      filteredSortedData: {
+        type: Array,
+        default: () => [],
       },
     },
 
     computed: {
       ...mapGetters({
-        results: 'get_project_results',
+        projectResults: 'get_project_results',
         projectItems: 'get_project_items',
         paginationObject: 'get_project_pagination',
         filters: 'project_filters',
@@ -180,83 +164,15 @@
         activeDataset: 'active_dataset',
         activeSpecie: 'active_specie',
       }),
-
-      filteredData() {
-        const copy = [...this.results];
-        const filtered = copy.filter(result => {
-          let isFiltered = false;
-          for (const filter of this.filters) {
-            const key = filter.column;
-
-            if (!filter.is_displayed) continue;
-            // options filter
-            else if (filter.options) {
-              if (!filter.filterModal.includes(result[key])) isFiltered = true;
-            }
-            // number filter
-            else if (
-              typeof filter.filterModal === 'number' ||
-              Array.isArray(filter.filterModal)
-            ) {
-              // checks if all values are in range. Creates a list in case of Age due to multiple values in string form
-              const n =
-                key === 'Age' ? createNumberList(result[key]) : [result[key]];
-              if (n.find(x => inRange(x, filter.filterModal)) === undefined)
-                isFiltered = true;
-            }
-            // text filter
-            else if (filter.filterModal !== '' && !isFiltered) {
-              // excact match if filter is based on API options
-              const isMatch = this.textFilter(result[key], filter.filterModal);
-              isFiltered = filter.filterModal !== '' && !isMatch;
-            }
-          }
-          return !isFiltered;
-        });
-        const withSort = _.orderBy(filtered, ...this.projectSortColumns);
-        const displayed = [];
-        for (const filter of this.filters) {
-          if (filter.is_displayed) displayed.push(filter.column);
-        }
-        const resultsOnScreen = [];
-
-        for (const item of withSort) {
-          const filtered = Object.keys(item)
-            .filter(key => displayed.includes(key))
-            .reduce((obj, key) => {
-              // add other statistic data if LogMedian is displayed
-              if (key === 'LogMedian') {
-                for (const key of Object.keys(this.csvTableStatTitle)) {
-                  obj[key] = item[key];
-                }
-              } else if (key === 'alias') {
-                // format alias data to avoid csv data conflict ("," problem)
-                try {
-                  obj[key] = JSON.parse(item[key]).join(' , ');
-                } catch {
-                  obj[key] = item[key].replaceAll('"', '');
-                }
-              } else obj[key] = item[key];
-              // add png url option in exported csv
-              obj['gene expression patterns'] = this.geneSummarySource(
-                item.ncbiGeneId
-              );
-              return obj;
-            }, {});
-          resultsOnScreen.push(filtered);
-        }
-        this.$emit('setProjectResultsView', resultsOnScreen);
-        return withSort;
-      },
       pageItems() {
-        return this.filteredData.slice(
+        return this.filteredSortedData.slice(
           this.paginationObject.offset,
           this.paginationObject.offset + this.paginationObject.limit
         );
       },
       pagesNumber() {
         let pagesNumber = Math.ceil(
-          this.filteredData.length / this.paginationObject.limit
+          this.filteredSortedData.length / this.paginationObject.limit
         );
         return pagesNumber;
       },
@@ -282,7 +198,6 @@
         setFilterModal: 'set_filter_modal',
         setActiveDataset: 'set_active_dataset',
         setProjectPagesNumber: 'set_project_pages_number',
-        setProjectResultsView: 'set_project_results_view',
       }),
       tooltipData(items, itemNum) {
         const statData = {};
@@ -316,11 +231,6 @@
           selectedItem: this.selectedItem,
         });
       },
-      textFilter(fullText, inputText) {
-        const reg = new RegExp(inputText, 'gi');
-        const isMatch = reg.test(fullText);
-        if (inputText.length > 0 && isMatch) return fullText.replaceAll(reg);
-      },
       setDataset() {
         if (this.dataset === 'humanFantom5') {
           this.setActiveDataset(specieSets[0].datasets[0]);
@@ -330,14 +240,6 @@
       },
       hasStringQuotes(str) {
         return str?.startsWith('"') && str?.endsWith('"');
-      },
-      isAliasArray(result, filter) {
-        if (filter.column !== 'alias') return;
-        try {
-          return Array.isArray(JSON.parse(result[filter.column]));
-        } catch {
-          return false;
-        }
       },
     },
   };
