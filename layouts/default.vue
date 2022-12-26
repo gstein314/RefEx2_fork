@@ -27,6 +27,9 @@
               <nuxt-link to="/about" class="category">About</nuxt-link>
             </li>
             <li>
+              <nuxt-link to="/datasets" class="category">Datasets</nuxt-link>
+            </li>
+            <li>
               <nuxt-link to="/help" class="category">Help</nuxt-link>
             </li>
           </ul>
