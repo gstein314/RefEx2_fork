@@ -43,10 +43,13 @@
     .vue-tags-input
       max-width: initial !important
       &.hide_caret
+        .ti-input
+          background-color: $DISABLE_COLOR
         input
           caret-color: transparent
           color: transparent
           cursor: default
+          background-color: $DISABLE_COLOR
       > .ti-autocomplete
         max-height: 252px
         overflow: auto
