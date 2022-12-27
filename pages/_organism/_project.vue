@@ -62,7 +62,7 @@
       v-if="isDisplaySettingsOn"
       @click.native="toggleDisplaySettings"
     />
-    <ModalViewFilter />
+    <ModalViewFilter @setFirstPage="setFirstPage" />
     <ModalViewGene />
     <ModalViewCompare />
     <project-results
@@ -79,6 +79,7 @@
       @activeSort="setProjectSortColumn"
     />
     <ResultsPagination
+      ref="resultsPagination"
       :pages-number="$store.state.project_pages_number"
       :results-displayed="resultsDisplayed"
       table-type="project"
@@ -541,6 +542,9 @@
           arr.push(obj);
         }
         this.projectTableHead = arr;
+      },
+      setFirstPage() {
+        this.$refs.resultsPagination.handleChangePage(1);
       },
     },
   };

@@ -145,6 +145,7 @@
       }),
       updateStore(filter = this.searchValue) {
         this.updateFilterModal('filterModal', filter);
+        this.$emit('setFirstPage');
       },
       resetSlider() {
         const numberValue = this.filterObj?.numberValue;
