@@ -38,6 +38,7 @@
     &.open
       height: auto
       overflow: visible
+      padding-bottom: 50px
   ::v-deep
     .vue-tags-input
       max-width: initial !important
@@ -67,6 +68,7 @@
         width: 100%
         .ti-tags
           height: 25px
+          position: relative
           input
             padding: 0px 10px
           .ti-tag
@@ -74,11 +76,16 @@
             background-color: $MAIN_COLOR
             padding: 3px 10px
             border-radius: 100px
+            position: relative
+            bottom: -45px
             &.ti-deletion-mark
               background-color: #F24B56
           .ti-new-tag-input-wrapper
             height: 24px
             padding: 0
+            .ti-new-tag-input
+              position: absolute
+              left: 0
       .ti-item.ti-selected-item
         color: #ffffff
         background-color: $MAIN_COLOR
