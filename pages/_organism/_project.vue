@@ -544,7 +544,7 @@
         this.projectTableHead = arr;
       },
       setFirstPage() {
-        this.$refs.resultsPagination.handleChangePage(1);
+        this.$refs.resultsPagination.setPageNumber(1);
       },
     },
   };
