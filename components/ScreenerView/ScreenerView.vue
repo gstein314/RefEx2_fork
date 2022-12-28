@@ -38,10 +38,10 @@
     &.open
       height: auto
       overflow: visible
-      padding-bottom: 50px
   ::v-deep
     .vue-tags-input
       max-width: initial !important
+      padding-bottom: 40px
       &.hide_caret
         .ti-input
           background-color: $DISABLE_COLOR
