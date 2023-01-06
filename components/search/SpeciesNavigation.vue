@@ -1,18 +1,17 @@
 <template>
   <nav class="nav_wrapper">
     <ul class="species_navi">
-      <li
-        v-for="specie in species"
-        :key="specie.species"
-        :class="{
-          active: activeSpecie.species === specie.species,
-        }"
-        @click="updateSpecie(specie.species)"
-      >
-        <icon-base :icon-name="specie.species" />
+      <li @click="updateSpecie(specie.species)">
+        <icon-base :icon-name="species[0].species" />
         <div class="specie_wrapper">
-          <p>{{ specie.species }}</p>
-          <form>
+          <p class="title">Dataset</p>
+          <p>{{ species[0].species }}</p>
+          <p>
+            {{ species[0].datasets[0].label
+            }}<font-awesome-icon icon="fa-angle-down" />
+          </p>
+
+          <!-- <form>
             <select
               v-model="selectedProject[specie.species]"
               class="specie_select"
@@ -26,7 +25,19 @@
                 {{ project.label }}
               </option>
             </select>
-          </form>
+          </form> -->
+        </div>
+      </li>
+      <li>
+        <font-awesome-icon icon="flask" />
+        <div class="specie_wrapper">
+          <p>Sample<font-awesome-icon icon="fa-angle-down" /></p>
+        </div>
+      </li>
+      <li>
+        <div class="specie_wrapper">
+          <p class="title">Gene symbol</p>
+          <p>testicular germ cell embryonal carcinoma cell line: NEC8</p>
         </div>
       </li>
     </ul>
@@ -82,53 +93,70 @@
     .species_navi
       padding: $PADDING_WRAPPER
       margin: 0
-      gap: 3rem
       display: flex
+      background-color: $MAIN_COLOR
+      height: 85px
+      list-style-type: none
+      width: 100%
+      margin: 0
+      overflow: hidden
       > li
+        position: relative
+        color: #fff
         display: grid
         grid-template-columns: auto 1fr
-        opacity: .3
-        padding: 10px 10px 0
+        align-content: center
+        padding: 10px 0px 10px 30px
+        &:hover
+          background-color: #095493
+          &:after
+            border-color: transparent transparent transparent #095493
+        &:before,
+        &:after
+          content: ""
+          position: absolute
+          width: 0
+          height: 0
+          margin: auto
+        &:before
+          top: -12px
+          right: -1em
+          border-style: solid
+          border-color: transparent transparent transparent #fff
+          border-width: 55px 0 55px 1em
+          z-index: 1
+        &:after
+          top: -12px
+          right: -.9em
+          border-style: solid
+          border-color: transparent transparent transparent $MAIN_COLOR
+          border-width: 55px 0 55px 1em
+          z-index: 1
+        > svg
+          font-size: 24px
         > .specie_wrapper
+          overflow: hidden
+          display: -webkit-box
+          -webkit-box-orient: vertical
+          -webkit-line-clamp: 3
+          > .title
+            font-size: 12px
+            font-weight: bold
           > form
             > .specie_select
               color: $BLACK
-        &.active
-          color: $WHITE
-          background-color: $MAIN_COLOR
-          border-top-left-radius: 10px
-          border-top-right-radius: 10px
-          opacity: 1
-          > .specie_wrapper
-            > p
-              font-weight: bold
-            > form
-              > .specie_select
-                color: $WHITE
-                font-weight: bold
-        &.active:hover
-          > .specie_wrapper
-            > form
-              > .specie_select
-                color: $MAIN_COLOR
-                background-color: $WHITE
-        &:hover:not(.active)
-          opacity: 1
-          cursor: pointer
-          color: $MAIN_COLOR
-          transition: 0.6s
-          > .specie_wrapper
-            > form
-              > .specie_select
-                color: $WHITE
-                background-color: $MAIN_COLOR
+          > p
+            position: relative
+            font-weight: bold
+            > svg
+              font-size: 12px
+              padding-left: 4px
         > svg
           align-self: flex-end
         > .specie_wrapper
-          display: flex
           flex-direction: column
           align-self: flex-end
-          margin: 6px 0 6px 10px
+          margin: 0 5px
           font-size: 18px
           > p
             margin: 0
@@ -136,6 +164,7 @@
             margin-left: -4px
             > .specie_select
               +select
+              padding: 0
               background: none
               font-size: inherit
               width: auto

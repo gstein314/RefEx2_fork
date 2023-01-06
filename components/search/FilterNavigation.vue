@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="nav_wrapper">
     <ul>
       <li
@@ -64,4 +64,4 @@
                   color: $MAIN_COLOR
                   background: rgba(255, 255, 255, 0.8)
                   transition: 0.6s
-</style>
+</style> -->
