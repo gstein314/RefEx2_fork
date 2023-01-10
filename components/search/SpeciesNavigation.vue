@@ -5,23 +5,41 @@
         <icon-base :icon-name="species[0].species" />
         <div class="specie_wrapper">
           <p class="title">Dataset</p>
-          <p>{{ species[0].species }}</p>
+          <p>{{ activeSpecie.species }}</p>
           <p>
-            {{ species[0].datasets[0].label
+            {{ activeDataset.label }}<font-awesome-icon icon="fa-angle-down" />
+          </p>
+        </div>
+      </li>
+      <li v-if="activeFilter.name === 'gene'">
+        <font-awesome-icon icon="dna" />
+        <div class="specie_wrapper">
+          <p>
+            {{
+              activeFilter.name.charAt(0).toUpperCase() +
+              activeFilter.name.slice(1)
             }}<font-awesome-icon icon="fa-angle-down" />
           </p>
         </div>
       </li>
-      <li>
+      <li v-if="activeFilter.name === 'sample'">
         <font-awesome-icon icon="flask" />
         <div class="specie_wrapper">
-          <p>Sample<font-awesome-icon icon="fa-angle-down" /></p>
+          <p>
+            {{
+              activeFilter.name.charAt(0).toUpperCase() +
+              activeFilter.name.slice(1)
+            }}<font-awesome-icon icon="fa-angle-down" />
+          </p>
         </div>
       </li>
       <li v-if="getPageType === 'project'">
         <div class="specie_wrapper">
-          <p class="title">Gene symbol</p>
-          <p>testicular germ cell embryonal carcinoma cell line: NEC8</p>
+          <p class="title">
+            {{ activeFilter.name === 'gene' ? 'Sample' : 'Gene' }}
+            Symbol
+          </p>
+          <p>{{ symbol.name || symbol.symbol || symbol.Description }}</p>
         </div>
       </li>
     </ul>
@@ -37,6 +55,12 @@
     components: {
       IconBase,
     },
+    props: {
+      symbol: {
+        type: String,
+        default: '',
+      },
+    },
     data() {
       return {
         species: datasets,
@@ -49,6 +73,8 @@
     computed: {
       ...mapGetters({
         activeSpecie: 'active_specie',
+        activeDataset: 'active_dataset',
+        activeFilter: 'active_filter',
         getPageType: 'get_page_type',
       }),
     },

@@ -1,12 +1,12 @@
 <template>
   <div class="wrapper">
-    <SpeciesNavigation />
     <p v-if="isError" class="error">
       <font-awesome-icon icon="exclamation-triangle" />
       An error has occured while fetching the data. Please check wheter the URL
       contains the correct information.
     </p>
     <div v-else ref="chartWrapper" class="chart_wrapper">
+      <SpeciesNavigation :symbol="infoForMainItem" />
       <div class="content">
         <h1 class="header_title">
           <div class="title">
@@ -563,6 +563,7 @@
         margin-right: 6px
     .chart_wrapper
       display: flex
+      flex-direction: column
       position: sticky
       left: 0
       min-width: calc(100vw - 15px)
