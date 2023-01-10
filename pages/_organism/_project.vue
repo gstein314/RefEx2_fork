@@ -1,5 +1,6 @@
 <template>
   <div class="wrapper">
+    <SpeciesNavigation />
     <p v-if="isError" class="error">
       <font-awesome-icon icon="exclamation-triangle" />
       An error has occured while fetching the data. Please check wheter the URL
@@ -88,6 +89,7 @@
 </template>
 
 <script>
+  import SpeciesNavigation from '~/components/search/SpeciesNavigation.vue';
   import 'vue-slider-component/dist-css/vue-slider-component.css';
   import { mapGetters, mapMutations } from 'vuex';
   import ItemComparison from '~/components/results/ItemComparison.vue';
@@ -116,6 +118,7 @@
 
   export default {
     components: {
+      SpeciesNavigation,
       ItemComparison,
       ModalViewGene,
       ModalViewCompare,

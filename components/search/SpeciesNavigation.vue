@@ -10,22 +10,6 @@
             {{ species[0].datasets[0].label
             }}<font-awesome-icon icon="fa-angle-down" />
           </p>
-
-          <!-- <form>
-            <select
-              v-model="selectedProject[specie.species]"
-              class="specie_select"
-              @change="updateActiveDataset(selectedProject[specie.species])"
-            >
-              <option
-                v-for="(project, index) of specie.datasets"
-                :key="index"
-                :value="project.dataset"
-              >
-                {{ project.label }}
-              </option>
-            </select>
-          </form> -->
         </div>
       </li>
       <li>
@@ -34,7 +18,7 @@
           <p>Sample<font-awesome-icon icon="fa-angle-down" /></p>
         </div>
       </li>
-      <li>
+      <li v-if="getPageType === 'project'">
         <div class="specie_wrapper">
           <p class="title">Gene symbol</p>
           <p>testicular germ cell embryonal carcinoma cell line: NEC8</p>
@@ -65,6 +49,7 @@
     computed: {
       ...mapGetters({
         activeSpecie: 'active_specie',
+        getPageType: 'get_page_type',
       }),
     },
     methods: {
@@ -101,6 +86,7 @@
       margin: 0
       overflow: hidden
       > li
+        cursor: pointer
         position: relative
         color: #fff
         display: grid
