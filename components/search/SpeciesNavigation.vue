@@ -1,46 +1,77 @@
 <template>
   <nav class="nav_wrapper">
     <ul class="species_navi">
-      <li @click="updateSpecie(specie.species)">
-        <icon-base :icon-name="species[0].species" />
-        <div class="specie_wrapper">
-          <p class="title">Dataset</p>
-          <p>{{ activeSpecie.species }}</p>
-          <p>
-            {{ activeDataset.label }}<font-awesome-icon icon="fa-angle-down" />
-          </p>
+      <li @click="updateIsOpenA">
+        <div class="box">
+          <icon-base :icon-name="species[0].species" />
+          <div class="specie_wrapper">
+            <p class="title">Dataset</p>
+            <p>{{ activeSpecie.species }}</p>
+            <p>
+              {{ activeDataset.label
+              }}<font-awesome-icon icon="fa-angle-down" />
+            </p>
+          </div>
+        </div>
+        <div class="test -a"></div>
+        <div class="test -b"></div>
+        <div class="dropdown" :class="{ isOpenA }">
+          <li>Human</li>
+          <li>Mouse</li>
+          <li>Drosophilidae</li>
         </div>
       </li>
-      <li v-if="activeFilter.name === 'gene'">
-        <font-awesome-icon icon="dna" />
-        <div class="specie_wrapper">
-          <p>
-            {{
-              activeFilter.name.charAt(0).toUpperCase() +
-              activeFilter.name.slice(1)
-            }}<font-awesome-icon icon="fa-angle-down" />
-          </p>
+      <li v-if="activeFilter.name === 'gene'" @click="updateIsOpenB">
+        <div class="box">
+          <font-awesome-icon icon="dna" />
+          <div class="specie_wrapper">
+            <p>
+              {{
+                activeFilter.name.charAt(0).toUpperCase() +
+                activeFilter.name.slice(1)
+              }}<font-awesome-icon icon="fa-angle-down" />
+            </p>
+          </div>
+        </div>
+        <div class="test -a"></div>
+        <div class="test -b"></div>
+        <div class="dropdown" :class="{ isOpenB }">
+          <li>Gene</li>
+          <li>Sample</li>
         </div>
       </li>
-      <li v-if="activeFilter.name === 'sample'">
-        <font-awesome-icon icon="flask" />
-        <div class="specie_wrapper">
-          <p>
-            {{
-              activeFilter.name.charAt(0).toUpperCase() +
-              activeFilter.name.slice(1)
-            }}<font-awesome-icon icon="fa-angle-down" />
-          </p>
+      <li v-if="activeFilter.name === 'sample'" @click="updateIsOpenB">
+        <div class="box">
+          <font-awesome-icon icon="flask" />
+          <div class="specie_wrapper">
+            <p>
+              {{
+                activeFilter.name.charAt(0).toUpperCase() +
+                activeFilter.name.slice(1)
+              }}<font-awesome-icon icon="fa-angle-down" />
+            </p>
+          </div>
+        </div>
+        <div class="test -a"></div>
+        <div class="test -b"></div>
+        <div class="dropdown" :class="{ isOpenB }">
+          <li>test1</li>
+          <li>test2</li>
+          <li>test3</li>
         </div>
       </li>
       <li v-if="getPageType === 'project'">
-        <div class="specie_wrapper">
-          <p class="title">
-            {{ activeFilter.name === 'gene' ? 'Sample' : 'Gene' }}
-            Symbol
-          </p>
-          <p>{{ symbol.name || symbol.symbol || symbol.Description }}</p>
+        <div class="box">
+          <div class="specie_wrapper">
+            <p class="title">
+              {{ activeFilter.name === 'gene' ? 'Sample' : 'Gene' }}
+              Symbol
+            </p>
+            <p>{{ symbol.name || symbol.symbol || symbol.Description }}</p>
+          </div>
         </div>
+        <div class="test -a"></div>
+        <div class="test -b"></div>
       </li>
     </ul>
   </nav>
@@ -57,13 +88,15 @@
     },
     props: {
       symbol: {
-        type: String,
-        default: '',
+        type: Object,
+        default: () => ({}),
       },
     },
     data() {
       return {
         species: datasets,
+        isOpenA: false,
+        isOpenB: false,
         selectedProject: datasets.reduce((acc, specie) => {
           acc[specie.species] = specie.datasets[0].dataset;
           return acc;
@@ -94,13 +127,22 @@
         this.setSpecie(specieId);
         this.updateActiveDataset(this.selectedProject[specieId]);
       },
+      updateIsOpenA() {
+        this.isOpenB = false;
+        this.isOpenA = !this.isOpenA;
+      },
+      updateIsOpenB() {
+        this.isOpenA = false;
+        this.isOpenB = !this.isOpenB;
+      },
     },
   };
 </script>
 
 <style lang="sass" scoped>
   .nav_wrapper
-    margin: -0px 0 0px
+    margin: 0
+    position: sticky
     .species_navi
       padding: $PADDING_WRAPPER
       margin: 0
@@ -110,74 +152,93 @@
       list-style-type: none
       width: 100%
       margin: 0
-      overflow: hidden
       > li
         cursor: pointer
         position: relative
         color: #fff
-        display: grid
-        grid-template-columns: auto 1fr
-        align-content: center
-        padding: 10px 0px 10px 30px
+        display: flex
+        padding-left: 10px
         &:hover
           background-color: #095493
-          &:after
-            border-color: transparent transparent transparent #095493
-        &:before,
-        &:after
-          content: ""
+          .test.-b
+            background-color: #095493
+        &:nth-child(n + 2)
+          padding-left: 30px
+        > .test.-a
           position: absolute
-          width: 0
-          height: 0
-          margin: auto
-        &:before
-          top: -12px
-          right: -1em
-          border-style: solid
-          border-color: transparent transparent transparent #fff
-          border-width: 55px 0 55px 1em
+          right: -20px
+          height: 100%
           z-index: 1
-        &:after
-          top: -12px
-          right: -.9em
-          border-style: solid
-          border-color: transparent transparent transparent $MAIN_COLOR
-          border-width: 55px 0 55px 1em
+          width: 50px
+          background: white
+          clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 0 50%, 0% 0%)
+        > .test.-b
+          right: -18px
+          height: 100%
           z-index: 1
+          width: 20px
+          position: absolute
+          width: 50px
+          height: 100%
+          background-color: $MAIN_COLOR
+          clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 0 50%, 0% 0%)
         > svg
           font-size: 24px
-        > .specie_wrapper
-          overflow: hidden
-          display: -webkit-box
-          -webkit-box-orient: vertical
-          -webkit-line-clamp: 3
-          > .title
-            font-size: 12px
-            font-weight: bold
-          > form
-            > .specie_select
-              color: $BLACK
-          > p
-            position: relative
-            font-weight: bold
-            > svg
+        > .box
+          display: grid
+          grid-template-columns: auto 1fr
+          align-content: center
+          z-index: 2
+          > .specie_wrapper
+            overflow: hidden
+            display: -webkit-box
+            -webkit-box-orient: vertical
+            -webkit-line-clamp: 3
+            > .title
               font-size: 12px
-              padding-left: 4px
-        > svg
-          align-self: flex-end
-        > .specie_wrapper
-          flex-direction: column
-          align-self: flex-end
-          margin: 0 5px
-          font-size: 18px
-          > p
-            margin: 0
-          > form
-            margin-left: -4px
-            > .specie_select
-              +select
-              padding: 0
-              background: none
-              font-size: inherit
-              width: auto
+              font-weight: bold
+            > form
+              > .specie_select
+                color: $BLACK
+            > p
+              position: relative
+              font-weight: bold
+              > svg
+                font-size: 12px
+                padding-left: 4px
+          > svg
+            align-self: center
+          > .specie_wrapper
+            flex-direction: column
+            align-self: flex-end
+            margin: 0 5px
+            font-size: 18px
+            > p
+              margin: 0
+            > form
+              margin-left: -4px
+              > .specie_select
+                +select
+                padding: 0
+                background: none
+                font-size: inherit
+                width: auto
+  .dropdown
+    position: absolute
+    top: 100%
+    left: 0
+    display: none
+    padding: 0
+    list-style-type: none
+    background-color: white
+    z-index: 999
+
+  .dropdown li
+    width: 250px
+    color: black
+    border-bottom: 1px solid #fff
+  .isOpenA
+    display: block
+  .isOpenB
+    display: block
 </style>
