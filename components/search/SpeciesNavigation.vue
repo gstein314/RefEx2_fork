@@ -3,22 +3,25 @@
     <ul class="species_navi">
       <li @click="updateIsOpenA">
         <div class="box">
-          <icon-base :icon-name="species[0].species" />
+          <icon-base :icon-name="activeSpecie.species" />
           <div class="specie_wrapper">
             <p class="title">Dataset</p>
             <p>{{ activeSpecie.species }}</p>
             <p>
               {{ activeDataset.label
-              }}<font-awesome-icon icon="fa-angle-down" />
+              }}<font-awesome-icon
+                v-if="isOpenA"
+                icon="fa-angle-down"
+              /><font-awesome-icon v-else icon="fa-angle-up" />
             </p>
           </div>
         </div>
         <div class="test -a"></div>
         <div class="test -b"></div>
         <div class="dropdown" :class="{ isOpenA }">
-          <li>Human</li>
-          <li>Mouse</li>
-          <li>Drosophilidae</li>
+          <li @click="updateSpecie('Human')">Human FANTOM5</li>
+          <li @click="test()">Human GTEx</li>
+          <li @click="updateSpecie('Mouse')">Mouse</li>
         </div>
       </li>
       <li v-if="activeFilter.name === 'gene'" @click="updateIsOpenB">
@@ -26,18 +29,19 @@
           <font-awesome-icon icon="dna" />
           <div class="specie_wrapper">
             <p>
-              {{
-                activeFilter.name.charAt(0).toUpperCase() +
-                activeFilter.name.slice(1)
-              }}<font-awesome-icon icon="fa-angle-down" />
+              {{ $firstLetterUppercase(activeFilter.name)
+              }}<font-awesome-icon
+                v-if="isOpenB"
+                icon="fa-angle-down"
+              /><font-awesome-icon v-else icon="fa-angle-up" />
             </p>
           </div>
         </div>
         <div class="test -a"></div>
         <div class="test -b"></div>
         <div class="dropdown" :class="{ isOpenB }">
-          <li>Gene</li>
-          <li>Sample</li>
+          <li @click="$store.commit('set_active_filter', 'gene')">Gene</li>
+          <li @click="$store.commit('set_active_filter', 'sample')">Sample</li>
         </div>
       </li>
       <li v-if="activeFilter.name === 'sample'" @click="updateIsOpenB">
@@ -45,19 +49,19 @@
           <font-awesome-icon icon="flask" />
           <div class="specie_wrapper">
             <p>
-              {{
-                activeFilter.name.charAt(0).toUpperCase() +
-                activeFilter.name.slice(1)
-              }}<font-awesome-icon icon="fa-angle-down" />
+              {{ $firstLetterUppercase(activeFilter.name)
+              }}<font-awesome-icon
+                v-if="isOpenB"
+                icon="fa-angle-down"
+              /><font-awesome-icon v-else icon="fa-angle-up" />
             </p>
           </div>
         </div>
         <div class="test -a"></div>
         <div class="test -b"></div>
         <div class="dropdown" :class="{ isOpenB }">
-          <li>test1</li>
-          <li>test2</li>
-          <li>test3</li>
+          <li @click="$store.commit('set_active_filter', 'gene')">Gene</li>
+          <li @click="$store.commit('set_active_filter', 'sample')">Sample</li>
         </div>
       </li>
       <li v-if="getPageType === 'project'">
@@ -116,6 +120,14 @@
         setSpecie: 'set_specie',
         setActiveDataset: 'set_active_dataset',
       }),
+      test() {
+        this.selectedProject = { Human: 'gtexV8' };
+        this.updateSpecie('Human');
+        this.selectedProject = datasets.reduce((acc, specie) => {
+          acc[specie.species] = specie.datasets[0].dataset;
+          return acc;
+        }, {});
+      },
       updateActiveDataset(datasetId) {
         this.setActiveDataset(
           this.activeSpecie.datasets.find(
@@ -143,6 +155,7 @@
   .nav_wrapper
     margin: 0
     position: sticky
+    z-index: 1
     .species_navi
       padding: $PADDING_WRAPPER
       margin: 0
@@ -164,6 +177,8 @@
             background-color: #095493
         &:nth-child(n + 2)
           padding-left: 30px
+        &:nth-child(3)
+          cursor: auto
         > .test.-a
           position: absolute
           right: -20px
@@ -232,10 +247,11 @@
     list-style-type: none
     background-color: white
     z-index: 999
-
+    padding: 20px
+    box-shadow: 0px 5px 15px -5px $BLACK
   .dropdown li
-    width: 250px
     color: black
+    min-width: 200px
     border-bottom: 1px solid #fff
   .isOpenA
     display: block
