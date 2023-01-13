@@ -1,7 +1,7 @@
 <template>
   <nav class="nav_wrapper">
     <ul class="species_navi">
-      <li @click="updateIsOpenA">
+      <li :class="{ isOpenA }" @click.stop="updateIsOpenA">
         <div class="box">
           <icon-base :icon-name="activeSpecie.species" />
           <div class="specie_wrapper">
@@ -10,58 +10,115 @@
             <p>
               {{ activeDataset.label
               }}<font-awesome-icon
-                v-if="isOpenA"
+                v-if="getPageType === 'index' && isOpenA"
                 icon="fa-angle-down"
-              /><font-awesome-icon v-else icon="fa-angle-up" />
+              /><font-awesome-icon
+                v-else-if="getPageType === 'index' && !isOpenA"
+                icon="fa-angle-up"
+              />
             </p>
           </div>
         </div>
         <div class="test -a"></div>
         <div class="test -b"></div>
         <div class="dropdown" :class="{ isOpenA }">
-          <li @click="updateSpecie('Human')">Human FANTOM5</li>
-          <li @click="test()">Human GTEx</li>
-          <li @click="updateSpecie('Mouse')">Mouse</li>
+          <li>
+            <icon-base :icon-name="'Human'" />
+            <div>
+              <p>Human</p>
+              <span class="dataset_name" @click="updateSpecie('Human')"
+                >FANTOM5</span
+              >
+              <span class="dataset_name" @click="test()">GTEx</span>
+            </div>
+          </li>
+          <li>
+            <icon-base :icon-name="'Mouse'" />
+            <div>
+              <p>Mouse</p>
+              <span class="dataset_name" @click="updateSpecie('Mouse')"
+                >FANTOM5</span
+              >
+            </div>
+          </li>
         </div>
       </li>
-      <li v-if="activeFilter.name === 'gene'" @click="updateIsOpenB">
+      <li
+        v-if="activeFilter.name === 'gene'"
+        :class="{ isOpenB }"
+        @click.stop="updateIsOpenB"
+      >
         <div class="box">
           <font-awesome-icon icon="dna" />
           <div class="specie_wrapper">
             <p>
               {{ $firstLetterUppercase(activeFilter.name)
               }}<font-awesome-icon
-                v-if="isOpenB"
+                v-if="getPageType === 'index' && isOpenB"
                 icon="fa-angle-down"
-              /><font-awesome-icon v-else icon="fa-angle-up" />
+              /><font-awesome-icon
+                v-else-if="getPageType === 'index' && !isOpenB"
+                icon="fa-angle-up"
+              />
             </p>
           </div>
         </div>
         <div class="test -a"></div>
         <div class="test -b"></div>
         <div class="dropdown" :class="{ isOpenB }">
-          <li @click="$store.commit('set_active_filter', 'gene')">Gene</li>
-          <li @click="$store.commit('set_active_filter', 'sample')">Sample</li>
+          <li
+            class="active_type"
+            @click="$store.commit('set_active_filter', 'gene')"
+          >
+            <font-awesome-icon icon="dna" />
+            <p>Gene</p>
+          </li>
+          <li
+            class="active_type"
+            @click="$store.commit('set_active_filter', 'sample')"
+          >
+            <font-awesome-icon icon="flask" />
+            <p>Sample</p>
+          </li>
         </div>
       </li>
-      <li v-if="activeFilter.name === 'sample'" @click="updateIsOpenB">
+      <li
+        v-if="activeFilter.name === 'sample'"
+        :class="{ isOpenB }"
+        @click.stop="updateIsOpenB"
+      >
         <div class="box">
           <font-awesome-icon icon="flask" />
           <div class="specie_wrapper">
             <p>
               {{ $firstLetterUppercase(activeFilter.name)
               }}<font-awesome-icon
-                v-if="isOpenB"
+                v-if="getPageType === 'index' && isOpenB"
                 icon="fa-angle-down"
-              /><font-awesome-icon v-else icon="fa-angle-up" />
+              /><font-awesome-icon
+                v-else-if="getPageType === 'index' && !isOpenB"
+                icon="fa-angle-up"
+              />
             </p>
           </div>
         </div>
         <div class="test -a"></div>
         <div class="test -b"></div>
         <div class="dropdown" :class="{ isOpenB }">
-          <li @click="$store.commit('set_active_filter', 'gene')">Gene</li>
-          <li @click="$store.commit('set_active_filter', 'sample')">Sample</li>
+          <li
+            class="active_type"
+            @click="$store.commit('set_active_filter', 'gene')"
+          >
+            <font-awesome-icon icon="dna" />
+            <p>Gene</p>
+          </li>
+          <li
+            class="active_type"
+            @click="$store.commit('set_active_filter', 'sample')"
+          >
+            <font-awesome-icon icon="flask" />
+            <p>Sample</p>
+          </li>
         </div>
       </li>
       <li v-if="getPageType === 'project'">
@@ -115,11 +172,23 @@
         getPageType: 'get_page_type',
       }),
     },
+    mounted() {
+      window.addEventListener('click', this.closeDropDown);
+    },
+    beforeDestroy() {
+      window.removeEventListener('click', this._onBlurHandler);
+    },
     methods: {
       ...mapMutations({
         setSpecie: 'set_specie',
         setActiveDataset: 'set_active_dataset',
       }),
+      closeDropDown(event) {
+        if (!this.$el.querySelector('.dropdown').contains(event.target)) {
+          this.isOpenA = false;
+          this.isOpenB = false;
+        }
+      },
       test() {
         this.selectedProject = { Human: 'gtexV8' };
         this.updateSpecie('Human');
@@ -140,12 +209,22 @@
         this.updateActiveDataset(this.selectedProject[specieId]);
       },
       updateIsOpenA() {
-        this.isOpenB = false;
-        this.isOpenA = !this.isOpenA;
+        if (this.getPageType === 'project') {
+          window.location.href = '/';
+          window.open('/');
+        } else {
+          this.isOpenB = false;
+          this.isOpenA = !this.isOpenA;
+        }
       },
       updateIsOpenB() {
-        this.isOpenA = false;
-        this.isOpenB = !this.isOpenB;
+        if (this.getPageType === 'project') {
+          window.location.href = '/';
+          window.open('/');
+        } else {
+          this.isOpenA = false;
+          this.isOpenB = !this.isOpenB;
+        }
       },
     },
   };
@@ -155,7 +234,8 @@
   .nav_wrapper
     margin: 0
     position: sticky
-    z-index: 1
+    z-index: 2
+    top: 0
     .species_navi
       padding: $PADDING_WRAPPER
       margin: 0
@@ -171,6 +251,10 @@
         color: #fff
         display: flex
         padding-left: 10px
+        &.isOpenA, &.isOpenB
+          background-color: #095493
+          .test.-b
+            background-color: #095493
         &:hover
           background-color: #095493
           .test.-b
@@ -223,6 +307,7 @@
                 padding-left: 4px
           > svg
             align-self: center
+            font-size: 24px
           > .specie_wrapper
             flex-direction: column
             align-self: flex-end
@@ -249,10 +334,36 @@
     z-index: 999
     padding: 20px
     box-shadow: 0px 5px 15px -5px $BLACK
-  .dropdown li
-    color: black
-    min-width: 200px
-    border-bottom: 1px solid #fff
+    cursor: auto
+    > .active_type:hover
+        color: white
+        background-color: #095493
+        border-radius: 5px
+        cursor: pointer
+    > li
+      color: black
+      min-width: 200px
+      border-bottom: 1px solid #fff
+      display: grid
+      grid-template-columns: 30px 1fr
+      align-content: center
+      > svg
+        width: 30px
+        font-size: 18px
+        align-self: center
+      > div
+        padding: 0 10px
+        > p
+          margin: 0
+          padding-bottom: 10px
+        > .dataset_name
+          background: $MAIN_COLOR
+          color: white
+          padding: 5px
+          border-radius: 5px
+          cursor: pointer
+          &:hover
+            background: #095493
   .isOpenA
     display: block
   .isOpenB
