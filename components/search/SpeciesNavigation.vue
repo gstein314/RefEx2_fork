@@ -241,7 +241,7 @@
       margin: 0
       display: flex
       background-color: $MAIN_COLOR
-      height: 85px
+      height: 70px
       list-style-type: none
       width: 100%
       margin: 0
@@ -337,7 +337,7 @@
     cursor: auto
     > .active_type:hover
         color: white
-        background-color: #095493
+        background-color: $MAIN_COLOR
         border-radius: 5px
         cursor: pointer
     > li
