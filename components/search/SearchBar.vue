@@ -24,51 +24,51 @@
         </dl>
       </span>
     </h3>
-    <template v-if="filterType === 'gene'">
-      <vue-simple-suggest
-        v-model="parameters.text"
-        :debounce="500"
-        :min-length="0"
-        :display-attribute="paramsForSuggestions[1]"
-        :value-attribute="paramsForSuggestions[0]"
-        :list="updateSuggestions"
-        :max-suggestions="20"
-        class="text_search_name"
-        placeholder="transcription factor"
-        @select="moveDetailpage"
-      >
-        <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
-        <!-- eslint-disable vue/no-unused-vars -->
-        <div slot="suggestion-item" slot-scope="{ suggestion }">
-          <strong
-            class="title"
-            v-html="
-              $highlightedSuggestion(
-                suggestion[paramsForSuggestions[0]],
-                parameters.text
-              )
-            "
-          >
-          </strong
-          >&nbsp; -&nbsp;
-          <span
-            v-html="
-              $highlightedSuggestion(
-                suggestion[paramsForSuggestions[1]],
-                parameters.text
-              )
-            "
-          ></span>
-        </div>
-        <div
-          v-if="isLoading"
-          slot="misc-item-below"
-          slot-scope="{ suggestion }"
-          class="misc-item"
+    <vue-simple-suggest
+      v-model="parameters.text"
+      :debounce="500"
+      :min-length="0"
+      :display-attribute="paramsForSuggestions[1]"
+      :value-attribute="paramsForSuggestions[0]"
+      :list="updateSuggestions"
+      :max-suggestions="20"
+      class="text_search_name"
+      :placeholder="filterPlaceholder(filterType)"
+      @select="moveDetailpage"
+    >
+      <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
+      <!-- eslint-disable vue/no-unused-vars -->
+      <div slot="suggestion-item" slot-scope="{ suggestion }">
+        <strong
+          class="title"
+          v-html="
+            $highlightedSuggestion(
+              suggestion[paramsForSuggestions[0]],
+              parameters.text
+            )
+          "
         >
-          <span>Loading...</span>
-        </div>
-      </vue-simple-suggest>
+        </strong
+        >&nbsp; -&nbsp;
+        <span
+          v-html="
+            $highlightedSuggestion(
+              suggestion[paramsForSuggestions[1]],
+              parameters.text
+            )
+          "
+        ></span>
+      </div>
+      <div
+        v-if="isLoading"
+        slot="misc-item-below"
+        slot-scope="{ suggestion }"
+        class="misc-item"
+      >
+        <span>Loading...</span>
+      </div>
+    </vue-simple-suggest>
+    <template v-if="filterType === 'gene'">
       <div :class="['summary_check_wrapper', { hide: parameters.text === '' }]">
         <input
           id="summary_check"
@@ -80,50 +80,6 @@
       </div>
     </template>
     <template v-else-if="filterType === 'sample'">
-      <vue-simple-suggest
-        v-model="parameters.text"
-        :debounce="500"
-        :min-length="0"
-        :display-attribute="paramsForSuggestions[1]"
-        :value-attribute="paramsForSuggestions[0]"
-        :list="updateSuggestions"
-        :max-suggestions="20"
-        class="text_search_name"
-        placeholder="liver"
-        @select="moveDetailpage"
-      >
-        <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
-        <!-- eslint-disable vue/no-unused-vars -->
-        <div slot="suggestion-item" slot-scope="{ suggestion }">
-          <strong
-            class="title"
-            v-html="
-              $highlightedSuggestion(
-                suggestion[paramsForSuggestions[0]],
-                parameters.text
-              )
-            "
-          >
-          </strong
-          >&nbsp; -&nbsp;
-          <span
-            v-html="
-              $highlightedSuggestion(
-                suggestion[paramsForSuggestions[1]],
-                parameters.text
-              )
-            "
-          ></span>
-        </div>
-        <div
-          v-if="isLoading"
-          slot="misc-item-below"
-          slot-scope="{ suggestion }"
-          class="misc-item"
-        >
-          <span>Loading...</span>
-        </div>
-      </vue-simple-suggest>
       <div class="summary_check_wrapper"></div>
     </template>
     <ScreenerView>
@@ -325,6 +281,14 @@
               filterType: this.filterType,
             });
           });
+      },
+      filterPlaceholder(type) {
+        switch (type) {
+          case 'gene':
+            return 'transcription factor';
+          case 'sample':
+            return 'liver';
+        }
       },
     },
   };

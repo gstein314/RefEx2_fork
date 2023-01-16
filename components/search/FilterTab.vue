@@ -41,6 +41,7 @@
     <index-results
       :key="`${$vnode.key}_results`"
       :table-data-is-same-as-screener="tableDataIsSameAsScreener"
+      :results-num="resultsNum"
       :filters="filters"
       @toggleDisplaySettings="toggleDisplaySettings"
     />

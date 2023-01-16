@@ -77,7 +77,7 @@
         return this.temporaryParameters.goTerm === '' &&
           this.parameters.go.length < 1
           ? 'transcription factor binding'
-          : '';
+          : 'Only one tag is allowed';
       },
     },
     watch: {

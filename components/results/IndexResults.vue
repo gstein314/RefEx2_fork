@@ -44,8 +44,22 @@
           :colspan="filters.filter(x => x.is_displayed).length + 2"
         >
           <font-awesome-icon icon="exclamation-triangle" />
-          Please press the 'Find {{ filterType }}s' button to update the results
-          to the current screener settings.
+          <template v-if="resultsNum === 0"
+            >No results found. Please check the spelling or try other
+            keywords.</template
+          >
+          <template v-else>
+            Please press the 'Find {{ filterType }}s' button to update the
+            results to the current screener settings.
+          </template>
+        </td>
+        <td
+          v-else-if="tableDataIsSameAsScreener && resultsNum === 0"
+          class="warning"
+          :colspan="filters.filter(x => x.is_displayed).length + 2"
+        >
+          <font-awesome-icon icon="exclamation-triangle" />
+          No results found. Please check the spelling or try other keywords.
         </td>
         <tr
           v-for="(result, resultIndex) in pageItems"
@@ -133,6 +147,10 @@
       tableDataIsSameAsScreener: {
         type: Boolean,
         default: true,
+      },
+      resultsNum: {
+        type: Number,
+        default: 0,
       },
     },
     data() {

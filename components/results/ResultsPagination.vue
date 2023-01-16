@@ -52,27 +52,19 @@
     </div>
     <div class="wrapper_item_right">
       <div class="showing_page">
-        <div v-if="tableType === 'index'">
-          <b>{{ (1 + (currentPage - 1) * currentLimit).toLocaleString() }}</b>
+        <div>
+          <b>{{ firstItemOrderInCurrentPage }}</b>
           -
-          <b>{{
-            currentPage * currentLimit > resultsNum
-              ? resultsNum.toLocaleString()
-              : (currentPage * currentLimit).toLocaleString()
-          }}</b>
-          of
-          {{ resultsNum.toLocaleString() }}
-        </div>
-        <div v-else-if="tableType === 'project'">
-          <b>{{ (1 + (currentPage - 1) * currentLimit).toLocaleString() }}</b>
-          -
-          <b>{{
-            currentPage * currentLimit > resultsDisplayed.length
-              ? resultsDisplayed.length.toLocaleString()
-              : (currentPage * currentLimit).toLocaleString()
-          }}</b>
-          of
-          {{ resultsDisplayed.length.toLocaleString() }}
+          <template v-if="tableType === 'index'">
+            <b>{{ lastItemOrderInCurrentPage(resultsNum) }}</b>
+            of
+            {{ resultsNum.toLocaleString() }}
+          </template>
+          <template v-else-if="tableType === 'project'">
+            <b>{{ lastItemOrderInCurrentPage(resultsDisplayed.length) }}</b>
+            of
+            {{ resultsDisplayed.length.toLocaleString() }}
+          </template>
         </div>
         <div class="display_pagination">
           <label for="pagination">Show</label>
@@ -174,8 +166,13 @@
           this.pagesNumber
         );
       },
+      firstItemOrderInCurrentPage() {
+        return (
+          1 +
+          (this.currentPage - 1) * this.currentLimit
+        ).toLocaleString();
+      },
     },
-
     methods: {
       ...mapMutations({
         updatePagination: 'set_pagination',
@@ -205,6 +202,11 @@
           offset: newOffset,
           type: this.tableType === 'index' ? 'index' : 'project',
         });
+      },
+      lastItemOrderInCurrentPage(totalNumOfResults) {
+        return this.currentPage * this.currentLimit > totalNumOfResults
+          ? totalNumOfResults.toLocaleString()
+          : (this.currentPage * this.currentLimit).toLocaleString();
       },
     },
   };
