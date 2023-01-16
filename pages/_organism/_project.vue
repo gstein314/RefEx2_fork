@@ -190,16 +190,21 @@
             };
           });
           store.commit('set_project_results_all', resultsAll);
+          const mapStatData = (data, stat) =>
+            data.refex_info?.map(x => {
+              x = parseFloat(x[stat]);
+              return x;
+            });
           return {
             id,
             info: data[`${type}_info`],
-            minData: data.refex_info?.map(x => x.LogMin),
-            firstQuartileData: data.refex_info?.map(x => x.Log1stQu),
-            medianData: data.refex_info?.map(x => x.LogMedian),
-            thirdQuartileData: data.refex_info?.map(x => x.Log3rdQu),
-            maxData: data.refex_info?.map(x => x.LogMax),
-            sdData: data.refex_info?.map(x => x.LogSd),
-            numberOfSamplesData: data.refex_info?.map(x => x.NumberOfSamples),
+            minData: mapStatData(data, 'LogMin'),
+            firstQuartileData: mapStatData(data, 'Log1stQu'),
+            medianData: mapStatData(data, 'LogMedian'),
+            thirdQuartileData: mapStatData(data, 'Log3rdQu'),
+            maxData: mapStatData(data, 'LogMax'),
+            sdData: mapStatData(data, 'LogSd'),
+            numberOfSamplesData: mapStatData(data, 'NumberOfSamples'),
           };
         })
       );
