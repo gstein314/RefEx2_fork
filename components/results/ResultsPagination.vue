@@ -173,6 +173,11 @@
         ).toLocaleString();
       },
     },
+    watch: {
+      resultsDisplayed() {
+        this.setPageNumber(1);
+      },
+    },
     methods: {
       ...mapMutations({
         updatePagination: 'set_pagination',
