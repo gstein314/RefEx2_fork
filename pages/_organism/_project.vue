@@ -62,7 +62,7 @@
       v-if="isDisplaySettingsOn"
       @click.native="toggleDisplaySettings"
     />
-    <ModalViewFilter @setFirstPage="setFirstPage" />
+    <ModalViewFilter />
     <ModalViewGene />
     <ModalViewCompare />
     <project-results
@@ -542,9 +542,6 @@
           arr.push(obj);
         }
         this.projectTableHead = arr;
-      },
-      setFirstPage() {
-        this.$refs.resultsPagination.setPageNumber(1);
       },
     },
   };
