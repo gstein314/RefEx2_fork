@@ -4,7 +4,10 @@
   <div class="text_search_area">
     <div class="search_condition_title">
       <h2>Search Conditions</h2>
-      <button class="remove_all_btn">Remove all</button>
+      <button class="remove_all_btn" @click="removeSearchConditions">
+        <font-awesome-icon icon="trash" />
+        Remove all
+      </button>
     </div>
     <h3>
       <span class="example"
@@ -292,6 +295,9 @@
           case 'sample':
             return 'liver';
         }
+      },
+      removeSearchConditions() {
+        this.parameters.text = '';
       },
     },
   };
