@@ -583,7 +583,6 @@
         display: flex
         flex-direction: column
         min-width: fit-content
-        width: 100%
         > .header_title
           align-items: flex-start
           margin: 0

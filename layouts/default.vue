@@ -17,7 +17,6 @@
               class="logotype"
               src="~/assets/img/refex-logotype.svg"
               alt="Reference Expression Dataset 2"
-              @click="$store.commit('set_active_filter', 'gene')"
             />
           </nuxt-link>
         </div>

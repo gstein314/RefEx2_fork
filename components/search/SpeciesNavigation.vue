@@ -172,6 +172,11 @@
         getPageType: 'get_page_type',
       }),
     },
+    created() {
+      this.setSpecie(this.activeSpecie.species);
+      // this.setActiveDataset(this.activeDataset);
+      this.setActiveFilter(this.activeFilter.name);
+    },
     mounted() {
       window.addEventListener('click', this.closeDropDown);
     },
@@ -182,6 +187,7 @@
       ...mapMutations({
         setSpecie: 'set_specie',
         setActiveDataset: 'set_active_dataset',
+        setActiveFilter: 'set_active_filter',
       }),
       closeDropDown(event) {
         if (!this.$el.querySelector('.dropdown').contains(event.target)) {
@@ -362,6 +368,8 @@
           padding: 5px
           border-radius: 5px
           cursor: pointer
+          margin-bottom: 3px
+          display: inline-block
           &:hover
             background: #095493
   .isOpenA
