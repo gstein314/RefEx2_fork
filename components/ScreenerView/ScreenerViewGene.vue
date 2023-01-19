@@ -569,7 +569,7 @@
             padding-right: 5px
       .unchecked
         input
-          color: #ccc
+          background: #ccc
     .filter_specificity_ROKU
       > table
         > tr
