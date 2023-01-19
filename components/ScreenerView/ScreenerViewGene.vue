@@ -137,7 +137,11 @@
               <font-awesome-icon icon="trash" /> Delete All
             </td>
           </tr>
-          <tr v-for="(val, index) in specificityROKU" :key="val.id">
+          <tr
+            v-for="(val, index) in specificityROKU"
+            :key="val.id"
+            :class="{ unchecked: !val.check }"
+          >
             <td class="check">
               <input
                 v-model="val.check"
@@ -221,7 +225,11 @@
               <font-awesome-icon icon="trash" /> Delete All
             </td>
           </tr>
-          <tr v-for="(val, index) in specificityTau" :key="val.id">
+          <tr
+            v-for="(val, index) in specificityTau"
+            :key="val.id"
+            :class="{ unchecked: !val.check }"
+          >
             <td class="check">
               <input
                 v-model="val.check"
@@ -559,6 +567,9 @@
             cursor: pointer
           > .check
             padding-right: 5px
+      .unchecked
+        input
+          color: #ccc
     .filter_specificity_ROKU
       > table
         > tr
