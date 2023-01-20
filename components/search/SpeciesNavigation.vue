@@ -124,11 +124,7 @@
       <li v-if="getPageType === 'project'">
         <div class="box">
           <div class="specie_wrapper">
-            <p class="title">
-              {{ activeFilter.name === 'gene' ? 'Sample' : 'Gene' }}
-              Symbol
-            </p>
-            <p>{{ symbol.name || symbol.symbol || symbol.Description }}</p>
+            <p>{{ symbol.symbol || symbol.Description }}</p>
           </div>
         </div>
         <div class="test -a"></div>
