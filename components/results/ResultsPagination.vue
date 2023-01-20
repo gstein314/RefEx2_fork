@@ -5,7 +5,7 @@
       <ul>
         <li
           :class="{ arrows: true, disabled: currentPage === 1 }"
-          @click="handleChangePage(1)"
+          @click="setPageNumber(1)"
         >
           <font-awesome-icon
             icon="angle-double-left"
@@ -14,7 +14,7 @@
         </li>
         <li
           :class="{ arrows: true, disabled: currentPage === 1 }"
-          @click="handleChangePage(currentPage - 1)"
+          @click="setPageNumber(currentPage - 1)"
         >
           <font-awesome-icon icon="angle-left" class="angle-left" />
         </li>
@@ -26,7 +26,7 @@
           v-for="(pageNumber, i) in pagesNumbersShown"
           :key="i"
           :class="{ pagination_item: true, active: pageNumber === currentPage }"
-          @click="handleChangePage(pageNumber)"
+          @click="setPageNumber(pageNumber)"
         >
           <span> {{ pageNumber }}</span>
         </li>
@@ -35,13 +35,13 @@
         </li>
         <li
           :class="{ arrows: true, disabled: currentPage === pagesNumber }"
-          @click="handleChangePage(currentPage + 1)"
+          @click="setPageNumber(currentPage + 1)"
         >
           <font-awesome-icon icon="angle-right" class="angle-right" />
         </li>
         <li
           :class="{ arrows: true, disabled: currentPage === pagesNumber }"
-          @click="handleChangePage(pagesNumber)"
+          @click="setPageNumber(pagesNumber)"
         >
           <font-awesome-icon
             icon="angle-double-right"
@@ -173,6 +173,11 @@
         ).toLocaleString();
       },
     },
+    watch: {
+      resultsDisplayed() {
+        this.setPageNumber(1);
+      },
+    },
     methods: {
       ...mapMutations({
         updatePagination: 'set_pagination',
@@ -184,7 +189,7 @@
           type: this.tableType,
         });
       },
-      handleChangePage(page) {
+      setPageNumber(page) {
         if (page < 1 || page > this.pagesNumber) {
           return;
         }

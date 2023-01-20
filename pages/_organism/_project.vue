@@ -80,6 +80,7 @@
       @activeSort="setProjectSortColumn"
     />
     <ResultsPagination
+      ref="resultsPagination"
       :pages-number="$store.state.project_pages_number"
       :results-displayed="resultsDisplayed"
       table-type="project"
