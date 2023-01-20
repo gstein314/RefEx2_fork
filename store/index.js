@@ -186,8 +186,10 @@ export const mutations = {
   ) {
     const copy = [...state.project_filters];
     const targetObjIndex = copy.findIndex(entry => entry.column === filterKey);
-    copy[targetObjIndex][key] = filter;
-    state.project_filters = copy;
+    if (copy[targetObjIndex][key] !== filter) {
+      copy[targetObjIndex][key] = filter;
+      state.project_filters = copy;
+    }
   },
   set_gene_modal(state, id = null) {
     state.gene_modal = id;
