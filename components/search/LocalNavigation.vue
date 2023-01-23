@@ -1,8 +1,8 @@
 <template>
   <nav class="nav_wrapper">
-    <ul class="species_navi">
-      <li :class="{ isOpenA }" @click.stop="updateIsOpenA">
-        <div class="box">
+    <ul class="nav_area">
+      <li :class="{ isOpenDataset }" @click.stop="updateIsOpenDataset">
+        <div class="nav_item">
           <icon-base :icon-name="activeSpecie.species" />
           <div class="specie_wrapper">
             <p class="title">Dataset</p>
@@ -10,18 +10,18 @@
             <p>
               {{ activeDataset.label
               }}<font-awesome-icon
-                v-if="getPageType === 'index' && isOpenA"
+                v-if="getPageType === 'index' && isOpenDataset"
                 icon="fa-angle-down"
               /><font-awesome-icon
-                v-else-if="getPageType === 'index' && !isOpenA"
+                v-else-if="getPageType === 'index' && !isOpenDataset"
                 icon="fa-angle-up"
               />
             </p>
           </div>
         </div>
-        <div class="test -a"></div>
-        <div class="test -b"></div>
-        <div class="dropdown" :class="{ isOpenA }">
+        <div class="nav_frame -before"></div>
+        <div class="nav_frame -after"></div>
+        <div class="dropdown_list" :class="{ isOpenDataset }">
           <li>
             <icon-base :icon-name="'Human'" />
             <div>
@@ -45,27 +45,27 @@
       </li>
       <li
         v-if="activeFilter.name === 'gene'"
-        :class="{ isOpenB }"
-        @click.stop="updateIsOpenB"
+        :class="{ isOpenType }"
+        @click.stop="updateIsOpenType"
       >
-        <div class="box">
+        <div class="nav_item">
           <font-awesome-icon icon="dna" />
           <div class="specie_wrapper">
             <p>
               {{ $firstLetterUppercase(activeFilter.name)
               }}<font-awesome-icon
-                v-if="getPageType === 'index' && isOpenB"
+                v-if="getPageType === 'index' && isOpenType"
                 icon="fa-angle-down"
               /><font-awesome-icon
-                v-else-if="getPageType === 'index' && !isOpenB"
+                v-else-if="getPageType === 'index' && !isOpenType"
                 icon="fa-angle-up"
               />
             </p>
           </div>
         </div>
-        <div class="test -a"></div>
-        <div class="test -b"></div>
-        <div class="dropdown" :class="{ isOpenB }">
+        <div class="nav_frame -before"></div>
+        <div class="nav_frame -after"></div>
+        <div class="dropdown_list" :class="{ isOpenType }">
           <li
             class="active_type"
             @click="$store.commit('set_active_filter', 'gene')"
@@ -84,27 +84,27 @@
       </li>
       <li
         v-if="activeFilter.name === 'sample'"
-        :class="{ isOpenB }"
-        @click.stop="updateIsOpenB"
+        :class="{ isOpenType }"
+        @click.stop="updateIsOpenType"
       >
-        <div class="box">
+        <div class="nav_item">
           <font-awesome-icon icon="flask" />
           <div class="specie_wrapper">
             <p>
               {{ $firstLetterUppercase(activeFilter.name)
               }}<font-awesome-icon
-                v-if="getPageType === 'index' && isOpenB"
+                v-if="getPageType === 'index' && isOpenType"
                 icon="fa-angle-down"
               /><font-awesome-icon
-                v-else-if="getPageType === 'index' && !isOpenB"
+                v-else-if="getPageType === 'index' && !isOpenType"
                 icon="fa-angle-up"
               />
             </p>
           </div>
         </div>
-        <div class="test -a"></div>
-        <div class="test -b"></div>
-        <div class="dropdown" :class="{ isOpenB }">
+        <div class="nav_frame -before"></div>
+        <div class="nav_frame -after"></div>
+        <div class="dropdown_list" :class="{ isOpenType }">
           <li
             class="active_type"
             @click="$store.commit('set_active_filter', 'gene')"
@@ -122,13 +122,13 @@
         </div>
       </li>
       <li v-if="getPageType === 'project'">
-        <div class="box">
+        <div class="nav_item">
           <div class="specie_wrapper">
             <p>{{ symbol.symbol || symbol.Description }}</p>
           </div>
         </div>
-        <div class="test -a"></div>
-        <div class="test -b"></div>
+        <div class="nav_frame -before"></div>
+        <div class="nav_frame -after"></div>
       </li>
     </ul>
   </nav>
@@ -152,8 +152,8 @@
     data() {
       return {
         species: datasets,
-        isOpenA: false,
-        isOpenB: false,
+        isOpenDataset: false,
+        isOpenType: false,
         selectedProject: datasets.reduce((acc, specie) => {
           acc[specie.species] = specie.datasets[0].dataset;
           return acc;
@@ -186,9 +186,9 @@
         setActiveFilter: 'set_active_filter',
       }),
       closeDropDown(event) {
-        if (!this.$el.querySelector('.dropdown').contains(event.target)) {
-          this.isOpenA = false;
-          this.isOpenB = false;
+        if (!this.$el.querySelector('.dropdown_list').contains(event.target)) {
+          this.isOpenDataset = false;
+          this.isOpenType = false;
         }
       },
       test() {
@@ -210,22 +210,22 @@
         this.setSpecie(specieId);
         this.updateActiveDataset(this.selectedProject[specieId]);
       },
-      updateIsOpenA() {
+      updateIsOpenDataset() {
         if (this.getPageType === 'project') {
           window.location.href = '/';
           window.open('/');
         } else {
-          this.isOpenB = false;
-          this.isOpenA = !this.isOpenA;
+          this.isOpenType = false;
+          this.isOpenDataset = !this.isOpenDataset;
         }
       },
-      updateIsOpenB() {
+      updateIsOpenType() {
         if (this.getPageType === 'project') {
           window.location.href = '/';
           window.open('/');
         } else {
-          this.isOpenA = false;
-          this.isOpenB = !this.isOpenB;
+          this.isOpenDataset = false;
+          this.isOpenType = !this.isOpenType;
         }
       },
     },
@@ -238,7 +238,7 @@
     position: sticky
     z-index: 2
     top: 0
-    .species_navi
+    .nav_area
       padding: $PADDING_WRAPPER
       margin: 0
       display: flex
@@ -253,19 +253,19 @@
         color: #fff
         display: flex
         padding-left: 10px
-        &.isOpenA, &.isOpenB
+        &.isOpenDataset, &.isOpenType
           background-color: #095493
-          .test.-b
+          .nav_frame.-after
             background-color: #095493
         &:hover
           background-color: #095493
-          .test.-b
+          .nav_frame.-after
             background-color: #095493
         &:nth-child(n + 2)
           padding-left: 30px
         &:nth-child(3)
           cursor: auto
-        > .test.-a
+        > .nav_frame.-before
           position: absolute
           right: -20px
           height: 100%
@@ -273,7 +273,7 @@
           width: 50px
           background: white
           clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 0 50%, 0% 0%)
-        > .test.-b
+        > .nav_frame.-after
           right: -18px
           height: 100%
           z-index: 1
@@ -285,7 +285,7 @@
           clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 0 50%, 0% 0%)
         > svg
           font-size: 24px
-        > .box
+        > .nav_item
           display: grid
           grid-template-columns: auto 1fr
           align-content: center
@@ -325,7 +325,7 @@
                 background: none
                 font-size: inherit
                 width: auto
-  .dropdown
+  .dropdown_list
     position: absolute
     top: 100%
     left: 0
@@ -368,8 +368,8 @@
           display: inline-block
           &:hover
             background: #095493
-  .isOpenA
+  .isOpenDataset
     display: block
-  .isOpenB
+  .isOpenType
     display: block
 </style>

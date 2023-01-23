@@ -6,7 +6,7 @@
       contains the correct information.
     </p>
     <div v-else ref="chartWrapper" class="chart_wrapper">
-      <SpeciesNavigation :symbol="infoForMainItem" />
+      <LocalNavigation :symbol="infoForMainItem" />
       <div class="content">
         <h1 class="header_title">
           <div class="title">
@@ -90,7 +90,7 @@
 </template>
 
 <script>
-  import SpeciesNavigation from '~/components/search/SpeciesNavigation.vue';
+  import LocalNavigation from '../../components/search/LocalNavigation.vue';
   import 'vue-slider-component/dist-css/vue-slider-component.css';
   import { mapGetters, mapMutations } from 'vuex';
   import ItemComparison from '~/components/results/ItemComparison.vue';
@@ -100,7 +100,6 @@
   import ModalViewFilter from '~/components/ModalView/ModalViewFilter.vue';
   import ProjectResults from '~/components/results/ProjectResults.vue';
   import ResultsPagination from '~/components/results/ResultsPagination.vue';
-  import DownloadButton from '~/components/DownloadButton.vue';
   import _ from 'lodash';
 
   const logMedianFilter = {
@@ -119,7 +118,7 @@
 
   export default {
     components: {
-      SpeciesNavigation,
+      LocalNavigation,
       ItemComparison,
       ModalViewGene,
       ModalViewCompare,
