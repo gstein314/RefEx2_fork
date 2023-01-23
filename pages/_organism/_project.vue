@@ -90,7 +90,7 @@
 </template>
 
 <script>
-  import LocalNavigation from '../../components/search/LocalNavigation.vue';
+  import LocalNavigation from '../../components/search/LocalNavigation/LocalNavigation.vue';
   import 'vue-slider-component/dist-css/vue-slider-component.css';
   import { mapGetters, mapMutations } from 'vuex';
   import ItemComparison from '~/components/results/ItemComparison.vue';
