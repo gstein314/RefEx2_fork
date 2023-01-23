@@ -60,10 +60,6 @@
       IconBase,
     },
     props: {
-      // activeSpecie: {
-      //   type: Object,
-      //   default: () => ({}),
-      // },
       getPageType: {
         type: String,
         default: '',

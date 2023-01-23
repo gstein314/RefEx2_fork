@@ -1,32 +1,23 @@
 <template>
-  <nav class="nav_wrapper">
-    <ul class="nav_area">
-      <local-navigation-dataset
-        :active-dataset="activeDataset"
-        :get-page-type="getPageType"
-      />
-      <local-navigation-type
-        :active-filter-name="activeFilter.name"
-        :get-page-type="getPageType"
-      />
-      <local-navigation-name :get-page-type="getPageType" :symbol="symbol" />
-    </ul>
-  </nav>
+  <li v-if="getPageType === 'project'">
+    <div class="nav_item">
+      <div class="specie_wrapper">
+        <p>{{ symbol.symbol || symbol.Description }}</p>
+      </div>
+    </div>
+    <div class="nav_frame -before"></div>
+    <div class="nav_frame -after"></div>
+  </li>
 </template>
 
 <script>
-  import { mapGetters, mapMutations } from 'vuex';
-  import LocalNavigationDataset from './LocalNavigationDataset.vue';
-  import LocalNavigationType from './LocalNavigationType.vue';
-  import LocalNavigationName from './LocalNavigationName.vue';
-
   export default {
-    components: {
-      LocalNavigationDataset,
-      LocalNavigationType,
-      LocalNavigationName,
-    },
+    components: {},
     props: {
+      getPageType: {
+        type: String,
+        default: '',
+      },
       symbol: {
         type: Object,
         default: () => ({}),
@@ -35,24 +26,34 @@
     data() {
       return {};
     },
-    computed: {
-      ...mapGetters({
-        activeDataset: 'active_dataset',
-        activeFilter: 'active_filter',
-        getPageType: 'get_page_type',
-      }),
-    },
-    created() {
-      // this.setActiveDataset(this.activeDataset);
-      this.setActiveFilter(this.activeFilter.name);
-    },
-    beforeDestroy() {
-      window.removeEventListener('click', this._onBlurHandler);
+    computed: {},
+    mounted() {
+      window.addEventListener('click', this.closeDropDown);
     },
     methods: {
-      ...mapMutations({
-        setActiveFilter: 'set_active_filter',
-      }),
+      updateIsOpenDataset() {
+        if (this.getPageType === 'project') {
+          window.location.href = '/';
+          window.open('/');
+        } else {
+          this.isOpenType = false;
+          this.isOpenDataset = !this.isOpenDataset;
+        }
+      },
+      updateIsOpenType() {
+        if (this.getPageType === 'project') {
+          window.location.href = '/';
+          window.open('/');
+        } else {
+          this.isOpenDataset = false;
+          this.isOpenType = !this.isOpenType;
+        }
+      },
+      closeDropDown(event) {
+        if (!this.$el.querySelector('.dropdown_list').contains(event.target)) {
+          this.isOpenType = false;
+        }
+      },
     },
   };
 </script>
@@ -150,4 +151,51 @@
                 background: none
                 font-size: inherit
                 width: auto
+  .dropdown_list
+    position: absolute
+    top: 100%
+    left: 0
+    display: none
+    padding: 0
+    list-style-type: none
+    background-color: white
+    z-index: 999
+    padding: 20px
+    box-shadow: 0px 5px 15px -5px $BLACK
+    cursor: auto
+    > .active_type:hover
+        color: white
+        background-color: $MAIN_COLOR
+        border-radius: 5px
+        cursor: pointer
+    > li
+      color: black
+      min-width: 200px
+      border-bottom: 1px solid #fff
+      display: grid
+      grid-template-columns: 30px 1fr
+      align-content: center
+      > svg
+        width: 30px
+        font-size: 18px
+        align-self: center
+      > div
+        padding: 0 10px
+        > p
+          margin: 0
+          padding-bottom: 10px
+        > .dataset_name
+          background: $MAIN_COLOR
+          color: white
+          padding: 5px
+          border-radius: 5px
+          cursor: pointer
+          margin-bottom: 3px
+          display: inline-block
+          &:hover
+            background: #095493
+  .isOpenDataset
+    display: block
+  .isOpenType
+    display: block
 </style>
