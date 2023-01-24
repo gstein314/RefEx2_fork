@@ -318,6 +318,15 @@
             delete: true,
           },
         ],
+        specificityROKUDefaultObj: {
+          group: '',
+          sample: '',
+          horl: '',
+          emin: '',
+          emax: '',
+          check: true,
+          delete: true,
+        },
         specificityTau: [
           {
             group: '',
@@ -327,6 +336,13 @@
             delete: true,
           },
         ],
+        specificityTauDefaultObj: {
+          group: '',
+          cutoff: '',
+          condition: '',
+          check: true,
+          delete: true,
+        },
         isAllChecked_ROKU: false,
         isAllChecked_Tau: false,
       };
@@ -455,32 +471,14 @@
       addIndexSpecificityROKU(index, value) {
         if (value.trim().length > 0) {
           if (!this.specificityROKU[index + 1]) {
-            this.specificityROKU.push({
-              group: '',
-              sample: '',
-              horl: '',
-              emin: '',
-              emax: '',
-              check: true,
-              delete: true,
-            });
+            this.specificityROKU.push({ ...this.specificityROKUDefaultObj });
           }
           this.specificityROKU[index].check = true;
           this.specificityROKU[index].delete = true;
         }
       },
       deleteAllSpecificityROKU() {
-        this.specificityROKU = [
-          {
-            group: '',
-            sample: '',
-            horl: '',
-            emin: '',
-            emax: '',
-            check: true,
-            delete: true,
-          },
-        ];
+        this.specificityROKU = [{ ...this.specificityROKUDefaultObj }];
       },
       addSpecificityTau(index) {
         this.specificityTau[index].check = !this.specificityTau[index].check;
@@ -491,28 +489,14 @@
       addIndexSpecificityTau(index, value) {
         if (value.trim().length > 0) {
           if (!this.specificityTau[index + 1]) {
-            this.specificityTau.push({
-              group: '',
-              cutoff: '',
-              condition: '',
-              check: true,
-              delete: true,
-            });
+            this.specificityTau.push({ ...this.specificityTauDefaultObj });
           }
           this.specificityTau[index].check = true;
           this.specificityTau[index].delete = true;
         }
       },
       deleteAllSpecificityTau() {
-        this.specificityTau = [
-          {
-            group: '',
-            cutoff: '',
-            condition: '',
-            check: true,
-            delete: true,
-          },
-        ];
+        this.specificityTau = [{ ...this.specificityTauDefaultObj }];
       },
     },
   };
