@@ -482,25 +482,26 @@
             specificityDefaultObj = this.specificityTauDefaultObj;
             break;
         }
-        if (action === 'CHECK') {
-          specificityArray[index].check = !specificityArray[index].check;
-        }
-        if (action === 'ADD') {
-          if (value.trim().length > 0) {
-            if (!specificityArray[index + 1]) {
-              specificityArray.push({ ...specificityDefaultObj });
+        switch (action) {
+          case 'CHECK':
+            specificityArray[index].check = !specificityArray[index].check;
+            break;
+          case 'ADD':
+            if (value.trim().length > 0) {
+              if (!specificityArray[index + 1]) {
+                specificityArray.push({ ...specificityDefaultObj });
+              }
+              specificityArray[index].check = true;
+              specificityArray[index].delete = true;
             }
-            specificityArray[index].check = true;
-            specificityArray[index].delete = true;
-          }
-        }
-        if (action === 'DEL') {
-          specificityArray.splice(index, 1);
-        }
-        if (action === 'DEL_ALL') {
-          console.log('DEL ALL');
-          specificityArray.splice(0, specificityArray.length);
-          specificityArray.push({ ...specificityDefaultObj });
+            break;
+          case 'DEL':
+            specificityArray.splice(index, 1);
+            break;
+          case 'DEL_ALL':
+            specificityArray.splice(0, specificityArray.length);
+            specificityArray.push({ ...specificityDefaultObj });
+            break;
         }
       },
     },
