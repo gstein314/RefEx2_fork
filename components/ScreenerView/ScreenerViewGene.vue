@@ -138,73 +138,78 @@
             </td>
           </tr>
           <tr
-            v-for="(val, index) in specificityROKU.list"
-            :key="val.id"
-            :class="{ unchecked: !val.check }"
+            v-for="(item, index) in specificityROKU.list"
+            :key="item.id"
+            :class="{ unchecked: !item.check }"
           >
             <td class="check">
               <input
-                v-model="val.check"
+                v-model="item.check"
                 type="checkbox"
-                @click="dispatchSpecificityAction('ROKU', 'CHECK', index)"
+                @click="dispatchSpecificityAction(item.type, 'CHECK', index)"
               />
             </td>
             <td>
               <input
-                v-model="val.group"
+                v-model="item.group"
                 type="text"
                 placeholder="select a group"
                 @input="
-                  dispatchSpecificityAction('ROKU', 'ADD', index, val.group)
+                  dispatchSpecificityAction(item.type, 'ADD', index, item.group)
                 "
               />
             </td>
             <td>
               <input
-                v-model="val.sample"
+                v-model="item.sample"
                 type="text"
                 placeholder="search samples by text"
                 @input="
-                  dispatchSpecificityAction('ROKU', 'ADD', index, val.sample)
+                  dispatchSpecificityAction(
+                    item.type,
+                    'ADD',
+                    index,
+                    item.sample
+                  )
                 "
               />
             </td>
             <td>
               <input
-                v-model="val.horl"
+                v-model="item.horl"
                 type="text"
                 placeholder="High"
                 @input="
-                  dispatchSpecificityAction('ROKU', 'ADD', index, val.horl)
+                  dispatchSpecificityAction(item.type, 'ADD', index, item.horl)
                 "
               />
             </td>
             <td>
               <input
-                v-model="val.emin"
+                v-model="item.emin"
                 type="text"
                 placeholder="1"
                 @input="
-                  dispatchSpecificityAction('ROKU', 'ADD', index, val.emin)
+                  dispatchSpecificityAction(item.type, 'ADD', index, item.emin)
                 "
               />
             </td>
             <td>
               <input
-                v-model="val.emax"
+                v-model="item.emax"
                 type="text"
                 placeholder="5"
                 @input="
-                  dispatchSpecificityAction('ROKU', 'ADD', index, val.emax)
+                  dispatchSpecificityAction(item.type, 'ADD', index, item.emax)
                 "
               />
             </td>
             <td class="icon">
               <button
                 class="delete_btn"
-                :class="{ disabled: !val.delete }"
-                :disabled="!val.delete"
-                @click="dispatchSpecificityAction('ROKU', 'DEL', index)"
+                :class="{ disabled: !item.delete }"
+                :disabled="!item.delete"
+                @click="dispatchSpecificityAction(item.type, 'DEL', index)"
               >
                 <font-awesome-icon icon="trash" />
                 Delete
@@ -240,53 +245,63 @@
             </td>
           </tr>
           <tr
-            v-for="(val, index) in specificityTau.list"
-            :key="val.id"
-            :class="{ unchecked: !val.check }"
+            v-for="(item, index) in specificityTau.list"
+            :key="item.id"
+            :class="{ unchecked: !item.check }"
           >
             <td class="check">
               <input
-                v-model="val.check"
+                v-model="item.check"
                 type="checkbox"
-                @click="dispatchSpecificityAction('Tau', 'CHECK', index)"
+                @click="dispatchSpecificityAction(item.type, 'CHECK', index)"
               />
             </td>
             <td>
               <input
-                v-model="val.group"
+                v-model="item.group"
                 type="text"
                 placeholder="select a group"
                 @input="
-                  dispatchSpecificityAction('Tau', 'ADD', index, val.group)
+                  dispatchSpecificityAction(item.type, 'ADD', index, item.group)
                 "
               />
             </td>
             <td>
               <input
-                v-model="val.cutoff"
+                v-model="item.cutoff"
                 type="text"
                 placeholder="0.1"
                 @input="
-                  dispatchSpecificityAction('Tau', 'ADD', index, val.cutoff)
+                  dispatchSpecificityAction(
+                    item.type,
+                    'ADD',
+                    index,
+                    item.cutoff
+                  )
                 "
               />
             </td>
             <td>
               <input
-                v-model="val.condition"
+                v-model="item.condition"
                 type="text"
                 placeholder="≧"
                 @input="
-                  dispatchSpecificityAction('Tau', 'ADD', index, val.condition)
+                  dispatchSpecificityAction(
+                    item.type,
+                    'ADD',
+                    index,
+                    item.condition
+                  )
                 "
               />
             </td>
             <td class="icon">
               <button
                 class="delete_btn"
-                :class="{ disabled: !val.delete }"
-                :disabled="!val.delete"
-                @click="dispatchSpecificityAction('Tau', 'DEL', index)"
+                :class="{ disabled: !item.delete }"
+                :disabled="!item.delete"
+                @click="dispatchSpecificityAction(item.type, 'DEL', index)"
               >
                 <font-awesome-icon icon="trash" />
                 Delete
@@ -308,6 +323,7 @@
     components: { MultiSelect },
     data() {
       const specificityROKUDefaultItem = {
+        type: 'ROKU',
         group: '',
         sample: '',
         horl: '',
@@ -317,6 +333,7 @@
         delete: true,
       };
       const specificityTauDefaultItem = {
+        type: 'Tau',
         group: '',
         cutoff: '',
         condition: '',
@@ -447,36 +464,37 @@
         this.parameters = { ...this.parameters, [key]: newTags };
       },
       dispatchSpecificityAction(type, action, index, value) {
-        let specificity = this[`specificity${type}`];
-        let specificityList = specificity.list;
-        let specificityDefaultItem = specificity.defaultItem;
+        const specificity = this[`specificity${type}`];
+        const list = specificity.list;
+        const targetItem = list[index];
+        const defaultItem = specificity.defaultItem;
         switch (action) {
           case 'CHECK_ALL':
             specificity.isAllChecked = !specificity.isAllChecked;
-            for (const item of specificity.list) {
+            for (const item of list) {
               specificity.isAllChecked
                 ? (item.check = true)
                 : (item.check = false);
             }
             break;
           case 'CHECK':
-            specificityList[index].check = !specificityList[index].check;
+            targetItem.check = !targetItem.check;
             break;
           case 'ADD':
             if (value.trim().length > 0) {
-              if (!specificityList[index + 1]) {
-                specificityList.push({ ...specificityDefaultItem });
+              if (!list[index + 1]) {
+                list.push({ ...defaultItem });
               }
-              specificityList[index].check = true;
-              specificityList[index].delete = true;
+              targetItem.check = true;
+              targetItem.delete = true;
             }
             break;
           case 'DEL':
-            specificityList.splice(index, 1);
+            list.splice(index, 1);
             break;
           case 'DEL_ALL':
-            specificityList.splice(0, specificityList.length);
-            specificityList.push({ ...specificityDefaultItem });
+            list.splice(0, list.length);
+            list.push({ ...defaultItem });
             break;
         }
       },
