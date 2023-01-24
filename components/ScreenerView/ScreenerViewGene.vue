@@ -120,7 +120,7 @@
             <td class="check">
               <input
                 type="checkbox"
-                :checked="isAllChecked_ROKU"
+                :checked="specificityROKU.isAllChecked"
                 @click="dispatchSpecificityAction('ROKU', 'CHECK_ALL')"
               />
             </td>
@@ -224,7 +224,7 @@
             <td class="check">
               <input
                 type="checkbox"
-                :checked="isAllChecked_Tau"
+                :checked="specificityTau.isAllChecked"
                 @click="dispatchSpecificityAction('Tau', 'CHECK_ALL')"
               />
             </td>
@@ -346,12 +346,12 @@
         specificityROKU: {
           list: [{ ...specificityROKUDefaultItem }],
           defaultItem: { ...specificityROKUDefaultItem },
-          isAllChecked: false,
+          isAllChecked: true,
         },
         specificityTau: {
           list: [{ ...specificityTauDefaultItem }],
           defaultItem: { ...specificityTauDefaultItem },
-          isAllChecked: false,
+          isAllChecked: true,
         },
       };
     },
