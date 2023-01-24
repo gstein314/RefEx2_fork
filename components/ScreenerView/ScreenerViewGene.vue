@@ -154,7 +154,9 @@
                 v-model="val.group"
                 type="text"
                 placeholder="select a group"
-                @input="addIndexSpecificity(index, val.group, 'ROKU')"
+                @input="
+                  dispatchSpecificityAction(index, val.group, 'ROKU', 'ADD')
+                "
               />
             </td>
             <td>
@@ -162,7 +164,9 @@
                 v-model="val.sample"
                 type="text"
                 placeholder="search samples by text"
-                @input="addIndexSpecificity(index, val.sample, 'ROKU')"
+                @input="
+                  dispatchSpecificityAction(index, val.sample, 'ROKU', 'ADD')
+                "
               />
             </td>
             <td>
@@ -170,7 +174,9 @@
                 v-model="val.horl"
                 type="text"
                 placeholder="High"
-                @input="addIndexSpecificity(index, val.horl, 'ROKU')"
+                @input="
+                  dispatchSpecificityAction(index, val.horl, 'ROKU', 'ADD')
+                "
               />
             </td>
             <td>
@@ -178,7 +184,9 @@
                 v-model="val.emin"
                 type="text"
                 placeholder="1"
-                @input="addIndexSpecificity(index, val.emin, 'ROKU')"
+                @input="
+                  dispatchSpecificityAction(index, val.emin, 'ROKU', 'ADD')
+                "
               />
             </td>
             <td>
@@ -186,7 +194,9 @@
                 v-model="val.emax"
                 type="text"
                 placeholder="5"
-                @input="addIndexSpecificity(index, val.emax, 'ROKU')"
+                @input="
+                  dispatchSpecificityAction(index, val.emax, 'ROKU', 'ADD')
+                "
               />
             </td>
             <td class="icon">
@@ -242,7 +252,9 @@
                 v-model="val.group"
                 type="text"
                 placeholder="select a group"
-                @input="addIndexSpecificity(index, val.group, 'Tau')"
+                @input="
+                  dispatchSpecificityAction(index, val.group, 'Tau', 'ADD')
+                "
               />
             </td>
             <td>
@@ -250,7 +262,9 @@
                 v-model="val.cutoff"
                 type="text"
                 placeholder="0.1"
-                @input="addIndexSpecificity(index, val.cutoff, 'Tau')"
+                @input="
+                  dispatchSpecificityAction(index, val.cutoff, 'Tau', 'ADD')
+                "
               />
             </td>
             <td>
@@ -258,7 +272,9 @@
                 v-model="val.condition"
                 type="text"
                 placeholder="≧"
-                @input="addIndexSpecificity(index, val.condition, 'Tau')"
+                @input="
+                  dispatchSpecificityAction(index, val.condition, 'Tau', 'ADD')
+                "
               />
             </td>
             <td class="icon">
@@ -451,6 +467,26 @@
       },
       delSpecificityROKU(index) {
         this.specificityROKU.splice(index, 1);
+      },
+      dispatchSpecificityAction(index, value, type, action) {
+        if (action === 'ADD') {
+          let specificityArray;
+          switch (type) {
+            case 'ROKU':
+              specificityArray = this.specificityROKU;
+              break;
+            case 'Tau':
+              specificityArray = this.specificityTau;
+              break;
+          }
+          if (value.trim().length > 0) {
+            if (!specificityArray[index + 1]) {
+              specificityArray.push({ ...this.specificityROKUDefaultObj });
+            }
+            specificityArray[index].check = true;
+            specificityArray[index].delete = true;
+          }
+        }
       },
       addIndexSpecificity(index, value, type) {
         let specificityArray;
