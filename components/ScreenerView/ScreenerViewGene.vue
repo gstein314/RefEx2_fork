@@ -314,8 +314,8 @@
             horl: '',
             emin: '',
             emax: '',
-            check: false,
-            delete: false,
+            check: true,
+            delete: true,
           },
         ],
         specificityTau: [
@@ -323,8 +323,8 @@
             group: '',
             cutoff: '',
             condition: '',
-            check: false,
-            delete: false,
+            check: true,
+            delete: true,
           },
         ],
         isAllChecked_ROKU: false,
@@ -461,8 +461,8 @@
               horl: '',
               emin: '',
               emax: '',
-              check: false,
-              delete: false,
+              check: true,
+              delete: true,
             });
           }
           this.specificityROKU[index].check = true;
@@ -477,8 +477,8 @@
             horl: '',
             emin: '',
             emax: '',
-            check: false,
-            delete: false,
+            check: true,
+            delete: true,
           },
         ];
       },
@@ -495,8 +495,8 @@
               group: '',
               cutoff: '',
               condition: '',
-              check: false,
-              delete: false,
+              check: true,
+              delete: true,
             });
           }
           this.specificityTau[index].check = true;
@@ -509,8 +509,8 @@
             group: '',
             cutoff: '',
             condition: '',
-            check: false,
-            delete: false,
+            check: true,
+            delete: true,
           },
         ];
       },
