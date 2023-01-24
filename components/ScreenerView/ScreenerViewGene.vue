@@ -307,7 +307,7 @@
   export default {
     components: { MultiSelect },
     data() {
-      const specificityROKUDefaultObj = {
+      const specificityROKUDefaultItem = {
         group: '',
         sample: '',
         horl: '',
@@ -316,7 +316,7 @@
         check: true,
         delete: true,
       };
-      const specificityTauDefaultObj = {
+      const specificityTauDefaultItem = {
         group: '',
         cutoff: '',
         condition: '',
@@ -344,19 +344,15 @@
         },
         debounce: null,
         specificityROKU: {
-          list: [{ ...specificityROKUDefaultObj }],
+          list: [{ ...specificityROKUDefaultItem }],
           isAllChecked: false,
         },
         specificityTau: {
-          list: [{ ...specificityTauDefaultObj }],
+          list: [{ ...specificityTauDefaultItem }],
           isAllChecked: false,
         },
-        // specificityROKU: [{ ...specificityROKUDefaultObj }],
-        specificityROKUDefaultObj: specificityROKUDefaultObj,
-        isAllChecked_ROKU: false,
-        // specificityTau: [{ ...specificityTauDefaultObj }],
-        specificityTauDefaultObj: specificityTauDefaultObj,
-        isAllChecked_Tau: false,
+        specificityROKUDefaultItem: specificityROKUDefaultItem,
+        specificityTauDefaultItem: specificityTauDefaultItem,
       };
     },
     computed: {
@@ -451,15 +447,15 @@
         this.parameters = { ...this.parameters, [key]: newTags };
       },
       toggleAllSpecificity(type) {
-        let specificityArray = this[`specificity${type}`];
+        let specificityList = this[`specificity${type}`];
         this[`isAllChecked_${type}`] = !this[`isAllChecked_${type}`];
         if (this[`isAllChecked_${type}`]) {
-          for (const index in specificityArray) {
-            specificityArray[index].check = true;
+          for (const index in specificityList) {
+            specificityList[index].check = true;
           }
         } else {
-          for (const index in specificityArray) {
-            specificityArray[index].check = false;
+          for (const index in specificityList) {
+            specificityList[index].check = false;
           }
         }
       },
@@ -488,27 +484,27 @@
         }
       },
       dispatchSpecificityAction(type, action, index, value) {
-        let specificityArray = this[`specificity${type}`].list;
-        let specificityDefaultObj = this[`specificity${type}DefaultObj`];
+        let specificityList = this[`specificity${type}`].list;
+        let specificityDefaultItem = this[`specificity${type}DefaultItem`];
         switch (action) {
           case 'CHECK':
-            specificityArray[index].check = !specificityArray[index].check;
+            specificityList[index].check = !specificityList[index].check;
             break;
           case 'ADD':
             if (value.trim().length > 0) {
-              if (!specificityArray[index + 1]) {
-                specificityArray.push({ ...specificityDefaultObj });
+              if (!specificityList[index + 1]) {
+                specificityList.push({ ...specificityDefaultItem });
               }
-              specificityArray[index].check = true;
-              specificityArray[index].delete = true;
+              specificityList[index].check = true;
+              specificityList[index].delete = true;
             }
             break;
           case 'DEL':
-            specificityArray.splice(index, 1);
+            specificityList.splice(index, 1);
             break;
           case 'DEL_ALL':
-            specificityArray.splice(0, specificityArray.length);
-            specificityArray.push({ ...specificityDefaultObj });
+            specificityList.splice(0, specificityList.length);
+            specificityList.push({ ...specificityDefaultItem });
             break;
         }
       },
