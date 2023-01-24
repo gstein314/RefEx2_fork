@@ -154,7 +154,7 @@
                 v-model="val.group"
                 type="text"
                 placeholder="select a group"
-                @input="addIndexSpecificityROKU(index, val.group)"
+                @input="addIndexSpecificity(index, val.group, 'ROKU')"
               />
             </td>
             <td>
@@ -162,7 +162,7 @@
                 v-model="val.sample"
                 type="text"
                 placeholder="search samples by text"
-                @input="addIndexSpecificityROKU(index, val.sample)"
+                @input="addIndexSpecificity(index, val.sample, 'ROKU')"
               />
             </td>
             <td>
@@ -170,7 +170,7 @@
                 v-model="val.horl"
                 type="text"
                 placeholder="High"
-                @input="addIndexSpecificityROKU(index, val.horl)"
+                @input="addIndexSpecificity(index, val.horl, 'ROKU')"
               />
             </td>
             <td>
@@ -178,7 +178,7 @@
                 v-model="val.emin"
                 type="text"
                 placeholder="1"
-                @input="addIndexSpecificityROKU(index, val.emin)"
+                @input="addIndexSpecificity(index, val.emin, 'ROKU')"
               />
             </td>
             <td>
@@ -186,7 +186,7 @@
                 v-model="val.emax"
                 type="text"
                 placeholder="5"
-                @input="addIndexSpecificityROKU(index, val.emax)"
+                @input="addIndexSpecificity(index, val.emax, 'ROKU')"
               />
             </td>
             <td class="icon">
@@ -242,7 +242,7 @@
                 v-model="val.group"
                 type="text"
                 placeholder="select a group"
-                @input="addIndexSpecificityTau(index, val.group)"
+                @input="addIndexSpecificity(index, val.group, 'Tau')"
               />
             </td>
             <td>
@@ -250,7 +250,7 @@
                 v-model="val.cutoff"
                 type="text"
                 placeholder="0.1"
-                @input="addIndexSpecificityTau(index, val.cutoff)"
+                @input="addIndexSpecificity(index, val.cutoff, 'Tau')"
               />
             </td>
             <td>
@@ -258,7 +258,7 @@
                 v-model="val.condition"
                 type="text"
                 placeholder="≧"
-                @input="addIndexSpecificityTau(index, val.condition)"
+                @input="addIndexSpecificity(index, val.condition, 'Tau')"
               />
             </td>
             <td class="icon">
@@ -452,13 +452,22 @@
       delSpecificityROKU(index) {
         this.specificityROKU.splice(index, 1);
       },
-      addIndexSpecificityROKU(index, value) {
+      addIndexSpecificity(index, value, type) {
+        let specificityArray;
+        switch (type) {
+          case 'ROKU':
+            specificityArray = this.specificityROKU;
+            break;
+          case 'Tau':
+            specificityArray = this.specificityTau;
+            break;
+        }
         if (value.trim().length > 0) {
-          if (!this.specificityROKU[index + 1]) {
-            this.specificityROKU.push({ ...this.specificityROKUDefaultObj });
+          if (!specificityArray[index + 1]) {
+            specificityArray.push({ ...this.specificityROKUDefaultObj });
           }
-          this.specificityROKU[index].check = true;
-          this.specificityROKU[index].delete = true;
+          specificityArray[index].check = true;
+          specificityArray[index].delete = true;
         }
       },
       deleteAllSpecificityROKU() {
@@ -469,15 +478,6 @@
       },
       delSpecificityTau(index) {
         this.specificityTau.splice(index, 1);
-      },
-      addIndexSpecificityTau(index, value) {
-        if (value.trim().length > 0) {
-          if (!this.specificityTau[index + 1]) {
-            this.specificityTau.push({ ...this.specificityTauDefaultObj });
-          }
-          this.specificityTau[index].check = true;
-          this.specificityTau[index].delete = true;
-        }
       },
       deleteAllSpecificityTau() {
         this.specificityTau = [{ ...this.specificityTauDefaultObj }];
