@@ -121,7 +121,7 @@
               <input
                 type="checkbox"
                 :checked="isAllChecked_ROKU"
-                @click="toggleAllSpecificity('ROKU')"
+                @click="toggleAllSpecificityROKU"
               />
             </td>
             <td class="group">Group</td>
@@ -138,7 +138,7 @@
             </td>
           </tr>
           <tr
-            v-for="(val, index) in specificityROKU"
+            v-for="(val, index) in specificityROKU.list"
             :key="val.id"
             :class="{ unchecked: !val.check }"
           >
@@ -240,7 +240,7 @@
             </td>
           </tr>
           <tr
-            v-for="(val, index) in specificityTau"
+            v-for="(val, index) in specificityTau.list"
             :key="val.id"
             :class="{ unchecked: !val.check }"
           >
@@ -343,10 +343,18 @@
           go: [],
         },
         debounce: null,
-        specificityROKU: [{ ...specificityROKUDefaultObj }],
+        specificityROKU: {
+          list: [{ ...specificityROKUDefaultObj }],
+          isAllChecked: false,
+        },
+        specificityTau: {
+          list: [{ ...specificityTauDefaultObj }],
+          isAllChecked: false,
+        },
+        // specificityROKU: [{ ...specificityROKUDefaultObj }],
         specificityROKUDefaultObj: specificityROKUDefaultObj,
         isAllChecked_ROKU: false,
-        specificityTau: [{ ...specificityTauDefaultObj }],
+        // specificityTau: [{ ...specificityTauDefaultObj }],
         specificityTauDefaultObj: specificityTauDefaultObj,
         isAllChecked_Tau: false,
       };
@@ -456,31 +464,31 @@
         }
       },
       toggleAllSpecificityROKU() {
-        this.isAllChecked_ROKU = !this.isAllChecked_ROKU;
-        if (this.isAllChecked_ROKU) {
-          for (const index in this.specificityROKU) {
-            this.specificityROKU[index].check = true;
+        this.specificityROKU.isAllChecked = !this.specificityROKU.isAllChecked;
+        if (this.specificityROKU.isAllChecked) {
+          for (const item of this.specificityROKU.list) {
+            item.check = true;
           }
         } else {
-          for (const index in this.specificityROKU) {
-            this.specificityROKU[index].check = false;
+          for (const item of this.specificityROKU.list) {
+            item.check = false;
           }
         }
       },
       toggleAllSpecificityTau() {
-        this.isAllChecked_Tau = !this.isAllChecked_Tau;
-        if (this.isAllChecked_Tau) {
-          for (const index in this.specificityTau) {
-            this.specificityTau[index].check = true;
+        this.specificityTau.isAllChecked = !this.specificityTau.isAllChecked;
+        if (this.specificityTau.isAllChecked) {
+          for (const item of this.specificityTau.list) {
+            item.check = true;
           }
         } else {
-          for (const index in this.specificityTau) {
-            this.specificityTau[index].check = false;
+          for (const item of this.specificityTau.list) {
+            item.check = false;
           }
         }
       },
       dispatchSpecificityAction(type, action, index, value) {
-        let specificityArray = this[`specificity${type}`];
+        let specificityArray = this[`specificity${type}`].list;
         let specificityDefaultObj = this[`specificity${type}DefaultObj`];
         switch (action) {
           case 'CHECK':
