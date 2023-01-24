@@ -121,7 +121,7 @@
               <input
                 type="checkbox"
                 :checked="isAllChecked_ROKU"
-                @click="toggleAllSpecificityROKU()"
+                @click="toggleAllSpecificity('ROKU')"
               />
             </td>
             <td class="group">Group</td>
@@ -345,9 +345,9 @@
         debounce: null,
         specificityROKU: [{ ...specificityROKUDefaultObj }],
         specificityROKUDefaultObj: specificityROKUDefaultObj,
+        isAllChecked_ROKU: false,
         specificityTau: [{ ...specificityTauDefaultObj }],
         specificityTauDefaultObj: specificityTauDefaultObj,
-        isAllChecked_ROKU: false,
         isAllChecked_Tau: false,
       };
     },
@@ -442,6 +442,19 @@
       setTags(newTags, key) {
         this.parameters = { ...this.parameters, [key]: newTags };
       },
+      toggleAllSpecificity(type) {
+        let specificityArray = this[`specificity${type}`];
+        this[`isAllChecked_${type}`] = !this[`isAllChecked_${type}`];
+        if (this[`isAllChecked_${type}`]) {
+          for (const index in specificityArray) {
+            specificityArray[index].check = true;
+          }
+        } else {
+          for (const index in specificityArray) {
+            specificityArray[index].check = false;
+          }
+        }
+      },
       toggleAllSpecificityROKU() {
         this.isAllChecked_ROKU = !this.isAllChecked_ROKU;
         if (this.isAllChecked_ROKU) {
@@ -469,7 +482,6 @@
       dispatchSpecificityAction(type, action, index, value) {
         let specificityArray = this[`specificity${type}`];
         let specificityDefaultObj = this[`specificity${type}DefaultObj`];
-        let isAllChecked = this[`isAllChecked_${type}`];
         switch (action) {
           case 'CHECK':
             specificityArray[index].check = !specificityArray[index].check;
