@@ -124,11 +124,13 @@
                 @click="dispatchSpecificityAction('ROKU', 'CHECK_ALL')"
               />
             </td>
-            <td class="group">Group</td>
-            <td class="sample">Sample</td>
-            <td class="horl">High or Low</td>
-            <td class="entropy">Entropy (min)</td>
-            <td class="entropy">Entropy (max)</td>
+            <td
+              v-for="criterion in criteriaROKU"
+              :key="criterion.id"
+              :class="criterion.class"
+            >
+              {{ criterion.name }}
+            </td>
             <td
               colspan="2"
               class="delete_all"
@@ -149,58 +151,13 @@
                 @click="dispatchSpecificityAction(item.type, 'CHECK', index)"
               />
             </td>
-            <td>
+            <td v-for="criterion in criteriaROKU" :key="criterion.id">
               <input
-                v-model="item.group"
+                v-model="criterion.group"
                 type="text"
-                placeholder="select a group"
+                :placeholder="criterion.placeholder"
                 @input="
                   dispatchSpecificityAction(item.type, 'ADD', index, item.group)
-                "
-              />
-            </td>
-            <td>
-              <input
-                v-model="item.sample"
-                type="text"
-                placeholder="search samples by text"
-                @input="
-                  dispatchSpecificityAction(
-                    item.type,
-                    'ADD',
-                    index,
-                    item.sample
-                  )
-                "
-              />
-            </td>
-            <td>
-              <input
-                v-model="item.horl"
-                type="text"
-                placeholder="High"
-                @input="
-                  dispatchSpecificityAction(item.type, 'ADD', index, item.horl)
-                "
-              />
-            </td>
-            <td>
-              <input
-                v-model="item.emin"
-                type="text"
-                placeholder="1"
-                @input="
-                  dispatchSpecificityAction(item.type, 'ADD', index, item.emin)
-                "
-              />
-            </td>
-            <td>
-              <input
-                v-model="item.emax"
-                type="text"
-                placeholder="5"
-                @input="
-                  dispatchSpecificityAction(item.type, 'ADD', index, item.emax)
                 "
               />
             </td>
@@ -233,9 +190,13 @@
                 @click="dispatchSpecificityAction('Tau', 'CHECK_ALL')"
               />
             </td>
-            <td class="group">Group</td>
-            <td class="cutoff">Cutoff</td>
-            <td class="condition">Condition</td>
+            <td
+              v-for="criterion in criteriaTau"
+              :key="criterion.id"
+              :class="criterion.class"
+            >
+              {{ criterion.name }}
+            </td>
             <td
               colspan="2"
               class="delete_all"
@@ -256,43 +217,13 @@
                 @click="dispatchSpecificityAction(item.type, 'CHECK', index)"
               />
             </td>
-            <td>
+            <td v-for="criterion in criteriaTau" :key="criterion.id">
               <input
-                v-model="item.group"
+                v-model="criterion.group"
                 type="text"
-                placeholder="select a group"
+                :placeholder="criterion.placeholder"
                 @input="
                   dispatchSpecificityAction(item.type, 'ADD', index, item.group)
-                "
-              />
-            </td>
-            <td>
-              <input
-                v-model="item.cutoff"
-                type="text"
-                placeholder="0.1"
-                @input="
-                  dispatchSpecificityAction(
-                    item.type,
-                    'ADD',
-                    index,
-                    item.cutoff
-                  )
-                "
-              />
-            </td>
-            <td>
-              <input
-                v-model="item.condition"
-                type="text"
-                placeholder="≧"
-                @input="
-                  dispatchSpecificityAction(
-                    item.type,
-                    'ADD',
-                    index,
-                    item.condition
-                  )
                 "
               />
             </td>
@@ -370,6 +301,48 @@
           defaultItem: { ...specificityTauDefaultItem },
           isAllChecked: true,
         },
+        criteriaROKU: [
+          {
+            id: '1',
+            name: 'Group',
+            class: 'group',
+            placeholder: 'select a group',
+          },
+          {
+            id: '2',
+            name: 'Sample',
+            class: 'sample',
+            placeholder: 'search samples by text',
+          },
+          { id: '3', name: 'High or Low', class: 'horl', placeholder: 'High' },
+          {
+            id: '4',
+            name: 'Entropy (min)',
+            class: 'entropy',
+            placeholder: '1',
+          },
+          {
+            id: '5',
+            name: 'Entropy (max)',
+            class: 'entropy',
+            placeholder: '5',
+          },
+        ],
+        criteriaTau: [
+          {
+            id: '1',
+            name: 'Group',
+            class: 'group',
+            placeholder: 'select a group',
+          },
+          {
+            id: '2',
+            name: 'Cutoff',
+            class: 'cutoff',
+            placeholder: '0.1',
+          },
+          { id: '3', name: 'Condition', class: 'condition', placeholder: '≧' },
+        ],
       };
     },
     computed: {
