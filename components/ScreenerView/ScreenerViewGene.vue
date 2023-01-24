@@ -287,6 +287,22 @@
   export default {
     components: { MultiSelect },
     data() {
+      const specificityROKUDefaultObj = {
+        group: '',
+        sample: '',
+        horl: '',
+        emin: '',
+        emax: '',
+        check: true,
+        delete: true,
+      };
+      const specificityTauDefaultObj = {
+        group: '',
+        cutoff: '',
+        condition: '',
+        check: true,
+        delete: true,
+      };
       return {
         autocompleteStaticData: {},
         chrValue: [],
@@ -307,42 +323,10 @@
           go: [],
         },
         debounce: null,
-        specificityROKU: [
-          {
-            group: '',
-            sample: '',
-            horl: '',
-            emin: '',
-            emax: '',
-            check: true,
-            delete: true,
-          },
-        ],
-        specificityROKUDefaultObj: {
-          group: '',
-          sample: '',
-          horl: '',
-          emin: '',
-          emax: '',
-          check: true,
-          delete: true,
-        },
-        specificityTau: [
-          {
-            group: '',
-            cutoff: '',
-            condition: '',
-            check: true,
-            delete: true,
-          },
-        ],
-        specificityTauDefaultObj: {
-          group: '',
-          cutoff: '',
-          condition: '',
-          check: true,
-          delete: true,
-        },
+        specificityROKU: [{ ...specificityROKUDefaultObj }],
+        specificityROKUDefaultObj: specificityROKUDefaultObj,
+        specificityTau: [{ ...specificityTauDefaultObj }],
+        specificityTauDefaultObj: specificityTauDefaultObj,
         isAllChecked_ROKU: false,
         isAllChecked_Tau: false,
       };
