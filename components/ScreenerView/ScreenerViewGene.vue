@@ -132,7 +132,7 @@
             <td
               colspan="2"
               class="delete_all"
-              @click="deleteAllSpecificityROKU"
+              @click="dispatchSpecificityAction('ROKU', 'DEL_ALL')"
             >
               <font-awesome-icon icon="trash" /> Delete All
             </td>
@@ -146,7 +146,7 @@
               <input
                 v-model="val.check"
                 type="checkbox"
-                @click="addSpecificityROKU(index)"
+                @click="dispatchSpecificityAction('ROKU', 'CHECK', index)"
               />
             </td>
             <td>
@@ -155,7 +155,7 @@
                 type="text"
                 placeholder="select a group"
                 @input="
-                  dispatchSpecificityAction(index, val.group, 'ROKU', 'ADD')
+                  dispatchSpecificityAction('ROKU', 'ADD', index, val.group)
                 "
               />
             </td>
@@ -165,7 +165,7 @@
                 type="text"
                 placeholder="search samples by text"
                 @input="
-                  dispatchSpecificityAction(index, val.sample, 'ROKU', 'ADD')
+                  dispatchSpecificityAction('ROKU', 'ADD', index, val.sample)
                 "
               />
             </td>
@@ -175,7 +175,7 @@
                 type="text"
                 placeholder="High"
                 @input="
-                  dispatchSpecificityAction(index, val.horl, 'ROKU', 'ADD')
+                  dispatchSpecificityAction('ROKU', 'ADD', index, val.horl)
                 "
               />
             </td>
@@ -185,7 +185,7 @@
                 type="text"
                 placeholder="1"
                 @input="
-                  dispatchSpecificityAction(index, val.emin, 'ROKU', 'ADD')
+                  dispatchSpecificityAction('ROKU', 'ADD', index, val.emin)
                 "
               />
             </td>
@@ -195,7 +195,7 @@
                 type="text"
                 placeholder="5"
                 @input="
-                  dispatchSpecificityAction(index, val.emax, 'ROKU', 'ADD')
+                  dispatchSpecificityAction('ROKU', 'ADD', index, val.emax)
                 "
               />
             </td>
@@ -204,7 +204,7 @@
                 class="delete_btn"
                 :class="{ disabled: !val.delete }"
                 :disabled="!val.delete"
-                @click="delSpecificityROKU(index)"
+                @click="dispatchSpecificityAction('ROKU', 'DEL', index)"
               >
                 <font-awesome-icon icon="trash" />
                 Delete
@@ -231,7 +231,11 @@
             <td class="group">Group</td>
             <td class="cutoff">Cutoff</td>
             <td class="condition">Condition</td>
-            <td colspan="2" class="delete_all" @click="deleteAllSpecificityTau">
+            <td
+              colspan="2"
+              class="delete_all"
+              @click="dispatchSpecificityAction('Tau', 'DEL_ALL')"
+            >
               <font-awesome-icon icon="trash" /> Delete All
             </td>
           </tr>
@@ -244,7 +248,7 @@
               <input
                 v-model="val.check"
                 type="checkbox"
-                @click="addSpecificityTau(index)"
+                @click="dispatchSpecificityAction('Tau', 'CHECK', index)"
               />
             </td>
             <td>
@@ -253,7 +257,7 @@
                 type="text"
                 placeholder="select a group"
                 @input="
-                  dispatchSpecificityAction(index, val.group, 'Tau', 'ADD')
+                  dispatchSpecificityAction('Tau', 'ADD', index, val.group)
                 "
               />
             </td>
@@ -263,7 +267,7 @@
                 type="text"
                 placeholder="0.1"
                 @input="
-                  dispatchSpecificityAction(index, val.cutoff, 'Tau', 'ADD')
+                  dispatchSpecificityAction('Tau', 'ADD', index, val.cutoff)
                 "
               />
             </td>
@@ -273,7 +277,7 @@
                 type="text"
                 placeholder="≧"
                 @input="
-                  dispatchSpecificityAction(index, val.condition, 'Tau', 'ADD')
+                  dispatchSpecificityAction('Tau', 'ADD', index, val.condition)
                 "
               />
             </td>
@@ -282,7 +286,7 @@
                 class="delete_btn"
                 :class="{ disabled: !val.delete }"
                 :disabled="!val.delete"
-                @click="delSpecificityTau(index)"
+                @click="dispatchSpecificityAction('Tau', 'DEL', index)"
               >
                 <font-awesome-icon icon="trash" />
                 Delete
@@ -465,58 +469,39 @@
           }
         }
       },
-      delSpecificityROKU(index) {
-        this.specificityROKU.splice(index, 1);
-      },
-      dispatchSpecificityAction(index, value, type, action) {
+      dispatchSpecificityAction(type, action, index, value) {
+        let specificityArray;
+        let specificityDefaultObj;
+        switch (type) {
+          case 'ROKU':
+            specificityArray = this.specificityROKU;
+            specificityDefaultObj = this.specificityROKUDefaultObj;
+            break;
+          case 'Tau':
+            specificityArray = this.specificityTau;
+            specificityDefaultObj = this.specificityTauDefaultObj;
+            break;
+        }
+        if (action === 'CHECK') {
+          specificityArray[index].check = !specificityArray[index].check;
+        }
         if (action === 'ADD') {
-          let specificityArray;
-          switch (type) {
-            case 'ROKU':
-              specificityArray = this.specificityROKU;
-              break;
-            case 'Tau':
-              specificityArray = this.specificityTau;
-              break;
-          }
           if (value.trim().length > 0) {
             if (!specificityArray[index + 1]) {
-              specificityArray.push({ ...this.specificityROKUDefaultObj });
+              specificityArray.push({ ...specificityDefaultObj });
             }
             specificityArray[index].check = true;
             specificityArray[index].delete = true;
           }
         }
-      },
-      addIndexSpecificity(index, value, type) {
-        let specificityArray;
-        switch (type) {
-          case 'ROKU':
-            specificityArray = this.specificityROKU;
-            break;
-          case 'Tau':
-            specificityArray = this.specificityTau;
-            break;
+        if (action === 'DEL') {
+          specificityArray.splice(index, 1);
         }
-        if (value.trim().length > 0) {
-          if (!specificityArray[index + 1]) {
-            specificityArray.push({ ...this.specificityROKUDefaultObj });
-          }
-          specificityArray[index].check = true;
-          specificityArray[index].delete = true;
+        if (action === 'DEL_ALL') {
+          console.log('DEL ALL');
+          specificityArray.splice(0, specificityArray.length);
+          specificityArray.push({ ...specificityDefaultObj });
         }
-      },
-      deleteAllSpecificityROKU() {
-        this.specificityROKU = [{ ...this.specificityROKUDefaultObj }];
-      },
-      addSpecificityTau(index) {
-        this.specificityTau[index].check = !this.specificityTau[index].check;
-      },
-      delSpecificityTau(index) {
-        this.specificityTau.splice(index, 1);
-      },
-      deleteAllSpecificityTau() {
-        this.specificityTau = [{ ...this.specificityTauDefaultObj }];
       },
     },
   };
