@@ -467,18 +467,9 @@
         }
       },
       dispatchSpecificityAction(type, action, index, value) {
-        let specificityArray;
-        let specificityDefaultObj;
-        switch (type) {
-          case 'ROKU':
-            specificityArray = this.specificityROKU;
-            specificityDefaultObj = this.specificityROKUDefaultObj;
-            break;
-          case 'Tau':
-            specificityArray = this.specificityTau;
-            specificityDefaultObj = this.specificityTauDefaultObj;
-            break;
-        }
+        let specificityArray = this[`specificity${type}`];
+        let specificityDefaultObj = this[`specificity${type}DefaultObj`];
+        let isAllChecked = this[`isAllChecked_${type}`];
         switch (action) {
           case 'CHECK':
             specificityArray[index].check = !specificityArray[index].check;
