@@ -442,9 +442,6 @@
       setTags(newTags, key) {
         this.parameters = { ...this.parameters, [key]: newTags };
       },
-      addSpecificityROKU(index) {
-        this.specificityROKU[index].check = !this.specificityROKU[index].check;
-      },
       toggleAllSpecificityROKU() {
         this.isAllChecked_ROKU = !this.isAllChecked_ROKU;
         if (this.isAllChecked_ROKU) {
