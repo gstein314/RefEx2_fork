@@ -46,6 +46,7 @@
                 id="cars"
                 v-model="item[filter.class]"
                 name="cars"
+                @change="dispatchAction('ADD', index, item[filter.class])"
               >
                 <option value="high">High</option>
                 <option value="low">Low</option>
@@ -129,7 +130,12 @@
             }
             break;
           case 'DEL':
-            list.splice(index, 1);
+            if (list.length === 1) {
+              list.splice(0, list.length);
+              list.push(defaultItem);
+            } else {
+              list.splice(index, 1);
+            }
             break;
           case 'DEL_ALL':
             list.splice(0, list.length);
