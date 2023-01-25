@@ -142,6 +142,7 @@
             list.push(defaultItem);
             break;
         }
+        this.isAllChecked = list.every(item => item.check);
       },
       autoCheckAfterInput(index, value) {
         const targetItem = this.specificity.list[index];
