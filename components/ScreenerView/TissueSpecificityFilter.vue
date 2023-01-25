@@ -46,7 +46,7 @@
                 id="cars"
                 v-model="item[filter.class]"
                 name="cars"
-                @change="dispatchAction('ADD', index, item[filter.class])"
+                @change="autoCheckAfterInput(index, item[filter.class])"
               >
                 <option value="high">High</option>
                 <option value="low">Low</option>
@@ -58,7 +58,7 @@
                 :placeholder="filter.placeholder"
                 :min="filter.min"
                 :max="filter.max"
-                @input="dispatchAction('ADD', index, item[filter.class])"
+                @input="autoCheckAfterInput(index, item[filter.class])"
               />
             </td>
             <td class="icon">
@@ -141,6 +141,13 @@
             list.splice(0, list.length);
             list.push(defaultItem);
             break;
+        }
+      },
+      autoCheckAfterInput(index, value) {
+        const targetItem = this.specificity.list[index];
+        this.dispatchAction('ADD', index, value);
+        if (targetItem.check === false) {
+          this.dispatchAction('CHECK', index);
         }
       },
     },
