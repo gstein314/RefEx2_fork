@@ -87,12 +87,18 @@
         isAllChecked: true,
       };
     },
+    mounted() {
+      this.dispatchAction('INIT');
+    },
     methods: {
       dispatchAction(action, index, value) {
         const list = this.specificity.list;
         const targetItem = list[index];
         const defaultItem = { ...this.specificity.defaultItem };
         switch (action) {
+          case 'INIT':
+            list.push(defaultItem);
+            break;
           case 'CHECK_ALL':
             this.isAllChecked = !this.isAllChecked;
             for (const item of list) {

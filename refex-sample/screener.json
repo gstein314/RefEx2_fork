@@ -1,17 +1,7 @@
 {
 	"specificityROKU": {
 		"type": "ROKU",
-		"list": [
-			{
-				"group": "",
-				"sample": "",
-				"horl": "",
-				"emin": "",
-				"emax": "",
-				"check": true,
-				"delete": true
-			}
-		],
+		"list": [],
 		"defaultItem": {
 			"group": "",
 			"sample": "",
@@ -56,15 +46,7 @@
 	],
 	"specificityTau":{
 		"type":"tau",
-		"list":[
-				{
-					"group":"",
-					"cutoff":"",
-					"condition":"",
-					"check":true,
-					"delete":true
-				}
-		],
+		"list":[],
 		"defaultItem":{
 				"group":"",
 				"cutoff":"",
