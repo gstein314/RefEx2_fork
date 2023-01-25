@@ -111,147 +111,26 @@
         ></div>
       </vue-tags-input>
     </no-ssr>
-
-    <h3>Filter by Tissue specificity (ROKU)</h3>
-    <no-ssr>
-      <div class="filter_specificity_ROKU">
-        <table>
-          <tr>
-            <td class="check">
-              <input
-                type="checkbox"
-                :checked="specificityROKU.isAllChecked"
-                @click="dispatchSpecificityAction('ROKU', 'CHECK_ALL')"
-              />
-            </td>
-            <td
-              v-for="filter in filtersROKU"
-              :key="filter.id"
-              :class="filter.class"
-            >
-              {{ filter.name }}
-            </td>
-            <td
-              colspan="2"
-              class="delete_all"
-              @click="dispatchSpecificityAction('ROKU', 'DEL_ALL')"
-            >
-              <font-awesome-icon icon="trash" /> Delete All
-            </td>
-          </tr>
-          <tr
-            v-for="(item, index) in specificityROKU.list"
-            :key="item.id"
-            :class="{ unchecked: !item.check }"
-          >
-            <td class="check">
-              <input
-                v-model="item.check"
-                type="checkbox"
-                @click="dispatchSpecificityAction(item.type, 'CHECK', index)"
-              />
-            </td>
-            <td v-for="filter in filtersROKU" :key="filter.id">
-              <input
-                v-model="filter.group"
-                type="text"
-                :placeholder="filter.placeholder"
-                @input="
-                  dispatchSpecificityAction(item.type, 'ADD', index, item.group)
-                "
-              />
-            </td>
-            <td class="icon">
-              <button
-                class="delete_btn"
-                :class="{ disabled: !item.delete }"
-                :disabled="!item.delete"
-                @click="dispatchSpecificityAction(item.type, 'DEL', index)"
-              >
-                <font-awesome-icon icon="trash" />
-                Delete
-              </button>
-            </td>
-          </tr>
-          <tr></tr>
-        </table>
-      </div>
-    </no-ssr>
-
-    <h3>Filter by Tissue specificity (tau)</h3>
-    <no-ssr>
-      <div class="filter_specificity_tau">
-        <table>
-          <tr>
-            <td class="check">
-              <input
-                type="checkbox"
-                :checked="specificityTau.isAllChecked"
-                @click="dispatchSpecificityAction('Tau', 'CHECK_ALL')"
-              />
-            </td>
-            <td
-              v-for="filter in filtersTau"
-              :key="filter.id"
-              :class="filter.class"
-            >
-              {{ filter.name }}
-            </td>
-            <td
-              colspan="2"
-              class="delete_all"
-              @click="dispatchSpecificityAction('Tau', 'DEL_ALL')"
-            >
-              <font-awesome-icon icon="trash" /> Delete All
-            </td>
-          </tr>
-          <tr
-            v-for="(item, index) in specificityTau.list"
-            :key="item.id"
-            :class="{ unchecked: !item.check }"
-          >
-            <td class="check">
-              <input
-                v-model="item.check"
-                type="checkbox"
-                @click="dispatchSpecificityAction(item.type, 'CHECK', index)"
-              />
-            </td>
-            <td v-for="filter in filtersTau" :key="filter.id">
-              <input
-                v-model="filter.group"
-                type="text"
-                :placeholder="filter.placeholder"
-                @input="
-                  dispatchSpecificityAction(item.type, 'ADD', index, item.group)
-                "
-              />
-            </td>
-            <td class="icon">
-              <button
-                class="delete_btn"
-                :class="{ disabled: !item.delete }"
-                :disabled="!item.delete"
-                @click="dispatchSpecificityAction(item.type, 'DEL', index)"
-              >
-                <font-awesome-icon icon="trash" />
-                Delete
-              </button>
-            </td>
-          </tr>
-          <tr></tr>
-        </table>
-      </div>
-    </no-ssr>
+    <TissueSpecificityFilter
+      :specificity="specificityROKU"
+      :filters-list="filtersROKU"
+      :specificity-type="'ROKU'"
+    />
+    <TissueSpecificityFilter
+      :specificity="specificityTau"
+      :filters-list="filtersTau"
+      :specificity-type="'tau'"
+    />
   </div>
 </template>
 
 <script>
   import { mapGetters } from 'vuex';
   import MultiSelect from 'vue-multiselect';
+  import TissueSpecificityFilter from './TissueSpecificityFilter.vue';
 
   export default {
-    components: { MultiSelect },
+    components: { MultiSelect, TissueSpecificityFilter },
     data() {
       const specificityROKUDefaultItem = {
         type: 'ROKU',
@@ -292,11 +171,13 @@
         },
         debounce: null,
         specificityROKU: {
+          type: 'ROKU',
           list: [{ ...specificityROKUDefaultItem }],
           defaultItem: { ...specificityROKUDefaultItem },
           isAllChecked: true,
         },
         specificityTau: {
+          type: 'tau',
           list: [{ ...specificityTauDefaultItem }],
           defaultItem: { ...specificityTauDefaultItem },
           isAllChecked: true,
