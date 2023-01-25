@@ -41,11 +41,16 @@
             </td>
             <td v-for="filter in filtersList" :key="filter.id">
               <input
-                v-model="filter.group"
+                v-model="item[filter.class]"
                 type="text"
                 :placeholder="filter.placeholder"
                 @input="
-                  dispatchSpecificityAction(item.type, 'ADD', index, item.group)
+                  dispatchSpecificityAction(
+                    item.type,
+                    'ADD',
+                    index,
+                    item[filter.class]
+                  )
                 "
               />
             </td>
@@ -82,6 +87,43 @@
       specificityType: {
         type: String,
         default: '',
+      },
+    },
+    methods: {
+      dispatchSpecificityAction(type, action, index, value) {
+        const specificity = this.specificity;
+        const list = specificity.list;
+        const targetItem = list[index];
+        const defaultItem = specificity.defaultItem;
+        switch (action) {
+          case 'CHECK_ALL':
+            specificity.isAllChecked = !specificity.isAllChecked;
+            for (const item of list) {
+              specificity.isAllChecked
+                ? (item.check = true)
+                : (item.check = false);
+            }
+            break;
+          case 'CHECK':
+            targetItem.check = !targetItem.check;
+            break;
+          case 'ADD':
+            if (value.trim().length > 0) {
+              if (!list[index + 1]) {
+                list.push({ ...defaultItem });
+              }
+              targetItem.check = true;
+              targetItem.delete = true;
+            }
+            break;
+          case 'DEL':
+            list.splice(index, 1);
+            break;
+          case 'DEL_ALL':
+            list.splice(0, list.length);
+            list.push({ ...defaultItem });
+            break;
+        }
       },
     },
   };

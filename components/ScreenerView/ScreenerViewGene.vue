@@ -199,13 +199,13 @@
           {
             id: '4',
             name: 'Entropy (min)',
-            class: 'entropy',
+            class: 'emin',
             placeholder: '1',
           },
           {
             id: '5',
             name: 'Entropy (max)',
-            class: 'entropy',
+            class: 'emax',
             placeholder: '5',
           },
         ],
@@ -317,41 +317,6 @@
       setTags(newTags, key) {
         this.parameters = { ...this.parameters, [key]: newTags };
       },
-      dispatchSpecificityAction(type, action, index, value) {
-        const specificity = this[`specificity${type}`];
-        const list = specificity.list;
-        const targetItem = list[index];
-        const defaultItem = specificity.defaultItem;
-        switch (action) {
-          case 'CHECK_ALL':
-            specificity.isAllChecked = !specificity.isAllChecked;
-            for (const item of list) {
-              specificity.isAllChecked
-                ? (item.check = true)
-                : (item.check = false);
-            }
-            break;
-          case 'CHECK':
-            targetItem.check = !targetItem.check;
-            break;
-          case 'ADD':
-            if (value.trim().length > 0) {
-              if (!list[index + 1]) {
-                list.push({ ...defaultItem });
-              }
-              targetItem.check = true;
-              targetItem.delete = true;
-            }
-            break;
-          case 'DEL':
-            list.splice(index, 1);
-            break;
-          case 'DEL_ALL':
-            list.splice(0, list.length);
-            list.push({ ...defaultItem });
-            break;
-        }
-      },
     },
   };
 </script>
@@ -417,7 +382,7 @@
             width: 30%
           > .horl
             width: 15%
-          > .entropy
+          > .emin,.emax
             width: 10%
     .filter_specificity_tau
       > table
