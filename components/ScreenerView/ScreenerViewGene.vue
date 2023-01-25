@@ -125,11 +125,11 @@
               />
             </td>
             <td
-              v-for="criterion in criteriaROKU"
-              :key="criterion.id"
-              :class="criterion.class"
+              v-for="filter in filtersROKU"
+              :key="filter.id"
+              :class="filter.class"
             >
-              {{ criterion.name }}
+              {{ filter.name }}
             </td>
             <td
               colspan="2"
@@ -151,11 +151,11 @@
                 @click="dispatchSpecificityAction(item.type, 'CHECK', index)"
               />
             </td>
-            <td v-for="criterion in criteriaROKU" :key="criterion.id">
+            <td v-for="filter in filtersROKU" :key="filter.id">
               <input
-                v-model="criterion.group"
+                v-model="filter.group"
                 type="text"
-                :placeholder="criterion.placeholder"
+                :placeholder="filter.placeholder"
                 @input="
                   dispatchSpecificityAction(item.type, 'ADD', index, item.group)
                 "
@@ -191,11 +191,11 @@
               />
             </td>
             <td
-              v-for="criterion in criteriaTau"
-              :key="criterion.id"
-              :class="criterion.class"
+              v-for="filter in filtersTau"
+              :key="filter.id"
+              :class="filter.class"
             >
-              {{ criterion.name }}
+              {{ filter.name }}
             </td>
             <td
               colspan="2"
@@ -217,11 +217,11 @@
                 @click="dispatchSpecificityAction(item.type, 'CHECK', index)"
               />
             </td>
-            <td v-for="criterion in criteriaTau" :key="criterion.id">
+            <td v-for="filter in filtersTau" :key="filter.id">
               <input
-                v-model="criterion.group"
+                v-model="filter.group"
                 type="text"
-                :placeholder="criterion.placeholder"
+                :placeholder="filter.placeholder"
                 @input="
                   dispatchSpecificityAction(item.type, 'ADD', index, item.group)
                 "
@@ -301,7 +301,7 @@
           defaultItem: { ...specificityTauDefaultItem },
           isAllChecked: true,
         },
-        criteriaROKU: [
+        filtersROKU: [
           {
             id: '1',
             name: 'Group',
@@ -328,7 +328,7 @@
             placeholder: '5',
           },
         ],
-        criteriaTau: [
+        filtersTau: [
           {
             id: '1',
             name: 'Group',
