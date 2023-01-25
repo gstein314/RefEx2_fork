@@ -7,6 +7,7 @@
           <tr>
             <td class="check">
               <input
+                v-model="isAllChecked"
                 type="checkbox"
                 :checked="isAllChecked"
                 @click="dispatchSpecificityAction('CHECK_ALL')"
@@ -83,10 +84,10 @@
         default: '',
       },
     },
-    computed: {
-      isAllChecked() {
-        return this.specificity.list.every(item => item.check);
-      },
+    data() {
+      return {
+        isAllChecked: true,
+      };
     },
     methods: {
       dispatchSpecificityAction(action, index, value) {
@@ -96,15 +97,14 @@
         const defaultItem = specificity.defaultItem;
         switch (action) {
           case 'CHECK_ALL':
-            specificity.isAllChecked = !specificity.isAllChecked;
+            this.isAllChecked = !this.isAllChecked;
             for (const item of list) {
-              specificity.isAllChecked
-                ? (item.check = true)
-                : (item.check = false);
+              this.isAllChecked ? (item.check = true) : (item.check = false);
             }
             break;
           case 'CHECK':
             targetItem.check = !targetItem.check;
+            this.isAllChecked = list.every(item => item.check);
             break;
           case 'ADD':
             if (value.trim().length > 0) {
