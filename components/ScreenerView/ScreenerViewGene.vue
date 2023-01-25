@@ -294,6 +294,10 @@
             font-size: 12px
             > input[type="checkbox"]
               cursor: pointer
+            > select:required:invalid
+              color: rgba(0, 0, 0, 0.3)
+              > option[value=""][disabled]
+                display: none
             > .delete_btn
               +button
               align-items: initial

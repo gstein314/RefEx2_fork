@@ -16,9 +16,7 @@
 		{
 			"id": "1",
 			"name": "Group",
-			"class": "group",
-			"inputType": "text",
-			"placeholder": "select a group"
+			"class": "group"
 		},
 		{
 			"id": "2",

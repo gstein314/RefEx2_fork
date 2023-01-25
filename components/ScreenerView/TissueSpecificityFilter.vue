@@ -42,12 +42,24 @@
             </td>
             <td v-for="filter in filtersList" :key="filter.id">
               <select
-                v-if="filter.class === 'horl'"
-                id="cars"
+                v-if="filter.class === 'group'"
                 v-model="item[filter.class]"
-                name="cars"
+                required
                 @change="autoCheckAfterInput(index, item[filter.class])"
               >
+                <option value="" disabled selected hidden>
+                  select a group
+                </option>
+                <option value="high">High</option>
+                <option value="low">Low</option>
+              </select>
+              <select
+                v-else-if="filter.class === 'horl'"
+                v-model="item[filter.class]"
+                required
+                @change="autoCheckAfterInput(index, item[filter.class])"
+              >
+                <option value="" disabled selected hidden>High</option>
                 <option value="high">High</option>
                 <option value="low">Low</option>
               </select>
@@ -124,7 +136,6 @@
             break;
           case 'CHECK':
             targetItem.check = !targetItem.check;
-            this.isAllChecked = list.every(item => item.check);
             break;
           case 'ADD':
             if (value.trim().length > 0) {
