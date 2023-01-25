@@ -310,10 +310,12 @@
         > tr
           > .icon
             text-align: center
-          > .group, .sample
-            width: 30%
+          > .group
+            width: 25%
+          > .sample
+            width: 32.5%
           > .horl
-            width: 15%
+            width: 12.5%
           > .emin,.emax
             width: 10%
     .filter_specificity_tau
