@@ -102,11 +102,14 @@
       align-items: center
       > span
         +sample_query
-    input, select
+    input
       +text_input
       font-size: 22px
       &.text_search_go_term
         margin-bottom: 10px
+    select
+      +selection
+      font-size: 20px
     > .classification_wrapper
       border: 1px dashed $GRAY
       border-radius: 3px

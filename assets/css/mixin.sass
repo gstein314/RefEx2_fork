@@ -54,6 +54,17 @@ $TOOLTIP_LAYER: 2
   &:focus
     outline: none
 
+@mixin selection
+  border: none
+  background: $MAIN_COLOR_PALE
+  width: 100%
+  padding: 10px 20px
+  box-sizing: border-box
+  border-radius: $BORDER_RADIUS_DEFAULT
+  position: relative
+  &:focus
+    outline: none
+
 @mixin suggestions
   border: none
   box-shadow: 0 2px 5px rgba(62, 70, 82, .22)

@@ -301,8 +301,10 @@
           > .check
             padding-right: 5px
       .unchecked
-        input
+        input, select
           background: #ccc
+        select
+          color: rgba(0, 0, 0, 0.3)
     .filter_specificity_ROKU
       > table
         > tr
