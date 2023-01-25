@@ -115,11 +115,13 @@
       :specificity="screener.specificityROKU"
       :filters-list="screener.filtersROKU"
       :specificity-type="screener.specificityROKU.type"
+      :datasets="datasets"
     />
     <TissueSpecificityFilter
       :specificity="screener.specificityTau"
       :filters-list="screener.filtersTau"
       :specificity-type="screener.specificityTau.type"
+      :datasets="datasets"
     />
   </div>
 </template>
@@ -129,6 +131,7 @@
   import MultiSelect from 'vue-multiselect';
   import TissueSpecificityFilter from './TissueSpecificityFilter.vue';
   import screener from '~/refex-sample/screener.json';
+  import datasets from '~/refex-sample/datasets.json';
 
   export default {
     components: { MultiSelect, TissueSpecificityFilter },
@@ -154,6 +157,7 @@
         },
         debounce: null,
         screener: screener,
+        datasets: datasets,
       };
     },
     computed: {

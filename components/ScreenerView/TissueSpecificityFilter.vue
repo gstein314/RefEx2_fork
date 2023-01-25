@@ -94,6 +94,10 @@
         type: String,
         default: '',
       },
+      datasets: {
+        type: Object,
+        default: () => {},
+      },
     },
     data() {
       return {
