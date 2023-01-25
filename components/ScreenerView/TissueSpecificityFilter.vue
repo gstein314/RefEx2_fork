@@ -8,8 +8,8 @@
             <td class="check">
               <input
                 type="checkbox"
-                :checked="specificity.isAllChecked"
-                @click="dispatchSpecificityAction(specificityType, 'CHECK_ALL')"
+                :checked="isAllChecked"
+                @click="dispatchSpecificityAction('CHECK_ALL')"
               />
             </td>
             <td
@@ -22,7 +22,7 @@
             <td
               colspan="2"
               class="delete_all"
-              @click="dispatchSpecificityAction(specificityType, 'DEL_ALL')"
+              @click="dispatchSpecificityAction('DEL_ALL')"
             >
               <font-awesome-icon icon="trash" /> Delete All
             </td>
@@ -36,7 +36,7 @@
               <input
                 v-model="item.check"
                 type="checkbox"
-                @click="dispatchSpecificityAction(item.type, 'CHECK', index)"
+                @click="dispatchSpecificityAction('CHECK', index)"
               />
             </td>
             <td v-for="filter in filtersList" :key="filter.id">
@@ -45,12 +45,7 @@
                 type="text"
                 :placeholder="filter.placeholder"
                 @input="
-                  dispatchSpecificityAction(
-                    item.type,
-                    'ADD',
-                    index,
-                    item[filter.class]
-                  )
+                  dispatchSpecificityAction('ADD', index, item[filter.class])
                 "
               />
             </td>
@@ -59,14 +54,13 @@
                 class="delete_btn"
                 :class="{ disabled: !item.delete }"
                 :disabled="!item.delete"
-                @click="dispatchSpecificityAction(item.type, 'DEL', index)"
+                @click="dispatchSpecificityAction('DEL', index)"
               >
                 <font-awesome-icon icon="trash" />
                 Delete
               </button>
             </td>
           </tr>
-          <tr></tr>
         </table>
       </div>
     </no-ssr>
@@ -89,8 +83,13 @@
         default: '',
       },
     },
+    computed: {
+      isAllChecked() {
+        return this.specificity.list.every(item => item.check);
+      },
+    },
     methods: {
-      dispatchSpecificityAction(type, action, index, value) {
+      dispatchSpecificityAction(action, index, value) {
         const specificity = this.specificity;
         const list = specificity.list;
         const targetItem = list[index];

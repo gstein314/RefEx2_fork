@@ -1,0 +1,98 @@
+{
+	"specificityROKU": {
+		"type": "ROKU",
+		"list": [
+			{
+				"group": "",
+				"sample": "",
+				"horl": "",
+				"emin": "",
+				"emax": "",
+				"check": true,
+				"delete": true
+			}
+		],
+		"defaultItem": {
+			"group": "",
+			"sample": "",
+			"horl": "",
+			"emin": "",
+			"emax": "",
+			"check": true,
+			"delete": true
+		},
+		"isAllChecked": true
+	},
+	"filtersROKU": [
+		{
+			"id": "1",
+			"name": "Group",
+			"class": "group",
+			"placeholder": "select a group"
+		},
+		{
+			"id": "2",
+			"name": "Sample",
+			"class": "sample",
+			"placeholder": "search samples by text"
+		},
+		{
+			"id": "3",
+			"name": "High or Low",
+			"class": "horl",
+			"placeholder": "High"
+		},
+		{
+			"id": "4",
+			"name": "Entropy (min)",
+			"class": "emin",
+			"placeholder": "1"
+		},
+		{
+			"id": "5",
+			"name": "Entropy (max)",
+			"class": "emax",
+			"placeholder": "5"
+		}
+	],
+	"specificityTau":{
+		"type":"tau",
+		"list":[
+				{
+					"group":"",
+					"cutoff":"",
+					"condition":"",
+					"check":true,
+					"delete":true
+				}
+		],
+		"defaultItem":{
+				"group":"",
+				"cutoff":"",
+				"condition":"",
+				"check":true,
+				"delete":true
+		},
+		"isAllChecked": true
+	},
+	"filtersTau": [
+		{
+			"id": "1",
+			"name": "Group",
+			"class": "group",
+			"placeholder": "select a group"
+		},
+		{
+			"id": "2",
+			"name": "Cutoff",
+			"class": "cutoff",
+			"placeholder": "0.1"
+		},
+		{
+			"id": "3",
+			"name": "Condition",
+			"class": "condition",
+			"placeholder": "≧"
+		}
+	]
+}

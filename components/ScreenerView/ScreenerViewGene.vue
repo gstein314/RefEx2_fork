@@ -112,14 +112,14 @@
       </vue-tags-input>
     </no-ssr>
     <TissueSpecificityFilter
-      :specificity="specificityROKU"
-      :filters-list="filtersROKU"
-      :specificity-type="'ROKU'"
+      :specificity="screener.specificityROKU"
+      :filters-list="screener.filtersROKU"
+      :specificity-type="screener.specificityROKU.type"
     />
     <TissueSpecificityFilter
-      :specificity="specificityTau"
-      :filters-list="filtersTau"
-      :specificity-type="'tau'"
+      :specificity="screener.specificityTau"
+      :filters-list="screener.filtersTau"
+      :specificity-type="screener.specificityTau.type"
     />
   </div>
 </template>
@@ -128,28 +128,11 @@
   import { mapGetters } from 'vuex';
   import MultiSelect from 'vue-multiselect';
   import TissueSpecificityFilter from './TissueSpecificityFilter.vue';
+  import screener from '~/refex-sample/screener.json';
 
   export default {
     components: { MultiSelect, TissueSpecificityFilter },
     data() {
-      const specificityROKUDefaultItem = {
-        type: 'ROKU',
-        group: '',
-        sample: '',
-        horl: '',
-        emin: '',
-        emax: '',
-        check: true,
-        delete: true,
-      };
-      const specificityTauDefaultItem = {
-        type: 'Tau',
-        group: '',
-        cutoff: '',
-        condition: '',
-        check: true,
-        delete: true,
-      };
       return {
         autocompleteStaticData: {},
         chrValue: [],
@@ -170,60 +153,7 @@
           go: [],
         },
         debounce: null,
-        specificityROKU: {
-          type: 'ROKU',
-          list: [{ ...specificityROKUDefaultItem }],
-          defaultItem: { ...specificityROKUDefaultItem },
-          isAllChecked: true,
-        },
-        specificityTau: {
-          type: 'tau',
-          list: [{ ...specificityTauDefaultItem }],
-          defaultItem: { ...specificityTauDefaultItem },
-          isAllChecked: true,
-        },
-        filtersROKU: [
-          {
-            id: '1',
-            name: 'Group',
-            class: 'group',
-            placeholder: 'select a group',
-          },
-          {
-            id: '2',
-            name: 'Sample',
-            class: 'sample',
-            placeholder: 'search samples by text',
-          },
-          { id: '3', name: 'High or Low', class: 'horl', placeholder: 'High' },
-          {
-            id: '4',
-            name: 'Entropy (min)',
-            class: 'emin',
-            placeholder: '1',
-          },
-          {
-            id: '5',
-            name: 'Entropy (max)',
-            class: 'emax',
-            placeholder: '5',
-          },
-        ],
-        filtersTau: [
-          {
-            id: '1',
-            name: 'Group',
-            class: 'group',
-            placeholder: 'select a group',
-          },
-          {
-            id: '2',
-            name: 'Cutoff',
-            class: 'cutoff',
-            placeholder: '0.1',
-          },
-          { id: '3', name: 'Condition', class: 'condition', placeholder: '≧' },
-        ],
+        screener: screener,
       };
     },
     computed: {
