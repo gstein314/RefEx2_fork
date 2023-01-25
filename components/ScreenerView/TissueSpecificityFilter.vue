@@ -41,10 +41,22 @@
               />
             </td>
             <td v-for="filter in filtersList" :key="filter.id">
-              <input
+              <select
+                v-if="filter.class === 'horl'"
+                id="cars"
                 v-model="item[filter.class]"
-                type="text"
+                name="cars"
+              >
+                <option value="high">High</option>
+                <option value="low">Low</option>
+              </select>
+              <input
+                v-else
+                v-model="item[filter.class]"
+                :type="filter.inputType"
                 :placeholder="filter.placeholder"
+                :min="filter.min"
+                :max="filter.max"
                 @input="dispatchAction('ADD', index, item[filter.class])"
               />
             </td>

@@ -102,7 +102,7 @@
       align-items: center
       > span
         +sample_query
-    input
+    input, select
       +text_input
       font-size: 22px
       &.text_search_go_term

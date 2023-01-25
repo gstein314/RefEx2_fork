@@ -17,31 +17,38 @@
 			"id": "1",
 			"name": "Group",
 			"class": "group",
+			"inputType": "text",
 			"placeholder": "select a group"
 		},
 		{
 			"id": "2",
 			"name": "Sample",
 			"class": "sample",
+			"inputType": "text",
 			"placeholder": "search samples by text"
 		},
 		{
 			"id": "3",
 			"name": "High or Low",
-			"class": "horl",
-			"placeholder": "High"
+			"class": "horl"
 		},
 		{
 			"id": "4",
 			"name": "Entropy (min)",
 			"class": "emin",
-			"placeholder": "1"
+			"inputType": "number",
+			"placeholder": "1",
+			"min": "1",
+			"max": "5"
 		},
 		{
 			"id": "5",
 			"name": "Entropy (max)",
 			"class": "emax",
-			"placeholder": "5"
+			"inputType": "number",
+			"placeholder": "5",
+			"min": "1",
+			"max": "5"
 		}
 	],
 	"specificityTau":{
@@ -60,18 +67,21 @@
 			"id": "1",
 			"name": "Group",
 			"class": "group",
+			"inputType": "text",
 			"placeholder": "select a group"
 		},
 		{
 			"id": "2",
 			"name": "Cutoff",
 			"class": "cutoff",
+			"inputType": "text",
 			"placeholder": "0.1"
 		},
 		{
 			"id": "3",
 			"name": "Condition",
 			"class": "condition",
+			"inputType": "text",
 			"placeholder": "≧"
 		}
 	]
