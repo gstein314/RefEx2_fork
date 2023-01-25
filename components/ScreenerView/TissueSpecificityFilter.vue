@@ -10,7 +10,7 @@
                 v-model="isAllChecked"
                 type="checkbox"
                 :checked="isAllChecked"
-                @click="dispatchSpecificityAction('CHECK_ALL')"
+                @click="dispatchAction('CHECK_ALL')"
               />
             </td>
             <td
@@ -23,7 +23,7 @@
             <td
               colspan="2"
               class="delete_all"
-              @click="dispatchSpecificityAction('DEL_ALL')"
+              @click="dispatchAction('DEL_ALL')"
             >
               <font-awesome-icon icon="trash" /> Delete All
             </td>
@@ -37,7 +37,7 @@
               <input
                 v-model="item.check"
                 type="checkbox"
-                @click="dispatchSpecificityAction('CHECK', index)"
+                @click="dispatchAction('CHECK', index)"
               />
             </td>
             <td v-for="filter in filtersList" :key="filter.id">
@@ -45,9 +45,7 @@
                 v-model="item[filter.class]"
                 type="text"
                 :placeholder="filter.placeholder"
-                @input="
-                  dispatchSpecificityAction('ADD', index, item[filter.class])
-                "
+                @input="dispatchAction('ADD', index, item[filter.class])"
               />
             </td>
             <td class="icon">
@@ -55,7 +53,7 @@
                 class="delete_btn"
                 :class="{ disabled: !item.delete }"
                 :disabled="!item.delete"
-                @click="dispatchSpecificityAction('DEL', index)"
+                @click="dispatchAction('DEL', index)"
               >
                 <font-awesome-icon icon="trash" />
                 Delete
@@ -90,11 +88,10 @@
       };
     },
     methods: {
-      dispatchSpecificityAction(action, index, value) {
-        const specificity = this.specificity;
-        const list = specificity.list;
+      dispatchAction(action, index, value) {
+        const list = this.specificity.list;
         const targetItem = list[index];
-        const defaultItem = specificity.defaultItem;
+        const defaultItem = { ...this.specificity.defaultItem };
         switch (action) {
           case 'CHECK_ALL':
             this.isAllChecked = !this.isAllChecked;
@@ -109,7 +106,7 @@
           case 'ADD':
             if (value.trim().length > 0) {
               if (!list[index + 1]) {
-                list.push({ ...defaultItem });
+                list.push(defaultItem);
               }
             }
             break;
@@ -118,7 +115,7 @@
             break;
           case 'DEL_ALL':
             list.splice(0, list.length);
-            list.push({ ...defaultItem });
+            list.push(defaultItem);
             break;
         }
       },
