@@ -111,8 +111,6 @@
               if (!list[index + 1]) {
                 list.push({ ...defaultItem });
               }
-              targetItem.check = true;
-              targetItem.delete = true;
             }
             break;
           case 'DEL':
