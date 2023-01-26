@@ -112,7 +112,7 @@
       </vue-tags-input>
     </no-ssr>
 
-    <TissueSpecificityFilter
+    <ScreenerFilter
       v-for="(condition, index) of screener"
       :key="index"
       :condition="condition"
@@ -125,12 +125,12 @@
 <script>
   import { mapGetters } from 'vuex';
   import MultiSelect from 'vue-multiselect';
-  import TissueSpecificityFilter from './TissueSpecificityFilter.vue';
+  import ScreenerFilter from './ScreenerFilter.vue';
   import screener from '~/refex-sample/screener.json';
   import datasets from '~/refex-sample/datasets.json';
 
   export default {
-    components: { MultiSelect, TissueSpecificityFilter },
+    components: { MultiSelect, ScreenerFilter },
     data() {
       return {
         autocompleteStaticData: {},
