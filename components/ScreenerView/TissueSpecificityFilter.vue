@@ -19,6 +19,12 @@
               :class="filter.class"
             >
               {{ filter.name }}
+              <a href="#">
+                <font-awesome-icon
+                  v-if="filter.class === 'entropy'"
+                  icon="info-circle"
+                />
+              </a>
             </td>
             <td
               colspan="2"

@@ -303,6 +303,8 @@
               align-items: initial
               padding: 13.5px 22px
               cursor: pointer !important
+            svg[data-icon="circle-info"]
+              color: $MAIN_COLOR
           > .delete_all
             color: $MAIN_COLOR
             cursor: pointer
@@ -324,7 +326,7 @@
             width: 35%
           > .horl
             width: 15%
-          > .emin,.emax
+          > .entropy
             width: 10%
     .filter_specificity_tau
       > table
