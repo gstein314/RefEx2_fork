@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h3>Filter by {{ condition.description }}</h3>
-    <no-ssr>
-      <div :class="condition.class">
+    <h3>Filter by {{ screenerFilter.description }}</h3>
+    <client-only>
+      <div :class="screenerFilter.class">
         <table>
           <tr>
             <td class="check">
@@ -35,7 +35,7 @@
             </td>
           </tr>
           <tr
-            v-for="(item, index) in condition.list"
+            v-for="(item, index) in screenerFilter.list"
             :key="index"
             :class="{ unchecked: !item.check }"
           >
@@ -48,7 +48,7 @@
             </td>
             <td v-for="filter in filters" :key="filter.id">
               <ScreenerFilterDropdown
-                v-if="['group', 'horl', 'condition'].includes(filter.class)"
+                v-if="filter.inputType === 'dropdown'"
                 :item="item"
                 :filter="filter"
                 :datasets="datasets"
@@ -77,7 +77,7 @@
           </tr>
         </table>
       </div>
-    </no-ssr>
+    </client-only>
   </div>
 </template>
 
@@ -86,7 +86,7 @@
   import ScreenerFilterDropdown from './ScreenerFilterDropdown.vue';
   export default {
     props: {
-      condition: {
+      screenerFilter: {
         type: Object,
         default: () => {},
       },
@@ -114,9 +114,9 @@
     },
     methods: {
       dispatchAction(action, index, value) {
-        const list = this.condition.list;
+        const list = this.screenerFilter.list;
         const targetItem = list[index];
-        const defaultItem = { ...this.condition.defaultItem };
+        const defaultItem = { ...this.screenerFilter.defaultItem };
         switch (action) {
           case 'INIT':
             list.push(defaultItem);
@@ -153,7 +153,7 @@
         this.isAllChecked = list.every(item => item.check);
       },
       autoCheckAfterInput(index, value) {
-        const targetItem = this.condition.list[index];
+        const targetItem = this.screenerFilter.list[index];
         this.dispatchAction('ADD', index, value);
         if (targetItem.check === false) {
           this.dispatchAction('CHECK', index);

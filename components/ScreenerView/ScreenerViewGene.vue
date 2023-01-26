@@ -3,7 +3,7 @@
   <!-- eslint-disable vue/no-v-html -->
   <div>
     <h3>Genes with Chr</h3>
-    <no-ssr>
+    <client-only>
       <multi-select
         v-model="chrValue"
         :allow-empty="true"
@@ -36,10 +36,10 @@
           </span>
         </template> -->
       </multi-select>
-    </no-ssr>
+    </client-only>
 
     <h3>Genes with Type of Gene</h3>
-    <no-ssr>
+    <client-only>
       <multi-select
         v-model="TOGValue"
         :allow-empty="true"
@@ -72,7 +72,7 @@
           </span>
         </template> -->
       </multi-select>
-    </no-ssr>
+    </client-only>
 
     <h3>
       Genes with GO Term
@@ -92,7 +92,7 @@
         </span>
       </span>
     </h3>
-    <no-ssr>
+    <client-only>
       <vue-tags-input
         v-model="temporaryParameters.goTerm"
         :tags="parameters.go"
@@ -110,13 +110,13 @@
           v-html="$highlightedSuggestion(item.text, temporaryParameters.goTerm)"
         ></div>
       </vue-tags-input>
-    </no-ssr>
+    </client-only>
 
     <ScreenerFilter
-      v-for="(condition, index) of screener"
+      v-for="(screenerFilter, index) of screener"
       :key="index"
-      :condition="condition"
-      :filters="condition.filters"
+      :screener-filter="screenerFilter"
+      :filters="screenerFilter.filters"
       :datasets="datasets"
     />
   </div>

@@ -1,7 +1,9 @@
 <template>
   <select v-model="listItem[filter.class]" required>
     <template v-if="filter.class === 'group'">
-      <option value="" disabled selected hidden>select a group</option>
+      <option value="" disabled selected hidden>
+        {{ filter.placeholder }}
+      </option>
       <option
         v-for="option in groupOptions"
         :key="option.id"
@@ -11,18 +13,29 @@
       </option>
     </template>
     <template v-else-if="filter.class === 'horl'">
-      <option value="" disabled selected hidden>High</option>
+      <option value="" disabled selected hidden>
+        {{ filter.placeholder }}
+      </option>
       <option value="high">High</option>
       <option value="low">Low</option>
     </template>
     <template v-else-if="filter.class === 'condition'">
-      <option value="" disabled selected hidden>≧</option>
+      <option value="" disabled selected hidden>
+        {{ filter.placeholder }}
+      </option>
       <option value="less than">&#60;</option>
-      <option value="less than or equal to">&#8804;</option>
+      <option value="less than or equal to">&#8806;</option>
       <option value="equal to">&#61;</option>
       <option value="not equal to">&#8800;</option>
-      <option value="greater than or equal to">&#8805;</option>
+      <option value="greater than or equal to">&#8807;</option>
       <option value="greater than">&#62;</option>
+    </template>
+    <template v-else-if="filter.class === 'statistic'">
+      <option value="" disabled selected hidden>
+        {{ filter.placeholder }}
+      </option>
+      <option value="max(TPM)">max(TPM)</option>
+      <option value="min(TPM)">min(TPM)</option>
     </template>
   </select>
 </template>
