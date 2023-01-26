@@ -315,9 +315,9 @@
           > .icon
             text-align: center
           > .sample
-            width: 50%
+            width: 60%
           > .cutoff, .condition
-            width: 15%
+            width: 10%
           > .statistic
             width: 20%
     .filter_specificity_ROKU
@@ -328,7 +328,7 @@
           > .group
             width: 25%
           > .sample
-            width: 35%
+            width: 40%
           > .horl
             width: 15%
           > .emin, .emax
@@ -339,7 +339,7 @@
           > .icon
             text-align: center
           > .group
-            width: 70%
+            width: 80%
           > .cutoff, .condition
-            width: 15%
+            width: 10%
 </style>
