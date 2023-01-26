@@ -19,7 +19,7 @@
               :class="filter.class"
             >
               {{ filter.name }}
-              <a href="#">
+              <a href="javascript:void(0)">
                 <font-awesome-icon
                   v-if="filter.class === 'entropy'"
                   icon="info-circle"
