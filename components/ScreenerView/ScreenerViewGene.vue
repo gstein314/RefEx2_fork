@@ -287,6 +287,7 @@
             font-size: 12px
             > input[type="checkbox"]
               cursor: pointer
+              -moz-transform: scale(3)
             > select:required:invalid
               color: rgba(0, 0, 0, 0.3)
             > .delete_btn
