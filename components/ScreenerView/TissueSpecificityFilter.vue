@@ -21,7 +21,7 @@
               {{ filter.name }}
               <a href="javascript:void(0)">
                 <font-awesome-icon
-                  v-if="filter.class === 'entropy'"
+                  v-if="['emin', 'emax'].includes(filter.class)"
                   icon="info-circle"
                 />
               </a>
@@ -73,6 +73,20 @@
                 <option value="" disabled selected hidden>High</option>
                 <option value="high">High</option>
                 <option value="low">Low</option>
+              </select>
+              <select
+                v-else-if="filter.class === 'condition'"
+                v-model="item[filter.class]"
+                required
+                @change="autoCheckAfterInput(index, item[filter.class])"
+              >
+                <option value="" disabled selected hidden>≧</option>
+                <option value="less than">&#60;</option>
+                <option value="less than or equal to">&#8804;</option>
+                <option value="equal to">&#61;</option>
+                <option value="not equal to">&#8800;</option>
+                <option value="greater than or equal to">&#8805;</option>
+                <option value="greater than">&#62;</option>
               </select>
               <input
                 v-else
