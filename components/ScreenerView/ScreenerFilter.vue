@@ -47,47 +47,12 @@
               />
             </td>
             <td v-for="filter in filters" :key="filter.id">
-              <select
-                v-if="filter.class === 'group'"
-                v-model="item[filter.class]"
-                required
-                @change="autoCheckAfterInput(index, item[filter.class])"
-              >
-                <option value="" disabled selected hidden>
-                  select a group
-                </option>
-                <option
-                  v-for="option in groupOptions"
-                  :key="option.id"
-                  :value="option.label"
-                >
-                  {{ option.label }}
-                </option>
-              </select>
-              <select
-                v-else-if="filter.class === 'horl'"
-                v-model="item[filter.class]"
-                required
-                @change="autoCheckAfterInput(index, item[filter.class])"
-              >
-                <option value="" disabled selected hidden>High</option>
-                <option value="high">High</option>
-                <option value="low">Low</option>
-              </select>
-              <select
-                v-else-if="filter.class === 'condition'"
-                v-model="item[filter.class]"
-                required
-                @change="autoCheckAfterInput(index, item[filter.class])"
-              >
-                <option value="" disabled selected hidden>≧</option>
-                <option value="less than">&#60;</option>
-                <option value="less than or equal to">&#8804;</option>
-                <option value="equal to">&#61;</option>
-                <option value="not equal to">&#8800;</option>
-                <option value="greater than or equal to">&#8805;</option>
-                <option value="greater than">&#62;</option>
-              </select>
+              <ScreenerFilterDropdown
+                v-if="['group', 'horl', 'condition'].includes(filter.class)"
+                :item="item"
+                :filter="filter"
+                :datasets="datasets"
+              />
               <input
                 v-else
                 v-model="item[filter.class]"
@@ -118,6 +83,7 @@
 
 <script>
   import { mapGetters } from 'vuex';
+  import ScreenerFilterDropdown from './ScreenerFilterDropdown.vue';
   export default {
     props: {
       condition: {
@@ -129,8 +95,8 @@
         default: () => [],
       },
       datasets: {
-        type: Object,
-        default: () => {},
+        type: Array,
+        default: () => [],
       },
     },
     data() {
@@ -142,18 +108,6 @@
       ...mapGetters({
         activeDataset: 'active_dataset',
       }),
-      groupOptions() {
-        const target = this.activeDataset.dataset;
-        if (target === 'humanFantom5') {
-          return this.datasets[0].datasets[0].condition;
-        } else if (target === 'gtexV8') {
-          return this.datasets[0].datasets[1].condition;
-        } else if (target === 'mouseFantom5') {
-          return [{ label: 'Group 1' }, { label: 'Group 2' }];
-          // お客さんの指定があり次第ハードコートから下記のコートに変更
-          // return this.datasets[1].datasets[0].condition;
-        } else return [{ label: 'No useable option found' }];
-      },
     },
     mounted() {
       this.dispatchAction('INIT');
