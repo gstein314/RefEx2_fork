@@ -115,9 +115,8 @@
     <TissueSpecificityFilter
       v-for="(condition, index) of screener"
       :key="index"
-      :specificity="condition"
-      :filters-list="condition.filters"
-      :specificity-type="condition.type"
+      :condition="condition"
+      :filters="condition.filters"
       :datasets="datasets"
     />
   </div>
@@ -284,7 +283,7 @@
         &:after
           content: none
 
-    .filter_specificity_ROKU, .filter_specificity_tau
+    .filter_TPM, .filter_specificity_ROKU, .filter_specificity_tau
       > table
         > tr
           > td
@@ -312,6 +311,15 @@
           background: #ccc
         select
           color: rgba(0, 0, 0, 0.3)
+    .filter_TPM
+      > table
+        > tr
+          > .icon
+            text-align: center
+          > .sample
+            width: 55%
+          > .cutoff, .condition ,.statistic
+            width: 15%
     .filter_specificity_ROKU
       > table
         > tr

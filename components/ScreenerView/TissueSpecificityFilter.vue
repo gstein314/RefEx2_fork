@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h3>Filter by Tissue specificity ({{ specificityType }})</h3>
+    <h3>Filter by {{ condition.description }}</h3>
     <no-ssr>
-      <div :class="`filter_specificity_${specificityType}`">
+      <div :class="condition.class">
         <table>
           <tr>
             <td class="check">
@@ -14,7 +14,7 @@
               />
             </td>
             <td
-              v-for="filter in filtersList"
+              v-for="filter in filters"
               :key="filter.id"
               :class="filter.class"
             >
@@ -35,7 +35,7 @@
             </td>
           </tr>
           <tr
-            v-for="(item, index) in specificity.list"
+            v-for="(item, index) in condition.list"
             :key="index"
             :class="{ unchecked: !item.check }"
           >
@@ -46,7 +46,7 @@
                 @click="dispatchAction('CHECK', index)"
               />
             </td>
-            <td v-for="filter in filtersList" :key="filter.id">
+            <td v-for="filter in filters" :key="filter.id">
               <select
                 v-if="filter.class === 'group'"
                 v-model="item[filter.class]"
@@ -120,17 +120,13 @@
   import { mapGetters } from 'vuex';
   export default {
     props: {
-      specificity: {
+      condition: {
         type: Object,
         default: () => {},
       },
-      filtersList: {
+      filters: {
         type: Array,
         default: () => [],
-      },
-      specificityType: {
-        type: String,
-        default: '',
       },
       datasets: {
         type: Object,
@@ -149,13 +145,13 @@
       groupOptions() {
         const target = this.activeDataset.dataset;
         if (target === 'humanFantom5') {
-          return this.datasets[0].datasets[0].specificity;
+          return this.datasets[0].datasets[0].condition;
         } else if (target === 'gtexV8') {
-          return this.datasets[0].datasets[1].specificity;
+          return this.datasets[0].datasets[1].condition;
         } else if (target === 'mouseFantom5') {
           return [{ label: 'Group 1' }, { label: 'Group 2' }];
           // お客さんの指定があり次第ハードコートから下記のコートに変更
-          // return this.datasets[1].datasets[0].specificity;
+          // return this.datasets[1].datasets[0].condition;
         } else return [{ label: 'No useable option found' }];
       },
     },
@@ -164,9 +160,9 @@
     },
     methods: {
       dispatchAction(action, index, value) {
-        const list = this.specificity.list;
+        const list = this.condition.list;
         const targetItem = list[index];
-        const defaultItem = { ...this.specificity.defaultItem };
+        const defaultItem = { ...this.condition.defaultItem };
         switch (action) {
           case 'INIT':
             list.push(defaultItem);
@@ -203,7 +199,7 @@
         this.isAllChecked = list.every(item => item.check);
       },
       autoCheckAfterInput(index, value) {
-        const targetItem = this.specificity.list[index];
+        const targetItem = this.condition.list[index];
         this.dispatchAction('ADD', index, value);
         if (targetItem.check === false) {
           this.dispatchAction('CHECK', index);
