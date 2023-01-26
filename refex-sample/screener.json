@@ -29,14 +29,24 @@
         "class": "condition",
         "placeholder": "≧",
         "inputType": "dropdown",
-        "options": ["option1", "option2"]
+        "options": [
+          { "description": "<", "value": "<" },
+          { "description": "≦", "value": "≦" },
+          { "description": "=", "value": "=" },
+          { "description": "≠", "value": "≠" },
+          { "description": "≧", "value": "≧" },
+          { "description": ">", "value": ">" }
+        ]
       },
       {
         "name": "Statistic",
         "class": "statistic",
         "placeholder": "max(TPM)",
         "inputType": "dropdown",
-        "options": ["option1", "option2"]
+        "options": [
+          { "description": "max(TPM)", "value": "max(TPM)" },
+          { "description": "min(TPM)", "value": "min(TPM)" }
+        ]
       }
     ]
   },
@@ -59,8 +69,7 @@
         "name": "Group",
         "class": "group",
         "placeholder": "select a group",
-        "inputType": "dropdown",
-        "options": ["option1", "option2"]
+        "inputType": "dropdown"
       },
       {
         "name": "Sample",
@@ -73,7 +82,10 @@
         "class": "horl",
         "placeholder": "High",
         "inputType": "dropdown",
-        "options": ["option1", "option2"]
+        "options": [
+          { "description": "High", "value": "high" },
+          { "description": "Low", "value": "low" }
+        ]
       },
       {
         "name": "Entropy-min (Optional)",
@@ -110,8 +122,7 @@
         "name": "Group",
         "class": "group",
         "placeholder": "select a group",
-        "inputType": "dropdown",
-        "options": ["option1", "option2"]
+        "inputType": "dropdown"
       },
       {
         "name": "Cutoff",
@@ -124,7 +135,14 @@
         "class": "condition",
         "placeholder": "≧",
         "inputType": "dropdown",
-        "options": ["option1", "option2"]
+        "options": [
+          { "description": "<", "value": "<" },
+          { "description": "≤", "value": "≤" },
+          { "description": "=", "value": "=" },
+          { "description": "≠", "value": "≠" },
+          { "description": "≧", "value": "≧" },
+          { "description": ">", "value": ">" }
+        ]
       }
     ]
   }

@@ -292,8 +292,6 @@
               cursor: pointer
             > select:required:invalid
               color: rgba(0, 0, 0, 0.3)
-              > option[value=""][disabled]
-                display: none
             > .delete_btn
               +button
               align-items: initial
@@ -318,7 +316,7 @@
             text-align: center
           > .sample
             width: 55%
-          > .cutoff, .condition ,.statistic
+          > .cutoff, .condition, .statistic
             width: 15%
     .filter_specificity_ROKU
       > table
