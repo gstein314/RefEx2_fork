@@ -2,7 +2,7 @@
   <div>
     <h3>Filter by {{ screenerFilter.description }}</h3>
     <client-only>
-      <div :class="screenerFilter.class">
+      <div :class="screenerFilter.className">
         <table>
           <tr>
             <td class="check">
@@ -16,12 +16,12 @@
             <td
               v-for="filter in filters"
               :key="filter.id"
-              :class="filter.class"
+              :class="filter.className"
             >
               {{ filter.name }}
               <a href="javascript:void(0)">
                 <font-awesome-icon
-                  v-if="['emin', 'emax'].includes(filter.class)"
+                  v-if="isEntropy(filter.className)"
                   icon="info-circle"
                 />
               </a>
@@ -49,13 +49,13 @@
             <td v-for="filter in filters" :key="filter.id">
               <select
                 v-if="filter.inputType === 'dropdown'"
-                v-model="item[filter.class]"
+                v-model="item[filter.className]"
                 required
               >
                 <option value="" disabled selected hidden>
                   {{ filter.placeholder }}
                 </option>
-                <template v-if="filter.class === 'group'">
+                <template v-if="filter.className === 'group'">
                   <option
                     v-for="option in groupOptions"
                     :key="option.id"
@@ -76,12 +76,12 @@
               </select>
               <input
                 v-else
-                v-model="item[filter.class]"
+                v-model="item[filter.className]"
                 :type="filter.inputType"
                 :placeholder="filter.placeholder"
                 :min="filter.min"
                 :max="filter.max"
-                @input="autoCheckAfterInput(itemIndex, item[filter.class])"
+                @input="autoCheckAfterInput(itemIndex, item[filter.className])"
               />
             </td>
             <td class="icon">
@@ -143,6 +143,9 @@
       this.dispatchAction('INIT');
     },
     methods: {
+      isEntropy(className) {
+        return ['emin', 'emax'].includes(className);
+      },
       dispatchAction(action, index, value) {
         const list = this.screenerFilter.list;
         const targetItem = list[index];

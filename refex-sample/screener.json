@@ -2,7 +2,7 @@
   {
     "description": "TPM",
     "type": "TPM",
-    "class": "filter_TPM",
+    "className": "filter_TPM",
     "list": [],
     "defaultItem": {
       "sample": "",
@@ -15,19 +15,19 @@
     "filters": [
       {
         "name": "Sample",
-        "class": "sample",
+        "className": "sample",
         "placeholder": "search samples by text",
         "inputType": "text"
       },
       {
         "name": "Cutoff",
-        "class": "cutoff",
+        "className": "cutoff",
         "placeholder": "0.1",
         "inputType": "text"
       },
       {
         "name": "Condition",
-        "class": "condition",
+        "className": "condition",
         "placeholder": "≧",
         "inputType": "dropdown",
         "options": [
@@ -41,7 +41,7 @@
       },
       {
         "name": "Statistic",
-        "class": "statistic",
+        "className": "statistic",
         "placeholder": "max(TPM)",
         "inputType": "dropdown",
         "options": [
@@ -54,7 +54,7 @@
   {
     "description": "Tissue specificity (ROKU)",
     "type": "ROKU",
-    "class": "filter_specificity_ROKU",
+    "className": "filter_specificity_ROKU",
     "list": [],
     "defaultItem": {
       "group": "",
@@ -68,19 +68,19 @@
     "filters": [
       {
         "name": "Group",
-        "class": "group",
+        "className": "group",
         "placeholder": "select a group",
         "inputType": "dropdown"
       },
       {
         "name": "Sample",
-        "class": "sample",
+        "className": "sample",
         "placeholder": "search samples by text",
         "inputType": "text"
       },
       {
         "name": "High or Low",
-        "class": "horl",
+        "className": "horl",
         "placeholder": "High",
         "inputType": "dropdown",
         "options": [
@@ -90,7 +90,7 @@
       },
       {
         "name": "Entropy-min (Optional)",
-        "class": "emin",
+        "className": "emin",
         "placeholder": "1",
         "inputType": "number",
         "min": "1",
@@ -98,7 +98,7 @@
       },
       {
         "name": "Entropy-max (Optional)",
-        "class": "emax",
+        "className": "emax",
         "placeholder": "5",
         "inputType": "number",
         "min": "1",
@@ -109,7 +109,7 @@
   {
     "description": "Tissue specificity (tau)",
     "type": "tau",
-    "class": "filter_specificity_tau",
+    "className": "filter_specificity_tau",
     "list": [],
     "defaultItem": {
       "group": "",
@@ -121,19 +121,19 @@
     "filters": [
       {
         "name": "Group",
-        "class": "group",
+        "className": "group",
         "placeholder": "select a group",
         "inputType": "dropdown"
       },
       {
         "name": "Cutoff",
-        "class": "cutoff",
+        "className": "cutoff",
         "placeholder": "0.1",
         "inputType": "text"
       },
       {
         "name": "Condition",
-        "class": "condition",
+        "className": "condition",
         "placeholder": "≧",
         "inputType": "dropdown",
         "options": [
