@@ -53,7 +53,7 @@
                 <option
                   v-for="option in groupOptions"
                   :key="option.id"
-                  value="high"
+                  :value="option.label"
                 >
                   {{ option.label }}
                 </option>
