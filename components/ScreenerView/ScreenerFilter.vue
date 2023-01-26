@@ -64,11 +64,7 @@
                     {{ option.label }}
                   </option>
                 </template>
-                <template
-                  v-else-if="
-                    ['horl', 'condition', 'statistic'].includes(filter.class)
-                  "
-                >
+                <template v-else>
                   <option
                     v-for="(option, optionIndex) of filter.options"
                     :key="optionIndex"
@@ -108,6 +104,7 @@
 
 <script>
   import { mapGetters } from 'vuex';
+  import datasets from '~/refex-sample/datasets.json';
   export default {
     props: {
       screenerFilter: {
@@ -118,14 +115,11 @@
         type: Array,
         default: () => [],
       },
-      datasets: {
-        type: Array,
-        default: () => [],
-      },
     },
     data() {
       return {
         isAllChecked: true,
+        datasets,
       };
     },
     computed: {

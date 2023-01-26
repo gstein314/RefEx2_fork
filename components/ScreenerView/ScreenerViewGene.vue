@@ -117,7 +117,6 @@
       :key="index"
       :screener-filter="screenerFilter"
       :filters="screenerFilter.filters"
-      :datasets="datasets"
     />
   </div>
 </template>
@@ -127,7 +126,6 @@
   import MultiSelect from 'vue-multiselect';
   import ScreenerFilter from './ScreenerFilter.vue';
   import screener from '~/refex-sample/screener.json';
-  import datasets from '~/refex-sample/datasets.json';
 
   export default {
     components: { MultiSelect, ScreenerFilter },
@@ -152,8 +150,7 @@
           go: [],
         },
         debounce: null,
-        screener: screener,
-        datasets: datasets,
+        screener,
       };
     },
     computed: {
