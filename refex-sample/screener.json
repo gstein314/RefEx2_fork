@@ -1,86 +1,116 @@
-{
-	"specificityROKU": {
-		"type": "ROKU",
+[
+	{
+		"description": "TPM",
+		"type": "TPM",
 		"list": [],
 		"defaultItem": {
 			"group": "",
-			"sample": "",
-			"horl": "",
-			"emin": "",
-			"emax": "",
+			"cutoff": "",
+			"condition": "",
 			"check": true,
 			"delete": true
-		}
+		},
+		"filters": [
+			{
+				"name": "Sample",
+				"class": "sample",
+				"inputType": "text",
+				"placeholder": "select a group"
+			},
+			{
+				"name": "Cutoff",
+				"class": "cutoff",
+				"inputType": "text",
+				"placeholder": "0.1"
+			},
+			{
+				"name": "Condition",
+				"class": "condition",
+				"inputType": "text",
+				"placeholder": "≧"
+			},
+			{
+				"name": "Statistic",
+				"class": "statistic"
+			}
+		]
 	},
-	"filtersROKU": [
-		{
-			"id": "1",
-			"name": "Group",
-			"class": "group"
-		},
-		{
-			"id": "2",
-			"name": "Sample",
-			"class": "sample",
-			"inputType": "text",
-			"placeholder": "search samples by text"
-		},
-		{
-			"id": "3",
-			"name": "High or Low",
-			"class": "horl"
-		},
-		{
-			"id": "4",
-			"name": "Entropy-min (Optional)",
-			"class": "emin",
-			"inputType": "number",
-			"placeholder": "1",
-			"min": "1",
-			"max": "5"
-		},
-		{
-			"id": "5",
-			"name": "Entropy-max (Optional)",
-			"class": "emax",
-			"inputType": "number",
-			"placeholder": "5",
-			"min": "1",
-			"max": "5"
-		}
-	],
-	"specificityTau":{
-		"type":"tau",
-		"list":[],
-		"defaultItem":{
-				"group":"",
-				"cutoff":"",
-				"condition":"",
-				"check":true,
-				"delete":true
-		}
-	},
-	"filtersTau": [
-		{
-			"id": "1",
-			"name": "Group",
-			"class": "group",
-			"inputType": "text",
-			"placeholder": "select a group"
-		},
-		{
-			"id": "2",
-			"name": "Cutoff",
-			"class": "cutoff",
-			"inputType": "text",
-			"placeholder": "0.1"
-		},
-		{
-			"id": "3",
-			"name": "Condition",
-			"class": "condition",
-			"inputType": "text",
-			"placeholder": "≧"
-		}
-	]
-}
+  {
+    "description": "Tissue specificity (ROKU)",
+    "type": "ROKU",
+    "list": [],
+    "defaultItem": {
+      "group": "",
+      "sample": "",
+      "horl": "",
+      "emin": "",
+      "emax": "",
+      "check": true,
+      "delete": true
+    },
+    "filters": [
+      {
+        "name": "Group",
+        "class": "group"
+      },
+      {
+        "name": "Sample",
+        "class": "sample",
+        "inputType": "text",
+        "placeholder": "search samples by text"
+      },
+      {
+        "name": "High or Low",
+        "class": "horl"
+      },
+      {
+        "name": "Entropy-min (Optional)",
+        "class": "emin",
+        "inputType": "number",
+        "placeholder": "1",
+        "min": "1",
+        "max": "5"
+      },
+      {
+        "name": "Entropy-max (Optional)",
+        "class": "emax",
+        "inputType": "number",
+        "placeholder": "5",
+        "min": "1",
+        "max": "5"
+      }
+    ]
+  },
+  {
+    "description": "Tissue specificity (tau)",
+    "type": "tau",
+    "list": [],
+    "defaultItem": {
+      "group": "",
+      "cutoff": "",
+      "condition": "",
+      "check": true,
+      "delete": true
+    },
+    "filters": [
+      {
+        "name": "Group",
+        "class": "group",
+        "inputType": "text",
+        "placeholder": "select a group"
+      },
+      {
+        "name": "Cutoff",
+        "class": "cutoff",
+        "inputType": "text",
+        "placeholder": "0.1"
+      },
+      {
+        "name": "Condition",
+        "class": "condition",
+        "inputType": "text",
+        "placeholder": "≧"
+      }
+    ]
+  }
+]

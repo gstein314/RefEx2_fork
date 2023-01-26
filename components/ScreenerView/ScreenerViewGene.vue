@@ -111,16 +111,13 @@
         ></div>
       </vue-tags-input>
     </no-ssr>
+
     <TissueSpecificityFilter
-      :specificity="screener.specificityROKU"
-      :filters-list="screener.filtersROKU"
-      :specificity-type="screener.specificityROKU.type"
-      :datasets="datasets"
-    />
-    <TissueSpecificityFilter
-      :specificity="screener.specificityTau"
-      :filters-list="screener.filtersTau"
-      :specificity-type="screener.specificityTau.type"
+      v-for="(condition, index) of screener"
+      :key="index"
+      :specificity="condition"
+      :filters-list="condition.filters"
+      :specificity-type="condition.type"
       :datasets="datasets"
     />
   </div>

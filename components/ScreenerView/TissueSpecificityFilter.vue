@@ -36,7 +36,7 @@
           </tr>
           <tr
             v-for="(item, index) in specificity.list"
-            :key="item.id"
+            :key="index"
             :class="{ unchecked: !item.check }"
           >
             <td class="check">
