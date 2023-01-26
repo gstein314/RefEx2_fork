@@ -294,14 +294,6 @@
             font-size: 12px
             > input[type="checkbox"]
               cursor: pointer
-            > select
-              display: grid
-            > select::after
-              content: ""
-              width: 0.8em
-              height: 0.5em
-              background-color: var(--select-arrow)
-              clip-path: polygon(100% 0%, 0 0%, 50% 100%)
             > select:required:invalid
               color: rgba(0, 0, 0, 0.3)
               > option[value=""][disabled]
