@@ -50,8 +50,13 @@
                 <option value="" disabled selected hidden>
                   select a group
                 </option>
-                <option value="high">High</option>
-                <option value="low">Low</option>
+                <option
+                  v-for="option in groupOptions"
+                  :key="option.id"
+                  value="high"
+                >
+                  {{ option.label }}
+                </option>
               </select>
               <select
                 v-else-if="filter.class === 'horl'"
@@ -92,6 +97,7 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
   export default {
     props: {
       specificity: {
@@ -115,6 +121,23 @@
       return {
         isAllChecked: true,
       };
+    },
+    computed: {
+      ...mapGetters({
+        activeDataset: 'active_dataset',
+      }),
+      groupOptions() {
+        const target = this.activeDataset.dataset;
+        if (target === 'humanFantom5') {
+          return this.datasets[0].datasets[0].specificity;
+        } else if (target === 'gtexV8') {
+          return this.datasets[0].datasets[1].specificity;
+        } else if (target === 'mouseFantom5') {
+          return [{ label: 'Group 1' }, { label: 'Group 2' }];
+          // お客さんの指定があり次第ハードコートから下記のコートに変更
+          // return this.datasets[1].datasets[0].specificity;
+        } else return [{ label: 'No useable option found' }];
+      },
     },
     mounted() {
       this.dispatchAction('INIT');
