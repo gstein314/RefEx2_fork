@@ -329,9 +329,9 @@
           > .group
             width: 25%
           > .sample
-            width: 32.5%
+            width: 35%
           > .horl
-            width: 12.5%
+            width: 15%
           > .emin,.emax
             width: 10%
     .filter_specificity_tau
