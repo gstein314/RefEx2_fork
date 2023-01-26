@@ -35,24 +35,49 @@
             </td>
           </tr>
           <tr
-            v-for="(item, index) in screenerFilter.list"
-            :key="index"
+            v-for="(item, itemIndex) in screenerFilter.list"
+            :key="itemIndex"
             :class="{ unchecked: !item.check }"
           >
             <td class="check">
               <input
                 v-model="item.check"
                 type="checkbox"
-                @click="dispatchAction('CHECK', index)"
+                @click="dispatchAction('CHECK', itemIndex)"
               />
             </td>
             <td v-for="filter in filters" :key="filter.id">
-              <ScreenerFilterDropdown
+              <select
                 v-if="filter.inputType === 'dropdown'"
-                :item="item"
-                :filter="filter"
-                :datasets="datasets"
-              />
+                v-model="item[filter.class]"
+                required
+              >
+                <option value="" disabled selected hidden>
+                  {{ filter.placeholder }}
+                </option>
+                <template v-if="filter.class === 'group'">
+                  <option
+                    v-for="option in groupOptions"
+                    :key="option.id"
+                    :value="option.label"
+                  >
+                    {{ option.label }}
+                  </option>
+                </template>
+                <template
+                  v-else-if="
+                    ['horl', 'condition', 'statistic'].includes(filter.class)
+                  "
+                >
+                  <option
+                    v-for="(option, optionIndex) of filter.options"
+                    :key="optionIndex"
+                    :value="option.value"
+                  >
+                    {{ option.description }}
+                  </option>
+                </template>
+              </select>
               <input
                 v-else
                 v-model="item[filter.class]"
@@ -60,7 +85,7 @@
                 :placeholder="filter.placeholder"
                 :min="filter.min"
                 :max="filter.max"
-                @input="autoCheckAfterInput(index, item[filter.class])"
+                @input="autoCheckAfterInput(itemIndex, item[filter.class])"
               />
             </td>
             <td class="icon">
@@ -68,7 +93,7 @@
                 class="delete_btn"
                 :class="{ disabled: !item.delete }"
                 :disabled="!item.delete"
-                @click="dispatchAction('DEL', index)"
+                @click="dispatchAction('DEL', itemIndex)"
               >
                 <font-awesome-icon icon="trash" />
                 Delete
@@ -83,7 +108,6 @@
 
 <script>
   import { mapGetters } from 'vuex';
-  import ScreenerFilterDropdown from './ScreenerFilterDropdown.vue';
   export default {
     props: {
       screenerFilter: {
@@ -108,6 +132,18 @@
       ...mapGetters({
         activeDataset: 'active_dataset',
       }),
+      groupOptions() {
+        const target = this.activeDataset.dataset;
+        if (target === 'humanFantom5') {
+          return this.datasets[0].datasets[0].specificity;
+        } else if (target === 'gtexV8') {
+          return this.datasets[0].datasets[1].specificity;
+        } else if (target === 'mouseFantom5') {
+          return [{ label: 'Group 1' }, { label: 'Group 2' }];
+          // お客さんの指定があり次第ハードコートから下記のコートに変更
+          // return this.datasets[1].datasets[0].specificity;
+        } else return [{ label: 'No useable option found' }];
+      },
     },
     mounted() {
       this.dispatchAction('INIT');

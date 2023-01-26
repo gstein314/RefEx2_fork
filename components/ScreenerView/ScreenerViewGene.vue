@@ -315,9 +315,11 @@
           > .icon
             text-align: center
           > .sample
-            width: 55%
-          > .cutoff, .condition, .statistic
+            width: 50%
+          > .cutoff, .condition
             width: 15%
+          > .statistic
+            width: 20%
     .filter_specificity_ROKU
       > table
         > tr

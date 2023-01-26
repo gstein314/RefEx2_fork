@@ -5,9 +5,10 @@
     "class": "filter_TPM",
     "list": [],
     "defaultItem": {
-      "group": "",
+      "sample": "",
       "cutoff": "",
       "condition": "",
+      "statistic": "",
       "check": true,
       "delete": true
     },
