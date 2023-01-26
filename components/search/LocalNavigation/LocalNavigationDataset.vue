@@ -1,5 +1,8 @@
 <template>
-  <li :class="{ isOpenDataset }" @click.stop="updateIsOpenDataset">
+  <li
+    :class="{ isOpenDataset }"
+    @click.stop="$emit('eventUpdateIsOpenDataset')"
+  >
     <div class="nav_item">
       <icon-base :icon-name="activeSpecie.species" />
       <div class="specie_wrapper">
@@ -19,62 +22,33 @@
     </div>
     <div class="nav_frame -before"></div>
     <div class="nav_frame -after"></div>
-    <ul class="dropdown_list" :class="{ isOpenDataset }">
-      <li v-for="specie in species" :key="specie.species">
-        <icon-base :icon-name="specie.species" />
-        <div>
-          <p>{{ specie.species }}</p>
-          <span
-            v-for="dataset in specie.datasets"
-            :key="dataset.dataset"
-            class="dataset_name"
-            @click="updateSpecie(specie.species, dataset.dataset)"
-            >{{ dataset.label }}</span
-          >
-          <!-- <span class="dataset_name" @click="updateSpecie('Human')"
-            >FANTOM5</span
-          > -->
-          <!-- <span class="dataset_name" @click="test()">GTEx</span> -->
-        </div>
-      </li>
-      <!-- <li>
-        <icon-base :icon-name="'Mouse'" />
-        <div>
-          <p>Mouse</p>
-          <span class="dataset_name" @click="updateSpecie('Mouse')"
-            >FANTOM5</span
-          >
-        </div>
-      </li> -->
-    </ul>
+    <local-navigation-dropdown :is-open-dataset="isOpenDataset" />
   </li>
 </template>
 
 <script>
   import { mapGetters, mapMutations } from 'vuex';
-  import datasets from '~/refex-sample/datasets.json';
+  // import datasets from '~/refex-sample/datasets.json';
   import IconBase from '~/components/icons/IconBase.vue';
+  import LocalNavigationDropdown from './LocalNavigationDropdown.vue';
 
   export default {
     components: {
       IconBase,
+      LocalNavigationDropdown,
     },
     props: {
       getPageType: {
         type: String,
         default: '',
       },
+      isOpenDataset: {
+        type: Boolean,
+        default: false,
+      },
     },
     data() {
-      return {
-        species: datasets,
-        isOpenDataset: false,
-        isOpenType: false,
-        selectedProject: datasets.reduce((acc, specie) => {
-          acc[specie.species] = specie.datasets[0].dataset;
-          return acc;
-        }, {}),
-      };
+      return {};
     },
     computed: {
       ...mapGetters({
@@ -85,45 +59,12 @@
     created() {
       this.setSpecie(this.activeSpecie.species);
     },
-    mounted() {
-      window.addEventListener('click', this.closeDropDown);
-    },
+    mounted() {},
     methods: {
       ...mapMutations({
         setSpecie: 'set_specie',
         setActiveDataset: 'set_active_dataset',
       }),
-      updateIsOpenDataset() {
-        if (this.getPageType === 'project') {
-          window.location.href = '/';
-          window.open('/');
-        } else {
-          this.isOpenType = false;
-          this.isOpenDataset = !this.isOpenDataset;
-        }
-      },
-      updateIsOpenType() {
-        if (this.getPageType === 'project') {
-          window.location.href = '/';
-          window.open('/');
-        } else {
-          this.isOpenDataset = false;
-          this.isOpenType = !this.isOpenType;
-        }
-      },
-      closeDropDown(event) {
-        if (!this.$el.querySelector('.dropdown_list').contains(event.target)) {
-          this.isOpenDataset = false;
-        }
-      },
-      test() {
-        this.selectedProject = { Human: 'gtexV8' };
-        this.updateSpecie('Human');
-        this.selectedProject = datasets.reduce((acc, specie) => {
-          acc[specie.species] = specie.datasets[0].dataset;
-          return acc;
-        }, {});
-      },
       updateSpecie(specieId, dataset) {
         this.setSpecie(specieId);
         this.updateActiveDataset(dataset);
@@ -232,51 +173,4 @@
                 background: none
                 font-size: inherit
                 width: auto
-  .dropdown_list
-    position: absolute
-    top: 100%
-    left: 0
-    display: none
-    padding: 0
-    list-style-type: none
-    background-color: white
-    z-index: 999
-    padding: 20px
-    box-shadow: 0px 5px 15px -5px $BLACK
-    cursor: auto
-    > .active_type:hover
-        color: white
-        background-color: $MAIN_COLOR
-        border-radius: 5px
-        cursor: pointer
-    > li
-      color: black
-      min-width: 200px
-      border-bottom: 1px solid #fff
-      display: grid
-      grid-template-columns: 30px 1fr
-      align-content: center
-      > svg
-        width: 30px
-        font-size: 18px
-        align-self: center
-      > div
-        padding: 0 10px
-        > p
-          margin: 0
-          padding-bottom: 10px
-        > .dataset_name
-          background: $MAIN_COLOR
-          color: white
-          padding: 5px
-          border-radius: 5px
-          cursor: pointer
-          margin: 0 3px 3px 0
-          display: inline-block
-          &:hover
-            background: #095493
-  .isOpenDataset
-    display: block
-  .isOpenType
-    display: block
 </style>

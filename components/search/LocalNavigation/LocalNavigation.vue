@@ -4,10 +4,14 @@
       <local-navigation-dataset
         :active-dataset="activeDataset"
         :get-page-type="getPageType"
+        :is-open-dataset="isOpenDataset"
+        @eventUpdateIsOpenDataset="updateIsOpenDataset"
       />
       <local-navigation-type
         :active-filter-name="activeFilter.name"
         :get-page-type="getPageType"
+        :is-open-type="isOpenType"
+        @eventUpdateIsOpenType="updateIsOpenType"
       />
       <local-navigation-name :get-page-type="getPageType" :symbol="symbol" />
     </ul>
@@ -33,7 +37,10 @@
       },
     },
     data() {
-      return {};
+      return {
+        isOpenDataset: false,
+        isOpenType: false,
+      };
     },
     computed: {
       ...mapGetters({
@@ -42,7 +49,8 @@
         getPageType: 'get_page_type',
       }),
     },
-    created() {
+    mounted() {
+      window.addEventListener('click', this.closeDropDown);
       // this.setActiveDataset(this.activeDataset);
       this.setActiveFilter(this.activeFilter.name);
     },
@@ -53,6 +61,30 @@
       ...mapMutations({
         setActiveFilter: 'set_active_filter',
       }),
+      updateIsOpenDataset() {
+        if (this.getPageType === 'project') {
+          window.location.href = '/';
+          window.open('/');
+        } else {
+          this.isOpenType = false;
+          this.isOpenDataset = !this.isOpenDataset;
+        }
+      },
+      updateIsOpenType() {
+        if (this.getPageType === 'project') {
+          window.location.href = '/';
+          window.open('/');
+        } else {
+          this.isOpenDataset = false;
+          this.isOpenType = !this.isOpenType;
+        }
+      },
+      closeDropDown(event) {
+        if (!this.$el.querySelector('.dropdown_list').contains(event.target)) {
+          this.isOpenDataset = false;
+          this.isOpenType = false;
+        }
+      },
     },
   };
 </script>

@@ -27,33 +27,33 @@
       return {};
     },
     computed: {},
-    mounted() {
-      window.addEventListener('click', this.closeDropDown);
-    },
+    // mounted() {
+    //   window.addEventListener('click', this.closeDropDown);
+    // },
     methods: {
-      updateIsOpenDataset() {
-        if (this.getPageType === 'project') {
-          window.location.href = '/';
-          window.open('/');
-        } else {
-          this.isOpenType = false;
-          this.isOpenDataset = !this.isOpenDataset;
-        }
-      },
-      updateIsOpenType() {
-        if (this.getPageType === 'project') {
-          window.location.href = '/';
-          window.open('/');
-        } else {
-          this.isOpenDataset = false;
-          this.isOpenType = !this.isOpenType;
-        }
-      },
-      closeDropDown(event) {
-        if (!this.$el.querySelector('.dropdown_list').contains(event.target)) {
-          this.isOpenType = false;
-        }
-      },
+      // updateIsOpenDataset() {
+      //   if (this.getPageType === 'project') {
+      //     window.location.href = '/';
+      //     window.open('/');
+      //   } else {
+      //     this.isOpenType = false;
+      //     this.isOpenDataset = !this.isOpenDataset;
+      //   }
+      // },
+      // updateIsOpenType() {
+      //   if (this.getPageType === 'project') {
+      //     window.location.href = '/';
+      //     window.open('/');
+      //   } else {
+      //     this.isOpenDataset = false;
+      //     this.isOpenType = !this.isOpenType;
+      //   }
+      // },
+      // closeDropDown(event) {
+      //   if (!this.$el.querySelector('.dropdown_list').contains(event.target)) {
+      //     this.isOpenType = false;
+      //   }
+      // },
     },
   };
 </script>
