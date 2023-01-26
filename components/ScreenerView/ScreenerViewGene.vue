@@ -326,7 +326,7 @@
             width: 35%
           > .horl
             width: 15%
-          > .entropy
+          > .emin, .emax
             width: 10%
     .filter_specificity_tau
       > table

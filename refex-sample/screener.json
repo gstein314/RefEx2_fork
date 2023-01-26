@@ -33,7 +33,7 @@
 		{
 			"id": "4",
 			"name": "Entropy-min (Optional)",
-			"class": "entropy",
+			"class": "emin",
 			"inputType": "number",
 			"placeholder": "1",
 			"min": "1",
@@ -42,7 +42,7 @@
 		{
 			"id": "5",
 			"name": "Entropy-max (Optional)",
-			"class": "entropy",
+			"class": "emax",
 			"inputType": "number",
 			"placeholder": "5",
 			"min": "1",
