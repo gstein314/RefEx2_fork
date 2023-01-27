@@ -10,6 +10,7 @@ $ACTIVE_COLOR_HOVER: rgba(255, 255, 0, .1)
 $BUTTON_HOVER_COLOR: #366c96
 $WARNING_BUTTON_COLOR: #FF8A17
 $WARNING_BUTTON_COLOR_HOVER: #F06A06
+$DISABLE_COLOR:#CCCCCC
 $COLOR_1: #488EC4
 $COLOR_2: #FF8A17
 $COLOR_3: #67C1C7
@@ -91,31 +92,36 @@ $TOOLTIP_LAYER: 2
   background: $MAIN_COLOR
   font-size: 16px
   font-weight: 500
-  padding: 6px 22px
+  padding: 0.4em 1.2em
   border: none
   border-radius: $BORDER_RADIUS_DEFAULT
   display: flex
   align-items: center
+  gap: 5px
+  transition: background 0.3s ease-in-out
   &:focus
     outline: none
   &:hover
     cursor: pointer
     background: $BUTTON_HOVER_COLOR
-    transition: 0.6s
   > svg
-    font-size: 14px
-    margin-right: 4px
+    display: block
+    align-self: flex-start
   &.update
     background: $WARNING_BUTTON_COLOR
     &:hover
       background: $WARNING_BUTTON_COLOR_HOVER
-      transition: 0.6s
   &.disabled
     background: #cccccc
     color: #ffffff
     cursor: not-allowed
     &:hover
       background: #cccccc
+
+
+@mixin sub_button
+  font-size: 12px
+  padding: 0.4em 1.2em
 
 @mixin table
   width: 100%
@@ -187,25 +193,16 @@ $TOOLTIP_LAYER: 2
   text-decoration: underline
   cursor: pointer
   color: $MAIN_COLOR
-  position: relative
   > [data-icon=up-right-from-square]
-    top: 3px
     font-size: 0.8em
   > [data-icon=dna]
-    top: 2px
     font-size: 0.9em
   > [data-icon=flask]
-    top: 2px
     font-size: 0.9em
-  &.icon_on_left
-    padding-left: 16px
-    > svg
-      position: absolute
-      left: 0
-  &.icon_on_right
-    > svg
-      position: absolute
-      right: -16px
+  &.text_with_icon
+    display: flex
+    align-items: center
+    gap: 5px
 
 @mixin select
   cursor: pointer

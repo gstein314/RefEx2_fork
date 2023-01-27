@@ -78,7 +78,7 @@
               !this.filters.find(x => x.column === key)?.is_displayed || false,
             filterKey: key,
           });
-          this.$emit('updateProjectTableHeading');
+          this.$emit('updateProjectTableHead');
         }
       },
       toggleDisplaySettings() {

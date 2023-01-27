@@ -19,7 +19,7 @@
               update: !tableDataIsSameAsScreener,
             }"
             :disabled="!validSearch"
-            @click="$refs[`${$vnode.key}_search`].showResults('all')"
+            @click="showSearchResult($vnode.key)"
           >
             <font-awesome-icon icon="search" />
             Find {{ $vnode.key }}s
@@ -41,6 +41,7 @@
     <index-results
       :key="`${$vnode.key}_results`"
       :table-data-is-same-as-screener="tableDataIsSameAsScreener"
+      :results-num="resultsNum"
       :filters="filters"
       @toggleDisplaySettings="toggleDisplaySettings"
     />
@@ -106,6 +107,10 @@
       toggleDisplaySettings() {
         this.isDisplaySettings = !this.isDisplaySettings;
       },
+      showSearchResult(vnodeKey) {
+        this.$refs[`${vnodeKey}_search`].showResults('all');
+        this.validSearch = false;
+      },
     },
   };
 </script>
@@ -138,4 +143,7 @@
             font-size: 0.7rem
           > button
             +button
+            background-color: $WARNING_BUTTON_COLOR
+            &:hover
+              background: $WARNING_BUTTON_COLOR_HOVER
 </style>
