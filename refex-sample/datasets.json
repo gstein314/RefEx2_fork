@@ -109,34 +109,363 @@
             "id": "humanFantom5Spec001",
             "label": "Adult tissues",
             "samples": [
-              "RES00001796", "RES00001815", "RES00002041", "RES00002072",
-              "RES00002078", "RES00002107", "RES00002110", "RES00002119",
-              "RES00002120", "RES00002122", "RES00002129", "RES00002130",
-              "RES00002132", "RES00002133", "RES00002137", "RES00002151",
-              "RES00002154", "RES00002171", "RES00002178", "RES00002184",
-              "RES00002186", "RES00002198", "RES00002202", "RES00002204",
-              "RES00002205", "RES00002206", "RES00002207", "RES00002208",
-              "RES00002215", "RES00002233", "RES00002235", "RES00002236",
-              "RES00002237", "RES00002240", "RES00002268", "RES00002273",
-              "RES00002274", "RES00002284", "RES00002291", "RES00002293",
-              "RES00002294", "RES00002394", "RES00002396", "RES00002405",
-              "RES00002406", "RES00002411", "RES00002419", "RES00002426",
-              "RES00002432", "RES00002434", "RES00002441", "RES00002442",
-              "RES00002444", "RES00002452", "RES00002455", "RES00002461",
-              "RES00002471", "RES00002485", "RES00002488", "RES00002491",
-              "RES00002495", "RES00002497", "RES00002498", "RES00002500",
-              "RES00002501", "RES00002508", "RES00002509", "RES00002511",
-              "RES00002512"
+              {
+                "id": "RES00001796",
+                "description": "Fingernail (including nail plate, eponychium and hyponychium)"
+              },
+              {
+                "id": "RES00001815",
+                "description": "H9 Embryonic Stem cells"
+              },
+              {
+                "id": "RES00002041",
+                "description": "Skin - palm"
+              },
+              {
+                "id": "RES00002072",
+                "description": "Urethra"
+              },
+              {
+                "id": "RES00002078",
+                "description": "achilles tendon"
+              },
+              {
+                "id": "RES00002107",
+                "description": "adipose tissue, adult"
+              },
+              {
+                "id": "RES00002110",
+                "description": "adrenal gland, adult"
+              },
+              {
+                "id": "RES00002119",
+                "description": "aorta, adult"
+              },
+              {
+                "id": "RES00002120",
+                "description": "appendix"
+              },
+              {
+                "id": "RES00002122",
+                "description": "artery"
+              },
+              {
+                "id": "RES00002129",
+                "description": "bladder, adult"
+              },
+              {
+                "id": "RES00002130",
+                "description": "blood, adult"
+              },
+              {
+                "id": "RES00002132",
+                "description": "bone marrow"
+              },
+              {
+                "id": "RES00002133",
+                "description": "brain, adult"
+              },
+              {
+                "id": "RES00002137",
+                "description": "breast, adult"
+              },
+              {
+                "id": "RES00002151",
+                "description": "cerebrospinal fluid"
+              },
+              {
+                "id": "RES00002154",
+                "description": "cervix, adult"
+              },
+              {
+                "id": "RES00002171",
+                "description": "colon, adult"
+              },
+              {
+                "id": "RES00002178",
+                "description": "cruciate ligament"
+              },
+              {
+                "id": "RES00002184",
+                "description": "ductus deferens"
+              },
+              {
+                "id": "RES00002186",
+                "description": "dura mater, adult"
+              },
+              {
+                "id": "RES00002198",
+                "description": "epididymis"
+              },
+              {
+                "id": "RES00002202",
+                "description": "esophagus, adult"
+              },
+              {
+                "id": "RES00002204",
+                "description": "eye - muscle inferior rectus"
+              },
+              {
+                "id": "RES00002205",
+                "description": "eye - muscle lateral"
+              },
+              {
+                "id": "RES00002206",
+                "description": "eye - muscle medial"
+              },
+              {
+                "id": "RES00002207",
+                "description": "eye - muscle superior"
+              },
+              {
+                "id": "RES00002208",
+                "description": "eye - vitreous humor"
+              },
+              {
+                "id": "RES00002215",
+                "description": "gall bladder"
+              },
+              {
+                "id": "RES00002233",
+                "description": "hIPS"
+              },
+              {
+                "id": "RES00002235",
+                "description": "heart - mitral valve"
+              },
+              {
+                "id": "RES00002236",
+                "description": "heart - pulmonic valve"
+              },
+              {
+                "id": "RES00002237",
+                "description": "heart - tricuspid valve"
+              },
+              {
+                "id": "RES00002240",
+                "description": "heart, adult"
+              },
+              {
+                "id": "RES00002268",
+                "description": "kidney, adult"
+              },
+              {
+                "id": "RES00002273",
+                "description": "left atrium, adult"
+              },
+              {
+                "id": "RES00002274",
+                "description": "left ventricle, adult"
+              },
+              {
+                "id": "RES00002284",
+                "description": "liver, adult"
+              },
+              {
+                "id": "RES00002291",
+                "description": "lung, adult"
+              },
+              {
+                "id": "RES00002293",
+                "description": "lung, right lower lobe, adult"
+              },
+              {
+                "id": "RES00002294",
+                "description": "lymph node, adult"
+              },
+              {
+                "id": "RES00002394",
+                "description": "ovary, adult"
+              },
+              {
+                "id": "RES00002396",
+                "description": "pancreas, adult"
+              },
+              {
+                "id": "RES00002405",
+                "description": "parotid gland"
+              },
+              {
+                "id": "RES00002406",
+                "description": "penis"
+              },
+              {
+                "id": "RES00002411",
+                "description": "placenta, adult"
+              },
+              {
+                "id": "RES00002419",
+                "description": "prostate, adult"
+              },
+              {
+                "id": "RES00002426",
+                "description": "retina, adult"
+              },
+              {
+                "id": "RES00002432",
+                "description": "salivary gland, adult"
+              },
+              {
+                "id": "RES00002434",
+                "description": "seminal vesicle"
+              },
+              {
+                "id": "RES00002441",
+                "description": "skeletal muscle - soleus muscle"
+              },
+              {
+                "id": "RES00002442",
+                "description": "skeletal muscle, adult"
+              },
+              {
+                "id": "RES00002444",
+                "description": "skin, adult"
+              },
+              {
+                "id": "RES00002452",
+                "description": "small intestine, adult"
+              },
+              {
+                "id": "RES00002455",
+                "description": "smooth muscle, adult"
+              },
+              {
+                "id": "RES00002461",
+                "description": "spleen, adult"
+              },
+              {
+                "id": "RES00002471",
+                "description": "submaxillary gland"
+              },
+              {
+                "id": "RES00002485",
+                "description": "testis, adult"
+              },
+              {
+                "id": "RES00002488",
+                "description": "throat"
+              },
+              {
+                "id": "RES00002491",
+                "description": "thymus, adult"
+              },
+              {
+                "id": "RES00002495",
+                "description": "thyroid, adult"
+              },
+              {
+                "id": "RES00002497",
+                "description": "tongue epidermis (fungiform papillae)"
+              },
+              {
+                "id": "RES00002498",
+                "description": "tongue"
+              },
+              {
+                "id": "RES00002500",
+                "description": "tonsil, adult"
+              },
+              {
+                "id": "RES00002501",
+                "description": "trachea, adult"
+              },
+              {
+                "id": "RES00002508",
+                "description": "umbilical cord, fetal"
+              },
+              {
+                "id": "RES00002509",
+                "description": "uterus, adult"
+              },
+              {
+                "id": "RES00002511",
+                "description": "vagina"
+              },
+              {
+                "id": "RES00002512",
+                "description": "vein"
+              }
             ]
           }, {
             "id": "humanFantom5Spec002",
             "label": "Epithelial cells",
             "samples": [
-              "RES00001679", "RES00001680", "RES00001706", "RES00001754",
-              "RES00001756", "RES00001767", "RES00001797", "RES00001839",
-              "RES00001862", "RES00001912", "RES00001990", "RES00001998",
-              "RES00002007", "RES00002009", "RES00002010", "RES00002013",
-              "RES00002014", "RES00002044", "RES00002070"
+              {
+                "id": "RES00001679",
+                "description": "Alveolar Epithelial Cells"
+              },
+              {
+                "id": "RES00001680",
+                "description": "Amniotic Epithelial Cells"
+              },
+              {
+                "id": "RES00001706",
+                "description": "Bronchial Epithelial Cell"
+              },
+              {
+                "id": "RES00001754",
+                "description": "Ciliary Epithelial Cells"
+              },
+              {
+                "id": "RES00001756",
+                "description": "Corneal Epithelial Cells"
+              },
+              {
+                "id": "RES00001767",
+                "description": "Esophageal Epithelial Cells"
+              },
+              {
+                "id": "RES00001797",
+                "description": "Gingival epithelial cells"
+              },
+              {
+                "id": "RES00001839",
+                "description": "Iris Pigment Epithelial Cells"
+              },
+              {
+                "id": "RES00001862",
+                "description": "Lens Epithelial Cells"
+              },
+              {
+                "id": "RES00001912",
+                "description": "Mammary Epithelial Cell"
+              },
+              {
+                "id": "RES00001990",
+                "description": "Olfactory epithelial cells"
+              },
+              {
+                "id": "RES00001998",
+                "description": "Placental Epithelial Cells"
+              },
+              {
+                "id": "RES00002007",
+                "description": "Prostate Epithelial Cells"
+              },
+              {
+                "id": "RES00002009",
+                "description": "Renal Cortical Epithelial Cells"
+              },
+              {
+                "id": "RES00002010",
+                "description": "Renal Epithelial Cells"
+              },
+              {
+                "id": "RES00002013",
+                "description": "Renal Proximal Tubular Epithelial Cell"
+              },
+              {
+                "id": "RES00002014",
+                "description": "Retinal Pigment Epithelial Cells"
+              },
+              {
+                "id": "RES00002044",
+                "description": "Small Airway Epithelial Cells"
+              },
+              {
+                "id": "RES00002070",
+                "description": "Tracheal Epithelial Cells"
+              }
             ]
           }
         ]
@@ -220,29 +549,279 @@
             "id": "gtexV8Spec001",
             "label": "All tissues",
             "samples": [
-              "RES00003651", "RES00003652", "RES00003653", "RES00003654",
-              "RES00003655", "RES00003656", "RES00003657", "RES00003658",
-              "RES00003659", "RES00003660", "RES00003661", "RES00003662",
-              "RES00003663", "RES00003664", "RES00003665", "RES00003666",
-              "RES00003667", "RES00003668", "RES00003669", "RES00003670",
-              "RES00003671", "RES00003672", "RES00003673", "RES00003675",
-              "RES00003676", "RES00003677", "RES00003678", "RES00003679",
-              "RES00003680", "RES00003681", "RES00003682", "RES00003683",
-              "RES00003684", "RES00003685", "RES00003686", "RES00003687",
-              "RES00003688", "RES00003689", "RES00003690", "RES00003691",
-              "RES00003692", "RES00003693", "RES00003694", "RES00003695",
-              "RES00003696", "RES00003697", "RES00003698", "RES00003699",
-              "RES00003700", "RES00003701", "RES00003702", "RES00003703",
-              "RES00003704", "RES00003705"
+              {
+                "id": "RES00003651",
+                "description": "Brain - Cortex"
+              },
+              {
+                "id": "RES00003652",
+                "description": "Prostate"
+              },
+              {
+                "id": "RES00003653",
+                "description": "Minor Salivary Gland"
+              },
+              {
+                "id": "RES00003654",
+                "description": "Lung"
+              },
+              {
+                "id": "RES00003655",
+                "description": "Brain - Spinal cord (cervical c-1)"
+              },
+              {
+                "id": "RES00003656",
+                "description": "Heart - Left Ventricle"
+              },
+              {
+                "id": "RES00003657",
+                "description": "Kidney - Medulla"
+              },
+              {
+                "id": "RES00003658",
+                "description": "Esophagus - Muscularis"
+              },
+              {
+                "id": "RES00003659",
+                "description": "Cells - EBV-transformed lymphocytes"
+              },
+              {
+                "id": "RES00003660",
+                "description": "Nerve - Tibial"
+              },
+              {
+                "id": "RES00003661",
+                "description": "Uterus"
+              },
+              {
+                "id": "RES00003662",
+                "description": "Artery - Tibial"
+              },
+              {
+                "id": "RES00003663",
+                "description": "Brain - Substantia nigra"
+              },
+              {
+                "id": "RES00003664",
+                "description": "Small Intestine - Terminal Ileum"
+              },
+              {
+                "id": "RES00003665",
+                "description": "Cervix - Endocervix"
+              },
+              {
+                "id": "RES00003666",
+                "description": "Kidney - Cortex"
+              },
+              {
+                "id": "RES00003667",
+                "description": "Colon - Sigmoid"
+              },
+              {
+                "id": "RES00003668",
+                "description": "Brain - Anterior cingulate cortex (BA24)"
+              },
+              {
+                "id": "RES00003669",
+                "description": "Artery - Aorta"
+              },
+              {
+                "id": "RES00003670",
+                "description": "Brain - Nucleus accumbens (basal ganglia)"
+              },
+              {
+                "id": "RES00003671",
+                "description": "Brain - Hippocampus"
+              },
+              {
+                "id": "RES00003672",
+                "description": "Esophagus - Gastroesophageal Junction"
+              },
+              {
+                "id": "RES00003673",
+                "description": "Brain - Cerebellar Hemisphere"
+              },
+              {
+                "id": "RES00003675",
+                "description": "Liver"
+              },
+              {
+                "id": "RES00003676",
+                "description": "Vagina"
+              },
+              {
+                "id": "RES00003677",
+                "description": "Ovary"
+              },
+              {
+                "id": "RES00003678",
+                "description": "Brain - Frontal Cortex (BA9)"
+              },
+              {
+                "id": "RES00003679",
+                "description": "Pancreas"
+              },
+              {
+                "id": "RES00003680",
+                "description": "Muscle - Skeletal"
+              },
+              {
+                "id": "RES00003681",
+                "description": "Brain - Cerebellum"
+              },
+              {
+                "id": "RES00003682",
+                "description": "Adipose - Visceral (Omentum)"
+              },
+              {
+                "id": "RES00003683",
+                "description": "Brain - Caudate (basal ganglia)"
+              },
+              {
+                "id": "RES00003684",
+                "description": "Skin - Not Sun Exposed (Suprapubic)"
+              },
+              {
+                "id": "RES00003685",
+                "description": "Breast - Mammary Tissue"
+              },
+              {
+                "id": "RES00003686",
+                "description": "Thyroid"
+              },
+              {
+                "id": "RES00003687",
+                "description": "Brain - Putamen (basal ganglia)"
+              },
+              {
+                "id": "RES00003688",
+                "description": "Pituitary"
+              },
+              {
+                "id": "RES00003689",
+                "description": "Cervix - Ectocervix"
+              },
+              {
+                "id": "RES00003690",
+                "description": "Cells - Cultured fibroblasts"
+              },
+              {
+                "id": "RES00003691",
+                "description": "Heart - Atrial Appendage"
+              },
+              {
+                "id": "RES00003692",
+                "description": "Whole Blood"
+              },
+              {
+                "id": "RES00003693",
+                "description": "Artery - Coronary"
+              },
+              {
+                "id": "RES00003694",
+                "description": "Brain - Amygdala"
+              },
+              {
+                "id": "RES00003695",
+                "description": "Brain - Hypothalamus"
+              },
+              {
+                "id": "RES00003696",
+                "description": "Testis"
+              },
+              {
+                "id": "RES00003697",
+                "description": "Stomach"
+              },
+              {
+                "id": "RES00003698",
+                "description": "Adrenal Gland"
+              },
+              {
+                "id": "RES00003699",
+                "description": "Skin - Sun Exposed (Lower leg)"
+              },
+              {
+                "id": "RES00003700",
+                "description": "Spleen"
+              },
+              {
+                "id": "RES00003701",
+                "description": "Adipose - Subcutaneous"
+              },
+              {
+                "id": "RES00003702",
+                "description": "Bladder"
+              },
+              {
+                "id": "RES00003703",
+                "description": "Esophagus - Mucosa"
+              },
+              {
+                "id": "RES00003704",
+                "description": "Colon - Transverse"
+              },
+              {
+                "id": "RES00003705",
+                "description": "Fallopian Tube"
+              }
             ]
           }, {
             "id": "gtexV8Spec002",
             "label": "Brain sub-regions",
             "samples": [
-              "RES00003651", "RES00003655", "RES00003663", "RES00003668",
-              "RES00003670", "RES00003671", "RES00003673", "RES00003678",
-              "RES00003681", "RES00003683", "RES00003687", "RES00003694",
-              "RES00003695"
+              {
+                "id": "RES00003651",
+                "description": "Brain - Cortex"
+              },
+              {
+                "id": "RES00003655",
+                "description": "Brain - Spinal cord (cervical c-1)"
+              },
+              {
+                "id": "RES00003663",
+                "description": "Brain - Substantia nigra"
+              },
+              {
+                "id": "RES00003668",
+                "description": "Brain - Anterior cingulate cortex (BA24)"
+              },
+              {
+                "id": "RES00003670",
+                "description": "Brain - Nucleus accumbens (basal ganglia)"
+              },
+              {
+                "id": "RES00003671",
+                "description": "Brain - Hippocampus"
+              },
+              {
+                "id": "RES00003673",
+                "description": "Brain - Cerebellar Hemisphere"
+              },
+              {
+                "id": "RES00003678",
+                "description": "Brain - Frontal Cortex (BA9)"
+              },
+              {
+                "id": "RES00003681",
+                "description": "Brain - Cerebellum"
+              },
+              {
+                "id": "RES00003683",
+                "description": "Brain - Caudate (basal ganglia)"
+              },
+              {
+                "id": "RES00003687",
+                "description": "Brain - Putamen (basal ganglia)"
+              },
+              {
+                "id": "RES00003694",
+                "description": "Brain - Amygdala"
+              },
+              {
+                "id": "RES00003695",
+                "description": "Brain - Hypothalamus"
+              }
             ]
           }
         ]
