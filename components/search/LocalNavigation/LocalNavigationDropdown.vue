@@ -144,7 +144,7 @@
     padding: 20px
     box-shadow: 0px 5px 15px -5px $BLACK
     cursor: auto
-    .isOpenDataset, .isOpenType
+  .isOpenDataset, .isOpenType
     display: block
     > .active_type:hover
         color: white
