@@ -51,6 +51,7 @@
                 v-if="filter.inputType === 'dropdown'"
                 v-model="item[filter.className]"
                 required
+                @change="autoAddAndCheck(itemIndex, item[filter.className])"
               >
                 <option value="" disabled selected hidden>
                   {{ filter.placeholder }}
