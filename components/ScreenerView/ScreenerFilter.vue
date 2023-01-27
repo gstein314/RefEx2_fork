@@ -81,7 +81,7 @@
                 :placeholder="filter.placeholder"
                 :min="filter.min"
                 :max="filter.max"
-                @input="autoCheckAfterInput(itemIndex, item[filter.className])"
+                @input="autoAddAndCheck(itemIndex, item[filter.className])"
               />
             </td>
             <td class="icon">
@@ -185,7 +185,7 @@
         }
         this.isAllChecked = list.every(item => item.check);
       },
-      autoCheckAfterInput(index, value) {
+      autoAddAndCheck(index, value) {
         const targetItem = this.screenerFilter.list[index];
         this.dispatchAction('ADD', index, value);
         if (targetItem.check === false) {
