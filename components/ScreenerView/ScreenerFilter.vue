@@ -29,9 +29,11 @@
             <td
               colspan="2"
               class="delete_all"
+              :class="{ disabled: isDisabled }"
               @click="dispatchAction('DEL_ALL')"
             >
-              <font-awesome-icon icon="trash" /> Delete All
+              <font-awesome-icon icon="trash" />
+              Delete All
             </td>
           </tr>
           <tr
@@ -106,6 +108,7 @@
 <script>
   import { mapGetters } from 'vuex';
   import datasets from '~/refex-sample/datasets.json';
+  import _ from 'lodash';
   export default {
     props: {
       screenerFilter: {
@@ -139,6 +142,16 @@
           // return this.datasets[1].datasets[0].specificity;
         } else return [{ label: 'No useable option found' }];
       },
+      isDisabled() {
+        const list = this.screenerFilter.list;
+        const firstItem = list[0];
+        const defaultItem = { ...this.screenerFilter.defaultItem };
+        defaultItem.delete = false;
+        if (_.isEqual(firstItem, defaultItem) && list.length === 1) {
+          return true;
+        }
+        return false;
+      },
     },
     mounted() {
       this.dispatchAction('INIT');
@@ -153,6 +166,7 @@
         const defaultItem = { ...this.screenerFilter.defaultItem };
         switch (action) {
           case 'INIT':
+            defaultItem.delete = false;
             list.push(defaultItem);
             break;
           case 'CHECK_ALL':
@@ -174,6 +188,7 @@
           case 'DEL':
             if (list.length === 1) {
               list.splice(0, list.length);
+              defaultItem.delete = false;
               list.push(defaultItem);
             } else {
               list.splice(index, 1);
@@ -181,13 +196,19 @@
             break;
           case 'DEL_ALL':
             list.splice(0, list.length);
+            defaultItem.delete = false;
             list.push(defaultItem);
             break;
+        }
+        const firstItem = list[0];
+        if (_.isEqual(firstItem, defaultItem) && list.length === 1) {
+          firstItem.delete = false;
         }
         this.isAllChecked = list.every(item => item.check);
       },
       autoAddAndCheck(index, value) {
         const targetItem = this.screenerFilter.list[index];
+        targetItem.delete = true;
         this.dispatchAction('ADD', index, value);
         if (targetItem.check === false) {
           this.dispatchAction('CHECK', index);

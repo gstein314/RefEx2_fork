@@ -300,6 +300,8 @@
           > .delete_all
             color: $MAIN_COLOR
             cursor: pointer
+            &.disabled
+              color: #CCC
           > .check
             padding-right: 5px
       .unchecked
