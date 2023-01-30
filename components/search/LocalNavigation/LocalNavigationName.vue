@@ -27,163 +27,78 @@
       return {};
     },
     computed: {},
-    // mounted() {
-    //   window.addEventListener('click', this.closeDropDown);
-    // },
-    methods: {
-      // updateIsOpenDataset() {
-      //   if (this.getPageType === 'project') {
-      //     window.location.href = '/';
-      //     window.open('/');
-      //   } else {
-      //     this.isOpenType = false;
-      //     this.isOpenDataset = !this.isOpenDataset;
-      //   }
-      // },
-      // updateIsOpenType() {
-      //   if (this.getPageType === 'project') {
-      //     window.location.href = '/';
-      //     window.open('/');
-      //   } else {
-      //     this.isOpenDataset = false;
-      //     this.isOpenType = !this.isOpenType;
-      //   }
-      // },
-      // closeDropDown(event) {
-      //   if (!this.$el.querySelector('.dropdown_list').contains(event.target)) {
-      //     this.isOpenType = false;
-      //   }
-      // },
-    },
+    methods: {},
   };
 </script>
 
 <style lang="sass" scoped>
-  .nav_wrapper
-    margin: 0
-    position: sticky
-    z-index: 2
-    top: 0
-    .nav_area
-      padding: $PADDING_WRAPPER
-      margin: 0
-      display: flex
-      background-color: $MAIN_COLOR
-      height: 70px
-      list-style-type: none
-      width: 100%
-      margin: 0
-      > li
-        cursor: pointer
-        position: relative
-        color: #fff
-        display: flex
-        padding-left: 10px
-        &.isOpenDataset, &.isOpenType
-          background-color: #095493
-          .nav_frame.-after
-            background-color: #095493
-        &:hover
-          background-color: #095493
-          .nav_frame.-after
-            background-color: #095493
-        &:nth-child(n + 2)
-          padding-left: 30px
-        &:nth-child(3)
-          cursor: auto
-        > .nav_frame.-before
-          position: absolute
-          right: -20px
-          height: 100%
-          z-index: 1
-          width: 50px
-          background: white
-          clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 0 50%, 0% 0%)
-        > .nav_frame.-after
-          right: -18px
-          height: 100%
-          z-index: 1
-          width: 20px
-          position: absolute
-          width: 50px
-          height: 100%
-          background-color: $MAIN_COLOR
-          clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 0 50%, 0% 0%)
-        > svg
-          font-size: 24px
-        > .nav_item
-          display: grid
-          grid-template-columns: auto 1fr
-          align-content: center
-          z-index: 2
-          > .specie_wrapper
-            overflow: hidden
-            display: -webkit-box
-            -webkit-box-orient: vertical
-            -webkit-line-clamp: 3
-            > .title
-              font-size: 12px
-              font-weight: bold
-            > form
-              > .specie_select
-                color: $BLACK
-            > p
-              position: relative
-              font-weight: bold
-              > svg
-                font-size: 12px
-                padding-left: 4px
-          > svg
-            align-self: center
-            font-size: 24px
-          > .specie_wrapper
-            flex-direction: column
-            align-self: flex-end
-            margin: 0 5px
-            font-size: 18px
-            > p
-              margin: 0
-            > form
-              margin-left: -4px
-              > .specie_select
-                +select
-                padding: 0
-                background: none
-                font-size: inherit
-                width: auto
-  .dropdown_list
-    position: absolute
-    top: 100%
-    left: 0
-    display: none
-    padding: 0
-    list-style-type: none
-    background-color: white
-    z-index: 999
-    padding: 20px
-    box-shadow: 0px 5px 15px -5px $BLACK
-    cursor: auto
-    > .active_type:hover
-        color: white
-        background-color: $MAIN_COLOR
-        border-radius: 5px
-        cursor: pointer
+  .nav_area
     > li
-      color: black
-      min-width: 200px
-      border-bottom: 1px solid #fff
-      display: grid
-      grid-template-columns: 30px 1fr
-      align-content: center
-      > svg
-        width: 30px
-        font-size: 18px
-        align-self: center
+      &:hover
+        background-color: #095493
+        .nav_frame.-after
+          background-color: #095493
+      > .nav_frame.-before
+        position: absolute
+        right: -20px
+        height: 100%
+        z-index: 1
+        width: 50px
+        background: white
+        clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 0 50%, 0% 0%)
+      > .nav_frame.-after
+        right: -18px
+        height: 100%
+        z-index: 1
+        width: 20px
+        position: absolute
+        width: 50px
+        height: 100%
+        background-color: $MAIN_COLOR
+        clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 0 50%, 0% 0%)
+      > .nav_item
+        display: grid
+        grid-template-columns: auto 1fr
+        align-content: center
+        z-index: 2
+        > .specie_wrapper
+          overflow: hidden
+          display: -webkit-box
+          -webkit-box-orient: vertical
+          -webkit-line-clamp: 3
+          > .title
+            font-size: 12px
+            font-weight: bold
+          > form
+            > .specie_select
+              color: $BLACK
+          > p
+            position: relative
+            font-weight: bold
+            > svg
+              font-size: 12px
+              padding-left: 4px
+        > svg
+          align-self: center
+          font-size: 24px
+        > .specie_wrapper
+          flex-direction: column
+          align-self: flex-end
+          margin: 0 5px
+          font-size: 18px
+          > p
+            margin: 0
+          > form
+            margin-left: -4px
+            > .specie_select
+              +select
+              padding: 0
+              background: none
+              font-size: inherit
+              width: auto
+  .dropdown_list
+    > li
       > div
-        padding: 0 10px
-        > p
-          margin: 0
-          padding-bottom: 10px
         > .dataset_name
           background: $MAIN_COLOR
           color: white
@@ -194,8 +109,4 @@
           display: inline-block
           &:hover
             background: #095493
-  .isOpenDataset
-    display: block
-  .isOpenType
-    display: block
 </style>

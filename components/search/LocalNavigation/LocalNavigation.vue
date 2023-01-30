@@ -63,8 +63,7 @@
       }),
       updateIsOpenDataset() {
         if (this.getPageType === 'project') {
-          window.location.href = '/';
-          window.open('/');
+          this.$router.push('/');
         } else {
           this.isOpenType = false;
           this.isOpenDataset = !this.isOpenDataset;
@@ -72,8 +71,7 @@
       },
       updateIsOpenType() {
         if (this.getPageType === 'project') {
-          window.location.href = '/';
-          window.open('/');
+          this.$router.push('/');
         } else {
           this.isOpenDataset = false;
           this.isOpenType = !this.isOpenType;
