@@ -1,0 +1,150 @@
+[
+  {
+    "description": "TPM",
+    "type": "TPM",
+    "className": "filter_TPM",
+    "list": [],
+    "defaultItem": {
+      "sample": "",
+      "cutoff": "",
+      "condition": "",
+      "statistic": "",
+      "check": true,
+      "delete": true
+    },
+    "filters": [
+      {
+        "name": "Sample",
+        "className": "sample",
+        "placeholder": "search samples by text",
+        "inputType": "text"
+      },
+      {
+        "name": "Cutoff",
+        "className": "cutoff",
+        "placeholder": "0.1",
+        "inputType": "text"
+      },
+      {
+        "name": "Condition",
+        "className": "condition",
+        "placeholder": "≧",
+        "inputType": "dropdown",
+        "options": [
+          { "description": "<", "value": "<" },
+          { "description": "≦", "value": "≦" },
+          { "description": "=", "value": "=" },
+          { "description": "≠", "value": "≠" },
+          { "description": "≧", "value": "≧" },
+          { "description": ">", "value": ">" }
+        ]
+      },
+      {
+        "name": "Statistic",
+        "className": "statistic",
+        "placeholder": "max(TPM)",
+        "inputType": "dropdown",
+        "options": [
+          { "description": "max(TPM)", "value": "max(TPM)" },
+          { "description": "min(TPM)", "value": "min(TPM)" }
+        ]
+      }
+    ]
+  },
+  {
+    "description": "Tissue specificity (ROKU)",
+    "type": "ROKU",
+    "className": "filter_specificity_ROKU",
+    "list": [],
+    "defaultItem": {
+      "group": "",
+      "sample": "",
+      "horl": "",
+      "emin": "",
+      "emax": "",
+      "check": true,
+      "delete": true
+    },
+    "filters": [
+      {
+        "name": "Group",
+        "className": "group",
+        "placeholder": "select a group",
+        "inputType": "dropdown"
+      },
+      {
+        "name": "Sample",
+        "className": "sample",
+        "placeholder": "search samples by text",
+        "inputType": "text"
+      },
+      {
+        "name": "High or Low",
+        "className": "horl",
+        "placeholder": "High",
+        "inputType": "dropdown",
+        "options": [
+          { "description": "High", "value": "high" },
+          { "description": "Low", "value": "low" }
+        ]
+      },
+      {
+        "name": "Entropy-min (Optional)",
+        "className": "emin",
+        "placeholder": "1",
+        "inputType": "number",
+        "min": "1",
+        "max": "5"
+      },
+      {
+        "name": "Entropy-max (Optional)",
+        "className": "emax",
+        "placeholder": "5",
+        "inputType": "number",
+        "min": "1",
+        "max": "5"
+      }
+    ]
+  },
+  {
+    "description": "Tissue specificity (tau)",
+    "type": "tau",
+    "className": "filter_specificity_tau",
+    "list": [],
+    "defaultItem": {
+      "group": "",
+      "cutoff": "",
+      "condition": "",
+      "check": true,
+      "delete": true
+    },
+    "filters": [
+      {
+        "name": "Group",
+        "className": "group",
+        "placeholder": "select a group",
+        "inputType": "dropdown"
+      },
+      {
+        "name": "Cutoff",
+        "className": "cutoff",
+        "placeholder": "0.1",
+        "inputType": "text"
+      },
+      {
+        "name": "Condition",
+        "className": "condition",
+        "placeholder": "≧",
+        "inputType": "dropdown",
+        "options": [
+          { "description": "<", "value": "<" },
+          { "description": "≤", "value": "≤" },
+          { "description": "=", "value": "=" },
+          { "description": "≠", "value": "≠" },
+          { "description": "≧", "value": "≧" },
+          { "description": ">", "value": ">" }
+        ]
+      }
+    ]
+  }
+]
