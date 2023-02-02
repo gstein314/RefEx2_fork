@@ -25,7 +25,7 @@
       </span>
     </h3>
     <vue-simple-suggest
-      v-model="parameters.text"
+      v-model.trim="parameters.text"
       :debounce="500"
       :min-length="0"
       :display-attribute="paramsForSuggestions[1]"

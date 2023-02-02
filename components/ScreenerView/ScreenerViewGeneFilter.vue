@@ -80,7 +80,7 @@
               <vue-simple-suggest
                 v-else-if="filter.className === 'sample'"
                 ref="sampleInput"
-                v-model="parameters.text"
+                v-model.trim="parameters.text"
                 :display-attribute="'description'"
                 :value-attribute="'id'"
                 :list="autocompleteItems"
@@ -108,7 +108,7 @@
               </vue-simple-suggest>
               <input
                 v-else
-                v-model="item[filter.className]"
+                v-model.trim="item[filter.className]"
                 :type="filter.inputType"
                 :placeholder="filter.placeholder"
                 :min="filter.min"
