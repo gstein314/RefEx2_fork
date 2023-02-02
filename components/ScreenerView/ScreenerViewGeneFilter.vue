@@ -285,7 +285,6 @@
       updateIsSelected() {
         this.isSelected =
           this.$refs.sampleInput[0].selected !== null ? true : false;
-        console.log(this.$refs.sampleInput[0].selected);
       },
     },
   };

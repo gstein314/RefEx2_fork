@@ -183,10 +183,6 @@
       parameters() {
         this.$emit('updateParameters', { go: this.goTermString });
       },
-      chrValue() {
-        console.log('event');
-        this.handleChrTagsUpdate(this.chrValue);
-      },
     },
     async created() {
       this.getAutoCompleteData().then(() => {});
@@ -240,9 +236,6 @@
         }
         this.$set(this.temporaryParameters, 'goTerm', '');
         this.setTags([{ id, text, tiClasses }], key);
-      },
-      handleChrTagsUpdate(tags) {
-        console.log(tags);
       },
       setTags(newTags, key) {
         this.parameters = { ...this.parameters, [key]: newTags };
