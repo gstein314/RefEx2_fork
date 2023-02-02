@@ -80,16 +80,21 @@
               <vue-simple-suggest
                 v-else-if="filter.className === 'sample'"
                 ref="sampleInput"
-                v-model.trim="parameters.text"
+                v-model.trim="item[filter.className]"
                 :display-attribute="'description'"
                 :value-attribute="'id'"
-                :list="autocompleteItems"
+                :list="autocompleteItems(item[filter.className])"
                 :debounce="500"
                 :min-length="0"
                 :max-suggestions="10"
                 class="text_search_name"
                 :placeholder="filter.placeholder"
-                @input="updateIsSelected"
+                @input="
+                  () => {
+                    updateIsSelected;
+                    autoAddAndCheck(itemIndex, item[filter.className]);
+                  }
+                "
               >
                 <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
                 <!-- eslint-disable vue/no-unused-vars -->
@@ -99,7 +104,7 @@
                     v-html="
                       $highlightedSuggestion(
                         suggestion.description,
-                        parameters.text,
+                        item[filter.className],
                         2
                       )
                     "
@@ -191,43 +196,6 @@
         }
         return false;
       },
-      autocompleteItems() {
-        const target = this.activeDataset.dataset;
-        const samplesArray = target => {
-          switch (target) {
-            case 'humanFantom5':
-              return this.datasets[0].datasets[0].specificity[0].samples;
-            case 'gtexV8':
-              return this.datasets[0].datasets[1].specificity[0].samples;
-            default:
-              return [
-                {
-                  id: 'testId1',
-                  description: 'Sample description 1',
-                },
-                {
-                  id: 'testId2',
-                  description: 'Sample description 2',
-                },
-              ];
-          }
-        };
-        const copy = [...samplesArray(target)];
-        const wordAndSpace = /[^\w\s]/g;
-        const alphaNumInput = this.parameters.text.replace(wordAndSpace, '');
-        const inputsArray = alphaNumInput.replace(/\s\s+/g, ' ').split(' ');
-
-        return copy.filter(sample => {
-          const alphaNumInput = sample.description.replace(wordAndSpace, '');
-
-          for (const input of inputsArray) {
-            return alphaNumInput.toLowerCase().indexOf(input.toLowerCase()) ===
-              -1
-              ? false
-              : true;
-          }
-        });
-      },
     },
     mounted() {
       this.dispatchAction('INIT');
@@ -293,6 +261,43 @@
       updateIsSelected() {
         this.isSelected =
           this.$refs.sampleInput[0].selected !== null ? true : false;
+      },
+      autocompleteItems(userInput) {
+        const target = this.activeDataset.dataset;
+        const samplesArray = target => {
+          switch (target) {
+            case 'humanFantom5':
+              return this.datasets[0].datasets[0].specificity[0].samples;
+            case 'gtexV8':
+              return this.datasets[0].datasets[1].specificity[0].samples;
+            default:
+              return [
+                {
+                  id: 'testId1',
+                  description: 'Sample description 1',
+                },
+                {
+                  id: 'testId2',
+                  description: 'Sample description 2',
+                },
+              ];
+          }
+        };
+        const copy = [...samplesArray(target)];
+        const wordAndSpace = /[^\w\s]/g;
+        const alphaNumInput = userInput.replace(wordAndSpace, '');
+        const inputsArray = alphaNumInput.replace(/\s\s+/g, ' ').split(' ');
+
+        return copy.filter(sample => {
+          const alphaNumInput = sample.description.replace(wordAndSpace, '');
+
+          for (const input of inputsArray) {
+            return alphaNumInput.toLowerCase().indexOf(input.toLowerCase()) ===
+              -1
+              ? false
+              : true;
+          }
+        });
       },
     },
   };
