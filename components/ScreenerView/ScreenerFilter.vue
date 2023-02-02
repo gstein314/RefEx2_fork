@@ -19,11 +19,12 @@
               :class="filter.className"
             >
               {{ filter.name }}
-              <a href="javascript:void(0)">
-                <font-awesome-icon
-                  v-if="isEntropy(filter.className)"
-                  icon="info-circle"
-                />
+              <template v-if="filter.className === 'sample' && !isSelected"
+                ><font-awesome-icon icon="exclamation-triangle" />
+                Please select from suggestions
+              </template>
+              <a v-if="isEntropy(filter.className)" href="javascript:void(0)">
+                <font-awesome-icon icon="info-circle" />
               </a>
             </td>
             <td
@@ -77,6 +78,33 @@
                   </option>
                 </template>
               </select>
+              <vue-simple-suggest
+                v-else-if="filter.className === 'sample'"
+                ref="sampleInput"
+                v-model="parameters.text"
+                :display-attribute="'description'"
+                :value-attribute="'id'"
+                :list="autocompleteItems"
+                :debounce="500"
+                :min-length="0"
+                :max-suggestions="10"
+                class="text_search_name"
+                :placeholder="filter.placeholder"
+                @input="updateIsSelected"
+              >
+                <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
+                <!-- eslint-disable vue/no-unused-vars -->
+                <div slot="suggestion-item" slot-scope="{ suggestion }">
+                  <span
+                    v-html="
+                      $highlightedSuggestion(
+                        suggestion.description,
+                        parameters.text
+                      )
+                    "
+                  ></span>
+                </div>
+              </vue-simple-suggest>
               <input
                 v-else
                 v-model="item[filter.className]"
@@ -107,9 +135,13 @@
 
 <script>
   import { mapGetters } from 'vuex';
+  import VueSimpleSuggest from 'vue-simple-suggest';
   import datasets from '~/refex-sample/datasets.json';
   import _ from 'lodash';
   export default {
+    components: {
+      VueSimpleSuggest,
+    },
     props: {
       screenerFilter: {
         type: Object,
@@ -124,6 +156,10 @@
       return {
         isAllChecked: true,
         datasets,
+        parameters: {
+          text: '',
+        },
+        isSelected: false,
       };
     },
     computed: {
@@ -151,6 +187,35 @@
           return true;
         }
         return false;
+      },
+      autocompleteItems() {
+        const target = this.activeDataset.dataset;
+        const samplesArray = target => {
+          switch (target) {
+            case 'humanFantom5':
+              return this.datasets[0].datasets[0].specificity[0].samples;
+            case 'gtexV8':
+              return this.datasets[0].datasets[1].specificity[0].samples;
+            default:
+              return [
+                {
+                  id: 'testId1',
+                  description: 'Sample description 1',
+                },
+                {
+                  id: 'testId2',
+                  description: 'Sample description 2',
+                },
+              ];
+          }
+        };
+        const copy = [...samplesArray(target)];
+        return copy.filter(
+          sample =>
+            sample.description
+              .toLowerCase()
+              .indexOf(this.parameters.text.toLowerCase()) !== -1
+        );
       },
     },
     mounted() {
@@ -213,6 +278,11 @@
         if (targetItem.check === false) {
           this.dispatchAction('CHECK', index);
         }
+      },
+      updateIsSelected() {
+        this.isSelected =
+          this.$refs.sampleInput[0].selected !== null ? true : false;
+        console.log(this.$refs.sampleInput[0].selected);
       },
     },
   };
