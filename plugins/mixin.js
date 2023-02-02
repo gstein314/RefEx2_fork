@@ -5,14 +5,15 @@ export default ({ app }, inject) => {
       const nonWordAndSpace = /[^\w\s]/g;
       const alphaNumInput = userInput.replaceAll(nonWordAndSpace, ' ');
       const oneSpaceInput = alphaNumInput.replace(/\s\s+/g, ' ').split(' ');
-      // console.log(oneSpaceInput);
       let highlightedText = originalDescription;
       for (const word of oneSpaceInput) {
         const reg = new RegExp(word, 'gi');
         const hasWord = reg.test(word);
-        if (word.length >= minChrLength && hasWord) {
+        if (
+          parseInt(word) !== NaN ||
+          (word.length >= minChrLength && hasWord)
+        ) {
           highlightedText = highlightedText.replaceAll(reg, `<mark>$&</mark>`);
-          console.log(highlightedText);
         }
       }
       return highlightedText;
