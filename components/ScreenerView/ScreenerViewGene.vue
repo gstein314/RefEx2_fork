@@ -114,7 +114,7 @@
       </vue-tags-input>
     </client-only>
 
-    <ScreenerFilter
+    <ScreenerViewGeneFilter
       v-for="(screenerFilter, index) of screener"
       :key="index"
       :screener-filter="screenerFilter"
@@ -126,11 +126,11 @@
 <script>
   import { mapGetters } from 'vuex';
   import MultiSelect from 'vue-multiselect';
-  import ScreenerFilter from './ScreenerFilter.vue';
+  import ScreenerViewGeneFilter from './ScreenerViewGeneFilter.vue';
   import screener from '~/refex-sample/screener.json';
 
   export default {
-    components: { MultiSelect, ScreenerFilter },
+    components: { MultiSelect, ScreenerViewGeneFilter },
     data() {
       return {
         autocompleteStaticData: {},
