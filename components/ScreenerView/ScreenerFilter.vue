@@ -19,9 +19,8 @@
               :class="filter.className"
             >
               {{ filter.name }}
-              <template v-if="filter.className === 'sample' && !isSelected"
-                ><font-awesome-icon icon="exclamation-triangle" />
-                Please select from suggestions
+              <template v-if="filter.className === 'sample' && !isSelected">
+                <WarningMessage>Please select from suggestions</WarningMessage>
               </template>
               <a v-if="isEntropy(filter.className)" href="javascript:void(0)">
                 <font-awesome-icon icon="info-circle" />
@@ -138,10 +137,12 @@
   import { mapGetters } from 'vuex';
   import VueSimpleSuggest from 'vue-simple-suggest';
   import datasets from '~/refex-sample/datasets.json';
+  import WarningMessage from '../WarningMessage.vue';
   import _ from 'lodash';
   export default {
     components: {
       VueSimpleSuggest,
+      WarningMessage,
     },
     props: {
       screenerFilter: {
