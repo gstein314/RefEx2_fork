@@ -99,7 +99,8 @@
                     v-html="
                       $highlightedSuggestion(
                         suggestion.description,
-                        parameters.text
+                        parameters.text,
+                        2
                       )
                     "
                   ></span>
