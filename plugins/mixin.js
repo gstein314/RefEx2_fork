@@ -2,9 +2,9 @@ export default ({ app }, inject) => {
   inject(
     'highlightedSuggestion',
     (originalDescription, userInput, minChrLength = 3) => {
-      const wordAndSpace = /[^\w\s]/g;
-      const wordsOnlyInput = userInput.replaceAll(wordAndSpace, ' ');
-      const oneSpaceInput = wordsOnlyInput.replace(/\s\s+/g, ' ').split(' ');
+      const nonWordAndSpace = /[^\w\s]/g;
+      const alphaNumInput = userInput.replaceAll(nonWordAndSpace, ' ');
+      const oneSpaceInput = alphaNumInput.replace(/\s\s+/g, ' ').split(' ');
       // console.log(oneSpaceInput);
       let highlightedText = originalDescription;
       for (const word of oneSpaceInput) {
