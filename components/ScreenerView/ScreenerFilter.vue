@@ -94,6 +94,7 @@
               >
                 <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
                 <!-- eslint-disable vue/no-unused-vars -->
+                <!-- eslint-disable vue/no-v-html -->
                 <div slot="suggestion-item" slot-scope="{ suggestion }">
                   <span
                     v-html="
