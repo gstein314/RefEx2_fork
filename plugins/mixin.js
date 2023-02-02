@@ -9,10 +9,7 @@ export default ({ app }, inject) => {
       for (const word of oneSpaceInput) {
         const reg = new RegExp(word, 'gi');
         const hasWord = reg.test(word);
-        if (
-          parseInt(word) !== NaN ||
-          (word.length >= minChrLength && hasWord)
-        ) {
+        if (word.length >= minChrLength && hasWord) {
           highlightedText = highlightedText.replaceAll(reg, `<mark>$&</mark>`);
         }
       }
