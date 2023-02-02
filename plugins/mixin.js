@@ -1,17 +1,21 @@
 export default ({ app }, inject) => {
   inject(
     'highlightedSuggestion',
-    (fullText, highlightedPart, chrLegnth = 3) => {
-      const wordRegExp = /\w+/g;
-      highlightedPart = wordRegExp[Symbol.match](highlightedPart)?.join(' ');
-      const reg = new RegExp(highlightedPart, 'gi');
-      const isHighlight = reg.test(highlightedPart);
-      if (highlightedPart?.length >= chrLegnth && isHighlight) {
-        console.log('fullText: ', fullText);
-        return fullText.replaceAll(reg, `<mark>$&</mark>`);
-      } else {
-        return fullText;
+    (originalDescription, userInput, minChrLength = 3) => {
+      const wordAndSpace = /[^\w\s]/g;
+      const wordsOnlyInput = userInput.replaceAll(wordAndSpace, ' ');
+      const oneSpaceInput = wordsOnlyInput.replace(/\s\s+/g, ' ').split(' ');
+      // console.log(oneSpaceInput);
+      let highlightedText = originalDescription;
+      for (const word of oneSpaceInput) {
+        const reg = new RegExp(word, 'gi');
+        const hasWord = reg.test(word);
+        if (word.length >= minChrLength && hasWord) {
+          highlightedText = highlightedText.replaceAll(reg, `<mark>$&</mark>`);
+          console.log(highlightedText);
+        }
       }
+      return highlightedText;
     }
   );
   inject('firstLetterUppercase', str => {

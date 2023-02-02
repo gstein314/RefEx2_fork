@@ -213,12 +213,20 @@
           }
         };
         const copy = [...samplesArray(target)];
-        return copy.filter(
-          sample =>
-            sample.description
+        return copy.filter(sample => {
+          const wordAndSpace = /[^\w\s]/g;
+          const wordsOnlyInput = sample.description.replaceAll(
+            wordAndSpace,
+            ' '
+          );
+          const oneSpaceInput = wordsOnlyInput.replace(/\s\s+/g, ' ');
+          const result =
+            oneSpaceInput
               .toLowerCase()
-              .indexOf(this.parameters.text.toLowerCase()) !== -1
-        );
+              .indexOf(this.parameters.text.toLowerCase()) !== -1;
+          result ? console.log(oneSpaceInput) : '';
+          return result;
+        });
       },
     },
     mounted() {
