@@ -213,19 +213,19 @@
           }
         };
         const copy = [...samplesArray(target)];
+        const wordAndSpace = /[^\w\s]/g;
+        const alphaNumInput = this.parameters.text.replace(wordAndSpace, '');
+        const inputsArray = alphaNumInput.replace(/\s\s+/g, ' ').split(' ');
+
         return copy.filter(sample => {
-          const wordAndSpace = /[^\w\s]/g;
-          const wordsOnlyInput = sample.description.replaceAll(
-            wordAndSpace,
-            ' '
-          );
-          const oneSpaceInput = wordsOnlyInput.replace(/\s\s+/g, ' ');
-          const result =
-            oneSpaceInput
-              .toLowerCase()
-              .indexOf(this.parameters.text.toLowerCase()) !== -1;
-          result ? console.log(oneSpaceInput) : '';
-          return result;
+          const alphaNumInput = sample.description.replace(wordAndSpace, '');
+
+          for (const input of inputsArray) {
+            return alphaNumInput.toLowerCase().indexOf(input.toLowerCase()) ===
+              -1
+              ? false
+              : true;
+          }
         });
       },
     },
