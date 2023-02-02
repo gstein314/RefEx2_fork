@@ -2,9 +2,8 @@ export default ({ app }, inject) => {
   inject(
     'highlightedSuggestion',
     (fullText, highlightedPart, chrLegnth = 3) => {
-      const alphabetRegExp = /\w+/g;
-      highlightedPart =
-        alphabetRegExp[Symbol.match](highlightedPart)?.join(' ');
+      const wordRegExp = /\w+/g;
+      highlightedPart = wordRegExp[Symbol.match](highlightedPart)?.join(' ');
       const reg = new RegExp(highlightedPart, 'gi');
       const isHighlight = reg.test(highlightedPart);
       if (highlightedPart?.length >= chrLegnth && isHighlight) {
