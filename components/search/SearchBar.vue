@@ -293,9 +293,11 @@
     },
   };
 </script>
-<style lang="sass" scoped>
+<style lang="sass">
   .vue-simple-suggest
       position: relative
+</style>
+<style lang="sass" scoped>
   .text_search_area
       width: 100%
       > h3
