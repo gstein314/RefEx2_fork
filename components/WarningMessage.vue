@@ -6,14 +6,7 @@
 </template>
 
 <script>
-  export default {
-    props: {
-      message: {
-        type: String,
-        required: true,
-      },
-    },
-  };
+  export default {};
 </script>
 <style lang="sass" scoped>
   .warning
