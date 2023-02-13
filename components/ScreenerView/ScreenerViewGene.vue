@@ -22,19 +22,6 @@
             <!-- <font-awesome-icon icon="exclamation-triangle" /> -->
           </div>
         </template>
-        <!-- <template slot="selection" slot-scope="{ values }">
-          <span
-            v-if="values.length &amp;&amp; values.length > 3"
-            class="multiselect__single"
-          >
-            {{
-              values.length === filterObj.options1.length
-                ? 'all'
-                : values.length
-            }}
-            options selected
-          </span>
-        </template> -->
       </multi-select>
     </client-only>
 
@@ -58,19 +45,6 @@
             <!-- <font-awesome-icon icon="exclamation-triangle" /> -->
           </div>
         </template>
-        <!-- <template slot="selection" slot-scope="{ values }">
-          <span
-            v-if="values.length &amp;&amp; values.length > 3"
-            class="multiselect__single"
-          >
-            {{
-              values.length === filterObj.options2.length
-                ? 'all'
-                : values.length
-            }}
-            options selected
-          </span>
-        </template> -->
       </multi-select>
     </client-only>
 
@@ -146,10 +120,14 @@
         // passed down to API
         parameters: {
           go: [],
+          chromosomePosition: [],
+          typeOfGene: [],
         },
         // will contain same keys as parameters. Autocompletion that does not come from the API should be hardcoded here in advance
         autoComplete: {
           go: [],
+          chromosomePosition: [],
+          typeOfGene: [],
         },
         debounce: null,
         screener,
@@ -169,9 +147,6 @@
           ? 'transcription factor binding'
           : 'Only one tag is allowed';
       },
-      selection() {
-        return this.chrValue.join();
-      },
     },
     watch: {
       activeDataset() {
@@ -181,11 +156,17 @@
         };
       },
       parameters() {
-        this.$emit('updateParameters', { go: this.goTermString });
+        this.$emit('updateParameters', {
+          go: this.goTermString,
+          chromosomePosition: this.chrValue.join(),
+          typeOfGene: this.TOGValue.join(),
+        });
       },
       chrValue() {
-        console.log('event');
         this.handleChrTagsUpdate(this.chrValue);
+      },
+      TOGValue() {
+        this.handleTOGTagsUpdate(this.TOGValue);
       },
     },
     async created() {
@@ -242,7 +223,16 @@
         this.setTags([{ id, text, tiClasses }], key);
       },
       handleChrTagsUpdate(tags) {
-        console.log(tags);
+        this.parameters = {
+          ...this.parameters,
+          ['chromosomePosition']: tags.join(),
+        };
+      },
+      handleTOGTagsUpdate(tags) {
+        this.parameters = {
+          ...this.parameters,
+          ['typeOfGene']: tags.join(),
+        };
       },
       setTags(newTags, key) {
         this.parameters = { ...this.parameters, [key]: newTags };
