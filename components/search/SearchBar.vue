@@ -2,7 +2,13 @@
   <!-- v-html setup neccesary for plugin, does NOT use user input/API data and is therefore safe to use -->
   <!-- eslint-disable vue/no-v-html -->
   <div class="text_search_area">
-    <h2>Search Conditions</h2>
+    <div class="search_condition_title">
+      <h2>Search Conditions</h2>
+      <button class="remove_all_btn" @click="removeSearchConditions">
+        <font-awesome-icon icon="trash" />
+        Remove all
+      </button>
+    </div>
     <h3>
       <span class="example"
         >e.g.
@@ -290,6 +296,9 @@
             return 'liver';
         }
       },
+      removeSearchConditions() {
+        this.parameters.text = '';
+      },
     },
   };
 </script>
@@ -297,6 +306,15 @@
   .vue-simple-suggest
       position: relative
   .text_search_area
+      > .search_condition_title
+          display: flex
+          position: relative
+          > .remove_all_btn
+              +button
+              +sub_button
+              position: absolute
+              top: 16px
+              left: 180px
       width: 100%
       > h3
           display: flex

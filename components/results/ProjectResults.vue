@@ -163,6 +163,7 @@
         filterObj: 'active_filter_modal',
         activeDataset: 'active_dataset',
         activeSpecie: 'active_specie',
+        activeFilter: 'active_filter',
       }),
       pageItems() {
         return this.filteredSortedData.slice(
