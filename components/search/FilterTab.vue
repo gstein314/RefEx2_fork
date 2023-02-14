@@ -61,6 +61,7 @@
         tableDataIsSameAsScreener: false,
         isDisplaySettings: false,
         validSearch: false,
+        // When returning from the sample project page to the index page, the filters on the gene side are empty. This is handled by loading filters.json, but it needs to be rewritten if the contents of the filters on the gene side are no longer fixed.
         filters: [
           ...(this.$store.getters.active_dataset[this.$vnode.key].filter ??
             this.$store.getters.active_filter.filter ??
@@ -90,10 +91,6 @@
         if (this.$vnode.key === 'gene') return;
         this.filters = this.activeDataset[this.$vnode.key]?.filter;
       },
-    },
-    mounted() {
-      console.log(this.$vnode.key);
-      console.log(this.filters);
     },
     methods: {
       toggleDisplayFilter(key) {
