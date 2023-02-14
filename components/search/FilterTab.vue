@@ -50,6 +50,7 @@
 <script>
   import { mapGetters } from 'vuex';
   import IndexResults from '~/components/results/IndexResults.vue';
+  import filters from '../../static/filters.json';
 
   export default {
     components: {
@@ -63,6 +64,7 @@
         filters: [
           ...(this.$store.getters.active_dataset[this.$vnode.key].filter ??
             this.$store.getters.active_filter.filter ??
+            filters[0].filter ??
             []),
         ],
       };
@@ -88,6 +90,10 @@
         if (this.$vnode.key === 'gene') return;
         this.filters = this.activeDataset[this.$vnode.key]?.filter;
       },
+    },
+    mounted() {
+      console.log(this.$vnode.key);
+      console.log(this.filters);
     },
     methods: {
       toggleDisplayFilter(key) {
