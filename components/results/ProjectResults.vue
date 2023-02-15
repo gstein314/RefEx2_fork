@@ -34,7 +34,7 @@
                 v-if="filter.column === 'symbol'"
                 class="text_with_icon"
                 @click="
-                  moveToProjectPage(result['ncbiGeneId' || 'ensemblGeneId'])
+                  moveToProjectPage(result.ncbiGeneId || result.ensemblGeneId)
                 "
               >
                 <font-awesome-icon class="left_icon" icon="dna" />
@@ -107,6 +107,7 @@
   import TableHeader from '~/components/results/TableHeader.vue';
   import { mapGetters, mapMutations } from 'vuex';
   import specieSets from '~/refex-sample/datasets.json';
+  import VueRouter from 'vue-router';
 
   export default {
     components: {
@@ -200,6 +201,9 @@
         setActiveDataset: 'set_active_dataset',
         setProjectPagesNumber: 'set_project_pages_number',
       }),
+      setQuery() {
+        this.query = this.$route.query;
+      },
       tooltipData(items, itemNum) {
         const statData = {};
         let tmp = {
@@ -223,8 +227,32 @@
         return statData;
       },
       moveToProjectPage(route) {
-        this.$nuxt.$loading.start();
-        window.location.href = this.routeToOtherProjectPage(route);
+        // this.$router
+        //   .push({
+        //     path: this.$route.path,
+        //     query: {
+        //       type: 'sample',
+        //       id: 'RES00003675',
+        //     },
+        //   })
+        //   .catch(failure => {
+        //     if (
+        //       isNavigationFailure(failure, NavigationFailureType.redirected)
+        //     ) {
+        //       failure.to.path; // '/admin'
+        //       failure.from.path; // '/'
+        //     }
+        //   });
+        console.log('fire');
+        try {
+          this.$router.push({
+            path: this.$route.path,
+            query: { ...this.$route.query, type: 'sample', id: 'RES00001835' },
+            shallow: true,
+          });
+        } catch (err) {
+          console.log(err);
+        }
       },
       activeSort(col_name) {
         this.$emit('activeSort', {

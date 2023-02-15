@@ -129,6 +129,8 @@
     },
     beforeRouteUpdate(to, from, next) {
       this.$forceUpdate();
+      next();
+      window.location.reload();
     },
     async asyncData({ $axios, query, store, route }) {
       let results;
@@ -431,6 +433,11 @@
           resultsDisplayed.push(filtered);
         }
         return resultsDisplayed;
+      },
+    },
+    watch: {
+      $route(to, from) {
+        console.log(to, from);
       },
     },
     created() {
