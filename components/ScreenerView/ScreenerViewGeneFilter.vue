@@ -14,17 +14,17 @@
               />
             </td>
             <td
-              v-for="filter in filters"
-              :key="filter.id"
-              :class="filter.className"
+              v-for="column in columns"
+              :key="column.id"
+              :class="column.className"
             >
-              {{ filter.name }}
+              {{ column.name }}
               <template
-                v-if="filter.className === 'sample' && !allSampleIsSelected"
+                v-if="column.className === 'sample' && !allSampleIsSelected"
               >
                 <WarningMessage>Please select from suggestions</WarningMessage>
               </template>
-              <a v-if="isEntropy(filter.className)" href="javascript:void(0)">
+              <a v-if="isEntropy(column.className)" href="javascript:void(0)">
                 <font-awesome-icon icon="info-circle" />
               </a>
             </td>
@@ -43,30 +43,30 @@
             :key="itemIndex"
             ref="listItem"
             class="list-item"
-            :class="{ unchecked: !item.isCheck }"
+            :class="{ unchecked: !item.isChecked }"
           >
             <template v-if="item.isShow">
               <td class="check">
                 <input
-                  v-model="item.isCheck"
+                  v-model="item.isChecked"
                   type="checkbox"
                   @click="dispatchAction('CHECK', itemIndex)"
                 />
               </td>
-              <td v-for="filter in filters" :key="filter.id">
+              <td v-for="column in columns" :key="column.id">
                 <select
-                  v-if="filter.inputType === 'dropdown'"
-                  v-model="item[filter.className]"
+                  v-if="column.inputType === 'dropdown'"
+                  v-model="item[column.className]"
                   required
-                  :disabled="!item.isCheck"
+                  :disabled="!item.isChecked"
                   @change="
-                    dispatchAction('ADD', itemIndex, item[filter.className])
+                    dispatchAction('ADD', itemIndex, item[column.className])
                   "
                 >
                   <option value="" disabled selected hidden>
-                    {{ filter.placeholder }}
+                    {{ column.placeholder }}
                   </option>
-                  <template v-if="filter.className === 'group'">
+                  <template v-if="column.className === 'group'">
                     <option
                       v-for="option in groupOptions"
                       :key="option.id"
@@ -77,7 +77,7 @@
                   </template>
                   <template v-else>
                     <option
-                      v-for="(option, optionIndex) of filter.options"
+                      v-for="(option, optionIndex) of column.options"
                       :key="optionIndex"
                       :value="option.value"
                     >
@@ -86,18 +86,22 @@
                   </template>
                 </select>
                 <vue-simple-suggest
-                  v-else-if="filter.className === 'sample'"
+                  v-else-if="column.className === 'sample'"
                   ref="sampleInputs"
-                  v-model.trim="item[filter.className]"
+                  v-model.trim="item[column.className]"
                   display-attribute="id"
                   value-attribute="description"
-                  :list="autocompleteItems(item[filter.className])"
+                  :list="autocompleteItems(item[column.className])"
                   :debounce="500"
                   :min-length="0"
                   :max-suggestions="10"
                   class="text_search_name"
                   @input="
-                    dispatchAction('ADD', itemIndex, item[filter.className])
+                    () => {
+                      dispatchAction('ADD', itemIndex, item[column.className]);
+                      tempFunction();
+                      setSelectedTrue(itemIndex);
+                    }
                   "
                 >
                   <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
@@ -108,7 +112,7 @@
                       v-html="
                         $highlightedSuggestion(
                           suggestion.description,
-                          item[filter.className],
+                          item[column.className],
                           2
                         )
                       "
@@ -117,14 +121,14 @@
                 </vue-simple-suggest>
                 <input
                   v-else
-                  v-model.trim="item[filter.className]"
-                  :type="filter.inputType"
-                  :placeholder="filter.placeholder"
-                  :min="filter.min"
-                  :max="filter.max"
-                  :disabled="!item.isCheck"
+                  v-model.trim="item[column.className]"
+                  :type="column.inputType"
+                  :placeholder="column.placeholder"
+                  :min="column.min"
+                  :max="column.max"
+                  :disabled="!item.isChecked"
                   @input="
-                    dispatchAction('ADD', itemIndex, item[filter.className])
+                    dispatchAction('ADD', itemIndex, item[column.className])
                   "
                 />
               </td>
@@ -133,12 +137,7 @@
                   class="delete_btn"
                   :class="{ disabled: !item.canDelete }"
                   :disabled="isDisable(item)"
-                  @click="
-                    e => {
-                      dispatchAction('DEL', itemIndex);
-                      tempFunction(e, itemIndex);
-                    }
-                  "
+                  @click="dispatchAction('DEL', itemIndex)"
                 >
                   <font-awesome-icon icon="trash" />
                   Delete
@@ -164,11 +163,11 @@
       WarningMessage,
     },
     props: {
-      screenerFilter: {
+      filter: {
         type: Object,
         default: () => {},
       },
-      filters: {
+      columns: {
         type: Array,
         default: () => [],
       },
@@ -182,6 +181,7 @@
         },
         allSampleIsSelected: true,
         sampleSelectedArray: [],
+        screenerFilter: this.filter,
       };
     },
     computed: {
@@ -239,48 +239,43 @@
     mounted() {
       this.dispatchAction('INIT');
     },
-    updated() {
-      // console.log('input changed');
-      const isSelectedUpToDate = this.$refs.sampleInputs?.map(
-        sampleInput => sampleInput.isSelectedUpToDate
-      );
-      const falseIndexArray = [];
-      if (isSelectedUpToDate !== undefined) {
-        for (const [i, item] of isSelectedUpToDate.entries()) {
-          if (item === false) {
-            falseIndexArray.push(i);
-          }
-        }
-      }
-      console.log(isSelectedUpToDate);
-      if (isSelectedUpToDate)
-        this.sampleSelectedArray = [...isSelectedUpToDate];
-      // if (falseIndexArray.length === 1 && falseIndexArray[0] === 0) {
-      //   const deleteToFalseForComparison = () => {
-      //     const copy = { ...this.screenerFilter.list[0] };
-      //     copy.canDelete = true;
-      //     return copy;
-      //   };
-      //   // console.log(deleteToFalseForComparison);
-      //   this.allSampleIsSelected = _.isEqual(
-      //     deleteToFalseForComparison(),
-      //     this.screenerFilter.defaultItem
-      //   );
-      // } else {
-      //   for (const i of falseIndexArray) {
-      //     const isDefaultItem = _.isEqual(
-      //       this.screenerFilter.list[i],
-      //       this.screenerFilter.defaultItem
-      //     );
-      //     if (!isDefaultItem) this.allSampleIsSelected = false;
-      //   }
-      // }
-    },
+    // updated() {
+    //   // console.log('input changed');
+    //   const isSelectedUpToDate = this.$refs.sampleInputs?.map(
+    //     sampleInput => sampleInput.isSelectedUpToDate
+    //   );
+    //   const falseIndexArray = [];
+    //   if (isSelectedUpToDate !== undefined) {
+    //     for (const [i, item] of isSelectedUpToDate.entries()) {
+    //       if (item === false) {
+    //         falseIndexArray.push(i);
+    //       }
+    //     }
+    //   }
+    //   console.log(isSelectedUpToDate);
+    //   if (
+    //     isSelectedUpToDate !== undefined &&
+    //     isSelectedUpToDate.includes(false)
+    //   ) {
+    //     const indexArray = [];
+    //     for (const [i, bool] of isSelectedUpToDate.entries()) {
+    //       if (bool === false) indexArray.push(i);
+    //     }
+    //     const defaultItem = { ...this.screenerFilter.defaultItem };
+    //     delete defaultItem.canDelete;
+    //     for (const index of indexArray) {
+    //       delete this.screenerFilter.list[index].canDelete;
+    //       if (!_.isEqual(this.screenerFilter.list[index], defaultItem)) {
+    //         this.allSampleIsSelected = false;
+    //       }
+    //     }
+    //     this.allSampleIsSelected = true;
+    //   } else this.allSampleIsSelected = true;
+    // },
     methods: {
       isDisable(item) {
         return !item.canDelete;
       },
-
       isEntropy(className) {
         return ['emin', 'emax'].includes(className);
       },
@@ -296,11 +291,13 @@
           case 'CHECK_ALL':
             this.isAllChecked = !this.isAllChecked;
             for (const item of list) {
-              this.isAllChecked ? (item.isCheck = true) : (item.isCheck = false);
+              this.isAllChecked
+                ? (item.isChecked = true)
+                : (item.isChecked = false);
             }
             break;
           case 'CHECK':
-            targetItem.isCheck = !targetItem.isCheck;
+            targetItem.isChecked = !targetItem.isChecked;
             break;
           case 'ADD':
             targetItem.canDelete = true;
@@ -341,7 +338,7 @@
         if (_.isEqual(firstItem, defaultItem) && list.length === 1) {
           firstItem.canDelete = false;
         }
-        this.isAllChecked = list.every(item => item.isCheck);
+        this.isAllChecked = list.every(item => item.isChecked);
         // console.log(this.screenerFilter.list);
         // console.log(this.$refs.sampleInputs?.map(input => input.selected));
       },
@@ -382,20 +379,46 @@
           }
         });
       },
-      tempFunction(e, index) {
-        // this.$refs.sampleInputs[index].$destroy();
-        // const targetVueSimpleSuggestEl = this.$refs.sampleInputs[index];
-        // targetVueSimpleSuggestEl.$parent.$children.splice(index, 1);
-        // console.dir(targetVueSimpleSuggestEl);
-        // this.$refs.sampleInputs[index].$destroy();
-        // console.dir(index);
-        // console.dir(this.$refs.itemList);
-        // console.dir(this.$refs.listItem[0]);
-        // this.$refs.itemList.removeChild(this.$refs.itemList.children[2]);
-        // console.log(this.$refs.itemList.removeChild(this.$refs.listItem));
-        // console.log(e.target.parentNode.parentNode.parentNode);
-        // this.$destroy();
-        // this.$el.parentNode.removeChild(this.$el);
+      tempFunction() {
+        const isSelectedUpToDate = this.$refs.sampleInputs?.map(
+          sampleInput => sampleInput.isSelectedUpToDate
+        );
+        const falseIndexArray = [];
+        if (isSelectedUpToDate !== undefined) {
+          for (const [i, item] of isSelectedUpToDate.entries()) {
+            if (item === false) {
+              falseIndexArray.push(i);
+            }
+          }
+        }
+        console.log(isSelectedUpToDate);
+        // if (
+        //   isSelectedUpToDate !== undefined &&
+        //   isSelectedUpToDate.includes(false)
+        // ) {
+        //   const indexArray = [];
+        //   for (const [i, bool] of isSelectedUpToDate.entries()) {
+        //     if (bool === false) indexArray.push(i);
+        //   }
+        //   const defaultItem = { ...this.screenerFilter.defaultItem };
+        //   delete defaultItem.canDelete;
+        //   const copy = [...this.screenerFilter.list];
+        //   for (const index of indexArray) {
+        //     delete copy[index].canDelete;
+        //     if (!_.isEqual(copy[index], defaultItem)) {
+        //       this.allSampleIsSelected = false;
+        //     }
+        //   }
+        //   this.allSampleIsSelected = true;
+        // } else this.allSampleIsSelected = true;
+      },
+      setSelectedTrue(index) {
+        const list = this.screenerFilter.list;
+        list[index].isSelected = true;
+      },
+      setSelectedFalse(index) {
+        const list = this.screenerFilter.list;
+        list[index].isSelected = false;
       },
     },
   };

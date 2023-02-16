@@ -9,11 +9,12 @@
       "cutoff": "",
       "condition": "",
       "statistic": "",
-      "isCheck": true,
+      "isChecked": true,
       "canDelete": true,
-      "isShow": true
+      "isShow": true,
+      "isSelected": false
     },
-    "filters": [
+    "columns": [
       {
         "name": "Sample",
         "className": "sample",
@@ -63,11 +64,11 @@
       "horl": "",
       "emin": "",
       "emax": "",
-      "isCheck": true,
+      "isChecked": true,
       "canDelete": true,
       "isShow": true
     },
-    "filters": [
+    "columns": [
       {
         "name": "Group",
         "className": "group",
@@ -117,11 +118,11 @@
       "group": "",
       "cutoff": "",
       "condition": "",
-      "isCheck": true,
+      "isChecked": true,
       "canDelete": true,
       "isShow": true
     },
-    "filters": [
+    "columns": [
       {
         "name": "Group",
         "className": "group",

@@ -117,8 +117,8 @@
     <ScreenerViewGeneFilter
       v-for="(screenerFilter, index) of screener"
       :key="index"
-      :screener-filter="screenerFilter"
-      :filters="screenerFilter.filters"
+      :filter="screenerFilter"
+      :columns="screenerFilter.columns"
     />
   </div>
 </template>
