@@ -62,7 +62,7 @@
                   <option
                     v-for="option in groupOptions"
                     :key="option.id"
-                    :value="option.label"
+                    :value="option.id"
                   >
                     {{ option.label }}
                   </option>
