@@ -198,6 +198,21 @@
       this.showResults('numfound');
       this.updateSearchCondition();
     },
+    // mounted() {
+    //   this.isLoading = true;
+    //   const suggestion = this.parameters.text;
+    //   const query = `{${this.queryPrefix}(text: "${suggestion}" ${
+    //     this.isSummaryIncluded ? 'summary: "true"' : ''
+    //   }) {${this.paramsForSuggestions.join(' ')}}}`;
+    //   console.log(query)
+    //   this.$axios
+    //     .$post('gql', {
+    //       query,
+    //     })
+    //     .then(results => console.log(results))
+    //     .catch(err => console.log(err))
+    //     .finally();
+    // },
     methods: {
       ...mapMutations({
         setAlertModal: 'set_alert_modal',

@@ -10,7 +10,8 @@
       "condition": "",
       "statistic": "",
       "check": true,
-      "delete": true
+      "delete": true,
+      "isShow": true
     },
     "filters": [
       {
@@ -63,7 +64,8 @@
       "emin": "",
       "emax": "",
       "check": true,
-      "delete": true
+      "delete": true,
+      "isShow": true
     },
     "filters": [
       {
@@ -116,7 +118,8 @@
       "cutoff": "",
       "condition": "",
       "check": true,
-      "delete": true
+      "delete": true,
+      "isShow": true
     },
     "filters": [
       {
@@ -138,7 +141,7 @@
         "inputType": "dropdown",
         "options": [
           { "description": "<", "value": "<" },
-          { "description": "≤", "value": "≤" },
+          { "description": "≦", "value": "≦" },
           { "description": "=", "value": "=" },
           { "description": "≠", "value": "≠" },
           { "description": "≧", "value": "≧" },
