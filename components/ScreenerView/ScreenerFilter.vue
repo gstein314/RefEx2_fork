@@ -124,6 +124,7 @@
       return {
         isAllChecked: true,
         datasets,
+        screenerFilterList: this.screenerFilter.list,
       };
     },
     computed: {
@@ -151,6 +152,18 @@
           return true;
         }
         return false;
+      },
+    },
+    watch: {
+      screenerFilterList: {
+        handler(newVal, oldVal) {
+          this.$emit(
+            'addFilterValue',
+            this.screenerFilter.type,
+            this.screenerFilter.list
+          );
+        },
+        deep: true,
       },
     },
     mounted() {

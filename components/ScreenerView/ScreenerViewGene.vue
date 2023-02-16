@@ -93,6 +93,7 @@
       :key="index"
       :screener-filter="screenerFilter"
       :filters="screenerFilter.filters"
+      @addFilterValue="addFilterValue"
     />
   </div>
 </template>
@@ -107,6 +108,10 @@
     components: { MultiSelect, ScreenerFilter },
     data() {
       return {
+        filterValue: [],
+        TPMValue: [],
+        ROKUValue: [],
+        tauValue: [],
         autocompleteStaticData: {},
         chrValue: [],
         TOGValue: [],
@@ -122,12 +127,14 @@
           go: [],
           chromosomePosition: [],
           typeOfGene: [],
+          filter: [],
         },
         // will contain same keys as parameters. Autocompletion that does not come from the API should be hardcoded here in advance
         autoComplete: {
           go: [],
           chromosomePosition: [],
           typeOfGene: [],
+          filter: [],
         },
         debounce: null,
         screener,
@@ -160,6 +167,7 @@
           go: this.goTermString,
           chromosomePosition: this.chrValue.join(),
           typeOfGene: this.TOGValue.join(),
+          filter: this.filterValue,
         });
       },
       chrValue() {
@@ -167,6 +175,9 @@
       },
       TOGValue() {
         this.handleTOGTagsUpdate(this.TOGValue);
+      },
+      filterValue() {
+        this.handleFilterValueUpdate(this.filterValue);
       },
     },
     async created() {
@@ -234,9 +245,33 @@
           ['typeOfGene']: tags.join(),
         };
       },
+      handleFilterValueUpdate() {
+        this.parameters = {
+          ...this.parameters,
+          ['filter']: this.filterValue,
+        };
+      },
       setTags(newTags, key) {
         this.parameters = { ...this.parameters, [key]: newTags };
         this.hideCaret = newTags.length === 0 ? false : true;
+      },
+      // TODO:
+      // Multiple support is not yet available
+      addFilterValue(type, list) {
+        switch (type) {
+          case 'TPM':
+            this.TPMValue = `{"method":"tpm", "sample":${list[0].sample}, "value":${list[0].cutoff},"logic":${list[0].condition}, "statistic":${list[0].statistic}}`;
+            this.filterValue = this.TPMValue;
+            break;
+          case 'ROKU':
+            this.ROKUValue = `{"method":"roku", "group":${list[0].group}, "sample":${list[0].sample},"highlow":${list[0].horl},"entropy_min":${list[0].emin},"entropy_max":${list[0].emax}`;
+            this.filterValue = this.ROKUValue;
+            break;
+          case 'tau':
+            this.tauValue = `{"method":"tau", "group":${list[0].group}, "logic":${list[0].condition}, "value":${list[0].cutoff}}`;
+            this.filterValue = this.tauValue;
+            break;
+        }
       },
     },
   };

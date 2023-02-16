@@ -176,9 +176,13 @@
           : `{${Object.keys(this.parameters)
               .filter(
                 param =>
-                  !['text', 'go', 'chromosomePosition', 'typeOfGene'].includes(
-                    param
-                  )
+                  ![
+                    'text',
+                    'go',
+                    'chromosomePosition',
+                    'typeOfGene',
+                    'filter',
+                  ].includes(param)
               )
               .join(' ')} ${this.extraVariablesToBeDsiplayedInResults}}`;
         const suffix = this.isNum ? '' : ` ${this.queryPrefix}Numfound`;
