@@ -43,12 +43,12 @@
             :key="itemIndex"
             ref="listItem"
             class="list-item"
-            :class="{ unchecked: !item.check }"
+            :class="{ unchecked: !item.isCheck }"
           >
             <template v-if="item.isShow">
               <td class="check">
                 <input
-                  v-model="item.check"
+                  v-model="item.isCheck"
                   type="checkbox"
                   @click="dispatchAction('CHECK', itemIndex)"
                 />
@@ -58,7 +58,7 @@
                   v-if="filter.inputType === 'dropdown'"
                   v-model="item[filter.className]"
                   required
-                  :disabled="!item.check"
+                  :disabled="!item.isCheck"
                   @change="
                     dispatchAction('ADD', itemIndex, item[filter.className])
                   "
@@ -122,7 +122,7 @@
                   :placeholder="filter.placeholder"
                   :min="filter.min"
                   :max="filter.max"
-                  :disabled="!item.check"
+                  :disabled="!item.isCheck"
                   @input="
                     dispatchAction('ADD', itemIndex, item[filter.className])
                   "
@@ -131,7 +131,7 @@
               <td class="icon">
                 <button
                   class="delete_btn"
-                  :class="{ disabled: !item.delete }"
+                  :class="{ disabled: !item.canDelete }"
                   :disabled="isDisable(item)"
                   @click="
                     e => {
@@ -204,7 +204,7 @@
         const list = this.screenerFilter.list;
         const firstItem = list[0];
         const defaultItem = { ...this.screenerFilter.defaultItem };
-        defaultItem.delete = false;
+        defaultItem.canDelete = false;
         if (_.isEqual(firstItem, defaultItem) && list.length === 1) {
           return true;
         }
@@ -258,7 +258,7 @@
       // if (falseIndexArray.length === 1 && falseIndexArray[0] === 0) {
       //   const deleteToFalseForComparison = () => {
       //     const copy = { ...this.screenerFilter.list[0] };
-      //     copy.delete = true;
+      //     copy.canDelete = true;
       //     return copy;
       //   };
       //   // console.log(deleteToFalseForComparison);
@@ -278,7 +278,7 @@
     },
     methods: {
       isDisable(item) {
-        return !item.delete;
+        return !item.canDelete;
       },
 
       isEntropy(className) {
@@ -290,20 +290,20 @@
         const defaultItem = { ...this.screenerFilter.defaultItem };
         switch (action) {
           case 'INIT':
-            defaultItem.delete = false;
+            defaultItem.canDelete = false;
             list.push(defaultItem);
             break;
           case 'CHECK_ALL':
             this.isAllChecked = !this.isAllChecked;
             for (const item of list) {
-              this.isAllChecked ? (item.check = true) : (item.check = false);
+              this.isAllChecked ? (item.isCheck = true) : (item.isCheck = false);
             }
             break;
           case 'CHECK':
-            targetItem.check = !targetItem.check;
+            targetItem.isCheck = !targetItem.isCheck;
             break;
           case 'ADD':
-            targetItem.delete = true;
+            targetItem.canDelete = true;
             if (value.trim().length > 0) {
               if (!list[index + 1]) {
                 list.push(defaultItem);
@@ -322,7 +322,7 @@
             };
             if (countOfShow() === 1) {
               list.splice(0, list.length);
-              defaultItem.delete = false;
+              defaultItem.canDelete = false;
               list.push(defaultItem);
             } else {
               // list.splice(index, 1);
@@ -333,15 +333,15 @@
             break;
           case 'DEL_ALL':
             list.splice(0, list.length);
-            defaultItem.delete = false;
+            defaultItem.canDelete = false;
             list.push(defaultItem);
             break;
         }
         const firstItem = list[0];
         if (_.isEqual(firstItem, defaultItem) && list.length === 1) {
-          firstItem.delete = false;
+          firstItem.canDelete = false;
         }
-        this.isAllChecked = list.every(item => item.check);
+        this.isAllChecked = list.every(item => item.isCheck);
         // console.log(this.screenerFilter.list);
         // console.log(this.$refs.sampleInputs?.map(input => input.selected));
       },

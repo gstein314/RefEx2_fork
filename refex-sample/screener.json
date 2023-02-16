@@ -9,8 +9,8 @@
       "cutoff": "",
       "condition": "",
       "statistic": "",
-      "check": true,
-      "delete": true,
+      "isCheck": true,
+      "canDelete": true,
       "isShow": true
     },
     "filters": [
@@ -63,8 +63,8 @@
       "horl": "",
       "emin": "",
       "emax": "",
-      "check": true,
-      "delete": true,
+      "isCheck": true,
+      "canDelete": true,
       "isShow": true
     },
     "filters": [
@@ -117,8 +117,8 @@
       "group": "",
       "cutoff": "",
       "condition": "",
-      "check": true,
-      "delete": true,
+      "isCheck": true,
+      "canDelete": true,
       "isShow": true
     },
     "filters": [
