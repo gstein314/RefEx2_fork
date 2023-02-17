@@ -114,11 +114,23 @@
       </vue-tags-input>
     </client-only>
 
-    <ScreenerViewGeneFilter
+    <!-- <ScreenerViewGeneFilter
       v-for="(screenerFilter, index) of screener"
       :key="index"
       :filter="screenerFilter"
       :columns="screenerFilter.columns"
+    /> -->
+    <ScreenerViewGeneFilter
+      :filter.sync="screener[0]"
+      :columns="screener[0].columns"
+    />
+    <ScreenerViewGeneFilter
+      :filter.sync="screener[1]"
+      :columns="screener[1].columns"
+    />
+    <ScreenerViewGeneFilter
+      :filter.sync="screener[2]"
+      :columns="screener[2].columns"
     />
   </div>
 </template>
@@ -282,6 +294,8 @@
         > tr
           > td
             font-size: 12px
+            > .text_search_name input
+              font-size: 22px
             > input[type="checkbox"]
               cursor: pointer
               -moz-transform: scale(3)
