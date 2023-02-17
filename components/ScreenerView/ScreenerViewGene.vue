@@ -264,7 +264,7 @@
             this.filterValue = this.TPMValue;
             break;
           case 'ROKU':
-            this.ROKUValue = `{"method":"roku", "group":${list[0].group}, "sample":${list[0].sample},"highlow":${list[0].horl},"entropy_min":${list[0].emin},"entropy_max":${list[0].emax}`;
+            this.ROKUValue = `{"method":"roku", "group":${list[0].group}, "sample":${list[0].sample},"highlow":${list[0].horl},"entropy_min":${list[0].emin},"entropy_max":${list[0].emax}}`;
             this.filterValue = this.ROKUValue;
             break;
           case 'tau':
