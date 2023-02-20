@@ -130,6 +130,7 @@
         activeDataset: 'active_dataset',
         activeSpecie: 'active_specie',
         searchCondition: 'search_condition_by_specie',
+        getSearchConditions: 'get_search_conditions',
       }),
       // returns either gene or sample
       filterType() {
@@ -208,6 +209,7 @@
       ...mapMutations({
         setAlertModal: 'set_alert_modal',
         updatePagination: 'set_pagination',
+        setSearchConditions: 'set_search_conditions',
       }),
       updateSearchCondition() {
         if (this.filterType === 'gene') {
@@ -242,6 +244,12 @@
       getSuggestions() {
         this.isLoading = true;
         const suggestion = this.parameters.text;
+        const searchText = {
+          type: this.filterType,
+          item: 'text',
+          value: suggestion,
+        };
+        this.setSearchConditions(searchText);
         const query = `{${this.queryPrefix}(text: "${suggestion}" ${
           this.isSummaryIncluded ? 'summary: "true"' : ''
         }) {${this.paramsForSuggestions.join(' ')}}}`;

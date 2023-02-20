@@ -48,6 +48,42 @@ export const state = () => ({
   index_sample_pages_number: 0,
   project_pages_number: 0,
   project_items: {},
+  search_conditions: {
+    gene: {
+      text: '',
+      chr: '',
+      tog: '',
+      go: '',
+      tpm: {
+        sample: '',
+        cutoff: '',
+        condition: '',
+        statistic: '',
+      },
+      roku: {
+        group: '',
+        sample: '',
+        horl: '',
+        emin: '',
+        emax: '',
+      },
+      tau: {
+        group: '',
+        cutoff: '',
+        condition: '',
+      },
+    },
+    sample: {
+      text: '',
+      sample_type: '',
+      experiment: '',
+      tissue: '',
+      cell_type: '',
+      disease: '',
+      developmental_stage: '',
+      sex: '',
+    },
+  },
 });
 
 export const getters = {
@@ -137,6 +173,9 @@ export const getters = {
   },
   get_project_pages_number(state) {
     return state.project_pages_number;
+  },
+  get_search_conditions(state) {
+    return state.search_conditions;
   },
 };
 
@@ -238,5 +277,10 @@ export const mutations = {
   },
   set_project_pages_number(state, project_pages_number) {
     state.project_pages_number = project_pages_number;
+  },
+  set_search_conditions(state, items) {
+    console.log('set');
+    state.search_conditions[items.type][items.item] = items.value;
+    console.log(items.type, items.item, items.value);
   },
 };

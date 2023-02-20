@@ -10,6 +10,7 @@
       />
       <div class="results_num_wrapper">
         <div class="results_num_inner">
+          <button @click="test">test</button>
           <h2>Estimated Results</h2>
           <p class="results_num">{{ resultsNum.toLocaleString() }}</p>
           <button
@@ -48,7 +49,7 @@
   </div>
 </template>
 <script>
-  import { mapGetters } from 'vuex';
+  import { mapGetters, mapMutations } from 'vuex';
   import IndexResults from '~/components/results/IndexResults.vue';
   import filters from '../../static/filters.json';
 
@@ -75,6 +76,7 @@
         activeDataset: 'active_dataset',
         resultsByName: 'results_by_name',
         filterByName: 'filter_by_name',
+        searchConditions: 'get_search_conditions',
       }),
       isActive() {
         return this.$vnode.key === this.$store.state.active_filter;
@@ -93,6 +95,12 @@
       },
     },
     methods: {
+      test() {
+        console.log(this.searchConditions);
+      },
+      ...mapMutations({
+        setSearchConditions: 'set_search_conditions',
+      }),
       toggleDisplayFilter(key) {
         const index = this.filters.findIndex(filter => filter.column === key);
         if (index < 0) return;
