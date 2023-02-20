@@ -130,7 +130,7 @@
         activeDataset: 'active_dataset',
         activeSpecie: 'active_specie',
         searchCondition: 'search_condition_by_specie',
-        getSearchConditions: 'get_search_conditions',
+        searchConditions: 'get_search_conditions',
       }),
       // returns either gene or sample
       filterType() {
@@ -175,7 +175,16 @@
         const resultParams = this.isNum
           ? ''
           : `{${Object.keys(this.parameters)
-              .filter(param => !['text', 'go'].includes(param))
+              .filter(
+                param =>
+                  ![
+                    'text',
+                    'go',
+                    'chromosomePosition',
+                    'typeOfGene',
+                    'filter',
+                  ].includes(param)
+              )
               .join(' ')} ${this.extraVariablesToBeDsiplayedInResults}}`;
         const suffix = this.isNum ? '' : ` ${this.queryPrefix}Numfound`;
         return `{${this.queryPrefix}${
@@ -204,6 +213,10 @@
     created() {
       this.showResults('numfound');
       this.updateSearchCondition();
+    },
+    mounted() {
+      if (this.searchConditions.gene.text)
+        this.parameters.text = this.searchConditions[this.filterType].text;
     },
     methods: {
       ...mapMutations({
@@ -271,6 +284,7 @@
           this.isSummaryIncluded = false;
         this.$axios
           .$post('gql', {
+            // TODO:
             query: this.suggestQuery,
           })
           .then(result => {

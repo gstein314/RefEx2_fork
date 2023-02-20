@@ -103,6 +103,7 @@
     methods: {
       ...mapMutations({
         setAlertModal: 'set_alert_modal',
+        setSearchConditions: 'set_search_conditions',
       }),
       initiateParametersDataset() {
         for (const filter of this.filters) {
@@ -144,6 +145,13 @@
       updateParameter(key, value) {
         if (key && value) this.$set(this.parameters, key, value);
         this.$emit('updateParameters', this.parameters);
+        console.log(key, value);
+        const sampleSearchCondition = {
+          type: 'sample',
+          item: key,
+          value: value,
+        };
+        this.setSearchConditions(sampleSearchCondition);
       },
     },
   };

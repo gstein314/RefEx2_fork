@@ -54,34 +54,19 @@ export const state = () => ({
       chr: '',
       tog: '',
       go: '',
-      tpm: {
-        sample: '',
-        cutoff: '',
-        condition: '',
-        statistic: '',
-      },
-      roku: {
-        group: '',
-        sample: '',
-        horl: '',
-        emin: '',
-        emax: '',
-      },
-      tau: {
-        group: '',
-        cutoff: '',
-        condition: '',
-      },
+      tpm: '',
+      roku: '',
+      tau: '',
     },
     sample: {
       text: '',
-      sample_type: '',
-      experiment: '',
-      tissue: '',
-      cell_type: '',
-      disease: '',
-      developmental_stage: '',
-      sex: '',
+      SampleTypeCategory: '',
+      ExperimentCategory: '',
+      UberonLabel: '',
+      ClLabel: '',
+      NcitLabel: '',
+      DevelopmentalStage: '',
+      Sex: '',
     },
   },
 });
@@ -281,6 +266,5 @@ export const mutations = {
   set_search_conditions(state, items) {
     console.log('set');
     state.search_conditions[items.type][items.item] = items.value;
-    console.log(items.type, items.item, items.value);
   },
 };

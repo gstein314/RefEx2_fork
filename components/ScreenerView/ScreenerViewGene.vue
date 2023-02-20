@@ -22,19 +22,6 @@
             <!-- <font-awesome-icon icon="exclamation-triangle" /> -->
           </div>
         </template>
-        <!-- <template slot="selection" slot-scope="{ values }">
-          <span
-            v-if="values.length &amp;&amp; values.length > 3"
-            class="multiselect__single"
-          >
-            {{
-              values.length === filterObj.options1.length
-                ? 'all'
-                : values.length
-            }}
-            options selected
-          </span>
-        </template> -->
       </multi-select>
     </client-only>
 
@@ -58,19 +45,6 @@
             <!-- <font-awesome-icon icon="exclamation-triangle" /> -->
           </div>
         </template>
-        <!-- <template slot="selection" slot-scope="{ values }">
-          <span
-            v-if="values.length &amp;&amp; values.length > 3"
-            class="multiselect__single"
-          >
-            {{
-              values.length === filterObj.options2.length
-                ? 'all'
-                : values.length
-            }}
-            options selected
-          </span>
-        </template> -->
       </multi-select>
     </client-only>
 
@@ -119,12 +93,13 @@
       :key="index"
       :screener-filter="screenerFilter"
       :filters="screenerFilter.filters"
+      @addFilterValue="addFilterValue"
     />
   </div>
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
+  import { mapGetters, mapMutations } from 'vuex';
   import MultiSelect from 'vue-multiselect';
   import ScreenerFilter from './ScreenerFilter.vue';
   import screener from '~/refex-sample/screener.json';
@@ -133,6 +108,10 @@
     components: { MultiSelect, ScreenerFilter },
     data() {
       return {
+        filterValue: [],
+        TPMValue: [],
+        ROKUValue: [],
+        tauValue: [],
         autocompleteStaticData: {},
         chrValue: [],
         TOGValue: [],
@@ -146,10 +125,16 @@
         // passed down to API
         parameters: {
           go: [],
+          chromosomePosition: [],
+          typeOfGene: [],
+          filter: [],
         },
         // will contain same keys as parameters. Autocompletion that does not come from the API should be hardcoded here in advance
         autoComplete: {
           go: [],
+          chromosomePosition: [],
+          typeOfGene: [],
+          filter: [],
         },
         debounce: null,
         screener,
@@ -159,6 +144,8 @@
     computed: {
       ...mapGetters({
         activeDataset: 'active_dataset',
+        activeFilter: 'active_filter',
+        searchConditions: 'get_search_conditions',
       }),
       goTermString() {
         return this.parameters.go.map(tag => tag.id).join(', ');
@@ -169,9 +156,6 @@
           ? 'transcription factor binding'
           : 'Only one tag is allowed';
       },
-      selection() {
-        return this.chrValue.join();
-      },
     },
     watch: {
       activeDataset() {
@@ -181,17 +165,56 @@
         };
       },
       parameters() {
-        this.$emit('updateParameters', { go: this.goTermString });
+        this.$emit('updateParameters', {
+          go: this.goTermString,
+          chromosomePosition: this.chrValue.join(),
+          typeOfGene: this.TOGValue.join(),
+          filter: this.filterValue,
+        });
       },
       chrValue() {
-        console.log('event');
+        const chrCondition = {
+          type: 'gene',
+          item: 'chr',
+          value: this.chrValue,
+        };
+        this.setSearchConditions(chrCondition);
         this.handleChrTagsUpdate(this.chrValue);
+      },
+      TOGValue() {
+        const TOGCondition = {
+          type: 'gene',
+          item: 'tog',
+          value: this.TOGValue,
+        };
+        this.setSearchConditions(TOGCondition);
+        this.handleTOGTagsUpdate(this.TOGValue);
+      },
+      filterValue(list) {
+        const filterCondition = {
+          type: 'gene',
+          item: JSON.parse(list).method,
+          value: JSON.parse(list),
+        };
+        this.setSearchConditions(filterCondition);
+        this.handleFilterValueUpdate(this.filterValue);
       },
     },
     async created() {
       this.getAutoCompleteData().then(() => {});
     },
+    mounted() {
+      if (this.searchConditions.gene.chr)
+        this.chrValue = this.searchConditions.gene.chr;
+      if (this.searchConditions.gene.tog)
+        this.TOGValue = this.searchConditions.gene.tog;
+      if (this.searchConditions.gene.go)
+        this.setTags(this.searchConditions.gene.go, 'go');
+    },
     methods: {
+      ...mapMutations({
+        setSearchConditions: 'set_search_conditions',
+      }),
       getAutoCompleteData() {
         return this.$axios
           .$get(`api/cv`)
@@ -242,11 +265,67 @@
         this.setTags([{ id, text, tiClasses }], key);
       },
       handleChrTagsUpdate(tags) {
-        console.log(tags);
+        this.parameters = {
+          ...this.parameters,
+          ['chromosomePosition']: tags.join(),
+        };
+      },
+      handleTOGTagsUpdate(tags) {
+        this.parameters = {
+          ...this.parameters,
+          ['typeOfGene']: tags.join(),
+        };
+      },
+      handleFilterValueUpdate(type, list) {
+        this.parameters = {
+          ...this.parameters,
+          ['filter']: this.filterValue,
+        };
       },
       setTags(newTags, key) {
         this.parameters = { ...this.parameters, [key]: newTags };
         this.hideCaret = newTags.length === 0 ? false : true;
+        const goCondition = { type: 'gene', item: 'go', value: newTags };
+        this.setSearchConditions(goCondition);
+      },
+      // TODO:
+      // Multiple support is not yet available
+      addFilterValue(type, list) {
+        switch (type) {
+          case 'TPM':
+            if (
+              (list[0].check && list[0].sample) ||
+              list[0].cutoff ||
+              list[0].condition ||
+              list[0].statistic
+            ) {
+              this.TPMValue = `{"method":"tpm", "sample":"${list[0].sample}", "value":"${list[0].cutoff}","logic":"${list[0].condition}", "statistic":"${list[0].statistic}"}`;
+              this.filterValue = this.TPMValue;
+            }
+            break;
+          case 'ROKU':
+            if (
+              (list[0].check && list[0].group) ||
+              list[0].sample ||
+              list[0].horl ||
+              list[0].emin ||
+              list[0].emax
+            ) {
+              this.ROKUValue = `{"method":"roku", "group":"${list[0].group}", "sample":"${list[0].sample}","highlow":"${list[0].horl}","entropy_min":"${list[0].emin}","entropy_max":"${list[0].emax}"}`;
+              this.filterValue = this.ROKUValue;
+            }
+            break;
+          case 'tau':
+            if (
+              (list[0].check && list[0].group) ||
+              list[0].condition ||
+              list[0].cutoff
+            ) {
+              this.tauValue = `{"method":"tau", "group":"${list[0].group}", "logic":"${list[0].condition}", "value":"${list[0].cutoff}"}`;
+              this.filterValue = this.tauValue;
+            }
+            break;
+        }
       },
     },
   };
