@@ -319,7 +319,7 @@
         }
       },
       removeSearchConditions() {
-        this.parameters.text = '';
+        window.location.reload();
       },
     },
   };

@@ -264,7 +264,6 @@ export const mutations = {
     state.project_pages_number = project_pages_number;
   },
   set_search_conditions(state, items) {
-    console.log('set');
     state.search_conditions[items.type][items.item] = items.value;
   },
 };

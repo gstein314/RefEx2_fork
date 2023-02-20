@@ -10,8 +10,6 @@
       />
       <div class="results_num_wrapper">
         <div class="results_num_inner">
-          <!-- TODO: -->
-          <button @click="test">test</button>
           <h2>Estimated Results</h2>
           <p class="results_num">{{ resultsNum.toLocaleString() }}</p>
           <button
@@ -96,10 +94,6 @@
       },
     },
     methods: {
-      // TODO:
-      test() {
-        console.log(this.searchConditions);
-      },
       ...mapMutations({
         setSearchConditions: 'set_search_conditions',
       }),
