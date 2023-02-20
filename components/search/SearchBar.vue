@@ -272,6 +272,7 @@
           this.isSummaryIncluded = false;
         this.$axios
           .$post('gql', {
+            // TODO:
             query: this.suggestQuery,
           })
           .then(result => {

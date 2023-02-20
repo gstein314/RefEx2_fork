@@ -260,16 +260,35 @@
       addFilterValue(type, list) {
         switch (type) {
           case 'TPM':
-            this.TPMValue = `{"method":"tpm", "sample":${list[0].sample}, "value":${list[0].cutoff},"logic":${list[0].condition}, "statistic":${list[0].statistic}}`;
-            this.filterValue = this.TPMValue;
+            if (
+              (list[0].check && list[0].sample) ||
+              list[0].cutoff ||
+              list[0].condition ||
+              list[0].statistic
+            ) {
+              this.TPMValue = `{"method":"tpm", "sample":${list[0].sample}, "value":${list[0].cutoff},"logic":${list[0].condition}, "statistic":${list[0].statistic}}`;
+              this.filterValue = this.TPMValue;
+            }
             break;
           case 'ROKU':
-            this.ROKUValue = `{"method":"roku", "group":${list[0].group}, "sample":${list[0].sample},"highlow":${list[0].horl},"entropy_min":${list[0].emin},"entropy_max":${list[0].emax}}`;
-            this.filterValue = this.ROKUValue;
+            if (
+              (list[0].check && list[0].group) ||
+              list[0].sample ||
+              list[0].horl
+            ) {
+              this.ROKUValue = `{"method":"roku", "group":${list[0].group}, "sample":${list[0].sample},"highlow":${list[0].horl},"entropy_min":${list[0].emin},"entropy_max":${list[0].emax}}`;
+              this.filterValue = this.ROKUValue;
+            }
             break;
           case 'tau':
-            this.tauValue = `{"method":"tau", "group":${list[0].group}, "logic":${list[0].condition}, "value":${list[0].cutoff}}`;
-            this.filterValue = this.tauValue;
+            if (
+              (list[0].check && list[0].group) ||
+              list[0].condition ||
+              list[0].cutoff
+            ) {
+              this.tauValue = `{"method":"tau", "group":${list[0].group}, "logic":${list[0].condition}, "value":${list[0].cutoff}}`;
+              this.filterValue = this.tauValue;
+            }
             break;
         }
       },
