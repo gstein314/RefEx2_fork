@@ -187,6 +187,11 @@
               )
               .join(' ')} ${this.extraVariablesToBeDsiplayedInResults}}`;
         const suffix = this.isNum ? '' : ` ${this.queryPrefix}Numfound`;
+        console.log(
+          `{${this.queryPrefix}${
+            this.isNum ? 'Numfound' : ''
+          }${params}${resultParams}${suffix}}`
+        );
         return `{${this.queryPrefix}${
           this.isNum ? 'Numfound' : ''
         }${params}${resultParams}${suffix}}`;
@@ -280,6 +285,21 @@
         this.typeOfQuery = type;
         let results;
         let results_num = 0;
+        // test
+        // const filter = {
+        //   method: 'roku',
+        //   group: 'humanFantom5Spec002',
+        //   sample: 'RES00001680',
+        //   highlow: 'high',
+        //   entropy_min: '',
+        //   entropy_max: '',
+        // };
+        // const filterString = JSON.stringify(filter).replace(/"/g, '\\"');
+        // const test = `{humanFantom5GeneNumfound(filter: "${filterString}")}`;
+
+        // console.log(test);
+        // test
+
         if (this.isSummaryIncluded && this.parameters.text.length === 0)
           this.isSummaryIncluded = false;
         this.$axios

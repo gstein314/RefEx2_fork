@@ -191,12 +191,12 @@
         this.handleTOGTagsUpdate(this.TOGValue);
       },
       filterValue(list) {
-        const filterCondition = {
-          type: 'gene',
-          item: JSON.parse(list).method,
-          value: JSON.parse(list),
-        };
-        this.setSearchConditions(filterCondition);
+        // const filterCondition = {
+        //   type: 'gene',
+        //   item: list[0].method,
+        //   value: list[0],
+        // };
+        // this.setSearchConditions(filterCondition);
         this.handleFilterValueUpdate(this.filterValue);
       },
     },
@@ -277,6 +277,7 @@
         };
       },
       handleFilterValueUpdate(type, list) {
+        console.log(this.filterValue);
         this.parameters = {
           ...this.parameters,
           ['filter']: this.filterValue,
@@ -294,35 +295,60 @@
         switch (type) {
           case 'TPM':
             if (
-              (list[0].check && list[0].sample) ||
-              list[0].cutoff ||
-              list[0].condition ||
+              list[0].check &&
+              list[0].sample &&
+              list[0].cutoff &&
+              list[0].condition &&
               list[0].statistic
             ) {
-              this.TPMValue = `{"method":"tpm", "sample":"${list[0].sample}", "value":"${list[0].cutoff}","logic":"${list[0].condition}", "statistic":"${list[0].statistic}"}`;
-              this.filterValue = this.TPMValue;
+              const filter = {
+                method: 'tpm',
+                sample: list[0].sample,
+                value: list[0].cutoff,
+                logic: list[0].condition,
+                statistic: list[0].statistic,
+              };
+              const filterString = JSON.stringify(filter).replace(/"/g, '\\"');
+              this.TPMValue = list;
+              this.filterValue = filterString;
             }
             break;
           case 'ROKU':
             if (
-              (list[0].check && list[0].group) ||
-              list[0].sample ||
-              list[0].horl ||
-              list[0].emin ||
-              list[0].emax
+              list[0].check &&
+              list[0].group &&
+              list[0].sample &&
+              list[0].horl
             ) {
-              this.ROKUValue = `{"method":"roku", "group":"${list[0].group}", "sample":"${list[0].sample}","highlow":"${list[0].horl}","entropy_min":"${list[0].emin}","entropy_max":"${list[0].emax}"}`;
-              this.filterValue = this.ROKUValue;
+              const filter = {
+                method: 'roku',
+                group: list[0].group,
+                sample: list[0].sample,
+                highlow: list[0].horl,
+                entropy_min: list[0].emin,
+                entropy_max: list[0].emax,
+              };
+              const filterString = JSON.stringify(filter).replace(/"/g, '\\"');
+              this.ROKUValue = list;
+              this.filterValue = filterString;
             }
             break;
           case 'tau':
             if (
-              (list[0].check && list[0].group) ||
-              list[0].condition ||
+              list[0].check &&
+              list[0].group &&
+              list[0].condition &&
               list[0].cutoff
             ) {
-              this.tauValue = `{"method":"tau", "group":"${list[0].group}", "logic":"${list[0].condition}", "value":"${list[0].cutoff}"}`;
-              this.filterValue = this.tauValue;
+              const filter = {
+                method: 'tau',
+                group: list[0].group,
+                logic: list[0].condition,
+                value: list[0].cutoff,
+              };
+              const filterString = JSON.stringify(filter).replace(/"/g, '\\"');
+              this.tauValue = list;
+              this.filterValue = filterString;
             }
             break;
         }
