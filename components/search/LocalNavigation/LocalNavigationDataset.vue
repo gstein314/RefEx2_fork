@@ -134,6 +134,7 @@
         > svg
           font-size: 24px
         > .nav_item
+          gap: 5px
           display: grid
           grid-template-columns: auto 1fr
           align-content: center
