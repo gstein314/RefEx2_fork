@@ -2,7 +2,10 @@
   <div>
     <h3>
       Filter by {{ screenerFilter.description }}
-      <font-awesome-icon icon="info-circle" />
+      <font-awesome-icon
+        v-tooltip="'This is Filter by ' + screenerFilter.description"
+        icon="info-circle"
+      />
     </h3>
     <client-only>
       <div :class="screenerFilter.className">
@@ -24,6 +27,7 @@
               {{ filter.name }}
               <font-awesome-icon
                 v-if="isEntropy(filter.className)"
+                v-tooltip="'Range: 1-5'"
                 icon="info-circle"
               />
             </td>
@@ -109,7 +113,9 @@
 <script>
   import { mapGetters } from 'vuex';
   import datasets from '~/refex-sample/datasets.json';
+  import 'floating-vue/dist/style.css';
   import _ from 'lodash';
+
   export default {
     props: {
       screenerFilter: {
@@ -218,3 +224,22 @@
     },
   };
 </script>
+
+<style lang="sass">
+  .v-popper--theme-tooltip .v-popper__inner
+    background: $WHITE
+    border: 1px solid $MAIN_COLOR
+    color: $BLACK
+    padding: 3px 8px
+    border-radius: 3px
+    box-shadow: 0 1px 4px rgba(62, 70, 82, .22)
+    z-index: $TOOLTIP_LAYER
+  .v-popper--theme-tooltip .v-popper__arrow-inner
+    z-index: 10
+    visibility: visible
+    border-color: $WHITE
+  .v-popper--theme-tooltip .v-popper__arrow-outer
+    border-color: $MAIN_COLOR
+  .v-popper__arrow-container
+    height: 0
+</style>
