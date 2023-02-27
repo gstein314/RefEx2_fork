@@ -90,7 +90,12 @@
                 v-model.trim="item[column.className]"
                 display-attribute="description"
                 value-attribute="id"
-                :list="autocompleteItems(item[column.className])"
+                :list="
+                  autocompleteItems(
+                    item[column.className],
+                    filter.list[itemIndex].group
+                  )
+                "
                 :debounce="500"
                 :min-length="0"
                 :max-suggestions="10"
@@ -403,14 +408,23 @@
         // console.log(this.screenerFilter.list);
         // console.log(this.$refs.sampleInputs?.map(input => input.selected));
       },
-      autocompleteItems(userInput) {
-        const target = this.activeDataset.dataset;
-        const samplesArray = target => {
-          switch (target) {
+      autocompleteItems(userInput, targetGroup) {
+        console.log(targetGroup);
+        const targetDataset = this.activeDataset.dataset;
+        const samplesArray = targetDataset => {
+          switch (targetDataset) {
             case 'humanFantom5':
-              return this.datasets[0].datasets[0].specificity[0].samples;
+              return targetGroup === 'Adult tissues'
+                ? this.datasets[0].datasets[0].specificity[0].samples
+                : targetGroup === 'Epithelial cells'
+                ? this.datasets[0].datasets[0].specificity[1].samples
+                : this.datasets[0].datasets[0].specificity[0].samples;
             case 'gtexV8':
-              return this.datasets[0].datasets[1].specificity[0].samples;
+              return targetGroup === 'All tissues'
+                ? this.datasets[0].datasets[1].specificity[0].samples
+                : targetGroup === 'Brain sub-regions'
+                ? this.datasets[0].datasets[1].specificity[1].samples
+                : this.datasets[0].datasets[1].specificity[0].samples;
             default:
               return [
                 {
@@ -424,7 +438,7 @@
               ];
           }
         };
-        const copy = [...samplesArray(target)];
+        const copy = [...samplesArray(targetDataset)];
         const wordAndSpace = /[^\w\s]/g;
         const alphaNumInput = userInput.replace(wordAndSpace, '');
         const inputsArray = alphaNumInput.replace(/\s\s+/g, ' ').split(' ');
