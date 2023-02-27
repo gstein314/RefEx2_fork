@@ -32,10 +32,7 @@
         "inputType": "dropdown",
         "options": [
           { "description": "<", "value": "<" },
-          { "description": "≦", "value": "≦" },
           { "description": "=", "value": "=" },
-          { "description": "≠", "value": "≠" },
-          { "description": "≧", "value": "≧" },
           { "description": ">", "value": ">" }
         ]
       },
@@ -138,10 +135,7 @@
         "inputType": "dropdown",
         "options": [
           { "description": "<", "value": "<" },
-          { "description": "≤", "value": "≤" },
           { "description": "=", "value": "=" },
-          { "description": "≠", "value": "≠" },
-          { "description": "≧", "value": "≧" },
           { "description": ">", "value": ">" }
         ]
       }
