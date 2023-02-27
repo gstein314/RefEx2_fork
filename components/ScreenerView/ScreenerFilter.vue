@@ -1,6 +1,9 @@
 <template>
   <div>
-    <h3>Filter by {{ screenerFilter.description }}</h3>
+    <h3>
+      Filter by {{ screenerFilter.description }}
+      <font-awesome-icon icon="info-circle" />
+    </h3>
     <client-only>
       <div :class="screenerFilter.className">
         <table>
@@ -19,12 +22,10 @@
               :class="filter.className"
             >
               {{ filter.name }}
-              <a href="javascript:void(0)">
-                <font-awesome-icon
-                  v-if="isEntropy(filter.className)"
-                  icon="info-circle"
-                />
-              </a>
+              <font-awesome-icon
+                v-if="isEntropy(filter.className)"
+                icon="info-circle"
+              />
             </td>
             <td
               colspan="2"

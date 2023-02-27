@@ -254,6 +254,9 @@
 
 <style lang="sass" scoped>
   ::v-deep
+    svg[data-icon="circle-info"], .delete_all
+      color: $MAIN_COLOR
+      cursor: pointer
     .multiselect
       input
         width: auto
@@ -299,10 +302,7 @@
               align-items: initial
               padding: 13.5px 22px
               cursor: pointer !important
-            svg[data-icon="circle-info"]
-              color: $MAIN_COLOR
           > .delete_all
-            color: $MAIN_COLOR
             cursor: pointer
             &.disabled
               color: #CCC
