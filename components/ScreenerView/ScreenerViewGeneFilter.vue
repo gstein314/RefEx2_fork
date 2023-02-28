@@ -20,7 +20,7 @@
             >
               {{ column.name }}
               <template
-                v-if="column.className === 'sample' && !allSampleIsSelected"
+                v-if="column.className === 'sample' && !isAllSampleSelected"
               >
                 <WarningMessage>Please select from suggestions</WarningMessage>
               </template>
@@ -184,8 +184,6 @@
         parameters: {
           text: '',
         },
-        allSampleIsSelected: true,
-        sampleSelectedArray: [],
         screenerFilter: this.filter,
       };
     },
@@ -193,6 +191,26 @@
       ...mapGetters({
         activeDataset: 'active_dataset',
       }),
+      isSelectedArray() {
+        const list = this.screenerFilter.list;
+        const defaultItem = this.screenerFilter.defaultItem;
+        const isSelectedArray = this.screenerFilter.list.map(
+          ({ isSelected }) => isSelected
+        );
+        if (list.length === 1) {
+          const copy = { ...defaultItem };
+          copy.canDelete = false;
+          if (_.isEqual(list.at(-1), copy)) {
+            isSelectedArray[0] = true;
+          }
+        } else if (_.isEqual(list.at(-1), defaultItem)) {
+          isSelectedArray[isSelectedArray.length - 1] = true;
+        }
+        return isSelectedArray;
+      },
+      isAllSampleSelected() {
+        return this.isSelectedArray.every(Boolean);
+      },
       groupOptions() {
         const target = this.activeDataset.dataset;
         if (target === 'humanFantom5') {
@@ -344,10 +362,42 @@
         // });
         // console.log(this.$refs.sampleInputs[index].selected.id);
       },
-      blurInputField(index) {},
-      consoleLog(name, index) {
-        console.log(name, 'run');
-        // this.$refs.sampleInputs[index].onBlur();
+      tempFunction2() {
+        const isSelectedUpToDate = this.screenerFilter.list.map(
+          item => item.isSelected
+        );
+        console.log(
+          '🚀 > tempFunction > isSelectedUpToDate:',
+          isSelectedUpToDate
+        );
+        // const falseIndexArray = [];
+        // if (isSelectedUpToDate !== undefined) {
+        //   for (const [i, item] of isSelectedUpToDate.entries()) {
+        //     if (item === false) {
+        //       falseIndexArray.push(i);
+        //     }
+        //   }
+        // }
+        // console.log(isSelectedUpToDate);
+        // if (
+        //   isSelectedUpToDate !== undefined &&
+        //   isSelectedUpToDate.includes(false)
+        // ) {
+        //   const indexArray = [];
+        //   for (const [i, bool] of isSelectedUpToDate.entries()) {
+        //     if (bool === false) indexArray.push(i);
+        //   }
+        //   const defaultItem = { ...this.screenerFilter.defaultItem };
+        //   delete defaultItem.canDelete;
+        //   const copy = [...this.screenerFilter.list];
+        //   for (const index of indexArray) {
+        //     delete copy[index].canDelete;
+        //     if (!_.isEqual(copy[index], defaultItem)) {
+        //       this.allSampleIsSelected = false;
+        //     }
+        //   }
+        //   this.allSampleIsSelected = true;
+        // } else this.allSampleIsSelected = true;
       },
     },
   };

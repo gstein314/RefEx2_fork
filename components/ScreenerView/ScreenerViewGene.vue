@@ -114,17 +114,9 @@
       </vue-tags-input>
     </client-only>
 
-    <!-- <ScreenerViewGeneFilter
-      v-for="(screenerFilter, index) of screener"
-      :key="index"
-      :filter="screenerFilter"
-      :columns="screenerFilter.columns"
-    /> -->
     <ScreenerViewGeneFilter
       :filter.sync="screener[0]"
       :columns="screener[0].columns"
-      @setSelectedObject="setSelectedObject"
-      @clearSelectedObject="clearSelectedObject"
     />
     <ScreenerViewGeneFilter
       :filter.sync="screener[1]"
@@ -254,12 +246,6 @@
       setTags(newTags, key) {
         this.parameters = { ...this.parameters, [key]: newTags };
         this.hideCaret = newTags.length === 0 ? false : true;
-      },
-      setSelectedObject(index, id) {
-        console.log(index, id);
-      },
-      clearSelectedObject(index, id) {
-        console.log(index, id);
       },
     },
   };
