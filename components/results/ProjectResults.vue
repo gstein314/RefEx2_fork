@@ -107,7 +107,6 @@
   import TableHeader from '~/components/results/TableHeader.vue';
   import { mapGetters, mapMutations } from 'vuex';
   import specieSets from '~/refex-sample/datasets.json';
-  import VueRouter from 'vue-router';
 
   export default {
     components: {
@@ -150,6 +149,10 @@
         type: Array,
         default: () => [],
       },
+      currentPageId: {
+        type: String,
+        default: '',
+      },
     },
 
     computed: {
@@ -172,6 +175,7 @@
           this.paginationObject.offset + this.paginationObject.limit
         );
       },
+
       pagesNumber() {
         let pagesNumber = Math.ceil(
           this.filteredSortedData.length / this.paginationObject.limit
@@ -215,8 +219,9 @@
           sdData: {},
           numberOfSamplesData: {},
         };
-        const ids = [];
+        let ids = [];
         items.forEach(item => ids.push(item.id));
+        if (this.currentPageId) ids = [this.currentPageId];
         for (let i = 0; i < ids.length; i++) {
           for (const statName in tmp) {
             tmp[statName][ids[i]] =
@@ -227,32 +232,7 @@
         return statData;
       },
       moveToProjectPage(route) {
-        // this.$router
-        //   .push({
-        //     path: this.$route.path,
-        //     query: {
-        //       type: 'sample',
-        //       id: 'RES00003675',
-        //     },
-        //   })
-        //   .catch(failure => {
-        //     if (
-        //       isNavigationFailure(failure, NavigationFailureType.redirected)
-        //     ) {
-        //       failure.to.path; // '/admin'
-        //       failure.from.path; // '/'
-        //     }
-        //   });
-        console.log('fire');
-        try {
-          this.$router.push({
-            path: this.$route.path,
-            query: { ...this.$route.query, type: 'sample', id: 'RES00001835' },
-            shallow: true,
-          });
-        } catch (err) {
-          console.log(err);
-        }
+        this.$router.push(this.routeToOtherProjectPage(route));
       },
       activeSort(col_name) {
         this.$emit('activeSort', {
