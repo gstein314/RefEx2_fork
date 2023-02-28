@@ -161,6 +161,7 @@
   import datasets from '~/refex-sample/datasets.json';
   import WarningMessage from '../WarningMessage.vue';
   import _ from 'lodash';
+
   export default {
     components: {
       VueSimpleSuggest,
@@ -186,10 +187,6 @@
         allSampleIsSelected: true,
         sampleSelectedArray: [],
         screenerFilter: this.filter,
-        testField1: '',
-        testField2: '',
-        testField3: '',
-        testList: [{ id: 'a' }, { id: 'b' }, { id: 'c' }],
       };
     },
     computed: {
