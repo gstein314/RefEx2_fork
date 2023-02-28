@@ -108,9 +108,6 @@
                     setSelectedTrue(itemIndex);
                   }
                 "
-                @focus="refreshSuggestions"
-                @blur="refreshSuggestions2"
-                @request-start="refreshSuggestions3"
               >
                 <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
                 <!-- eslint-disable vue/no-unused-vars -->
@@ -154,46 +151,6 @@
           </tr>
         </table>
       </div>
-      <!-- <vue-simple-suggest
-        ref="testElement1"
-        v-model.trim="testField1"
-        display-attribute="id"
-        value-attribute="id"
-        :list="[{ id: 'a' }, { id: 'b' }, { id: 'c' }]"
-        :debounce="500"
-        :min-length="0"
-        :max-suggestions="10"
-        class="text_search_name"
-      >
-      </vue-simple-suggest>
-      <button @click="clearField(1)">clear</button>
-      <vue-simple-suggest
-        ref="testElement2"
-        v-model.trim="testField2"
-        display-attribute="id"
-        value-attribute="id"
-        :list="[{ id: 'a' }, { id: 'b' }, { id: 'c' }]"
-        :debounce="500"
-        :min-length="0"
-        :max-suggestions="10"
-        class="text_search_name"
-        @click="clearField"
-      >
-      </vue-simple-suggest>
-      <button @click="clearField(2)">clear</button>
-      <vue-simple-suggest
-        ref="testElement3"
-        v-model.trim="testField3"
-        display-attribute="id"
-        value-attribute="id"
-        :list="[{ id: 'a' }, { id: 'b' }, { id: 'c' }]"
-        :debounce="500"
-        :min-length="0"
-        :max-suggestions="10"
-        class="text_search_name"
-      >
-      </vue-simple-suggest>
-      <button @click="clearField(3)">clear</button> -->
     </client-only>
   </div>
 </template>
@@ -261,83 +218,11 @@
         }
         return false;
       },
-      // selectedSample() {
-      //   return this.$refs.sampleInputs?.map(input => input.selected);
-      // },
-      // isSelected() {
-      //   let status = false;
-      //   const sampleInputs = this.$refs.sampleInput;
-      //   if (sampleInputs) {
-      //     for (let [i, input] of sampleInputs.entries()) {
-      //       if (i === sampleInputs.length - 1) {
-      //         continue;
-      //       }
-      //       console.log(input.selected);
-      //       status = input.selected !== null ? true : false;
-      //     }
-      //   }
-      //   return status;
-      // },
-    },
-    watch: {
-      screenerFilter: {
-        handler(newVal, oldVal) {
-          // console.log('watch changed');
-        },
-        deep: true,
-      },
     },
     mounted() {
       this.dispatchAction('INIT');
     },
-    // updated() {
-    //   // console.log('input changed');
-    //   const isSelectedUpToDate = this.$refs.sampleInputs?.map(
-    //     sampleInput => sampleInput.isSelectedUpToDate
-    //   );
-    //   const falseIndexArray = [];
-    //   if (isSelectedUpToDate !== undefined) {
-    //     for (const [i, item] of isSelectedUpToDate.entries()) {
-    //       if (item === false) {
-    //         falseIndexArray.push(i);
-    //       }
-    //     }
-    //   }
-    //   console.log(isSelectedUpToDate);
-    //   if (
-    //     isSelectedUpToDate !== undefined &&
-    //     isSelectedUpToDate.includes(false)
-    //   ) {
-    //     const indexArray = [];
-    //     for (const [i, bool] of isSelectedUpToDate.entries()) {
-    //       if (bool === false) indexArray.push(i);
-    //     }
-    //     const defaultItem = { ...this.screenerFilter.defaultItem };
-    //     delete defaultItem.canDelete;
-    //     for (const index of indexArray) {
-    //       delete this.screenerFilter.list[index].canDelete;
-    //       if (!_.isEqual(this.screenerFilter.list[index], defaultItem)) {
-    //         this.allSampleIsSelected = false;
-    //       }
-    //     }
-    //     this.allSampleIsSelected = true;
-    //   } else this.allSampleIsSelected = true;
-    // },
     methods: {
-      refreshSuggestions() {
-        console.log('focused');
-        // this.$refs.sampleInputs[0].clearSuggestions();
-        this.$refs.sampleInputs[0].getSuggestions('request-start');
-        // this.$refs.sampleInputs[0].showSuggestions();
-      },
-      refreshSuggestions2() {
-        console.log('blurred');
-        // this.$refs.sampleInputs[0].clearSuggestions();
-      },
-      refreshSuggestions3() {
-        console.log('refresh started');
-        // this.$refs.sampleInputs[0].clearSuggestions();
-      },
       isDisable(item) {
         return !item.canDelete;
       },
@@ -373,43 +258,13 @@
             }
             break;
           case 'DEL':
-            // list[index].sample = '';
-            // this.$refs.listItem[index].$destroy();
-            // console.log(
-            //   this.$refs.listItem[index].parentNode.children[index + 1]
-            // );
-            // this.$refs.listItem[index].parentNode.removeChild(
-            //   this.$refs.listItem[index].parentNode.children[index + 1]
-            // );
-            // this.$refs.sampleInputs[
-            //   index
-            // ].$el.parentNode.parentNode.parentNode.removeChild(
-            //   this.$refs.sampleInputs[index].$el.parentNode.parentNode
-            // );
-            // this.$refs.sampleInputs[
-            //   index
-            // ].$el.parentNode.parentNode.removeChild(
-            //   this.$refs.sampleInputs[index].$el.parentNode.children[index]
-            // );
-            const countOfShow = () => {
-              let count = 0;
-              for (const item of list) {
-                if (item.isShow) {
-                  count++;
-                }
-              }
-              return count;
-            };
             if (list.length === 1) {
               list.splice(0, list.length);
               defaultItem.canDelete = false;
               list.push(defaultItem);
             } else {
               list.splice(index, 1);
-              // targetItem.isShow = false;
             }
-            // console.log(this.$refs.sampleInputs);
-            // this.$refs.sampleInputs[index].$destroy();
             break;
           case 'DEL_ALL':
             list.splice(0, list.length);
@@ -422,8 +277,6 @@
           firstItem.canDelete = false;
         }
         this.isAllChecked = list.every(item => item.isChecked);
-        // console.log(this.screenerFilter.list);
-        // console.log(this.$refs.sampleInputs?.map(input => input.selected));
       },
       autocompleteItems(userInput, targetGroup) {
         const targetDataset = this.activeDataset.dataset;
@@ -482,26 +335,6 @@
             }
           }
         }
-        // console.log(isSelectedUpToDate);
-        // if (
-        //   isSelectedUpToDate !== undefined &&
-        //   isSelectedUpToDate.includes(false)
-        // ) {
-        //   const indexArray = [];
-        //   for (const [i, bool] of isSelectedUpToDate.entries()) {
-        //     if (bool === false) indexArray.push(i);
-        //   }
-        //   const defaultItem = { ...this.screenerFilter.defaultItem };
-        //   delete defaultItem.canDelete;
-        //   const copy = [...this.screenerFilter.list];
-        //   for (const index of indexArray) {
-        //     delete copy[index].canDelete;
-        //     if (!_.isEqual(copy[index], defaultItem)) {
-        //       this.allSampleIsSelected = false;
-        //     }
-        //   }
-        //   this.allSampleIsSelected = true;
-        // } else this.allSampleIsSelected = true;
       },
       setSelectedTrue(index) {
         const list = this.screenerFilter.list;
