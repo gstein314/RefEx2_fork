@@ -191,6 +191,9 @@
       ...mapGetters({
         activeDataset: 'active_dataset',
       }),
+      selectedObjectIdKey() {
+        return this.$refs.sampleInputs[0].selected.id;
+      },
       groupOptions() {
         const target = this.activeDataset.dataset;
         if (target === 'humanFantom5') {
