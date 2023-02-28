@@ -104,8 +104,6 @@
                 @input="
                   () => {
                     dispatchAction('ADD', itemIndex, item[column.className]);
-                    tempFunction();
-                    setSelectedTrue(itemIndex);
                   }
                 "
               >
@@ -315,33 +313,6 @@
             return alphaNumInput.toLowerCase().includes(input.toLowerCase());
           }
         });
-      },
-      tempFunction() {
-        const isSelectedUpToDate = this.$refs.sampleInputs?.map(
-          sampleInput => sampleInput.isSelectedUpToDate
-        );
-        const falseIndexArray = [];
-        if (isSelectedUpToDate !== undefined) {
-          for (const [i, item] of isSelectedUpToDate.entries()) {
-            if (item === false) {
-              falseIndexArray.push(i);
-            }
-          }
-        }
-      },
-      setSelectedTrue(index) {
-        const list = this.screenerFilter.list;
-        list[index].isSelected = true;
-      },
-      setSelectedFalse(index) {
-        const list = this.screenerFilter.list;
-        list[index].isSelected = false;
-      },
-      clearField(index) {
-        this.$refs[`testElement${index}`].$destroy();
-        this.$refs[`testElement${index}`].$el.parentNode.removeChild(
-          this.$refs[`testElement${index}`].$el
-        );
       },
     },
   };
