@@ -87,7 +87,6 @@
               <vue-simple-suggest
                 v-else-if="column.className === 'sample'"
                 ref="sampleInputs"
-                v-model.trim="item[column.className]"
                 display-attribute="description"
                 value-attribute="id"
                 :list="
@@ -106,7 +105,7 @@
                     dispatchAction('ADD', itemIndex, item[column.className]);
                   }
                 "
-                @select="setSelectedObjectIdKey(itemIndex)"
+                @select="setSelectedObject(itemIndex)"
               >
                 <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
                 <!-- eslint-disable vue/no-unused-vars -->
@@ -315,11 +314,21 @@
           }
         });
       },
-      setSelectedObjectIdKey(index) {
-        console.log(this.$refs.sampleInputs[index].selected.id);
+      setSelectedObject(index) {
+        const id = this.$refs.sampleInputs[index].selected.id;
+        this.screenerFilter.list[index].sample = id;
+        this.$emit('setSelectedObject', {
+          index,
+          id: this.$refs.sampleInputs[index].selected.id,
+        });
+        // console.log(this.$refs.sampleInputs[index].selected.id);
       },
-      clearSelectedObjectIdKey(index) {
-        console.log(this.$refs.sampleInputs[index].selected.id);
+      clearSelectedObject(index) {
+        this.$emit('clearSelectedObject', {
+          index,
+          id: this.$refs.sampleInputs[index].selected.id,
+        });
+        // console.log(this.$refs.sampleInputs[index].selected.id);
       },
     },
   };
