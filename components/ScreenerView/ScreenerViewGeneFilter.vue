@@ -296,20 +296,22 @@
       },
       autocompleteItems(userInput, targetGroup) {
         const targetDataset = this.activeDataset.dataset;
+        const humanFantom5Dataset = this.datasets[0].datasets[0];
+        const gtexV8Dataset = this.datasets[0].datasets[1];
         const samplesArray = targetDataset => {
           switch (targetDataset) {
             case 'humanFantom5':
               return targetGroup === 'Adult tissues'
-                ? this.datasets[0].datasets[0].specificity[0].samples
+                ? humanFantom5Dataset.specificity[0].samples
                 : targetGroup === 'Epithelial cells'
-                ? this.datasets[0].datasets[0].specificity[1].samples
-                : this.datasets[0].datasets[0].specificity[0].samples;
+                ? humanFantom5Dataset.specificity[1].samples
+                : humanFantom5Dataset.specificity[0].samples;
             case 'gtexV8':
               return targetGroup === 'All tissues'
-                ? this.datasets[0].datasets[1].specificity[0].samples
+                ? gtexV8Dataset.specificity[0].samples
                 : targetGroup === 'Brain sub-regions'
-                ? this.datasets[0].datasets[1].specificity[1].samples
-                : this.datasets[0].datasets[1].specificity[0].samples;
+                ? gtexV8Dataset.specificity[1].samples
+                : gtexV8Dataset.specificity[0].samples;
             default:
               return [
                 {
