@@ -258,7 +258,7 @@
               defaultItem.canDelete = false;
               list.push(defaultItem);
             } else {
-              list.splice(index, 1);
+              this.$delete(list, index);
             }
             break;
           case 'DEL_ALL':
@@ -315,8 +315,9 @@
         });
       },
       setSelectedObject(index) {
-        const id = this.$refs.sampleInputs[index].selected.id;
-        const text = this.$refs.sampleInputs[index].selected.description;
+        const sampleInput = { ...this.$refs.sampleInputs[index] };
+        const id = sampleInput.selected.id;
+        const text = sampleInput.selected.description;
         this.screenerFilter.list[index].sampleId = id;
         this.screenerFilter.list[index].sampleText = text;
         this.screenerFilter.list[index].isSelected = true;
