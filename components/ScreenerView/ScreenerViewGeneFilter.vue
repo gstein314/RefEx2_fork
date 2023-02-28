@@ -292,7 +292,7 @@
         if (_.isEqual(firstItem, defaultItem) && list.length === 1) {
           firstItem.canDelete = false;
         }
-        this.isAllChecked = list.every(item => item.isChecked);
+        this.isAllChecked = list.every(({ isChecked }) => isChecked);
       },
       autocompleteItems(userInput, targetGroup) {
         const targetDataset = this.activeDataset.dataset;
