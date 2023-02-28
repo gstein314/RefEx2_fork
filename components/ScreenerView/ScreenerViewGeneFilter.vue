@@ -311,12 +311,8 @@
 
         return copy.filter(sample => {
           const alphaNumInput = sample.description.replace(wordAndSpace, '');
-
           for (const input of inputsArray) {
-            return alphaNumInput.toLowerCase().indexOf(input.toLowerCase()) ===
-              -1
-              ? false
-              : true;
+            return alphaNumInput.toLowerCase().includes(input.toLowerCase());
           }
         });
       },
