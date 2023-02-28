@@ -215,15 +215,16 @@
       },
       groupOptions() {
         const target = this.activeDataset.dataset;
-        if (target === 'humanFantom5') {
-          return this.datasets[0].datasets[0].specificity;
-        } else if (target === 'gtexV8') {
-          return this.datasets[0].datasets[1].specificity;
-        } else if (target === 'mouseFantom5') {
-          return [{ label: 'Group 1' }, { label: 'Group 2' }];
-          // お客さんの指定があり次第ハードコートから下記のコートに変更
-          // return this.datasets[1].datasets[0].specificity;
-        } else return [{ label: 'No useable option found' }];
+        switch (target) {
+          case 'humanFantom5':
+            return this.datasets[0].datasets[0].specificity;
+          case 'gtexV8':
+            return this.datasets[0].datasets[1].specificity;
+          case 'mouseFantom5':
+            return this.datasets[1].datasets[0].specificity;
+          default:
+            return [{ label: 'No useable option found' }];
+        }
       },
       deleteDisabled() {
         const list = this.screenerFilter.list;
