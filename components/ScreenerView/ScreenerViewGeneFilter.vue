@@ -197,16 +197,16 @@
         const isSelectedArray = this.screenerFilter.list
           .filter(({ isChecked }) => isChecked)
           .map(({ isSelected }) => isSelected);
-        const lastItemEqualsDefaultItem = obj => {
-          return _.isEqual(list.at(-1), obj);
-        };
         if (list.length === 1) {
           const copy = { ...defaultItem };
           copy.canDelete = false;
-          isSelectedArray[0] = lastItemEqualsDefaultItem(copy);
+          isSelectedArray[0] = _.isEqual(list[0], copy);
         } else {
-          isSelectedArray[isSelectedArray.length - 1] =
-            lastItemEqualsDefaultItem(defaultItem);
+          for (const [i, item] of list.entries()) {
+            if (_.isEqual(item, defaultItem)) {
+              isSelectedArray[i] = true;
+            }
+          }
         }
         return isSelectedArray;
       },
@@ -292,6 +292,10 @@
         if (_.isEqual(firstItem, defaultItem) && list.length === 1) {
           firstItem.canDelete = false;
         }
+        // if (targetItem !== undefined) console.log(targetItem);
+        // if (targetItem) {
+        //   targetItem.isSelected = targetItem.sampleId === '' ? false : true;
+        // }
         this.isAllChecked = list.every(({ isChecked }) => isChecked);
       },
       autocompleteItems(userInput, targetGroup) {
