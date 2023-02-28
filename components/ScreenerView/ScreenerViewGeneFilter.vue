@@ -340,10 +340,10 @@
       setSelectedObject(index) {
         const sampleInput = { ...this.$refs.sampleInputs[index] };
         const id = sampleInput.selected.id;
-        const text = sampleInput.selected.description;
+        const description = sampleInput.selected.description;
         const targetItem = this.screenerFilter.list[index];
         targetItem.sampleId = id;
-        targetItem.sampleDescription = text;
+        targetItem.sampleDescription = description;
         targetItem.isSelected = true;
       },
       clearSelectedObject(index) {
