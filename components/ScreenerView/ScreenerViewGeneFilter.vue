@@ -343,14 +343,14 @@
         const text = sampleInput.selected.description;
         const targetItem = this.screenerFilter.list[index];
         targetItem.sampleId = id;
-        targetItem.sampleText = text;
+        targetItem.sampleDescription = text;
         targetItem.isSelected = true;
       },
       clearSelectedObject(index) {
         const targetItem = this.screenerFilter.list[index];
-        if (targetItem.sampleText !== targetItem.sample) {
+        if (targetItem.sampleDescription !== targetItem.sample) {
           targetItem.sampleId = '';
-          targetItem.sampleText = '';
+          targetItem.sampleDescription = '';
           targetItem.isSelected = false;
         }
       },

@@ -7,7 +7,7 @@
     "defaultItem": {
       "sample": "",
       "sampleId": "",
-      "sampleText": "",
+      "sampleDescription": "",
       "cutoff": "",
       "condition": "",
       "statistic": "",
@@ -63,7 +63,7 @@
       "group": "",
       "sample": "",
       "sampleId": "",
-      "sampleText": "",
+      "sampleDescription": "",
       "horl": "",
       "emin": "",
       "emax": "",
