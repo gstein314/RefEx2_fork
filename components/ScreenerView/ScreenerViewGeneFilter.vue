@@ -194,9 +194,9 @@
       isSelectedArray() {
         const list = this.screenerFilter.list;
         const defaultItem = this.screenerFilter.defaultItem;
-        const isSelectedArray = this.screenerFilter.list.map(
-          ({ isSelected }) => isSelected
-        );
+        const isSelectedArray = this.screenerFilter.list
+          .filter(({ isChecked }) => isChecked)
+          .map(({ isSelected }) => isSelected);
         const lastItemEqualsDefaultItem = obj => {
           return _.isEqual(list.at(-1), obj);
         };
