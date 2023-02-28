@@ -103,9 +103,11 @@
                 class="text_search_name"
                 @select="setSelectedObject(itemIndex)"
                 @input="
-                  dispatchAction('ADD', itemIndex, item[column.className])
+                  () => {
+                    dispatchAction('ADD', itemIndex, item[column.className]);
+                    clearSelectedObject(itemIndex);
+                  }
                 "
-                @focus="clearSelectedObject(itemIndex)"
               >
                 <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
                 <!-- eslint-disable vue/no-unused-vars -->
@@ -328,9 +330,14 @@
         // console.log(this.$refs.sampleInputs[index].selected.id);
       },
       clearSelectedObject(index) {
-        this.screenerFilter.list[index].sampleId = '';
-        this.screenerFilter.list[index].sampleText = '';
-        this.screenerFilter.list[index].isSelected = false;
+        if (
+          this.screenerFilter.list[index].sampleText !==
+          this.screenerFilter.list[index].sample
+        ) {
+          this.screenerFilter.list[index].sampleId = '';
+          this.screenerFilter.list[index].sampleText = '';
+          this.screenerFilter.list[index].isSelected = false;
+        }
         // this.$emit('clearSelectedObject', {
         //   index,
         //   id: this.$refs.sampleInputs[index].selected.id,
