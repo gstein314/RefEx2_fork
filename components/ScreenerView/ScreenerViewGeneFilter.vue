@@ -87,6 +87,7 @@
               <vue-simple-suggest
                 v-else-if="column.className === 'sample'"
                 ref="sampleInputs"
+                v-model.trim="item[column.className]"
                 display-attribute="description"
                 value-attribute="id"
                 :list="
@@ -100,12 +101,11 @@
                 :max-suggestions="10"
                 :placeholder="column.placeholder"
                 class="text_search_name"
-                @input="
-                  () => {
-                    dispatchAction('ADD', itemIndex, item[column.className]);
-                  }
-                "
                 @select="setSelectedObject(itemIndex)"
+                @input="
+                  dispatchAction('ADD', itemIndex, item[column.className])
+                "
+                @focus="clearSelectedObject(itemIndex)"
               >
                 <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
                 <!-- eslint-disable vue/no-unused-vars -->
@@ -316,19 +316,30 @@
       },
       setSelectedObject(index) {
         const id = this.$refs.sampleInputs[index].selected.id;
-        this.screenerFilter.list[index].sample = id;
-        this.$emit('setSelectedObject', {
-          index,
-          id: this.$refs.sampleInputs[index].selected.id,
-        });
+        const text = this.$refs.sampleInputs[index].selected.description;
+        this.screenerFilter.list[index].sampleId = id;
+        this.screenerFilter.list[index].sampleText = text;
+        this.screenerFilter.list[index].isSelected = true;
+        // this.$emit('setSelectedObject', {
+        //   index,
+        //   id: this.$refs.sampleInputs[index].selected.id,
+        // });
         // console.log(this.$refs.sampleInputs[index].selected.id);
       },
       clearSelectedObject(index) {
-        this.$emit('clearSelectedObject', {
-          index,
-          id: this.$refs.sampleInputs[index].selected.id,
-        });
+        this.screenerFilter.list[index].sampleId = '';
+        this.screenerFilter.list[index].sampleText = '';
+        this.screenerFilter.list[index].isSelected = false;
+        // this.$emit('clearSelectedObject', {
+        //   index,
+        //   id: this.$refs.sampleInputs[index].selected.id,
+        // });
         // console.log(this.$refs.sampleInputs[index].selected.id);
+      },
+      blurInputField(index) {},
+      consoleLog(name, index) {
+        console.log(name, 'run');
+        // this.$refs.sampleInputs[index].onBlur();
       },
     },
   };

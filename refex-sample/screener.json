@@ -6,6 +6,8 @@
     "list": [],
     "defaultItem": {
       "sample": "",
+      "sampleId": "",
+      "sampleText": "",
       "cutoff": "",
       "condition": "",
       "statistic": "",
@@ -61,6 +63,8 @@
     "defaultItem": {
       "group": "",
       "sample": "",
+      "sampleId": "",
+      "sampleText": "",
       "horl": "",
       "emin": "",
       "emax": "",
