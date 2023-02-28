@@ -108,6 +108,9 @@
                     setSelectedTrue(itemIndex);
                   }
                 "
+                @focus="refreshSuggestions"
+                @blur="refreshSuggestions2"
+                @request-start="refreshSuggestions3"
               >
                 <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
                 <!-- eslint-disable vue/no-unused-vars -->
@@ -279,7 +282,7 @@
     watch: {
       screenerFilter: {
         handler(newVal, oldVal) {
-          console.log('watch changed');
+          // console.log('watch changed');
         },
         deep: true,
       },
@@ -321,6 +324,20 @@
     //   } else this.allSampleIsSelected = true;
     // },
     methods: {
+      refreshSuggestions() {
+        console.log('focused');
+        // this.$refs.sampleInputs[0].clearSuggestions();
+        this.$refs.sampleInputs[0].getSuggestions('request-start');
+        // this.$refs.sampleInputs[0].showSuggestions();
+      },
+      refreshSuggestions2() {
+        console.log('blurred');
+        // this.$refs.sampleInputs[0].clearSuggestions();
+      },
+      refreshSuggestions3() {
+        console.log('refresh started');
+        // this.$refs.sampleInputs[0].clearSuggestions();
+      },
       isDisable(item) {
         return !item.canDelete;
       },
@@ -391,7 +408,7 @@
               list.splice(index, 1);
               // targetItem.isShow = false;
             }
-            console.log(this.$refs.sampleInputs);
+            // console.log(this.$refs.sampleInputs);
             // this.$refs.sampleInputs[index].$destroy();
             break;
           case 'DEL_ALL':
@@ -409,7 +426,6 @@
         // console.log(this.$refs.sampleInputs?.map(input => input.selected));
       },
       autocompleteItems(userInput, targetGroup) {
-        console.log(targetGroup);
         const targetDataset = this.activeDataset.dataset;
         const samplesArray = targetDataset => {
           switch (targetDataset) {
@@ -466,7 +482,7 @@
             }
           }
         }
-        console.log(isSelectedUpToDate);
+        // console.log(isSelectedUpToDate);
         // if (
         //   isSelectedUpToDate !== undefined &&
         //   isSelectedUpToDate.includes(false)
