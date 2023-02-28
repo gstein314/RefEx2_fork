@@ -197,14 +197,16 @@
         const isSelectedArray = this.screenerFilter.list.map(
           ({ isSelected }) => isSelected
         );
+        const lastItemEqualsDefaultItem = obj => {
+          return _.isEqual(list.at(-1), obj);
+        };
         if (list.length === 1) {
           const copy = { ...defaultItem };
           copy.canDelete = false;
-          if (_.isEqual(list.at(-1), copy)) {
-            isSelectedArray[0] = true;
-          }
-        } else if (_.isEqual(list.at(-1), defaultItem)) {
-          isSelectedArray[isSelectedArray.length - 1] = true;
+          isSelectedArray[0] = lastItemEqualsDefaultItem(copy);
+        } else {
+          isSelectedArray[isSelectedArray.length - 1] =
+            lastItemEqualsDefaultItem(defaultItem);
         }
         return isSelectedArray;
       },
@@ -256,9 +258,7 @@
           case 'CHECK_ALL':
             this.isAllChecked = !this.isAllChecked;
             for (const item of list) {
-              this.isAllChecked
-                ? (item.isChecked = true)
-                : (item.isChecked = false);
+              item.isChecked = this.isAllChecked ? true : false;
             }
             break;
           case 'CHECK':
@@ -338,66 +338,18 @@
         const sampleInput = { ...this.$refs.sampleInputs[index] };
         const id = sampleInput.selected.id;
         const text = sampleInput.selected.description;
-        this.screenerFilter.list[index].sampleId = id;
-        this.screenerFilter.list[index].sampleText = text;
-        this.screenerFilter.list[index].isSelected = true;
-        // this.$emit('setSelectedObject', {
-        //   index,
-        //   id: this.$refs.sampleInputs[index].selected.id,
-        // });
-        // console.log(this.$refs.sampleInputs[index].selected.id);
+        const targetItem = this.screenerFilter.list[index];
+        targetItem.sampleId = id;
+        targetItem.sampleText = text;
+        targetItem.isSelected = true;
       },
       clearSelectedObject(index) {
-        if (
-          this.screenerFilter.list[index].sampleText !==
-          this.screenerFilter.list[index].sample
-        ) {
-          this.screenerFilter.list[index].sampleId = '';
-          this.screenerFilter.list[index].sampleText = '';
-          this.screenerFilter.list[index].isSelected = false;
+        const targetItem = this.screenerFilter.list[index];
+        if (targetItem.sampleText !== targetItem.sample) {
+          targetItem.sampleId = '';
+          targetItem.sampleText = '';
+          targetItem.isSelected = false;
         }
-        // this.$emit('clearSelectedObject', {
-        //   index,
-        //   id: this.$refs.sampleInputs[index].selected.id,
-        // });
-        // console.log(this.$refs.sampleInputs[index].selected.id);
-      },
-      tempFunction2() {
-        const isSelectedUpToDate = this.screenerFilter.list.map(
-          item => item.isSelected
-        );
-        console.log(
-          '🚀 > tempFunction > isSelectedUpToDate:',
-          isSelectedUpToDate
-        );
-        // const falseIndexArray = [];
-        // if (isSelectedUpToDate !== undefined) {
-        //   for (const [i, item] of isSelectedUpToDate.entries()) {
-        //     if (item === false) {
-        //       falseIndexArray.push(i);
-        //     }
-        //   }
-        // }
-        // console.log(isSelectedUpToDate);
-        // if (
-        //   isSelectedUpToDate !== undefined &&
-        //   isSelectedUpToDate.includes(false)
-        // ) {
-        //   const indexArray = [];
-        //   for (const [i, bool] of isSelectedUpToDate.entries()) {
-        //     if (bool === false) indexArray.push(i);
-        //   }
-        //   const defaultItem = { ...this.screenerFilter.defaultItem };
-        //   delete defaultItem.canDelete;
-        //   const copy = [...this.screenerFilter.list];
-        //   for (const index of indexArray) {
-        //     delete copy[index].canDelete;
-        //     if (!_.isEqual(copy[index], defaultItem)) {
-        //       this.allSampleIsSelected = false;
-        //     }
-        //   }
-        //   this.allSampleIsSelected = true;
-        // } else this.allSampleIsSelected = true;
       },
     },
   };
