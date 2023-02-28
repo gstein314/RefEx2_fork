@@ -106,6 +106,7 @@
                     dispatchAction('ADD', itemIndex, item[column.className]);
                   }
                 "
+                @select="setSelectedObjectIdKey(itemIndex)"
               >
                 <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
                 <!-- eslint-disable vue/no-unused-vars -->
@@ -191,9 +192,6 @@
       ...mapGetters({
         activeDataset: 'active_dataset',
       }),
-      selectedObjectIdKey() {
-        return this.$refs.sampleInputs[0].selected.id;
-      },
       groupOptions() {
         const target = this.activeDataset.dataset;
         if (target === 'humanFantom5') {
@@ -316,6 +314,12 @@
             return alphaNumInput.toLowerCase().includes(input.toLowerCase());
           }
         });
+      },
+      setSelectedObjectIdKey(index) {
+        console.log(this.$refs.sampleInputs[index].selected.id);
+      },
+      clearSelectedObjectIdKey(index) {
+        console.log(this.$refs.sampleInputs[index].selected.id);
       },
     },
   };
