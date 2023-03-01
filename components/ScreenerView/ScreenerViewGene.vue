@@ -290,6 +290,7 @@
             font-size: 12px
             > .text_search_name input
               font-size: 22px
+              +warning_border
             > input[type="checkbox"]
               cursor: pointer
               -moz-transform: scale(3)
