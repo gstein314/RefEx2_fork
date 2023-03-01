@@ -90,7 +90,7 @@
                 v-model.trim="item[column.className]"
                 display-attribute="description"
                 value-attribute="id"
-                :styles="autoCompleteStyle(isCheckedSelectedArray[itemIndex])"
+                :styles="autoCompleteStyle(item)"
                 :list="
                   autocompleteItems(
                     item[column.className],
@@ -186,6 +186,7 @@
           text: '',
         },
         screenerFilter: this.filter,
+        defaultItem: this.filter.defaultItem,
       };
     },
     computed: {
@@ -195,8 +196,7 @@
       isCheckedSelectedArray() {
         const list = this.screenerFilter.list;
         const filteredList = list.filter(({ isChecked }) => isChecked);
-        const defaultItem = this.screenerFilter.defaultItem;
-        const isDefaultItem = item => _.isEqual(item, defaultItem);
+        const isDefaultItem = item => _.isEqual(item, this.defaultItem);
         const isCheckedSelectedArray = list
           .filter(({ isChecked }) => isChecked)
           .map(({ isSelected }) => isSelected);
@@ -226,8 +226,7 @@
       deleteDisabled() {
         const list = this.screenerFilter.list;
         const firstItem = list[0];
-        const defaultItem = this.screenerFilter.defaultItem;
-        if (_.isEqual(firstItem, defaultItem) && list.length === 1) {
+        if (_.isEqual(firstItem, this.defaultItem) && list.length === 1) {
           return true;
         }
         return false;
@@ -237,8 +236,11 @@
       this.dispatchAction('INIT');
     },
     methods: {
-      autoCompleteStyle(isSelectedTrue) {
-        if (!isSelectedTrue) return { defaultInput: 'warning' };
+      autoCompleteStyle(item) {
+        const { isChecked, isSelected } = item;
+        const isDefaultItem = _.isEqual(item, this.defaultItem);
+        if (isChecked && !isSelected && !isDefaultItem)
+          return { defaultInput: 'warning' };
       },
       isDisable(item) {
         return this.screenerFilter.list.length <= 1 || !item.isChecked;
@@ -249,7 +251,7 @@
       dispatchAction(action, index, value) {
         const list = this.screenerFilter.list;
         const targetItem = list[index];
-        const defaultItemCopy = { ...this.screenerFilter.defaultItem };
+        const defaultItemCopy = { ...this.defaultItem };
         switch (action) {
           case 'INIT':
             list.push(defaultItemCopy);
