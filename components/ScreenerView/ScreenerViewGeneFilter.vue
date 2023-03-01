@@ -1,6 +1,12 @@
 <template>
   <div>
-    <h3>Filter by {{ screenerFilter.description }}</h3>
+    <h3>
+      Filter by {{ screenerFilter.description }}
+      <font-awesome-icon
+        v-tooltip="'This is Filter by ' + screenerFilter.description"
+        icon="info-circle"
+      />
+    </h3>
     <client-only>
       <div :class="screenerFilter.className">
         <table ref="itemList" class="item-list">
@@ -26,9 +32,11 @@
                   >Please select from suggestion(s)
                 </WarningMessage>
               </template>
-              <a v-if="isEntropy(column.className)" href="javascript:void(0)">
-                <font-awesome-icon icon="info-circle" />
-              </a>
+              <font-awesome-icon
+                v-if="isEntropy(column.className)"
+                v-tooltip="'Range: 1-5'"
+                icon="info-circle"
+              />
             </td>
             <td
               colspan="2"
@@ -172,6 +180,7 @@
   import VueSimpleSuggest from 'vue-simple-suggest';
   import datasets from '~/refex-sample/datasets.json';
   import WarningMessage from '../WarningMessage.vue';
+  import 'floating-vue/dist/style.css';
   import _ from 'lodash';
 
   export default {
@@ -370,3 +379,22 @@
     },
   };
 </script>
+
+<style lang="sass">
+  .v-popper--theme-tooltip .v-popper__inner
+    background: $WHITE
+    border: 1px solid $MAIN_COLOR
+    color: $BLACK
+    padding: 3px 8px
+    border-radius: 3px
+    box-shadow: 0 1px 4px rgba(62, 70, 82, .22)
+    z-index: $TOOLTIP_LAYER
+  .v-popper--theme-tooltip .v-popper__arrow-inner
+    z-index: 10
+    visibility: visible
+    border-color: $WHITE
+  .v-popper--theme-tooltip .v-popper__arrow-outer
+    border-color: $MAIN_COLOR
+  .v-popper__arrow-container
+    height: 0
+</style>
