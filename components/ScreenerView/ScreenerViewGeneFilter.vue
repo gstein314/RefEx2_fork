@@ -193,19 +193,30 @@
       }),
       isSelectedArray() {
         const list = this.screenerFilter.list;
+        const filteredList = list.filter(({ isChecked }) => isChecked);
         const defaultItem = this.screenerFilter.defaultItem;
-        const isSelectedArray = this.screenerFilter.list
+        const isDefaultItem = item => _.isEqual(item, defaultItem);
+        const isSelectedArray = list
           .filter(({ isChecked }) => isChecked)
           .map(({ isSelected }) => isSelected);
-        if (list.length === 1 && !isSelectedArray[0]) {
-          isSelectedArray[0] = _.isEqual(list[0], defaultItem);
+        console.log(
+          '🚀 > isSelectedArray > isSelectedArray before:',
+          isSelectedArray
+        );
+
+        if (list.length === 1 && !list[0].isChecked) {
+          list[0].isChecked = isDefaultItem(list[0]);
         } else {
-          for (const [i, item] of list.entries()) {
-            if (_.isEqual(item, defaultItem)) {
+          for (const [i, item] of filteredList.entries()) {
+            if (isDefaultItem(item) || !item.isChecked) {
               isSelectedArray[i] = true;
             }
           }
         }
+        console.log(
+          '🚀 > isSelectedArray > isSelectedArray after:',
+          isSelectedArray
+        );
         return isSelectedArray;
       },
       isAllSampleSelected() {
@@ -232,6 +243,16 @@
           return true;
         }
         return false;
+      },
+    },
+    watch: {
+      isSelectedArray: {
+        handler(newValue, oldValue) {
+          // Note: `newValue` will be equal to `oldValue` here
+          // on nested mutations as long as the object itself
+          // hasn't been replaced.
+        },
+        deep: true,
       },
     },
     mounted() {
