@@ -31,7 +31,7 @@
             <td
               colspan="2"
               class="delete_all"
-              :class="{ disabled: deleteDisabled }"
+              :class="{ disabled: resetAllDisabled }"
               @click="dispatchAction('DEL_ALL')"
             >
               <font-awesome-icon icon="rotate-right" />
@@ -223,7 +223,7 @@
             return [{ label: 'No useable option found' }];
         }
       },
-      deleteDisabled() {
+      resetAllDisabled() {
         const firstItem = this.list[0];
         if (_.isEqual(firstItem, this.defaultItem) && this.list.length === 1) {
           return true;
