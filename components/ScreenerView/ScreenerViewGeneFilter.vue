@@ -344,3 +344,16 @@
     },
   };
 </script>
+
+<style lang="sass" scoped>
+  .vue-simple-suggest
+    border: 1px solid $WARNING_COLOR
+    animation: border-pulsate 1s infinite
+    @keyframes border-pulsate
+      0%
+        border-color: $WARNING_COLOR
+      50%
+        border-color: transparent
+      100%
+        border-color: $WARNING_COLOR
+</style>
