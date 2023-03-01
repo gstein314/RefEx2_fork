@@ -313,7 +313,6 @@
       .unchecked
         input, select
           background: $DISABLE_COLOR
-        select
           color: rgba(0, 0, 0, 0.25)
           &:disabled
             opacity: 1
