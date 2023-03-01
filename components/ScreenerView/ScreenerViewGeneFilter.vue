@@ -250,7 +250,7 @@
           return { defaultInput: 'warning' };
       },
       isDisable(item) {
-        return this.list.length <= 1 || !item.isChecked;
+        return this.list.length <= 1;
       },
       isEntropy(className) {
         return ['emin', 'emax'].includes(className);
