@@ -30,7 +30,7 @@
       {
         "name": "Condition",
         "className": "condition",
-        "placeholder": "≧",
+        "placeholder": "<",
         "inputType": "dropdown",
         "options": [
           { "description": "<", "value": "<" },
@@ -134,7 +134,7 @@
       {
         "name": "Condition",
         "className": "condition",
-        "placeholder": "≧",
+        "placeholder": "<",
         "inputType": "dropdown",
         "options": [
           { "description": "<", "value": "<" },
