@@ -95,6 +95,8 @@
                 :styles="autoCompleteStyle(item)"
                 :list="
                   autocompleteItems(
+                    item,
+                    itemIndex,
                     item[column.className],
                     filter.list[itemIndex].group
                   )
@@ -294,8 +296,15 @@
             this.list.push(defaultItemCopy);
             break;
         }
+        if (this.$refs.sampleInputs !== undefined) {
+          // this.$refs.sampleInputs[index].onInput();
+          // const sampleInput = this.$refs.sampleInputs[index];
+          // sampleInput.suggestions = sampleInput.list.filter(
+          //   (item, i) => i <= 9
+          // );
+        }
       },
-      autocompleteItems(userInput, targetGroup) {
+      autocompleteItems(item, index, userInput, targetGroup) {
         const targetDataset = this.activeDataset.dataset;
         const humanFantom5Dataset = this.datasets[0].datasets[0];
         const gtexV8Dataset = this.datasets[0].datasets[1];
@@ -331,12 +340,18 @@
         const alphaNumInput = userInput.replace(wordAndSpace, '');
         const inputsArray = alphaNumInput.replace(/\s\s+/g, ' ').split(' ');
 
-        return copy.filter(sample => {
+        const result = copy.filter(sample => {
           const alphaNumInput = sample.description.replace(wordAndSpace, '');
           for (const input of inputsArray) {
             return alphaNumInput.toLowerCase().includes(input.toLowerCase());
           }
         });
+        if (this.$refs.sampleInputs !== undefined) {
+          if (this.$refs.sampleInputs[index] !== undefined) {
+            this.$refs.sampleInputs[index].suggestions = result;
+          }
+        }
+        return result;
       },
       setSelectedObject(index) {
         const sampleInputCopy = { ...this.$refs.sampleInputs[index] };
