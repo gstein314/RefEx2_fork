@@ -12,7 +12,7 @@
       "condition": "",
       "statistic": "",
       "isChecked": true,
-      "isSelected": false
+      "isSampleSelected": false
     },
     "columns": [
       {
@@ -67,7 +67,7 @@
       "emin": "",
       "emax": "",
       "isChecked": true,
-      "isSelected": false
+      "isSampleSelected": false
     },
     "columns": [
       {

@@ -199,7 +199,7 @@
         const isDefaultItem = item => _.isEqual(item, this.defaultItem);
         const isCheckedSelectedArray = this.list
           .filter(({ isChecked }) => isChecked)
-          .map(({ isSelected }) => isSelected);
+          .map(({ isSampleSelected }) => isSampleSelected);
         for (const [i, item] of filteredList.entries()) {
           if (isDefaultItem(item) || !item.isChecked) {
             isCheckedSelectedArray[i] = true;
@@ -244,9 +244,9 @@
     },
     methods: {
       autoCompleteStyle(item) {
-        const { isChecked, isSelected } = item;
+        const { isChecked, isSampleSelected } = item;
         const isDefaultItem = _.isEqual(item, this.defaultItem);
-        if (isChecked && !isSelected && !isDefaultItem)
+        if (isChecked && !isSampleSelected && !isDefaultItem)
           return { defaultInput: 'warning' };
       },
       isDisable(item) {
@@ -342,14 +342,14 @@
         const targetItem = this.list[index];
         targetItem.sampleId = id;
         targetItem.sampleDescription = description;
-        targetItem.isSelected = true;
+        targetItem.isSampleSelected = true;
       },
       clearSelectedObject(index) {
         const targetItem = this.list[index];
         if (targetItem.sampleDescription !== targetItem.sample) {
           targetItem.sampleId = '';
           targetItem.sampleDescription = '';
-          targetItem.isSelected = false;
+          targetItem.isSampleSelected = false;
         }
       },
     },
