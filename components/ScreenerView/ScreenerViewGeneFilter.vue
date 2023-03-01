@@ -61,7 +61,13 @@
                 required
                 :disabled="!item.isChecked"
                 @change="
-                  dispatchAction('ADD', itemIndex, item[column.className])
+                  () => {
+                    dispatchAction('ADD', itemIndex, item[column.className]);
+                    if (column.className === 'group') {
+                      item.sample = '';
+                      clearSelectedObject(itemIndex);
+                    }
+                  }
                 "
               >
                 <option value="" disabled selected hidden>
