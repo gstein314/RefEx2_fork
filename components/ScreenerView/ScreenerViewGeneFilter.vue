@@ -101,6 +101,7 @@
                 :min-length="0"
                 :max-suggestions="10"
                 :placeholder="column.placeholder"
+                :disabled="!item.isChecked"
                 class="text_search_name"
                 @select="setSelectedObject(itemIndex)"
                 @input="
