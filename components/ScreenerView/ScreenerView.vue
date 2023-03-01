@@ -90,7 +90,7 @@
               position: absolute
               left: 0
       .ti-item.ti-selected-item
-        color: #ffffff
+        color: $WHITE
         background-color: $MAIN_COLOR
     p
       margin: 0

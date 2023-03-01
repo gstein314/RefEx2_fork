@@ -124,7 +124,7 @@
         background-color: $COLOR_1
     > .tooltip
       display: none
-      background-color: #ffffff
+      background-color: $WHITE
       padding: 3px 8px
       border: 1px solid $MAIN_COLOR
       border-radius: 3px

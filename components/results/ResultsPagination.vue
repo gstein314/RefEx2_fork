@@ -265,7 +265,7 @@
             cursor: pointer
             position: relative
             &.active
-              color: #fff
+              color: $WHITE
               >span
                 border: 1px $MAIN_COLOR solid
                 background-color: $MAIN_COLOR

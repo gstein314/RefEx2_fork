@@ -36,7 +36,7 @@ $TOOLTIP_LAYER: 2
 
 @mixin hover
   cursor: pointer
-  color: #ffffff
+  color: $WHITE
   background: $MAIN_COLOR
   border-radius: 100px
   transition: .6s
@@ -72,7 +72,7 @@ $TOOLTIP_LAYER: 2
   padding: 20px 0
   margin: 0
   position: absolute
-  background-color: #ffffff
+  background-color: $WHITE
   z-index: 100
 
   > li
@@ -83,12 +83,12 @@ $TOOLTIP_LAYER: 2
       display: flex
       align-items: center
     &.hover
-      color: #ffffff
+      color: $WHITE
       background-color: $MAIN_COLOR
       cursor: pointer
 
 @mixin button
-  color: #ffffff
+  color: $WHITE
   background: $MAIN_COLOR
   font-size: 16px
   font-weight: 500
@@ -113,7 +113,7 @@ $TOOLTIP_LAYER: 2
       background: $WARNING_BUTTON_COLOR_HOVER
   &.disabled
     background: $DISABLE_COLOR
-    color: #ffffff
+    color: $WHITE
     cursor: not-allowed
     &:hover
       background: $DISABLE_COLOR
@@ -143,7 +143,7 @@ $TOOLTIP_LAYER: 2
         top: 0
         text-align: left
         padding: 8px 10px 6px 10px
-        background-color: #ffffff
+        background-color: $WHITE
         z-index: 1
         .small
           font-weight: normal
@@ -218,7 +218,7 @@ $TOOLTIP_LAYER: 2
     outline: none
   &:hover
     background-color: $MAIN_COLOR
-    color: #fff
+    color: $WHITE
     transition: all 0.3s
 
 @mixin modal_bg
@@ -237,7 +237,7 @@ $TOOLTIP_LAYER: 2
   max-height: 70vh
   overflow: auto
   transform: translate(-50%, -50%)
-  background-color: #ffffff
+  background-color: $WHITE
   padding: 55px 67px
   z-index: $MODAL_LAYER
 
@@ -270,7 +270,7 @@ $TOOLTIP_LAYER: 2
   justify-content: flex-end
   margin-left: auto
   top: 119px
-  background-color: #ffffff
+  background-color: $WHITE
   z-index: 1
   word-break: keep-all
   > .display_settings
