@@ -251,7 +251,7 @@
       },
     },
     mounted() {
-      this.dispatchAction('INIT');
+      if (this.list.length === 0) this.dispatchAction('INIT');
     },
     methods: {
       autoCompleteStyle(item) {
