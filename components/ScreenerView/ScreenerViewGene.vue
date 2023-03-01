@@ -307,12 +307,12 @@
             color: $MAIN_COLOR
             cursor: pointer
             &.disabled
-              color: #CCC
+              color: $DISABLE_COLOR
           > .check
             padding-right: 5px
       .unchecked
         input, select
-          background: #ccc
+          background: $DISABLE_COLOR
         select
           color: rgba(0, 0, 0, 0.25)
           &:disabled
