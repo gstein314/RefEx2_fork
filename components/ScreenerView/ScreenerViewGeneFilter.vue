@@ -198,8 +198,7 @@
           .filter(({ isChecked }) => isChecked)
           .map(({ isSelected }) => isSelected);
         if (list.length === 1) {
-          const copy = { ...defaultItem };
-          isSelectedArray[0] = _.isEqual(list[0], copy);
+          isSelectedArray[0] = _.isEqual(list[0], defaultItem);
         } else {
           for (const [i, item] of list.entries()) {
             if (_.isEqual(item, defaultItem)) {
@@ -228,7 +227,7 @@
       deleteDisabled() {
         const list = this.screenerFilter.list;
         const firstItem = list[0];
-        const defaultItem = { ...this.screenerFilter.defaultItem };
+        const defaultItem = this.screenerFilter.defaultItem;
         if (_.isEqual(firstItem, defaultItem) && list.length === 1) {
           return true;
         }
@@ -248,10 +247,10 @@
       dispatchAction(action, index, value) {
         const list = this.screenerFilter.list;
         const targetItem = list[index];
-        const defaultItem = { ...this.screenerFilter.defaultItem };
+        const defaultItemCopy = { ...this.screenerFilter.defaultItem };
         switch (action) {
           case 'INIT':
-            list.push(defaultItem);
+            list.push(defaultItemCopy);
             break;
           case 'CHECK_ALL':
             this.isAllChecked = !this.isAllChecked;
@@ -265,21 +264,21 @@
           case 'ADD':
             if (value.trim().length > 0) {
               if (!list[index + 1]) {
-                list.push(defaultItem);
+                list.push(defaultItemCopy);
               }
             }
             break;
           case 'DEL':
             if (list.length === 1) {
               list.splice(0, list.length);
-              list.push(defaultItem);
+              list.push(defaultItemCopy);
             } else {
               this.$delete(list, index);
             }
             break;
           case 'DEL_ALL':
             list.splice(0, list.length);
-            list.push(defaultItem);
+            list.push(defaultItemCopy);
             break;
         }
         this.isAllChecked = list.every(({ isChecked }) => isChecked);
@@ -328,9 +327,9 @@
         });
       },
       setSelectedObject(index) {
-        const sampleInput = { ...this.$refs.sampleInputs[index] };
-        const id = sampleInput.selected.id;
-        const description = sampleInput.selected.description;
+        const sampleInputCopy = { ...this.$refs.sampleInputs[index] };
+        const id = sampleInputCopy.selected.id;
+        const description = sampleInputCopy.selected.description;
         const targetItem = this.screenerFilter.list[index];
         targetItem.sampleId = id;
         targetItem.sampleDescription = description;
