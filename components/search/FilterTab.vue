@@ -50,6 +50,7 @@
 <script>
   import { mapGetters } from 'vuex';
   import IndexResults from '~/components/results/IndexResults.vue';
+  import filters from '../../static/filters.json';
 
   export default {
     components: {
@@ -60,9 +61,11 @@
         tableDataIsSameAsScreener: false,
         isDisplaySettings: false,
         validSearch: false,
+        // When returning from the sample project page to the index page, the filters on the gene side are empty. This is handled by loading filters.json, but it needs to be rewritten if the contents of the filters on the gene side are no longer fixed.
         filters: [
           ...(this.$store.getters.active_dataset[this.$vnode.key].filter ??
             this.$store.getters.active_filter.filter ??
+            filters[0].filter ??
             []),
         ],
       };

@@ -7,7 +7,7 @@ $ERROR_COLOR: #FF4C5E
 $WARNING_COLOR: #efd512
 $ACTIVE_COLOR: #fad275 
 $ACTIVE_COLOR_HOVER: rgba(255, 255, 0, .1)
-$BUTTON_HOVER_COLOR: #366c96
+$BUTTON_HOVER_COLOR: #095493
 $WARNING_BUTTON_COLOR: #FF8A17
 $WARNING_BUTTON_COLOR_HOVER: #F06A06
 $DISABLE_COLOR:#CCCCCC
@@ -140,7 +140,7 @@ $TOOLTIP_LAYER: 2
         background-color: $ACTIVE_COLOR_HOVER
       > th
         position: sticky
-        top: 0
+        top: 70px
         text-align: left
         padding: 8px 10px 6px 10px
         background-color: $WHITE
@@ -292,3 +292,28 @@ $TOOLTIP_LAYER: 2
   &.warning
     outline: 1px solid $WARNING_COLOR
     outline-offset: -1px
+@mixin tooltip
+  background-color: #ffffff
+  padding: 3px 8px
+  border: 1px solid $MAIN_COLOR
+  border-radius: 3px
+  box-shadow: 0 1px 4px rgba(62, 70, 82, .22)
+  z-index: $TOOLTIP_LAYER
+
+@mixin popper
+  .v-popper--theme-tooltip .v-popper__inner
+    background: $WHITE
+    border: 1px solid $MAIN_COLOR
+    color: $BLACK
+    padding: 3px 8px
+    border-radius: 3px
+    box-shadow: 0 1px 4px rgba(62, 70, 82, .22)
+    z-index: $TOOLTIP_LAYER
+  .v-popper--theme-tooltip .v-popper__arrow-inner
+    z-index: 10
+    visibility: visible
+    border-color: $WHITE
+  .v-popper--theme-tooltip .v-popper__arrow-outer
+    border-color: $MAIN_COLOR
+  .v-popper__arrow-container
+    height: 0

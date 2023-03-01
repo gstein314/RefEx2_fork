@@ -163,6 +163,7 @@
         filterObj: 'active_filter_modal',
         activeDataset: 'active_dataset',
         activeSpecie: 'active_specie',
+        activeFilter: 'active_filter',
       }),
       pageItems() {
         return this.filteredSortedData.slice(
@@ -182,6 +183,11 @@
     },
     created() {
       this.setPageType('project');
+      if (location.search.match(/=(.*)&/)[1] === 'gene') {
+        this.$store.commit('set_active_filter', 'gene');
+      } else {
+        this.$store.commit('set_active_filter', 'sample');
+      }
     },
     mounted() {
       this.setDataset();
