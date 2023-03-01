@@ -289,14 +289,5 @@ $TOOLTIP_LAYER: 2
       cursor: pointer
 
 @mixin warning_border
-  border: 1px solid $WARNING_COLOR
-  animation: border-pulsate 1.5s infinite
-  @keyframes border-pulsate
-    20%
-      border-color: $WARNING_COLOR
-      animation-timing-function: ease-out
-    50%
-      border-color: transparent
-    80%
-      border-color: $WARNING_COLOR
-      animation-timing-function: ease-in
+  &.warning
+    border: 1px solid $WARNING_COLOR

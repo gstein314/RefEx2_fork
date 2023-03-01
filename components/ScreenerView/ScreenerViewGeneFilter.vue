@@ -90,6 +90,7 @@
                 v-model.trim="item[column.className]"
                 display-attribute="description"
                 value-attribute="id"
+                :styles="autoCompleteStyle(isCheckedSelectedArray[itemIndex])"
                 :list="
                   autocompleteItems(
                     item[column.className],
@@ -236,6 +237,9 @@
       this.dispatchAction('INIT');
     },
     methods: {
+      autoCompleteStyle(isSelectedTrue) {
+        if (!isSelectedTrue) return { defaultInput: 'warning' };
+      },
       isDisable(item) {
         return this.screenerFilter.list.length <= 1 || !item.isChecked;
       },
