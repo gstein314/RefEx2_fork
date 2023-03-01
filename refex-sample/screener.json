@@ -12,7 +12,6 @@
       "condition": "",
       "statistic": "",
       "isChecked": true,
-      "canDelete": true,
       "isSelected": false
     },
     "columns": [
@@ -68,7 +67,6 @@
       "emin": "",
       "emax": "",
       "isChecked": true,
-      "canDelete": true,
       "isSelected": false
     },
     "columns": [
@@ -121,8 +119,7 @@
       "group": "",
       "cutoff": "",
       "condition": "",
-      "isChecked": true,
-      "canDelete": true
+      "isChecked": true
     },
     "columns": [
       {

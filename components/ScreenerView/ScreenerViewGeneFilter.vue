@@ -140,7 +140,7 @@
             <td class="icon">
               <button
                 class="delete_btn"
-                :class="{ disabled: !item.canDelete }"
+                :class="{ disabled: isDisable(item) }"
                 :disabled="isDisable(item)"
                 @click="dispatchAction('DEL', itemIndex)"
               >
@@ -242,7 +242,7 @@
     },
     methods: {
       isDisable(item) {
-        return !item.canDelete;
+        return this.screenerFilter.list.length === 1 || !item.isChecked;
       },
       isEntropy(className) {
         return ['emin', 'emax'].includes(className);
