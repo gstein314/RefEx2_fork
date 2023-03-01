@@ -199,7 +199,6 @@
           .map(({ isSelected }) => isSelected);
         if (list.length === 1) {
           const copy = { ...defaultItem };
-          copy.canDelete = false;
           isSelectedArray[0] = _.isEqual(list[0], copy);
         } else {
           for (const [i, item] of list.entries()) {
@@ -230,7 +229,6 @@
         const list = this.screenerFilter.list;
         const firstItem = list[0];
         const defaultItem = { ...this.screenerFilter.defaultItem };
-        defaultItem.canDelete = false;
         if (_.isEqual(firstItem, defaultItem) && list.length === 1) {
           return true;
         }
@@ -253,7 +251,6 @@
         const defaultItem = { ...this.screenerFilter.defaultItem };
         switch (action) {
           case 'INIT':
-            defaultItem.canDelete = false;
             list.push(defaultItem);
             break;
           case 'CHECK_ALL':
@@ -266,7 +263,6 @@
             targetItem.isChecked = !targetItem.isChecked;
             break;
           case 'ADD':
-            targetItem.canDelete = true;
             if (value.trim().length > 0) {
               if (!list[index + 1]) {
                 list.push(defaultItem);
@@ -276,7 +272,6 @@
           case 'DEL':
             if (list.length === 1) {
               list.splice(0, list.length);
-              defaultItem.canDelete = false;
               list.push(defaultItem);
             } else {
               this.$delete(list, index);
@@ -284,18 +279,9 @@
             break;
           case 'DEL_ALL':
             list.splice(0, list.length);
-            defaultItem.canDelete = false;
             list.push(defaultItem);
             break;
         }
-        const firstItem = list[0];
-        if (_.isEqual(firstItem, defaultItem) && list.length === 1) {
-          firstItem.canDelete = false;
-        }
-        // if (targetItem !== undefined) console.log(targetItem);
-        // if (targetItem) {
-        //   targetItem.isSelected = targetItem.sampleId === '' ? false : true;
-        // }
         this.isAllChecked = list.every(({ isChecked }) => isChecked);
       },
       autocompleteItems(userInput, targetGroup) {
