@@ -186,6 +186,7 @@
           text: '',
         },
         screenerFilter: this.filter,
+        list: this.filter.list,
         defaultItem: this.filter.defaultItem,
       };
     },
@@ -194,10 +195,9 @@
         activeDataset: 'active_dataset',
       }),
       isCheckedSelectedArray() {
-        const list = this.screenerFilter.list;
-        const filteredList = list.filter(({ isChecked }) => isChecked);
+        const filteredList = this.list.filter(({ isChecked }) => isChecked);
         const isDefaultItem = item => _.isEqual(item, this.defaultItem);
-        const isCheckedSelectedArray = list
+        const isCheckedSelectedArray = this.list
           .filter(({ isChecked }) => isChecked)
           .map(({ isSelected }) => isSelected);
         for (const [i, item] of filteredList.entries()) {
@@ -224,9 +224,8 @@
         }
       },
       deleteDisabled() {
-        const list = this.screenerFilter.list;
-        const firstItem = list[0];
-        if (_.isEqual(firstItem, this.defaultItem) && list.length === 1) {
+        const firstItem = this.list[0];
+        if (_.isEqual(firstItem, this.defaultItem) && this.list.length === 1) {
           return true;
         }
         return false;
@@ -243,22 +242,21 @@
           return { defaultInput: 'warning' };
       },
       isDisable(item) {
-        return this.screenerFilter.list.length <= 1 || !item.isChecked;
+        return this.list.length <= 1 || !item.isChecked;
       },
       isEntropy(className) {
         return ['emin', 'emax'].includes(className);
       },
       dispatchAction(action, index, value) {
-        const list = this.screenerFilter.list;
-        const targetItem = list[index];
+        const targetItem = this.list[index];
         const defaultItemCopy = { ...this.defaultItem };
         switch (action) {
           case 'INIT':
-            list.push(defaultItemCopy);
+            this.list.push(defaultItemCopy);
             break;
           case 'CHECK_ALL':
             this.isAllChecked = !this.isAllChecked;
-            for (const item of list) {
+            for (const item of this.list) {
               item.isChecked = this.isAllChecked ? true : false;
             }
             break;
@@ -267,25 +265,25 @@
             break;
           case 'ADD':
             if (value.trim().length > 0) {
-              if (!list[index + 1]) {
-                list.push(defaultItemCopy);
+              if (!this.list[index + 1]) {
+                this.list.push(defaultItemCopy);
               }
             }
             break;
           case 'DEL':
-            if (list.length === 1) {
-              list.splice(0, list.length);
-              list.push(defaultItemCopy);
+            if (this.list.length === 1) {
+              this.list.splice(0, this.list.length);
+              this.list.push(defaultItemCopy);
             } else {
-              this.$delete(list, index);
+              this.$delete(this.list, index);
             }
             break;
           case 'DEL_ALL':
-            list.splice(0, list.length);
-            list.push(defaultItemCopy);
+            this.list.splice(0, this.list.length);
+            this.list.push(defaultItemCopy);
             break;
         }
-        this.isAllChecked = list.every(({ isChecked }) => isChecked);
+        this.isAllChecked = this.list.every(({ isChecked }) => isChecked);
       },
       autocompleteItems(userInput, targetGroup) {
         const targetDataset = this.activeDataset.dataset;
@@ -334,13 +332,13 @@
         const sampleInputCopy = { ...this.$refs.sampleInputs[index] };
         const id = sampleInputCopy.selected.id;
         const description = sampleInputCopy.selected.description;
-        const targetItem = this.screenerFilter.list[index];
+        const targetItem = this.list[index];
         targetItem.sampleId = id;
         targetItem.sampleDescription = description;
         targetItem.isSelected = true;
       },
       clearSelectedObject(index) {
-        const targetItem = this.screenerFilter.list[index];
+        const targetItem = this.list[index];
         if (targetItem.sampleDescription !== targetItem.sample) {
           targetItem.sampleId = '';
           targetItem.sampleDescription = '';
