@@ -34,6 +34,7 @@
               :class="{ disabled: deleteDisabled }"
               @click="dispatchAction('DEL_ALL')"
             >
+              <font-awesome-icon icon="rotate-right" />
               <font-awesome-icon icon="trash" />
               Delete All
             </td>
