@@ -39,7 +39,7 @@
             </td>
           </tr>
           <tr
-            v-for="(item, itemIndex) in screenerFilter.list"
+            v-for="(item, itemIndex) in list"
             :key="itemIndex"
             ref="listItem"
             class="list-item"
@@ -230,6 +230,14 @@
         }
         return false;
       },
+      getIsAllChecked() {
+        return this.list.every(({ isChecked }) => isChecked);
+      },
+    },
+    watch: {
+      getIsAllChecked(newState) {
+        this.isAllChecked = newState;
+      },
     },
     mounted() {
       this.dispatchAction('INIT');
@@ -283,7 +291,6 @@
             this.list.push(defaultItemCopy);
             break;
         }
-        this.isAllChecked = this.list.every(({ isChecked }) => isChecked);
       },
       autocompleteItems(userInput, targetGroup) {
         const targetDataset = this.activeDataset.dataset;
