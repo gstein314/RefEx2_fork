@@ -296,59 +296,49 @@
             this.list.push(defaultItemCopy);
             break;
         }
-        if (this.$refs.sampleInputs !== undefined) {
-          // this.$refs.sampleInputs[index].onInput();
-          // const sampleInput = this.$refs.sampleInputs[index];
-          // sampleInput.suggestions = sampleInput.list.filter(
-          //   (item, i) => i <= 9
-          // );
-        }
       },
       autocompleteItems(item, index, userInput, targetGroup) {
         const targetDataset = this.activeDataset.dataset;
         const humanFantom5Dataset = this.datasets[0].datasets[0];
         const gtexV8Dataset = this.datasets[0].datasets[1];
-        const samplesArray = targetDataset => {
-          switch (targetDataset) {
-            case 'humanFantom5':
-              return targetGroup === 'Adult tissues'
-                ? humanFantom5Dataset.specificity[0].samples
-                : targetGroup === 'Epithelial cells'
-                ? humanFantom5Dataset.specificity[1].samples
-                : humanFantom5Dataset.specificity[0].samples;
-            case 'gtexV8':
-              return targetGroup === 'All tissues'
-                ? gtexV8Dataset.specificity[0].samples
-                : targetGroup === 'Brain sub-regions'
-                ? gtexV8Dataset.specificity[1].samples
-                : gtexV8Dataset.specificity[0].samples;
-            default:
-              return [
-                {
-                  id: 'testId1',
-                  description: 'Sample description 1',
-                },
-                {
-                  id: 'testId2',
-                  description: 'Sample description 2',
-                },
-              ];
+        const allSamples = humanFantom5Dataset.specificity[0].samples
+          .concat(humanFantom5Dataset.specificity[1].samples)
+          .concat(gtexV8Dataset.specificity[0].samples)
+          .concat(gtexV8Dataset.specificity[1].samples);
+        const samplesArray = () => {
+          if (item.hasOwnProperty('group')) {
+            switch (targetDataset) {
+              case 'humanFantom5':
+                return targetGroup === 'Adult tissues'
+                  ? humanFantom5Dataset.specificity[0].samples
+                  : targetGroup === 'Epithelial cells'
+                  ? humanFantom5Dataset.specificity[1].samples
+                  : humanFantom5Dataset.specificity[0].samples;
+              case 'gtexV8':
+                return targetGroup === 'All tissues'
+                  ? gtexV8Dataset.specificity[0].samples
+                  : targetGroup === 'Brain sub-regions'
+                  ? gtexV8Dataset.specificity[1].samples
+                  : gtexV8Dataset.specificity[0].samples;
+            }
           }
+          return allSamples;
         };
-        const copy = [...samplesArray(targetDataset)];
         const wordAndSpace = /[^\w\s]/g;
         const alphaNumInput = userInput.replace(wordAndSpace, '');
         const inputsArray = alphaNumInput.replace(/\s\s+/g, ' ').split(' ');
 
-        const result = copy.filter(sample => {
+        const result = samplesArray().filter(sample => {
           const alphaNumInput = sample.description.replace(wordAndSpace, '');
           for (const input of inputsArray) {
             return alphaNumInput.toLowerCase().includes(input.toLowerCase());
           }
         });
+        const firstHowManyResult = num =>
+          result.filter((sample, i) => i <= num - 1);
         if (this.$refs.sampleInputs !== undefined) {
           if (this.$refs.sampleInputs[index] !== undefined) {
-            this.$refs.sampleInputs[index].suggestions = result;
+            this.$refs.sampleInputs[index].suggestions = firstHowManyResult(10);
           }
         }
         return result;
