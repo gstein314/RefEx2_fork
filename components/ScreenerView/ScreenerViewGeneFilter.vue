@@ -307,10 +307,11 @@
         const targetDataset = this.activeDataset.dataset;
         const humanFantom5Dataset = this.datasets[0].datasets[0];
         const gtexV8Dataset = this.datasets[0].datasets[1];
-        const allSamples = humanFantom5Dataset.specificity[0].samples
-          .concat(humanFantom5Dataset.specificity[1].samples)
-          .concat(gtexV8Dataset.specificity[0].samples)
-          .concat(gtexV8Dataset.specificity[1].samples);
+        const allSamples = humanFantom5Dataset.specificity[0].samples.concat(
+          humanFantom5Dataset.specificity[1].samples,
+          gtexV8Dataset.specificity[0].samples,
+          gtexV8Dataset.specificity[1].samples
+        );
         const samplesArray = () => {
           if (item.hasOwnProperty('group')) {
             switch (targetDataset) {
