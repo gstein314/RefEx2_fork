@@ -30,7 +30,7 @@
             </td>
             <td
               colspan="2"
-              class="delete_all"
+              class="reset"
               :class="{ disabled: resetAllDisabled }"
               @click="dispatchAction('RESET')"
             >

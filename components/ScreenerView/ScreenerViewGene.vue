@@ -295,7 +295,7 @@
               cursor: pointer
               -moz-transform: scale(3)
             > select:required:invalid
-              color: rgba(0, 0, 0, 0.3)
+              color: rgba(0, 0, 0, 0.25)
             > .delete_btn
               +button
               align-items: initial
@@ -303,7 +303,7 @@
               cursor: pointer !important
             svg[data-icon="circle-info"]
               color: $MAIN_COLOR
-          > .delete_all
+          > .reset
             color: $MAIN_COLOR
             cursor: pointer
             &.disabled
@@ -314,7 +314,9 @@
         input, select
           background: #ccc
         select
-          color: rgba(0, 0, 0, 0.3)
+          color: rgba(0, 0, 0, 0.25)
+          &:disabled
+            opacity: 1
     .filter_TPM
       > table
         > tr
