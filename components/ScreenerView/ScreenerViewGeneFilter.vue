@@ -22,7 +22,9 @@
               <template
                 v-if="column.className === 'sample' && !isAllSampleSelected"
               >
-                <WarningMessage>Please select from suggestions</WarningMessage>
+                <WarningMessage
+                  >Please select from suggestion(s)
+                </WarningMessage>
               </template>
               <a v-if="isEntropy(column.className)" href="javascript:void(0)">
                 <font-awesome-icon icon="info-circle" />
