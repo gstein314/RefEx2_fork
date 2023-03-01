@@ -32,10 +32,10 @@
               colspan="2"
               class="delete_all"
               :class="{ disabled: resetAllDisabled }"
-              @click="dispatchAction('DEL_ALL')"
+              @click="dispatchAction('RESET')"
             >
               <font-awesome-icon icon="rotate-right" />
-              Reset All
+              Reset
             </td>
           </tr>
           <tr
@@ -143,7 +143,7 @@
                 class="delete_btn"
                 :class="{ disabled: isDisable(item) }"
                 :disabled="isDisable(item)"
-                @click="dispatchAction('DEL', itemIndex)"
+                @click="dispatchAction('DELETE', itemIndex)"
               >
                 <font-awesome-icon icon="trash" />
                 Delete
@@ -278,7 +278,7 @@
               }
             }
             break;
-          case 'DEL':
+          case 'DELETE':
             if (this.list.length === 1) {
               this.list.splice(0, this.list.length);
               this.list.push(defaultItemCopy);
@@ -286,7 +286,7 @@
               this.$delete(this.list, index);
             }
             break;
-          case 'DEL_ALL':
+          case 'RESET':
             this.list.splice(0, this.list.length);
             this.list.push(defaultItemCopy);
             break;
