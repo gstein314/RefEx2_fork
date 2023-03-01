@@ -35,8 +35,7 @@
               @click="dispatchAction('DEL_ALL')"
             >
               <font-awesome-icon icon="rotate-right" />
-              <font-awesome-icon icon="trash" />
-              Delete All
+              Reset All
             </td>
           </tr>
           <tr
@@ -198,7 +197,7 @@
         const isSelectedArray = this.screenerFilter.list
           .filter(({ isChecked }) => isChecked)
           .map(({ isSelected }) => isSelected);
-        if (list.length === 1) {
+        if (list.length === 1 && !isSelectedArray[0]) {
           isSelectedArray[0] = _.isEqual(list[0], defaultItem);
         } else {
           for (const [i, item] of list.entries()) {
@@ -240,7 +239,7 @@
     },
     methods: {
       isDisable(item) {
-        return this.screenerFilter.list.length === 1 || !item.isChecked;
+        return this.screenerFilter.list.length <= 1 || !item.isChecked;
       },
       isEntropy(className) {
         return ['emin', 'emax'].includes(className);
