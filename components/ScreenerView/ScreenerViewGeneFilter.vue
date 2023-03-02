@@ -121,13 +121,13 @@
                   :placeholder="column.placeholder"
                   :disabled="!item.isChecked"
                   class="text_search_name"
-                  @select="setSelectedObject(itemIndex)"
+                  @select="setSelectedSample(itemIndex, true)"
                   @input="
                     () => {
                       dispatchAction('ADD', itemIndex, item[column.className]);
                     }
                   "
-                  @focus="clearSelectedObject(itemIndex)"
+                  @focus="setSelectedSample(itemIndex, false)"
                 >
                   <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
                   <!-- eslint-disable vue/no-unused-vars -->
@@ -349,28 +349,26 @@
         }
         return filteredSamples;
       },
-      setSelectedObject(index) {
-        const { id, description } = this.$refs.sampleInputs[index].selected;
+      setSelectedSample(index, bool) {
         const targetItem = this.list[index];
-        Object.assign(targetItem, {
-          sampleId: id,
-          sampleDescription: description,
-          isSampleSelected: true,
-        });
-        setTimeout(
-          () => this.$refs.sampleInputs[index].inputElement.blur(),
-          10
-        );
-      },
-      clearSelectedObject(index) {
-        const targetItem = this.list[index];
-        this.$refs.sampleInputs[index].setText('');
-        this.$refs.sampleInputs[index].selected = null;
-        Object.assign(targetItem, {
-          sampleId: '',
-          sampleDescription: '',
-          isSampleSelected: false,
-        });
+        const sampleInput = this.$refs.sampleInputs[index];
+        if (bool) {
+          const { id, description } = sampleInput.selected;
+          Object.assign(targetItem, {
+            sampleId: id,
+            sampleDescription: description,
+            isSampleSelected: true,
+          });
+          setTimeout(() => sampleInput.inputElement.blur(), 10);
+        } else {
+          sampleInput.setText('');
+          sampleInput.selected = null;
+          Object.assign(targetItem, {
+            sampleId: '',
+            sampleDescription: '',
+            isSampleSelected: false,
+          });
+        }
       },
     },
   };
