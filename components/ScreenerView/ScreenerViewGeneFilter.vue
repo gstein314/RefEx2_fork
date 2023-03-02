@@ -359,7 +359,7 @@
         });
         setTimeout(
           () => this.$refs.sampleInputs[index].inputElement.blur(),
-          20
+          10
         );
       },
       clearSelectedObject(index) {
