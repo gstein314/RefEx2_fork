@@ -219,17 +219,9 @@
         activeDataset: 'active_dataset',
       }),
       isCheckedSelectedArray() {
-        const filteredList = this.list.filter(({ isChecked }) => isChecked);
-        const isDefaultItem = item => _.isEqual(item, this.defaultItem);
-        const isCheckedSelectedArray = this.list
-          .filter(({ isChecked }) => isChecked)
+        return this.list
+          .filter(item => item.isChecked && !_.isEqual(item, this.defaultItem))
           .map(({ isSampleSelected }) => isSampleSelected);
-        for (const [i, item] of filteredList.entries()) {
-          if (isDefaultItem(item) || !item.isChecked) {
-            isCheckedSelectedArray[i] = true;
-          }
-        }
-        return isCheckedSelectedArray;
       },
       isAllSampleSelected() {
         return this.isCheckedSelectedArray.every(Boolean);
