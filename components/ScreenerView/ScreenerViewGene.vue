@@ -311,7 +311,7 @@
             cursor: pointer
             -moz-transform: scale(3)
           select:required:invalid
-            color: rgba(0, 0, 0, 0.25)
+            color: $PLACEHOLDER_COLOR
           .delete_btn
             +button
             align-items: initial
@@ -319,14 +319,10 @@
             cursor: pointer
           svg[data-icon="circle-info"]
             color: $MAIN_COLOR
-          svg[data-icon="circle-check"]
-            color: rgba(0, 0, 0, 0.25)
-            &.valid
-              color: $MAIN_COLOR
           .unchecked
             input, select
               background: $DISABLE_COLOR
-              color: rgba(0, 0, 0, 0.25)
+              color: $PLACEHOLDER_COLOR
               &:disabled
                 opacity: 1
     .filter_TPM
