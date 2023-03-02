@@ -300,6 +300,7 @@
             cursor: pointer
             &.disabled
               color: $DISABLE_COLOR
+              cursor: not-allowed
         tbody
           input, select
             height: 2.25em
@@ -315,7 +316,7 @@
             +button
             align-items: initial
             padding: 13.5px 22px
-            cursor: pointer !important
+            cursor: pointer
           svg[data-icon="circle-info"]
             color: $MAIN_COLOR
           .unchecked
