@@ -320,25 +320,22 @@
         const targetDataset = this.activeDataset.dataset;
         const humanFantom5Dataset = this.datasets[0].datasets[0];
         const gtexV8Dataset = this.datasets[0].datasets[1];
-        const sortedAllSamples = humanFantom5Dataset.specificity[0].samples
-          .concat(
-            humanFantom5Dataset.specificity[1].samples,
-            gtexV8Dataset.specificity[0].samples,
-            gtexV8Dataset.specificity[1].samples
-          )
-          .sort((a, b) =>
-            a.description > b.description
-              ? 1
-              : a.description < b.description
-              ? -1
-              : 0
-          );
-        const samplesArray = () => {
+        const allSamples = [
+          ...humanFantom5Dataset.specificity[0].samples,
+          ...humanFantom5Dataset.specificity[1].samples,
+          ...gtexV8Dataset.specificity[0].samples,
+          ...gtexV8Dataset.specificity[1].samples,
+        ];
+
+        const sortSamplesByDescription = (a, b) =>
+          a.description.localeCompare(b.description);
+
+        const getSamplesArray = () => {
           if (item.hasOwnProperty('group')) {
-            let arr;
+            let sortedArray;
             switch (targetDataset) {
               case 'humanFantom5':
-                arr =
+                sortedArray =
                   targetGroup === 'Adult tissues'
                     ? humanFantom5Dataset.specificity[0].samples
                     : targetGroup === 'Epithelial cells'
@@ -346,7 +343,7 @@
                     : humanFantom5Dataset.specificity[0].samples;
                 break;
               case 'gtexV8':
-                arr =
+                sortedArray =
                   targetGroup === 'All tissues'
                     ? gtexV8Dataset.specificity[0].samples
                     : targetGroup === 'Brain sub-regions'
@@ -354,35 +351,28 @@
                     : gtexV8Dataset.specificity[0].samples;
                 break;
               default:
-                return sortedAllSamples;
+                return allSamples.sort(sortSamplesByDescription);
             }
-            const sortedArray = [...arr].sort((a, b) => {
-              const loweredA = a.description.toLowerCase();
-              const loweredB = b.description.toLowerCase();
-              return loweredA > loweredB ? 1 : loweredA < loweredB ? -1 : 0;
-            });
-            return sortedArray;
+            return [...sortedArray].sort(sortSamplesByDescription);
           }
-          return sortedAllSamples;
+          return allSamples.sort(sortSamplesByDescription);
         };
         const wordAndSpace = /[^\w\s]/g;
         const alphaNumInput = userInput.replace(wordAndSpace, '');
         const inputsArray = alphaNumInput.replace(/\s\s+/g, ' ').split(' ');
 
-        const result = samplesArray().filter(sample => {
+        const filteredSamples = getSamplesArray().filter(sample => {
           const alphaNumInput = sample.description.replace(wordAndSpace, '');
-          for (const input of inputsArray) {
-            return alphaNumInput.toLowerCase().includes(input.toLowerCase());
-          }
+          return inputsArray.every(input =>
+            alphaNumInput.toLowerCase().includes(input.toLowerCase())
+          );
         });
-        const firstHowManyResult = num =>
-          result.filter((sample, i) => i <= num - 1);
-        if (this.$refs.sampleInputs !== undefined) {
-          if (this.$refs.sampleInputs[index] !== undefined) {
-            this.$refs.sampleInputs[index].suggestions = firstHowManyResult(10);
-          }
+        const suggestions = filteredSamples.slice(0, 10);
+        // manually update vue-simple-suggest suggestions after "Group" option changed
+        if (this.$refs.sampleInputs?.[index]) {
+          this.$refs.sampleInputs[index].suggestions = suggestions;
         }
-        return result;
+        return filteredSamples;
       },
       setSelectedObject(index) {
         const sampleInputCopy = { ...this.$refs.sampleInputs[index] };
