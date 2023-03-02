@@ -291,21 +291,21 @@
             break;
         }
       },
-      autocompleteItems(item, index, userInput, targetGroup) {
-        const targetDataset = this.activeDataset.dataset;
-        const sampleMap = {
+      autocompleteItems(item, index, userInput, selectedGroup) {
+        const selectedDataset = this.activeDataset.dataset;
+        const humanSampleMap = {
           adultTissues: this.datasets[0].datasets[0].specificity[0].samples,
           epithelialCells: this.datasets[0].datasets[0].specificity[1].samples,
           allTissues: this.datasets[0].datasets[1].specificity[0].samples,
           brainSubRegions: this.datasets[0].datasets[1].specificity[1].samples,
         };
         const allFantom5Samples = [
-          ...sampleMap.adultTissues,
-          ...sampleMap.epithelialCells,
+          ...humanSampleMap.adultTissues,
+          ...humanSampleMap.epithelialCells,
         ];
         const allGtexSamples = [
-          ...sampleMap.allTissues,
-          ...sampleMap.brainSubRegions,
+          ...humanSampleMap.allTissues,
+          ...humanSampleMap.brainSubRegions,
         ];
         const allSamples = [...allFantom5Samples, ...allGtexSamples];
 
@@ -314,21 +314,21 @@
 
         const getSamplesArray = () => {
           let unsortedSamples;
-          switch (targetDataset) {
+          switch (selectedDataset) {
             case 'humanFantom5':
               unsortedSamples =
-                targetGroup === 'Adult tissues'
-                  ? sampleMap.adultTissues
-                  : targetGroup === 'Epithelial cells'
-                  ? sampleMap.epithelialCells
+                selectedGroup === 'Adult tissues'
+                  ? humanSampleMap.adultTissues
+                  : selectedGroup === 'Epithelial cells'
+                  ? humanSampleMap.epithelialCells
                   : allFantom5Samples;
               break;
             case 'gtexV8':
               unsortedSamples =
-                targetGroup === 'All tissues'
-                  ? sampleMap.allTissues
-                  : targetGroup === 'Brain sub-regions'
-                  ? sampleMap.brainSubRegions
+                selectedGroup === 'All tissues'
+                  ? humanSampleMap.allTissues
+                  : selectedGroup === 'Brain sub-regions'
+                  ? humanSampleMap.brainSubRegions
                   : allGtexSamples;
               break;
             default:
