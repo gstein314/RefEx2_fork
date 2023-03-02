@@ -375,20 +375,23 @@
         return filteredSamples;
       },
       setSelectedObject(index) {
-        const sampleInputCopy = { ...this.$refs.sampleInputs[index] };
-        const id = sampleInputCopy.selected.id;
-        const description = sampleInputCopy.selected.description;
+        const { id, description } = this.$refs.sampleInputs[index].selected;
         const targetItem = this.list[index];
-        targetItem.sampleId = id;
-        targetItem.sampleDescription = description;
-        targetItem.isSampleSelected = true;
+        Object.assign(targetItem, {
+          sampleId: id,
+          sampleDescription: description,
+          isSampleSelected: true,
+        });
       },
+
       clearSelectedObject(index) {
         const targetItem = this.list[index];
         if (targetItem.sampleDescription !== targetItem.sample) {
-          targetItem.sampleId = '';
-          targetItem.sampleDescription = '';
-          targetItem.isSampleSelected = false;
+          Object.assign(targetItem, {
+            sampleId: '',
+            sampleDescription: '',
+            isSampleSelected: false,
+          });
         }
       },
     },
