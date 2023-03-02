@@ -124,6 +124,7 @@
                     :placeholder="column.placeholder"
                     :disabled="!item.isChecked"
                     class="text_search_name"
+                    :class="{ valid: isSelectedArray[itemIndex] }"
                     @select="setSelectedSample(itemIndex, true)"
                     @input="
                       () => {
@@ -394,6 +395,10 @@
 <style lang="sass">
   .sample-input
     position: relative
+    .vue-simple-suggest
+      &.valid
+        input
+          cursor: pointer
     svg[data-icon="circle-check"]
       position: absolute
       right: 1em
