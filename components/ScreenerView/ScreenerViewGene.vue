@@ -301,6 +301,8 @@
             &.disabled
               color: $DISABLE_COLOR
         tbody
+          input, select
+            height: 2.25em
           .text_search_name input
             font-size: 20px
             +warning_border
