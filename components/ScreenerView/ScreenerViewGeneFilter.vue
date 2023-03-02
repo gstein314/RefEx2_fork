@@ -270,6 +270,17 @@
           brainSubRegions: this.datasets[0].datasets[1].specificity[1].samples,
         };
       },
+      allHumanSamples() {
+        const { adultTissues, epithelialCells, allTissues, brainSubRegions } =
+          this.humanSampleMap;
+        return [
+          ...adultTissues,
+          ...epithelialCells,
+          ...allTissues,
+          ...brainSubRegions,
+          ,
+        ];
+      },
     },
     mounted() {
       if (this.list.length === 0) this.dispatchAction('INIT');
