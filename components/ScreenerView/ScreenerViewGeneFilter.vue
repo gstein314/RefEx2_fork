@@ -239,11 +239,9 @@
         );
       },
       resetAllDisabled() {
-        const firstItem = this.list[0];
-        if (_.isEqual(firstItem, this.defaultItem) && this.list.length === 1) {
-          return true;
-        }
-        return false;
+        return (
+          this.list.length === 1 && _.isEqual(this.list[0], this.defaultItem)
+        );
       },
       getIsAllChecked() {
         return this.list.every(({ isChecked }) => isChecked);
