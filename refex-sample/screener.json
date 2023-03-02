@@ -70,7 +70,7 @@
       {
         "name": "Group",
         "className": "group",
-        "placeholder": "select a group",
+        "placeholder": "All groups",
         "inputType": "dropdown"
       },
       {
