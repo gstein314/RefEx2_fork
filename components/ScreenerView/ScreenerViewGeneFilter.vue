@@ -336,14 +336,15 @@
           }
           return [...unsortedSamples].sort(sortSamplesByDescription);
         };
-        const wordAndSpace = /[^\w\s]/g;
-        const alphaNumInput = userInput.replace(wordAndSpace, '');
-        const inputsArray = alphaNumInput.replace(/\s\s+/g, ' ').split(' ');
+        const nonWordAndSpace = /[^\w\s]/g;
+        const toAlphaNum = userInput.replace(nonWordAndSpace, '');
+
+        const wordArray = toAlphaNum.replace(/\s\s+/g, ' ').split(' ');
 
         const filteredSamples = getSamplesArray().filter(sample => {
-          const alphaNumInput = sample.description.replace(wordAndSpace, '');
-          return inputsArray.every(input =>
-            alphaNumInput.toLowerCase().includes(input.toLowerCase())
+          const toAlphaNum = sample.description.replace(nonWordAndSpace, '');
+          return wordArray.every(input =>
+            toAlphaNum.toLowerCase().includes(input.toLowerCase())
           );
         });
         // manually update vue-simple-suggest suggestions after "Group" option changed
