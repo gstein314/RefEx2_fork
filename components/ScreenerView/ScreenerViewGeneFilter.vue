@@ -365,6 +365,7 @@
       clearSelectedObject(index) {
         const targetItem = this.list[index];
         this.$refs.sampleInputs[index].setText('');
+        this.$refs.sampleInputs[index].selected = null;
         Object.assign(targetItem, {
           sampleId: '',
           sampleDescription: '',
