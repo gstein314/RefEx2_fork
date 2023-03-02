@@ -125,9 +125,9 @@
                   @input="
                     () => {
                       dispatchAction('ADD', itemIndex, item[column.className]);
-                      clearSelectedObject(itemIndex);
                     }
                   "
+                  @focus="clearSelectedObject(itemIndex)"
                 >
                   <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
                   <!-- eslint-disable vue/no-unused-vars -->
@@ -359,21 +359,17 @@
         });
         setTimeout(
           () => this.$refs.sampleInputs[index].inputElement.blur(),
-          100
+          20
         );
       },
       clearSelectedObject(index) {
         const targetItem = this.list[index];
-        if (targetItem.sampleDescription !== targetItem.sample) {
-          if (targetItem.sampleId) {
-            this.$refs.sampleInputs[index].setText('');
-          }
-          Object.assign(targetItem, {
-            sampleId: '',
-            sampleDescription: '',
-            isSampleSelected: false,
-          });
-        }
+        this.$refs.sampleInputs[index].setText('');
+        Object.assign(targetItem, {
+          sampleId: '',
+          sampleDescription: '',
+          isSampleSelected: false,
+        });
       },
     },
   };
