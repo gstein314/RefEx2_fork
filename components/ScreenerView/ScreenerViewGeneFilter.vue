@@ -320,29 +320,50 @@
         const targetDataset = this.activeDataset.dataset;
         const humanFantom5Dataset = this.datasets[0].datasets[0];
         const gtexV8Dataset = this.datasets[0].datasets[1];
-        const allSamples = humanFantom5Dataset.specificity[0].samples.concat(
-          humanFantom5Dataset.specificity[1].samples,
-          gtexV8Dataset.specificity[0].samples,
-          gtexV8Dataset.specificity[1].samples
-        );
+        const sortedAllSamples = humanFantom5Dataset.specificity[0].samples
+          .concat(
+            humanFantom5Dataset.specificity[1].samples,
+            gtexV8Dataset.specificity[0].samples,
+            gtexV8Dataset.specificity[1].samples
+          )
+          .sort((a, b) =>
+            a.description > b.description
+              ? 1
+              : a.description < b.description
+              ? -1
+              : 0
+          );
         const samplesArray = () => {
           if (item.hasOwnProperty('group')) {
+            let arr;
             switch (targetDataset) {
               case 'humanFantom5':
-                return targetGroup === 'Adult tissues'
-                  ? humanFantom5Dataset.specificity[0].samples
-                  : targetGroup === 'Epithelial cells'
-                  ? humanFantom5Dataset.specificity[1].samples
-                  : humanFantom5Dataset.specificity[0].samples;
+                arr =
+                  targetGroup === 'Adult tissues'
+                    ? humanFantom5Dataset.specificity[0].samples
+                    : targetGroup === 'Epithelial cells'
+                    ? humanFantom5Dataset.specificity[1].samples
+                    : humanFantom5Dataset.specificity[0].samples;
+                break;
               case 'gtexV8':
-                return targetGroup === 'All tissues'
-                  ? gtexV8Dataset.specificity[0].samples
-                  : targetGroup === 'Brain sub-regions'
-                  ? gtexV8Dataset.specificity[1].samples
-                  : gtexV8Dataset.specificity[0].samples;
+                arr =
+                  targetGroup === 'All tissues'
+                    ? gtexV8Dataset.specificity[0].samples
+                    : targetGroup === 'Brain sub-regions'
+                    ? gtexV8Dataset.specificity[1].samples
+                    : gtexV8Dataset.specificity[0].samples;
+                break;
+              default:
+                return sortedAllSamples;
             }
+            const sortedArray = [...arr].sort((a, b) => {
+              const loweredA = a.description.toLowerCase();
+              const loweredB = b.description.toLowerCase();
+              return loweredA > loweredB ? 1 : loweredA < loweredB ? -1 : 0;
+            });
+            return sortedArray;
           }
-          return allSamples;
+          return sortedAllSamples;
         };
         const wordAndSpace = /[^\w\s]/g;
         const alphaNumInput = userInput.replace(wordAndSpace, '');
