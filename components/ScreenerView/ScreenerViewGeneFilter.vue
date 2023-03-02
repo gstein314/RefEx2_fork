@@ -357,6 +357,10 @@
           sampleDescription: description,
           isSampleSelected: true,
         });
+        setTimeout(
+          () => this.$refs.sampleInputs[index].inputElement.blur(),
+          100
+        );
       },
       clearSelectedObject(index) {
         const targetItem = this.list[index];
