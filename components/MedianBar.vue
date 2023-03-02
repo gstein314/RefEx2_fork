@@ -123,14 +123,14 @@
         transform: translateY(-50%)
         background-color: $COLOR_1
     > .tooltip
+      +tooltip
       display: none
-      background-color: #ffffff
+      background-color: $WHITE
       padding: 3px 8px
       border: 1px solid $MAIN_COLOR
       border-radius: 3px
       box-shadow: 0 1px 4px rgba(62, 70, 82, .22)
       position: absolute
-      z-index: $TOOLTIP_LAYER
       min-width:300px
     &:hover
       > .tooltip

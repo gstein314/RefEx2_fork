@@ -31,7 +31,7 @@
       </span>
     </h3>
     <vue-simple-suggest
-      v-model="parameters.text"
+      v-model.trim="parameters.text"
       :debounce="500"
       :min-length="0"
       :display-attribute="paramsForSuggestions[1]"
@@ -204,6 +204,21 @@
       this.showResults('numfound');
       this.updateSearchCondition();
     },
+    // mounted() {
+    //   this.isLoading = true;
+    //   const suggestion = this.parameters.text;
+    //   const query = `{${this.queryPrefix}(text: "${suggestion}" ${
+    //     this.isSummaryIncluded ? 'summary: "true"' : ''
+    //   }) {${this.paramsForSuggestions.join(' ')}}}`;
+    //   console.log(query)
+    //   this.$axios
+    //     .$post('gql', {
+    //       query,
+    //     })
+    //     .then(results => console.log(results))
+    //     .catch(err => console.log(err))
+    //     .finally();
+    // },
     methods: {
       ...mapMutations({
         setAlertModal: 'set_alert_modal',
@@ -302,9 +317,11 @@
     },
   };
 </script>
-<style lang="sass" scoped>
+<style lang="sass">
   .vue-simple-suggest
       position: relative
+</style>
+<style lang="sass" scoped>
   .text_search_area
       > .search_condition_title
           display: flex

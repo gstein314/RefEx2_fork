@@ -6,13 +6,15 @@
     "list": [],
     "defaultItem": {
       "sample": "",
+      "sampleId": "",
+      "sampleDescription": "",
       "cutoff": "",
       "condition": "",
       "statistic": "",
-      "check": true,
-      "delete": true
+      "isChecked": true,
+      "isSampleSelected": false
     },
-    "filters": [
+    "columns": [
       {
         "name": "Sample",
         "className": "sample",
@@ -28,14 +30,11 @@
       {
         "name": "Condition",
         "className": "condition",
-        "placeholder": "≧",
+        "placeholder": "<",
         "inputType": "dropdown",
         "options": [
           { "description": "<", "value": "<" },
-          { "description": "≦", "value": "≦" },
           { "description": "=", "value": "=" },
-          { "description": "≠", "value": "≠" },
-          { "description": "≧", "value": "≧" },
           { "description": ">", "value": ">" }
         ]
       },
@@ -59,13 +58,15 @@
     "defaultItem": {
       "group": "",
       "sample": "",
+      "sampleId": "",
+      "sampleDescription": "",
       "horl": "",
       "emin": "",
       "emax": "",
-      "check": true,
-      "delete": true
+      "isChecked": true,
+      "isSampleSelected": false
     },
-    "filters": [
+    "columns": [
       {
         "name": "Group",
         "className": "group",
@@ -115,10 +116,9 @@
       "group": "",
       "cutoff": "",
       "condition": "",
-      "check": true,
-      "delete": true
+      "isChecked": true
     },
-    "filters": [
+    "columns": [
       {
         "name": "Group",
         "className": "group",
@@ -134,14 +134,11 @@
       {
         "name": "Condition",
         "className": "condition",
-        "placeholder": "≧",
+        "placeholder": "<",
         "inputType": "dropdown",
         "options": [
           { "description": "<", "value": "<" },
-          { "description": "≤", "value": "≤" },
           { "description": "=", "value": "=" },
-          { "description": "≠", "value": "≠" },
-          { "description": "≧", "value": "≧" },
           { "description": ">", "value": ">" }
         ]
       }

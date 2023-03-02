@@ -114,11 +114,17 @@
       </vue-tags-input>
     </client-only>
 
-    <ScreenerFilter
-      v-for="(screenerFilter, index) of screener"
-      :key="index"
-      :screener-filter="screenerFilter"
-      :filters="screenerFilter.filters"
+    <ScreenerViewGeneFilter
+      :filter.sync="screener[0]"
+      :columns="screener[0].columns"
+    />
+    <ScreenerViewGeneFilter
+      :filter.sync="screener[1]"
+      :columns="screener[1].columns"
+    />
+    <ScreenerViewGeneFilter
+      :filter.sync="screener[2]"
+      :columns="screener[2].columns"
     />
   </div>
 </template>
@@ -126,11 +132,11 @@
 <script>
   import { mapGetters } from 'vuex';
   import MultiSelect from 'vue-multiselect';
-  import ScreenerFilter from './ScreenerFilter.vue';
+  import ScreenerViewGeneFilter from './ScreenerViewGeneFilter.vue';
   import screener from '~/refex-sample/screener.json';
 
   export default {
-    components: { MultiSelect, ScreenerFilter },
+    components: { MultiSelect, ScreenerViewGeneFilter },
     data() {
       return {
         autocompleteStaticData: {},
@@ -182,10 +188,6 @@
       },
       parameters() {
         this.$emit('updateParameters', { go: this.goTermString });
-      },
-      chrValue() {
-        console.log('event');
-        this.handleChrTagsUpdate(this.chrValue);
       },
     },
     async created() {
@@ -241,9 +243,6 @@
         this.$set(this.temporaryParameters, 'goTerm', '');
         this.setTags([{ id, text, tiClasses }], key);
       },
-      handleChrTagsUpdate(tags) {
-        console.log(tags);
-      },
       setTags(newTags, key) {
         this.parameters = { ...this.parameters, [key]: newTags };
         this.hideCaret = newTags.length === 0 ? false : true;
@@ -254,6 +253,9 @@
 
 <style lang="sass" scoped>
   ::v-deep
+    svg[data-icon="circle-info"], .delete_all
+      color: $MAIN_COLOR
+      cursor: pointer
     .multiselect
       input
         width: auto
@@ -289,11 +291,14 @@
         > tr
           > td
             font-size: 12px
+            > .text_search_name input
+              font-size: 22px
+              +warning_border
             > input[type="checkbox"]
               cursor: pointer
               -moz-transform: scale(3)
             > select:required:invalid
-              color: rgba(0, 0, 0, 0.3)
+              color: rgba(0, 0, 0, 0.25)
             > .delete_btn
               +button
               align-items: initial
@@ -301,18 +306,19 @@
               cursor: pointer !important
             svg[data-icon="circle-info"]
               color: $MAIN_COLOR
-          > .delete_all
+          > .reset
             color: $MAIN_COLOR
             cursor: pointer
             &.disabled
-              color: #CCC
+              color: $DISABLE_COLOR
           > .check
             padding-right: 5px
       .unchecked
         input, select
-          background: #ccc
-        select
-          color: rgba(0, 0, 0, 0.3)
+          background: $DISABLE_COLOR
+          color: rgba(0, 0, 0, 0.25)
+          &:disabled
+            opacity: 1
     .filter_TPM
       > table
         > tr
