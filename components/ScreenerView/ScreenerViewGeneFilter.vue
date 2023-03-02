@@ -262,6 +262,14 @@
           this.list.forEach(item => (item.isChecked = newValue));
         },
       },
+      humanSampleMap() {
+        return {
+          adultTissues: this.datasets[0].datasets[0].specificity[0].samples,
+          epithelialCells: this.datasets[0].datasets[0].specificity[1].samples,
+          allTissues: this.datasets[0].datasets[1].specificity[0].samples,
+          brainSubRegions: this.datasets[0].datasets[1].specificity[1].samples,
+        };
+      },
     },
     mounted() {
       if (this.list.length === 0) this.dispatchAction('INIT');
@@ -315,12 +323,12 @@
           brainSubRegions: this.datasets[0].datasets[1].specificity[1].samples,
         };
         const allFantom5Samples = [
-          ...humanSampleMap.adultTissues,
-          ...humanSampleMap.epithelialCells,
+          ...this.humanSampleMap.adultTissues,
+          ...this.humanSampleMap.epithelialCells,
         ];
         const allGtexSamples = [
-          ...humanSampleMap.allTissues,
-          ...humanSampleMap.brainSubRegions,
+          ...this.humanSampleMap.allTissues,
+          ...this.humanSampleMap.brainSubRegions,
         ];
         const allSamples = [...allFantom5Samples, ...allGtexSamples];
         const sortSamplesByDescription = (a, b) =>
@@ -331,17 +339,17 @@
             case 'humanFantom5':
               unsortedSamples =
                 selectedGroup === 'Adult tissues'
-                  ? humanSampleMap.adultTissues
+                  ? this.humanSampleMap.adultTissues
                   : selectedGroup === 'Epithelial cells'
-                  ? humanSampleMap.epithelialCells
+                  ? this.humanSampleMap.epithelialCells
                   : allFantom5Samples;
               break;
             case 'gtexV8':
               unsortedSamples =
                 selectedGroup === 'All tissues'
-                  ? humanSampleMap.allTissues
+                  ? this.humanSampleMap.allTissues
                   : selectedGroup === 'Brain sub-regions'
-                  ? humanSampleMap.brainSubRegions
+                  ? this.humanSampleMap.brainSubRegions
                   : allGtexSamples;
               break;
             default:
