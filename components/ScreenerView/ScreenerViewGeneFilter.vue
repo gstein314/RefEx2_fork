@@ -72,7 +72,6 @@
                     () => {
                       dispatchAction('ADD', itemIndex, item[column.className]);
                       if (column.className === 'group') {
-                        item.sample = '';
                         setSelectedSample(itemIndex, false);
                       }
                     }
@@ -382,6 +381,7 @@
           sampleInput.setText('');
           sampleInput.selected = null;
           Object.assign(targetItem, {
+            sample: '',
             sampleId: '',
             sampleDescription: '',
             isSampleSelected: false,
