@@ -227,17 +227,16 @@
         return this.isCheckedSelectedArray.every(Boolean);
       },
       groupOptions() {
-        const target = this.activeDataset.dataset;
-        switch (target) {
-          case 'humanFantom5':
-            return this.datasets[0].datasets[0].specificity;
-          case 'gtexV8':
-            return this.datasets[0].datasets[1].specificity;
-          case 'mouseFantom5':
-            return this.datasets[1].datasets[0].specificity;
-          default:
-            return [{ label: 'No useable option found' }];
-        }
+        const optionsMap = {
+          humanFantom5: this.datasets[0].datasets[0].specificity,
+          gtexV8: this.datasets[0].datasets[1].specificity,
+          mouseFantom5: this.datasets[1].datasets[0].specificity,
+        };
+        return (
+          optionsMap[this.activeDataset.dataset] || [
+            { label: 'No useable option found' },
+          ]
+        );
       },
       resetAllDisabled() {
         const firstItem = this.list[0];
