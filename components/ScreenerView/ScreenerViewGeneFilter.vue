@@ -362,6 +362,9 @@
       clearSelectedObject(index) {
         const targetItem = this.list[index];
         if (targetItem.sampleDescription !== targetItem.sample) {
+          if (targetItem.sampleId) {
+            this.$refs.sampleInputs[index].setText('');
+          }
           Object.assign(targetItem, {
             sampleId: '',
             sampleDescription: '',
