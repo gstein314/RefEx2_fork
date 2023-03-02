@@ -288,9 +288,7 @@
             break;
           case 'CHECK_ALL':
             this.isAllChecked = !this.isAllChecked;
-            for (const item of this.list) {
-              item.isChecked = this.isAllChecked ? true : false;
-            }
+            this.list.forEach(item => (item.isChecked = this.isAllChecked));
             break;
           case 'CHECK':
             targetItem.isChecked = !targetItem.isChecked;
