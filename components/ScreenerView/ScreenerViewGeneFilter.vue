@@ -128,7 +128,6 @@
                       clearSelectedObject(itemIndex);
                     }
                   "
-                  @focus="clearSelectedObject(itemIndex)"
                 >
                   <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
                   <!-- eslint-disable vue/no-unused-vars -->
