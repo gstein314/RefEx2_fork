@@ -69,10 +69,10 @@
                   required
                   :disabled="!item.isChecked"
                   @change="
-                    () => {
+                    e => {
                       dispatchAction('ADD', itemIndex, item[column.className]);
                       if (column.className === 'group') {
-                        setSelectedSample(itemIndex, false);
+                        setSelectedSample(itemIndex, false, item.sample, e);
                       }
                     }
                   "
@@ -113,7 +113,6 @@
                     :max-suggestions="0"
                     :list="
                       autocompleteItems(
-                        item,
                         itemIndex,
                         item[column.className],
                         filter.list[itemIndex].group
@@ -325,14 +324,8 @@
             break;
         }
       },
-      autocompleteItems(item, index, userInput, selectedGroup) {
+      autocompleteItems(index, userInput, selectedGroup) {
         const selectedDataset = this.activeDataset.dataset;
-        const humanSampleMap = {
-          adultTissues: this.datasets[0].datasets[0].specificity[0].samples,
-          epithelialCells: this.datasets[0].datasets[0].specificity[1].samples,
-          allTissues: this.datasets[0].datasets[1].specificity[0].samples,
-          brainSubRegions: this.datasets[0].datasets[1].specificity[1].samples,
-        };
         const allFantom5Samples = [
           ...this.humanSampleMap.adultTissues,
           ...this.humanSampleMap.epithelialCells,
@@ -383,7 +376,7 @@
         }
         return filteredSamples;
       },
-      setSelectedSample(index, bool) {
+      setSelectedSample(index, bool, sample, e) {
         const targetItem = this.list[index];
         const sampleInput = this.$refs.sampleInputs[index];
         if (bool) {
@@ -396,6 +389,19 @@
           setTimeout(() => sampleInput.inputElement.blur(), 10);
           return;
         }
+        const isSampleInTargetGroup = () => {
+          if (e !== undefined) {
+            const selectGroup = _.camelCase(e.target.value);
+            if (
+              this.humanSampleMap[selectGroup]
+                .map(sample => sample.description)
+                .includes(sample)
+            )
+              return true;
+          }
+          return false;
+        };
+        if (isSampleInTargetGroup()) return;
         if (sampleInput.selected) {
           sampleInput.setText('');
           sampleInput.selected = null;
