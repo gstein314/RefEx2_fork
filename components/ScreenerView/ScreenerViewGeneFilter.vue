@@ -163,8 +163,8 @@
               <td class="icon">
                 <button
                   class="delete_btn"
-                  :class="{ disabled: isDisable(item) }"
-                  :disabled="isDisable(item)"
+                  :class="{ disabled: list.length <= 1 }"
+                  :disabled="list.length <= 1"
                   @click="dispatchAction('DELETE', itemIndex)"
                 >
                   <font-awesome-icon icon="trash" />
@@ -270,11 +270,9 @@
       autoCompleteStyle(item) {
         const { isChecked, isSampleSelected } = item;
         const isDefaultItem = _.isEqual(item, this.defaultItem);
-        if (isChecked && !isSampleSelected && !isDefaultItem)
+        if (isChecked && !isSampleSelected && !isDefaultItem) {
           return { defaultInput: 'warning' };
-      },
-      isDisable(item) {
-        return this.list.length <= 1;
+        }
       },
       isEntropy(className) {
         return ['emin', 'emax'].includes(className);
