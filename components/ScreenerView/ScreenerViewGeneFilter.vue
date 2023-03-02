@@ -26,13 +26,10 @@
                 :class="column.className"
               >
                 {{ column.name }}
-                <template
+                <WarningMessage
                   v-if="column.className === 'sample' && !isAllSampleSelected"
-                >
-                  <WarningMessage
-                    >Please select from suggestion(s)
-                  </WarningMessage>
-                </template>
+                  >Please select from suggestion(s)
+                </WarningMessage>
                 <font-awesome-icon
                   v-if="isEntropy(column.className)"
                   v-tooltip="'Range: 1-5'"
