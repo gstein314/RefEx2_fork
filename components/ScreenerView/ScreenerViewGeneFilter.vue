@@ -128,6 +128,7 @@
                       clearSelectedObject(itemIndex);
                     }
                   "
+                  @focus="clearSelectedObject(itemIndex)"
                 >
                   <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
                   <!-- eslint-disable vue/no-unused-vars -->
@@ -308,10 +309,8 @@
           ...humanSampleMap.brainSubRegions,
         ];
         const allSamples = [...allFantom5Samples, ...allGtexSamples];
-
         const sortSamplesByDescription = (a, b) =>
           a.description.localeCompare(b.description);
-
         const getSamplesArray = () => {
           let unsortedSamples;
           switch (selectedDataset) {
@@ -338,9 +337,7 @@
         };
         const nonWordAndSpace = /[^\w\s]/g;
         const toAlphaNum = userInput.replace(nonWordAndSpace, '');
-
         const wordArray = toAlphaNum.replace(/\s\s+/g, ' ').split(' ');
-
         const filteredSamples = getSamplesArray().filter(sample => {
           const toAlphaNum = sample.description.replace(nonWordAndSpace, '');
           return wordArray.every(input =>
@@ -362,7 +359,6 @@
           isSampleSelected: true,
         });
       },
-
       clearSelectedObject(index) {
         const targetItem = this.list[index];
         if (targetItem.sampleDescription !== targetItem.sample) {
