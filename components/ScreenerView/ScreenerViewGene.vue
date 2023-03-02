@@ -287,69 +287,72 @@
           content: none
 
     .filter_TPM, .filter_specificity_ROKU, .filter_specificity_tau
-      > table
-        > tr
-          > td
+      table
+        .check
+          padding-right: 5px
+        thead
+          th
             font-size: 12px
-            > .text_search_name input
-              font-size: 22px
-              +warning_border
-            > input[type="checkbox"]
-              cursor: pointer
-              -moz-transform: scale(3)
-            > select:required:invalid
-              color: rgba(0, 0, 0, 0.25)
-            > .delete_btn
-              +button
-              align-items: initial
-              padding: 13.5px 22px
-              cursor: pointer !important
-            svg[data-icon="circle-info"]
-              color: $MAIN_COLOR
-          > .reset
+            font-weight: initial
+            text-align: initial
+          .reset
             color: $MAIN_COLOR
             cursor: pointer
             &.disabled
               color: $DISABLE_COLOR
-          > .check
-            padding-right: 5px
-      .unchecked
-        input, select
-          background: $DISABLE_COLOR
-          color: rgba(0, 0, 0, 0.25)
-          &:disabled
-            opacity: 1
+        tbody
+          .text_search_name input
+            font-size: 20px
+            +warning_border
+          input[type="checkbox"]
+            cursor: pointer
+            -moz-transform: scale(3)
+          select:required:invalid
+            color: rgba(0, 0, 0, 0.25)
+          .delete_btn
+            +button
+            align-items: initial
+            padding: 13.5px 22px
+            cursor: pointer !important
+          svg[data-icon="circle-info"]
+            color: $MAIN_COLOR
+          .unchecked
+            input, select
+              background: $DISABLE_COLOR
+              color: rgba(0, 0, 0, 0.25)
+              &:disabled
+                opacity: 1
     .filter_TPM
-      > table
-        > tr
-          > .icon
+      table
+        th, tr
+          .icon
             text-align: center
-          > .sample
+          .sample
             width: 60%
-          > .cutoff, .condition
+          .cutoff, .condition
             width: 10%
-          > .statistic
+          .statistic
             width: 20%
     .filter_specificity_ROKU
-      > table
-        > tr
-          > .icon
+      table
+        th, tr
+          .icon
             text-align: center
-          > .group
+          .group
             width: 25%
-          > .sample
+          .sample
             width: 40%
-          > .horl
+          .horl
             width: 15%
-          > .emin, .emax
+          .emin, .emax
             width: 10%
     .filter_specificity_tau
-      > table
-        > tr
-          > .icon
+      table
+        th, tr
+          .icon
             text-align: center
-          > .group
+          .group
             width: 80%
-          > .cutoff, .condition
+          .cutoff, .condition
             width: 10%
 </style>

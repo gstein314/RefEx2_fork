@@ -10,165 +10,169 @@
     <client-only>
       <div :class="screenerFilter.className">
         <table ref="itemList" class="item-list">
-          <tr>
-            <td class="check">
-              <input
-                v-model="isAllChecked"
-                type="checkbox"
-                :checked="isAllChecked"
-                @click="dispatchAction('CHECK_ALL')"
-              />
-            </td>
-            <td
-              v-for="column in columns"
-              :key="column.id"
-              :class="column.className"
-            >
-              {{ column.name }}
-              <template
-                v-if="column.className === 'sample' && !isAllSampleSelected"
+          <thead>
+            <tr>
+              <th class="check">
+                <input
+                  v-model="isAllChecked"
+                  type="checkbox"
+                  :checked="isAllChecked"
+                  @click="dispatchAction('CHECK_ALL')"
+                />
+              </th>
+              <th
+                v-for="column in columns"
+                :key="column.id"
+                :class="column.className"
               >
-                <WarningMessage
-                  >Please select from suggestion(s)
-                </WarningMessage>
-              </template>
-              <font-awesome-icon
-                v-if="isEntropy(column.className)"
-                v-tooltip="'Range: 1-5'"
-                icon="info-circle"
-              />
-            </td>
-            <td
-              colspan="2"
-              class="reset"
-              :class="{ disabled: resetAllDisabled }"
-              @click="dispatchAction('RESET')"
+                {{ column.name }}
+                <template
+                  v-if="column.className === 'sample' && !isAllSampleSelected"
+                >
+                  <WarningMessage
+                    >Please select from suggestion(s)
+                  </WarningMessage>
+                </template>
+                <font-awesome-icon
+                  v-if="isEntropy(column.className)"
+                  v-tooltip="'Range: 1-5'"
+                  icon="info-circle"
+                />
+              </th>
+              <th
+                colspan="2"
+                class="reset"
+                :class="{ disabled: resetAllDisabled }"
+                @click="dispatchAction('RESET')"
+              >
+                <font-awesome-icon icon="rotate-right" />
+                Reset
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              v-for="(item, itemIndex) in list"
+              :key="itemIndex"
+              ref="listItem"
+              class="list-item"
+              :class="{ unchecked: !item.isChecked }"
             >
-              <font-awesome-icon icon="rotate-right" />
-              Reset
-            </td>
-          </tr>
-          <tr
-            v-for="(item, itemIndex) in list"
-            :key="itemIndex"
-            ref="listItem"
-            class="list-item"
-            :class="{ unchecked: !item.isChecked }"
-          >
-            <td class="check">
-              <input
-                v-model="item.isChecked"
-                type="checkbox"
-                @click="dispatchAction('CHECK', itemIndex)"
-              />
-            </td>
-            <td v-for="column in columns" :key="column.id">
-              <select
-                v-if="column.inputType === 'dropdown'"
-                v-model="item[column.className]"
-                required
-                :disabled="!item.isChecked"
-                @change="
-                  () => {
-                    dispatchAction('ADD', itemIndex, item[column.className]);
-                    if (column.className === 'group') {
-                      item.sample = '';
+              <td class="check">
+                <input
+                  v-model="item.isChecked"
+                  type="checkbox"
+                  @click="dispatchAction('CHECK', itemIndex)"
+                />
+              </td>
+              <td v-for="column in columns" :key="column.id">
+                <select
+                  v-if="column.inputType === 'dropdown'"
+                  v-model="item[column.className]"
+                  required
+                  :disabled="!item.isChecked"
+                  @change="
+                    () => {
+                      dispatchAction('ADD', itemIndex, item[column.className]);
+                      if (column.className === 'group') {
+                        item.sample = '';
+                        clearSelectedObject(itemIndex);
+                      }
+                    }
+                  "
+                >
+                  <option value="" disabled selected hidden>
+                    {{ column.placeholder }}
+                  </option>
+                  <template v-if="column.className === 'group'">
+                    <option
+                      v-for="option in groupOptions"
+                      :key="option.id"
+                      :value="option.label"
+                    >
+                      {{ option.label }}
+                    </option>
+                  </template>
+                  <template v-else>
+                    <option
+                      v-for="(option, optionIndex) of column.options"
+                      :key="optionIndex"
+                      :value="option.value"
+                    >
+                      {{ option.description }}
+                    </option>
+                  </template>
+                </select>
+                <vue-simple-suggest
+                  v-else-if="column.className === 'sample'"
+                  ref="sampleInputs"
+                  v-model.trim="item[column.className]"
+                  display-attribute="description"
+                  value-attribute="id"
+                  :styles="autoCompleteStyle(item)"
+                  :list="
+                    autocompleteItems(
+                      item,
+                      itemIndex,
+                      item[column.className],
+                      filter.list[itemIndex].group
+                    )
+                  "
+                  :debounce="500"
+                  :min-length="0"
+                  :max-suggestions="10"
+                  :placeholder="column.placeholder"
+                  :disabled="!item.isChecked"
+                  class="text_search_name"
+                  @select="setSelectedObject(itemIndex)"
+                  @input="
+                    () => {
+                      dispatchAction('ADD', itemIndex, item[column.className]);
                       clearSelectedObject(itemIndex);
                     }
-                  }
-                "
-              >
-                <option value="" disabled selected hidden>
-                  {{ column.placeholder }}
-                </option>
-                <template v-if="column.className === 'group'">
-                  <option
-                    v-for="option in groupOptions"
-                    :key="option.id"
-                    :value="option.label"
-                  >
-                    {{ option.label }}
-                  </option>
-                </template>
-                <template v-else>
-                  <option
-                    v-for="(option, optionIndex) of column.options"
-                    :key="optionIndex"
-                    :value="option.value"
-                  >
-                    {{ option.description }}
-                  </option>
-                </template>
-              </select>
-              <vue-simple-suggest
-                v-else-if="column.className === 'sample'"
-                ref="sampleInputs"
-                v-model.trim="item[column.className]"
-                display-attribute="description"
-                value-attribute="id"
-                :styles="autoCompleteStyle(item)"
-                :list="
-                  autocompleteItems(
-                    item,
-                    itemIndex,
-                    item[column.className],
-                    filter.list[itemIndex].group
-                  )
-                "
-                :debounce="500"
-                :min-length="0"
-                :max-suggestions="10"
-                :placeholder="column.placeholder"
-                :disabled="!item.isChecked"
-                class="text_search_name"
-                @select="setSelectedObject(itemIndex)"
-                @input="
-                  () => {
-                    dispatchAction('ADD', itemIndex, item[column.className]);
-                    clearSelectedObject(itemIndex);
-                  }
-                "
-              >
-                <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
-                <!-- eslint-disable vue/no-unused-vars -->
-                <!-- eslint-disable vue/no-v-html -->
-                <div slot="suggestion-item" slot-scope="{ suggestion }">
-                  <span
-                    v-html="
-                      $highlightedSuggestion(
-                        suggestion.description,
-                        item[column.className],
-                        2
-                      )
-                    "
-                  ></span>
-                </div>
-              </vue-simple-suggest>
-              <input
-                v-else
-                v-model.trim="item[column.className]"
-                :type="column.inputType"
-                :placeholder="column.placeholder"
-                :min="column.min"
-                :max="column.max"
-                :disabled="!item.isChecked"
-                @input="
-                  dispatchAction('ADD', itemIndex, item[column.className])
-                "
-              />
-            </td>
-            <td class="icon">
-              <button
-                class="delete_btn"
-                :class="{ disabled: isDisable(item) }"
-                :disabled="isDisable(item)"
-                @click="dispatchAction('DELETE', itemIndex)"
-              >
-                <font-awesome-icon icon="trash" />
-                Delete
-              </button>
-            </td>
-          </tr>
+                  "
+                >
+                  <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
+                  <!-- eslint-disable vue/no-unused-vars -->
+                  <!-- eslint-disable vue/no-v-html -->
+                  <div slot="suggestion-item" slot-scope="{ suggestion }">
+                    <span
+                      v-html="
+                        $highlightedSuggestion(
+                          suggestion.description,
+                          item[column.className],
+                          2
+                        )
+                      "
+                    ></span>
+                  </div>
+                </vue-simple-suggest>
+                <input
+                  v-else
+                  v-model.trim="item[column.className]"
+                  :type="column.inputType"
+                  :placeholder="column.placeholder"
+                  :min="column.min"
+                  :max="column.max"
+                  :disabled="!item.isChecked"
+                  @input="
+                    dispatchAction('ADD', itemIndex, item[column.className])
+                  "
+                />
+              </td>
+              <td class="icon">
+                <button
+                  class="delete_btn"
+                  :class="{ disabled: isDisable(item) }"
+                  :disabled="isDisable(item)"
+                  @click="dispatchAction('DELETE', itemIndex)"
+                >
+                  <font-awesome-icon icon="trash" />
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </client-only>
