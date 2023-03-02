@@ -117,7 +117,6 @@
                   "
                   :debounce="500"
                   :min-length="0"
-                  :max-suggestions="10"
                   :placeholder="column.placeholder"
                   :disabled="!item.isChecked"
                   class="text_search_name"
@@ -342,10 +341,9 @@
             alphaNumInput.toLowerCase().includes(input.toLowerCase())
           );
         });
-        const suggestions = filteredSamples.slice(0, 10);
         // manually update vue-simple-suggest suggestions after "Group" option changed
         if (this.$refs.sampleInputs?.[index]) {
-          this.$refs.sampleInputs[index].suggestions = suggestions;
+          this.$refs.sampleInputs[index].suggestions = filteredSamples;
         }
         return filteredSamples;
       },
