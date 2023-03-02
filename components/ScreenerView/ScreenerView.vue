@@ -119,7 +119,7 @@
         +sample_query
     input
       +text_input
-      font-size: 22px
+      font-size: 20px
       &.text_search_go_term
         margin-bottom: 10px
     select
