@@ -107,6 +107,7 @@
                   display-attribute="description"
                   value-attribute="id"
                   :styles="autoCompleteStyle(item)"
+                  :max-suggestions="0"
                   :list="
                     autocompleteItems(
                       item,
