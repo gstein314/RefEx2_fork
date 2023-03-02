@@ -73,7 +73,7 @@
                       dispatchAction('ADD', itemIndex, item[column.className]);
                       if (column.className === 'group') {
                         item.sample = '';
-                        clearSelectedObject(itemIndex);
+                        setSelectedSample(itemIndex, false);
                       }
                     }
                   "
