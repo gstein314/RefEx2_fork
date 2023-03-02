@@ -372,6 +372,8 @@
 </script>
 
 <style lang="sass">
+  .suggestions
+    +scrollable-suggestions
   .v-popper--theme-tooltip
     .v-popper__inner
       background: $WHITE
