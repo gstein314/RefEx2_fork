@@ -100,50 +100,59 @@
                     </option>
                   </template>
                 </select>
-                <vue-simple-suggest
+                <div
                   v-else-if="column.className === 'sample'"
-                  ref="sampleInputs"
-                  v-model.trim="item[column.className]"
-                  display-attribute="description"
-                  value-attribute="id"
-                  :styles="autoCompleteStyle(item)"
-                  :max-suggestions="0"
-                  :list="
-                    autocompleteItems(
-                      item,
-                      itemIndex,
-                      item[column.className],
-                      filter.list[itemIndex].group
-                    )
-                  "
-                  :debounce="500"
-                  :min-length="0"
-                  :placeholder="column.placeholder"
-                  :disabled="!item.isChecked"
-                  class="text_search_name"
-                  @select="setSelectedSample(itemIndex, true)"
-                  @input="
-                    () => {
-                      dispatchAction('ADD', itemIndex, item[column.className]);
-                    }
-                  "
-                  @focus="setSelectedSample(itemIndex, false)"
+                  class="sample-input"
                 >
-                  <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
-                  <!-- eslint-disable vue/no-unused-vars -->
-                  <!-- eslint-disable vue/no-v-html -->
-                  <div slot="suggestion-item" slot-scope="{ suggestion }">
-                    <span
-                      v-html="
-                        $highlightedSuggestion(
-                          suggestion.description,
-                          item[column.className],
-                          2
-                        )
-                      "
-                    ></span>
-                  </div>
-                </vue-simple-suggest>
+                  <vue-simple-suggest
+                    ref="sampleInputs"
+                    v-model.trim="item[column.className]"
+                    display-attribute="description"
+                    value-attribute="id"
+                    :styles="autoCompleteStyle(item)"
+                    :max-suggestions="0"
+                    :list="
+                      autocompleteItems(
+                        item,
+                        itemIndex,
+                        item[column.className],
+                        filter.list[itemIndex].group
+                      )
+                    "
+                    :debounce="500"
+                    :min-length="0"
+                    :placeholder="column.placeholder"
+                    :disabled="!item.isChecked"
+                    class="text_search_name"
+                    @select="setSelectedSample(itemIndex, true)"
+                    @input="
+                      () => {
+                        dispatchAction(
+                          'ADD',
+                          itemIndex,
+                          item[column.className]
+                        );
+                      }
+                    "
+                    @focus="setSelectedSample(itemIndex, false)"
+                  >
+                    <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
+                    <!-- eslint-disable vue/no-unused-vars -->
+                    <!-- eslint-disable vue/no-v-html -->
+                    <div slot="suggestion-item" slot-scope="{ suggestion }">
+                      <span
+                        v-html="
+                          $highlightedSuggestion(
+                            suggestion.description,
+                            item[column.className],
+                            2
+                          )
+                        "
+                      ></span>
+                    </div>
+                  </vue-simple-suggest>
+                  <font-awesome-icon icon="circle-check" class="valid-sample" />
+                </div>
                 <input
                   v-else
                   v-model.trim="item[column.className]"
@@ -360,7 +369,9 @@
             isSampleSelected: true,
           });
           setTimeout(() => sampleInput.inputElement.blur(), 10);
-        } else {
+          return;
+        }
+        if (sampleInput.selected) {
           sampleInput.setText('');
           sampleInput.selected = null;
           Object.assign(targetItem, {
@@ -375,6 +386,12 @@
 </script>
 
 <style lang="sass">
+  .sample-input
+    position: relative
+    .valid-sample
+      position: absolute
+      right: 1em
+      top: 1em
   .suggestions
     +scrollable-suggestions
   .v-popper--theme-tooltip

@@ -317,7 +317,7 @@
             align-items: initial
             padding: 13.5px 22px
             cursor: pointer
-          svg[data-icon="circle-info"]
+          svg[data-icon="circle-info"],svg[data-icon="circle-check"]
             color: $MAIN_COLOR
           .unchecked
             input, select
