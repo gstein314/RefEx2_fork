@@ -204,7 +204,6 @@
     },
     data() {
       return {
-        isAllChecked: true,
         datasets,
         parameters: {
           text: '',
@@ -243,13 +242,13 @@
           this.list.length === 1 && _.isEqual(this.list[0], this.defaultItem)
         );
       },
-      getIsAllChecked() {
-        return this.list.every(({ isChecked }) => isChecked);
-      },
-    },
-    watch: {
-      getIsAllChecked(newState) {
-        this.isAllChecked = newState;
+      isAllChecked: {
+        get() {
+          return this.list.every(({ isChecked }) => isChecked);
+        },
+        set(newValue) {
+          this.list.forEach(item => (item.isChecked = newValue));
+        },
       },
     },
     mounted() {
@@ -275,7 +274,6 @@
             break;
           case 'CHECK_ALL':
             this.isAllChecked = !this.isAllChecked;
-            this.list.forEach(item => (item.isChecked = this.isAllChecked));
             break;
           case 'CHECK':
             targetItem.isChecked = !targetItem.isChecked;
