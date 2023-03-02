@@ -294,40 +294,43 @@
         const targetDataset = this.activeDataset.dataset;
         const humanFantom5Dataset = this.datasets[0].datasets[0];
         const gtexV8Dataset = this.datasets[0].datasets[1];
-        const allSamples = [
+        const allFantom5Samples = [
           ...humanFantom5Dataset.specificity[0].samples,
           ...humanFantom5Dataset.specificity[1].samples,
+        ];
+        const allGtexSamples = [
           ...gtexV8Dataset.specificity[0].samples,
           ...gtexV8Dataset.specificity[1].samples,
         ];
+        const allSamples = [...allFantom5Samples, ...allGtexSamples];
 
         const sortSamplesByDescription = (a, b) =>
           a.description.localeCompare(b.description);
 
         const getSamplesArray = () => {
           if (item.hasOwnProperty('group')) {
-            let sortedArray;
+            let unsortedSamples;
             switch (targetDataset) {
               case 'humanFantom5':
-                sortedArray =
+                unsortedSamples =
                   targetGroup === 'Adult tissues'
                     ? humanFantom5Dataset.specificity[0].samples
                     : targetGroup === 'Epithelial cells'
                     ? humanFantom5Dataset.specificity[1].samples
-                    : humanFantom5Dataset.specificity[0].samples;
+                    : allFantom5Samples;
                 break;
               case 'gtexV8':
-                sortedArray =
+                unsortedSamples =
                   targetGroup === 'All tissues'
                     ? gtexV8Dataset.specificity[0].samples
                     : targetGroup === 'Brain sub-regions'
                     ? gtexV8Dataset.specificity[1].samples
-                    : gtexV8Dataset.specificity[0].samples;
+                    : allGtexSamples;
                 break;
               default:
                 return allSamples.sort(sortSamplesByDescription);
             }
-            return [...sortedArray].sort(sortSamplesByDescription);
+            return [...unsortedSamples].sort(sortSamplesByDescription);
           }
           return allSamples.sort(sortSamplesByDescription);
         };
