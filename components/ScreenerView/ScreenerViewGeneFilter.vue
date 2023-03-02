@@ -151,7 +151,10 @@
                       ></span>
                     </div>
                   </vue-simple-suggest>
-                  <font-awesome-icon icon="circle-check" class="valid-sample" />
+                  <font-awesome-icon
+                    icon="circle-check"
+                    :class="{ valid: isSelectedArray[itemIndex] }"
+                  />
                 </div>
                 <input
                   v-else
@@ -223,6 +226,9 @@
       ...mapGetters({
         activeDataset: 'active_dataset',
       }),
+      isSelectedArray() {
+        return this.list.map(({ isSampleSelected }) => isSampleSelected);
+      },
       isCheckedSelectedArray() {
         return this.list
           .filter(item => item.isChecked && !_.isEqual(item, this.defaultItem))
@@ -388,7 +394,7 @@
 <style lang="sass">
   .sample-input
     position: relative
-    .valid-sample
+    svg[data-icon="circle-check"]
       position: absolute
       right: 1em
       top: 1em
