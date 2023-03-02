@@ -43,7 +43,7 @@
                 colspan="2"
                 class="reset"
                 :class="{ disabled: resetAllDisabled }"
-                @click="dispatchAction('RESET')"
+                @click="dispatchAction('INIT')"
               >
                 <font-awesome-icon icon="rotate-right" />
                 Reset
@@ -282,7 +282,7 @@
         const defaultItemCopy = { ...this.defaultItem };
         switch (action) {
           case 'INIT':
-            this.list.push(defaultItemCopy);
+            this.list.splice(0, this.list.length, defaultItemCopy);
             break;
           case 'CHECK_ALL':
             this.isAllChecked = !this.isAllChecked;
@@ -300,15 +300,10 @@
             break;
           case 'DELETE':
             if (this.list.length === 1) {
-              this.list.splice(0, this.list.length);
-              this.list.push(defaultItemCopy);
+              this.list.splice(0, this.list.length, defaultItemCopy);
             } else {
               this.$delete(this.list, index);
             }
-            break;
-          case 'RESET':
-            this.list.splice(0, this.list.length);
-            this.list.push(defaultItemCopy);
             break;
         }
       },
