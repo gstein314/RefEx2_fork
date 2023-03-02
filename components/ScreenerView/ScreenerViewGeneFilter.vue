@@ -390,14 +390,14 @@
           return;
         }
         const isSampleInTargetGroup = () => {
-          if (e !== undefined) {
-            const selectGroup = _.camelCase(e.target.value);
-            if (
-              this.humanSampleMap[selectGroup]
+          if (e) {
+            const selectedGroup = _.camelCase(e.target.value);
+            const groupSamples = this.humanSampleMap[selectedGroup];
+            if (groupSamples) {
+              return groupSamples
                 .map(sample => sample.description)
-                .includes(sample)
-            )
-              return true;
+                .includes(sample);
+            }
           }
           return false;
         };
