@@ -209,13 +209,11 @@
       isSelectedArray() {
         return this.list.map(({ isSampleSelected }) => isSampleSelected);
       },
-      isCheckedSelectedArray() {
-        return this.list
-          .filter(item => item.isChecked && !_.isEqual(item, this.defaultItem))
-          .map(({ isSampleSelected }) => isSampleSelected);
-      },
       isAllSampleSelected() {
-        return this.isCheckedSelectedArray.every(Boolean);
+        return this.list
+          .filter(item => !_.isEqual(item, this.defaultItem))
+          .map(({ isSampleSelected }) => isSampleSelected)
+          .every(Boolean);
       },
       groupOptions() {
         const optionsMap = {
@@ -233,14 +231,6 @@
         return (
           this.list.length === 1 && _.isEqual(this.list[0], this.defaultItem)
         );
-      },
-      isAllChecked: {
-        get() {
-          return this.list.every(({ isChecked }) => isChecked);
-        },
-        set(newValue) {
-          this.list.forEach(item => (item.isChecked = newValue));
-        },
       },
       humanSampleMap() {
         return {
@@ -267,9 +257,9 @@
     },
     methods: {
       autoCompleteStyle(item) {
-        const { isChecked, isSampleSelected } = item;
+        const { isSampleSelected } = item;
         const isDefaultItem = _.isEqual(item, this.defaultItem);
-        if (isChecked && !isSampleSelected && !isDefaultItem) {
+        if (!isSampleSelected && !isDefaultItem) {
           return { defaultInput: 'warning' };
         }
       },
@@ -282,12 +272,6 @@
         switch (action) {
           case 'INIT':
             this.list.splice(0, this.list.length, defaultItemCopy);
-            break;
-          case 'CHECK_ALL':
-            this.isAllChecked = !this.isAllChecked;
-            break;
-          case 'CHECK':
-            targetItem.isChecked = !targetItem.isChecked;
             break;
           case 'ADD':
             if (value.trim().length > 0) {
