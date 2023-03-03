@@ -22,7 +22,7 @@
         "inputType": "text"
       },
       {
-        "name": "Cutoff",
+        "name": "Cutoff (0-1)",
         "className": "cutoff",
         "placeholder": "0.1",
         "inputType": "text"
@@ -126,7 +126,7 @@
         "inputType": "dropdown"
       },
       {
-        "name": "Cutoff",
+        "name": "Cutoff (0-1)",
         "className": "cutoff",
         "placeholder": "0.1",
         "inputType": "text"
