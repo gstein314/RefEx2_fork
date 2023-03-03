@@ -88,11 +88,26 @@
       </vue-tags-input>
     </client-only>
 
-    <ScreenerFilter
+    <!-- <ScreenerFilter
       v-for="(screenerFilter, index) of screener"
       :key="index"
       :screener-filter="screenerFilter"
       :filters="screenerFilter.filters"
+      @addFilterValue="addFilterValue" 
+    /> -->
+    <ScreenerViewGeneFilter
+      :filter.sync="screener[0]"
+      :columns="screener[0].columns"
+      @addFilterValue="addFilterValue"
+    />
+    <ScreenerViewGeneFilter
+      :filter.sync="screener[1]"
+      :columns="screener[1].columns"
+      @addFilterValue="addFilterValue"
+    />
+    <ScreenerViewGeneFilter
+      :filter.sync="screener[2]"
+      :columns="screener[2].columns"
       @addFilterValue="addFilterValue"
     />
   </div>
@@ -101,11 +116,11 @@
 <script>
   import { mapGetters, mapMutations } from 'vuex';
   import MultiSelect from 'vue-multiselect';
-  import ScreenerFilter from './ScreenerFilter.vue';
+  import ScreenerViewGeneFilter from './ScreenerViewGeneFilter.vue';
   import screener from '~/refex-sample/screener.json';
 
   export default {
-    components: { MultiSelect, ScreenerFilter },
+    components: { MultiSelect, ScreenerViewGeneFilter },
     data() {
       return {
         filterValue: [],
@@ -295,15 +310,14 @@
         switch (type) {
           case 'TPM':
             if (
-              list[0].check &&
-              list[0].sample &&
+              list[0].sampleId &&
               list[0].cutoff &&
               list[0].condition &&
               list[0].statistic
             ) {
               const filter = {
                 method: 'tpm',
-                sample: list[0].sample,
+                sample: list[0].sampleId,
                 value: list[0].cutoff,
                 logic: list[0].condition,
                 statistic: list[0].statistic,
@@ -314,16 +328,11 @@
             }
             break;
           case 'ROKU':
-            if (
-              list[0].check &&
-              list[0].group &&
-              list[0].sample &&
-              list[0].horl
-            ) {
+            if (list[0].group && list[0].sampleId && list[0].horl) {
               const filter = {
                 method: 'roku',
                 group: list[0].group,
-                sample: list[0].sample,
+                sample: list[0].sampleId,
                 highlow: list[0].horl,
                 entropy_min: list[0].emin,
                 entropy_max: list[0].emax,
@@ -334,12 +343,7 @@
             }
             break;
           case 'tau':
-            if (
-              list[0].check &&
-              list[0].group &&
-              list[0].condition &&
-              list[0].cutoff
-            ) {
+            if (list[0].group && list[0].condition && list[0].cutoff) {
               const filter = {
                 method: 'tau',
                 group: list[0].group,
@@ -359,6 +363,9 @@
 
 <style lang="sass" scoped>
   ::v-deep
+    svg[data-icon="circle-info"], .delete_all
+      color: $MAIN_COLOR
+      cursor: pointer
     .multiselect
       input
         width: auto
@@ -394,11 +401,14 @@
         > tr
           > td
             font-size: 12px
+            > .text_search_name input
+              font-size: 22px
+              +warning_border
             > input[type="checkbox"]
               cursor: pointer
               -moz-transform: scale(3)
             > select:required:invalid
-              color: rgba(0, 0, 0, 0.3)
+              color: rgba(0, 0, 0, 0.25)
             > .delete_btn
               +button
               align-items: initial
@@ -406,18 +416,19 @@
               cursor: pointer !important
             svg[data-icon="circle-info"]
               color: $MAIN_COLOR
-          > .delete_all
+          > .reset
             color: $MAIN_COLOR
             cursor: pointer
             &.disabled
-              color: #CCC
+              color: $DISABLE_COLOR
           > .check
             padding-right: 5px
       .unchecked
         input, select
-          background: #ccc
-        select
-          color: rgba(0, 0, 0, 0.3)
+          background: $DISABLE_COLOR
+          color: rgba(0, 0, 0, 0.25)
+          &:disabled
+            opacity: 1
     .filter_TPM
       > table
         > tr

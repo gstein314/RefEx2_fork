@@ -132,7 +132,7 @@
         font-size: 18px
         align-self: center
       > div
-        padding: 0 10px
+        padding: 0 13px
         > p
           margin: 0
           padding-bottom: 2px

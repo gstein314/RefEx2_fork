@@ -31,7 +31,7 @@
       </span>
     </h3>
     <vue-simple-suggest
-      v-model="parameters.text"
+      v-model.trim="parameters.text"
       :debounce="500"
       :min-length="0"
       :display-attribute="paramsForSuggestions[1]"
@@ -285,20 +285,6 @@
         this.typeOfQuery = type;
         let results;
         let results_num = 0;
-        // test
-        // const filter = {
-        //   method: 'roku',
-        //   group: 'humanFantom5Spec002',
-        //   sample: 'RES00001680',
-        //   highlow: 'high',
-        //   entropy_min: '',
-        //   entropy_max: '',
-        // };
-        // const filterString = JSON.stringify(filter).replace(/"/g, '\\"');
-        // const test = `{humanFantom5GeneNumfound(filter: "${filterString}")}`;
-
-        // console.log(test);
-        // test
 
         if (this.isSummaryIncluded && this.parameters.text.length === 0)
           this.isSummaryIncluded = false;
@@ -344,9 +330,11 @@
     },
   };
 </script>
-<style lang="sass" scoped>
+<style lang="sass">
   .vue-simple-suggest
       position: relative
+</style>
+<style lang="sass" scoped>
   .text_search_area
       > .search_condition_title
           display: flex
