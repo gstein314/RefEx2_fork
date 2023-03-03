@@ -111,6 +111,9 @@
         };
       });
     },
+    updated() {
+      this.$emit('updateParameters', this.searchConditions.sample);
+    },
     methods: {
       ...mapMutations({
         setAlertModal: 'set_alert_modal',

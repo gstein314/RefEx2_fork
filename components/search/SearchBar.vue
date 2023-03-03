@@ -325,6 +325,7 @@
         }
       },
       removeSearchConditions() {
+        // TODO: change logic
         window.location.reload();
       },
     },

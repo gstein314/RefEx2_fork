@@ -87,14 +87,6 @@
         ></div>
       </vue-tags-input>
     </client-only>
-
-    <!-- <ScreenerFilter
-      v-for="(screenerFilter, index) of screener"
-      :key="index"
-      :screener-filter="screenerFilter"
-      :filters="screenerFilter.filters"
-      @addFilterValue="addFilterValue" 
-    /> -->
     <ScreenerViewGeneFilter
       :filter.sync="screener[0]"
       :columns="screener[0].columns"
