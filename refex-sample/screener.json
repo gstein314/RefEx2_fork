@@ -11,7 +11,6 @@
       "cutoff": "",
       "condition": "",
       "statistic": "",
-      "isChecked": true,
       "isSampleSelected": false
     },
     "columns": [
@@ -63,7 +62,6 @@
       "horl": "",
       "emin": "",
       "emax": "",
-      "isChecked": true,
       "isSampleSelected": false
     },
     "columns": [
@@ -115,8 +113,7 @@
     "defaultItem": {
       "group": "",
       "cutoff": "",
-      "condition": "",
-      "isChecked": true
+      "condition": ""
     },
     "columns": [
       {
