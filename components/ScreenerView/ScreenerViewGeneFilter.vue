@@ -12,14 +12,6 @@
         <table ref="itemList" class="item-list">
           <thead>
             <tr>
-              <th class="check">
-                <input
-                  v-model="isAllChecked"
-                  type="checkbox"
-                  :checked="isAllChecked"
-                  @click="dispatchAction('CHECK_ALL')"
-                />
-              </th>
               <th
                 v-for="column in columns"
                 :key="column.id"
@@ -53,21 +45,12 @@
               :key="itemIndex"
               ref="listItem"
               class="list-item"
-              :class="{ unchecked: !item.isChecked }"
             >
-              <td class="check">
-                <input
-                  v-model="item.isChecked"
-                  type="checkbox"
-                  @click="dispatchAction('CHECK', itemIndex)"
-                />
-              </td>
               <td v-for="column in columns" :key="column.id">
                 <select
                   v-if="column.inputType === 'dropdown'"
                   v-model="item[column.className]"
                   required
-                  :disabled="!item.isChecked"
                   @change="
                     e => {
                       dispatchAction('ADD', itemIndex, item[column.className]);
@@ -121,7 +104,6 @@
                     :debounce="500"
                     :min-length="0"
                     :placeholder="column.placeholder"
-                    :disabled="!item.isChecked"
                     class="text_search_name"
                     @select="setSelectedSample(itemIndex, true)"
                     @input="
@@ -162,7 +144,6 @@
                   :placeholder="column.placeholder"
                   :min="column.min"
                   :max="column.max"
-                  :disabled="!item.isChecked"
                   @input="
                     dispatchAction('ADD', itemIndex, item[column.className])
                   "
@@ -392,7 +373,7 @@
         const isSampleInTargetGroup = () => {
           if (e) {
             const selectedGroup = _.camelCase(e.target.value);
-            const groupSamples = this.humanSampleMap[selectedGroup];
+            const groupSamples = this.humanSampleMap?.[selectedGroup];
             if (groupSamples) {
               return groupSamples
                 .map(sample => sample.description)
@@ -401,7 +382,10 @@
           }
           return false;
         };
-        if (isSampleInTargetGroup()) return;
+        if (isSampleInTargetGroup()) {
+          targetItem.group = e.target.value;
+          return;
+        }
         if (sampleInput.selected) {
           sampleInput.setText('');
           sampleInput.selected = null;
