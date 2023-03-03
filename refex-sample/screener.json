@@ -33,9 +33,9 @@
         "placeholder": "<",
         "inputType": "dropdown",
         "options": [
-          { "description": "<", "value": "<" },
-          { "description": "=", "value": "=" },
-          { "description": ">", "value": ">" }
+          { "description": "<", "value": "gt" },
+          { "description": "=", "value": "eq" },
+          { "description": ">", "value": "lt" }
         ]
       },
       {
@@ -137,9 +137,9 @@
         "placeholder": "<",
         "inputType": "dropdown",
         "options": [
-          { "description": "<", "value": "<" },
-          { "description": "=", "value": "=" },
-          { "description": ">", "value": ">" }
+          { "description": "<", "value": "gt" },
+          { "description": "=", "value": "eq" },
+          { "description": ">", "value": "lt" }
         ]
       }
     ]
