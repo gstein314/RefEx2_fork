@@ -288,8 +288,6 @@
 
     .filter_TPM, .filter_specificity_ROKU, .filter_specificity_tau
       table
-        .check
-          padding-right: 5px
         thead
           th
             font-size: 12px
@@ -307,9 +305,6 @@
           .text_search_name input
             font-size: 20px
             +warning_border
-          input[type="checkbox"]
-            cursor: pointer
-            -moz-transform: scale(3)
           select:required:invalid
             color: $PLACEHOLDER_COLOR
           .delete_btn
@@ -319,12 +314,6 @@
             cursor: pointer
           svg[data-icon="circle-info"]
             color: $MAIN_COLOR
-          .unchecked
-            input, select
-              background: $DISABLE_COLOR
-              color: $PLACEHOLDER_COLOR
-              &:disabled
-                opacity: 1
     .filter_TPM
       table
         th, tr
