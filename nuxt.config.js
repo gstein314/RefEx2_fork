@@ -89,6 +89,6 @@ export default {
   },
 
   router: {
-    base: '/',
+    base: process.env.NODE_ENV === 'dev' ? '/' : '/RefEx2/',
   },
 };
