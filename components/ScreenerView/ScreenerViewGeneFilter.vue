@@ -133,10 +133,6 @@
                       ></span>
                     </div>
                   </vue-simple-suggest>
-                  <font-awesome-icon
-                    icon="circle-check"
-                    :class="{ valid: isSelectedArray[itemIndex] }"
-                  />
                 </div>
                 <input
                   v-else
@@ -420,8 +416,6 @@
   .sample-input
     position: relative
     &.valid
-      svg[data-icon="circle-check"]
-        color: $MAIN_COLOR
       input
         cursor: pointer
     svg[data-icon="circle-check"]
