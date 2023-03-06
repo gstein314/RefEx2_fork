@@ -284,7 +284,6 @@
         };
       },
       handleFilterValueUpdate(type, list) {
-        console.log(this.filterValue);
         this.parameters = {
           ...this.parameters,
           ['filter']: this.filterValue,

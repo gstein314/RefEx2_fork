@@ -51,6 +51,7 @@ export const state = () => ({
   search_conditions: {
     gene: {
       text: '',
+      summary: '',
       chr: '',
       tog: '',
       go: '',

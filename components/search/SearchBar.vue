@@ -187,11 +187,6 @@
               )
               .join(' ')} ${this.extraVariablesToBeDsiplayedInResults}}`;
         const suffix = this.isNum ? '' : ` ${this.queryPrefix}Numfound`;
-        console.log(
-          `{${this.queryPrefix}${
-            this.isNum ? 'Numfound' : ''
-          }${params}${resultParams}${suffix}}`
-        );
         return `{${this.queryPrefix}${
           this.isNum ? 'Numfound' : ''
         }${params}${resultParams}${suffix}}`;
@@ -222,6 +217,9 @@
     mounted() {
       if (this.searchConditions.gene.text)
         this.parameters.text = this.searchConditions[this.filterType].text;
+      if (this.filterType === 'gene' && this.searchConditions.gene.summary) {
+        this.isSummaryIncluded = this.searchConditions[this.filterType].summary;
+      }
     },
     methods: {
       ...mapMutations({
@@ -271,6 +269,12 @@
         const query = `{${this.queryPrefix}(text: "${suggestion}" ${
           this.isSummaryIncluded ? 'summary: "true"' : ''
         }) {${this.paramsForSuggestions.join(' ')}}}`;
+        const searchSummary = {
+          type: this.filterType,
+          item: 'summary',
+          value: this.isSummaryIncluded,
+        };
+        this.setSearchConditions(searchSummary);
         return this.$axios
           .$post('gql', {
             query,
