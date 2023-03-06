@@ -49,7 +49,7 @@
                 v-for="column in columns"
                 :key="column.id"
                 :class="{
-                  warning: !columnValidityArray[column.id][itemIndex],
+                  warning: !isValidInput(column.id, itemIndex),
                 }"
               >
                 <select
@@ -265,8 +265,20 @@
       if (this.list.length === 0) this.dispatchAction('INIT');
     },
     methods: {
-      isValidColumn2(column) {
+      getTargetItem(index) {
+        return this.list[index];
+      },
+      isEntropy(id) {
+        return ['emin', 'emax'].includes(id);
+      },
+      isValidColumn(column) {
         return Object.values(this.columnValidityArray[column]).every(Boolean);
+      },
+      isValidInput(column, index) {
+        const targetItem = this.getTargetItem(index);
+        return (
+          _.isEqual(this.defaultItem, targetItem) || targetItem[column] !== ''
+        );
       },
       autoCompleteStyle(item) {
         const { isSampleSelected } = item;
@@ -274,9 +286,6 @@
         if (!isSampleSelected && !isDefaultItem) {
           return { defaultInput: 'warning' };
         }
-      },
-      isEntropy(id) {
-        return ['emin', 'emax'].includes(id);
       },
       dispatchAction(action, index, value) {
         const defaultItemCopy = { ...this.defaultItem };
@@ -353,7 +362,7 @@
         return filteredSamples;
       },
       setSelectedSample(index, bool, sample, e) {
-        const targetItem = this.list[index];
+        const targetItem = this.getTargetItem(index);
         const sampleInput = this.$refs.sampleInputs[index];
         if (bool) {
           const { id, description } = sampleInput.selected;
@@ -392,14 +401,6 @@
           });
         }
       },
-      // isDefaultItem(index) {
-      //   const targetItem = this.list[index];
-      //   return _.isEqual(targetItem, this.defaultItem);
-      // },
-      // isValidInput(index, column) {
-      //   const targetItem = this.list[index];
-      //   return !targetItem[column] === '';
-      // },
     },
   };
 </script>
