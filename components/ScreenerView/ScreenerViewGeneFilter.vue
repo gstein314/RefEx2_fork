@@ -8,22 +8,22 @@
       />
     </h3>
     <client-only>
-      <div :class="screenerFilter.className">
+      <div :class="screenerFilter.id">
         <table ref="itemList" class="item-list">
           <thead>
             <tr>
               <th
                 v-for="column in columns"
                 :key="column.id"
-                :class="column.className"
+                :class="column.id"
               >
                 {{ column.name }}
                 <WarningMessage
-                  v-if="column.className === 'sample' && !isAllSampleSelected"
+                  v-if="column.id === 'sample' && !isAllSampleSelected"
                   >Please select from suggestion(s)
                 </WarningMessage>
                 <font-awesome-icon
-                  v-if="isEntropy(column.className)"
+                  v-if="isEntropy(column.id)"
                   v-tooltip="'Range: 1-5'"
                   icon="info-circle"
                 />
@@ -49,12 +49,12 @@
               <td v-for="column in columns" :key="column.id">
                 <select
                   v-if="column.inputType === 'dropdown'"
-                  v-model="item[column.className]"
+                  v-model="item[column.id]"
                   required
                   @change="
                     e => {
-                      dispatchAction('ADD', itemIndex, item[column.className]);
-                      if (column.className === 'group') {
+                      dispatchAction('ADD', itemIndex, item[column.id]);
+                      if (column.id === 'group') {
                         setSelectedSample(itemIndex, false, item.sample, e);
                       }
                     }
@@ -63,7 +63,7 @@
                   <option value="" disabled selected hidden>
                     {{ column.placeholder }}
                   </option>
-                  <template v-if="column.className === 'group'">
+                  <template v-if="column.id === 'group'">
                     <option
                       v-for="option in groupOptions"
                       :key="option.id"
@@ -83,13 +83,13 @@
                   </template>
                 </select>
                 <div
-                  v-else-if="column.className === 'sample'"
+                  v-else-if="column.id === 'sample'"
                   class="sample-input"
                   :class="{ valid: isSelectedArray[itemIndex] }"
                 >
                   <vue-simple-suggest
                     ref="sampleInputs"
-                    v-model.trim="item[column.className]"
+                    v-model.trim="item[column.id]"
                     display-attribute="description"
                     value-attribute="id"
                     :styles="autoCompleteStyle(item)"
@@ -97,7 +97,7 @@
                     :list="
                       autocompleteItems(
                         itemIndex,
-                        item[column.className],
+                        item[column.id],
                         filter.list[itemIndex].group
                       )
                     "
@@ -111,7 +111,7 @@
                         dispatchAction(
                           'ADD',
                           itemIndex,
-                          item[column.className]
+                          item[column.id]
                         );
                       }
                     "
@@ -125,7 +125,7 @@
                         v-html="
                           $highlightedSuggestion(
                             suggestion.description,
-                            item[column.className],
+                            item[column.id],
                             2
                           )
                         "
@@ -139,13 +139,13 @@
                 </div>
                 <input
                   v-else
-                  v-model.trim="item[column.className]"
+                  v-model.trim="item[column.id]"
                   :type="column.inputType"
                   :placeholder="column.placeholder"
                   :min="column.min"
                   :max="column.max"
                   @input="
-                    dispatchAction('ADD', itemIndex, item[column.className])
+                    dispatchAction('ADD', itemIndex, item[column.id])
                   "
                 />
               </td>
@@ -263,8 +263,8 @@
           return { defaultInput: 'warning' };
         }
       },
-      isEntropy(className) {
-        return ['emin', 'emax'].includes(className);
+      isEntropy(id) {
+        return ['emin', 'emax'].includes(id);
       },
       dispatchAction(action, index, value) {
         const targetItem = this.list[index];
