@@ -118,6 +118,7 @@
       :key="index"
       :filter.sync="geneFilters[index]"
       :columns="filter.columns"
+      :datasets="datasets"
     />
   </div>
 </template>
@@ -127,6 +128,7 @@
   import MultiSelect from 'vue-multiselect';
   import ScreenerViewGeneFilter from './ScreenerViewGeneFilter.vue';
   import geneFilters from '~/refex-sample/gene_filters.json';
+  import datasets from '~/refex-sample/datasets.json';
 
   export default {
     components: { MultiSelect, ScreenerViewGeneFilter },
@@ -151,8 +153,9 @@
           go: [],
         },
         debounce: null,
-        geneFilters: geneFilters,
         hideCaret: false,
+        geneFilters,
+        datasets,
       };
     },
     computed: {

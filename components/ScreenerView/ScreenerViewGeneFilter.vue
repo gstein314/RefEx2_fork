@@ -1,14 +1,14 @@
 <template>
   <div>
     <h3>
-      Filter by {{ screenerFilter.description }}
+      Filter by {{ filter.description }}
       <font-awesome-icon
-        v-tooltip="'This is Filter by ' + screenerFilter.description"
+        v-tooltip="'This is Filter by ' + filter.description"
         icon="info-circle"
       />
     </h3>
     <client-only>
-      <div :class="screenerFilter.id">
+      <div :class="filter.id">
         <table ref="itemList" class="item-list">
           <thead>
             <tr>
@@ -166,7 +166,6 @@
 <script>
   import { mapGetters } from 'vuex';
   import VueSimpleSuggest from 'vue-simple-suggest';
-  import datasets from '~/refex-sample/datasets.json';
   import WarningMessage from '../WarningMessage.vue';
   import 'floating-vue/dist/style.css';
   import _ from 'lodash';
@@ -185,17 +184,10 @@
         type: Array,
         default: () => [],
       },
-    },
-    data() {
-      return {
-        datasets,
-        parameters: {
-          text: '',
-        },
-        screenerFilter: { ...this.filter },
-        list: [...this.filter.list],
-        defaultItem: { ...this.filter.defaultItem },
-      };
+      datasets: {
+        type: Array,
+        default: () => [],
+      },
     },
     computed: {
       ...mapGetters({
@@ -203,6 +195,12 @@
       }),
       // TODO: extract isEqualDefaultItem to methods
       // TODO: pass item to method as arg instead of (index)
+      list() {
+        return this.filter.list;
+      },
+      defaultItem() {
+        return this.filter.defaultItem;
+      },
       isValidColumn() {
         const obj = {};
         for (const [column, array] of Object.entries(
