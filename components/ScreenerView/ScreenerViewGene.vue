@@ -300,11 +300,16 @@
               color: $DISABLE_COLOR
               cursor: not-allowed
         tbody
+          td
+            &.warning
+              input, select
+                +warning_border
           input, select
             height: 2.25em
           .text_search_name input
             font-size: 20px
-            +warning_border
+            &.warning
+              +warning_border
           select:required:invalid
             color: $PLACEHOLDER_COLOR
           .delete_btn

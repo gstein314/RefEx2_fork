@@ -44,7 +44,13 @@
               ref="listItem"
               class="list-item"
             >
-              <td v-for="column in columns" :key="column.id">
+              <td
+                v-for="column in columns"
+                :key="column.id"
+                :class="{
+                  warning: !validColumnBoolArray[column.id][itemIndex],
+                }"
+              >
                 <select
                   v-if="column.inputType === 'dropdown'"
                   v-model="item[column.id]"
