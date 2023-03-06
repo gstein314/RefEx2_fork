@@ -103,7 +103,7 @@
                       autocompleteItems(
                         itemIndex,
                         item[column.id],
-                        filter.list[itemIndex].group
+                        filter.list[itemIndex]?.group
                       )
                     "
                     :debounce="500"
@@ -192,9 +192,9 @@
         parameters: {
           text: '',
         },
-        screenerFilter: this.filter,
-        list: this.filter.list,
-        defaultItem: this.filter.defaultItem,
+        screenerFilter: { ...this.filter },
+        list: [...this.filter.list],
+        defaultItem: { ...this.filter.defaultItem },
       };
     },
     computed: {

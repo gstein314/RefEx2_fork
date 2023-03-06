@@ -113,18 +113,11 @@
         ></div>
       </vue-tags-input>
     </client-only>
-
     <ScreenerViewGeneFilter
-      :filter.sync="geneFilter[0]"
-      :columns="geneFilter[0].columns"
-    />
-    <ScreenerViewGeneFilter
-      :filter.sync="geneFilter[1]"
-      :columns="geneFilter[1].columns"
-    />
-    <ScreenerViewGeneFilter
-      :filter.sync="geneFilter[2]"
-      :columns="geneFilter[2].columns"
+      v-for="(filter, index) of geneFilters"
+      :key="index"
+      :filter.sync="geneFilters[index]"
+      :columns="filter.columns"
     />
   </div>
 </template>
@@ -133,7 +126,7 @@
   import { mapGetters } from 'vuex';
   import MultiSelect from 'vue-multiselect';
   import ScreenerViewGeneFilter from './ScreenerViewGeneFilter.vue';
-  import geneFilter from '~/refex-sample/gene_filters.json';
+  import geneFilters from '~/refex-sample/gene_filters.json';
 
   export default {
     components: { MultiSelect, ScreenerViewGeneFilter },
@@ -158,7 +151,7 @@
           go: [],
         },
         debounce: null,
-        geneFilter: geneFilter,
+        geneFilters: geneFilters,
         hideCaret: false,
       };
     },
