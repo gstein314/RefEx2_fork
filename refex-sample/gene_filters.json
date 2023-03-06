@@ -1,6 +1,6 @@
 [
   {
-    "description": "TPM",
+    "name": "TPM",
     "type": "TPM",
     "id": "filter_TPM",
     "list": [],
@@ -50,7 +50,7 @@
     ]
   },
   {
-    "description": "Tissue specificity (ROKU)",
+    "name": "Tissue specificity (ROKU)",
     "type": "ROKU",
     "id": "filter_specificity_ROKU",
     "list": [],
@@ -106,7 +106,7 @@
     ]
   },
   {
-    "description": "Tissue specificity (tau)",
+    "name": "Tissue specificity (tau)",
     "type": "tau",
     "id": "filter_specificity_tau",
     "list": [],

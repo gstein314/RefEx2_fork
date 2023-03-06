@@ -1,9 +1,9 @@
 <template>
   <div>
     <h3>
-      Filter by {{ filter.description }}
+      Filter by {{ filter.name }}
       <font-awesome-icon
-        v-tooltip="'This is Filter by ' + filter.description"
+        v-tooltip="'This is Filter by ' + filter.name"
         icon="info-circle"
       />
     </h3>
