@@ -22,6 +22,7 @@
                 <WarningMessage
                   v-if="column.id === 'sample' && !isAllSampleSelected"
                 >
+                  Please select from suggestion(s)
                 </WarningMessage>
                 <WarningMessage v-else-if="!isValidColumn[column.id]">
                 </WarningMessage>
@@ -403,14 +404,14 @@
           });
         }
       },
-      isDefaultItem(index) {
-        const targetItem = this.list[index];
-        return _.isEqual(targetItem, this.defaultItem);
-      },
-      isValidInput(index, column) {
-        const targetItem = this.list[index];
-        return !targetItem[column] === '';
-      },
+      // isDefaultItem(index) {
+      //   const targetItem = this.list[index];
+      //   return _.isEqual(targetItem, this.defaultItem);
+      // },
+      // isValidInput(index, column) {
+      //   const targetItem = this.list[index];
+      //   return !targetItem[column] === '';
+      // },
     },
   };
 </script>
