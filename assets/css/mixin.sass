@@ -10,6 +10,7 @@ $ACTIVE_COLOR_HOVER: rgba(255, 255, 0, .1)
 $BUTTON_HOVER_COLOR: #095493
 $WARNING_BUTTON_COLOR: #FF8A17
 $WARNING_BUTTON_COLOR_HOVER: #F06A06
+$WARNING_FIELD_COLOR: rgb(255, 192, 203, 0.5)
 $DISABLE_COLOR:#CCCCCC
 $PLACEHOLDER_COLOR: #CCCCCC
 $COLOR_1: #488EC4
@@ -288,9 +289,8 @@ $TOOLTIP_LAYER: 2
     &:hover
       cursor: pointer
 
-@mixin warning_border
-  outline: 1px solid $WARNING_COLOR
-  outline-offset: -1px
+@mixin warning_field
+  background: $WARNING_FIELD_COLOR
 @mixin tooltip
   background-color: #ffffff
   padding: 3px 8px
