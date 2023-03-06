@@ -12,21 +12,19 @@
         <table ref="itemList" class="item-list">
           <thead>
             <tr>
-              <th
-                v-for="column in columns"
-                :key="column.id"
-                :class="column.id"
-              >
+              <th v-for="column in columns" :key="column.id" :class="column.id">
                 {{ column.name }}
-                <WarningMessage
-                  v-if="column.id === 'sample' && !isAllSampleSelected"
-                  >Please select from suggestion(s)
-                </WarningMessage>
                 <font-awesome-icon
                   v-if="isEntropy(column.id)"
                   v-tooltip="'Range: 1-5'"
                   icon="info-circle"
                 />
+                <WarningMessage
+                  v-if="column.id === 'sample' && !isAllSampleSelected"
+                >
+                </WarningMessage>
+                <WarningMessage v-else-if="!isValidColumn[column.id]">
+                </WarningMessage>
               </th>
               <th
                 colspan="2"
@@ -108,11 +106,7 @@
                     @select="setSelectedSample(itemIndex, true)"
                     @input="
                       () => {
-                        dispatchAction(
-                          'ADD',
-                          itemIndex,
-                          item[column.id]
-                        );
+                        dispatchAction('ADD', itemIndex, item[column.id]);
                       }
                     "
                     @focus="setSelectedSample(itemIndex, false)"
@@ -144,9 +138,7 @@
                   :placeholder="column.placeholder"
                   :min="column.min"
                   :max="column.max"
-                  @input="
-                    dispatchAction('ADD', itemIndex, item[column.id])
-                  "
+                  @input="dispatchAction('ADD', itemIndex, item[column.id])"
                 />
               </td>
               <td class="icon">
@@ -206,6 +198,31 @@
       ...mapGetters({
         activeDataset: 'active_dataset',
       }),
+      // TODO: extract isEqualDefaultItem to methods
+      // TODO: pass item to method as arg instead of (index)
+      isValidColumn() {
+        const obj = {};
+        for (const [column, array] of Object.entries(
+          this.validColumnBoolArray
+        )) {
+          obj[column] = array.every(Boolean);
+        }
+        return obj;
+      },
+      validColumnBoolArray() {
+        const obj = {};
+        for (const column of this.filter.columns) {
+          obj[column.id] = [];
+          for (const item of this.list) {
+            if (_.isEqual(this.defaultItem, item)) {
+              obj[column.id].push(true);
+              continue;
+            }
+            obj[column.id].push(item[column.id] !== '');
+          }
+        }
+        return obj;
+      },
       isSelectedArray() {
         return this.list.map(({ isSampleSelected }) => isSampleSelected);
       },
@@ -267,7 +284,6 @@
         return ['emin', 'emax'].includes(id);
       },
       dispatchAction(action, index, value) {
-        const targetItem = this.list[index];
         const defaultItemCopy = { ...this.defaultItem };
         switch (action) {
           case 'INIT':
@@ -380,6 +396,14 @@
             isSampleSelected: false,
           });
         }
+      },
+      isDefaultItem(index) {
+        const targetItem = this.list[index];
+        return _.isEqual(targetItem, this.defaultItem);
+      },
+      isValidInput(index, column) {
+        const targetItem = this.list[index];
+        return !targetItem[column] === '';
       },
     },
   };
