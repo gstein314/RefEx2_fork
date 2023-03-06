@@ -20,7 +20,7 @@
                   icon="info-circle"
                 />
                 <WarningMessage
-                  v-if="column.id === 'sample' && !isAllSampleSelected"
+                  v-if="column.id === 'sample' && !eachSampleIsSelected"
                 >
                   Please select from suggestion(s)
                 </WarningMessage>
@@ -49,7 +49,7 @@
                 v-for="column in columns"
                 :key="column.id"
                 :class="{
-                  warning: !validColumnBoolArray[column.id][itemIndex],
+                  warning: !columnValidityArray[column.id][itemIndex],
                 }"
               >
                 <select
@@ -202,32 +202,32 @@
         return this.filter.defaultItem;
       },
       isValidColumn() {
-        const obj = {};
+        const columnValidity = {};
         for (const [column, array] of Object.entries(
-          this.validColumnBoolArray
+          this.columnValidityArray
         )) {
-          obj[column] = array.every(Boolean);
+          columnValidity[column] = array.every(Boolean);
         }
-        return obj;
+        return columnValidity;
       },
-      validColumnBoolArray() {
-        const obj = {};
+      columnValidityArray() {
+        const columnValidityArray = {};
         for (const column of this.filter.columns) {
-          obj[column.id] = [];
+          columnValidityArray[column.id] = [];
           for (const item of this.list) {
             if (_.isEqual(this.defaultItem, item)) {
-              obj[column.id].push(true);
+              columnValidityArray[column.id].push(true);
               continue;
             }
-            obj[column.id].push(item[column.id] !== '');
+            columnValidityArray[column.id].push(item[column.id] !== '');
           }
         }
-        return obj;
+        return columnValidityArray;
       },
       isSelectedArray() {
         return this.list.map(({ isSampleSelected }) => isSampleSelected);
       },
-      isAllSampleSelected() {
+      eachSampleIsSelected() {
         return this.list
           .filter(item => !_.isEqual(item, this.defaultItem))
           .map(({ isSampleSelected }) => isSampleSelected)
