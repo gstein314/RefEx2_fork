@@ -24,7 +24,7 @@
                 >
                   Please select from suggestion(s)
                 </WarningMessage>
-                <WarningMessage v-else-if="!isValidColumn[column.id]">
+                <WarningMessage v-else-if="!isValidColumn(column.id)">
                 </WarningMessage>
               </th>
               <th
@@ -201,15 +201,6 @@
       defaultItem() {
         return this.filter.defaultItem;
       },
-      isValidColumn() {
-        const columnValidity = {};
-        for (const [column, array] of Object.entries(
-          this.columnValidityArray
-        )) {
-          columnValidity[column] = array.every(Boolean);
-        }
-        return columnValidity;
-      },
       columnValidityArray() {
         const columnValidityArray = {};
         for (const column of this.filter.columns) {
@@ -274,6 +265,9 @@
       if (this.list.length === 0) this.dispatchAction('INIT');
     },
     methods: {
+      isValidColumn2(column) {
+        return Object.values(this.columnValidityArray[column]).every(Boolean);
+      },
       autoCompleteStyle(item) {
         const { isSampleSelected } = item;
         const isDefaultItem = _.isEqual(item, this.defaultItem);
