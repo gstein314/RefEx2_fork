@@ -363,6 +363,7 @@
       },
       setSelectedSample(index, bool, sample, e) {
         const targetItem = this.getTargetItem(index);
+        if (!this.$refs.sampleInputs) return;
         const sampleInput = this.$refs.sampleInputs[index];
         if (bool) {
           const { id, description } = sampleInput.selected;
