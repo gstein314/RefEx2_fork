@@ -193,8 +193,6 @@
       ...mapGetters({
         activeDataset: 'active_dataset',
       }),
-      // TODO: extract isEqualDefaultItem to methods
-      // TODO: pass item to method as arg instead of (index)
       list() {
         return this.filter.list;
       },
@@ -206,7 +204,7 @@
         for (const column of this.filter.columns) {
           columnValidityArray[column.id] = [];
           for (const item of this.list) {
-            if (_.isEqual(this.defaultItem, item)) {
+            if (this.isDefaultItem(item)) {
               columnValidityArray[column.id].push(true);
               continue;
             }
@@ -220,7 +218,7 @@
       },
       eachSampleIsSelected() {
         return this.list
-          .filter(item => !_.isEqual(item, this.defaultItem))
+          .filter(item => !this.isDefaultItem(item))
           .map(({ isSampleSelected }) => isSampleSelected)
           .every(Boolean);
       },
@@ -237,9 +235,7 @@
         );
       },
       resetAllDisabled() {
-        return (
-          this.list.length === 1 && _.isEqual(this.list[0], this.defaultItem)
-        );
+        return this.list.length === 1 && this.isDefaultItem(this.list[0]);
       },
       humanSampleMap() {
         return {
@@ -271,19 +267,19 @@
       isEntropy(id) {
         return ['emin', 'emax'].includes(id);
       },
+      isDefaultItem(item) {
+        return _.isEqual(this.defaultItem, item);
+      },
       isValidColumn(column) {
         return Object.values(this.columnValidityArray[column]).every(Boolean);
       },
       isValidInput(column, index) {
         const targetItem = this.getTargetItem(index);
-        return (
-          _.isEqual(this.defaultItem, targetItem) || targetItem[column] !== ''
-        );
+        return this.isDefaultItem(targetItem) || targetItem[column] !== '';
       },
       autoCompleteStyle(item) {
         const { isSampleSelected } = item;
-        const isDefaultItem = _.isEqual(item, this.defaultItem);
-        if (!isSampleSelected && !isDefaultItem) {
+        if (!isSampleSelected && !this.isDefaultItem(item)) {
           return { defaultInput: 'warning' };
         }
       },
