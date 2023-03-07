@@ -30,7 +30,7 @@
               <th
                 colspan="2"
                 class="reset"
-                :class="{ disabled: resetAllDisabled }"
+                :class="{ disabled: resetIsDisabled }"
                 @click="dispatchAction('INIT')"
               >
                 <font-awesome-icon icon="rotate-right" />
@@ -199,19 +199,19 @@
       defaultItem() {
         return this.filter.defaultItem;
       },
-      columnValidityArray() {
-        const columnValidityArray = {};
+      columnValidity() {
+        const obj = {};
         for (const column of this.filter.columns) {
-          columnValidityArray[column.id] = [];
+          obj[column.id] = [];
           for (const item of this.list) {
             if (this.isDefaultItem(item)) {
-              columnValidityArray[column.id].push(true);
+              obj[column.id].push(true);
               continue;
             }
-            columnValidityArray[column.id].push(item[column.id] !== '');
+            obj[column.id].push(item[column.id] !== '');
           }
         }
-        return columnValidityArray;
+        return obj;
       },
       isSelectedArray() {
         return this.list.map(({ isSampleSelected }) => isSampleSelected);
@@ -234,7 +234,7 @@
           ]
         );
       },
-      resetAllDisabled() {
+      resetIsDisabled() {
         return this.list.length === 1 && this.isDefaultItem(this.list[0]);
       },
       humanSampleMap() {
@@ -271,7 +271,7 @@
         return _.isEqual(this.defaultItem, item);
       },
       isValidColumn(column) {
-        return Object.values(this.columnValidityArray[column]).every(Boolean);
+        return Object.values(this.columnValidity[column]).every(Boolean);
       },
       isValidInput(column, index) {
         const targetItem = this.getTargetItem(index);
