@@ -99,11 +99,7 @@
                     :styles="autoCompleteStyle(item)"
                     :max-suggestions="0"
                     :list="
-                      autocompleteItems(
-                        itemIndex,
-                        item[column.id],
-                        filter.list[itemIndex]?.group
-                      )
+                      autocompleteItems(itemIndex, item[column.id], item.group)
                     "
                     :debounce="500"
                     :min-length="0"
@@ -255,9 +251,11 @@
         const obj = {};
         const humanDataset = this.datasets[0].datasets;
         for (const subDataset of humanDataset) {
-          obj[subDataset.dataset] = [];
+          obj[subDataset.dataset] = {};
+          obj[subDataset.dataset].allSamples = [];
           for (const spec of subDataset.specificity) {
-            obj[subDataset.dataset].push(spec);
+            obj[subDataset.dataset][spec.id] = spec;
+            obj[subDataset.dataset].allSamples.push(...spec.samples);
           }
         }
         return obj;
@@ -325,9 +323,19 @@
           ...this.humanSampleMap.allTissues,
           ...this.humanSampleMap.brainSubRegions,
         ];
-        const allSamples = [...allFantom5Samples, ...allGtexSamples];
+        const datasetSamples = this.datasetSamples;
+        // const sampleList =
+        //   datasetSamples[selectedDataset]?.[selectedGroup]?.samples;
+        // const copy = [...sampleList];
+        const unsortedSampleList = () => {
+          if (selectedGroup === undefined) {
+            return datasetSamples[selectedDataset].allSamples;
+          } else return datasetSamples[selectedDataset][selectedGroup]?.samples;
+        };
         const sortSamplesByDescription = (a, b) =>
           a.description.localeCompare(b.description);
+        console.log(unsortedSampleList());
+        const allSamples = [...allFantom5Samples, ...allGtexSamples];
         const getSamplesArray = () => {
           let unsortedSamples;
           switch (selectedDataset) {
