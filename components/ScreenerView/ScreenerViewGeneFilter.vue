@@ -251,6 +251,17 @@
           ,
         ];
       },
+      datasetSamples() {
+        const obj = {};
+        const humanDataset = this.datasets[0].datasets;
+        for (const subDataset of humanDataset) {
+          obj[subDataset.dataset] = [];
+          for (const spec of subDataset.specificity) {
+            obj[subDataset.dataset].push(spec);
+          }
+        }
+        return obj;
+      },
     },
     mounted() {
       if (this.list.length === 0) this.dispatchAction('INIT');
