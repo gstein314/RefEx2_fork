@@ -236,17 +236,6 @@
           brainSubRegions: this.datasets[0].datasets[1].specificity[1].samples,
         };
       },
-      allHumanSamples() {
-        const { adultTissues, epithelialCells, allTissues, brainSubRegions } =
-          this.humanSampleMap;
-        return [
-          ...adultTissues,
-          ...epithelialCells,
-          ...allTissues,
-          ...brainSubRegions,
-          ,
-        ];
-      },
       datasetSamples() {
         const obj = {};
         const humanDataset = this.datasets[0].datasets;
