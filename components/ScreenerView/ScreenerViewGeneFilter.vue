@@ -58,7 +58,7 @@
                   required
                   @change="
                     e => {
-                      dispatchAction('ADD', itemIndex, item[column.id]);
+                      dispatchAction('ADD', itemIndex, column.id);
                       if (column.id === 'group') {
                         setSelectedSample(itemIndex, false, item.sample, e);
                       }
@@ -113,7 +113,7 @@
                     @select="setSelectedSample(itemIndex, true)"
                     @input="
                       () => {
-                        dispatchAction('ADD', itemIndex, item[column.id]);
+                        dispatchAction('ADD', itemIndex, column.id);
                       }
                     "
                     @focus="setSelectedSample(itemIndex, false)"
@@ -141,7 +141,7 @@
                   :placeholder="column.placeholder"
                   :min="column.min"
                   :max="column.max"
-                  @input="dispatchAction('ADD', itemIndex, item[column.id])"
+                  @input="dispatchAction('ADD', itemIndex, column.id)"
                 />
               </td>
               <td class="icon">
@@ -283,25 +283,29 @@
           return { defaultInput: 'warning' };
         }
       },
-      dispatchAction(action, index, value) {
+      dispatchAction(action, index, column) {
+        const numOfItems = this.list.length;
         const defaultItemCopy = { ...this.defaultItem };
+        const targetItem = this.getTargetItem(index);
+        const setNewList = () =>
+          this.list.splice(0, numOfItems, defaultItemCopy);
+        const shouldAddNewItem = () => {
+          const inputField = targetItem[column];
+          const hasNonSpaceInput = inputField.trim().length > 0;
+          const hasNextItem = this.getTargetItem(index + 1) ? true : false;
+          return hasNonSpaceInput && !hasNextItem;
+        };
         switch (action) {
           case 'INIT':
-            this.list.splice(0, this.list.length, defaultItemCopy);
+            setNewList();
             break;
           case 'ADD':
-            if (value.trim().length > 0) {
-              if (!this.list[index + 1]) {
-                this.list.push(defaultItemCopy);
-              }
+            if (shouldAddNewItem()) {
+              this.list.push(defaultItemCopy);
             }
             break;
           case 'DELETE':
-            if (this.list.length === 1) {
-              this.list.splice(0, this.list.length, defaultItemCopy);
-            } else {
-              this.$delete(this.list, index);
-            }
+            numOfItems === 1 ? setNewList() : this.$delete(this.list, index);
             break;
         }
       },
