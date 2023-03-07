@@ -315,36 +315,32 @@
       },
       autocompleteItems(index, userInput, selectedGroup) {
         const selectedDataset = this.activeDataset.dataset;
-        const unsortedSampleList = () => {
-          let copy;
-          if (selectedGroup === undefined) {
-            copy = this.datasetSamples[selectedDataset].allSamples;
-          } else
-            copy = this.datasetSamples[selectedDataset][selectedGroup]?.samples;
-          if (copy !== undefined) return JSON.parse(JSON.stringify(copy));
+        const unsortedSamples = () => {
+          const defaultList = JSON.parse(
+            JSON.stringify(this.datasetSamples[selectedDataset].allSamples)
+          );
+          try {
+            return JSON.parse(
+              JSON.stringify(
+                this.datasetSamples[selectedDataset][selectedGroup]?.samples
+              )
+            );
+          } catch (error) {
+            return defaultList;
+          }
         };
-        console.log(unsortedSampleList());
         const sortSamplesByDescription = (a, b) =>
           a.description.localeCompare(b.description);
-        const sortList = unsortedSampleList()?.sort(sortSamplesByDescription);
-        const sortedSampleList = () => {
-          const arr = unsortedSampleList();
-          const copy = [...arr];
-          copy.sort(sortSamplesByDescription);
-          return copy;
-        };
-        // return arr;
+        const sortedSamples = unsortedSamples()?.sort(sortSamplesByDescription);
         const nonWordAndSpace = /[^\w\s]/g;
         const toAlphaNum = userInput?.replace(nonWordAndSpace, '');
         const wordArray = toAlphaNum.replace(/\s\s+/g, ' ').split(' ');
-        const filteredSamples = sortList
-          ?.sort(sortSamplesByDescription)
-          .filter(sample => {
-            const toAlphaNum = sample.description.replace(nonWordAndSpace, '');
-            return wordArray.every(input =>
-              toAlphaNum.toLowerCase().includes(input.toLowerCase())
-            );
-          });
+        const filteredSamples = sortedSamples.filter(sample => {
+          const toAlphaNum = sample.description.replace(nonWordAndSpace, '');
+          return wordArray.every(input =>
+            toAlphaNum.toLowerCase().includes(input.toLowerCase())
+          );
+        });
         // manually update vue-simple-suggest suggestions after "Group" option changed
         if (this.$refs.sampleInputs?.[index]) {
           this.$refs.sampleInputs[index].suggestions = filteredSamples;
