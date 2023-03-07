@@ -42,7 +42,6 @@
             <tr
               v-for="(item, itemIndex) in list"
               :key="itemIndex"
-              ref="listItem"
               class="list-item"
             >
               <td
