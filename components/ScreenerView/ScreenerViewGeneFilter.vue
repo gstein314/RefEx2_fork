@@ -315,60 +315,36 @@
       },
       autocompleteItems(index, userInput, selectedGroup) {
         const selectedDataset = this.activeDataset.dataset;
-        const allFantom5Samples = [
-          ...this.humanSampleMap.adultTissues,
-          ...this.humanSampleMap.epithelialCells,
-        ];
-        const allGtexSamples = [
-          ...this.humanSampleMap.allTissues,
-          ...this.humanSampleMap.brainSubRegions,
-        ];
-        const datasetSamples = this.datasetSamples;
-        // const sampleList =
-        //   datasetSamples[selectedDataset]?.[selectedGroup]?.samples;
-        // const copy = [...sampleList];
         const unsortedSampleList = () => {
+          let copy;
           if (selectedGroup === undefined) {
-            return datasetSamples[selectedDataset].allSamples;
-          } else return datasetSamples[selectedDataset][selectedGroup]?.samples;
+            copy = this.datasetSamples[selectedDataset].allSamples;
+          } else
+            copy = this.datasetSamples[selectedDataset][selectedGroup]?.samples;
+          if (copy !== undefined) return JSON.parse(JSON.stringify(copy));
         };
+        console.log(unsortedSampleList());
         const sortSamplesByDescription = (a, b) =>
           a.description.localeCompare(b.description);
-        console.log(unsortedSampleList());
-        const allSamples = [...allFantom5Samples, ...allGtexSamples];
-        const getSamplesArray = () => {
-          let unsortedSamples;
-          switch (selectedDataset) {
-            case 'humanFantom5':
-              unsortedSamples =
-                selectedGroup === 'Adult tissues'
-                  ? this.humanSampleMap.adultTissues
-                  : selectedGroup === 'Epithelial cells'
-                  ? this.humanSampleMap.epithelialCells
-                  : allFantom5Samples;
-              break;
-            case 'gtexV8':
-              unsortedSamples =
-                selectedGroup === 'All tissues'
-                  ? this.humanSampleMap.allTissues
-                  : selectedGroup === 'Brain sub-regions'
-                  ? this.humanSampleMap.brainSubRegions
-                  : allGtexSamples;
-              break;
-            default:
-              return allSamples.sort(sortSamplesByDescription);
-          }
-          return [...unsortedSamples].sort(sortSamplesByDescription);
+        const sortList = unsortedSampleList()?.sort(sortSamplesByDescription);
+        const sortedSampleList = () => {
+          const arr = unsortedSampleList();
+          const copy = [...arr];
+          copy.sort(sortSamplesByDescription);
+          return copy;
         };
+        // return arr;
         const nonWordAndSpace = /[^\w\s]/g;
-        const toAlphaNum = userInput.replace(nonWordAndSpace, '');
+        const toAlphaNum = userInput?.replace(nonWordAndSpace, '');
         const wordArray = toAlphaNum.replace(/\s\s+/g, ' ').split(' ');
-        const filteredSamples = getSamplesArray().filter(sample => {
-          const toAlphaNum = sample.description.replace(nonWordAndSpace, '');
-          return wordArray.every(input =>
-            toAlphaNum.toLowerCase().includes(input.toLowerCase())
-          );
-        });
+        const filteredSamples = sortList
+          ?.sort(sortSamplesByDescription)
+          .filter(sample => {
+            const toAlphaNum = sample.description.replace(nonWordAndSpace, '');
+            return wordArray.every(input =>
+              toAlphaNum.toLowerCase().includes(input.toLowerCase())
+            );
+          });
         // manually update vue-simple-suggest suggestions after "Group" option changed
         if (this.$refs.sampleInputs?.[index]) {
           this.$refs.sampleInputs[index].suggestions = filteredSamples;
