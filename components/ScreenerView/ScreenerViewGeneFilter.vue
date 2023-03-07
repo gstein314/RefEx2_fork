@@ -110,11 +110,7 @@
                     :placeholder="column.placeholder"
                     class="text_search_name"
                     @select="setSelectedSample(itemIndex, true)"
-                    @input="
-                      () => {
-                        dispatchAction('ADD', itemIndex, column.id);
-                      }
-                    "
+                    @input="dispatchAction('ADD', itemIndex, column.id)"
                     @focus="setSelectedSample(itemIndex, false)"
                   >
                     <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
