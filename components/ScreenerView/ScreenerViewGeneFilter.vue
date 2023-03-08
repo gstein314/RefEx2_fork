@@ -99,7 +99,11 @@
                     :styles="autoCompleteStyle(item)"
                     :max-suggestions="0"
                     :list="
-                      autocompleteItems(itemIndex, item[column.id], item.group)
+                      autocompleteItems(
+                        itemIndex,
+                        item[column.id].input,
+                        item.group
+                      )
                     "
                     :debounce="500"
                     :min-length="0"
@@ -299,7 +303,7 @@
       },
       autocompleteItems(index, userInput, selectedGroup) {
         const activeDateset = this.activeDataset.dataset;
-        const unsortedSamples = () => {
+        const getUnsortedSamples = () => {
           try {
             return JSON.parse(
               JSON.stringify(
@@ -316,26 +320,35 @@
         };
         const sortSamplesByDescription = (a, b) =>
           a.description.localeCompare(b.description);
-        const sortedSamples = unsortedSamples()?.sort(sortSamplesByDescription);
-        const nonWordDigitSpace = /[^\w\d\s]/g;
-        const toAlphaNum = userInput?.replace(nonWordDigitSpace, '');
-        const twoSpacesOrMore = /\s\s+/g;
-        const wordArray = toAlphaNum.replace(twoSpacesOrMore, ' ').split(' ');
-        const filteredSamples = sortedSamples.filter(sample => {
-          const toAlphaNum = sample.description.replace(nonWordDigitSpace, '');
-          return wordArray.every(input =>
-            toAlphaNum.toLowerCase().includes(input.toLowerCase())
-          );
-        });
-        // manually update vue-simple-suggest suggestions after "Group" option changed
-        const updateSuggestions = () => {
-          const inputRef = this.$refs.sampleInputs?.[index];
-          if (inputRef) {
-            inputRef.suggestions = filteredSamples;
-          }
+        const sortedSamples = getUnsortedSamples().sort(
+          sortSamplesByDescription
+        );
+        const filterSamples = (samples, input) => {
+          const nonWordDigitSpace = /[^\w\d\s]/g;
+          const toAlphaNum = input.replace(nonWordDigitSpace, '');
+          const twoSpacesOrMore = /\s\s+/g;
+          const wordArray = toAlphaNum.replace(twoSpacesOrMore, ' ').split(' ');
+
+          return samples.filter(sample => {
+            const description = sample.description.replace(
+              nonWordDigitSpace,
+              ''
+            );
+            return wordArray.every(input =>
+              description.toLowerCase().includes(input.toLowerCase())
+            );
+          });
         };
-        updateSuggestions();
-        return filteredSamples;
+        const filteredSamples = userInput
+          ? filterSamples(sortedSamples, userInput)
+          : undefined;
+        const suggestions = filteredSamples ?? sortedSamples;
+        // manually update vue-simple-suggest suggestions after "Group" option changed
+        const inputRef = this.$refs.sampleInputs?.[index];
+        if (inputRef) {
+          inputRef.suggestions = suggestions;
+        }
+        return suggestions;
       },
       setSelectedSample(index, action, e) {
         const targetItem = this.getTargetItem(index);
