@@ -4,7 +4,7 @@
   <div class="text_search_area">
     <div class="search_condition_title">
       <h2>Search Conditions</h2>
-      <button class="remove_all_btn" @click="resetSearchConditions">
+      <button class="reset_all_btn" @click="resetSearchConditions">
         <font-awesome-icon icon="rotate-right" />
         Reset all
       </button>
@@ -314,7 +314,7 @@
           display: flex
           align-items: center
           justify-content: space-between
-          > .remove_all_btn
+          > .reset_all_btn
               +button
               +sub_button
       width: 100%
