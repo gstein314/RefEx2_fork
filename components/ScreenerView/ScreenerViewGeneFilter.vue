@@ -108,6 +108,7 @@
                     @select="
                       e => {
                         setSelectedSample(itemIndex, true, null, e);
+                        setGroupOption(itemIndex);
                       }
                     "
                     @input="dispatchAction('ADD', itemIndex, column.id)"
@@ -357,25 +358,6 @@
           setTimeout(() => sampleInput.inputElement.blur(), 10);
           return;
         }
-        if (e) {
-          const groupId = e.target.value;
-          console.log(groupId);
-          console.log(this.datasetSamples[activeDateset]);
-          const selectedDataset =
-            this.datasetSamples[activeDateset][groupId].samples;
-          const sampleIsInDataset = selectedDataset
-            .map(sample => sample.id)
-            .includes(targetItem.sampleId);
-          console.log(sampleIsInDataset);
-          if (!sampleIsInDataset) {
-            targetItem.sample = '';
-          } else return;
-        }
-
-        // if (isSampleInTargetGroup()) {
-        //   targetItem.group = 'humanFantom5Spec001';
-        //   return;
-        // }
         if (sampleInput.selected) {
           sampleInput.setText('');
           sampleInput.selected = null;
@@ -385,6 +367,16 @@
             sampleDescription: '',
             isSampleSelected: false,
           });
+        }
+      },
+      setGroupOption(index) {
+        const targetItem = this.getTargetItem(index);
+        console.log(targetItem);
+        if (targetItem.group !== undefined) {
+          const sampleInput = this.$refs.sampleInputs[index];
+          const { group } = sampleInput.selected;
+          targetItem.group = group;
+          return targetItem;
         }
       },
     },
