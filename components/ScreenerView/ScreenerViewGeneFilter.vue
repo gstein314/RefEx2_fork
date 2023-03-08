@@ -55,7 +55,14 @@
                   v-if="column.inputType === 'dropdown'"
                   v-model="item[column.id]"
                   required
-                  @change="dispatchAction('ADD', itemIndex, column.id)"
+                  @change="
+                    () => {
+                      dispatchAction('ADD', itemIndex, column.id);
+                      if (column.id === 'group') {
+                        setSelectedSample(itemIndex, 'CLEAR');
+                      }
+                    }
+                  "
                 >
                   <option value="" disabled selected hidden>
                     {{ column.placeholder }}
