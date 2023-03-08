@@ -143,7 +143,12 @@
                   :min="column.min"
                   :max="column.max"
                   :step="0.1"
-                  @input="dispatchAction('ADD', itemIndex, column.id)"
+                  @input="
+                    e => {
+                      validateNumInput(itemIndex, column, e);
+                      dispatchAction('ADD', itemIndex, column.id);
+                    }
+                  "
                 />
               </td>
               <td class="icon">
@@ -251,6 +256,15 @@
       },
     },
     methods: {
+      validateNumInput(index, column, e) {
+        const numInput = parseFloat(e.target.value);
+        const { id, min, max } = column;
+        const isWithinRange =
+          numInput >= parseInt(min) && numInput <= parseInt(max);
+        this.getTargetItem(index)[id] = isWithinRange
+          ? numInput.toString()
+          : '';
+      },
       getTargetItem(index) {
         return this.list[index];
       },
