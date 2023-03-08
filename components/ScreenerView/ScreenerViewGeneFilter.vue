@@ -229,6 +229,7 @@
         const subDatasetSamples = {};
         const defaultSamples = {};
         const speciesDatasets = this.datasets;
+
         for (const speciesDataset of speciesDatasets) {
           for (const subDataset of speciesDataset.datasets) {
             subDatasetSamples[subDataset.dataset] = {};
@@ -281,6 +282,7 @@
           const hasNextItem = this.getTargetItem(index + 1) ? true : false;
           return hasNonSpaceInput && !hasNextItem;
         };
+
         switch (action) {
           case 'INIT':
             setNewList();
@@ -346,7 +348,6 @@
               setTimeout(() => sampleInput.inputElement.blur(), 10);
             }
             break;
-
           case 'CLEAR':
             if (sampleInput?.selected) {
               sampleInput.setText('');
@@ -364,6 +365,7 @@
       },
       setGroupOption(index) {
         const targetItem = this.getTargetItem(index);
+
         if (targetItem.group !== undefined) {
           const sampleInput = this.$refs.sampleInputs[index];
           const { group } = sampleInput.selected;
