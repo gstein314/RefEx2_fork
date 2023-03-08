@@ -281,7 +281,8 @@
         const setNewList = () =>
           this.list.splice(0, numOfItems, defaultItemCopy);
         const shouldAddNewItem = () => {
-          const inputField = ['sample'].includes(column)
+          const isObject = typeof defaultItemCopy[column] === 'object';
+          const inputField = isObject
             ? targetItem[column].input
             : targetItem[column];
           const hasNonSpaceInput = inputField.trim().length > 0;
