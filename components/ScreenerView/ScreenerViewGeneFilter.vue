@@ -55,14 +55,7 @@
                   v-if="column.inputType === 'dropdown'"
                   v-model="item[column.id]"
                   required
-                  @change="
-                    e => {
-                      dispatchAction('ADD', itemIndex, column.id);
-                      if (column.id === 'group') {
-                        setSelectedSample(itemIndex, false, item.sample, e);
-                      }
-                    }
-                  "
+                  @change="dispatchAction('ADD', itemIndex, column.id)"
                 >
                   <option value="" disabled selected hidden>
                     {{ column.placeholder }}
@@ -106,8 +99,8 @@
                     :placeholder="column.placeholder"
                     class="text_search_name"
                     @select="
-                      e => {
-                        setSelectedSample(itemIndex, true, null, e);
+                      () => {
+                        setSelectedSample(itemIndex, true);
                         setGroupOption(itemIndex);
                       }
                     "
@@ -330,12 +323,13 @@
         }
         return filteredSamples;
       },
-      setSelectedSample(index, addSelected, sample, e) {
+      setSelectedSample(index, bool) {
         const targetItem = this.getTargetItem(index);
         const activeDateset = this.activeDataset.dataset;
         if (!this.$refs.sampleInputs) return;
         const sampleInput = this.$refs.sampleInputs[index];
-        if (addSelected) {
+        const shouldAddSelected = bool;
+        if (shouldAddSelected) {
           const { id, description } = sampleInput.selected;
           Object.assign(targetItem, {
             sampleId: id,
@@ -358,7 +352,6 @@
       },
       setGroupOption(index) {
         const targetItem = this.getTargetItem(index);
-        console.log(targetItem);
         if (targetItem.group !== undefined) {
           const sampleInput = this.$refs.sampleInputs[index];
           const { group } = sampleInput.selected;
