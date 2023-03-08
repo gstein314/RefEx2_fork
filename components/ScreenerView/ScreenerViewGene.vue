@@ -297,6 +297,7 @@
             font-weight: initial
             text-align: initial
           .reset
+            text-align: right
             color: $MAIN_COLOR
             cursor: pointer
             &.disabled
