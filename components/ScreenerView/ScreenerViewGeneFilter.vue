@@ -317,7 +317,7 @@
         const sortSamplesByDescription = (a, b) =>
           a.description.localeCompare(b.description);
         const sortedSamples = unsortedSamples()?.sort(sortSamplesByDescription);
-        const nonWordDigitSpace = /[^\w\s]/g;
+        const nonWordDigitSpace = /[^\w\d\s]/g;
         const toAlphaNum = userInput?.replace(nonWordDigitSpace, '');
         const twoSpacesOrMore = /\s\s+/g;
         const wordArray = toAlphaNum.replace(twoSpacesOrMore, ' ').split(' ');
@@ -328,9 +328,13 @@
           );
         });
         // manually update vue-simple-suggest suggestions after "Group" option changed
-        if (this.$refs.sampleInputs?.[index]) {
-          this.$refs.sampleInputs[index].suggestions = filteredSamples;
-        }
+        const updateSuggestions = () => {
+          const inputRef = this.$refs.sampleInputs?.[index];
+          if (inputRef) {
+            inputRef.suggestions = filteredSamples;
+          }
+        };
+        updateSuggestions();
         return filteredSamples;
       },
       setSelectedSample(index, action) {
