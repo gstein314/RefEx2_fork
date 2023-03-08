@@ -248,9 +248,6 @@
         return { bySubDataset: subDatasetSamples, byDefault: defaultSamples };
       },
     },
-    mounted() {
-      if (this.list.length === 0) this.dispatchAction('INIT');
-    },
     methods: {
       getTargetItem(index) {
         return this.list[index];
