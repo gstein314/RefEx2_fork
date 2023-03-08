@@ -130,33 +130,37 @@
   import geneFilters from '~/refex-sample/gene_filters.json';
   import datasets from '~/refex-sample/datasets.json';
 
+  const initialState = () => {
+    return {
+      autocompleteStaticData: {},
+      chrValue: [],
+      TOGValue: [],
+      chrCheckedValue: [],
+      chrOptions: [],
+      TOGOptions: [],
+      // only used in this component
+      temporaryParameters: {
+        goTerm: '',
+      },
+      // passed down to API
+      parameters: {
+        go: [],
+      },
+      // will contain same keys as parameters. Autocompletion that does not come from the API should be hardcoded here in advance
+      autoComplete: {
+        go: [],
+      },
+      debounce: null,
+      hideCaret: false,
+      geneFilters: JSON.parse(JSON.stringify(geneFilters)),
+      datasets: JSON.parse(JSON.stringify(datasets)),
+    };
+  };
+
   export default {
     components: { MultiSelect, ScreenerViewGeneFilter },
     data() {
-      return {
-        autocompleteStaticData: {},
-        chrValue: [],
-        TOGValue: [],
-        chrCheckedValue: [],
-        chrOptions: [],
-        TOGOptions: [],
-        // only used in this component
-        temporaryParameters: {
-          goTerm: '',
-        },
-        // passed down to API
-        parameters: {
-          go: [],
-        },
-        // will contain same keys as parameters. Autocompletion that does not come from the API should be hardcoded here in advance
-        autoComplete: {
-          go: [],
-        },
-        debounce: null,
-        hideCaret: false,
-        geneFilters,
-        datasets,
-      };
+      return initialState();
     },
     computed: {
       ...mapGetters({
@@ -190,6 +194,9 @@
       this.getAutoCompleteData().then(() => {});
     },
     methods: {
+      resetComponent() {
+        Object.assign(this.$data, initialState());
+      },
       getAutoCompleteData() {
         return this.$axios
           .$get(`api/cv`)

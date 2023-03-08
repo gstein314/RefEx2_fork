@@ -88,7 +88,7 @@
     <template v-else-if="filterType === 'sample'">
       <div class="summary_check_wrapper"></div>
     </template>
-    <ScreenerView>
+    <ScreenerView ref="screenerView">
       <component
         :is="`screener-view-${filterType}`"
         @updateParameters="updateParams"
@@ -298,6 +298,8 @@
       },
       removeSearchConditions() {
         this.parameters.text = '';
+        const screenerViewChild = this.$refs.screenerView.$children[0];
+        screenerViewChild.resetComponent();
       },
     },
   };
