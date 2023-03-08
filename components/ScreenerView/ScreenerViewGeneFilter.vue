@@ -1,12 +1,22 @@
 <template>
-  <div>
-    <h3>
-      Filter by {{ filter.name }}
-      <font-awesome-icon
-        v-tooltip="'This is Filter by ' + filter.name"
-        icon="info-circle"
-      />
-    </h3>
+  <div class="filter">
+    <div class="filter_title">
+      <div>
+        Filter by {{ filter.name }}
+        <font-awesome-icon
+          v-tooltip="'This is Filter by ' + filter.name"
+          icon="info-circle"
+        />
+      </div>
+      <a
+        class="reset_btn"
+        :class="{ disabled: resetIsDisabled }"
+        @click="dispatchAction('INIT')"
+      >
+        <font-awesome-icon icon="rotate-right" />
+        Reset
+      </a>
+    </div>
     <client-only>
       <div :class="filter.id">
         <table ref="itemList" class="item-list">
@@ -26,15 +36,6 @@
                 </WarningMessage>
                 <WarningMessage v-else-if="!isValidColumn(column.id)">
                 </WarningMessage>
-              </th>
-              <th
-                colspan="2"
-                class="reset"
-                :class="{ disabled: resetIsDisabled }"
-                @click="dispatchAction('INIT')"
-              >
-                <font-awesome-icon icon="rotate-right" />
-                Reset
               </th>
             </tr>
           </thead>
@@ -394,6 +395,17 @@
 </script>
 
 <style lang="sass">
+  .filter_title
+    margin-bottom: 10px
+    display: flex
+    align-items: center
+    justify-content: space-between
+    .reset_btn
+      color: $MAIN_COLOR
+      cursor: pointer
+      &.disabled
+        color: $DISABLE_COLOR
+        cursor: not-allowed
   .sample-input
     position: relative
     &.valid

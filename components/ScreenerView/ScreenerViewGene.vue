@@ -288,7 +288,8 @@
       *[class^="multiselect__option"]
         &:after
           content: none
-
+    .filter + .filter
+      margin-top: 30px
     .filter_TPM, .filter_specificity_ROKU, .filter_specificity_tau
       table
         thead
@@ -296,13 +297,6 @@
             font-size: 12px
             font-weight: initial
             text-align: initial
-          .reset
-            text-align: right
-            color: $MAIN_COLOR
-            cursor: pointer
-            &.disabled
-              color: $DISABLE_COLOR
-              cursor: not-allowed
         tbody
           td
             &.warning
