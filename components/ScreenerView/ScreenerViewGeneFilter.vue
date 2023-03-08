@@ -69,7 +69,7 @@
                   </option>
                   <template v-if="column.id === 'group'">
                     <option
-                      v-for="option in groupOptions"
+                      v-for="option of Object.values(availableGroups)"
                       :key="option.id"
                       :value="option.id"
                     >
@@ -218,43 +218,29 @@
           .map(({ isSampleSelected }) => isSampleSelected)
           .every(Boolean);
       },
-      groupOptions() {
-        const optionsMap = {
-          humanFantom5: this.datasets[0].datasets[0].specificity,
-          gtexV8: this.datasets[0].datasets[1].specificity,
-          mouseFantom5: this.datasets[1].datasets[0].specificity,
-        };
-        return (
-          optionsMap[this.activeDataset.dataset] || [
-            { label: 'No useable option found' },
-          ]
-        );
+      availableGroups() {
+        const activeDataset = this.activeDataset.dataset;
+        return this.datasetSamples.bySubDataset[activeDataset];
       },
       resetIsDisabled() {
         return this.list.length === 1 && this.isDefaultItem(this.list[0]);
       },
-      humanSampleMap() {
-        return {
-          adultTissues: this.datasets[0].datasets[0].specificity[0].samples,
-          epithelialCells: this.datasets[0].datasets[0].specificity[1].samples,
-          allTissues: this.datasets[0].datasets[1].specificity[0].samples,
-          brainSubRegions: this.datasets[0].datasets[1].specificity[1].samples,
-        };
-      },
-
       datasetSamples() {
-        const obj = {};
-        const humanDataset = this.datasets[0].datasets;
-        for (const [specId, subDataset] of Object.entries(humanDataset)) {
-          obj[subDataset.dataset] = {};
-          obj[subDataset.dataset].allSamples = [];
-          for (const spec of subDataset.specificity) {
-            spec.samples.map(sample => (sample.group = spec.id));
-            obj[subDataset.dataset][spec.id] = spec;
-            obj[subDataset.dataset].allSamples.push(...spec.samples);
+        const subDatasetSamples = {};
+        const defaultSamples = {};
+        const speciesDatasets = this.datasets;
+        for (const speciesDataset of speciesDatasets) {
+          for (const subDataset of speciesDataset.datasets) {
+            subDatasetSamples[subDataset.dataset] = {};
+            defaultSamples[subDataset.dataset] = [];
+            for (const spec of subDataset.specificity) {
+              spec.samples.forEach(sample => (sample.group = spec.id));
+              subDatasetSamples[subDataset.dataset][spec.id] = spec;
+              defaultSamples[subDataset.dataset].push(...spec.samples);
+            }
           }
         }
-        return obj;
+        return { bySubDataset: subDatasetSamples, byDefault: defaultSamples };
       },
     },
     mounted() {
@@ -312,16 +298,17 @@
       autocompleteItems(index, userInput, selectedGroup) {
         const activeDateset = this.activeDataset.dataset;
         const unsortedSamples = () => {
-          const defaultList = JSON.parse(
-            JSON.stringify(this.datasetSamples[activeDateset].allSamples)
-          );
           try {
             return JSON.parse(
               JSON.stringify(
-                this.datasetSamples[activeDateset][selectedGroup]?.samples
+                this.datasetSamples.bySubDataset[activeDateset][selectedGroup]
+                  .samples
               )
             );
           } catch (error) {
+            const defaultList = JSON.parse(
+              JSON.stringify(this.datasetSamples.byDefault[activeDateset])
+            );
             return defaultList;
           }
         };
