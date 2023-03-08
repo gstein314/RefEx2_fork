@@ -142,6 +142,7 @@
                   :placeholder="column.placeholder"
                   :min="column.min"
                   :max="column.max"
+                  :step="0.1"
                   @input="dispatchAction('ADD', itemIndex, column.id)"
                 />
               </td>

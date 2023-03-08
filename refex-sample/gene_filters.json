@@ -38,7 +38,9 @@
         "name": "Cutoff (0-1)",
         "id": "cutoff",
         "placeholder": "0.1",
-        "inputType": "text"
+        "inputType": "number",
+        "min": "0",
+        "max": "1"
       },
       {
         "name": "Condition",
@@ -161,7 +163,9 @@
         "name": "Cutoff (0-1)",
         "id": "cutoff",
         "placeholder": "0.1",
-        "inputType": "text"
+        "inputType": "number",
+        "min": "0",
+        "max": "1"
       },
       {
         "name": "Condition",
