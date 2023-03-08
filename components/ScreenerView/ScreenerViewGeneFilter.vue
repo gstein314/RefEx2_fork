@@ -244,10 +244,11 @@
       datasetSamples() {
         const obj = {};
         const humanDataset = this.datasets[0].datasets;
-        for (const subDataset of humanDataset) {
+        for (const [specId, subDataset] of Object.entries(humanDataset)) {
           obj[subDataset.dataset] = {};
           obj[subDataset.dataset].allSamples = [];
           for (const spec of subDataset.specificity) {
+            spec.samples.map(sample => (sample.group = spec.id));
             obj[subDataset.dataset][spec.id] = spec;
             obj[subDataset.dataset].allSamples.push(...spec.samples);
           }
