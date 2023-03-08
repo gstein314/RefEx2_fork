@@ -93,7 +93,7 @@
                 >
                   <vue-simple-suggest
                     ref="sampleInputs"
-                    v-model.trim="item[column.id]"
+                    v-model.trim="item[column.id].input"
                     display-attribute="description"
                     value-attribute="id"
                     :styles="autoCompleteStyle(item)"
@@ -126,7 +126,7 @@
                         v-html="
                           $highlightedSuggestion(
                             suggestion.description,
-                            item[column.id],
+                            item[column.id].input,
                             2
                           )
                         "
@@ -214,12 +214,12 @@
         return obj;
       },
       isSelectedArray() {
-        return this.list.map(({ isSampleSelected }) => isSampleSelected);
+        return this.list.map(({ sample }) => sample.isSelected);
       },
       eachSampleIsSelected() {
         return this.list
           .filter(item => !this.isDefaultItem(item))
-          .map(({ isSampleSelected }) => isSampleSelected)
+          .map(({ sample }) => sample.isSelected)
           .every(Boolean);
       },
       availableGroups() {
@@ -269,19 +269,22 @@
         return this.isDefaultItem(targetItem) || targetItem[column] !== '';
       },
       autoCompleteStyle(item) {
-        const { isSampleSelected } = item;
-        if (!isSampleSelected && !this.isDefaultItem(item)) {
+        const { isSelected } = item.sample;
+        if (!isSelected && !this.isDefaultItem(item)) {
           return { defaultInput: 'warning' };
         }
       },
       dispatchAction(action, index, column) {
         const numOfItems = this.list.length;
-        const defaultItemCopy = { ...this.defaultItem };
+        const defaultItemCopy = JSON.parse(JSON.stringify(this.defaultItem));
         const targetItem = this.getTargetItem(index);
         const setNewList = () =>
           this.list.splice(0, numOfItems, defaultItemCopy);
         const shouldAddNewItem = () => {
-          const inputField = targetItem[column];
+          let inputField;
+          if (['sample'].includes(column)) {
+            inputField = targetItem[column].input;
+          } else inputField = targetItem[column];
           const hasNonSpaceInput = inputField.trim().length > 0;
           const hasNextItem = this.getTargetItem(index + 1) ? true : false;
           return hasNonSpaceInput && !hasNextItem;
@@ -359,9 +362,9 @@
         switch (action) {
           case 'ADD':
             if (sampleInput) {
-              Object.assign(targetItem, {
-                sampleId: id,
-                sampleDescription: description,
+              Object.assign(targetItem.sample, {
+                id: id,
+                description: description,
                 isSampleSelected: true,
               });
               setTimeout(() => sampleInput.inputElement.blur(), 10);
@@ -371,11 +374,11 @@
             if (sampleInput?.selected) {
               sampleInput.setText('');
               sampleInput.selected = null;
-              Object.assign(targetItem, {
-                sample: '',
-                sampleId: '',
-                sampleDescription: '',
-                isSampleSelected: false,
+              Object.assign(targetItem.sample, {
+                input: '',
+                id: '',
+                description: '',
+                isSelected: false,
               });
               if (isSampleField) {
                 targetItem.group = '';

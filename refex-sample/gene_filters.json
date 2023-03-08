@@ -5,13 +5,15 @@
     "id": "filter_TPM",
     "list": [],
     "defaultItem": {
-      "sample": "",
-      "sampleId": "",
-      "sampleDescription": "",
+      "sample": {
+        "input": "",
+        "id": "",
+        "description": "",
+        "isSelected": false
+      },
       "cutoff": "",
       "condition": "",
-      "statistic": "",
-      "isSampleSelected": false
+      "statistic": ""
     },
     "columns": [
       {
@@ -56,13 +58,15 @@
     "list": [],
     "defaultItem": {
       "group": "",
-      "sample": "",
-      "sampleId": "",
-      "sampleDescription": "",
+      "sample": {
+        "input": "",
+        "id": "",
+        "description": "",
+        "isSelected": false
+      },
       "horl": "",
       "emin": "",
-      "emax": "",
-      "isSampleSelected": false
+      "emax": ""
     },
     "columns": [
       {
