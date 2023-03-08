@@ -281,10 +281,9 @@
         const setNewList = () =>
           this.list.splice(0, numOfItems, defaultItemCopy);
         const shouldAddNewItem = () => {
-          let inputField;
-          if (['sample'].includes(column)) {
-            inputField = targetItem[column].input;
-          } else inputField = targetItem[column];
+          const inputField = ['sample'].includes(column)
+            ? targetItem[column].input
+            : targetItem[column];
           const hasNonSpaceInput = inputField.trim().length > 0;
           const hasNextItem = this.getTargetItem(index + 1) ? true : false;
           return hasNonSpaceInput && !hasNextItem;
@@ -359,32 +358,27 @@
         const { id, description } = sampleInput?.selected || {};
         const isSampleField = e?.target.localName === 'input';
 
-        switch (action) {
-          case 'ADD':
-            if (sampleInput) {
-              Object.assign(targetItem.sample, {
-                id: id,
-                description: description,
-                isSelected: true,
-              });
-              setTimeout(() => sampleInput.inputElement.blur(), 10);
-            }
-            break;
-          case 'CLEAR':
-            if (sampleInput?.selected) {
-              sampleInput.setText('');
-              sampleInput.selected = null;
-              Object.assign(targetItem.sample, {
-                input: '',
-                id: '',
-                description: '',
-                isSelected: false,
-              });
-              if (isSampleField && targetItem.group) {
-                targetItem.group = '';
-              }
-            }
-            break;
+        if (action === 'ADD' && sampleInput) {
+          Object.assign(targetItem.sample, {
+            id: id,
+            description: description,
+            isSelected: true,
+          });
+          setTimeout(() => sampleInput.inputElement.blur(), 10);
+        }
+
+        if (action === 'CLEAR' && sampleInput?.selected) {
+          sampleInput.setText('');
+          sampleInput.selected = null;
+          Object.assign(targetItem.sample, {
+            input: '',
+            id: '',
+            description: '',
+            isSelected: false,
+          });
+          if (isSampleField && targetItem.group) {
+            targetItem.group = '';
+          }
         }
       },
       setGroupOption(index) {
