@@ -317,11 +317,12 @@
         const sortSamplesByDescription = (a, b) =>
           a.description.localeCompare(b.description);
         const sortedSamples = unsortedSamples()?.sort(sortSamplesByDescription);
-        const nonWordAndSpace = /[^\w\s]/g;
-        const toAlphaNum = userInput?.replace(nonWordAndSpace, '');
-        const wordArray = toAlphaNum.replace(/\s\s+/g, ' ').split(' ');
+        const nonWordDigitSpace = /[^\w\s]/g;
+        const toAlphaNum = userInput?.replace(nonWordDigitSpace, '');
+        const twoSpacesOrMore = /\s\s+/g;
+        const wordArray = toAlphaNum.replace(twoSpacesOrMore, ' ').split(' ');
         const filteredSamples = sortedSamples.filter(sample => {
-          const toAlphaNum = sample.description.replace(nonWordAndSpace, '');
+          const toAlphaNum = sample.description.replace(nonWordDigitSpace, '');
           return wordArray.every(input =>
             toAlphaNum.toLowerCase().includes(input.toLowerCase())
           );
