@@ -56,10 +56,10 @@
                   v-model="item[column.id]"
                   required
                   @change="
-                    () => {
+                    e => {
                       dispatchAction('ADD', itemIndex, column.id);
                       if (column.id === 'group') {
-                        setSelectedSample(itemIndex, 'CLEAR');
+                        setSelectedSample(itemIndex, 'CLEAR', e);
                       }
                     }
                   "
@@ -112,7 +112,7 @@
                       }
                     "
                     @input="dispatchAction('ADD', itemIndex, column.id)"
-                    @focus="setSelectedSample(itemIndex, 'CLEAR')"
+                    @focus="e => setSelectedSample(itemIndex, 'CLEAR', e)"
                   >
                     <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
                     <!-- eslint-disable vue/no-unused-vars -->
@@ -337,10 +337,11 @@
         updateSuggestions();
         return filteredSamples;
       },
-      setSelectedSample(index, action) {
+      setSelectedSample(index, action, e) {
         const targetItem = this.getTargetItem(index);
         const sampleInput = this.$refs.sampleInputs?.[index];
         const { id, description } = sampleInput?.selected || {};
+        const isSampleField = e?.target.localName === 'input';
 
         switch (action) {
           case 'ADD':
@@ -362,8 +363,10 @@
                 sampleId: '',
                 sampleDescription: '',
                 isSampleSelected: false,
-                group: '',
               });
+              if (isSampleField) {
+                targetItem.group = '';
+              }
             }
             break;
         }
