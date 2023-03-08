@@ -105,7 +105,11 @@
                     :min-length="0"
                     :placeholder="column.placeholder"
                     class="text_search_name"
-                    @select="setSelectedSample(itemIndex, true)"
+                    @select="
+                      e => {
+                        setSelectedSample(itemIndex, true, null, e);
+                      }
+                    "
                     @input="dispatchAction('ADD', itemIndex, column.id)"
                     @focus="setSelectedSample(itemIndex, false)"
                   >
@@ -236,6 +240,7 @@
           brainSubRegions: this.datasets[0].datasets[1].specificity[1].samples,
         };
       },
+
       datasetSamples() {
         const obj = {};
         const humanDataset = this.datasets[0].datasets;
@@ -303,15 +308,15 @@
         }
       },
       autocompleteItems(index, userInput, selectedGroup) {
-        const selectedDataset = this.activeDataset.dataset;
+        const activeDateset = this.activeDataset.dataset;
         const unsortedSamples = () => {
           const defaultList = JSON.parse(
-            JSON.stringify(this.datasetSamples[selectedDataset].allSamples)
+            JSON.stringify(this.datasetSamples[activeDateset].allSamples)
           );
           try {
             return JSON.parse(
               JSON.stringify(
-                this.datasetSamples[selectedDataset][selectedGroup]?.samples
+                this.datasetSamples[activeDateset][selectedGroup]?.samples
               )
             );
           } catch (error) {
@@ -336,11 +341,12 @@
         }
         return filteredSamples;
       },
-      setSelectedSample(index, bool, sample, e) {
+      setSelectedSample(index, addSelected, sample, e) {
         const targetItem = this.getTargetItem(index);
+        const activeDateset = this.activeDataset.dataset;
         if (!this.$refs.sampleInputs) return;
         const sampleInput = this.$refs.sampleInputs[index];
-        if (bool) {
+        if (addSelected) {
           const { id, description } = sampleInput.selected;
           Object.assign(targetItem, {
             sampleId: id,
@@ -350,22 +356,25 @@
           setTimeout(() => sampleInput.inputElement.blur(), 10);
           return;
         }
-        const isSampleInTargetGroup = () => {
-          if (e) {
-            const selectedGroup = _.camelCase(e.target.value);
-            const groupSamples = this.humanSampleMap?.[selectedGroup];
-            if (groupSamples) {
-              return groupSamples
-                .map(sample => sample.description)
-                .includes(sample);
-            }
-          }
-          return false;
-        };
-        if (isSampleInTargetGroup()) {
-          targetItem.group = e.target.value;
-          return;
+        if (e) {
+          const groupId = e.target.value;
+          console.log(groupId);
+          console.log(this.datasetSamples[activeDateset]);
+          const selectedDataset =
+            this.datasetSamples[activeDateset][groupId].samples;
+          const sampleIsInDataset = selectedDataset
+            .map(sample => sample.id)
+            .includes(targetItem.sampleId);
+          console.log(sampleIsInDataset);
+          if (!sampleIsInDataset) {
+            targetItem.sample = '';
+          } else return;
         }
+
+        // if (isSampleInTargetGroup()) {
+        //   targetItem.group = 'humanFantom5Spec001';
+        //   return;
+        // }
         if (sampleInput.selected) {
           sampleInput.setText('');
           sampleInput.selected = null;
