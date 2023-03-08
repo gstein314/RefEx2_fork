@@ -261,9 +261,12 @@
         const { id, min, max } = column;
         const isWithinRange =
           numInput >= parseInt(min) && numInput <= parseInt(max);
-        this.getTargetItem(index)[id] = isWithinRange
-          ? numInput.toString()
-          : '';
+        const toOneDecimal = () => {
+          let text = numInput.toString();
+          const tenthsIndex = text.indexOf('.') + 1;
+          return text.substring(0, tenthsIndex + 1);
+        };
+        this.getTargetItem(index)[id] = isWithinRange ? toOneDecimal() : '';
       },
       getTargetItem(index) {
         return this.list[index];
