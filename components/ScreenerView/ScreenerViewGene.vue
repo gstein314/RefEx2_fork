@@ -293,6 +293,7 @@
     .filter_TPM, .filter_specificity_ROKU, .filter_specificity_tau
       table
         thead
+          height: 30px
           th
             font-size: 12px
             font-weight: initial
