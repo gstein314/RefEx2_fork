@@ -325,20 +325,23 @@
       },
       setSelectedSample(index, action) {
         const targetItem = this.getTargetItem(index);
-        if (!this.$refs.sampleInputs) return;
-        const sampleInput = this.$refs.sampleInputs[index];
-        const { id, description } = sampleInput.selected;
+        const sampleInput = this.$refs.sampleInputs?.[index];
+        const { id, description } = sampleInput?.selected || {};
+
         switch (action) {
           case 'ADD':
-            Object.assign(targetItem, {
-              sampleId: id,
-              sampleDescription: description,
-              isSampleSelected: true,
-            });
-            setTimeout(() => sampleInput.inputElement.blur(), 10);
-            return;
+            if (sampleInput) {
+              Object.assign(targetItem, {
+                sampleId: id,
+                sampleDescription: description,
+                isSampleSelected: true,
+              });
+              setTimeout(() => sampleInput.inputElement.blur(), 10);
+            }
+            break;
+
           case 'CLEAR':
-            if (sampleInput.selected) {
+            if (sampleInput?.selected) {
               sampleInput.setText('');
               sampleInput.selected = null;
               Object.assign(targetItem, {
