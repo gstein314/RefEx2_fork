@@ -270,7 +270,7 @@
       },
       autoCompleteStyle(item) {
         const { isSelected } = item.sample;
-        if (!isSelected && !this.isDefaultItem(item)) {
+        if (!this.isDefaultItem(item) && !isSelected) {
           return { defaultInput: 'warning' };
         }
       },
@@ -365,7 +365,7 @@
               Object.assign(targetItem.sample, {
                 id: id,
                 description: description,
-                isSampleSelected: true,
+                isSelected: true,
               });
               setTimeout(() => sampleInput.inputElement.blur(), 10);
             }
@@ -380,7 +380,7 @@
                 description: '',
                 isSelected: false,
               });
-              if (isSampleField) {
+              if (isSampleField && targetItem.group) {
                 targetItem.group = '';
               }
             }
