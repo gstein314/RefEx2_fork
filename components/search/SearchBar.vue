@@ -312,13 +312,11 @@
   .text_search_area
       > .search_condition_title
           display: flex
-          position: relative
+          align-items: center
+          justify-content: space-between
           > .remove_all_btn
               +button
               +sub_button
-              position: absolute
-              top: 16px
-              left: 180px
       width: 100%
       > h3
           display: flex
