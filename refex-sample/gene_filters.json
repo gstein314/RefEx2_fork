@@ -3,7 +3,19 @@
     "name": "TPM",
     "type": "TPM",
     "id": "filter_TPM",
-    "list": [],
+    "list": [
+      {
+        "sample": {
+          "input": "",
+          "id": "",
+          "description": "",
+          "isSelected": false
+        },
+        "cutoff": "",
+        "condition": "",
+        "statistic": ""
+      }
+    ],
     "defaultItem": {
       "sample": {
         "input": "",
@@ -55,7 +67,20 @@
     "name": "Tissue specificity (ROKU)",
     "type": "ROKU",
     "id": "filter_specificity_ROKU",
-    "list": [],
+    "list": [
+      {
+        "group": "",
+        "sample": {
+          "input": "",
+          "id": "",
+          "description": "",
+          "isSelected": false
+        },
+        "horl": "",
+        "emin": "",
+        "emax": ""
+      }
+    ],
     "defaultItem": {
       "group": "",
       "sample": {
@@ -113,7 +138,13 @@
     "name": "Tissue specificity (tau)",
     "type": "tau",
     "id": "filter_specificity_tau",
-    "list": [],
+    "list": [
+      {
+        "group": "",
+        "cutoff": "",
+        "condition": ""
+      }
+    ],
     "defaultItem": {
       "group": "",
       "cutoff": "",
