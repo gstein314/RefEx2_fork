@@ -100,12 +100,12 @@
                     class="text_search_name"
                     @select="
                       () => {
-                        setSelectedSample(itemIndex, true);
+                        setSelectedSample(itemIndex, 'ADD');
                         setGroupOption(itemIndex);
                       }
                     "
                     @input="dispatchAction('ADD', itemIndex, column.id)"
-                    @focus="setSelectedSample(itemIndex, false)"
+                    @focus="setSelectedSample(itemIndex, 'CLEAR')"
                   >
                     <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
                     <!-- eslint-disable vue/no-unused-vars -->
@@ -323,31 +323,33 @@
         }
         return filteredSamples;
       },
-      setSelectedSample(index, bool) {
+      setSelectedSample(index, action) {
         const targetItem = this.getTargetItem(index);
-        const activeDateset = this.activeDataset.dataset;
         if (!this.$refs.sampleInputs) return;
         const sampleInput = this.$refs.sampleInputs[index];
-        const shouldAddSelected = bool;
-        if (shouldAddSelected) {
-          const { id, description } = sampleInput.selected;
-          Object.assign(targetItem, {
-            sampleId: id,
-            sampleDescription: description,
-            isSampleSelected: true,
-          });
-          setTimeout(() => sampleInput.inputElement.blur(), 10);
-          return;
-        }
-        if (sampleInput.selected) {
-          sampleInput.setText('');
-          sampleInput.selected = null;
-          Object.assign(targetItem, {
-            sample: '',
-            sampleId: '',
-            sampleDescription: '',
-            isSampleSelected: false,
-          });
+        const { id, description } = sampleInput.selected;
+        switch (action) {
+          case 'ADD':
+            Object.assign(targetItem, {
+              sampleId: id,
+              sampleDescription: description,
+              isSampleSelected: true,
+            });
+            setTimeout(() => sampleInput.inputElement.blur(), 10);
+            return;
+          case 'CLEAR':
+            if (sampleInput.selected) {
+              sampleInput.setText('');
+              sampleInput.selected = null;
+              Object.assign(targetItem, {
+                sample: '',
+                sampleId: '',
+                sampleDescription: '',
+                isSampleSelected: false,
+                group: '',
+              });
+            }
+            break;
         }
       },
       setGroupOption(index) {
