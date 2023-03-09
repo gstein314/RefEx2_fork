@@ -117,7 +117,6 @@
       onEvent: false,
       isSummaryIncluded: false,
       isReloadActive: false,
-      isLoading: false,
       validSearch: false,
       // either 'all' or 'numfound'
       typeOfQuery: 'numfound',
@@ -131,6 +130,7 @@
     },
     data() {
       return {
+        isLoading: false,
         currentSearchCondition: '',
         ...initialState(),
       };
