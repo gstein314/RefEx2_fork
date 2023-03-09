@@ -108,6 +108,22 @@
   import { mapGetters } from 'vuex';
   import { mapMutations } from 'vuex';
 
+  const initialState = () => {
+    return {
+      parameters: {
+        go: '',
+        text: '',
+      },
+      onEvent: false,
+      isSummaryIncluded: false,
+      isReloadActive: false,
+      isLoading: false,
+      validSearch: false,
+      // either 'all' or 'numfound'
+      typeOfQuery: 'numfound',
+    };
+  };
+
   export default {
     components: {
       VueSimpleSuggest,
@@ -115,18 +131,8 @@
     },
     data() {
       return {
-        parameters: {
-          text: '',
-        },
-        onEvent: false,
-        isSummaryIncluded: false,
-        isReloadActive: false,
-        isLoading: false,
-        validSearch: false,
-        // either 'all' or 'numfound'
-        typeOfQuery: 'numfound',
         currentSearchCondition: '',
-        isInitialState: true,
+        ...initialState(),
       };
     },
     computed: {
@@ -187,6 +193,12 @@
         return `{${this.queryPrefix}${
           this.isNum ? 'Numfound' : ''
         }${params}${resultParams}${suffix}}`;
+      },
+      isInitialState() {
+        const defaultState = initialState();
+        return Object.keys(defaultState).every(key =>
+          _.isEqual(this.$data[key], defaultState[key])
+        );
       },
     },
     watch: {
@@ -303,14 +315,13 @@
             return 'liver';
         }
       },
+      resetComponent() {
+        Object.assign(this.$data, initialState());
+      },
       resetAllSearchConditions() {
-        this.parameters.text = '';
+        this.resetComponent();
         const screenerViewChild = this.$refs.screenerView.$children[0];
         screenerViewChild.resetComponent();
-        this.isInitialState = false;
-      },
-      setIsInitialState(bool) {
-        this.isInitialState = bool;
       },
     },
   };
