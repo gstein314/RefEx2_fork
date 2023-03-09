@@ -310,7 +310,6 @@
         this.isInitialState = false;
       },
       setIsInitialState(bool) {
-        console.log('listen', bool);
         this.isInitialState = bool;
       },
     },

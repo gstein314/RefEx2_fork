@@ -183,12 +183,10 @@
         return this.chrValue.join();
       },
       isInitialState() {
-        for (const [key, value] of Object.entries(initialState())) {
-          if (!_.isEqual(this.$data[key], value)) {
-            return false;
-          }
-        }
-        return true;
+        const defaultState = initialState();
+        return Object.keys(defaultState).every(key =>
+          _.isEqual(this.$data[key], defaultState[key])
+        );
       },
     },
     watch: {
@@ -199,8 +197,6 @@
         };
       },
       isInitialState(newVal) {
-        console.log('change');
-        console.log('isInitialState', newVal);
         this.$emit('setIsInitialState', newVal);
       },
       parameters() {
