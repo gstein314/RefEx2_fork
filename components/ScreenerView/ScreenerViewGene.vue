@@ -183,15 +183,11 @@
       },
       isInitialState() {
         for (const [key, value] of Object.entries(initialState())) {
-          if (_.isEqual(this.$data[key], value)) {
-            console.log('same');
+          if (!_.isEqual(this.$data[key], value)) {
+            return false;
           }
-          // console.log('🚀 > isInitialState > value:', value);
-          // console.log('🚀 > isInitialState > this.$data[key]:', {
-          //   ...this.$data[key],
-          // });
         }
-        return 0;
+        return true;
       },
     },
     watch: {
@@ -200,6 +196,11 @@
         this.parameters = {
           go: [],
         };
+      },
+      isInitialState(newVal) {
+        console.log('change');
+        console.log('isInitialState', newVal);
+        this.$emit('setIsInitialState', newVal);
       },
       parameters() {
         this.$emit('updateParameters', { go: this.goTermString });

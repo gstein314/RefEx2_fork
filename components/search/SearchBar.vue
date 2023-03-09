@@ -4,7 +4,12 @@
   <div class="text_search_area">
     <div class="search_condition_title">
       <h2>Search Conditions</h2>
-      <button class="reset_all_btn" @click="resetAllSearchConditions">
+      <button
+        class="reset_all_btn"
+        :class="{ disabled: isInitialState }"
+        :disabled="isInitialState"
+        @click="resetAllSearchConditions"
+      >
         <font-awesome-icon icon="rotate-right" />
         Reset all
       </button>
@@ -92,6 +97,7 @@
       <component
         :is="`screener-view-${filterType}`"
         @updateParameters="updateParams"
+        @setIsInitialState="setIsInitialState"
       ></component>
     </ScreenerView>
   </div>
@@ -120,6 +126,7 @@
         // either 'all' or 'numfound'
         typeOfQuery: 'numfound',
         currentSearchCondition: '',
+        isInitialState: true,
       };
     },
     computed: {
@@ -300,6 +307,11 @@
         this.parameters.text = '';
         const screenerViewChild = this.$refs.screenerView.$children[0];
         screenerViewChild.resetComponent();
+        this.isInitialState = false;
+      },
+      setIsInitialState(bool) {
+        console.log('listen', bool);
+        this.isInitialState = bool;
       },
     },
   };
