@@ -132,12 +132,6 @@
 
   const initialState = () => {
     return {
-      autocompleteStaticData: {},
-      chrValue: [],
-      TOGValue: [],
-      chrCheckedValue: [],
-      chrOptions: [],
-      TOGOptions: [],
       // only used in this component
       temporaryParameters: {
         goTerm: '',
@@ -150,7 +144,6 @@
       autoComplete: {
         go: [],
       },
-      debounce: null,
       hideCaret: false,
       geneFilters: JSON.parse(JSON.stringify(geneFilters)),
       datasets: JSON.parse(JSON.stringify(datasets)),
@@ -160,7 +153,16 @@
   export default {
     components: { MultiSelect, ScreenerViewGeneFilter },
     data() {
-      return initialState();
+      return {
+        autocompleteStaticData: {},
+        chrValue: [],
+        TOGValue: [],
+        chrCheckedValue: [],
+        chrOptions: [],
+        TOGOptions: [],
+        debounce: null,
+        ...initialState(),
+      };
     },
     computed: {
       ...mapGetters({
@@ -194,9 +196,8 @@
       this.getAutoCompleteData().then(() => {});
     },
     methods: {
-      async resetComponent() {
+      resetComponent() {
         Object.assign(this.$data, initialState());
-        await this.getAutoCompleteData().then(() => {});
       },
       getAutoCompleteData() {
         return this.$axios
