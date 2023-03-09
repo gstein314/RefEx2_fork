@@ -4,7 +4,7 @@
   <div class="text_search_area">
     <div class="search_condition_title">
       <h2>Search Conditions</h2>
-      <button class="reset_all_btn" @click="resetSearchConditions">
+      <button class="reset_all_btn" @click="resetAllSearchConditions">
         <font-awesome-icon icon="rotate-right" />
         Reset all
       </button>
@@ -296,7 +296,7 @@
             return 'liver';
         }
       },
-      resetSearchConditions() {
+      resetAllSearchConditions() {
         this.parameters.text = '';
         const screenerViewChild = this.$refs.screenerView.$children[0];
         screenerViewChild.resetComponent();
