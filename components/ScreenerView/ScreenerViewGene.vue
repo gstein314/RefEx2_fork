@@ -131,6 +131,9 @@
   import datasets from '~/refex-sample/datasets.json';
   import _ from 'lodash';
 
+  const stringifiedGeneFilters = JSON.stringify(geneFilters);
+  const stringifiedDatasets = JSON.stringify(datasets);
+
   const initialState = () => {
     return {
       chrValue: [],
@@ -148,8 +151,8 @@
         go: [],
       },
       hideCaret: false,
-      geneFilters: JSON.parse(JSON.stringify(geneFilters)),
-      datasets: JSON.parse(JSON.stringify(datasets)),
+      geneFilters: JSON.parse(stringifiedGeneFilters),
+      datasets: JSON.parse(stringifiedDatasets),
     };
   };
 
