@@ -1,12 +1,6 @@
 <template>
   <div v-show="isActive" class="filter_tab">
-    <main
-      @keyup.enter="
-        () => {
-          if (validSearch) showSearchResult($vnode.key);
-        }
-      "
-    >
+    <main @keyup.enter="enterKeySearch($vnode.key)">
       <SearchBar
         :key="`${$vnode.key}_search`"
         :ref="`${$vnode.key}_search`"
@@ -119,6 +113,9 @@
       showSearchResult(vnodeKey) {
         this.$refs[`${vnodeKey}_search`].showResults('all');
         this.validSearch = false;
+      },
+      enterKeySearch(vnodeKey) {
+        if (this.validSearch) this.showSearchResult(vnodeKey);
       },
     },
   };
