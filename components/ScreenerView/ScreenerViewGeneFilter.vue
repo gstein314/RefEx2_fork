@@ -249,7 +249,7 @@
             subDatasetSamples[subDataset.dataset] = {};
             defaultSamples[subDataset.dataset] = [];
             for (const spec of subDataset.specificity) {
-              spec.samples.forEach(sample => (sample.group = spec.id));
+              // spec.samples.forEach(sample => (sample.group = spec.id));
               subDatasetSamples[subDataset.dataset][spec.id] = spec;
               defaultSamples[subDataset.dataset].push(...spec.samples);
             }

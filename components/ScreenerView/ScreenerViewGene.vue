@@ -129,6 +129,7 @@
   import ScreenerViewGeneFilter from './ScreenerViewGeneFilter.vue';
   import geneFilters from '~/refex-sample/gene_filters.json';
   import datasets from '~/refex-sample/datasets.json';
+  import _ from 'lodash';
 
   const initialState = () => {
     return {
@@ -179,6 +180,18 @@
       },
       selection() {
         return this.chrValue.join();
+      },
+      isInitialState() {
+        for (const [key, value] of Object.entries(initialState())) {
+          if (_.isEqual(this.$data[key], value)) {
+            console.log('same');
+          }
+          // console.log('🚀 > isInitialState > value:', value);
+          // console.log('🚀 > isInitialState > this.$data[key]:', {
+          //   ...this.$data[key],
+          // });
+        }
+        return 0;
       },
     },
     watch: {
