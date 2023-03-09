@@ -51,7 +51,8 @@
                 v-for="column in columns"
                 :key="column.id"
                 :class="{
-                  warning: !isValidInput(column.id, itemIndex),
+                  warning:
+                    column.isRequired && !isValidInput(column.id, itemIndex),
                 }"
               >
                 <select
