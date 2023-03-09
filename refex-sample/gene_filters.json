@@ -31,12 +31,14 @@
       {
         "name": "Sample",
         "id": "sample",
+        "isRequired": true,
         "placeholder": "search by keywords",
         "inputType": "text"
       },
       {
         "name": "Cutoff (0-1)",
         "id": "cutoff",
+        "isRequired": true,
         "placeholder": "0.1",
         "inputType": "number",
         "min": "0",
@@ -45,6 +47,7 @@
       {
         "name": "Condition",
         "id": "condition",
+        "isRequired": true,
         "placeholder": "<",
         "inputType": "dropdown",
         "options": [
@@ -56,6 +59,7 @@
       {
         "name": "Statistic",
         "id": "statistic",
+        "isRequired": true,
         "placeholder": "max(TPM)",
         "inputType": "dropdown",
         "options": [
@@ -99,18 +103,21 @@
       {
         "name": "Group",
         "id": "group",
+        "isRequired": true,
         "placeholder": "All groups",
         "inputType": "dropdown"
       },
       {
         "name": "Sample",
         "id": "sample",
+        "isRequired": true,
         "placeholder": "search by keywords",
         "inputType": "text"
       },
       {
         "name": "High or Low",
         "id": "horl",
+        "isRequired": true,
         "placeholder": "High",
         "inputType": "dropdown",
         "options": [
@@ -121,6 +128,7 @@
       {
         "name": "Entropy-min (Optional)",
         "id": "emin",
+        "isRequired": false,
         "placeholder": "1",
         "inputType": "number",
         "min": "1",
@@ -129,6 +137,7 @@
       {
         "name": "Entropy-max (Optional)",
         "id": "emax",
+        "isRequired": false,
         "placeholder": "5",
         "inputType": "number",
         "min": "1",
@@ -156,12 +165,14 @@
       {
         "name": "Group",
         "id": "group",
+        "isRequired": true,
         "placeholder": "select a group",
         "inputType": "dropdown"
       },
       {
         "name": "Cutoff (0-1)",
         "id": "cutoff",
+        "isRequired": true,
         "placeholder": "0.1",
         "inputType": "number",
         "min": "0",
@@ -170,6 +181,7 @@
       {
         "name": "Condition",
         "id": "condition",
+        "isRequired": true,
         "placeholder": "<",
         "inputType": "dropdown",
         "options": [
