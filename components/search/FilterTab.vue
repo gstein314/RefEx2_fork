@@ -115,7 +115,12 @@
         this.validSearch = false;
       },
       enterKeySearch(vnodeKey) {
-        if (this.validSearch) this.showSearchResult(vnodeKey);
+        if (this.validSearch) {
+          this.showSearchResult(vnodeKey);
+          this.$refs[
+            `${vnodeKey}_search`
+          ].$refs.searchInput.inputElement.blur();
+        }
       },
     },
   };
