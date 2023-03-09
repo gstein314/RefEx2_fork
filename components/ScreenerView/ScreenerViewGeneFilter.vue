@@ -418,6 +418,14 @@
 </script>
 
 <style lang="sass">
+  tbody
+    td
+      &.warning
+        input, select
+          +warning_field
+    .text_search_name input
+      &.warning
+        +warning_field
   .filter_title
     display: flex
     align-items: center

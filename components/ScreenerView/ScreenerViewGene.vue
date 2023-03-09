@@ -300,16 +300,10 @@
             font-weight: initial
             text-align: initial
         tbody
-          td
-            &.warning
-              input, select
-                +warning_field
           input, select
             height: 2.25em
           .text_search_name input
             font-size: 20px
-            &.warning
-              +warning_field
           select:required:invalid
             color: $PLACEHOLDER_COLOR
           .delete_btn
