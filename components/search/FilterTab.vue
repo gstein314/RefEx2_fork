@@ -1,6 +1,12 @@
 <template>
   <div v-show="isActive" class="filter_tab">
-    <main @keyup.enter="showSearchResult($vnode.key)">
+    <main
+      @keyup.enter="
+        () => {
+          if (validSearch) showSearchResult($vnode.key);
+        }
+      "
+    >
       <SearchBar
         :key="`${$vnode.key}_search`"
         :ref="`${$vnode.key}_search`"
