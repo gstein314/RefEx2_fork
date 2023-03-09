@@ -194,8 +194,9 @@
       this.getAutoCompleteData().then(() => {});
     },
     methods: {
-      resetComponent() {
+      async resetComponent() {
         Object.assign(this.$data, initialState());
+        await this.getAutoCompleteData().then(() => {});
       },
       getAutoCompleteData() {
         return this.$axios
