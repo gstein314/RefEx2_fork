@@ -36,6 +36,7 @@
       </span>
     </h3>
     <vue-simple-suggest
+      ref="searchInput"
       v-model.trim="parameters.text"
       :debounce="500"
       :min-length="0"
@@ -210,6 +211,9 @@
     created() {
       this.showResults('numfound');
       this.updateSearchCondition();
+    },
+    mounted() {
+      setTimeout(() => this.$refs.searchInput.inputElement.focus(), 10);
     },
     methods: {
       ...mapMutations({
