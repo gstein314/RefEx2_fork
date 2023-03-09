@@ -34,7 +34,9 @@
                 >
                   Please select from suggestion(s)
                 </WarningMessage>
-                <WarningMessage v-else-if="!isValidColumn(column.id)">
+                <WarningMessage
+                  v-else-if="column.isRequired && !isValidColumn(column.id)"
+                >
                 </WarningMessage>
               </th>
             </tr>
