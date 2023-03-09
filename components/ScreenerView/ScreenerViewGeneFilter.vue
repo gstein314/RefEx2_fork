@@ -142,7 +142,7 @@
                   :placeholder="column.placeholder"
                   :min="column.min"
                   :max="column.max"
-                  :step="0.1"
+                  step="0.1"
                   @input="
                     e => {
                       validateNumInput(itemIndex, column, e);
@@ -258,6 +258,7 @@
     methods: {
       validateNumInput(index, column, e) {
         const numInput = parseFloat(e.target.value);
+        const targetItem = this.getTargetItem(index);
         const { id, min, max } = column;
         const isWithinRange =
           numInput >= parseInt(min) && numInput <= parseInt(max);
@@ -266,7 +267,9 @@
           const tenthsIndex = text.indexOf('.') + 1;
           return text.substring(0, tenthsIndex + 1);
         };
-        this.getTargetItem(index)[id] = isWithinRange ? toOneDecimal() : '';
+        targetItem[id] = isWithinRange
+          ? toOneDecimal()
+          : targetItem[id].substring(0, targetItem[id].length - 1);
       },
       getTargetItem(index) {
         return this.list[index];
