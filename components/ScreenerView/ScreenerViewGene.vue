@@ -133,6 +133,8 @@
 
   const initialState = () => {
     return {
+      chrValue: [],
+      TOGValue: [],
       // only used in this component
       temporaryParameters: {
         goTerm: '',
@@ -156,8 +158,7 @@
     data() {
       return {
         autocompleteStaticData: {},
-        chrValue: [],
-        TOGValue: [],
+
         chrCheckedValue: [],
         chrOptions: [],
         TOGOptions: [],
