@@ -147,9 +147,6 @@
         go: [],
       },
       // will contain same keys as parameters. Autocompletion that does not come from the API should be hardcoded here in advance
-      autoComplete: {
-        go: [],
-      },
       hideCaret: false,
       geneFilters: JSON.parse(stringifiedGeneFilters),
       datasets: JSON.parse(stringifiedDatasets),
@@ -161,7 +158,9 @@
     data() {
       return {
         autocompleteStaticData: {},
-
+        autoComplete: {
+          go: [],
+        },
         chrCheckedValue: [],
         chrOptions: [],
         TOGOptions: [],
@@ -200,7 +199,7 @@
         };
       },
       isInitialState(newVal) {
-        this.$emit('setIsInitialState', newVal);
+        this.$emit('toggleChildIsInitialState', newVal);
       },
       parameters() {
         this.$emit('updateParameters', { go: this.goTermString });

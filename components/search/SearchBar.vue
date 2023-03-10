@@ -97,7 +97,7 @@
       <component
         :is="`screener-view-${filterType}`"
         @updateParameters="updateParams"
-        @setIsInitialState="setIsInitialState"
+        @toggleChildIsInitialState="toggleChildIsInitialState"
       ></component>
     </ScreenerView>
   </div>
@@ -132,6 +132,7 @@
       return {
         isLoading: false,
         currentSearchCondition: '',
+        childIsInitialState: true,
         ...initialState(),
       };
     },
@@ -195,6 +196,7 @@
         }${params}${resultParams}${suffix}}`;
       },
       isInitialState() {
+        if (!this.childIsInitialState) return false;
         const defaultState = initialState();
         return Object.keys(defaultState).every(key =>
           _.isEqual(this.$data[key], defaultState[key])
@@ -322,6 +324,9 @@
         this.resetComponent();
         const screenerViewChild = this.$refs.screenerView.$children[0];
         screenerViewChild.resetComponent();
+      },
+      toggleChildIsInitialState(bool) {
+        this.childIsInitialState = !this.childIsInitialState;
       },
     },
   };
