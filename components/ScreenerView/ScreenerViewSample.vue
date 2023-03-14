@@ -104,6 +104,9 @@
       ...mapMutations({
         setAlertModal: 'set_alert_modal',
       }),
+      resetComponent() {
+        // Object.assign(this.$data, initialState());
+      },
       initiateParametersDataset() {
         for (const filter of this.filters) {
           const key = filter.column;
