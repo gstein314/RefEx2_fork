@@ -199,7 +199,7 @@
         };
       },
       isInitialState(newVal) {
-        this.$emit('toggleChildIsInitialState', newVal);
+        this.$emit('setChildIsInitialState', newVal);
       },
       parameters() {
         this.$emit('updateParameters', { go: this.goTermString });

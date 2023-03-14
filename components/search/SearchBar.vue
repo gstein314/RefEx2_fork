@@ -98,7 +98,7 @@
       <component
         :is="`screener-view-${filterType}`"
         @updateParameters="updateParams"
-        @toggleChildIsInitialState="toggleChildIsInitialState"
+        @setChildIsInitialState="setChildIsInitialState"
       ></component>
     </ScreenerView>
   </div>
@@ -329,8 +329,8 @@
         const screenerViewChild = this.$refs.screenerView.$children[0];
         screenerViewChild.resetComponent();
       },
-      toggleChildIsInitialState(bool) {
-        this.childIsInitialState = !this.childIsInitialState;
+      setChildIsInitialState(bool) {
+        this.childIsInitialState = bool;
       },
     },
   };
