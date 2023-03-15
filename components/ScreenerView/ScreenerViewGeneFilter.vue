@@ -453,6 +453,10 @@
     align-items: initial
     padding: 10px
     cursor: pointer
+    opacity: 0.7
+    transition: opacity 0.3s ease-in-out
+    &:hover
+      opacity: 1
   .sample-input
     position: relative
     &.valid
