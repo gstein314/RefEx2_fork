@@ -134,7 +134,8 @@
         validSearch: false,
         // either 'all' or 'numfound'
         typeOfQuery: 'numfound',
-        ...initialState(),
+        parameters: { go: '', text: '' },
+        initialParameters: { go: '', text: '' },
       };
     },
     computed: {
@@ -198,10 +199,7 @@
       },
       isInitialState() {
         if (!this.childIsInitialState) return false;
-        const defaultState = initialState();
-        return Object.keys(defaultState).every(key =>
-          _.isEqual(this.$data[key], defaultState[key])
-        );
+        return _.isEqual(this.parameters, this.initialParameters);
       },
     },
     watch: {
@@ -322,7 +320,7 @@
         }
       },
       resetComponent() {
-        Object.assign(this.$data, initialState());
+        Object.assign(this.parameters, this.initialParameters);
       },
       resetAllSearchConditions() {
         this.resetComponent();
