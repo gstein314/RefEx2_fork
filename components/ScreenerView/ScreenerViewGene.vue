@@ -274,9 +274,6 @@
 
 <style lang="sass" scoped>
   ::v-deep
-    svg[data-icon="circle-info"], .delete_all
-      color: $MAIN_COLOR
-      cursor: pointer
     .multiselect
       input
         width: auto

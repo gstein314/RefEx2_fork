@@ -155,14 +155,14 @@
                 />
               </td>
               <td class="icon">
-                <button
+                <a
                   class="delete_btn"
                   :class="{ disabled: list.length <= 1 }"
                   :disabled="list.length <= 1"
                   @click="dispatchAction('DELETE', itemIndex)"
                 >
-                  <font-awesome-icon icon="trash" />
-                </button>
+                  <font-awesome-icon icon="trash-xmark" />
+                </a>
               </td>
             </tr>
           </tbody>
@@ -423,6 +423,14 @@
 </script>
 
 <style lang="sass">
+  svg[data-icon="circle-info"], .delete_all
+    color: $MAIN_COLOR
+    cursor: pointer
+  svg[data-icon="trash-xmark"]
+    color: $ERROR_COLOR
+    cursor: pointer
+  select:required:invalid
+    color: $PLACEHOLDER_COLOR
   tbody
     td
       &.warning
@@ -441,15 +449,10 @@
       cursor: pointer
       &.disabled
         cursor: not-allowed
-  select:required:invalid
-    color: $PLACEHOLDER_COLOR
   .delete_btn
-    +button
     align-items: initial
-    padding: 13.5px 22px
+    padding: 10px
     cursor: pointer
-    svg[data-icon="circle-info"]
-      color: $MAIN_COLOR
   .sample-input
     position: relative
     &.valid
