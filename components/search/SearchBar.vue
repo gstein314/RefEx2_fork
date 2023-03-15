@@ -127,7 +127,7 @@
         // either 'all' or 'numfound'
         typeOfQuery: 'numfound',
         parameters: { text: '' },
-        initialParameters: { text: '' },
+        initialParameters: {},
       };
     },
     computed: {
