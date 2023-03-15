@@ -115,12 +115,6 @@
         go: '',
         text: '',
       },
-      onEvent: false,
-      isSummaryIncluded: false,
-      isReloadActive: false,
-      validSearch: false,
-      // either 'all' or 'numfound'
-      typeOfQuery: 'numfound',
     };
   };
 
@@ -134,6 +128,12 @@
         isLoading: false,
         currentSearchCondition: '',
         childIsInitialState: true,
+        onEvent: false,
+        isSummaryIncluded: false,
+        isReloadActive: false,
+        validSearch: false,
+        // either 'all' or 'numfound'
+        typeOfQuery: 'numfound',
         ...initialState(),
       };
     },
