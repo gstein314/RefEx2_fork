@@ -173,6 +173,7 @@
         activeDataset: 'active_dataset',
       }),
       goTermString() {
+        if (this.parameters.go.length === 0) return '';
         return this.parameters.go.map(tag => tag.id).join(', ');
       },
       placeholderGOTerm() {
@@ -207,6 +208,8 @@
     },
     async created() {
       this.getAutoCompleteData().then(() => {});
+      this.$emit('updateParameters', { go: this.goTermString });
+      this.$emit('storeInitialParameters', { go: this.goTermString });
     },
     methods: {
       resetComponent() {

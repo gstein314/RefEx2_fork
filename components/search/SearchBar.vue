@@ -98,6 +98,7 @@
       <component
         :is="`screener-view-${filterType}`"
         @updateParameters="updateParams"
+        @storeInitialParameters="storeInitialParameters"
         @setChildIsInitialState="setChildIsInitialState"
       ></component>
     </ScreenerView>
@@ -108,15 +109,6 @@
   import ScreenerView from '~/components/ScreenerView/ScreenerView.vue';
   import { mapGetters } from 'vuex';
   import { mapMutations } from 'vuex';
-
-  const initialState = () => {
-    return {
-      parameters: {
-        go: '',
-        text: '',
-      },
-    };
-  };
 
   export default {
     components: {
@@ -134,8 +126,8 @@
         validSearch: false,
         // either 'all' or 'numfound'
         typeOfQuery: 'numfound',
-        parameters: { go: '', text: '' },
-        initialParameters: { go: '', text: '' },
+        parameters: { text: '' },
+        initialParameters: { text: '' },
       };
     },
     computed: {
@@ -245,6 +237,9 @@
         this.parameters = { text: this.parameters.text, ...params };
 
         this.showResults('numfound');
+      },
+      storeInitialParameters(params) {
+        this.initialParameters = { text: '', ...params };
       },
       moveDetailpage(suggestion) {
         this.$nuxt.$loading.start();
