@@ -8,14 +8,14 @@
           icon="info-circle"
         />
       </div>
-      <a
+      <button
         class="reset_btn"
         :class="{ disabled: resetIsDisabled }"
         @click="dispatchAction('INIT')"
       >
         <font-awesome-icon icon="rotate-right" />
         Reset
-      </a>
+      </button>
     </div>
     <client-only>
       <div :class="filter.id">
@@ -437,10 +437,10 @@
     align-items: center
     justify-content: space-between
     .reset_btn
-      color: $MAIN_COLOR
+      +button
+      +sub_button
       cursor: pointer
       &.disabled
-        color: $DISABLE_COLOR
         cursor: not-allowed
   .sample-input
     position: relative
