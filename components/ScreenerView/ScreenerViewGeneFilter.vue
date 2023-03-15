@@ -162,7 +162,6 @@
                   @click="dispatchAction('DELETE', itemIndex)"
                 >
                   <font-awesome-icon icon="trash" />
-                  Delete
                 </button>
               </td>
             </tr>
@@ -442,6 +441,15 @@
       cursor: pointer
       &.disabled
         cursor: not-allowed
+  select:required:invalid
+    color: $PLACEHOLDER_COLOR
+  .delete_btn
+    +button
+    align-items: initial
+    padding: 13.5px 22px
+    cursor: pointer
+    svg[data-icon="circle-info"]
+      color: $MAIN_COLOR
   .sample-input
     position: relative
     &.valid

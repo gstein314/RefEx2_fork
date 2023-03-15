@@ -321,15 +321,6 @@
             height: 2.25em
           .text_search_name input
             font-size: 20px
-          select:required:invalid
-            color: $PLACEHOLDER_COLOR
-          .delete_btn
-            +button
-            align-items: initial
-            padding: 13.5px 22px
-            cursor: pointer
-          svg[data-icon="circle-info"]
-            color: $MAIN_COLOR
     .filter_TPM
       table
         th, tr
