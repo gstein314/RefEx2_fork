@@ -48,7 +48,7 @@
   </div>
 </template>
 <script>
-  import { mapGetters } from 'vuex';
+  import { mapGetters, mapMutations } from 'vuex';
   import IndexResults from '~/components/results/IndexResults.vue';
   import filters from '../../static/filters.json';
 
@@ -75,6 +75,7 @@
         activeDataset: 'active_dataset',
         resultsByName: 'results_by_name',
         filterByName: 'filter_by_name',
+        searchConditions: 'get_search_conditions',
       }),
       isActive() {
         return this.$vnode.key === this.$store.state.active_filter;
@@ -93,6 +94,9 @@
       },
     },
     methods: {
+      ...mapMutations({
+        setSearchConditions: 'set_search_conditions',
+      }),
       toggleDisplayFilter(key) {
         const index = this.filters.findIndex(filter => filter.column === key);
         if (index < 0) return;

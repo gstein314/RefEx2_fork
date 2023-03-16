@@ -85,37 +85,6 @@
         setSpecie: 'set_specie',
         setActiveDataset: 'set_active_dataset',
       }),
-      // updateIsOpenDataset() {
-      //   if (this.getPageType === 'project') {
-      //     window.location.href = '/';
-      //     window.open('/');
-      //   } else {
-      //     this.isOpenType = false;
-      //     this.isOpenDataset = !this.isOpenDataset;
-      //   }
-      // },
-      // updateIsOpenType() {
-      //   if (this.getPageType === 'project') {
-      //     window.location.href = '/';
-      //     window.open('/');
-      //   } else {
-      //     this.isOpenDataset = false;
-      //     this.isOpenType = !this.isOpenType;
-      //   }
-      // },
-      // closeDropDown(event) {
-      //   if (!this.$el.querySelector('.dropdown_list').contains(event.target)) {
-      //     this.isOpenDataset = false;
-      //   }
-      // },
-      test() {
-        this.selectedProject = { Human: 'gtexV8' };
-        this.updateSpecie('Human');
-        this.selectedProject = datasets.reduce((acc, specie) => {
-          acc[specie.species] = specie.datasets[0].dataset;
-          return acc;
-        }, {});
-      },
       updateSpecie(specieId, dataset) {
         this.setSpecie(specieId);
         this.updateActiveDataset(dataset);

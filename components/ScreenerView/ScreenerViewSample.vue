@@ -78,6 +78,7 @@
       ...mapGetters({
         filterByName: 'filter_by_name',
         activeDataset: 'active_dataset',
+        searchConditions: 'get_search_conditions',
       }),
       description() {
         return this.filterByName('sample').description;
@@ -107,11 +108,25 @@
       this.getAutoCompleteData().then(() => {
         this.initiateParametersDataset();
         this.setAutoComplete();
+        const sample_conditions = this.searchConditions.sample;
+        this.parameters = {
+          SampleTypeCategory: sample_conditions.SampleTypeCategory,
+          ExperimentCategory: sample_conditions.ExperimentCategory,
+          UberonLabel: sample_conditions.UberonLabel,
+          ClLabel: sample_conditions.ClLabel,
+          NcitLabel: sample_conditions.NcitLabel,
+          DevelopmentalStage: sample_conditions.DevelopmentalStage,
+          Sex: sample_conditions.Sex,
+        };
       });
+    },
+    updated() {
+      this.$emit('updateParameters', this.searchConditions.sample);
     },
     methods: {
       ...mapMutations({
         setAlertModal: 'set_alert_modal',
+        setSearchConditions: 'set_search_conditions',
       }),
       resetComponent() {
         Object.assign(this.parameters, { ...this.initialParameters });
@@ -165,6 +180,18 @@
           this.$set(this.parameters, key, value);
         }
         this.$emit('updateParameters', this.parameters);
+        const sampleSearchCondition = {
+          type: 'sample',
+          item: key,
+          value: value,
+        };
+        this.setSearchConditions(sampleSearchCondition);
+        // const sampleSearchCondition = {
+        //   type: 'sample',
+        //   item: 'sample_conditions',
+        //   value: this.parameters,
+        // };
+        // this.setSearchConditions(sampleSearchCondition);
       },
     },
   };

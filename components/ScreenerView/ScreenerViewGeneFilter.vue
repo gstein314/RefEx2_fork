@@ -258,6 +258,14 @@
         return { bySubDataset: subDatasetSamples, byDefault: defaultSamples };
       },
     },
+    watch: {
+      list: {
+        handler(newVal, oldVal) {
+          this.$emit('addFilterValue', this.filter.type, this.list);
+        },
+        deep: true,
+      },
+    },
     methods: {
       validateNumInput(index, column, e) {
         const numInput = parseFloat(e.target.value);
