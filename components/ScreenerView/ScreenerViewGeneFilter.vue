@@ -323,6 +323,7 @@
         switch (action) {
           case 'INIT':
             setNewList();
+            this.$emit('resetUpdateParameters');
             break;
           // TODO: Comment out until gql is multi
           // case 'ADD':

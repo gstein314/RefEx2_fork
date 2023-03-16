@@ -94,6 +94,7 @@
       :columns="filter.columns"
       :datasets="datasets"
       @addFilterValue="addFilterValue"
+      @resetUpdateParameters="resetUpdateParameters"
     />
   </div>
 </template>
@@ -259,6 +260,12 @@
       ...mapMutations({
         setSearchConditions: 'set_search_conditions',
       }),
+      resetUpdateParameters() {
+        this.$emit('updateParameters', {});
+      },
+      handleStoreInitialParameters() {
+        this.$emit('storeInitialParameters', {});
+      },
       resetComponent() {
         Object.assign(this.$data, initialState());
       },
