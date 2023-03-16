@@ -19,22 +19,8 @@
               :value="props.option.name"
             />
             <span class="option__small">{{ props.option }}</span>
-            <!-- <FontAwesomeIcon icon="exclamation-triangle" /> -->
           </div>
         </template>
-        <!-- <template slot="selection" slot-scope="{ values }">
-          <span
-            v-if="values.length &amp;&amp; values.length > 3"
-            class="multiselect__single"
-          >
-            {{
-              values.length === filterObj.options1.length
-                ? 'all'
-                : values.length
-            }}
-            options selected
-          </span>
-        </template> -->
       </multi-select>
     </client-only>
 
@@ -55,22 +41,8 @@
               :value="props.option.name"
             />
             <span class="option__small">{{ props.option }}</span>
-            <!-- <FontAwesomeIcon icon="exclamation-triangle" /> -->
           </div>
         </template>
-        <!-- <template slot="selection" slot-scope="{ values }">
-          <span
-            v-if="values.length &amp;&amp; values.length > 3"
-            class="multiselect__single"
-          >
-            {{
-              values.length === filterObj.options2.length
-                ? 'all'
-                : values.length
-            }}
-            options selected
-          </span>
-        </template> -->
       </multi-select>
     </client-only>
 
