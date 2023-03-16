@@ -7,7 +7,12 @@
 </template>
 
 <script>
+  import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
   export default {
+    components: {
+      FontAwesomeIcon,
+    },
     props: {
       text: {
         type: String,
