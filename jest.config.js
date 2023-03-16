@@ -4,14 +4,8 @@ module.exports = {
     '^~/(.*)$': '<rootDir>/$1',
     '^vue$': 'vue/dist/vue.common.js',
   },
-  moduleFileExtensions: [
-    'ts', // if using TypeScript
-    'js',
-    'vue',
-    'json',
-  ],
+  moduleFileExtensions: ['js', 'vue', 'json'],
   transform: {
-    '^.+\\.ts$': 'ts-jest', // if using TypeScript
     '^.+\\.js$': 'babel-jest',
     '.*\\.(vue)$': 'vue-jest',
   },
