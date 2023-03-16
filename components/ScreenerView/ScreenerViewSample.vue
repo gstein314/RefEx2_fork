@@ -58,14 +58,16 @@
   </div>
 </template>
 <script>
-  import { mapGetters } from 'vuex';
-  import { mapMutations } from 'vuex';
+  import { mapGetters, mapMutations } from 'vuex';
+  import _ from 'lodash';
 
   export default {
     data() {
       return {
         // passed down to API
         parameters: {},
+        // used for comparing and activating reset all
+        initialParameters: {},
         // will contain same keys as parameters. Autocompletion that does not come from the API should be hardcoded here in advance
         autoComplete: {},
         autocompleteStaticData: {},
@@ -86,12 +88,19 @@
       filters() {
         return this.dataSetSpecificParameters?.filter ?? [];
       },
+      isInitialState() {
+        return _.isEqual(this.parameters, this.initialParameters);
+      },
     },
     watch: {
       activeDataset() {
         this.parameters = {};
+        this.initialParameters = {};
         this.setAutoComplete();
         this.initiateParametersDataset();
+      },
+      isInitialState(newVal) {
+        this.$emit('setChildIsInitialState', newVal);
       },
     },
     async created() {
@@ -104,13 +113,23 @@
       ...mapMutations({
         setAlertModal: 'set_alert_modal',
       }),
+      resetComponent() {
+        Object.assign(this.parameters, { ...this.initialParameters });
+      },
       initiateParametersDataset() {
+        const parametersObj = {};
         for (const filter of this.filters) {
           const key = filter.column;
-          this.$set(this.parameters, key, '');
+          parametersObj[key] = '';
           if (!this.autoComplete[key]) this.$set(this.autoComplete, key, []);
         }
+        this.parameters = parametersObj;
+        this.initialParameters = { ...parametersObj };
         this.$emit('updateParameters', { ...this.parameters });
+        this.$emit('storeInitialParameters', { ...this.initialParameters });
+      },
+      storeInitialParameters(obj) {
+        this.initialParameters = obj;
       },
       getAutoCompleteData() {
         return this.$axios
@@ -142,7 +161,9 @@
         this.isOpen = !this.isOpen;
       },
       updateParameter(key, value) {
-        if (key && value) this.$set(this.parameters, key, value);
+        if (key && value) {
+          this.$set(this.parameters, key, value);
+        }
         this.$emit('updateParameters', this.parameters);
       },
     },
