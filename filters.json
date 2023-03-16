@@ -1,0 +1,68 @@
+[
+  {
+    "name": "gene",
+    "description": "",
+    "filter": [
+      {
+        "column": "symbol",
+        "label": "Symbol",
+        "note": "",
+        "is_checkbox": false,
+        "is_displayed": true,
+        "is_ontology": false
+      },
+      {
+        "column": "name",
+        "label": "Name",
+        "note": "",
+        "is_checkbox": false,
+        "is_displayed": true,
+        "is_ontology": false
+      },
+      {
+        "column": "alias",
+        "label": "Alias",
+        "note": "",
+        "is_checkbox": false,
+        "is_displayed": true,
+        "is_ontology": false
+      },
+      {
+        "column": "geneid",
+        "label": "Gene ID",
+        "note": "",
+        "is_checkbox": false,
+        "is_displayed": true,
+        "is_ontology": false
+      },
+      {
+        "column": "chromosomePosition",
+        "label": "Chr",
+        "note": "",
+        "is_checkbox": false,
+        "is_displayed": true,
+        "is_ontology": false
+      },
+      {
+        "column": "typeOfGene",
+        "label": "Type of Gene",
+        "note": "",
+        "is_checkbox": false,
+        "is_displayed": true,
+        "is_ontology": false
+      },
+      {
+        "column": "gene expression patterns",
+        "label": "Gene expression patterns",
+        "note": "",
+        "is_checkbox": false,
+        "is_displayed": true,
+        "is_ontology": false
+      }
+    ]
+  },
+  {
+    "name": "sample",
+    "description": "Genes that are specifically expressed in a given sample by classification"
+  }
+]
