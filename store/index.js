@@ -88,9 +88,9 @@ export const getters = {
   route_to_other_project_page: state => ids => {
     if (Array.isArray(ids)) ids = ids.join(',');
     if (location.search.match(/=(.*)&/)[1] === 'gene')
-      return `${state.active_specie.species}/${state.active_dataset.dataset}?type=sample&id=${ids}`;
+      return `/${state.active_specie.species}/${state.active_dataset.dataset}?type=sample&id=${ids}`;
     else
-      return `${state.active_specie.species}/${state.active_dataset.dataset}?type=gene&id=${ids}`;
+      return `/${state.active_specie.species}/${state.active_dataset.dataset}?type=gene&id=${ids}`;
   },
   gene_modal(state) {
     return state.gene_modal;

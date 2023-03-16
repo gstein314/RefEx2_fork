@@ -70,6 +70,7 @@
       ref="results"
       :height-chart-wrapper="heightChartWrapper"
       :items="items"
+      :current-page-id="currentPageId"
       :gene-id-key="geneIdKey"
       :dataset="dataset"
       :selected-item="selectedId"
@@ -127,7 +128,11 @@
       ProjectResults,
       ResultsPagination,
     },
-    beforeRouteUpdate(to, from, next) {
+    async beforeRouteUpdate(to, from, next) {
+      this.$nuxt.$loading.start();
+      this.currentPageId = to.query.id;
+      await this.$nuxt.refresh();
+      next();
       this.$forceUpdate();
     },
     async asyncData({ $axios, query, store, route }) {
@@ -190,6 +195,7 @@
             };
           });
           store.commit('set_project_results_all', resultsAll);
+          store.commit('set_active_filter', type);
           const mapStatData = (data, stat) =>
             data.refex_info?.map(x => {
               x = parseFloat(x[stat]);
@@ -238,8 +244,16 @@
           column: infoFromCurrentDataset.gene.key,
           label: infoFromCurrentDataset.gene.header,
         };
-      if (type === 'gene') filters = [description, logMedianFilter, ...filters];
-      else filters.splice(1, 0, logMedianFilter);
+      if (type === 'gene') {
+        filters = [description, logMedianFilter, ...filters];
+        store.commit('set_project_filters', filters);
+      } else {
+        filters.splice(1, 0, logMedianFilter);
+        store.commit('set_project_filters', filters);
+      }
+      store.commit('set_project_items', {
+        items: items,
+      });
 
       return {
         filterType: type,
@@ -260,6 +274,7 @@
         projectTableHead: [],
         columnsArray: [],
         ordersArray: [],
+        currentPageId: '',
       };
     },
     computed: {
@@ -322,28 +337,23 @@
       },
       resultsWithCombinedMedians() {
         const medianArraysObj = {};
+        const projectResults =
+          this.projectResultsAll[this.selectedItem.id] ||
+          this.projectResultsAll[this.currentPageId];
         for (const item of Object.values(this.items)) {
           const symbolOrDescription = info => info.symbol || info.Description;
           medianArraysObj[`LogMedian_${symbolOrDescription(item.info)}`] =
             item.medianData;
         }
-        const combinedLogMediansArray = [];
-        for (
-          let i = 0;
-          i < this.projectResultsAll[this.selectedItem.id].length;
-          i++
-        ) {
-          const combinedLogMediansObj = {};
-          for (const [key, mediansArr] of Object.entries(medianArraysObj)) {
-            combinedLogMediansObj[key] = mediansArr[i];
-          }
-          combinedLogMediansArray.push(combinedLogMediansObj);
-        }
-        const copy = { ...this.projectResultsAll[this.selectedItem.id] };
-        const resultsWithCombinedMedians = [];
-        for (const [i, item] of combinedLogMediansArray.entries()) {
-          resultsWithCombinedMedians.push(_.merge(copy[i], item));
-        }
+
+        const combinedLogMediansArray = _.zip(
+          ...Object.values(medianArraysObj)
+        ).map(arr => _.zipObject(Object.keys(medianArraysObj), arr));
+
+        const resultsWithCombinedMedians = projectResults.map((result, i) => {
+          const combinedLogMediansObj = combinedLogMediansArray[i];
+          return Object.assign({}, result, combinedLogMediansObj);
+        });
         return resultsWithCombinedMedians;
       },
       filteredSortedData() {
@@ -384,7 +394,7 @@
             }
             // text filter
             else if (filter.filterModal !== '' && !isFiltered) {
-              // excact match if filter is based on API options
+              // exact match if filter is based on API options
               const isMatch = textFilter(result[key], filter.filterModal);
               isFiltered = filter.filterModal !== '' && !isMatch;
             }
@@ -450,7 +460,9 @@
       });
     },
     updated() {
-      this.heightChartWrapper = this.roundDownClientHeight;
+      this.heightChartWrapper = Math.floor(
+        this.$refs.chartWrapper.getBoundingClientRect().height
+      );
     },
     destroyed() {
       this.setSampleAlias();

@@ -61,7 +61,7 @@
         tableDataIsSameAsScreener: false,
         isDisplaySettings: false,
         validSearch: false,
-        // When returning from the sample project page to the index page, the filters on the gene side are empty. This is handled by loading filters.json, but it needs to be rewritten if the contents of the filters on the gene side are no longer fixed.
+        // TODO: When returning from the sample project page to the index page, the filters on the gene side are empty. This is handled by loading filters.json, but it needs to be rewritten if the contents of the filters on the gene side are no longer fixed.
         filters: [
           ...(this.$store.getters.active_dataset[this.$vnode.key].filter ??
             this.$store.getters.active_filter.filter ??
@@ -80,7 +80,7 @@
         return this.$vnode.key === this.$store.state.active_filter;
       },
       resultsNum() {
-        return this.resultsByName(this.$vnode.key).results_num;
+        return this.resultsByName(this.$vnode.key).results_num ?? 0;
       },
       resultTableLength() {
         return this.resultsByName(this.$vnode.key).results.length;
