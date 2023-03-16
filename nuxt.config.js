@@ -1,8 +1,6 @@
 import datasets from './refex-sample/datasets.json';
 import { exponentialDelay } from 'axios-retry';
-
-const isProduction = process.env.NODE_ENV == 'production';
-const href = '/dbcls/refex_beta/favicon.ico';
+const href = '/favicon.ico';
 
 export default {
   ssr: false,
@@ -76,7 +74,7 @@ export default {
   },
 
   generate: {
-    dir: 'refex_beta',
+    dir: 'refex',
     routes() {
       let routes = [];
       datasets.map(specie => {
@@ -89,6 +87,6 @@ export default {
   },
 
   router: {
-    base: '/dbcls/refex_beta/',
+    base: '/',
   },
 };
