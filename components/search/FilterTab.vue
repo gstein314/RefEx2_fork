@@ -80,7 +80,7 @@
         return this.$vnode.key === this.$store.state.active_filter;
       },
       resultsNum() {
-        return this.resultsByName(this.$vnode.key).results_num;
+        return this.resultsByName(this.$vnode.key).results_num ?? 0;
       },
       resultTableLength() {
         return this.resultsByName(this.$vnode.key).results.length;
