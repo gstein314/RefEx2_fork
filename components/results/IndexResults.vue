@@ -11,7 +11,7 @@
       >
       <div class="display_settings_wrapper">
         <button class="show_all_btn" @click="$emit('toggleDisplaySettings')">
-          <font-awesome-icon icon="eye" />
+          <FontAwesomeIcon icon="eye" />
           Show/hide columns
         </button>
       </div>
@@ -43,7 +43,7 @@
           class="warning"
           :colspan="filters.filter(x => x.is_displayed).length + 2"
         >
-          <font-awesome-icon icon="exclamation-triangle" />
+          <FontAwesomeIcon icon="exclamation-triangle" />
           <template v-if="resultsNum === 0"
             >No results found. Please check the spelling or try other
             keywords.</template
@@ -58,7 +58,7 @@
           class="warning"
           :colspan="filters.filter(x => x.is_displayed).length + 2"
         >
-          <font-awesome-icon icon="exclamation-triangle" />
+          <FontAwesomeIcon icon="exclamation-triangle" />
           No results found. Please check the spelling or try other keywords.
         </td>
         <tr
@@ -79,7 +79,7 @@
               class="text_with_icon"
               @click="moveToProjectPage(result['refexSampleId'])"
             >
-              <font-awesome-icon icon="flask" />
+              <FontAwesomeIcon icon="flask" />
               {{ result.Description }}
             </a>
           </td>
@@ -98,9 +98,9 @@
               v-else-if="filter.column === 'symbol'"
               class="text_with_icon"
               @click="moveToProjectPage(result['geneid'])"
-              ><font-awesome-icon class="left_icon" icon="dna" />
+              ><FontAwesomeIcon class="left_icon" icon="dna" />
               {{ result[filter.column] }}
-              <font-awesome-icon
+              <FontAwesomeIcon
                 icon="info-circle"
                 @click.stop="setGeneModal(result.geneid)"
               />
@@ -112,7 +112,7 @@
               :href="datasetInfo.url_prefix + result.geneid"
             >
               {{ result[filter.column] }}
-              <font-awesome-icon icon="external-link-alt" />
+              <FontAwesomeIcon icon="external-link-alt" />
             </a>
             <span
               v-else-if="isArrayLikeString(result[filter.column])"

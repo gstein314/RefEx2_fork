@@ -20,14 +20,14 @@
         class="active_type"
         @click="$store.commit('set_active_filter', 'gene')"
       >
-        <font-awesome-icon icon="dna" />
+        <FontAwesomeIcon icon="dna" />
         <p>Gene</p>
       </li>
       <li
         class="active_type"
         @click="$store.commit('set_active_filter', 'sample')"
       >
-        <font-awesome-icon icon="flask" />
+        <FontAwesomeIcon icon="flask" />
         <p>Sample</p>
       </li>
     </ul>

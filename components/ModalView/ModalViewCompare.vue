@@ -2,7 +2,7 @@
   <modal-view v-if="isOn" @click.native="closeModalView">
     <div class="modal compare_modal" @click.stop="">
       <p class="modal_title">
-        <font-awesome-icon icon="search" />
+        <FontAwesomeIcon icon="search" />
         {{ `Compare with comma separated ${getActiveDatasetHeader()} list` }}
       </p>
       {{ setSearchField }}
@@ -23,7 +23,7 @@
           @keydown.enter="comparisonSearch"
         />
         <button @click="comparisonSearch">
-          <font-awesome-icon icon="search" />
+          <FontAwesomeIcon icon="search" />
           Search
         </button>
       </div>

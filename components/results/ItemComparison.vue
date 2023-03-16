@@ -8,13 +8,13 @@
       @click="select(item.id)"
     >
       <span>{{ item.info.symbol || item.info.Description }}</span>
-      <font-awesome-icon
+      <FontAwesomeIcon
         v-if="displayInfoButton"
         class="info"
         icon="info-circle"
         @click="$emit('showModal', item.id)"
       />
-      <font-awesome-icon
+      <FontAwesomeIcon
         v-if="isMedianSort(item.id)"
         :icon="sortIcon"
         :flip="sortOrder"

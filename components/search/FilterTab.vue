@@ -21,11 +21,11 @@
             :disabled="!validSearch"
             @click="showSearchResult($vnode.key)"
           >
-            <font-awesome-icon icon="search" />
+            <FontAwesomeIcon icon="search" />
             Find {{ $vnode.key }}s
           </button>
           <p v-show="!validSearch" class="warning small">
-            <font-awesome-icon icon="exclamation-triangle" />
+            <FontAwesomeIcon icon="exclamation-triangle" />
             Please set search condition(s)
           </p>
         </div>

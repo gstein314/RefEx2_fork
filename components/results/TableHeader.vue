@@ -19,11 +19,11 @@
           <div v-if="note" class="tag">{{ note }}</div>
         </div>
         <div class="sort_icon">
-          <font-awesome-icon :icon="sortIcon" :flip="sortOrder" />
+          <FontAwesomeIcon :icon="sortIcon" :flip="sortOrder" />
         </div>
       </div>
       <div class="header_btn search" @click="setFilterModal(id)">
-        <font-awesome-icon icon="search" :class="{ active: isActiveSearch }" />
+        <FontAwesomeIcon icon="search" :class="{ active: isActiveSearch }" />
       </div>
     </div>
   </div>

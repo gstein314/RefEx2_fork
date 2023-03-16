@@ -10,10 +10,10 @@
         <p>{{ activeSpecie.species }}</p>
         <p>
           {{ activeDataset.label
-          }}<font-awesome-icon
+          }}<FontAwesomeIcon
             v-if="getPageType === 'index' && isOpenDataset"
             icon="fa-angle-down"
-          /><font-awesome-icon
+          /><FontAwesomeIcon
             v-else-if="getPageType === 'index' && !isOpenDataset"
             icon="fa-angle-up"
           />

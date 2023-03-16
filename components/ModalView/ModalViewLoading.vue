@@ -1,7 +1,7 @@
 <template>
   <modal-view v-if="loading">
     <div class="modal">
-      <font-awesome-icon
+      <FontAwesomeIcon
         class="spinner fa-spin"
         :icon="['fad', 'spinner-third']"
       />

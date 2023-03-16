@@ -19,7 +19,7 @@
               :value="props.option.name"
             />
             <span class="option__small">{{ props.option }}</span>
-            <!-- <font-awesome-icon icon="exclamation-triangle" /> -->
+            <!-- <FontAwesomeIcon icon="exclamation-triangle" /> -->
           </div>
         </template>
         <!-- <template slot="selection" slot-scope="{ values }">
@@ -55,7 +55,7 @@
               :value="props.option.name"
             />
             <span class="option__small">{{ props.option }}</span>
-            <!-- <font-awesome-icon icon="exclamation-triangle" /> -->
+            <!-- <FontAwesomeIcon icon="exclamation-triangle" /> -->
           </div>
         </template>
         <!-- <template slot="selection" slot-scope="{ values }">

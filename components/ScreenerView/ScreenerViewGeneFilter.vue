@@ -3,7 +3,7 @@
     <div class="filter_title">
       <div>
         Filter by {{ filter.name }}
-        <font-awesome-icon
+        <FontAwesomeIcon
           v-tooltip="'This is Filter by ' + filter.name"
           icon="info-circle"
         />
@@ -13,7 +13,7 @@
         :class="{ disabled: resetIsDisabled }"
         @click="dispatchAction('INIT')"
       >
-        <font-awesome-icon icon="rotate-right" />
+        <FontAwesomeIcon icon="rotate-right" />
         Reset
       </a>
     </div>
@@ -24,7 +24,7 @@
             <tr>
               <th v-for="column in columns" :key="column.id" :class="column.id">
                 {{ column.name }}
-                <font-awesome-icon
+                <FontAwesomeIcon
                   v-if="isEntropy(column.id)"
                   v-tooltip="'Range: 1-5'"
                   icon="info-circle"
@@ -161,7 +161,7 @@
                   :disabled="list.length <= 1"
                   @click="dispatchAction('DELETE', itemIndex)"
                 >
-                  <font-awesome-icon icon="trash" />
+                  <FontAwesomeIcon icon="trash" />
                   Delete
                 </button>
               </td>

@@ -6,7 +6,7 @@
       @click.stop=""
     >
       <p class="modal_title">
-        <font-awesome-icon icon="search" />
+        <FontAwesomeIcon icon="search" />
         {{ filterObj.label }}
         <span :class="{ tag: filterObj.is_ontology }"
           >&nbsp;{{ filterObj.note }}</span
@@ -63,7 +63,7 @@
                 :checked="searchValue.includes(props.option)"
               />
               <span class="option__small">{{ props.option }}</span>
-              <!-- <font-awesome-icon icon="exclamation-triangle" /> -->
+              <!-- <FontAwesomeIcon icon="exclamation-triangle" /> -->
             </div>
           </template>
           <template slot="selection" slot-scope="{ values }">
