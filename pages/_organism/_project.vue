@@ -1,9 +1,9 @@
 <template>
   <div class="wrapper">
     <p v-if="isError" class="error">
-      <FontAwesomeIcon icon="exclamation-triangle" />
-      An error has occured while fetching the data. Please check wheter the URL
-      contains the correct information.
+      <WarningMessage
+        :text="'An error has occured while fetching the data. Please check wheter the URL contains the correct information.'"
+      />
     </p>
     <div v-else ref="chartWrapper" class="chart_wrapper">
       <LocalNavigation :symbol="infoForMainItem" />
