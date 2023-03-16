@@ -1,8 +1,6 @@
 import datasets from './refex-sample/datasets.json';
 import { exponentialDelay } from 'axios-retry';
-
-const isProduction = process.env.NODE_ENV == 'production';
-const href = isProduction ? '/RefEx2/favicon.ico' : '/favicon.ico';
+const href = '/favicon.ico';
 
 export default {
   ssr: false,
@@ -14,7 +12,7 @@ export default {
   target: 'static',
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    title: 'Refex',
+    title: 'RefEx2 beta',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -89,6 +87,6 @@ export default {
   },
 
   router: {
-    base: process.env.NODE_ENV === 'dev' ? '/' : '/RefEx2/',
+    base: '/',
   },
 };
