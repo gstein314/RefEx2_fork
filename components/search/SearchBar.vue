@@ -10,7 +10,7 @@
         :disabled="isInitialState"
         @click="resetAllSearchConditions"
       >
-        <font-awesome-icon icon="rotate-right" />
+        <FontAwesomeIcon icon="rotate-right" />
         Reset all
       </button>
     </div>

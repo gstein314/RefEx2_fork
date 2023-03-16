@@ -1,6 +1,6 @@
 <template>
   <button class="download_btn" @click="downloadTsv">
-    <font-awesome-icon icon="arrow-down-to-line" />
+    <FontAwesomeIcon icon="arrow-down-to-line" />
     Download .tsv
   </button>
 </template>

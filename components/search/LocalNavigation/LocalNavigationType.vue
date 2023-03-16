@@ -1,15 +1,15 @@
 <template>
   <li :class="{ isOpenType }" @click.stop="$emit('eventUpdateIsOpenType')">
     <div class="nav_item">
-      <font-awesome-icon v-if="activeFilterName === 'gene'" icon="dna" />
-      <font-awesome-icon v-if="activeFilterName === 'sample'" icon="flask" />
+      <FontAwesomeIcon v-if="activeFilterName === 'gene'" icon="dna" />
+      <FontAwesomeIcon v-if="activeFilterName === 'sample'" icon="flask" />
       <div class="specie_wrapper">
         <p>
           {{ $firstLetterUppercase(activeFilterName)
-          }}<font-awesome-icon
+          }}<FontAwesomeIcon
             v-if="getPageType === 'index' && isOpenType"
             icon="fa-angle-down"
-          /><font-awesome-icon
+          /><FontAwesomeIcon
             v-else-if="getPageType === 'index' && !isOpenType"
             icon="fa-angle-up"
           />

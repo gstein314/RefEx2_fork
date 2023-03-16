@@ -7,16 +7,13 @@
           :class="{ arrows: true, disabled: currentPage === 1 }"
           @click="setPageNumber(1)"
         >
-          <font-awesome-icon
-            icon="angle-double-left"
-            class="angle-double-left"
-          />
+          <FontAwesomeIcon icon="angle-double-left" class="angle-double-left" />
         </li>
         <li
           :class="{ arrows: true, disabled: currentPage === 1 }"
           @click="setPageNumber(currentPage - 1)"
         >
-          <font-awesome-icon icon="angle-left" class="angle-left" />
+          <FontAwesomeIcon icon="angle-left" class="angle-left" />
         </li>
         <li v-if="isHiddenPagesLeft" class="dots">
           <span>...</span>
@@ -37,13 +34,13 @@
           :class="{ arrows: true, disabled: currentPage === pagesNumber }"
           @click="setPageNumber(currentPage + 1)"
         >
-          <font-awesome-icon icon="angle-right" class="angle-right" />
+          <FontAwesomeIcon icon="angle-right" class="angle-right" />
         </li>
         <li
           :class="{ arrows: true, disabled: currentPage === pagesNumber }"
           @click="setPageNumber(pagesNumber)"
         >
-          <font-awesome-icon
+          <FontAwesomeIcon
             icon="angle-double-right"
             class="chevron-double-right"
           />

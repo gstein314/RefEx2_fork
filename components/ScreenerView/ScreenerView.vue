@@ -3,9 +3,9 @@
   <!-- eslint-disable vue/no-v-html -->
   <div class="screener_wrapper" :class="{ open: isOpen }">
     <p class="screener_title" @click="toggleScreener">
-      <font-awesome-icon icon="filter" class="filter" />
+      <FontAwesomeIcon icon="filter" class="filter" />
       Screener
-      <font-awesome-icon
+      <FontAwesomeIcon
         icon="chevron-right"
         :class="isOpen ? 'open' : 'close'"
       />

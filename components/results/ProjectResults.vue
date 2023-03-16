@@ -37,9 +37,9 @@
                   moveToProjectPage(result.ncbiGeneId || result.ensemblGeneId)
                 "
               >
-                <font-awesome-icon class="left_icon" icon="dna" />
+                <FontAwesomeIcon class="left_icon" icon="dna" />
                 {{ result.symbol }}
-                <font-awesome-icon
+                <FontAwesomeIcon
                   class="right_icon info"
                   icon="info-circle"
                   @click.stop="setGeneModal(result[geneIdKey])"
@@ -50,7 +50,7 @@
                 class="text_with_icon"
                 @click="moveToProjectPage(result['RefexSampleId'])"
               >
-                <font-awesome-icon icon="flask" />
+                <FontAwesomeIcon icon="flask" />
                 {{ result.Description }}
               </a>
               <MedianBar
@@ -73,7 +73,7 @@
                 :href="datasetInfo.url_prefix + result.ncbiGeneId"
               >
                 {{ result[filter.column] }}
-                <font-awesome-icon icon="external-link-alt" />
+                <FontAwesomeIcon icon="external-link-alt" />
               </a>
               <a
                 v-else-if="filter.column === 'ensemblGeneId'"
@@ -82,7 +82,7 @@
                 :href="datasetInfo.url_prefix + result.ensemblGeneId"
               >
                 {{ result[filter.column] }}
-                <font-awesome-icon icon="external-link-alt" />
+                <FontAwesomeIcon icon="external-link-alt" />
               </a>
               <template v-else>
                 {{ result[filter.column] }}
@@ -92,7 +92,7 @@
                     setFilterSearchValue(result[filter.column]);
                     setFilterModal(filter.column);
                   "
-                  ><font-awesome-icon icon="plus-circle"
+                  ><FontAwesomeIcon icon="plus-circle"
                 /></span>
               </template>
             </td>

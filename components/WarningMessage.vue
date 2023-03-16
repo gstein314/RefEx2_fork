@@ -1,14 +1,22 @@
 <template>
   <span class="warning">
-    <font-awesome-icon icon="exclamation-triangle" />
+    <FontAwesomeIcon icon="exclamation-triangle" />
     <slot></slot>
+    {{ text }}
   </span>
 </template>
 
 <script>
-  export default {};
+  export default {
+    props: {
+      text: {
+        type: String,
+        default: '',
+      },
+    },
+  };
 </script>
 <style lang="sass" scoped>
   .warning
-      +warning
+    +warning
 </style>

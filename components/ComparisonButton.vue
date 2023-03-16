@@ -1,6 +1,6 @@
 <template>
   <button class="comparison_btn" @click="toggleCompareModal">
-    <font-awesome-icon icon="chart-column" />
+    <FontAwesomeIcon icon="chart-column" />
     Comparison
   </button>
 </template>

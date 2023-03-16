@@ -2,7 +2,7 @@
   <modal-view v-if="error.isOn" @click.native="close({ bool: false })">
     <div class="modal" @click.stop>
       <div class="title">
-        <p><font-awesome-icon icon="exclamation-triangle" />Error</p>
+        <p><WarningMessage :text="'Error'" /></p>
       </div>
       <div class="content">
         <p>An error has occured {{ error.msg }} Please try again later.</p>

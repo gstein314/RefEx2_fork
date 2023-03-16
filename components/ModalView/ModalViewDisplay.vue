@@ -2,7 +2,7 @@
   <modal-view>
     <div class="modal display_settings_modal" @click.stop="">
       <p class="modal_title">
-        <font-awesome-icon icon="eye" />
+        <FontAwesomeIcon icon="eye" />
         Show/hide columns
       </p>
       <div class="display_checkboxes">
