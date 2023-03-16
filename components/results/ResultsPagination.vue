@@ -111,7 +111,7 @@
         projectResults: 'get_project_results',
       }),
       resultsNum() {
-        return this.resultsByName(this.activeFilter.name).results_num;
+        return this.resultsByName(this.activeFilter.name).results_num ?? 0;
       },
       paginationObject() {
         return this.tableType === 'index'
