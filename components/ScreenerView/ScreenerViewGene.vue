@@ -227,12 +227,12 @@
         this.handleTOGTagsUpdate(this.TOGValue);
       },
       filterValue(list) {
-        // const filterCondition = {
-        //   type: 'gene',
-        //   item: list[0].method,
-        //   value: list[0],
-        // };
-        // this.setSearchConditions(filterCondition);
+        const filterCondition = {
+          type: 'gene',
+          item: JSON.parse(list.replace(/\\/g, '')).method,
+          value: list,
+        };
+        this.setSearchConditions(filterCondition);
         this.handleFilterValueUpdate(this.filterValue);
       },
     },
@@ -248,6 +248,12 @@
         this.TOGValue = this.searchConditions.gene.tog;
       if (this.searchConditions.gene.go)
         this.setTags(this.searchConditions.gene.go, 'go');
+      if (this.searchConditions.gene.temporaryParameters)
+        this.filterValue = this.searchConditions.gene.tpm;
+      if (this.searchConditions.gene.roku)
+        this.filterValue = this.searchConditions.gene.roku;
+      if (this.searchConditions.gene.tau)
+        this.filterValue = this.searchConditions.gene.tau;
     },
     methods: {
       ...mapMutations({
@@ -317,7 +323,7 @@
           ['typeOfGene']: tags.join(),
         };
       },
-      handleFilterValueUpdate(type, list) {
+      handleFilterValueUpdate(list) {
         this.parameters = {
           ...this.parameters,
           ['filter']: this.filterValue,
