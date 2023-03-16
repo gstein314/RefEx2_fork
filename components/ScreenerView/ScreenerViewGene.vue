@@ -88,18 +88,11 @@
       </vue-tags-input>
     </client-only>
     <ScreenerViewGeneFilter
-      :filter.sync="screener[0]"
-      :columns="screener[0].columns"
-      @addFilterValue="addFilterValue"
-    />
-    <ScreenerViewGeneFilter
-      :filter.sync="screener[1]"
-      :columns="screener[1].columns"
-      @addFilterValue="addFilterValue"
-    />
-    <ScreenerViewGeneFilter
-      :filter.sync="screener[2]"
-      :columns="screener[2].columns"
+      v-for="(filter, index) of geneFilters"
+      :key="index"
+      :filter.sync="geneFilters[index]"
+      :columns="filter.columns"
+      :datasets="datasets"
       @addFilterValue="addFilterValue"
     />
   </div>
@@ -109,7 +102,31 @@
   import { mapGetters, mapMutations } from 'vuex';
   import MultiSelect from 'vue-multiselect';
   import ScreenerViewGeneFilter from './ScreenerViewGeneFilter.vue';
-  import screener from '~/refex-sample/screener.json';
+  import geneFilters from '~/refex-sample/gene_filters.json';
+  import datasets from '~/refex-sample/datasets.json';
+  import _ from 'lodash';
+
+  const stringifiedGeneFilters = JSON.stringify(geneFilters);
+  const stringifiedDatasets = JSON.stringify(datasets);
+
+  const initialState = () => {
+    return {
+      chrValue: [],
+      TOGValue: [],
+      // only used in this component
+      temporaryParameters: {
+        goTerm: '',
+      },
+      // passed down to API
+      parameters: {
+        go: [],
+      },
+      // will contain same keys as parameters. Autocompletion that does not come from the API should be hardcoded here in advance
+      hideCaret: false,
+      geneFilters: JSON.parse(stringifiedGeneFilters),
+      datasets: JSON.parse(stringifiedDatasets),
+    };
+  };
 
   export default {
     components: { MultiSelect, ScreenerViewGeneFilter },
@@ -144,8 +161,7 @@
           filter: [],
         },
         debounce: null,
-        screener,
-        hideCaret: false,
+        ...initialState(),
       };
     },
     computed: {
@@ -155,6 +171,7 @@
         searchConditions: 'get_search_conditions',
       }),
       goTermString() {
+        if (this.parameters.go.length === 0) return '';
         return this.parameters.go.map(tag => tag.id).join(', ');
       },
       placeholderGOTerm() {
@@ -163,6 +180,15 @@
           ? 'transcription factor binding'
           : 'Only one tag is allowed';
       },
+      selection() {
+        return this.chrValue.join();
+      },
+      isInitialState() {
+        const defaultState = initialState();
+        return Object.keys(defaultState).every(key =>
+          _.isEqual(this.$data[key], defaultState[key])
+        );
+      },
     },
     watch: {
       activeDataset() {
@@ -170,6 +196,9 @@
         this.parameters = {
           go: [],
         };
+      },
+      isInitialState(newVal) {
+        this.$emit('setChildIsInitialState', newVal);
       },
       parameters() {
         this.$emit('updateParameters', {
@@ -209,6 +238,8 @@
     },
     async created() {
       this.getAutoCompleteData().then(() => {});
+      this.$emit('updateParameters', { go: this.goTermString });
+      this.$emit('storeInitialParameters', { go: this.goTermString });
     },
     mounted() {
       if (this.searchConditions.gene.chr)
@@ -222,6 +253,9 @@
       ...mapMutations({
         setSearchConditions: 'set_search_conditions',
       }),
+      resetComponent() {
+        Object.assign(this.$data, initialState());
+      },
       getAutoCompleteData() {
         return this.$axios
           .$get(`api/cv`)
@@ -301,14 +335,14 @@
         switch (type) {
           case 'TPM':
             if (
-              list[0].sampleId &&
+              list[0].sample.id &&
               list[0].cutoff &&
               list[0].condition &&
               list[0].statistic
             ) {
               const filter = {
                 method: 'tpm',
-                sample: list[0].sampleId,
+                sample: list[0].sample.id,
                 value: list[0].cutoff,
                 logic: list[0].condition,
                 statistic: list[0].statistic,
@@ -319,11 +353,11 @@
             }
             break;
           case 'ROKU':
-            if (list[0].group && list[0].sampleId && list[0].horl) {
+            if (list[0].group && list[0].sample.id && list[0].horl) {
               const filter = {
                 method: 'roku',
                 group: list[0].group,
-                sample: list[0].sampleId,
+                sample: list[0].sample.id,
                 highlow: list[0].horl,
                 entropy_min: list[0].emin,
                 entropy_max: list[0].emax,
@@ -386,71 +420,61 @@
       *[class^="multiselect__option"]
         &:after
           content: none
-
+    .filter + .filter
+      margin-top: 30px
     .filter_TPM, .filter_specificity_ROKU, .filter_specificity_tau
-      > table
-        > tr
-          > td
+      table
+        thead
+          height: 30px
+          th
             font-size: 12px
-            > .text_search_name input
-              font-size: 22px
-              +warning_border
-            > input[type="checkbox"]
-              cursor: pointer
-              -moz-transform: scale(3)
-            > select:required:invalid
-              color: rgba(0, 0, 0, 0.25)
-            > .delete_btn
-              +button
-              align-items: initial
-              padding: 13.5px 22px
-              cursor: pointer !important
-            svg[data-icon="circle-info"]
-              color: $MAIN_COLOR
-          > .reset
-            color: $MAIN_COLOR
+            font-weight: initial
+            text-align: initial
+        tbody
+          input, select
+            height: 2.25em
+          .text_search_name input
+            font-size: 20px
+          select:required:invalid
+            color: $PLACEHOLDER_COLOR
+          .delete_btn
+            +button
+            align-items: initial
+            padding: 13.5px 22px
             cursor: pointer
-            &.disabled
-              color: $DISABLE_COLOR
-          > .check
-            padding-right: 5px
-      .unchecked
-        input, select
-          background: $DISABLE_COLOR
-          color: rgba(0, 0, 0, 0.25)
-          &:disabled
-            opacity: 1
+          svg[data-icon="circle-info"]
+            color: $MAIN_COLOR
     .filter_TPM
-      > table
-        > tr
-          > .icon
+      table
+        th, tr
+          .icon
             text-align: center
-          > .sample
+          .sample
             width: 60%
-          > .cutoff, .condition
+          .cutoff, .condition
             width: 10%
-          > .statistic
+          .statistic
             width: 20%
     .filter_specificity_ROKU
-      > table
-        > tr
-          > .icon
+      table
+        th, tr
+          .icon
             text-align: center
-          > .group
+          .group
             width: 25%
-          > .sample
+          .sample
             width: 40%
-          > .horl
+          .horl
             width: 15%
-          > .emin, .emax
+          .emin, .emax
             width: 10%
     .filter_specificity_tau
-      > table
-        > tr
-          > .icon
+      table
+        th, tr
+          .icon
             text-align: center
-          > .group
+          .group
             width: 80%
-          > .cutoff, .condition
+          .cutoff, .condition
             width: 10%
 </style>

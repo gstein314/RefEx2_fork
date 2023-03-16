@@ -4,9 +4,14 @@
   <div class="text_search_area">
     <div class="search_condition_title">
       <h2>Search Conditions</h2>
-      <button class="remove_all_btn" @click="removeSearchConditions">
-        <font-awesome-icon icon="trash" />
-        Remove all
+      <button
+        class="reset_all_btn"
+        :class="{ disabled: isInitialState }"
+        :disabled="isInitialState"
+        @click="resetAllSearchConditions"
+      >
+        <font-awesome-icon icon="rotate-right" />
+        Reset all
       </button>
     </div>
     <h3>
@@ -31,6 +36,7 @@
       </span>
     </h3>
     <vue-simple-suggest
+      ref="searchInput"
       v-model.trim="parameters.text"
       :debounce="500"
       :min-length="0"
@@ -88,10 +94,12 @@
     <template v-else-if="filterType === 'sample'">
       <div class="summary_check_wrapper"></div>
     </template>
-    <ScreenerView>
+    <ScreenerView ref="screenerView">
       <component
         :is="`screener-view-${filterType}`"
         @updateParameters="updateParams"
+        @storeInitialParameters="storeInitialParameters"
+        @setChildIsInitialState="setChildIsInitialState"
       ></component>
     </ScreenerView>
   </div>
@@ -109,17 +117,17 @@
     },
     data() {
       return {
-        parameters: {
-          text: '',
-        },
+        isLoading: false,
+        currentSearchCondition: '',
+        childIsInitialState: true,
         onEvent: false,
         isSummaryIncluded: false,
         isReloadActive: false,
-        isLoading: false,
         validSearch: false,
         // either 'all' or 'numfound'
         typeOfQuery: 'numfound',
-        currentSearchCondition: '',
+        parameters: { text: '' },
+        initialParameters: {},
       };
     },
     computed: {
@@ -191,6 +199,10 @@
           this.isNum ? 'Numfound' : ''
         }${params}${resultParams}${suffix}}`;
       },
+      isInitialState() {
+        if (!this.childIsInitialState) return false;
+        return _.isEqual(this.parameters, this.initialParameters);
+      },
     },
     watch: {
       parameters: {
@@ -220,6 +232,7 @@
       if (this.filterType === 'gene' && this.searchConditions.gene.summary) {
         this.isSummaryIncluded = this.searchConditions[this.filterType].summary;
       }
+      setTimeout(() => this.$refs.searchInput.inputElement.focus(), 10);
     },
     methods: {
       ...mapMutations({
@@ -240,6 +253,9 @@
         this.parameters = { text: this.parameters.text, ...params };
 
         this.showResults('numfound');
+      },
+      storeInitialParameters(params) {
+        this.initialParameters = { text: '', ...params };
       },
       moveDetailpage(suggestion) {
         this.$nuxt.$loading.start();
@@ -328,9 +344,16 @@
             return 'liver';
         }
       },
-      removeSearchConditions() {
-        // TODO: change logic
-        window.location.reload();
+      resetComponent() {
+        Object.assign(this.parameters, this.initialParameters);
+      },
+      resetAllSearchConditions() {
+        this.resetComponent();
+        const screenerViewChild = this.$refs.screenerView.$children[0];
+        screenerViewChild.resetComponent();
+      },
+      setChildIsInitialState(bool) {
+        this.childIsInitialState = bool;
       },
     },
   };
@@ -343,13 +366,11 @@
   .text_search_area
       > .search_condition_title
           display: flex
-          position: relative
-          > .remove_all_btn
+          align-items: center
+          justify-content: space-between
+          > .reset_all_btn
               +button
               +sub_button
-              position: absolute
-              top: 16px
-              left: 180px
       width: 100%
       > h3
           display: flex

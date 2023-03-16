@@ -48,7 +48,7 @@
           </div>
           <div class="align_right">
             <button class="reset_btn" :class="isNoSort" @click="clearSortArray">
-              <font-awesome-icon icon="xmark" />
+              <font-awesome-icon icon="rotate-right" />
               Reset sorting column(s)
             </button>
             <button class="show_all_btn" @click="toggleDisplaySettings">

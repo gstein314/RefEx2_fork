@@ -1,174 +1,172 @@
 <template>
-  <div>
-    <h3>
-      Filter by {{ screenerFilter.description }}
-      <font-awesome-icon
-        v-tooltip="'This is Filter by ' + screenerFilter.description"
-        icon="info-circle"
-      />
-    </h3>
+  <div class="filter">
+    <div class="filter_title">
+      <div>
+        Filter by {{ filter.name }}
+        <font-awesome-icon
+          v-tooltip="'This is Filter by ' + filter.name"
+          icon="info-circle"
+        />
+      </div>
+      <a
+        class="reset_btn"
+        :class="{ disabled: resetIsDisabled }"
+        @click="dispatchAction('INIT')"
+      >
+        <font-awesome-icon icon="rotate-right" />
+        Reset
+      </a>
+    </div>
     <client-only>
-      <div :class="screenerFilter.className">
+      <div :class="filter.id">
         <table ref="itemList" class="item-list">
-          <tr>
-            <td class="check">
-              <input
-                v-model="isAllChecked"
-                type="checkbox"
-                :checked="isAllChecked"
-                @click="dispatchAction('CHECK_ALL')"
-              />
-            </td>
-            <td
-              v-for="column in columns"
-              :key="column.id"
-              :class="column.className"
-            >
-              {{ column.name }}
-              <template
-                v-if="column.className === 'sample' && !isAllSampleSelected"
-              >
+          <thead>
+            <tr>
+              <th v-for="column in columns" :key="column.id" :class="column.id">
+                {{ column.name }}
+                <font-awesome-icon
+                  v-if="isEntropy(column.id)"
+                  v-tooltip="'Range: 1-5'"
+                  icon="info-circle"
+                />
                 <WarningMessage
-                  >Please select from suggestion(s)
+                  v-if="column.id === 'sample' && !eachSampleIsSelected"
+                >
+                  Please select from suggestion(s)
                 </WarningMessage>
-              </template>
-              <font-awesome-icon
-                v-if="isEntropy(column.className)"
-                v-tooltip="'Range: 1-5'"
-                icon="info-circle"
-              />
-            </td>
-            <td
-              colspan="2"
-              class="reset"
-              :class="{ disabled: resetAllDisabled }"
-              @click="dispatchAction('RESET')"
+                <WarningMessage
+                  v-else-if="column.isRequired && !isValidColumn(column.id)"
+                >
+                </WarningMessage>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              v-for="(item, itemIndex) in list"
+              :key="itemIndex"
+              class="list-item"
             >
-              <font-awesome-icon icon="rotate-right" />
-              Reset
-            </td>
-          </tr>
-          <tr
-            v-for="(item, itemIndex) in list"
-            :key="itemIndex"
-            ref="listItem"
-            class="list-item"
-            :class="{ unchecked: !item.isChecked }"
-          >
-            <td class="check">
-              <input
-                v-model="item.isChecked"
-                type="checkbox"
-                @click="dispatchAction('CHECK', itemIndex)"
-              />
-            </td>
-            <td v-for="column in columns" :key="column.id">
-              <select
-                v-if="column.inputType === 'dropdown'"
-                v-model="item[column.className]"
-                required
-                :disabled="!item.isChecked"
-                @change="
-                  () => {
-                    dispatchAction('ADD', itemIndex, item[column.className]);
-                    if (column.className === 'group') {
-                      item.sample = '';
-                      clearSelectedObject(itemIndex);
+              <td
+                v-for="column in columns"
+                :key="column.id"
+                :class="{
+                  warning:
+                    column.isRequired && !isValidInput(column.id, itemIndex),
+                }"
+              >
+                <select
+                  v-if="column.inputType === 'dropdown'"
+                  v-model="item[column.id]"
+                  required
+                  @change="
+                    e => {
+                      dispatchAction('ADD', itemIndex, column.id);
+                      if (column.id === 'group') {
+                        setSelectedSample(itemIndex, 'CLEAR', e);
+                      }
                     }
-                  }
-                "
-              >
-                <option value="" disabled selected hidden>
-                  {{ column.placeholder }}
-                </option>
-                <template v-if="column.className === 'group'">
-                  <option
-                    v-for="option in groupOptions"
-                    :key="option.id"
-                    :value="option.label"
-                  >
-                    {{ option.label }}
+                  "
+                >
+                  <option value="" disabled selected hidden>
+                    {{ column.placeholder }}
                   </option>
-                </template>
-                <template v-else>
-                  <option
-                    v-for="(option, optionIndex) of column.options"
-                    :key="optionIndex"
-                    :value="option.value"
-                  >
-                    {{ option.description }}
-                  </option>
-                </template>
-              </select>
-              <vue-simple-suggest
-                v-else-if="column.className === 'sample'"
-                ref="sampleInputs"
-                v-model.trim="item[column.className]"
-                display-attribute="description"
-                value-attribute="id"
-                :styles="autoCompleteStyle(item)"
-                :list="
-                  autocompleteItems(
-                    item,
-                    itemIndex,
-                    item[column.className],
-                    filter.list[itemIndex].group
-                  )
-                "
-                :debounce="500"
-                :min-length="0"
-                :max-suggestions="10"
-                :placeholder="column.placeholder"
-                :disabled="!item.isChecked"
-                class="text_search_name"
-                @select="setSelectedObject(itemIndex)"
-                @input="
-                  () => {
-                    dispatchAction('ADD', itemIndex, item[column.className]);
-                    clearSelectedObject(itemIndex);
-                  }
-                "
-              >
-                <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
-                <!-- eslint-disable vue/no-unused-vars -->
-                <!-- eslint-disable vue/no-v-html -->
-                <div slot="suggestion-item" slot-scope="{ suggestion }">
-                  <span
-                    v-html="
-                      $highlightedSuggestion(
-                        suggestion.description,
-                        item[column.className],
-                        2
+                  <template v-if="column.id === 'group'">
+                    <option
+                      v-for="option of Object.values(availableGroups)"
+                      :key="option.id"
+                      :value="option.id"
+                    >
+                      {{ option.label }}
+                    </option>
+                  </template>
+                  <template v-else>
+                    <option
+                      v-for="(option, optionIndex) of column.options"
+                      :key="optionIndex"
+                      :value="option.value"
+                    >
+                      {{ option.description }}
+                    </option>
+                  </template>
+                </select>
+                <div
+                  v-else-if="column.id === 'sample'"
+                  class="sample-input"
+                  :class="{ valid: isSelectedArray[itemIndex] }"
+                >
+                  <vue-simple-suggest
+                    ref="sampleInputs"
+                    v-model.trim="item[column.id].input"
+                    display-attribute="description"
+                    value-attribute="id"
+                    :styles="autoCompleteStyle(item)"
+                    :max-suggestions="0"
+                    :list="
+                      autocompleteItems(
+                        itemIndex,
+                        item[column.id].input,
+                        item.group
                       )
                     "
-                  ></span>
+                    :debounce="500"
+                    :min-length="0"
+                    :placeholder="column.placeholder"
+                    class="text_search_name"
+                    @select="
+                      () => {
+                        setSelectedSample(itemIndex, 'ADD');
+                        setGroupOption(itemIndex);
+                      }
+                    "
+                    @input="dispatchAction('ADD', itemIndex, column.id)"
+                    @focus="e => setSelectedSample(itemIndex, 'CLEAR', e)"
+                  >
+                    <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
+                    <!-- eslint-disable vue/no-unused-vars -->
+                    <!-- eslint-disable vue/no-v-html -->
+                    <div slot="suggestion-item" slot-scope="{ suggestion }">
+                      <span
+                        v-html="
+                          $highlightedSuggestion(
+                            suggestion.description,
+                            item[column.id].input,
+                            2
+                          )
+                        "
+                      ></span>
+                    </div>
+                  </vue-simple-suggest>
                 </div>
-              </vue-simple-suggest>
-              <input
-                v-else
-                v-model.trim="item[column.className]"
-                :type="column.inputType"
-                :placeholder="column.placeholder"
-                :min="column.min"
-                :max="column.max"
-                :disabled="!item.isChecked"
-                @input="
-                  dispatchAction('ADD', itemIndex, item[column.className])
-                "
-              />
-            </td>
-            <td class="icon">
-              <button
-                class="delete_btn"
-                :class="{ disabled: isDisable(item) }"
-                :disabled="isDisable(item)"
-                @click="dispatchAction('DELETE', itemIndex)"
-              >
-                <font-awesome-icon icon="trash" />
-                Delete
-              </button>
-            </td>
-          </tr>
+                <input
+                  v-else
+                  v-model.trim="item[column.id]"
+                  :type="column.inputType"
+                  :placeholder="column.placeholder"
+                  :min="column.min"
+                  :max="column.max"
+                  step="0.1"
+                  @input="
+                    e => {
+                      validateNumInput(itemIndex, column, e);
+                      dispatchAction('ADD', itemIndex, column.id);
+                    }
+                  "
+                />
+              </td>
+              <td class="icon">
+                <button
+                  class="delete_btn"
+                  :class="{ disabled: list.length <= 1 }"
+                  :disabled="list.length <= 1"
+                  @click="dispatchAction('DELETE', itemIndex)"
+                >
+                  <font-awesome-icon icon="trash" />
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </client-only>
@@ -178,7 +176,6 @@
 <script>
   import { mapGetters } from 'vuex';
   import VueSimpleSuggest from 'vue-simple-suggest';
-  import datasets from '~/refex-sample/datasets.json';
   import WarningMessage from '../WarningMessage.vue';
   import 'floating-vue/dist/style.css';
   import _ from 'lodash';
@@ -197,189 +194,237 @@
         type: Array,
         default: () => [],
       },
-    },
-    data() {
-      return {
-        isAllChecked: true,
-        datasets,
-        parameters: {
-          text: '',
-        },
-        screenerFilter: this.filter,
-        list: this.filter.list,
-        defaultItem: this.filter.defaultItem,
-      };
+      datasets: {
+        type: Array,
+        default: () => [],
+      },
     },
     computed: {
       ...mapGetters({
         activeDataset: 'active_dataset',
       }),
-      isCheckedSelectedArray() {
-        const filteredList = this.list.filter(({ isChecked }) => isChecked);
-        const isDefaultItem = item => _.isEqual(item, this.defaultItem);
-        const isCheckedSelectedArray = this.list
-          .filter(({ isChecked }) => isChecked)
-          .map(({ isSampleSelected }) => isSampleSelected);
-        for (const [i, item] of filteredList.entries()) {
-          if (isDefaultItem(item) || !item.isChecked) {
-            isCheckedSelectedArray[i] = true;
+      list() {
+        return this.filter.list;
+      },
+      defaultItem() {
+        return this.filter.defaultItem;
+      },
+      columnValidity() {
+        const obj = {};
+        for (const column of this.filter.columns) {
+          obj[column.id] = [];
+          for (const item of this.list) {
+            if (this.isDefaultItem(item)) {
+              obj[column.id].push(true);
+              continue;
+            }
+            obj[column.id].push(item[column.id] !== '');
           }
         }
-        return isCheckedSelectedArray;
+        return obj;
       },
-      isAllSampleSelected() {
-        return this.isCheckedSelectedArray.every(Boolean);
+      isSelectedArray() {
+        return this.list.map(({ sample }) => sample.isSelected);
       },
-      groupOptions() {
-        const target = this.activeDataset.dataset;
-        switch (target) {
-          case 'humanFantom5':
-            return this.datasets[0].datasets[0].specificity;
-          case 'gtexV8':
-            return this.datasets[0].datasets[1].specificity;
-          case 'mouseFantom5':
-            return this.datasets[1].datasets[0].specificity;
-          default:
-            return [{ label: 'No useable option found' }];
+      eachSampleIsSelected() {
+        return this.list
+          .filter(item => !this.isDefaultItem(item))
+          .map(({ sample }) => sample.isSelected)
+          .every(Boolean);
+      },
+      availableGroups() {
+        const activeDataset = this.activeDataset.dataset;
+        return this.datasetSamples.bySubDataset[activeDataset];
+      },
+      resetIsDisabled() {
+        return this.list.length === 1 && this.isDefaultItem(this.list[0]);
+      },
+      datasetSamples() {
+        const subDatasetSamples = {};
+        const defaultSamples = {};
+        const speciesDatasets = this.datasets;
+
+        for (const speciesDataset of speciesDatasets) {
+          for (const subDataset of speciesDataset.datasets) {
+            subDatasetSamples[subDataset.dataset] = {};
+            defaultSamples[subDataset.dataset] = [];
+            for (const spec of subDataset.specificity) {
+              // spec.samples.forEach(sample => (sample.group = spec.id));
+              subDatasetSamples[subDataset.dataset][spec.id] = spec;
+              defaultSamples[subDataset.dataset].push(...spec.samples);
+            }
+          }
         }
-      },
-      resetAllDisabled() {
-        const firstItem = this.list[0];
-        if (_.isEqual(firstItem, this.defaultItem) && this.list.length === 1) {
-          return true;
-        }
-        return false;
-      },
-      getIsAllChecked() {
-        return this.list.every(({ isChecked }) => isChecked);
+        return { bySubDataset: subDatasetSamples, byDefault: defaultSamples };
       },
     },
     watch: {
-      getIsAllChecked(newState) {
-        this.isAllChecked = newState;
-      },
       list: {
         handler(newVal, oldVal) {
-          this.$emit('addFilterValue', this.screenerFilter.type, this.list);
+          this.$emit('addFilterValue', this.filter.type, this.list);
         },
         deep: true,
       },
     },
-    mounted() {
-      if (this.list.length === 0) this.dispatchAction('INIT');
-    },
     methods: {
+      validateNumInput(index, column, e) {
+        const numInput = parseFloat(e.target.value);
+        const targetItem = this.getTargetItem(index);
+        const { id, min, max } = column;
+        const isWithinRange =
+          numInput >= parseInt(min) && numInput <= parseInt(max);
+        const toOneDecimal = () => {
+          let text = numInput.toString();
+          const tenthsIndex = text.indexOf('.') + 1;
+          return text.substring(0, tenthsIndex + 1);
+        };
+        targetItem[id] = isWithinRange
+          ? toOneDecimal()
+          : targetItem[id].substring(0, targetItem[id].length - 1);
+      },
+      getTargetItem(index) {
+        return this.list[index];
+      },
+      isEntropy(id) {
+        return ['emin', 'emax'].includes(id);
+      },
+      isDefaultItem(item) {
+        return _.isEqual(this.defaultItem, item);
+      },
+      isValidColumn(column) {
+        return Object.values(this.columnValidity[column]).every(Boolean);
+      },
+      isValidInput(column, index) {
+        const targetItem = this.getTargetItem(index);
+        return this.isDefaultItem(targetItem) || targetItem[column] !== '';
+      },
       autoCompleteStyle(item) {
-        const { isChecked, isSampleSelected } = item;
-        const isDefaultItem = _.isEqual(item, this.defaultItem);
-        if (isChecked && !isSampleSelected && !isDefaultItem)
+        const { isSelected } = item.sample;
+        if (!this.isDefaultItem(item) && !isSelected) {
           return { defaultInput: 'warning' };
+        }
       },
-      isDisable(item) {
-        return this.list.length <= 1;
-      },
-      isEntropy(className) {
-        return ['emin', 'emax'].includes(className);
-      },
-      dispatchAction(action, index, value) {
-        const targetItem = this.list[index];
-        const defaultItemCopy = { ...this.defaultItem };
+      dispatchAction(action, index, column) {
+        const numOfItems = this.list.length;
+        const defaultItemCopy = JSON.parse(JSON.stringify(this.defaultItem));
+        const targetItem = this.getTargetItem(index);
+        const setNewList = () =>
+          this.list.splice(0, numOfItems, defaultItemCopy);
+        const shouldAddNewItem = () => {
+          const isObject = typeof defaultItemCopy[column] === 'object';
+          const inputField = isObject
+            ? targetItem[column].input
+            : targetItem[column];
+          const hasNonSpaceInput = inputField.trim().length > 0;
+          const hasNextItem = this.getTargetItem(index + 1) ? true : false;
+          return hasNonSpaceInput && !hasNextItem;
+        };
+
         switch (action) {
           case 'INIT':
-            this.list.push(defaultItemCopy);
-            break;
-          case 'CHECK_ALL':
-            this.isAllChecked = !this.isAllChecked;
-            for (const item of this.list) {
-              item.isChecked = this.isAllChecked ? true : false;
-            }
-            break;
-          case 'CHECK':
-            targetItem.isChecked = !targetItem.isChecked;
+            setNewList();
             break;
           case 'ADD':
-            if (value.trim().length > 0) {
-              if (!this.list[index + 1]) {
-                this.list.push(defaultItemCopy);
-              }
+            if (shouldAddNewItem()) {
+              this.list.push(defaultItemCopy);
             }
             break;
           case 'DELETE':
-            if (this.list.length === 1) {
-              this.list.splice(0, this.list.length);
-              this.list.push(defaultItemCopy);
-            } else {
-              this.$delete(this.list, index);
-            }
-            break;
-          case 'RESET':
-            this.list.splice(0, this.list.length);
-            this.list.push(defaultItemCopy);
+            numOfItems === 1 ? setNewList() : this.$delete(this.list, index);
             break;
         }
       },
-      autocompleteItems(item, index, userInput, targetGroup) {
-        const targetDataset = this.activeDataset.dataset;
-        const humanFantom5Dataset = this.datasets[0].datasets[0];
-        const gtexV8Dataset = this.datasets[0].datasets[1];
-        const allSamples = humanFantom5Dataset.specificity[0].samples.concat(
-          humanFantom5Dataset.specificity[1].samples,
-          gtexV8Dataset.specificity[0].samples,
-          gtexV8Dataset.specificity[1].samples
-        );
-        const samplesArray = () => {
-          if (item.hasOwnProperty('group')) {
-            switch (targetDataset) {
-              case 'humanFantom5':
-                return targetGroup === 'Adult tissues'
-                  ? humanFantom5Dataset.specificity[0].samples
-                  : targetGroup === 'Epithelial cells'
-                  ? humanFantom5Dataset.specificity[1].samples
-                  : humanFantom5Dataset.specificity[0].samples;
-              case 'gtexV8':
-                return targetGroup === 'All tissues'
-                  ? gtexV8Dataset.specificity[0].samples
-                  : targetGroup === 'Brain sub-regions'
-                  ? gtexV8Dataset.specificity[1].samples
-                  : gtexV8Dataset.specificity[0].samples;
-            }
+      autocompleteItems(index, userInput, selectedGroup) {
+        const activeDateset = this.activeDataset.dataset;
+        const getUnsortedSamples = () => {
+          try {
+            return JSON.parse(
+              JSON.stringify(
+                this.datasetSamples.bySubDataset[activeDateset][selectedGroup]
+                  .samples
+              )
+            );
+          } catch (error) {
+            const defaultList = JSON.parse(
+              JSON.stringify(this.datasetSamples.byDefault[activeDateset])
+            );
+            return defaultList;
           }
-          return allSamples;
         };
-        const wordAndSpace = /[^\w\s]/g;
-        const alphaNumInput = userInput.replace(wordAndSpace, '');
-        const inputsArray = alphaNumInput.replace(/\s\s+/g, ' ').split(' ');
+        const sortSamplesByDescription = (a, b) =>
+          a.description.localeCompare(b.description);
+        const sortedSamples = getUnsortedSamples().sort(
+          sortSamplesByDescription
+        );
+        const filterSamples = (samples, input) => {
+          const nonWordDigitSpace = /[^\w\d\s]/g;
+          const toAlphaNum = input.replace(nonWordDigitSpace, '');
+          const twoSpacesOrMore = /\s\s+/g;
+          const wordArray = toAlphaNum.replace(twoSpacesOrMore, ' ').split(' ');
 
-        const result = samplesArray().filter(sample => {
-          const alphaNumInput = sample.description.replace(wordAndSpace, '');
-          for (const input of inputsArray) {
-            return alphaNumInput.toLowerCase().includes(input.toLowerCase());
-          }
-        });
-        const firstHowManyResult = num =>
-          result.filter((sample, i) => i <= num - 1);
-        if (this.$refs.sampleInputs !== undefined) {
-          if (this.$refs.sampleInputs[index] !== undefined) {
-            this.$refs.sampleInputs[index].suggestions = firstHowManyResult(10);
+          return samples.filter(sample => {
+            const description = sample.description.replace(
+              nonWordDigitSpace,
+              ''
+            );
+            return wordArray.every(input =>
+              description.toLowerCase().includes(input.toLowerCase())
+            );
+          });
+        };
+        const filteredSamples = userInput
+          ? filterSamples(sortedSamples, userInput)
+          : undefined;
+        const suggestions = filteredSamples ?? sortedSamples;
+        // manually update vue-simple-suggest suggestions after "Group" option changed
+        const inputRef = this.$refs.sampleInputs?.[index];
+        if (inputRef) {
+          inputRef.suggestions = suggestions;
+        }
+        return suggestions;
+      },
+      setSelectedSample(index, action, e) {
+        const targetItem = this.getTargetItem(index);
+        const sampleInput = this.$refs.sampleInputs?.[index];
+        const { id, description } = sampleInput?.selected || {};
+        const isSampleField = e?.target.localName === 'input';
+
+        if (action === 'ADD' && sampleInput) {
+          Object.assign(targetItem.sample, {
+            id: id,
+            description: description,
+            isSelected: true,
+          });
+          setTimeout(() => sampleInput.inputElement.blur(), 10);
+        }
+
+        if (action === 'CLEAR' && sampleInput?.selected) {
+          sampleInput.setText('');
+          sampleInput.selected = null;
+          Object.assign(targetItem.sample, {
+            input: '',
+            id: '',
+            description: '',
+            isSelected: false,
+          });
+          if (isSampleField && targetItem.group) {
+            targetItem.group = '';
           }
         }
-        return result;
       },
-      setSelectedObject(index) {
-        const sampleInputCopy = { ...this.$refs.sampleInputs[index] };
-        const id = sampleInputCopy.selected.id;
-        const description = sampleInputCopy.selected.description;
-        const targetItem = this.list[index];
-        targetItem.sampleId = id;
-        targetItem.sampleDescription = description;
-        targetItem.isSampleSelected = true;
-      },
-      clearSelectedObject(index) {
-        const targetItem = this.list[index];
-        if (targetItem.sampleDescription !== targetItem.sample) {
-          targetItem.sampleId = '';
-          targetItem.sampleDescription = '';
-          targetItem.isSampleSelected = false;
+      setGroupOption(index) {
+        const targetItem = this.getTargetItem(index);
+        if (targetItem.group !== undefined) {
+          const sampleInput = this.$refs.sampleInputs[index];
+          for (const [groupId, group] of Object.entries(this.availableGroups)) {
+            const isInGroup = Boolean(
+              group.samples.find(({ id }) => id === targetItem.sample.id)
+            );
+            if (isInGroup) {
+              targetItem.group = groupId;
+              break;
+            }
+          }
         }
       },
     },
@@ -387,20 +432,51 @@
 </script>
 
 <style lang="sass">
-  .v-popper--theme-tooltip .v-popper__inner
-    background: $WHITE
-    border: 1px solid $MAIN_COLOR
-    color: $BLACK
-    padding: 3px 8px
-    border-radius: 3px
-    box-shadow: 0 1px 4px rgba(62, 70, 82, .22)
-    z-index: $TOOLTIP_LAYER
-  .v-popper--theme-tooltip .v-popper__arrow-inner
-    z-index: 10
-    visibility: visible
-    border-color: $WHITE
-  .v-popper--theme-tooltip .v-popper__arrow-outer
-    border-color: $MAIN_COLOR
-  .v-popper__arrow-container
-    height: 0
+  tbody
+    td
+      &.warning
+        input, select
+          +warning_field
+    .text_search_name input
+      &.warning
+        +warning_field
+  .filter_title
+    display: flex
+    align-items: center
+    justify-content: space-between
+    .reset_btn
+      color: $MAIN_COLOR
+      cursor: pointer
+      &.disabled
+        color: $DISABLE_COLOR
+        cursor: not-allowed
+  .sample-input
+    position: relative
+    &.valid
+      input
+        cursor: pointer
+    svg[data-icon="circle-check"]
+      position: absolute
+      right: 1em
+      top: 1em
+      color: $PLACEHOLDER_COLOR
+  .suggestions
+    +scrollable-suggestions
+  .v-popper--theme-tooltip
+    .v-popper__inner
+      background: $WHITE
+      border: 1px solid $MAIN_COLOR
+      color: $BLACK
+      padding: 3px 8px
+      border-radius: 3px
+      box-shadow: 0 1px 4px rgba(62, 70, 82, .22)
+      z-index: $TOOLTIP_LAYER
+    .v-popper__arrow-inner
+      z-index: 10
+      visibility: visible
+      border-color: $WHITE
+    .v-popper__arrow-outer
+      border-color: $MAIN_COLOR
+    .v-popper__arrow-container
+      height: 0
 </style>

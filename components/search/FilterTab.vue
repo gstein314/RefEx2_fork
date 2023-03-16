@@ -1,6 +1,6 @@
 <template>
   <div v-show="isActive" class="filter_tab">
-    <main>
+    <main @keyup.enter="enterKeySearch($vnode.key)">
       <SearchBar
         :key="`${$vnode.key}_search`"
         :ref="`${$vnode.key}_search`"
@@ -81,7 +81,7 @@
         return this.$vnode.key === this.$store.state.active_filter;
       },
       resultsNum() {
-        return this.resultsByName(this.$vnode.key).results_num;
+        return this.resultsByName(this.$vnode.key).results_num ?? 0;
       },
       resultTableLength() {
         return this.resultsByName(this.$vnode.key).results.length;
@@ -117,6 +117,14 @@
       showSearchResult(vnodeKey) {
         this.$refs[`${vnodeKey}_search`].showResults('all');
         this.validSearch = false;
+      },
+      enterKeySearch(vnodeKey) {
+        if (this.validSearch) {
+          this.showSearchResult(vnodeKey);
+          this.$refs[
+            `${vnodeKey}_search`
+          ].$refs.searchInput.inputElement.blur();
+        }
       },
     },
   };

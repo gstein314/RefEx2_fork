@@ -51,19 +51,7 @@
           cursor: default
           background-color: $DISABLE_COLOR
       > .ti-autocomplete
-        max-height: 252px
-        overflow: auto
-        white-space: nowrap
-        resize: vertical
-        &[style*="height"]
-          max-height: unset
-        &::-webkit-scrollbar-track
-          background: $MAIN_COLOR_PALE
-        &::-webkit-scrollbar-thumb
-          all: initial
-          background: #7C7C7C3F
-        &::-webkit-scrollbar-thumb:hover
-          background: $GRAY
+        +scrollable-suggestions
       .ti-input
         +text_input
         padding: 10px
@@ -119,7 +107,7 @@
         +sample_query
     input
       +text_input
-      font-size: 22px
+      font-size: 20px
       &.text_search_go_term
         margin-bottom: 10px
     select

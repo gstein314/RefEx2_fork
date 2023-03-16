@@ -10,7 +10,9 @@ $ACTIVE_COLOR_HOVER: rgba(255, 255, 0, .1)
 $BUTTON_HOVER_COLOR: #095493
 $WARNING_BUTTON_COLOR: #FF8A17
 $WARNING_BUTTON_COLOR_HOVER: #F06A06
+$WARNING_FIELD_COLOR: rgb(255, 192, 203, 0.5)
 $DISABLE_COLOR:#CCCCCC
+$PLACEHOLDER_COLOR: #CCCCCC
 $COLOR_1: #488EC4
 $COLOR_2: #FF8A17
 $COLOR_3: #67C1C7
@@ -50,8 +52,7 @@ $TOOLTIP_LAYER: 2
   border-radius: $BORDER_RADIUS_DEFAULT
   position: relative
   &::placeholder
-    color: $BLACK
-    opacity: .3
+    color: $PLACEHOLDER_COLOR
   &:focus
     outline: none
 
@@ -288,10 +289,10 @@ $TOOLTIP_LAYER: 2
     &:hover
       cursor: pointer
 
-@mixin warning_border
-  &.warning
-    outline: 1px solid $WARNING_COLOR
-    outline-offset: -1px
+@mixin warning_field
+  background: $WARNING_FIELD_COLOR
+  outline: 1px solid pink
+  outline-offset: -1px
 @mixin tooltip
   background-color: #ffffff
   padding: 3px 8px
@@ -317,3 +318,20 @@ $TOOLTIP_LAYER: 2
     border-color: $MAIN_COLOR
   .v-popper__arrow-container
     height: 0
+
+// ! The suggestions overflowed don't get highlighted
+@mixin scrollable-suggestions
+  width: 100%
+  max-height: 252px
+  overflow: auto
+  white-space: nowrap
+  resize: vertical
+  &[style*="height"]
+    max-height: unset
+  &::-webkit-scrollbar-track
+    background: $MAIN_COLOR_PALE
+  &::-webkit-scrollbar-thumb
+    all: initial
+    background: #7C7C7C3F
+  &::-webkit-scrollbar-thumb:hover
+    background: $GRAY
