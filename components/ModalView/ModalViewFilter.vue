@@ -63,7 +63,6 @@
                 :checked="searchValue.includes(props.option)"
               />
               <span class="option__small">{{ props.option }}</span>
-              <!-- <font-awesome-icon icon="exclamation-triangle" /> -->
             </div>
           </template>
           <template slot="selection" slot-scope="{ values }">
