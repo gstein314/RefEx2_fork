@@ -109,6 +109,7 @@
   import ScreenerView from '~/components/ScreenerView/ScreenerView.vue';
   import { mapGetters } from 'vuex';
   import { mapMutations } from 'vuex';
+  import _ from 'lodash';
 
   export default {
     components: {
