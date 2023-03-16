@@ -2,7 +2,7 @@
   <div class="wrapper">
     <p v-if="isError" class="error">
       <WarningMessage
-        :text="'An error has occured while fetching the data. Please check wheter the URL contains the correct information.'"
+        :text="'An error has occurred while fetching the data. Please check whether the URL contains the correct information.'"
       />
     </p>
     <div v-else ref="chartWrapper" class="chart_wrapper">
