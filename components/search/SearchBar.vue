@@ -230,6 +230,8 @@
     mounted() {
       if (this.searchConditions.gene.text)
         this.parameters.text = this.searchConditions[this.filterType].text;
+      if (this.searchConditions.sample.text)
+        this.parameters.text = this.searchConditions[this.filterType].text;
       if (this.filterType === 'gene' && this.searchConditions.gene.summary) {
         this.isSummaryIncluded = this.searchConditions[this.filterType].summary;
       }
@@ -252,7 +254,6 @@
       updateParams(params) {
         this.$emit('updateScreener');
         this.parameters = { text: this.parameters.text, ...params };
-
         this.showResults('numfound');
       },
       storeInitialParameters(params) {

@@ -323,12 +323,14 @@
         switch (action) {
           case 'INIT':
             setNewList();
+            this.$emit('resetUpdateParameters');
             break;
-          case 'ADD':
-            if (shouldAddNewItem()) {
-              this.list.push(defaultItemCopy);
-            }
-            break;
+          // TODO: Comment out until gql is multi
+          // case 'ADD':
+          //   if (shouldAddNewItem()) {
+          //     this.list.push(defaultItemCopy);
+          //   }
+          //   break;
           case 'DELETE':
             numOfItems === 1 ? setNewList() : this.$delete(this.list, index);
             break;
