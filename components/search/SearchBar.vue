@@ -192,6 +192,7 @@
                     'chromosomePosition',
                     'typeOfGene',
                     'filter',
+                    'summary',
                   ].includes(param)
               )
               .join(' ')} ${this.extraVariablesToBeDsiplayedInResults}}`;
