@@ -186,12 +186,6 @@
           value: value,
         };
         this.setSearchConditions(sampleSearchCondition);
-        // const sampleSearchCondition = {
-        //   type: 'sample',
-        //   item: 'sample_conditions',
-        //   value: this.parameters,
-        // };
-        // this.setSearchConditions(sampleSearchCondition);
       },
     },
   };
