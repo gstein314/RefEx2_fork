@@ -15,7 +15,7 @@ describe('ComparisonButton.vue', () => {
       toggleCompareModal: jest.fn(),
     };
     store = new Vuex.Store({
-      actions,
+      mutations: actions,
     });
   });
 

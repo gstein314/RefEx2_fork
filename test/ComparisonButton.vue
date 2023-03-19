@@ -7,14 +7,14 @@
 
 <script>
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-  import { mapActions } from 'vuex';
+  import { mapMutations } from 'vuex';
 
   export default {
     components: {
       FontAwesomeIcon,
     },
     methods: {
-      ...mapActions(['toggleCompareModal']),
+      ...mapMutations(['toggleCompareModal']),
     },
   };
 </script>
