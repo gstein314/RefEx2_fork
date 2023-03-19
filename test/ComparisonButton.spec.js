@@ -1,6 +1,6 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
-import ComparisonButton from './ComparisonButton.vue';
+import ComparisonButton from '@/components/ComparisonButton.vue';
 
 const localVue = createLocalVue();
 
@@ -12,16 +12,16 @@ describe('ComparisonButton.vue', () => {
 
   beforeEach(() => {
     actions = {
-      toggleCompareModal: jest.fn(),
+      set_compare_modal: jest.fn(),
     };
     store = new Vuex.Store({
       mutations: actions,
     });
   });
 
-  it('dispatches "toggleCompareModal" when button is clicked', () => {
+  it('dispatches "set_compare_modal" when button is clicked', () => {
     const wrapper = shallowMount(ComparisonButton, { store, localVue });
     wrapper.find('button').trigger('click');
-    expect(actions.toggleCompareModal).toHaveBeenCalled();
+    expect(actions.set_compare_modal).toHaveBeenCalled();
   });
 });

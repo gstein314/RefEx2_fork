@@ -6,9 +6,13 @@
 </template>
 
 <script>
+  import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
   import { mapMutations } from 'vuex';
 
   export default {
+    components: {
+      FontAwesomeIcon,
+    },
     methods: {
       ...mapMutations({
         toggleCompareModal: 'set_compare_modal',
