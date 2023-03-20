@@ -118,6 +118,7 @@
           DevelopmentalStage: sample_conditions.DevelopmentalStage,
           Sex: sample_conditions.Sex,
         };
+        this.$emit('updateParameters', this.parameters);
       });
     },
     methods: {
@@ -137,7 +138,7 @@
         }
         this.parameters = { ...parametersObj };
         this.initialParameters = { ...parametersObj };
-        this.$emit('updateParameters', { ...parametersObj });
+        this.$emit('updateParameters', this.parameters);
         this.$emit('storeInitialParameters', { ...this.initialParameters });
       },
       storeInitialParameters(obj) {
