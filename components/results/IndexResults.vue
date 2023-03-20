@@ -156,6 +156,7 @@
     data() {
       return {
         checkedResults: [],
+        resultsCached: [],
       };
     },
     computed: {
@@ -174,7 +175,7 @@
         return this.activeDataset[this.filterType].item_comparison_example;
       },
       resultsUniqueKeys() {
-        return this.results.map(item => item[this.keyForID]);
+        return this.resultsCached.map(item => item[this.keyForID]);
       },
       keyForID() {
         return this.filterType === 'gene' ? 'geneid' : 'refexSampleId';
@@ -195,13 +196,15 @@
         return this.resultsByName(this.filterType).results;
       },
       pageItems() {
-        return this.results.slice(
+        return this.resultsCached.slice(
           this.paginationObject.offset,
           this.paginationObject.offset + this.paginationObject.limit
         );
       },
       pagesNumber() {
-        return Math.ceil(this.results.length / this.paginationObject.limit);
+        return Math.ceil(
+          this.resultsCached.length / this.paginationObject.limit
+        );
       },
     },
     watch: {
@@ -213,6 +216,11 @@
           this.setCheckedResults(this.getCheckedResults.filter(Boolean));
           this.checkedResults = this.getCheckedResults;
         }
+      },
+      results(newVal, oldVal) {
+        if (newVal.length === 0) return;
+        if (this.resultsCached.length === 0)
+          this.resultsCached = JSON.parse(JSON.stringify(newVal));
       },
     },
     created() {

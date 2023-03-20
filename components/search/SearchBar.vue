@@ -109,6 +109,7 @@
   import ScreenerView from '~/components/ScreenerView/ScreenerView.vue';
   import { mapGetters } from 'vuex';
   import { mapMutations } from 'vuex';
+  import _ from 'lodash';
 
   export default {
     components: {
@@ -138,6 +139,7 @@
         activeDataset: 'active_dataset',
         activeSpecie: 'active_specie',
         searchCondition: 'search_condition_by_specie',
+        searchConditions: 'get_search_conditions',
       }),
       // returns either gene or sample
       filterType() {
@@ -182,7 +184,17 @@
         const resultParams = this.isNum
           ? ''
           : `{${Object.keys(this.parameters)
-              .filter(param => !['text', 'go'].includes(param))
+              .filter(
+                param =>
+                  ![
+                    'text',
+                    'go',
+                    'chromosomePosition',
+                    'typeOfGene',
+                    'filter',
+                    'summary',
+                  ].includes(param)
+              )
               .join(' ')} ${this.extraVariablesToBeDsiplayedInResults}}`;
         const suffix = this.isNum ? '' : ` ${this.queryPrefix}Numfound`;
         return `{${this.queryPrefix}${
@@ -217,12 +229,20 @@
       this.updateSearchCondition();
     },
     mounted() {
+      if (this.searchConditions.gene.text)
+        this.parameters.text = this.searchConditions[this.filterType].text;
+      if (this.searchConditions.sample.text)
+        this.parameters.text = this.searchConditions[this.filterType].text;
+      if (this.filterType === 'gene' && this.searchConditions.gene.summary) {
+        this.isSummaryIncluded = this.searchConditions[this.filterType].summary;
+      }
       setTimeout(() => this.$refs.searchInput.inputElement.focus(), 10);
     },
     methods: {
       ...mapMutations({
         setAlertModal: 'set_alert_modal',
         updatePagination: 'set_pagination',
+        setSearchConditions: 'set_search_conditions',
       }),
       updateSearchCondition() {
         if (this.filterType === 'gene') {
@@ -235,7 +255,6 @@
       updateParams(params) {
         this.$emit('updateScreener');
         this.parameters = { text: this.parameters.text, ...params };
-
         this.showResults('numfound');
       },
       storeInitialParameters(params) {
@@ -260,9 +279,21 @@
       getSuggestions() {
         this.isLoading = true;
         const suggestion = this.parameters.text;
+        const searchText = {
+          type: this.filterType,
+          item: 'text',
+          value: suggestion,
+        };
+        this.setSearchConditions(searchText);
         const query = `{${this.queryPrefix}(text: "${suggestion}" ${
           this.isSummaryIncluded ? 'summary: "true"' : ''
         }) {${this.paramsForSuggestions.join(' ')}}}`;
+        const searchSummary = {
+          type: this.filterType,
+          item: 'summary',
+          value: this.isSummaryIncluded,
+        };
+        this.setSearchConditions(searchSummary);
         return this.$axios
           .$post('gql', {
             query,
@@ -277,10 +308,12 @@
         this.typeOfQuery = type;
         let results;
         let results_num = 0;
+
         if (this.isSummaryIncluded && this.parameters.text.length === 0)
           this.isSummaryIncluded = false;
         this.$axios
           .$post('gql', {
+            // TODO:
             query: this.suggestQuery,
           })
           .then(result => {

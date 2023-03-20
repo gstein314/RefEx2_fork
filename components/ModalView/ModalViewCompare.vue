@@ -72,8 +72,10 @@
       comparisonSearch() {
         if (this.itemIdsForComparisonStr === '') return;
         this.$nuxt.$loading.start();
-        location.href = this.routeToProjectPage(
-          this.itemIdsForComparisonStr.replace(/^,/, '').replace(/ /g, '')
+        this.$router.push(
+          this.routeToProjectPage(
+            this.itemIdsForComparisonStr.replace(/^,/, '').replace(/ /g, '')
+          )
         );
         this.toggleCompareModal();
       },
