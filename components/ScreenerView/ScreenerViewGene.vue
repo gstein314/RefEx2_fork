@@ -125,7 +125,6 @@
         typeOfGene: '',
         filter: '',
       },
-      // will contain same keys as parameters. Autocompletion that does not come from the API should be hardcoded here in advance
       hideCaret: false,
       geneFilters: JSON.parse(stringifiedGeneFilters),
       datasets: JSON.parse(stringifiedDatasets),
@@ -144,6 +143,7 @@
         chrCheckedValue: [],
         chrOptions: [],
         TOGOptions: [],
+        // will contain same keys as parameters. Autocompletion that does not come from the API should be hardcoded here in advance
         autoComplete: {
           go: [],
           chromosomePosition: [],
