@@ -100,12 +100,12 @@
 </template>
 
 <script>
-  import { mapGetters, mapMutations } from 'vuex';
-  import MultiSelect from 'vue-multiselect';
-  import ScreenerViewGeneFilter from './ScreenerViewGeneFilter.vue';
-  import geneFilters from '~/refex-sample/gene_filters.json';
-  import datasets from '~/refex-sample/datasets.json';
   import _ from 'lodash';
+  import MultiSelect from 'vue-multiselect';
+  import { mapGetters, mapMutations } from 'vuex';
+  import datasets from '~/refex-sample/datasets.json';
+  import geneFilters from '~/refex-sample/gene_filters.json';
+  import ScreenerViewGeneFilter from './ScreenerViewGeneFilter.vue';
 
   const stringifiedGeneFilters = JSON.stringify(geneFilters);
   const stringifiedDatasets = JSON.stringify(datasets);
@@ -121,6 +121,9 @@
       // passed down to API
       parameters: {
         go: [],
+        chromosomePosition: '',
+        typeOfGene: '',
+        filter: '',
       },
       // will contain same keys as parameters. Autocompletion that does not come from the API should be hardcoded here in advance
       hideCaret: false,
@@ -138,23 +141,9 @@
         ROKUValue: [],
         tauValue: [],
         autocompleteStaticData: {},
-        chrValue: [],
-        TOGValue: [],
         chrCheckedValue: [],
         chrOptions: [],
         TOGOptions: [],
-        // only used in this component
-        temporaryParameters: {
-          goTerm: '',
-        },
-        // passed down to API
-        parameters: {
-          go: [],
-          chromosomePosition: [],
-          typeOfGene: [],
-          filter: [],
-        },
-        // will contain same keys as parameters. Autocompletion that does not come from the API should be hardcoded here in advance
         autoComplete: {
           go: [],
           chromosomePosition: [],
@@ -240,7 +229,7 @@
     async created() {
       this.getAutoCompleteData().then(() => {});
       this.$emit('updateParameters', { go: this.goTermString });
-      this.$emit('storeInitialParameters', { go: this.goTermString });
+      this.initiateParametersDataset();
     },
     mounted() {
       if (this.searchConditions.gene.chr)
@@ -268,6 +257,16 @@
       },
       resetComponent() {
         Object.assign(this.$data, initialState());
+      },
+      initiateParametersDataset() {
+        const parametersObj = {
+          go: '',
+          chromosomePosition: '',
+          typeOfGene: '',
+          filter: '',
+        };
+        this.$emit('updateParameters', { ...parametersObj });
+        this.$emit('storeInitialParameters', { ...parametersObj });
       },
       getAutoCompleteData() {
         return this.$axios

@@ -253,7 +253,11 @@
       },
       updateParams(params) {
         this.$emit('updateScreener');
-        this.parameters = { text: this.parameters.text, ...params };
+        this.parameters = {
+          text: this.parameters.text,
+          summary: this.parameters.summary,
+          ...params,
+        };
         this.showResults('numfound');
       },
       storeInitialParameters(params) {
