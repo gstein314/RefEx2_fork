@@ -58,8 +58,8 @@
   </div>
 </template>
 <script>
-  import { mapGetters, mapMutations } from 'vuex';
   import _ from 'lodash';
+  import { mapGetters, mapMutations } from 'vuex';
 
   export default {
     data() {
@@ -120,9 +120,6 @@
         };
       });
     },
-    updated() {
-      this.$emit('updateParameters', this.searchConditions.sample);
-    },
     methods: {
       ...mapMutations({
         setAlertModal: 'set_alert_modal',
@@ -138,9 +135,9 @@
           parametersObj[key] = '';
           if (!this.autoComplete[key]) this.$set(this.autoComplete, key, []);
         }
-        this.parameters = parametersObj;
+        this.parameters = { ...parametersObj };
         this.initialParameters = { ...parametersObj };
-        this.$emit('updateParameters', { ...this.parameters });
+        this.$emit('updateParameters', { ...parametersObj });
         this.$emit('storeInitialParameters', { ...this.initialParameters });
       },
       storeInitialParameters(obj) {
