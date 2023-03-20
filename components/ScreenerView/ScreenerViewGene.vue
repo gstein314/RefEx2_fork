@@ -116,6 +116,7 @@
   import datasets from '~/refex-sample/datasets.json';
   import geneFilters from '~/refex-sample/gene_filters.json';
   import ScreenerViewGeneFilter from './ScreenerViewGeneFilter.vue';
+import filters from '~/static/filters.json';
 
   const stringifiedGeneFilters = JSON.stringify(geneFilters);
   const stringifiedDatasets = JSON.stringify(datasets);
@@ -446,6 +447,8 @@
       *[class^="multiselect__option"]
         &:after
           content: none
+    .filter
+      margin-left: 20px
     .filter + .filter
       margin-top: 30px
     .filter_TPM, .filter_specificity_ROKU, .filter_specificity_tau
