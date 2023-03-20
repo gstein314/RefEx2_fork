@@ -118,7 +118,7 @@
           DevelopmentalStage: sample_conditions.DevelopmentalStage,
           Sex: sample_conditions.Sex,
         };
-        this.$emit('updateParameters', this.parameters);
+        emitUpdateParameters();
       });
     },
     methods: {
@@ -138,8 +138,8 @@
         }
         this.parameters = { ...parametersObj };
         this.initialParameters = { ...parametersObj };
-        this.$emit('updateParameters', this.parameters);
-        this.$emit('storeInitialParameters', { ...this.initialParameters });
+        emitUpdateParameters();
+        emitStoreInitialParameters();
       },
       storeInitialParameters(obj) {
         this.initialParameters = obj;
@@ -177,13 +177,19 @@
         if (key && value) {
           this.$set(this.parameters, key, value);
         }
-        this.$emit('updateParameters', this.parameters);
+        emitUpdateParameters();
         const sampleSearchCondition = {
           type: 'sample',
           item: key,
           value: value,
         };
         this.setSearchConditions(sampleSearchCondition);
+      },
+      emitUpdateParameters() {
+        this.$emit('updateParameters', this.parameters);
+      },
+      emitStoreInitialParameters() {
+        this.$emit('storeInitialParameters', { ...this.initialParameters });
       },
     },
   };
