@@ -170,9 +170,6 @@
           ? 'transcription factor binding'
           : 'Only one tag is allowed';
       },
-      selection() {
-        return this.chrValue.join();
-      },
       isInitialState() {
         const defaultState = initialState();
         return Object.keys(defaultState).every(key =>
