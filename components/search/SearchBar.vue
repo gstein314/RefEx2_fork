@@ -100,6 +100,7 @@
         @updateParameters="updateParams"
         @storeInitialParameters="storeInitialParameters"
         @setChildIsInitialState="setChildIsInitialState"
+        @resetAll="resetAllSearchConditions"
       ></component>
     </ScreenerView>
   </div>

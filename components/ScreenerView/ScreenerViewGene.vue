@@ -182,10 +182,7 @@
     },
     watch: {
       activeDataset() {
-        // reset all keys of this.parameters to ''
-        this.parameters = {
-          go: [],
-        };
+        this.$emit('resetAll');
       },
       isInitialState(newVal) {
         this.$emit('setChildIsInitialState', newVal);
