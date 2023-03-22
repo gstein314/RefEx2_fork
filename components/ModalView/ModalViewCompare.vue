@@ -71,12 +71,17 @@
       },
       comparisonSearch() {
         if (this.itemIdsForComparisonStr === '') return;
-        this.$nuxt.$loading.start();
-        this.$router.push(
-          this.routeToProjectPage(
-            this.itemIdsForComparisonStr.replace(/^,/, '').replace(/ /g, '')
-          )
-        );
+        // TODO: skip when same id
+        const urlParams = new URLSearchParams(window.location.search);
+        const idValue = urlParams.get('id');
+        if (this.itemIdsForComparisonStr !== idValue) {
+          this.$nuxt.$loading.start();
+          this.$router.push(
+            this.routeToProjectPage(
+              this.itemIdsForComparisonStr.replace(/^,/, '').replace(/ /g, '')
+            )
+          );
+        }
         this.toggleCompareModal();
       },
       closeModalView() {
