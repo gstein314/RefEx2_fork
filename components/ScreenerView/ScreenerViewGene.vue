@@ -88,6 +88,7 @@
       </vue-tags-input>
     </client-only>
     <div>
+      <!-- // TODO: Delete if multiple queries is able -->
       <template v-if="!filterObj.method">
         <b>None</b> of the following filters will be applied to the search
         conditions.
@@ -440,6 +441,7 @@
         &:after
           content: none
     .filter
+      // TODO: Del indentation
       margin-left: 20px
     .filter + .filter
       margin-top: 30px
