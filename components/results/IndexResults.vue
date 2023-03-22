@@ -39,7 +39,7 @@
       </thead>
       <tbody>
         <td
-          v-if="!tableDataIsSameAsScreener"
+          v-if="resultsCached.length === 0"
           class="warning"
           :colspan="filters.filter(x => x.is_displayed).length + 2"
         >
@@ -217,10 +217,13 @@
           this.checkedResults = this.getCheckedResults;
         }
       },
-      results(newVal, oldVal) {
-        if (newVal.length === 0) return;
-        if (this.resultsCached.length === 0)
-          this.resultsCached = JSON.parse(JSON.stringify(newVal));
+      results: {
+        handler(newVal) {
+          if (newVal.length > 0) {
+            this.resultsCached = JSON.parse(JSON.stringify(newVal));
+          }
+        },
+        deep: true,
       },
     },
     created() {
