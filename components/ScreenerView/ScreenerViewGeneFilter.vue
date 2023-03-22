@@ -269,6 +269,15 @@
         deep: true,
       },
     },
+    mounted() {
+      if (sessionStorage.hasOwnProperty('gene-filter-lists')) {
+        const geneFilterLists = JSON.parse(
+          sessionStorage.getItem('gene-filter-lists')
+        );
+        this.list.length = 0;
+        this.list.push(...geneFilterLists[this.$vnode.key]);
+      }
+    },
     methods: {
       validateNumInput(index, column, e) {
         const numInput = parseFloat(e.target.value);
@@ -340,7 +349,7 @@
           //   break;
           case 'DELETE':
             numOfItems === 1 ? setNewList() : this.$delete(this.list, index);
-            // TODO: 
+            // TODO:
             if (this.activeFilterObj.method === this.filter.type) {
               this.$emit('resetActiveFilterObj');
             }
