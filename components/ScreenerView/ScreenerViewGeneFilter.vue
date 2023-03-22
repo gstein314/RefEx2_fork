@@ -173,11 +173,11 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
-  import VueSimpleSuggest from 'vue-simple-suggest';
-  import WarningMessage from '../WarningMessage.vue';
   import 'floating-vue/dist/style.css';
   import _ from 'lodash';
+  import VueSimpleSuggest from 'vue-simple-suggest';
+  import { mapGetters } from 'vuex';
+  import WarningMessage from '../WarningMessage.vue';
 
   export default {
     components: {
@@ -346,10 +346,10 @@
               )
             );
           } catch (error) {
-            const defaultList = JSON.parse(
+            const rawDefaultList = JSON.parse(
               JSON.stringify(this.datasetSamples.byDefault[activeDateset])
             );
-            return defaultList;
+            return _.uniqWith(rawDefaultList, _.isEqual);
           }
         };
         const sortSamplesByDescription = (a, b) =>
