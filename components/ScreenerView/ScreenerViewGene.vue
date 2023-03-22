@@ -93,18 +93,20 @@
         conditions.
       </template>
       <template v-else>
-        <b>Filter by {{ activeFilterObj.method }}</b> will be applied to the search
-        conditions.
+        <b>Filter by {{ activeFilterObj.method }}</b> will be applied to the
+        search conditions.
       </template>
     </div>
     <ScreenerViewGeneFilter
       v-for="(filter, index) of geneFilters"
       :key="index"
       :filter.sync="geneFilters[index]"
+      :active-filter-obj.sync="activeFilterObj"
       :columns="filter.columns"
       :datasets="datasets"
       @addFilterValue="addFilterValue"
       @resetUpdateParameters="resetUpdateParameters"
+      @resetActiveFilterObj="activeFilterObj = {}"
     />
   </div>
 </template>
