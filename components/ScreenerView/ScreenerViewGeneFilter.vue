@@ -349,12 +349,7 @@
             const rawDefaultList = JSON.parse(
               JSON.stringify(this.datasetSamples.byDefault[activeDateset])
             );
-            const removeDuplicatesFromArray = list => {
-              return Array.from(new Set(list.map(JSON.stringify))).map(
-                JSON.parse
-              );
-            };
-            return removeDuplicatesFromArray(rawDefaultList);
+            return _.uniqWith(rawDefaultList, _.isEqual);
           }
         };
         const sortSamplesByDescription = (a, b) =>
