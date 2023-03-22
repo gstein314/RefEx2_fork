@@ -100,16 +100,16 @@
         @updateParameters="updateParams"
         @storeInitialParameters="storeInitialParameters"
         @setChildIsInitialState="setChildIsInitialState"
+        @resetAll="resetAllSearchConditions"
       ></component>
     </ScreenerView>
   </div>
 </template>
 <script>
-  import VueSimpleSuggest from 'vue-simple-suggest';
-  import ScreenerView from '~/components/ScreenerView/ScreenerView.vue';
-  import { mapGetters } from 'vuex';
-  import { mapMutations } from 'vuex';
   import _ from 'lodash';
+  import VueSimpleSuggest from 'vue-simple-suggest';
+  import { mapGetters, mapMutations } from 'vuex';
+  import ScreenerView from '~/components/ScreenerView/ScreenerView.vue';
 
   export default {
     components: {
@@ -127,7 +127,7 @@
         validSearch: false,
         // either 'all' or 'numfound'
         typeOfQuery: 'numfound',
-        parameters: { text: '' },
+        parameters: { text: '', summary: false },
         initialParameters: {},
       };
     },
@@ -254,11 +254,15 @@
       },
       updateParams(params) {
         this.$emit('updateScreener');
-        this.parameters = { text: this.parameters.text, ...params };
+        this.parameters = {
+          text: this.parameters.text,
+          summary: this.parameters.summary,
+          ...params,
+        };
         this.showResults('numfound');
       },
       storeInitialParameters(params) {
-        this.initialParameters = { text: '', ...params };
+        this.initialParameters = { text: '', summary: false, ...params };
       },
       moveDetailpage(suggestion) {
         this.$nuxt.$loading.start();
@@ -350,10 +354,11 @@
       resetComponent() {
         Object.assign(this.parameters, this.initialParameters);
       },
-      resetAllSearchConditions() {
-        this.resetComponent();
+      async resetAllSearchConditions() {
         const screenerViewChild = this.$refs.screenerView.$children[0];
-        screenerViewChild.resetComponent();
+        await screenerViewChild.resetComponent();
+
+        this.resetComponent();
       },
       setChildIsInitialState(bool) {
         this.childIsInitialState = bool;

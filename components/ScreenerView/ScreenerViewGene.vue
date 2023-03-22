@@ -131,8 +131,10 @@
       // passed down to API
       parameters: {
         go: [],
+        chromosomePosition: '',
+        typeOfGene: '',
+        filter: '',
       },
-      // will contain same keys as parameters. Autocompletion that does not come from the API should be hardcoded here in advance
       hideCaret: false,
       geneFilters: JSON.parse(stringifiedGeneFilters),
       datasets: JSON.parse(stringifiedDatasets),
@@ -149,22 +151,9 @@
         ROKUValue: [],
         tauValue: [],
         autocompleteStaticData: {},
-        chrValue: [],
-        TOGValue: [],
         chrCheckedValue: [],
         chrOptions: [],
         TOGOptions: [],
-        // only used in this component
-        temporaryParameters: {
-          goTerm: '',
-        },
-        // passed down to API
-        parameters: {
-          go: [],
-          chromosomePosition: [],
-          typeOfGene: [],
-          filter: [],
-        },
         // will contain same keys as parameters. Autocompletion that does not come from the API should be hardcoded here in advance
         autoComplete: {
           go: [],
@@ -192,9 +181,6 @@
           ? 'transcription factor binding'
           : 'Only one tag is allowed';
       },
-      selection() {
-        return this.chrValue.join();
-      },
       isInitialState() {
         const defaultState = initialState();
         return Object.keys(defaultState).every(key =>
@@ -204,10 +190,7 @@
     },
     watch: {
       activeDataset() {
-        // reset all keys of this.parameters to ''
-        this.parameters = {
-          go: [],
-        };
+        this.$emit('resetAll');
       },
       isInitialState(newVal) {
         this.$emit('setChildIsInitialState', newVal);
@@ -251,7 +234,7 @@
     async created() {
       this.getAutoCompleteData().then(() => {});
       this.$emit('updateParameters', { go: this.goTermString });
-      this.$emit('storeInitialParameters', { go: this.goTermString });
+      this.initiateParametersDataset();
     },
     mounted() {
       if (this.searchConditions.gene.chr)
@@ -279,6 +262,16 @@
       },
       resetComponent() {
         Object.assign(this.$data, initialState());
+      },
+      initiateParametersDataset() {
+        const parametersObj = {
+          go: '',
+          chromosomePosition: '',
+          typeOfGene: '',
+          filter: '',
+        };
+        this.$emit('updateParameters', { ...parametersObj });
+        this.$emit('storeInitialParameters', { ...parametersObj });
       },
       getAutoCompleteData() {
         return this.$axios

@@ -58,8 +58,8 @@
   </div>
 </template>
 <script>
-  import { mapGetters, mapMutations } from 'vuex';
   import _ from 'lodash';
+  import { mapGetters, mapMutations } from 'vuex';
 
   export default {
     data() {
@@ -118,10 +118,8 @@
           DevelopmentalStage: sample_conditions.DevelopmentalStage,
           Sex: sample_conditions.Sex,
         };
+        this.emitUpdateParameters();
       });
-    },
-    updated() {
-      this.$emit('updateParameters', this.searchConditions.sample);
     },
     methods: {
       ...mapMutations({
@@ -138,10 +136,10 @@
           parametersObj[key] = '';
           if (!this.autoComplete[key]) this.$set(this.autoComplete, key, []);
         }
-        this.parameters = parametersObj;
+        this.parameters = { ...parametersObj };
         this.initialParameters = { ...parametersObj };
-        this.$emit('updateParameters', { ...this.parameters });
-        this.$emit('storeInitialParameters', { ...this.initialParameters });
+        this.emitUpdateParameters();
+        this.emitStoreInitialParameters();
       },
       storeInitialParameters(obj) {
         this.initialParameters = obj;
@@ -179,13 +177,19 @@
         if (key && value) {
           this.$set(this.parameters, key, value);
         }
-        this.$emit('updateParameters', this.parameters);
+        this.emitUpdateParameters();
         const sampleSearchCondition = {
           type: 'sample',
           item: key,
           value: value,
         };
         this.setSearchConditions(sampleSearchCondition);
+      },
+      emitUpdateParameters() {
+        this.$emit('updateParameters', this.parameters);
+      },
+      emitStoreInitialParameters() {
+        this.$emit('storeInitialParameters', { ...this.initialParameters });
       },
     },
   };
