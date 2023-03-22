@@ -39,7 +39,7 @@
       </thead>
       <tbody>
         <td
-          v-if="!tableDataIsSameAsScreener"
+          v-if="resultsCached.length === 0"
           class="warning"
           :colspan="filters.filter(x => x.is_displayed).length + 2"
         >
