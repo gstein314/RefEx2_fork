@@ -130,8 +130,7 @@
     },
     async beforeRouteUpdate(to, from, next) {
       this.$nuxt.$loading.start();
-      this.currentPageId =
-        to.query.id.length > 0 ? to.query.id.split(',')[0] : [];
+      this.currentPageId = to.query.id.length > 0 ? to.query.id.split(',') : [];
       await this.$nuxt.refresh();
       next();
       this.$forceUpdate();
@@ -151,7 +150,7 @@
           if (data[`${type}_info`]?.error) {
             isError = true;
           }
-          resultsAll[id] = data.refex_info.map((result, index) => {
+          resultsAll[id] = await data.refex_info.map((result, index) => {
             const createNumberSorter = str => {
               if (str === undefined) return;
               const toNum = str => {
@@ -338,11 +337,10 @@
       },
       resultsWithCombinedMedians() {
         const medianArraysObj = {};
-        console.log('c', this.currentPageId);
-        console.log('s', this.selectedItem.id);
         const projectResults =
           this.projectResultsAll[this.selectedItem.id] ||
-          this.projectResultsAll[this.currentPageId];
+          this.projectResultsAll[this.currentPageId[0]];
+        console.log('start');
         for (const item of Object.values(this.items)) {
           const symbolOrDescription = info => info.symbol || info.Description;
           medianArraysObj[`LogMedian_${symbolOrDescription(item.info)}`] =

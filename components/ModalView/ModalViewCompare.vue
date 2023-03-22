@@ -71,7 +71,6 @@
       },
       comparisonSearch() {
         if (this.itemIdsForComparisonStr === '') return;
-        // TODO: skip when same id
         const urlParams = new URLSearchParams(window.location.search);
         const idValue = urlParams.get('id');
         if (this.itemIdsForComparisonStr !== idValue) {

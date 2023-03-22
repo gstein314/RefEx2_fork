@@ -150,7 +150,7 @@
         default: () => [],
       },
       currentPageId: {
-        type: String,
+        type: [String, Array],
         default: '',
       },
     },
@@ -225,8 +225,11 @@
           numberOfSamplesData: {},
         };
         let ids = [];
-        items.forEach(item => ids.push(item.id));
-        if (this.currentPageId) ids = this.currentPageId.split(',');
+        if (this.currentPageId) {
+          ids = this.currentPageId;
+        } else {
+          items.forEach(item => ids.push(item.id));
+        }
         for (let i = 0; i < ids.length; i++) {
           for (const statName in tmp) {
             tmp[statName][ids[i]] =
