@@ -213,6 +213,7 @@
             value => value === ''
           );
           this.$emit('updateValiditySearch', this.validSearch);
+          this.showResults('numfound');
         },
         deep: true,
       },
@@ -225,7 +226,6 @@
       },
     },
     created() {
-      this.showResults('numfound');
       this.updateSearchCondition();
     },
     mounted() {
@@ -259,7 +259,6 @@
           summary: this.parameters.summary,
           ...params,
         };
-        this.showResults('numfound');
       },
       storeInitialParameters(params) {
         this.initialParameters = { text: '', summary: false, ...params };
@@ -277,7 +276,6 @@
         }
       },
       updateSuggestions() {
-        this.showResults('numfound');
         return this.getSuggestions();
       },
       getSuggestions() {
