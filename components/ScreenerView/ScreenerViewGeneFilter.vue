@@ -173,11 +173,11 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
-  import VueSimpleSuggest from 'vue-simple-suggest';
-  import WarningMessage from '../WarningMessage.vue';
   import 'floating-vue/dist/style.css';
   import _ from 'lodash';
+  import VueSimpleSuggest from 'vue-simple-suggest';
+  import { mapGetters } from 'vuex';
+  import WarningMessage from '../WarningMessage.vue';
 
   export default {
     components: {
@@ -186,6 +186,10 @@
     },
     props: {
       filter: {
+        type: Object,
+        default: () => {},
+      },
+      activeFilterObj: {
         type: Object,
         default: () => {},
       },
@@ -323,6 +327,10 @@
           case 'INIT':
             setNewList();
             this.$emit('resetUpdateParameters');
+            // TODO: del when multi is enabled
+            if (this.activeFilterObj.method === this.filter.type) {
+              this.$emit('resetActiveFilterObj');
+            }
             break;
           // TODO: Comment out until gql is multi
           // case 'ADD':
@@ -332,6 +340,10 @@
           //   break;
           case 'DELETE':
             numOfItems === 1 ? setNewList() : this.$delete(this.list, index);
+            // TODO: 
+            if (this.activeFilterObj.method === this.filter.type) {
+              this.$emit('resetActiveFilterObj');
+            }
             break;
         }
       },
@@ -346,10 +358,10 @@
               )
             );
           } catch (error) {
-            const defaultList = JSON.parse(
+            const rawDefaultList = JSON.parse(
               JSON.stringify(this.datasetSamples.byDefault[activeDateset])
             );
-            return defaultList;
+            return _.uniqWith(rawDefaultList, _.isEqual);
           }
         };
         const sortSamplesByDescription = (a, b) =>
