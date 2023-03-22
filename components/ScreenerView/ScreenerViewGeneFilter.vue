@@ -8,14 +8,14 @@
           icon="info-circle"
         />
       </div>
-      <a
+      <button
         class="reset_btn"
         :class="{ disabled: resetIsDisabled }"
         @click="dispatchAction('INIT')"
       >
         <font-awesome-icon icon="rotate-right" />
         Reset
-      </a>
+      </button>
     </div>
     <client-only>
       <div :class="filter.id">
@@ -155,15 +155,14 @@
                 />
               </td>
               <td class="icon">
-                <button
+                <a
                   class="delete_btn"
                   :class="{ disabled: list.length <= 1 }"
                   :disabled="list.length <= 1"
                   @click="dispatchAction('DELETE', itemIndex)"
                 >
-                  <font-awesome-icon icon="trash" />
-                  Delete
-                </button>
+                  <font-awesome-icon icon="trash-xmark" />
+                </a>
               </td>
             </tr>
           </tbody>
@@ -434,6 +433,14 @@
 </script>
 
 <style lang="sass">
+  svg[data-icon="circle-info"], .delete_all
+    color: $MAIN_COLOR
+    cursor: pointer
+  svg[data-icon="trash-xmark"]
+    color: $ERROR_COLOR
+    cursor: pointer
+  select:required:invalid
+    color: $PLACEHOLDER_COLOR
   tbody
     td
       &.warning
@@ -447,11 +454,19 @@
     align-items: center
     justify-content: space-between
     .reset_btn
-      color: $MAIN_COLOR
+      +button
+      +sub_button
       cursor: pointer
       &.disabled
-        color: $DISABLE_COLOR
         cursor: not-allowed
+  .delete_btn
+    align-items: initial
+    padding: 10px
+    cursor: pointer
+    opacity: 0.7
+    transition: opacity 0.3s ease-in-out
+    &:hover
+      opacity: 1
   .sample-input
     position: relative
     &.valid
