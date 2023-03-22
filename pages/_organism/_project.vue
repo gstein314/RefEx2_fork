@@ -133,7 +133,6 @@
       this.currentPageId = to.query.id.length > 0 ? to.query.id.split(',') : [];
       await this.$nuxt.refresh();
       next();
-      this.$forceUpdate();
     },
     async asyncData({ $axios, query, store, route }) {
       let results;
@@ -340,7 +339,6 @@
         const projectResults =
           this.projectResultsAll[this.selectedItem.id] ||
           this.projectResultsAll[this.currentPageId[0]];
-        console.log('start');
         for (const item of Object.values(this.items)) {
           const symbolOrDescription = info => info.symbol || info.Description;
           medianArraysObj[`LogMedian_${symbolOrDescription(item.info)}`] =
