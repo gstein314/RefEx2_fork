@@ -116,7 +116,6 @@
   import datasets from '~/refex-sample/datasets.json';
   import geneFilters from '~/refex-sample/gene_filters.json';
   import ScreenerViewGeneFilter from './ScreenerViewGeneFilter.vue';
-import filters from '~/static/filters.json';
 
   const stringifiedGeneFilters = JSON.stringify(geneFilters);
   const stringifiedDatasets = JSON.stringify(datasets);
