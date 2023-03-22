@@ -130,7 +130,10 @@
     },
     async beforeRouteUpdate(to, from, next) {
       this.$nuxt.$loading.start();
-      this.currentPageId = to.query.id;
+      this.currentPageId =
+        to.query.id.length > 0 ? to.query.id.split(',')[0] : [];
+      // to.query.id.split(',')[0] === '' ? '' : to.query.id.split(',')[0];
+      console.log('current', this.currentPageId);
       await this.$nuxt.refresh();
       next();
       this.$forceUpdate();
@@ -337,9 +340,11 @@
       },
       resultsWithCombinedMedians() {
         const medianArraysObj = {};
+        console.log(this.currentPageId);
         const projectResults =
-          this.projectResultsAll[this.selectedItem.id] ||
-          this.projectResultsAll[this.currentPageId];
+          this.projectResultsAll[this.currentPageId] ||
+          this.projectResultsAll[this.selectedItem.id];
+        console.log(projectResults);
         for (const item of Object.values(this.items)) {
           const symbolOrDescription = info => info.symbol || info.Description;
           medianArraysObj[`LogMedian_${symbolOrDescription(item.info)}`] =

@@ -226,7 +226,7 @@
         };
         let ids = [];
         items.forEach(item => ids.push(item.id));
-        if (this.currentPageId) ids = [this.currentPageId];
+        if (this.currentPageId) ids = this.currentPageId.split(',');
         for (let i = 0; i < ids.length; i++) {
           for (const statName in tmp) {
             tmp[statName][ids[i]] =

@@ -105,7 +105,7 @@ export const getters = {
   },
   route_to_project_page: state => ids => {
     if (Array.isArray(ids)) ids = ids.join(',');
-    return `${state.active_specie.species}/${state.active_dataset.dataset}?type=${state.active_filter}&id=${ids}`;
+    return `/${state.active_specie.species}/${state.active_dataset.dataset}?type=${state.active_filter}&id=${ids}`;
   },
   route_to_other_project_page: state => ids => {
     if (Array.isArray(ids)) ids = ids.join(',');
