@@ -54,11 +54,7 @@
           </template>
         </td>
         <td
-          v-else-if="
-            tableDataIsSameAsScreener &&
-            !Boolean(resultsCached) &&
-            resultsNum === 0
-          "
+          v-else-if="tableDataIsSameAsScreener && resultsNum === 0"
           class="warning"
           :colspan="filters.filter(x => x.is_displayed).length + 2"
         >
