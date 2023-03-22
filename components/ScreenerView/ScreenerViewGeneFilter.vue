@@ -189,6 +189,10 @@
         type: Object,
         default: () => {},
       },
+      activeFilterObj: {
+        type: Object,
+        default: () => {},
+      },
       columns: {
         type: Array,
         default: () => [],
@@ -323,6 +327,10 @@
           case 'INIT':
             setNewList();
             this.$emit('resetUpdateParameters');
+            // TODO: del when multi is enabled
+            if (this.activeFilterObj.method === this.filter.type) {
+              this.$emit('resetActiveFilterObj');
+            }
             break;
           // TODO: Comment out until gql is multi
           // case 'ADD':
@@ -332,6 +340,10 @@
           //   break;
           case 'DELETE':
             numOfItems === 1 ? setNewList() : this.$delete(this.list, index);
+            // TODO: 
+            if (this.activeFilterObj.method === this.filter.type) {
+              this.$emit('resetActiveFilterObj');
+            }
             break;
         }
       },

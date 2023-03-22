@@ -89,23 +89,25 @@
     </client-only>
     <div>
       <!-- // TODO: Delete if multiple queries is able -->
-      <template v-if="!filterObj.method">
+      <template v-if="!activeFilterObj.method">
         <b>None</b> of the following filters will be applied to the search
         conditions.
       </template>
       <template v-else>
-        <b>Filter by {{ filterObj.method }}</b> will be applied to the search
-        conditions.
+        <b>Filter by {{ activeFilterObj.method }}</b> will be applied to the
+        search conditions.
       </template>
     </div>
     <ScreenerViewGeneFilter
       v-for="(filter, index) of geneFilters"
       :key="index"
       :filter.sync="geneFilters[index]"
+      :active-filter-obj.sync="activeFilterObj"
       :columns="filter.columns"
       :datasets="datasets"
       @addFilterValue="addFilterValue"
       @resetUpdateParameters="resetUpdateParameters"
+      @resetActiveFilterObj="activeFilterObj = {}"
     />
   </div>
 </template>
@@ -139,7 +141,7 @@
       hideCaret: false,
       geneFilters: JSON.parse(stringifiedGeneFilters),
       datasets: JSON.parse(stringifiedDatasets),
-      filterObj: {},
+      activeFilterObj: {},
     };
   };
 
@@ -369,7 +371,7 @@
               this.TPMValue = list;
               this.filterValue = filterString;
               filter.method = filter.method.toUpperCase();
-              this.filterObj = filter;
+              this.activeFilterObj = filter;
             }
             break;
           case 'ROKU':
@@ -386,7 +388,7 @@
               this.ROKUValue = list;
               this.filterValue = filterString;
               filter.method = filter.method.toUpperCase();
-              this.filterObj = filter;
+              this.activeFilterObj = filter;
             }
             break;
           case 'tau':
@@ -400,7 +402,7 @@
               const filterString = JSON.stringify(filter).replace(/"/g, '\\"');
               this.tauValue = list;
               this.filterValue = filterString;
-              this.filterObj = filter;
+              this.activeFilterObj = filter;
             }
             break;
         }
