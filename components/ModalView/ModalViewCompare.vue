@@ -70,7 +70,7 @@
         this.itemIdsForComparisonStr = route;
       },
       comparisonSearch() {
-        if (this.itemIdsForComparisonStr === '') return;
+        if (!Boolean(this.itemIdsForComparisonStr)) return;
         this.$nuxt.$loading.start();
         this.$router.push(
           this.routeToProjectPage(
