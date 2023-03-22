@@ -88,12 +88,12 @@
       </vue-tags-input>
     </client-only>
     <div>
-      <template v-if="!filterObj.method">
+      <template v-if="!activeFilterObj.method">
         <b>None</b> of the following filters will be applied to the search
         conditions.
       </template>
       <template v-else>
-        <b>Filter by {{ filterObj.method }}</b> will be applied to the search
+        <b>Filter by {{ activeFilterObj.method }}</b> will be applied to the search
         conditions.
       </template>
     </div>
@@ -138,7 +138,7 @@
       hideCaret: false,
       geneFilters: JSON.parse(stringifiedGeneFilters),
       datasets: JSON.parse(stringifiedDatasets),
-      filterObj: {},
+      activeFilterObj: {},
     };
   };
 
@@ -368,7 +368,7 @@
               this.TPMValue = list;
               this.filterValue = filterString;
               filter.method = filter.method.toUpperCase();
-              this.filterObj = filter;
+              this.activeFilterObj = filter;
             }
             break;
           case 'ROKU':
@@ -385,7 +385,7 @@
               this.ROKUValue = list;
               this.filterValue = filterString;
               filter.method = filter.method.toUpperCase();
-              this.filterObj = filter;
+              this.activeFilterObj = filter;
             }
             break;
           case 'tau':
@@ -399,7 +399,7 @@
               const filterString = JSON.stringify(filter).replace(/"/g, '\\"');
               this.tauValue = list;
               this.filterValue = filterString;
-              this.filterObj = filter;
+              this.activeFilterObj = filter;
             }
             break;
         }
