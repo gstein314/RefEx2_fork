@@ -263,6 +263,7 @@
         results,
         dataset: project,
         selectedId: items[0].id,
+        resultsAll: resultsAll,
       };
     },
     data() {
@@ -274,6 +275,7 @@
         columnsArray: [],
         ordersArray: [],
         currentPageId: '',
+        resultsAll: null,
       };
     },
     computed: {
@@ -337,8 +339,8 @@
       resultsWithCombinedMedians() {
         const medianArraysObj = {};
         const projectResults =
-          this.projectResultsAll[this.selectedItem.id] ||
-          this.projectResultsAll[this.currentPageId[0]];
+          this.resultsAll[this.selectedItem.id] ||
+          this.resultsAll[this.currentPageId[0]];
         for (const item of Object.values(this.items)) {
           const symbolOrDescription = info => info.symbol || info.Description;
           medianArraysObj[`LogMedian_${symbolOrDescription(item.info)}`] =
