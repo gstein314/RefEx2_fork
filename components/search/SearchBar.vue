@@ -229,10 +229,8 @@
       this.updateSearchCondition();
     },
     mounted() {
-      if (this.searchConditions.gene.text)
-        this.parameters.text = this.searchConditions[this.filterType].text;
-      if (this.searchConditions.sample.text)
-        this.parameters.text = this.searchConditions[this.filterType].text;
+      if (this.searchConditions[this.filterType].text)
+        this.parameters = { ...this.searchConditions[this.filterType] };
       if (this.filterType === 'gene' && this.searchConditions.gene.summary) {
         this.isSummaryIncluded = this.searchConditions[this.filterType].summary;
       }
