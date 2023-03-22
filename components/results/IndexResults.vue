@@ -221,10 +221,13 @@
           this.checkedResults = this.getCheckedResults;
         }
       },
-      results(newVal, oldVal) {
-        if (newVal.length === 0) return;
-        if (this.resultsCached.length === 0)
-          this.resultsCached = JSON.parse(JSON.stringify(newVal));
+      results: {
+        handler(newVal) {
+          if (newVal.length > 0) {
+            this.resultsCached = JSON.parse(JSON.stringify(newVal));
+          }
+        },
+        deep: true,
       },
     },
     created() {
