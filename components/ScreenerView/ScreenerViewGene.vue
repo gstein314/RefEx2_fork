@@ -176,7 +176,7 @@
         return this.parameters.go.map(tag => tag.id).join(', ');
       },
       placeholderGOTerm() {
-        return this.temporaryParameters.goTerm === '' &&
+        return !Boolean(this.temporaryParameters.goTerm) &&
           this.parameters.go.length < 1
           ? 'transcription factor binding'
           : 'Only one tag is allowed';

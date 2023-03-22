@@ -81,7 +81,9 @@
       </div>
     </vue-simple-suggest>
     <template v-if="filterType === 'gene'">
-      <div :class="['summary_check_wrapper', { hide: parameters.text === '' }]">
+      <div
+        :class="['summary_check_wrapper', { hide: !Boolean(parameters.text) }]"
+      >
         <input
           id="summary_check"
           v-model="isSummaryIncluded"
@@ -210,7 +212,7 @@
       parameters: {
         handler: function () {
           this.validSearch = !Object.values(this.parameters).every(
-            value => value === ''
+            value => !Boolean(value)
           );
           this.$emit('updateValiditySearch', this.validSearch);
         },
