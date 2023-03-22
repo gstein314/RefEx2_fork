@@ -113,6 +113,7 @@
 </template>
 
 <script>
+  import { useStorage } from '@vueuse/core';
   import _ from 'lodash';
   import MultiSelect from 'vue-multiselect';
   import { mapGetters, mapMutations } from 'vuex';
@@ -122,6 +123,7 @@
 
   const stringifiedGeneFilters = JSON.stringify(geneFilters);
   const stringifiedDatasets = JSON.stringify(datasets);
+  const geneFilterLists = useStorage('geneFilterLists', [], sessionStorage);
 
   const initialState = () => {
     return {
@@ -190,6 +192,9 @@
           _.isEqual(this.$data[key], defaultState[key])
         );
       },
+      geneFilterLists() {
+        return this.geneFilters.map(({ list }) => list);
+      },
     },
     watch: {
       activeDataset() {
@@ -232,6 +237,12 @@
         };
         this.setSearchConditions(filterCondition);
         this.handleFilterValueUpdate(this.filterValue);
+      },
+      geneFilterLists: {
+        handler(newVal, oldVal) {
+          sessionStorage.setItem('geneFilterLists', JSON.stringify(newVal));
+        },
+        deep: true,
       },
     },
     async created() {
