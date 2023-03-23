@@ -238,7 +238,7 @@
       },
       geneFilterLists: {
         handler(newVal, oldVal) {
-          sessionStorage.setItem('gene-filter-lists', JSON.stringify(newVal));
+          sessionStorage.setItem('gene-filter-map', JSON.stringify(newVal));
         },
         deep: true,
       },
