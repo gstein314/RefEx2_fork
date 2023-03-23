@@ -2,6 +2,7 @@
   <button class="comparison_btn" @click="toggleCompareModal">
     <font-awesome-icon icon="chart-column" />
     Comparison
+    <span class="badge">3</span>
   </button>
 </template>
 
@@ -18,5 +19,14 @@
 </script>
 <style lang="sass" scoped>
   .comparison_btn
-      +button
+    position: relative
+    +button
+    .badge
+      position: absolute
+      top: -10px
+      right: -10px
+      padding: 3px 8px
+      border-radius: 50%
+      background: $WARNING_BUTTON_COLOR
+      color: white
 </style>
