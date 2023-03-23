@@ -2,14 +2,21 @@
   <button class="comparison_btn" @click="toggleCompareModal">
     <font-awesome-icon icon="chart-column" />
     Comparison
-    <span class="badge">3</span>
+    <span v-if="getCheckedResults.length > 0" class="badge">{{
+      getCheckedResults.length
+    }}</span>
   </button>
 </template>
 
 <script>
-  import { mapMutations } from 'vuex';
+  import { mapGetters, mapMutations } from 'vuex';
 
   export default {
+    computed: {
+      ...mapGetters({
+        getCheckedResults: 'get_checked_results',
+      }),
+    },
     methods: {
       ...mapMutations({
         toggleCompareModal: 'set_compare_modal',
@@ -25,7 +32,7 @@
       position: absolute
       top: -10px
       right: -10px
-      padding: 3px 8px
+      padding: .1rem .4rem
       border-radius: 50%
       background: $WARNING_BUTTON_COLOR
       color: white
