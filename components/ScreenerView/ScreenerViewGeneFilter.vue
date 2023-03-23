@@ -270,9 +270,9 @@
       },
     },
     mounted() {
-      if (sessionStorage.hasOwnProperty('gene-filter-map')) {
+      if (sessionStorage.hasOwnProperty('gene-screener-filters')) {
         const geneFilterLists = JSON.parse(
-          sessionStorage.getItem('gene-filter-map')
+          sessionStorage.getItem('gene-screener-filters')
         );
         this.list.length = 0;
         this.list.push(...geneFilterLists[this.$vnode.key]);

@@ -201,13 +201,18 @@
       isInitialState(newVal) {
         this.$emit('setChildIsInitialState', newVal);
       },
-      parameters() {
-        this.$emit('updateParameters', {
+      parameters(newVal) {
+        const obj = {
           go: this.goTermString,
           chromosomePosition: this.chrValue.join(),
           typeOfGene: this.TOGValue.join(),
           filter: this.filterValue,
-        });
+        };
+        this.$emit('updateParameters', { ...obj });
+        // sessionStorage.setItem(
+        //   'gene-screener-parameters',
+        //   JSON.stringify(newVal)
+        // );
       },
       chrValue() {
         const chrCondition = {
@@ -236,12 +241,15 @@
         this.setSearchConditions(filterCondition);
         this.handleFilterValueUpdate(this.filterValue);
       },
-      geneFilterLists: {
-        handler(newVal, oldVal) {
-          sessionStorage.setItem('gene-filter-map', JSON.stringify(newVal));
-        },
-        deep: true,
-      },
+      // geneFilterLists: {
+      //   handler(newVal, oldVal) {
+      //     sessionStorage.setItem(
+      //       'gene-screener-filters',
+      //       JSON.stringify(newVal)
+      //     );
+      //   },
+      //   deep: true,
+      // },
     },
     async created() {
       this.getAutoCompleteData().then(() => {});
@@ -249,18 +257,38 @@
       this.initiateParametersDataset();
     },
     mounted() {
-      if (this.searchConditions.gene.chr)
-        this.chrValue = this.searchConditions.gene.chr;
-      if (this.searchConditions.gene.tog)
-        this.TOGValue = this.searchConditions.gene.tog;
-      if (this.searchConditions.gene.go)
-        this.setTags(this.searchConditions.gene.go, 'go');
-      if (this.searchConditions.gene.temporaryParameters)
-        this.filterValue = this.searchConditions.gene.tpm;
-      if (this.searchConditions.gene.roku)
-        this.filterValue = this.searchConditions.gene.roku;
-      if (this.searchConditions.gene.tau)
-        this.filterValue = this.searchConditions.gene.tau;
+      if (sessionStorage.hasOwnProperty('gene-screener-conditions')) {
+        const obj = JSON.parse(
+          sessionStorage.getItem('gene-screener-conditions')
+        );
+        this.chrValue = obj.chrValue;
+        this.TOGValue = obj.TOGValue;
+        this.setTags(obj.go, 'go');
+      }
+      if (sessionStorage.hasOwnProperty('gene-screener-parameters')) {
+        const obj = JSON.parse(
+          sessionStorage.getItem('gene-screener-parameters')
+        );
+        this.$set(this.parameters, obj);
+      }
+    },
+    beforeDestroy() {
+      sessionStorage.setItem(
+        'gene-screener-conditions',
+        JSON.stringify({
+          chrValue: this.chrValue,
+          TOGValue: this.TOGValue,
+          go: this.parameters.go,
+        })
+      );
+      sessionStorage.setItem(
+        'gene-screener-parameters',
+        JSON.stringify(this.parameters)
+      );
+      sessionStorage.setItem(
+        'gene-screener-filters',
+        JSON.stringify(this.geneFilterLists)
+      );
     },
     methods: {
       ...mapMutations({
