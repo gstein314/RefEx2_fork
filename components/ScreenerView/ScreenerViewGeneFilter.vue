@@ -446,8 +446,6 @@
 </script>
 
 <style lang="sass">
-  .item-list
-    width: 100%
   svg[data-icon="circle-info"], .delete_all
     color: $MAIN_COLOR
     cursor: pointer
