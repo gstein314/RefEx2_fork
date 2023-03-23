@@ -87,7 +87,7 @@
         ></div>
       </vue-tags-input>
     </client-only>
-    <div>
+    <div class="filter_search_condition">
       <!-- // TODO: Delete if multiple queries is able -->
       <template v-if="!activeFilterObj.method">
         <b>None</b> of the following filters will be applied to the search
@@ -413,6 +413,8 @@
 
 <style lang="sass" scoped>
   ::v-deep
+    .filter_search_condition
+      padding-bottom: 15px
     .multiselect
       input
         width: auto
@@ -466,7 +468,7 @@
           .icon
             text-align: center
           .sample
-            width: 60%
+            width: 70%
           .cutoff, .condition
             width: 10%
           .statistic
@@ -490,7 +492,7 @@
           .icon
             text-align: center
           .group
-            width: 80%
+            width: 70%
           .cutoff, .condition
-            width: 10%
+            width: 15%
 </style>
