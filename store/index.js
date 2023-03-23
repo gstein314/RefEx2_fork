@@ -37,7 +37,10 @@ export const state = () => ({
     limit: 10,
     offset: 0,
   },
-  checked_results: [],
+  checked_results: {
+    gene: [],
+    sample: [],
+  },
   results: filters.reduce((acc, filter) => {
     acc[filter.name] = { results: [], results_num: 0 };
     return acc;
@@ -90,7 +93,7 @@ export const getters = {
     return { limit, offset };
   },
   get_checked_results(state) {
-    return state.checked_results;
+    return state.checked_results[state.active_filter];
   },
   index_pagination(state) {
     return state.index_pagination;
@@ -253,7 +256,7 @@ export const mutations = {
     state.filter_search_value = value;
   },
   set_checked_results(state, checked_results) {
-    state.checked_results = checked_results;
+    state.checked_results[state.active_filter] = checked_results;
   },
   set_index_gene_pages_number(state, index_gene_pages_number) {
     state.index_gene_pages_number = index_gene_pages_number;
