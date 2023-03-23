@@ -3,12 +3,6 @@
     <div class="results_title_wrapper">
       <h2>Matching {{ filterType }}s</h2>
       <ComparisonButton />
-      <span class="example">e.g.</span>
-      <span
-        class="sample_value"
-        @click="moveToProjectPage(examples[0].route)"
-        >{{ examples[0].label }}</span
-      >
       <div class="display_settings_wrapper">
         <button class="show_all_btn" @click="$emit('toggleDisplaySettings')">
           <font-awesome-icon icon="eye" />

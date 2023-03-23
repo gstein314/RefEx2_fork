@@ -154,6 +154,7 @@
                   "
                 />
               </td>
+              <!-- // hide trash can button until multi-search
               <td class="icon">
                 <a
                   class="delete_btn"
@@ -163,7 +164,7 @@
                 >
                   <font-awesome-icon icon="trash-xmark" />
                 </a>
-              </td>
+              </td> -->
             </tr>
           </tbody>
         </table>
@@ -340,7 +341,7 @@
           //   break;
           case 'DELETE':
             numOfItems === 1 ? setNewList() : this.$delete(this.list, index);
-            // TODO: 
+            // TODO:
             if (this.activeFilterObj.method === this.filter.type) {
               this.$emit('resetActiveFilterObj');
             }
@@ -445,6 +446,8 @@
 </script>
 
 <style lang="sass">
+  .item-list
+    width: 100%
   svg[data-icon="circle-info"], .delete_all
     color: $MAIN_COLOR
     cursor: pointer
