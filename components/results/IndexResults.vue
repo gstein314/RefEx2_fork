@@ -146,6 +146,10 @@
         type: Number,
         default: 0,
       },
+      filterKey: {
+        type: String,
+        default: 'gene',
+      },
     },
     data() {
       return {
@@ -253,7 +257,11 @@
         this.handleChange();
       },
       handleChange() {
-        this.setCheckedResults(this.checkedResults[this.activeFilter.name]);
+        const type = this.filterKey;
+        this.setCheckedResults({
+          checked_results: this.checkedResults[type],
+          type,
+        });
       },
     },
   };

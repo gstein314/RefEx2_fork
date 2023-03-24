@@ -43,6 +43,7 @@
       :table-data-is-same-as-screener="tableDataIsSameAsScreener"
       :results-num="resultsNum"
       :filters="filters"
+      :filter-key="`${$vnode.key}`"
       @toggleDisplaySettings="toggleDisplaySettings"
     />
   </div>
