@@ -47,7 +47,24 @@
       class="text_search_name"
       :placeholder="filterPlaceholder(filterType)"
       @select="moveDetailpage"
+      @hide-list="
+        () => {
+          $emit('showSearchResult');
+        }
+      "
     >
+      <template slot="misc-item-above" slot-scope="{ query }">
+        <div v-if="query" class="misc-item">
+          <div
+            class="clickable-div"
+            @click.self="$emit('showSearchResult')"
+          ></div>
+          <span
+            >You're searching for '<b>{{ query }}</b
+            >'</span
+          >
+        </div>
+      </template>
       <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
       <!-- eslint-disable vue/no-unused-vars -->
       <div slot="suggestion-item" slot-scope="{ suggestion }">
@@ -428,6 +445,19 @@
               margin-bottom: 15px
       .vue-simple-suggest.designed .suggestions
           +suggestions
+          .misc-item
+              position: relative
+              &:hover
+                  color: $WHITE
+                  background-color: $WARNING_BUTTON_COLOR
+                  cursor: pointer
+          .clickable-div
+              position: absolute
+              height: 100%
+              width: 100%
+              cursor: pointer
+
+
       > .summary_check_wrapper
           min-height: 30px
           font-size: 14px

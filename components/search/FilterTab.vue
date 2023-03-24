@@ -7,6 +7,7 @@
         @updateValiditySearch="validSearch = $event"
         @updateScreener="setTableDataIsSameAsScreener(false)"
         @updateResults="setTableDataIsSameAsScreener(true)"
+        @showSearchResult="showSearchResult"
       />
       <div class="results_num_wrapper">
         <div class="results_num_inner">
@@ -19,7 +20,7 @@
               update: !tableDataIsSameAsScreener,
             }"
             :disabled="!validSearch"
-            @click="showSearchResult($vnode.key)"
+            @click="showSearchResult"
           >
             <font-awesome-icon icon="search" />
             Find {{ $vnode.key }}s
@@ -86,6 +87,7 @@
       resultTableLength() {
         return this.resultsByName(this.$vnode.key).results.length;
       },
+      console: () => console,
     },
     watch: {
       activeDataset() {
@@ -114,15 +116,15 @@
       toggleDisplaySettings() {
         this.isDisplaySettings = !this.isDisplaySettings;
       },
-      showSearchResult(vnodeKey) {
-        this.$refs[`${vnodeKey}_search`].showResults('all');
+      showSearchResult() {
+        this.$refs[`${this.$vnode.key}_search`].showResults('all');
         this.validSearch = false;
       },
-      enterKeySearch(vnodeKey) {
+      enterKeySearch() {
         if (this.validSearch) {
-          this.showSearchResult(vnodeKey);
+          this.showSearchResult(this.$vnode.key);
           this.$refs[
-            `${vnodeKey}_search`
+            `${this.$vnode.key}_search`
           ].$refs.searchInput.inputElement.blur();
         }
       },
