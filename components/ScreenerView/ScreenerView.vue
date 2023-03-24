@@ -20,6 +20,11 @@
         isOpen: false,
       };
     },
+    mounted() {
+      this.isOpen = this.$getSessionStorage(
+        `${this.$vnode.key}-screener-is-open`
+      );
+    },
     methods: {
       toggleScreener() {
         this.isOpen = !this.isOpen;
