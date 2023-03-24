@@ -368,8 +368,8 @@
       async resetAllSearchConditions() {
         const screenerViewChild = this.$refs.screenerView.$children[0];
         await screenerViewChild.resetComponent();
-
-        this.resetComponent();
+        await this.resetComponent();
+        sessionStorage.clear();
       },
       setChildIsInitialState(bool) {
         this.childIsInitialState = bool;
