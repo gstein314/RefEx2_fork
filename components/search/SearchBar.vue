@@ -351,8 +351,10 @@
               results_num,
               filterType: this.filterType,
             });
-            this.$setSessionStorage('gene-search-conditions', this.parameters);
           });
+        if (type === 'numfound') {
+          this.$setSessionStorage('gene-search-conditions', this.parameters);
+        }
       },
       filterPlaceholder(type) {
         switch (type) {
