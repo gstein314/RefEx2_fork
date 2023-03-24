@@ -23,6 +23,10 @@
     methods: {
       toggleScreener() {
         this.isOpen = !this.isOpen;
+        this.$setSessionStorage(
+          `${this.$vnode.key}-screener-is-open`,
+          this.isOpen
+        );
       },
     },
   };

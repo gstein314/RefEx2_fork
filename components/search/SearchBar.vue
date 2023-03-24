@@ -96,7 +96,7 @@
     <template v-else-if="filterType === 'sample'">
       <div class="summary_check_wrapper"></div>
     </template>
-    <ScreenerView ref="screenerView">
+    <ScreenerView ref="screenerView" :key="filterType">
       <component
         :is="`screener-view-${filterType}`"
         @updateParameters="updateParams"
