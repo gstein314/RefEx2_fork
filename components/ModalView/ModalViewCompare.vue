@@ -83,7 +83,11 @@
         this.inputItemIds = this.itemIdsForComparisonStr
           .replace(/ /g, '')
           .split(',');
-        this.setCheckedResults(this.inputItemIds);
+        if (this.inputItemIds[0] === '') {
+          this.setCheckedResults([]);
+        } else {
+          this.setCheckedResults(this.inputItemIds);
+        }
         this.toggleCompareModal();
       },
       getActiveDatasetHeader() {
@@ -91,19 +95,15 @@
           switch (this.activeFilter.name) {
             case 'gene':
               return this.activeDataset.gene.header;
-              break;
             case 'sample':
               return 'RES ID';
-              break;
           }
         } else if (this.activeSpecie.species === 'Mouse') {
           switch (this.activeFilter.name) {
             case 'gene':
               return this.activeDataset.gene.header;
-              break;
             case 'sample':
               return 'RES ID';
-              break;
           }
         }
       },
