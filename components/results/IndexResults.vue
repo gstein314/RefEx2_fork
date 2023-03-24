@@ -62,7 +62,7 @@
         >
           <td class="checkbox" @click="e => e.stopPropagation()">
             <input
-              v-model="checkedResults"
+              v-model="checkedResults[activeFilter.name]"
               type="checkbox"
               :value="result[keyForID]"
               @change="handleChange"
@@ -149,7 +149,7 @@
     },
     data() {
       return {
-        checkedResults: [],
+        checkedResults: { gene: [], sample: [] },
         resultsCached: [],
       };
     },
@@ -164,6 +164,7 @@
         geneSummarySource: 'gene_summary_source',
         getCheckedResults: 'get_checked_results',
         isOn: 'compare_modal',
+        activeFilter: 'active_filter',
       }),
       examples() {
         return this.activeDataset[this.filterType].item_comparison_example;
@@ -183,7 +184,8 @@
       isAllChecked() {
         return (
           this.resultsUniqueKeys.length > 0 &&
-          this.checkedResults.length === this.resultsUniqueKeys.length
+          this.checkedResults[this.activeFilter.name].length ===
+            this.resultsUniqueKeys.length
         );
       },
       results() {
@@ -203,12 +205,11 @@
     },
     watch: {
       activeDataset() {
-        this.checkedResults = [];
+        this.checkedResults[this.activeFilter.name] = [];
       },
       isOn() {
         if (!this.isOn) {
-          this.setCheckedResults(this.getCheckedResults.filter(Boolean));
-          this.checkedResults = this.getCheckedResults;
+          this.checkedResults[this.activeFilter.name] = this.getCheckedResults;
         }
       },
       results: {
@@ -241,14 +242,14 @@
       },
       toggleAllCheckbox() {
         if (this.isAllChecked) {
-          this.checkedResults = [];
+          this.checkedResults[this.activeFilter.name] = [];
         } else {
-          this.checkedResults = this.resultsUniqueKeys;
+          this.checkedResults[this.activeFilter.name] = this.resultsUniqueKeys;
         }
         this.handleChange();
       },
       handleChange() {
-        this.setCheckedResults(this.checkedResults);
+        this.setCheckedResults(this.checkedResults[this.activeFilter.name]);
       },
     },
   };
