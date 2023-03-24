@@ -154,6 +154,7 @@
                   "
                 />
               </td>
+              <!-- // hide trash can button until multi-search
               <td class="icon">
                 <a
                   class="delete_btn"
@@ -163,7 +164,7 @@
                 >
                   <font-awesome-icon icon="trash-xmark" />
                 </a>
-              </td>
+              </td> -->
             </tr>
           </tbody>
         </table>
@@ -454,6 +455,8 @@
 </script>
 
 <style lang="sass">
+  .item-list
+    width: 100%
   svg[data-icon="circle-info"], .delete_all
     color: $MAIN_COLOR
     cursor: pointer

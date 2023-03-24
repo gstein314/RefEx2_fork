@@ -44,7 +44,6 @@
               :file-name="tsvTitle"
               :fields-array="projectTableHead"
             />
-            <ComparisonButton v-if="filterType === 'gene'" />
           </div>
           <div class="align_right">
             <button class="reset_btn" :class="isNoSort" @click="clearSortArray">
