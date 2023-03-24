@@ -205,7 +205,10 @@
     },
     watch: {
       activeDataset() {
-        this.checkedResults[this.activeFilter.name] = [];
+        this.checkedResults = { gene: [], sample: [] };
+        this.handleChange();
+      },
+      activeFilter() {
         this.handleChange();
       },
       isOn() {
