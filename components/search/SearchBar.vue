@@ -245,6 +245,14 @@
         }
       });
     },
+    beforeDestroy() {
+      sessionStorage.setItem(
+        'gene-search-conditions',
+        JSON.stringify({
+          parameters: this.parameters,
+        })
+      );
+    },
     methods: {
       ...mapMutations({
         setAlertModal: 'set_alert_modal',
