@@ -272,7 +272,7 @@
     mounted() {
       if (sessionStorage.hasOwnProperty('gene-screener-filters')) {
         const geneFilterLists = JSON.parse(
-          sessionStorage.getItem('gene-screener-filters')
+          sessionStorage['gene-screener-filters']
         );
         this.list.length = 0;
         this.list.push(...geneFilterLists[this.$vnode.key]);

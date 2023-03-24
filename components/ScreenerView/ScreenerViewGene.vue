@@ -241,15 +241,6 @@
         this.setSearchConditions(filterCondition);
         this.handleFilterValueUpdate(this.filterValue);
       },
-      // geneFilterLists: {
-      //   handler(newVal, oldVal) {
-      //     sessionStorage.setItem(
-      //       'gene-screener-filters',
-      //       JSON.stringify(newVal)
-      //     );
-      //   },
-      //   deep: true,
-      // },
     },
     async created() {
       this.getAutoCompleteData().then(() => {});
@@ -257,38 +248,26 @@
       this.initiateParametersDataset();
     },
     mounted() {
-      if (sessionStorage.hasOwnProperty('gene-screener-conditions')) {
-        const obj = JSON.parse(
-          sessionStorage.getItem('gene-screener-conditions')
-        );
-        this.chrValue = obj.chrValue;
-        this.TOGValue = obj.TOGValue;
-        this.setTags(obj.go, 'go');
+      const conditions = this.$getSessionStorage('gene-screener-conditions');
+      if (conditions) {
+        this.chrValue = conditions.chrValue;
+        this.TOGValue = conditions.TOGValue;
+        this.setTags(conditions.go, 'go');
       }
-      if (sessionStorage.hasOwnProperty('gene-screener-parameters')) {
-        const obj = JSON.parse(
-          sessionStorage.getItem('gene-screener-parameters')
-        );
-        this.$set(this.parameters, obj);
+
+      const parameters = this.$getSessionStorage('gene-screener-parameters');
+      if (parameters) {
+        this.parameters = parameters;
       }
     },
     beforeDestroy() {
-      sessionStorage.setItem(
-        'gene-screener-conditions',
-        JSON.stringify({
-          chrValue: this.chrValue,
-          TOGValue: this.TOGValue,
-          go: this.parameters.go,
-        })
-      );
-      sessionStorage.setItem(
-        'gene-screener-parameters',
-        JSON.stringify(this.parameters)
-      );
-      sessionStorage.setItem(
-        'gene-screener-filters',
-        JSON.stringify(this.geneFilterLists)
-      );
+      this.$setSessionStorage('gene-screener-conditions', {
+        chrValue: this.chrValue,
+        TOGValue: this.TOGValue,
+        go: this.parameters.go,
+      });
+      this.$setSessionStorage('gene-screener-parameters', this.parameters);
+      this.$setSessionStorage('gene-screener-filters', this.geneFilterLists);
     },
     methods: {
       ...mapMutations({

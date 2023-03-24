@@ -238,20 +238,15 @@
       if (this.filterType === 'gene' && this.searchConditions.gene.summary) {
         this.isSummaryIncluded = this.searchConditions[this.filterType].summary;
       }
+      if (sessionStorage.hasOwnProperty('gene-search-conditions')) {
+        this.parameters = this.$getSessionStorage('gene-search-conditions');
+      }
       setTimeout(() => {
         const mainInputField = this.$refs.searchInput.inputElement;
         if (!Boolean(mainInputField.value)) {
           mainInputField.focus(), 10;
         }
       });
-    },
-    beforeDestroy() {
-      sessionStorage.setItem(
-        'gene-search-conditions',
-        JSON.stringify({
-          parameters: this.parameters,
-        })
-      );
     },
     methods: {
       ...mapMutations({
@@ -356,6 +351,7 @@
               results_num,
               filterType: this.filterType,
             });
+            this.$setSessionStorage('gene-search-conditions', this.parameters);
           });
       },
       filterPlaceholder(type) {
