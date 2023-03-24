@@ -206,6 +206,7 @@
     watch: {
       activeDataset() {
         this.checkedResults[this.activeFilter.name] = [];
+        this.handleChange();
       },
       isOn() {
         if (!this.isOn) {
