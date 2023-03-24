@@ -22,4 +22,12 @@ export default ({ app }, inject) => {
   inject('variableName', str => {
     return str.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
   });
+  inject('setSessionStorage', (storageKey, dataToBeStored) => {
+    sessionStorage[storageKey] = JSON.stringify(dataToBeStored);
+  });
+  inject('getSessionStorage', storageKey => {
+    if (sessionStorage.hasOwnProperty(storageKey)) {
+      return JSON.parse(sessionStorage[storageKey]);
+    }
+  });
 };
