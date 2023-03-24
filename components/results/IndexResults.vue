@@ -212,9 +212,6 @@
         this.checkedResults = { gene: [], sample: [] };
         this.handleChange();
       },
-      activeFilter() {
-        this.handleChange();
-      },
       isOn() {
         if (!this.isOn) {
           this.checkedResults[this.activeFilter.name] = this.getCheckedResults;
