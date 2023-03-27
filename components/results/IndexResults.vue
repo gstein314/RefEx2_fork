@@ -146,6 +146,10 @@
         type: Number,
         default: 0,
       },
+      filterKey: {
+        type: String,
+        default: 'gene',
+      },
     },
     data() {
       return {
@@ -205,7 +209,8 @@
     },
     watch: {
       activeDataset() {
-        this.checkedResults[this.activeFilter.name] = [];
+        this.checkedResults = { gene: [], sample: [] };
+        this.handleChange();
       },
       isOn() {
         if (!this.isOn) {
@@ -249,7 +254,11 @@
         this.handleChange();
       },
       handleChange() {
-        this.setCheckedResults(this.checkedResults[this.activeFilter.name]);
+        const type = this.filterKey;
+        this.setCheckedResults({
+          checked_results: this.checkedResults[type],
+          type,
+        });
       },
     },
   };

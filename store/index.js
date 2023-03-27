@@ -255,8 +255,8 @@ export const mutations = {
   set_filter_search_value(state, value) {
     state.filter_search_value = value;
   },
-  set_checked_results(state, checked_results) {
-    state.checked_results[state.active_filter] = checked_results;
+  set_checked_results(state, { checked_results, type }) {
+    state.checked_results[type] = checked_results;
   },
   set_index_gene_pages_number(state, index_gene_pages_number) {
     state.index_gene_pages_number = index_gene_pages_number;

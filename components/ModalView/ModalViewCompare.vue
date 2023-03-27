@@ -80,13 +80,14 @@
         this.toggleCompareModal();
       },
       closeModalView() {
+        const type = this.activeFilter.name;
         this.inputItemIds = this.itemIdsForComparisonStr
           .replace(/ /g, '')
           .split(',');
         if (this.inputItemIds[0] === '') {
-          this.setCheckedResults([]);
+          this.setCheckedResults({ checked_results: [], type });
         } else {
-          this.setCheckedResults(this.inputItemIds);
+          this.setCheckedResults({ checked_results: this.inputItemIds, type });
         }
         this.toggleCompareModal();
       },
