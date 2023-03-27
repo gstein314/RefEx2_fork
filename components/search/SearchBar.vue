@@ -48,8 +48,8 @@
       :placeholder="filterPlaceholder(filterType)"
       @select="moveDetailpage"
       @hide-list="
-        () => {
-          $emit('showSearchResult');
+        e => {
+          console.log(`🤖\x1B[40;93;1me: \x1B[m`, e);
         }
       "
     >
@@ -57,10 +57,11 @@
         <div v-if="query" class="misc-item">
           <div
             class="clickable-div"
-            @click.self="$emit('showSearchResult')"
+            @click.stop="$emit('showSearchResult')"
           ></div>
+          <font-awesome-icon class="search-icon" icon="search" />
           <span
-            >You're searching for '<b>{{ query }}</b
+            >Find {{ activeFilter.name }}s with keyword(s) '<b>{{ query }}</b
             >'</span
           >
         </div>
@@ -223,6 +224,9 @@
       isInitialState() {
         if (!this.childIsInitialState) return false;
         return _.isEqual(this.parameters, this.initialParameters);
+      },
+      console() {
+        return console;
       },
     },
     watch: {
@@ -445,17 +449,24 @@
               margin-bottom: 15px
       .vue-simple-suggest.designed .suggestions
           +suggestions
-          .misc-item
-              position: relative
+          li:first-child
+              pointer-events: none
+              margin-bottom: 10px
               &:hover
                   color: $WHITE
                   background-color: $WARNING_BUTTON_COLOR
                   cursor: pointer
-          .clickable-div
-              position: absolute
-              height: 100%
-              width: 100%
-              cursor: pointer
+              .search-icon
+                  margin:0 5px
+              .misc-item
+                  position: relative
+                  pointer-events: auto
+                  border-bottom: 1px solid $GRAY
+              .clickable-div
+                  position: absolute
+                  height: 100%
+                  width: 100%
+                  cursor: pointer
 
 
       > .summary_check_wrapper
