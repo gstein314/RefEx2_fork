@@ -2,6 +2,7 @@ export default ({ app }, inject) => {
   inject(
     'highlightedSuggestion',
     (originalDescription, userInput, minChrLength = 3) => {
+      if (originalDescription === 'alternativeSearch') return;
       const nonWordAndSpace = /[^\w\s]/g;
       const alphaNumInput = userInput.replaceAll(nonWordAndSpace, ' ');
       const oneSpaceInput = alphaNumInput.replace(/\s\s+/g, ' ').split(' ');
@@ -10,7 +11,8 @@ export default ({ app }, inject) => {
         const reg = new RegExp(word, 'gi');
         const hasWord = reg.test(word);
         if (word.length >= minChrLength && hasWord) {
-          highlightedText = highlightedText.replaceAll(reg, `<mark>$&</mark>`);
+          console.log(`🤖\x1B[40;93;1mhighlightedText: \x1B[m` ,highlightedText)
+          highlightedText = highlightedText?.replaceAll(reg, `<mark>$&</mark>`);
         }
       }
       return highlightedText;
