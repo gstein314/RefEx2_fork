@@ -47,47 +47,44 @@
       class="text_search_name"
       :placeholder="filterPlaceholder(filterType)"
       @select="moveDetailpage"
-      @hide-list="
-        e => {
-          console.log(`🤖\x1B[40;93;1me: \x1B[m`, e);
-        }
-      "
+      @show-list="canAlternativeSearch = true"
+      @hide-list="canAlternativeSearch = false"
     >
-      <template slot="misc-item-above" slot-scope="{ query }">
-        <div v-if="query" class="misc-item">
-          <div
-            class="clickable-div"
-            @click.stop="$emit('showSearchResult')"
-          ></div>
-          <font-awesome-icon class="search-icon" icon="search" />
-          <span
-            >Find {{ activeFilter.name }}s with keyword(s) '<b>{{ query }}</b
-            >'</span
-          >
-        </div>
-      </template>
       <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
       <!-- eslint-disable vue/no-unused-vars -->
       <div slot="suggestion-item" slot-scope="{ suggestion }">
-        <strong
-          class="title"
-          v-html="
-            $highlightedSuggestion(
-              suggestion[paramsForSuggestions[0]],
-              parameters.text
-            )
-          "
-        >
-        </strong
-        >&nbsp; -&nbsp;
-        <span
-          v-html="
-            $highlightedSuggestion(
-              suggestion[paramsForSuggestions[1]],
-              parameters.text
-            )
-          "
-        ></span>
+        <template v-if="suggestion.geneid === 'alternativeSearch'">
+          <span class="misc-item">
+            <font-awesome-icon class="search-icon" icon="search" />
+            <span
+              >Find {{ activeFilter.name }}s with keyword(s) '<b>{{
+                parameters.text
+              }}</b
+              >'</span
+            >
+          </span>
+        </template>
+        <template v-else>
+          <strong
+            class="title"
+            v-html="
+              $highlightedSuggestion(
+                suggestion[paramsForSuggestions[0]],
+                parameters.text
+              )
+            "
+          >
+          </strong
+          >&nbsp; -&nbsp;
+          <span
+            v-html="
+              $highlightedSuggestion(
+                suggestion[paramsForSuggestions[1]],
+                parameters.text
+              )
+            "
+          ></span>
+        </template>
       </div>
       <div
         v-if="isLoading"
@@ -149,6 +146,7 @@
         typeOfQuery: 'numfound',
         parameters: { text: '', summary: false },
         initialParameters: {},
+        canAlternativeSearch: false,
       };
     },
     computed: {
@@ -290,6 +288,12 @@
         this.initialParameters = { text: '', summary: false, ...params };
       },
       moveDetailpage(suggestion) {
+        for (const value of Object.values(suggestion)) {
+          if (value === 'alternativeSearch') {
+            this.$emit('showSearchResult');
+            return;
+          }
+        }
         this.$nuxt.$loading.start();
         if (this.filterType === 'gene') {
           this.$router.push(
@@ -328,6 +332,19 @@
           })
           .then(results => {
             this.isLoading = false;
+            // create pesudo item for alternative search due to the lack of the API
+            const createAlternativeSearch = () => {
+              const pseudoFirstItem = {
+                ...results.data[this.queryPrefix][0],
+              };
+              for (const key of Object.keys(pseudoFirstItem)) {
+                if (key === 'name') {
+                  pseudoFirstItem.name = this.parameters.text;
+                } else pseudoFirstItem[key] = 'alternativeSearch';
+              }
+              results.data[this.queryPrefix].unshift(pseudoFirstItem);
+            };
+            createAlternativeSearch();
             return results.data[this.queryPrefix];
           });
       },
@@ -450,24 +467,15 @@
       .vue-simple-suggest.designed .suggestions
           +suggestions
           li:first-child
-              pointer-events: none
               margin-bottom: 10px
+              .search-icon
+                  margin: 0 5px
+              > div
+                  border-bottom: 1px solid $LIGHTGRAY
               &:hover
                   color: $WHITE
                   background-color: $WARNING_BUTTON_COLOR
                   cursor: pointer
-              .search-icon
-                  margin:0 5px
-              .misc-item
-                  position: relative
-                  pointer-events: auto
-                  border-bottom: 1px solid $GRAY
-              .clickable-div
-                  position: absolute
-                  height: 100%
-                  width: 100%
-                  cursor: pointer
-
 
       > .summary_check_wrapper
           min-height: 30px
