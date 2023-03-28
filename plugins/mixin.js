@@ -11,7 +11,6 @@ export default ({ app }, inject) => {
         const reg = new RegExp(word, 'gi');
         const hasWord = reg.test(word);
         if (word.length >= minChrLength && hasWord) {
-          console.log(`🤖\x1B[40;93;1mhighlightedText: \x1B[m` ,highlightedText)
           highlightedText = highlightedText?.replaceAll(reg, `<mark>$&</mark>`);
         }
       }

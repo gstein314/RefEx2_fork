@@ -47,12 +47,21 @@
       class="text_search_name"
       :placeholder="filterPlaceholder(filterType)"
       @select="moveDetailpage"
-      @show-list="canAlternativeSearch = true"
-      @hide-list="canAlternativeSearch = false"
     >
       <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
       <!-- eslint-disable vue/no-unused-vars -->
       <div slot="suggestion-item" slot-scope="{ suggestion }">
+        <!-- <template
+          v-if="suggestion.geneid === 'alternativeSearch' && resultsNum === 0"
+        >
+          <span class="misc-item">
+            <font-awesome-icon class="search-icon" icon="search" />
+            <span
+              >No results found. Please check the spelling or try other
+              keywords.</span
+            >
+          </span>
+        </template> -->
         <template v-if="suggestion.geneid === 'alternativeSearch'">
           <span class="misc-item">
             <font-awesome-icon class="search-icon" icon="search" />
@@ -146,7 +155,6 @@
         typeOfQuery: 'numfound',
         parameters: { text: '', summary: false },
         initialParameters: {},
-        canAlternativeSearch: false,
       };
     },
     computed: {
@@ -334,6 +342,7 @@
             this.isLoading = false;
             // create pesudo item for alternative search due to the lack of the API
             const createAlternativeSearch = () => {
+              if (results.data[this.queryPrefix].length === 0) return;
               const pseudoFirstItem = {
                 ...results.data[this.queryPrefix][0],
               };
