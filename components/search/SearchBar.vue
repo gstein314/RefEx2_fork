@@ -80,6 +80,15 @@
         <span>Loading...</span>
       </div>
     </vue-simple-suggest>
+    <div class="alternative-search" @click="$emit('showSearchResult')">
+      <font-awesome-icon class="search-icon" icon="search" />
+      <span
+        >Find {{ activeFilter.name }}s with keyword(s) '<b>{{
+          parameters.text
+        }}</b
+        >'</span
+      >
+    </div>
     <template v-if="filterType === 'gene'">
       <div
         :class="['summary_check_wrapper', { hide: !Boolean(parameters.text) }]"
