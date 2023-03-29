@@ -90,7 +90,7 @@
     >
       <span class="search-text">
         <font-awesome-icon class="search-icon" icon="search" />
-        <template v-if="validSearch" >
+        <template v-if="validSearch">
           Find {{ activeFilter.name }}s with keyword(s) '<b>{{
             parameters.text
           }}</b
@@ -387,7 +387,7 @@
       async resetAllSearchConditions() {
         const screenerViewChild = this.$refs.screenerView.$children[0];
         await screenerViewChild.resetComponent();
-
+        this.$emit('resetIndexResults');
         this.resetComponent();
       },
       setChildIsInitialState(bool) {

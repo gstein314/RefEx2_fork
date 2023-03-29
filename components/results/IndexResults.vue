@@ -121,6 +121,13 @@
   import { mapGetters, mapMutations } from 'vuex';
   import ResultsPagination from '~/components/results/ResultsPagination.vue';
 
+  const initialState = () => {
+    return {
+      checkedResults: { gene: [], sample: [] },
+      resultsCached: [],
+    };
+  };
+
   export default {
     components: {
       ResultsPagination,
@@ -145,8 +152,7 @@
     },
     data() {
       return {
-        checkedResults: { gene: [], sample: [] },
-        resultsCached: [],
+        ...initialState(),
       };
     },
     computed: {
@@ -251,6 +257,9 @@
           checked_results: this.checkedResults[type],
           type,
         });
+      },
+      resetComponent() {
+        Object.assign(this.$data, initialState());
       },
     },
   };
