@@ -85,6 +85,7 @@
     <div
       v-if="alternativeSearchShouldShow"
       class="alternative-search"
+      :class="{ disabled: !validSearch }"
       @click="$emit('showSearchResult')"
     >
       <span class="search-text">
@@ -133,6 +134,12 @@
       VueSimpleSuggest,
       ScreenerView,
     },
+    props: {
+      validSearch: {
+        type: Boolean,
+        default: false,
+      },
+    },
     data() {
       return {
         isLoading: false,
@@ -141,7 +148,6 @@
         onEvent: false,
         isSummaryIncluded: false,
         isReloadActive: false,
-        validSearch: false,
         // either 'all' or 'numfound'
         typeOfQuery: 'numfound',
         parameters: { text: '', summary: false },
@@ -227,10 +233,10 @@
     watch: {
       parameters: {
         handler: function () {
-          this.validSearch = !Object.values(this.parameters).every(
-            value => !Boolean(value)
+          this.$emit(
+            'updateValiditySearch',
+            !Object.values(this.parameters).every(value => !Boolean(value))
           );
-          this.$emit('updateValiditySearch', this.validSearch);
           this.showResults('numfound');
         },
         deep: true,
