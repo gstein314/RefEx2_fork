@@ -428,6 +428,7 @@
               margin-bottom: 15px
       .vue-simple-suggest.designed .suggestions
           +suggestions
+          transform: translateY(40px)
       > .summary_check_wrapper
           min-height: 30px
           font-size: 14px
