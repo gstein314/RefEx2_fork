@@ -7,6 +7,7 @@
         @updateValiditySearch="validSearch = $event"
         @updateScreener="setTableDataIsSameAsScreener(false)"
         @updateResults="setTableDataIsSameAsScreener(true)"
+        @showSearchResult="showSearchResult($vnode.key)"
       />
       <div class="results_num_wrapper">
         <div class="results_num_inner">

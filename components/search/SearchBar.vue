@@ -47,6 +47,8 @@
       class="text_search_name"
       :placeholder="filterPlaceholder(filterType)"
       @select="moveDetailpage"
+      @show-list="setAlternativeSearchShouldShow(true)"
+      @hide-list="setAlternativeSearchShouldShow(false)"
     >
       <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
       <!-- eslint-disable vue/no-unused-vars -->
@@ -80,14 +82,18 @@
         <span>Loading...</span>
       </div>
     </vue-simple-suggest>
-    <div class="alternative-search" @click="$emit('showSearchResult')">
-      <font-awesome-icon class="search-icon" icon="search" />
-      <span
-        >Find {{ activeFilter.name }}s with keyword(s) '<b>{{
+    <div
+      v-if="alternativeSearchShouldShow"
+      class="alternative-search"
+      @click="$emit('showSearchResult')"
+    >
+      <span class="search-text">
+        <font-awesome-icon class="search-icon" icon="search" />
+        Find {{ activeFilter.name }}s with keyword(s) '<b>{{
           parameters.text
         }}</b
-        >'</span
-      >
+        >'
+      </span>
     </div>
     <template v-if="filterType === 'gene'">
       <div
@@ -140,6 +146,7 @@
         typeOfQuery: 'numfound',
         parameters: { text: '', summary: false },
         initialParameters: {},
+        alternativeSearchShouldShow: false,
       };
     },
     computed: {
@@ -375,6 +382,11 @@
       setChildIsInitialState(bool) {
         this.childIsInitialState = bool;
       },
+      setAlternativeSearchShouldShow(bool) {
+        setTimeout(() => {
+          this.alternativeSearchShouldShow = bool;
+        }, 0);
+      },
     },
   };
 </script>
@@ -438,6 +450,18 @@
       .vue-simple-suggest.designed .suggestions
           +suggestions
           transform: translateY(40px)
+      .alternative-search
+          box-shadow: 0 2px 5px rgba(62, 70, 82, .22)
+          padding: 10px 0
+          width: 100%
+          text-align: left
+          cursor: pointer
+          &:hover
+              color: white
+              background-color: $WARNING_BUTTON_COLOR
+          .search-text
+              display: inline-block
+              margin-left: 20px
       > .summary_check_wrapper
           min-height: 30px
           font-size: 14px
