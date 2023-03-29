@@ -407,6 +407,7 @@
 </style>
 <style lang="sass" scoped>
   .text_search_area
+      position: relative
       > .search_condition_title
           display: flex
           align-items: center
@@ -462,11 +463,13 @@
           +suggestions
           transform: translateY(40px)
       .alternative-search
+          position: absolute
           box-shadow: 0 2px 5px rgba(62, 70, 82, .22)
           padding: 10px 0
           width: 100%
           text-align: left
           cursor: pointer
+          background-color: white
           &:hover
               color: white
               background-color: $WARNING_BUTTON_COLOR
