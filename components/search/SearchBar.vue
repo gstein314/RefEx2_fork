@@ -465,6 +465,9 @@
           &:hover
               color: white
               background-color: $WARNING_BUTTON_COLOR
+          &.disabled:hover
+              background-color: $DISABLE_COLOR
+              cursor: not-allowed
           .search-text
               display: inline-block
               margin-left: 20px
