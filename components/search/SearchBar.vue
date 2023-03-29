@@ -249,6 +249,7 @@
       activeDataset() {
         this.$set(this.parameters, 'text', '');
         this.typeOfQuery = 'reset numfound';
+        this.resetAllSearchConditions();
       },
       isSummaryIncluded() {
         this.updateSuggestions();
