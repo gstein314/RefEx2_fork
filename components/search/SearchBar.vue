@@ -90,10 +90,15 @@
     >
       <span class="search-text">
         <font-awesome-icon class="search-icon" icon="search" />
-        Find {{ activeFilter.name }}s with keyword(s) '<b>{{
-          parameters.text
-        }}</b
-        >'
+        <template v-if="validSearch" >
+          Find {{ activeFilter.name }}s with keyword(s) '<b>{{
+            parameters.text
+          }}</b
+          >'
+        </template>
+        <template v-else>
+          No new results found. Please try other keywords.
+        </template>
       </span>
     </div>
     <template v-if="filterType === 'gene'">
