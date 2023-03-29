@@ -113,12 +113,9 @@
                     :min-length="0"
                     :placeholder="column.placeholder"
                     class="text_search_name"
-                    @select="
-                      () => {
-                        setSelectedSample(itemIndex, 'ADD');
-                        setGroupOption(itemIndex);
-                      }
-                    "
+                    :class="{ disabled: item.group === '' }"
+                    :disabled="item.group === ''"
+                    @select="setSelectedSample(itemIndex, 'ADD')"
                     @input="dispatchAction('ADD', itemIndex, column.id)"
                     @focus="e => setSelectedSample(itemIndex, 'CLEAR', e)"
                   >
@@ -423,21 +420,6 @@
           });
           if (isSampleField && targetItem.group) {
             targetItem.group = '';
-          }
-        }
-      },
-      setGroupOption(index) {
-        const targetItem = this.getTargetItem(index);
-        if (targetItem.group !== undefined) {
-          const sampleInput = this.$refs.sampleInputs[index];
-          for (const [groupId, group] of Object.entries(this.availableGroups)) {
-            const isInGroup = Boolean(
-              group.samples.find(({ id }) => id === targetItem.sample.id)
-            );
-            if (isInGroup) {
-              targetItem.group = groupId;
-              break;
-            }
           }
         }
       },
