@@ -443,6 +443,13 @@
       &.warning
         input, select
           +warning_field
+    .text_search_name
+      &.disabled
+        input
+          background-color: $DISABLE_INPUT_COLOR
+          cursor: not-allowed
+        input::placeholder
+          color: $DISABLE_PLACEHOLDER_COLOR
     .text_search_name input
       &.warning
         +warning_field
