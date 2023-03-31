@@ -38,7 +38,7 @@
     <vue-simple-suggest
       ref="searchInput"
       v-model.trim="parameters.text"
-      :debounce="500"
+      :debounce="debounceTimer"
       :min-length="0"
       :display-attribute="paramsForSuggestions[1]"
       :value-attribute="paramsForSuggestions[0]"
@@ -399,7 +399,7 @@
       setAlternativeSearchShouldShow(bool) {
         setTimeout(() => {
           this.alternativeSearchShouldShow = bool;
-        }, 500);
+        }, this.debounceTimer);
       },
     },
   };
