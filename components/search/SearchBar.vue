@@ -83,11 +83,9 @@
       </div>
     </vue-simple-suggest>
     <div
+      v-if="alternativeSearchShouldShow"
       class="alternative-search"
       :class="{ disabled: !validSearch }"
-      :style="{
-        visibility: alternativeSearchShouldShow ? 'visible' : 'hidden',
-      }"
       @click="$emit('showSearchResult')"
     >
       <span class="search-text">
