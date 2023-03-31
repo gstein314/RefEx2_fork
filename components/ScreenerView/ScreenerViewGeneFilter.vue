@@ -504,7 +504,7 @@
       box-shadow: 0 1px 4px rgba(62, 70, 82, .22)
       z-index: $TOOLTIP_LAYER
     .v-popper__arrow-inner
-      z-index: 10
+      z-index: $TOOLTIP_LAYER
       visibility: visible
       border-color: $WHITE
     .v-popper__arrow-outer
