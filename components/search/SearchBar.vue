@@ -159,6 +159,7 @@
         initialParameters: {},
         alternativeSearchShouldShow: false,
         debounceTimer: 500,
+        setTimeoutId: null,
       };
     },
     computed: {
@@ -395,12 +396,15 @@
         this.childIsInitialState = bool;
       },
       setAlternativeSearchShouldShow(bool) {
-        setTimeout(
-          () => {
+        if (bool) {
+          clearTimeout(this.setTimeoutId);
+          this.alternativeSearchShouldShow = bool;
+        } else {
+          this.setTimeoutId = setTimeout(() => {
             this.alternativeSearchShouldShow = bool;
-          },
-          bool ? 0 : this.debounceTimer
-        );
+            this.setTimeoutId = null;
+          }, this.debounceTimer);
+        }
       },
     },
   };
