@@ -397,9 +397,12 @@
         this.childIsInitialState = bool;
       },
       setAlternativeSearchShouldShow(bool) {
-        setTimeout(() => {
-          this.alternativeSearchShouldShow = bool;
-        }, this.debounceTimer);
+        setTimeout(
+          () => {
+            this.alternativeSearchShouldShow = bool;
+          },
+          bool ? 0 : this.debounceTimer
+        );
       },
     },
   };
