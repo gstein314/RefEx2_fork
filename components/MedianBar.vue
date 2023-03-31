@@ -140,7 +140,7 @@
         grid-row-gap: 1px
         grid-column-gap: 0.2rem
         padding: 10px
-        z-index: 100
+        z-index: $TOOLTIP_LAYER
         > .title
           grid-area: top
           text-align: left

@@ -91,7 +91,7 @@
   .nav_wrapper
     margin: 0
     position: sticky
-    z-index: 2
+    z-index: $NAVBAR_LAYER
     top: 0
     .nav_area
       padding: $PADDING_WRAPPER

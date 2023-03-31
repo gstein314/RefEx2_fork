@@ -109,7 +109,7 @@
     padding: 0
     list-style-type: none
     background-color: white
-    z-index: 999
+    z-index: $NAVBAR_LAYER
     padding: 20px
     box-shadow: 0px 5px 15px -5px $BLACK
     cursor: auto
