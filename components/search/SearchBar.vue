@@ -83,14 +83,16 @@
       </div>
     </vue-simple-suggest>
     <div
-      v-if="alternativeSearchShouldShow"
       class="alternative-search"
       :class="{ disabled: !validSearch }"
+      :style="{
+        visibility: alternativeSearchShouldShow ? 'visible' : 'hidden',
+      }"
       @click="$emit('showSearchResult')"
     >
       <span class="search-text">
         <font-awesome-icon class="search-icon" icon="search" />
-        <template v-if="validSearch" >
+        <template v-if="validSearch">
           Find {{ activeFilter.name }}s with keyword(s) '<b>{{
             parameters.text
           }}</b
