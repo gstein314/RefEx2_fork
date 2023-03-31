@@ -160,6 +160,7 @@
         parameters: { text: '', summary: false },
         initialParameters: {},
         alternativeSearchShouldShow: false,
+        debounceTimer: 500,
       };
     },
     computed: {
