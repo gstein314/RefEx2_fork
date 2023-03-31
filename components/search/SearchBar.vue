@@ -398,7 +398,7 @@
       setAlternativeSearchShouldShow(bool) {
         setTimeout(() => {
           this.alternativeSearchShouldShow = bool;
-        }, 0);
+        }, 500);
       },
     },
   };
