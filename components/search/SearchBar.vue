@@ -476,6 +476,7 @@
           text-align: left
           cursor: pointer
           background-color: white
+          z-index: 5 // TODO: switch to $SUGGESTION_LAYER
           &:hover
               color: white
               background-color: $WARNING_BUTTON_COLOR
