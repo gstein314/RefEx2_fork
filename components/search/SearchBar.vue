@@ -469,6 +469,7 @@
               margin-bottom: 15px
       .vue-simple-suggest.designed .suggestions
           +suggestions
+      > .vue-simple-suggest.designed .suggestions
           transform: translateY(40px)
       .alternative-search
           position: absolute
