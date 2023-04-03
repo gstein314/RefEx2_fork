@@ -992,7 +992,7 @@
               "is_checkbox": true,
               "is_displayed": true,
               "is_ontology": false
-            },
+            }
           ],
           "item_comparison_example": [
             {
@@ -1002,7 +1002,7 @@
             {
               "route": "RES00003710,RES00003711",
               "label": "Root apex vs Root"
-            },
+            }
           ],
           "search_conditions": [
             {
