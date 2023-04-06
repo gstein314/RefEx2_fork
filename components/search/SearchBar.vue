@@ -251,6 +251,7 @@
       activeDataset() {
         this.$set(this.parameters, 'text', '');
         this.typeOfQuery = 'reset numfound';
+        this.resetAllSearchConditions();
       },
       isSummaryIncluded() {
         this.updateSuggestions();
@@ -389,7 +390,7 @@
       async resetAllSearchConditions() {
         const screenerViewChild = this.$refs.screenerView.$children[0];
         await screenerViewChild.resetComponent();
-
+        this.$emit('resetIndexResults');
         this.resetComponent();
       },
       setChildIsInitialState(bool) {

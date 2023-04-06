@@ -9,6 +9,7 @@
         @updateScreener="setTableDataIsSameAsScreener(false)"
         @updateResults="setTableDataIsSameAsScreener(true)"
         @showSearchResult="showSearchResult($vnode.key)"
+        @resetIndexResults="resetIndexResults"
       />
       <div class="results_num_wrapper">
         <div class="results_num_inner">
@@ -42,6 +43,7 @@
     />
     <index-results
       :key="`${$vnode.key}_results`"
+      :ref="`${$vnode.key}_results`"
       :table-data-is-same-as-screener="tableDataIsSameAsScreener"
       :results-num="resultsNum"
       :filters="filters"
@@ -128,6 +130,9 @@
             `${vnodeKey}_search`
           ].$refs.searchInput.inputElement.blur();
         }
+      },
+      resetIndexResults() {
+        this.$refs[`${this.$vnode.key}_results`].resetComponent();
       },
     },
   };
