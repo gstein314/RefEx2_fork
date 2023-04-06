@@ -4,9 +4,12 @@
       <SearchBar
         :key="`${$vnode.key}_search`"
         :ref="`${$vnode.key}_search`"
+        :valid-search="validSearch"
         @updateValiditySearch="validSearch = $event"
         @updateScreener="setTableDataIsSameAsScreener(false)"
         @updateResults="setTableDataIsSameAsScreener(true)"
+        @showSearchResult="showSearchResult($vnode.key)"
+        @resetIndexResults="resetIndexResults"
       />
       <div class="results_num_wrapper">
         <div class="results_num_inner">
@@ -40,9 +43,11 @@
     />
     <index-results
       :key="`${$vnode.key}_results`"
+      :ref="`${$vnode.key}_results`"
       :table-data-is-same-as-screener="tableDataIsSameAsScreener"
       :results-num="resultsNum"
       :filters="filters"
+      :filter-key="`${$vnode.key}`"
       @toggleDisplaySettings="toggleDisplaySettings"
     />
   </div>
@@ -125,6 +130,9 @@
             `${vnodeKey}_search`
           ].$refs.searchInput.inputElement.blur();
         }
+      },
+      resetIndexResults() {
+        this.$refs[`${this.$vnode.key}_results`].resetComponent();
       },
     },
   };

@@ -8,14 +8,14 @@
           icon="info-circle"
         />
       </div>
-      <a
+      <button
         class="reset_btn"
         :class="{ disabled: resetIsDisabled }"
         @click="dispatchAction('INIT')"
       >
         <font-awesome-icon icon="rotate-right" />
         Reset
-      </a>
+      </button>
     </div>
     <client-only>
       <div :class="filter.id">
@@ -113,12 +113,9 @@
                     :min-length="0"
                     :placeholder="column.placeholder"
                     class="text_search_name"
-                    @select="
-                      () => {
-                        setSelectedSample(itemIndex, 'ADD');
-                        setGroupOption(itemIndex);
-                      }
-                    "
+                    :class="{ disabled: item.group === '' }"
+                    :disabled="item.group === ''"
+                    @select="setSelectedSample(itemIndex, 'ADD')"
                     @input="dispatchAction('ADD', itemIndex, column.id)"
                     @focus="e => setSelectedSample(itemIndex, 'CLEAR', e)"
                   >
@@ -154,17 +151,17 @@
                   "
                 />
               </td>
+              <!-- // hide trash can button until multi-search
               <td class="icon">
-                <button
+                <a
                   class="delete_btn"
                   :class="{ disabled: list.length <= 1 }"
                   :disabled="list.length <= 1"
                   @click="dispatchAction('DELETE', itemIndex)"
                 >
-                  <font-awesome-icon icon="trash" />
-                  Delete
-                </button>
-              </td>
+                  <font-awesome-icon icon="trash-xmark" />
+                </a>
+              </td> -->
             </tr>
           </tbody>
         </table>
@@ -174,11 +171,11 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
-  import VueSimpleSuggest from 'vue-simple-suggest';
-  import WarningMessage from '../WarningMessage.vue';
   import 'floating-vue/dist/style.css';
   import _ from 'lodash';
+  import VueSimpleSuggest from 'vue-simple-suggest';
+  import { mapGetters } from 'vuex';
+  import WarningMessage from '../WarningMessage.vue';
 
   export default {
     components: {
@@ -187,6 +184,10 @@
     },
     props: {
       filter: {
+        type: Object,
+        default: () => {},
+      },
+      activeFilterObj: {
         type: Object,
         default: () => {},
       },
@@ -323,14 +324,24 @@
         switch (action) {
           case 'INIT':
             setNewList();
-            break;
-          case 'ADD':
-            if (shouldAddNewItem()) {
-              this.list.push(defaultItemCopy);
+            this.$emit('resetUpdateParameters');
+            // TODO: del when multi is enabled
+            if (this.activeFilterObj.method === this.filter.type) {
+              this.$emit('resetActiveFilterObj');
             }
             break;
+          // TODO: Comment out until gql is multi
+          // case 'ADD':
+          //   if (shouldAddNewItem()) {
+          //     this.list.push(defaultItemCopy);
+          //   }
+          //   break;
           case 'DELETE':
             numOfItems === 1 ? setNewList() : this.$delete(this.list, index);
+            // TODO:
+            if (this.activeFilterObj.method === this.filter.type) {
+              this.$emit('resetActiveFilterObj');
+            }
             break;
         }
       },
@@ -345,10 +356,10 @@
               )
             );
           } catch (error) {
-            const defaultList = JSON.parse(
+            const rawDefaultList = JSON.parse(
               JSON.stringify(this.datasetSamples.byDefault[activeDateset])
             );
-            return defaultList;
+            return _.uniqWith(rawDefaultList, _.isEqual);
           }
         };
         const sortSamplesByDescription = (a, b) =>
@@ -412,31 +423,33 @@
           }
         }
       },
-      setGroupOption(index) {
-        const targetItem = this.getTargetItem(index);
-        if (targetItem.group !== undefined) {
-          const sampleInput = this.$refs.sampleInputs[index];
-          for (const [groupId, group] of Object.entries(this.availableGroups)) {
-            const isInGroup = Boolean(
-              group.samples.find(({ id }) => id === targetItem.sample.id)
-            );
-            if (isInGroup) {
-              targetItem.group = groupId;
-              break;
-            }
-          }
-        }
-      },
     },
   };
 </script>
 
 <style lang="sass">
+  .item-list
+    width: 100%
+  svg[data-icon="circle-info"], .delete_all
+    color: $MAIN_COLOR
+    cursor: pointer
+  svg[data-icon="trash-xmark"]
+    color: $ERROR_COLOR
+    cursor: pointer
+  select:required:invalid
+    color: $PLACEHOLDER_COLOR
   tbody
     td
       &.warning
         input, select
           +warning_field
+    .text_search_name
+      &.disabled
+        input
+          background-color: $DISABLE_INPUT_COLOR
+          cursor: not-allowed
+        input::placeholder
+          color: $DISABLE_PLACEHOLDER_COLOR
     .text_search_name input
       &.warning
         +warning_field
@@ -445,11 +458,19 @@
     align-items: center
     justify-content: space-between
     .reset_btn
-      color: $MAIN_COLOR
+      +button
+      +sub_button
       cursor: pointer
       &.disabled
-        color: $DISABLE_COLOR
         cursor: not-allowed
+  .delete_btn
+    align-items: initial
+    padding: 10px
+    cursor: pointer
+    opacity: 0.7
+    transition: opacity 0.3s ease-in-out
+    &:hover
+      opacity: 1
   .sample-input
     position: relative
     &.valid

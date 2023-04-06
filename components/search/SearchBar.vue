@@ -38,7 +38,7 @@
     <vue-simple-suggest
       ref="searchInput"
       v-model.trim="parameters.text"
-      :debounce="500"
+      :debounce="debounceTimer"
       :min-length="0"
       :display-attribute="paramsForSuggestions[1]"
       :value-attribute="paramsForSuggestions[0]"
@@ -47,6 +47,8 @@
       class="text_search_name"
       :placeholder="filterPlaceholder(filterType)"
       @select="moveDetailpage"
+      @show-list="setAlternativeSearchShouldShow(true)"
+      @hide-list="setAlternativeSearchShouldShow(false)"
     >
       <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
       <!-- eslint-disable vue/no-unused-vars -->
@@ -80,8 +82,29 @@
         <span>Loading...</span>
       </div>
     </vue-simple-suggest>
+    <div
+      v-if="alternativeSearchShouldShow"
+      class="alternative-search"
+      :class="{ disabled: !validSearch }"
+      @click="$emit('showSearchResult')"
+    >
+      <span class="search-text">
+        <font-awesome-icon class="search-icon" icon="search" />
+        <template v-if="validSearch">
+          Find {{ activeFilter.name }}s with keyword(s) '<b>{{
+            parameters.text
+          }}</b
+          >'
+        </template>
+        <template v-else>
+          No new results found. Please try other keywords.
+        </template>
+      </span>
+    </div>
     <template v-if="filterType === 'gene'">
-      <div :class="['summary_check_wrapper', { hide: parameters.text === '' }]">
+      <div
+        :class="['summary_check_wrapper', { hide: !Boolean(parameters.text) }]"
+      >
         <input
           id="summary_check"
           v-model="isSummaryIncluded"
@@ -100,21 +123,27 @@
         @updateParameters="updateParams"
         @storeInitialParameters="storeInitialParameters"
         @setChildIsInitialState="setChildIsInitialState"
+        @resetAll="resetAllSearchConditions"
       ></component>
     </ScreenerView>
   </div>
 </template>
 <script>
-  import VueSimpleSuggest from 'vue-simple-suggest';
-  import ScreenerView from '~/components/ScreenerView/ScreenerView.vue';
-  import { mapGetters } from 'vuex';
-  import { mapMutations } from 'vuex';
   import _ from 'lodash';
+  import VueSimpleSuggest from 'vue-simple-suggest';
+  import { mapGetters, mapMutations } from 'vuex';
+  import ScreenerView from '~/components/ScreenerView/ScreenerView.vue';
 
   export default {
     components: {
       VueSimpleSuggest,
       ScreenerView,
+    },
+    props: {
+      validSearch: {
+        type: Boolean,
+        default: false,
+      },
     },
     data() {
       return {
@@ -124,11 +153,13 @@
         onEvent: false,
         isSummaryIncluded: false,
         isReloadActive: false,
-        validSearch: false,
         // either 'all' or 'numfound'
         typeOfQuery: 'numfound',
-        parameters: { text: '' },
+        parameters: { text: '', summary: false },
         initialParameters: {},
+        alternativeSearchShouldShow: false,
+        debounceTimer: 500,
+        setTimeoutId: null,
       };
     },
     computed: {
@@ -192,6 +223,7 @@
                     'chromosomePosition',
                     'typeOfGene',
                     'filter',
+                    'summary',
                   ].includes(param)
               )
               .join(' ')} ${this.extraVariablesToBeDsiplayedInResults}}`;
@@ -208,32 +240,38 @@
     watch: {
       parameters: {
         handler: function () {
-          this.validSearch = !Object.values(this.parameters).every(
-            value => value === ''
+          this.$emit(
+            'updateValiditySearch',
+            !Object.values(this.parameters).every(value => !Boolean(value))
           );
-          this.$emit('updateValiditySearch', this.validSearch);
+          this.showResults('numfound');
         },
         deep: true,
       },
       activeDataset() {
         this.$set(this.parameters, 'text', '');
         this.typeOfQuery = 'reset numfound';
+        this.resetAllSearchConditions();
       },
       isSummaryIncluded() {
         this.updateSuggestions();
       },
     },
     created() {
-      this.showResults('numfound');
       this.updateSearchCondition();
     },
     mounted() {
-      if (this.searchConditions.gene.text)
-        this.parameters.text = this.searchConditions[this.filterType].text;
+      if (this.searchConditions[this.filterType].text)
+        this.parameters = { ...this.searchConditions[this.filterType] };
       if (this.filterType === 'gene' && this.searchConditions.gene.summary) {
         this.isSummaryIncluded = this.searchConditions[this.filterType].summary;
       }
-      setTimeout(() => this.$refs.searchInput.inputElement.focus(), 10);
+      setTimeout(() => {
+        const mainInputField = this.$refs.searchInput.inputElement;
+        if (!Boolean(mainInputField.value)) {
+          mainInputField.focus(), 10;
+        }
+      });
     },
     methods: {
       ...mapMutations({
@@ -251,12 +289,14 @@
       },
       updateParams(params) {
         this.$emit('updateScreener');
-        this.parameters = { text: this.parameters.text, ...params };
-
-        this.showResults('numfound');
+        this.parameters = {
+          text: this.parameters.text,
+          summary: this.parameters.summary,
+          ...params,
+        };
       },
       storeInitialParameters(params) {
-        this.initialParameters = { text: '', ...params };
+        this.initialParameters = { text: '', summary: false, ...params };
       },
       moveDetailpage(suggestion) {
         this.$nuxt.$loading.start();
@@ -271,7 +311,6 @@
         }
       },
       updateSuggestions() {
-        this.showResults('numfound');
         return this.getSuggestions();
       },
       getSuggestions() {
@@ -348,13 +387,25 @@
       resetComponent() {
         Object.assign(this.parameters, this.initialParameters);
       },
-      resetAllSearchConditions() {
-        this.resetComponent();
+      async resetAllSearchConditions() {
         const screenerViewChild = this.$refs.screenerView.$children[0];
-        screenerViewChild.resetComponent();
+        await screenerViewChild.resetComponent();
+        this.$emit('resetIndexResults');
+        this.resetComponent();
       },
       setChildIsInitialState(bool) {
         this.childIsInitialState = bool;
+      },
+      setAlternativeSearchShouldShow(bool) {
+        if (bool) {
+          clearTimeout(this.setTimeoutId);
+          this.alternativeSearchShouldShow = bool;
+        } else {
+          this.setTimeoutId = setTimeout(() => {
+            this.alternativeSearchShouldShow = bool;
+            this.setTimeoutId = null;
+          }, this.debounceTimer);
+        }
       },
     },
   };
@@ -365,6 +416,7 @@
 </style>
 <style lang="sass" scoped>
   .text_search_area
+      position: relative
       > .search_condition_title
           display: flex
           align-items: center
@@ -418,6 +470,26 @@
               margin-bottom: 15px
       .vue-simple-suggest.designed .suggestions
           +suggestions
+      > .vue-simple-suggest.designed .suggestions
+          transform: translateY(40px)
+      .alternative-search
+          position: absolute
+          box-shadow: 0 2px 5px rgba(62, 70, 82, .22)
+          padding: 10px 0
+          width: 100%
+          text-align: left
+          cursor: pointer
+          background-color: white
+          z-index: 5 // TODO: switch to $SUGGESTION_LAYER
+          &:hover
+              color: white
+              background-color: $WARNING_BUTTON_COLOR
+          &.disabled:hover
+              background-color: $DISABLE_COLOR
+              cursor: not-allowed
+          .search-text
+              display: inline-block
+              margin-left: 20px
       > .summary_check_wrapper
           min-height: 30px
           font-size: 14px

@@ -936,5 +936,147 @@
         "specificity": []
       }
     ]
+  },
+  {
+    "species": "Arabidopsis thaliana",
+    "search_conditions": [
+      { "label": "Gene Name", "examples": ["transcription factor"] },
+      { "label": "Symbol", "examples": ["DNMT2"] },
+      { "label": "Summary", "examples": ["chloroplast"] }
+    ],
+    "datasets": [
+      {
+        "dataset": "athTPJ2016",
+        "label": "Trava",
+        "gene": {
+          "key": "ncbiGeneId",
+          "header": "NCBI Gene ID",
+          "url_prefix": "http://identifiers.org/ncbigene/",
+          "item_comparison_example": [
+            {
+              "route": "814851,814850,843783,837968",
+              "label": "Fucosyltransferases (FT1, FUT2, FUT3, FUT6)"
+            }
+          ]
+        },
+        "sample": {
+          "filter": [
+            {
+              "column": "Age",
+              "label": "Age",
+              "note": "",
+              "is_checkbox": true,
+              "is_displayed": true,
+              "is_ontology": false
+            },
+            {
+              "column": "DevelopmentalStage",
+              "label": "Developmenntal stage",
+              "note": "",
+              "is_checkbox": true,
+              "is_displayed": true,
+              "is_ontology": false
+            },
+            {
+              "column": "OrganismPart",
+              "label": "Organism part",
+              "note": "",
+              "is_checkbox": true,
+              "is_displayed": true,
+              "is_ontology": false
+            },
+            {
+              "column": "Treatment",
+              "label": "Treatment",
+              "note": "",
+              "is_checkbox": true,
+              "is_displayed": true,
+              "is_ontology": false
+            }
+          ],
+          "item_comparison_example": [
+            {
+              "route": "RES00003780,RES00003781,RES00003782,RES00003783,RES00003784",
+              "label": "Heat-treated leaves"
+            },
+            {
+              "route": "RES00003710,RES00003711",
+              "label": "Root apex vs Root"
+            }
+          ],
+          "search_conditions": [
+            {
+              "label": "Sample Name",
+              "examples": ["flower", "seed"]
+            }
+          ]
+        },
+        "specificity": []
+      },
+      {
+        "dataset": "athNat2020",
+        "label": "Proteome project",
+        "gene": {
+          "key": "ncbiGeneId",
+          "header": "NCBI Gene ID",
+          "url_prefix": "http://identifiers.org/ncbigene/",
+          "item_comparison_example": [
+            {
+              "route": "814851,814850,843783,837968",
+              "label": "Fucosyltransferases (FT1, FUT2, FUT3, FUT6)"
+            }
+          ]
+        },
+        "sample": {
+          "filter": [
+            {
+              "column": "Age",
+              "label": "Age",
+              "note": "",
+              "is_checkbox": true,
+              "is_displayed": true,
+              "is_ontology": false
+            },
+            {
+              "column": "DevelopmentalStage",
+              "label": "Developmenntal stage",
+              "note": "",
+              "is_checkbox": true,
+              "is_displayed": true,
+              "is_ontology": false
+            },
+            {
+              "column": "OrganismPart",
+              "label": "Organism part",
+              "note": "",
+              "is_checkbox": true,
+              "is_displayed": true,
+              "is_ontology": false
+            },
+            {
+              "column": "SamplingSite",
+              "label": "Sampling site",
+              "note": "",
+              "is_checkbox": true,
+              "is_displayed": true,
+              "is_ontology": false
+            }
+          ],
+          "item_comparison_example": [
+            {
+              "route": "RES00003807,RES00003808",
+              "label": "Cotyledon vs Hypocotyl"
+            }
+          ],
+          "search_conditions": [
+            {
+              "label": "Sample Name",
+              "examples": ["flower", "seed"]
+            }
+          ]
+        },
+        "specificity": []
+      }
+    ]
   }
 ]

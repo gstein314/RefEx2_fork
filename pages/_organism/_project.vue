@@ -44,7 +44,7 @@
               :file-name="tsvTitle"
               :fields-array="projectTableHead"
             />
-            <ComparisonButton v-if="filterType === 'gene'" />
+            <ShareButton />
           </div>
           <div class="align_right">
             <button class="reset_btn" :class="isNoSort" @click="clearSortArray">
@@ -588,7 +588,7 @@
       position: sticky
       background-color: white
       top: 0
-      z-index: 1
+      z-index: 2
       > .content
         gap: 20px
         padding: 10px 20px

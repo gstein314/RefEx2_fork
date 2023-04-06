@@ -87,24 +87,38 @@
         ></div>
       </vue-tags-input>
     </client-only>
+    <div class="filter_search_condition">
+      <!-- // TODO: Delete if multiple queries is able -->
+      <template v-if="!activeFilterObj.method">
+        <b>None</b> of the following filters will be applied to the search
+        conditions.
+      </template>
+      <template v-else>
+        <b>Filter by {{ activeFilterObj.method }}</b> will be applied to the
+        search conditions.
+      </template>
+    </div>
     <ScreenerViewGeneFilter
       v-for="(filter, index) of geneFilters"
       :key="index"
       :filter.sync="geneFilters[index]"
+      :active-filter-obj.sync="activeFilterObj"
       :columns="filter.columns"
       :datasets="datasets"
       @addFilterValue="addFilterValue"
+      @resetUpdateParameters="resetUpdateParameters"
+      @resetActiveFilterObj="activeFilterObj = {}"
     />
   </div>
 </template>
 
 <script>
-  import { mapGetters, mapMutations } from 'vuex';
-  import MultiSelect from 'vue-multiselect';
-  import ScreenerViewGeneFilter from './ScreenerViewGeneFilter.vue';
-  import geneFilters from '~/refex-sample/gene_filters.json';
-  import datasets from '~/refex-sample/datasets.json';
   import _ from 'lodash';
+  import MultiSelect from 'vue-multiselect';
+  import { mapGetters, mapMutations } from 'vuex';
+  import datasets from '~/refex-sample/datasets.json';
+  import geneFilters from '~/refex-sample/gene_filters.json';
+  import ScreenerViewGeneFilter from './ScreenerViewGeneFilter.vue';
 
   const stringifiedGeneFilters = JSON.stringify(geneFilters);
   const stringifiedDatasets = JSON.stringify(datasets);
@@ -120,11 +134,14 @@
       // passed down to API
       parameters: {
         go: [],
+        chromosomePosition: '',
+        typeOfGene: '',
+        filter: '',
       },
-      // will contain same keys as parameters. Autocompletion that does not come from the API should be hardcoded here in advance
       hideCaret: false,
       geneFilters: JSON.parse(stringifiedGeneFilters),
       datasets: JSON.parse(stringifiedDatasets),
+      activeFilterObj: {},
     };
   };
 
@@ -137,22 +154,9 @@
         ROKUValue: [],
         tauValue: [],
         autocompleteStaticData: {},
-        chrValue: [],
-        TOGValue: [],
         chrCheckedValue: [],
         chrOptions: [],
         TOGOptions: [],
-        // only used in this component
-        temporaryParameters: {
-          goTerm: '',
-        },
-        // passed down to API
-        parameters: {
-          go: [],
-          chromosomePosition: [],
-          typeOfGene: [],
-          filter: [],
-        },
         // will contain same keys as parameters. Autocompletion that does not come from the API should be hardcoded here in advance
         autoComplete: {
           go: [],
@@ -175,13 +179,10 @@
         return this.parameters.go.map(tag => tag.id).join(', ');
       },
       placeholderGOTerm() {
-        return this.temporaryParameters.goTerm === '' &&
+        return !Boolean(this.temporaryParameters.goTerm) &&
           this.parameters.go.length < 1
           ? 'transcription factor binding'
           : 'Only one tag is allowed';
-      },
-      selection() {
-        return this.chrValue.join();
       },
       isInitialState() {
         const defaultState = initialState();
@@ -192,10 +193,7 @@
     },
     watch: {
       activeDataset() {
-        // reset all keys of this.parameters to ''
-        this.parameters = {
-          go: [],
-        };
+        this.$emit('resetAll');
       },
       isInitialState(newVal) {
         this.$emit('setChildIsInitialState', newVal);
@@ -239,7 +237,7 @@
     async created() {
       this.getAutoCompleteData().then(() => {});
       this.$emit('updateParameters', { go: this.goTermString });
-      this.$emit('storeInitialParameters', { go: this.goTermString });
+      this.initiateParametersDataset();
     },
     mounted() {
       if (this.searchConditions.gene.chr)
@@ -259,8 +257,24 @@
       ...mapMutations({
         setSearchConditions: 'set_search_conditions',
       }),
+      resetUpdateParameters() {
+        this.$emit('updateParameters', {});
+      },
+      handleStoreInitialParameters() {
+        this.$emit('storeInitialParameters', {});
+      },
       resetComponent() {
         Object.assign(this.$data, initialState());
+      },
+      initiateParametersDataset() {
+        const parametersObj = {
+          go: '',
+          chromosomePosition: '',
+          typeOfGene: '',
+          filter: '',
+        };
+        this.$emit('updateParameters', { ...parametersObj });
+        this.$emit('storeInitialParameters', { ...parametersObj });
       },
       getAutoCompleteData() {
         return this.$axios
@@ -356,6 +370,8 @@
               const filterString = JSON.stringify(filter).replace(/"/g, '\\"');
               this.TPMValue = list;
               this.filterValue = filterString;
+              filter.method = filter.method.toUpperCase();
+              this.activeFilterObj = filter;
             }
             break;
           case 'ROKU':
@@ -371,6 +387,8 @@
               const filterString = JSON.stringify(filter).replace(/"/g, '\\"');
               this.ROKUValue = list;
               this.filterValue = filterString;
+              filter.method = filter.method.toUpperCase();
+              this.activeFilterObj = filter;
             }
             break;
           case 'tau':
@@ -384,6 +402,7 @@
               const filterString = JSON.stringify(filter).replace(/"/g, '\\"');
               this.tauValue = list;
               this.filterValue = filterString;
+              this.activeFilterObj = filter;
             }
             break;
         }
@@ -394,9 +413,8 @@
 
 <style lang="sass" scoped>
   ::v-deep
-    svg[data-icon="circle-info"], .delete_all
-      color: $MAIN_COLOR
-      cursor: pointer
+    .filter_search_condition
+      padding-bottom: 15px
     .multiselect
       input
         width: auto
@@ -426,6 +444,9 @@
       *[class^="multiselect__option"]
         &:after
           content: none
+    .filter
+      // TODO: Del indentation
+      margin-left: 20px
     .filter + .filter
       margin-top: 30px
     .filter_TPM, .filter_specificity_ROKU, .filter_specificity_tau
@@ -441,22 +462,13 @@
             height: 2.25em
           .text_search_name input
             font-size: 20px
-          select:required:invalid
-            color: $PLACEHOLDER_COLOR
-          .delete_btn
-            +button
-            align-items: initial
-            padding: 13.5px 22px
-            cursor: pointer
-          svg[data-icon="circle-info"]
-            color: $MAIN_COLOR
     .filter_TPM
       table
         th, tr
           .icon
             text-align: center
           .sample
-            width: 60%
+            width: 70%
           .cutoff, .condition
             width: 10%
           .statistic
@@ -480,7 +492,7 @@
           .icon
             text-align: center
           .group
-            width: 80%
+            width: 70%
           .cutoff, .condition
-            width: 10%
+            width: 15%
 </style>

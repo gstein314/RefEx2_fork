@@ -3,12 +3,6 @@
     <div class="results_title_wrapper">
       <h2>Matching {{ filterType }}s</h2>
       <ComparisonButton />
-      <span class="example">e.g.</span>
-      <span
-        class="sample_value"
-        @click="moveToProjectPage(examples[0].route)"
-        >{{ examples[0].label }}</span
-      >
       <div class="display_settings_wrapper">
         <button class="show_all_btn" @click="$emit('toggleDisplaySettings')">
           <font-awesome-icon icon="eye" />
@@ -39,7 +33,7 @@
       </thead>
       <tbody>
         <td
-          v-if="!tableDataIsSameAsScreener"
+          v-if="resultsCached.length === 0"
           class="warning"
           :colspan="filters.filter(x => x.is_displayed).length + 2"
         >
@@ -53,14 +47,6 @@
             results to the current screener settings.
           </template>
         </td>
-        <td
-          v-else-if="tableDataIsSameAsScreener && resultsNum === 0"
-          class="warning"
-          :colspan="filters.filter(x => x.is_displayed).length + 2"
-        >
-          <font-awesome-icon icon="exclamation-triangle" />
-          No results found. Please check the spelling or try other keywords.
-        </td>
         <tr
           v-for="(result, resultIndex) in pageItems"
           v-else
@@ -68,7 +54,7 @@
         >
           <td class="checkbox" @click="e => e.stopPropagation()">
             <input
-              v-model="checkedResults"
+              v-model="checkedResults[activeFilter.name]"
               type="checkbox"
               :value="result[keyForID]"
               @change="handleChange"
@@ -135,6 +121,13 @@
   import { mapGetters, mapMutations } from 'vuex';
   import ResultsPagination from '~/components/results/ResultsPagination.vue';
 
+  const initialState = () => {
+    return {
+      checkedResults: { gene: [], sample: [] },
+      resultsCached: [],
+    };
+  };
+
   export default {
     components: {
       ResultsPagination,
@@ -152,11 +145,14 @@
         type: Number,
         default: 0,
       },
+      filterKey: {
+        type: String,
+        default: 'gene',
+      },
     },
     data() {
       return {
-        checkedResults: [],
-        resultsCached: [],
+        ...initialState(),
       };
     },
     computed: {
@@ -170,6 +166,7 @@
         geneSummarySource: 'gene_summary_source',
         getCheckedResults: 'get_checked_results',
         isOn: 'compare_modal',
+        activeFilter: 'active_filter',
       }),
       examples() {
         return this.activeDataset[this.filterType].item_comparison_example;
@@ -189,7 +186,8 @@
       isAllChecked() {
         return (
           this.resultsUniqueKeys.length > 0 &&
-          this.checkedResults.length === this.resultsUniqueKeys.length
+          this.checkedResults[this.activeFilter.name].length ===
+            this.resultsUniqueKeys.length
         );
       },
       results() {
@@ -209,18 +207,21 @@
     },
     watch: {
       activeDataset() {
-        this.checkedResults = [];
+        this.checkedResults = { gene: [], sample: [] };
+        this.handleChange();
       },
       isOn() {
         if (!this.isOn) {
-          this.setCheckedResults(this.getCheckedResults.filter(Boolean));
-          this.checkedResults = this.getCheckedResults;
+          this.checkedResults[this.activeFilter.name] = this.getCheckedResults;
         }
       },
-      results(newVal, oldVal) {
-        if (newVal.length === 0) return;
-        if (this.resultsCached.length === 0)
-          this.resultsCached = JSON.parse(JSON.stringify(newVal));
+      results: {
+        handler(newVal) {
+          if (newVal.length > 0) {
+            this.resultsCached = JSON.parse(JSON.stringify(newVal));
+          }
+        },
+        deep: true,
       },
     },
     created() {
@@ -244,14 +245,21 @@
       },
       toggleAllCheckbox() {
         if (this.isAllChecked) {
-          this.checkedResults = [];
+          this.checkedResults[this.activeFilter.name] = [];
         } else {
-          this.checkedResults = this.resultsUniqueKeys;
+          this.checkedResults[this.activeFilter.name] = this.resultsUniqueKeys;
         }
         this.handleChange();
       },
       handleChange() {
-        this.setCheckedResults(this.checkedResults);
+        const type = this.filterKey;
+        this.setCheckedResults({
+          checked_results: this.checkedResults[type],
+          type,
+        });
+      },
+      resetComponent() {
+        Object.assign(this.$data, initialState());
       },
     },
   };

@@ -36,7 +36,7 @@
         "inputType": "text"
       },
       {
-        "name": "Cutoff (0-1)",
+        "name": "Cutoff",
         "id": "cutoff",
         "isRequired": true,
         "placeholder": "0.1",
@@ -111,7 +111,7 @@
         "name": "Sample",
         "id": "sample",
         "isRequired": true,
-        "placeholder": "search by keywords",
+        "placeholder": "select a group and search by keywords",
         "inputType": "text"
       },
       {
