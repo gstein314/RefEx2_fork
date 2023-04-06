@@ -44,7 +44,6 @@
           .join('');
       },
       iconComponent() {
-        import(`~/components/icons/Icon${this.parsedName}.vue`);
         return () => import(`~/components/icons/Icon${this.parsedName}.vue`);
       },
     },

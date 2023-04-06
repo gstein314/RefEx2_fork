@@ -52,6 +52,10 @@
         type: String,
         default: () => {},
       },
+      typeLower: {
+        type: String,
+        default: () => {},
+      },
     },
   };
 </script>

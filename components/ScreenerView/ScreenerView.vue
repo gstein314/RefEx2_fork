@@ -41,17 +41,25 @@
   ::v-deep
     .vue-tags-input
       max-width: initial !important
-      padding-bottom: 40px
       &.hide_caret
-        .ti-input
-          background-color: $DISABLE_COLOR
         input
           caret-color: transparent
           color: transparent
           cursor: default
-          background-color: $DISABLE_COLOR
       > .ti-autocomplete
-        +scrollable-suggestions
+        max-height: 252px
+        overflow: auto
+        white-space: nowrap
+        resize: vertical
+        &[style*="height"]
+          max-height: unset
+        &::-webkit-scrollbar-track
+          background: $MAIN_COLOR_PALE
+        &::-webkit-scrollbar-thumb
+          all: initial
+          background: #7C7C7C3F
+        &::-webkit-scrollbar-thumb:hover
+          background: $GRAY
       .ti-input
         +text_input
         padding: 10px
@@ -59,7 +67,6 @@
         width: 100%
         .ti-tags
           height: 25px
-          position: relative
           input
             padding: 0px 10px
           .ti-tag
@@ -67,18 +74,13 @@
             background-color: $MAIN_COLOR
             padding: 3px 10px
             border-radius: 100px
-            position: relative
-            bottom: -45px
             &.ti-deletion-mark
               background-color: #F24B56
           .ti-new-tag-input-wrapper
             height: 24px
             padding: 0
-            .ti-new-tag-input
-              position: absolute
-              left: 0
       .ti-item.ti-selected-item
-        color: $WHITE
+        color: #ffffff
         background-color: $MAIN_COLOR
     p
       margin: 0
@@ -107,12 +109,9 @@
         +sample_query
     input
       +text_input
-      font-size: 20px
+      font-size: 22px
       &.text_search_go_term
         margin-bottom: 10px
-    select
-      +selection
-      font-size: 20px
     > .classification_wrapper
       border: 1px dashed $GRAY
       border-radius: 3px

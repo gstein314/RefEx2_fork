@@ -1,6 +1,6 @@
 <template>
   <div v-show="isActive" class="filter_tab">
-    <main @keyup.enter="enterKeySearch($vnode.key)">
+    <main>
       <SearchBar
         :key="`${$vnode.key}_search`"
         :ref="`${$vnode.key}_search`"
@@ -41,17 +41,14 @@
     <index-results
       :key="`${$vnode.key}_results`"
       :table-data-is-same-as-screener="tableDataIsSameAsScreener"
-      :results-num="resultsNum"
       :filters="filters"
-      :filter-key="`${$vnode.key}`"
       @toggleDisplaySettings="toggleDisplaySettings"
     />
   </div>
 </template>
 <script>
-  import { mapGetters, mapMutations } from 'vuex';
+  import { mapGetters } from 'vuex';
   import IndexResults from '~/components/results/IndexResults.vue';
-  import filters from '../../static/filters.json';
 
   export default {
     components: {
@@ -62,11 +59,9 @@
         tableDataIsSameAsScreener: false,
         isDisplaySettings: false,
         validSearch: false,
-        // TODO: When returning from the sample project page to the index page, the filters on the gene side are empty. This is handled by loading filters.json, but it needs to be rewritten if the contents of the filters on the gene side are no longer fixed.
         filters: [
           ...(this.$store.getters.active_dataset[this.$vnode.key].filter ??
             this.$store.getters.active_filter.filter ??
-            filters[0].filter ??
             []),
         ],
       };
@@ -76,13 +71,12 @@
         activeDataset: 'active_dataset',
         resultsByName: 'results_by_name',
         filterByName: 'filter_by_name',
-        searchConditions: 'get_search_conditions',
       }),
       isActive() {
         return this.$vnode.key === this.$store.state.active_filter;
       },
       resultsNum() {
-        return this.resultsByName(this.$vnode.key).results_num ?? 0;
+        return this.resultsByName(this.$vnode.key).results_num;
       },
       resultTableLength() {
         return this.resultsByName(this.$vnode.key).results.length;
@@ -95,9 +89,6 @@
       },
     },
     methods: {
-      ...mapMutations({
-        setSearchConditions: 'set_search_conditions',
-      }),
       toggleDisplayFilter(key) {
         const index = this.filters.findIndex(filter => filter.column === key);
         if (index < 0) return;
@@ -118,14 +109,6 @@
       showSearchResult(vnodeKey) {
         this.$refs[`${vnodeKey}_search`].showResults('all');
         this.validSearch = false;
-      },
-      enterKeySearch(vnodeKey) {
-        if (this.validSearch) {
-          this.showSearchResult(vnodeKey);
-          this.$refs[
-            `${vnodeKey}_search`
-          ].$refs.searchInput.inputElement.blur();
-        }
       },
     },
   };

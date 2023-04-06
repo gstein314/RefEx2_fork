@@ -3,6 +3,12 @@
     <div class="results_title_wrapper">
       <h2>Matching {{ filterType }}s</h2>
       <ComparisonButton />
+      <span class="example">e.g.</span>
+      <span
+        class="sample_value"
+        @click="moveToProjectPage(examples[0].route)"
+        >{{ examples[0].label }}</span
+      >
       <div class="display_settings_wrapper">
         <button class="show_all_btn" @click="$emit('toggleDisplaySettings')">
           <font-awesome-icon icon="eye" />
@@ -33,27 +39,13 @@
       </thead>
       <tbody>
         <td
-          v-if="resultsCached.length === 0"
+          v-if="!tableDataIsSameAsScreener"
           class="warning"
           :colspan="filters.filter(x => x.is_displayed).length + 2"
         >
           <font-awesome-icon icon="exclamation-triangle" />
-          <template v-if="resultsNum === 0"
-            >No results found. Please check the spelling or try other
-            keywords.</template
-          >
-          <template v-else>
-            Please press the 'Find {{ filterType }}s' button to update the
-            results to the current screener settings.
-          </template>
-        </td>
-        <td
-          v-else-if="tableDataIsSameAsScreener && resultsNum === 0"
-          class="warning"
-          :colspan="filters.filter(x => x.is_displayed).length + 2"
-        >
-          <font-awesome-icon icon="exclamation-triangle" />
-          No results found. Please check the spelling or try other keywords.
+          Please press the 'Find {{ filterType }}s' button to update the results
+          to the current screener settings.
         </td>
         <tr
           v-for="(result, resultIndex) in pageItems"
@@ -62,7 +54,7 @@
         >
           <td class="checkbox" @click="e => e.stopPropagation()">
             <input
-              v-model="checkedResults[activeFilter.name]"
+              v-model="checkedResults"
               type="checkbox"
               :value="result[keyForID]"
               @change="handleChange"
@@ -142,19 +134,10 @@
         type: Boolean,
         default: true,
       },
-      resultsNum: {
-        type: Number,
-        default: 0,
-      },
-      filterKey: {
-        type: String,
-        default: 'gene',
-      },
     },
     data() {
       return {
-        checkedResults: { gene: [], sample: [] },
-        resultsCached: [],
+        checkedResults: [],
       };
     },
     computed: {
@@ -168,13 +151,12 @@
         geneSummarySource: 'gene_summary_source',
         getCheckedResults: 'get_checked_results',
         isOn: 'compare_modal',
-        activeFilter: 'active_filter',
       }),
       examples() {
         return this.activeDataset[this.filterType].item_comparison_example;
       },
       resultsUniqueKeys() {
-        return this.resultsCached.map(item => item[this.keyForID]);
+        return this.results.map(item => item[this.keyForID]);
       },
       keyForID() {
         return this.filterType === 'gene' ? 'geneid' : 'refexSampleId';
@@ -188,42 +170,31 @@
       isAllChecked() {
         return (
           this.resultsUniqueKeys.length > 0 &&
-          this.checkedResults[this.activeFilter.name].length ===
-            this.resultsUniqueKeys.length
+          this.checkedResults.length === this.resultsUniqueKeys.length
         );
       },
       results() {
         return this.resultsByName(this.filterType).results;
       },
       pageItems() {
-        return this.resultsCached.slice(
+        return this.results.slice(
           this.paginationObject.offset,
           this.paginationObject.offset + this.paginationObject.limit
         );
       },
       pagesNumber() {
-        return Math.ceil(
-          this.resultsCached.length / this.paginationObject.limit
-        );
+        return Math.ceil(this.results.length / this.paginationObject.limit);
       },
     },
     watch: {
       activeDataset() {
-        this.checkedResults = { gene: [], sample: [] };
-        this.handleChange();
+        this.checkedResults = [];
       },
       isOn() {
         if (!this.isOn) {
-          this.checkedResults[this.activeFilter.name] = this.getCheckedResults;
+          this.setCheckedResults(this.getCheckedResults.filter(Boolean));
+          this.checkedResults = this.getCheckedResults;
         }
-      },
-      results: {
-        handler(newVal) {
-          if (newVal.length > 0) {
-            this.resultsCached = JSON.parse(JSON.stringify(newVal));
-          }
-        },
-        deep: true,
       },
     },
     created() {
@@ -247,18 +218,14 @@
       },
       toggleAllCheckbox() {
         if (this.isAllChecked) {
-          this.checkedResults[this.activeFilter.name] = [];
+          this.checkedResults = [];
         } else {
-          this.checkedResults[this.activeFilter.name] = this.resultsUniqueKeys;
+          this.checkedResults = this.resultsUniqueKeys;
         }
         this.handleChange();
       },
       handleChange() {
-        const type = this.filterKey;
-        this.setCheckedResults({
-          checked_results: this.checkedResults[type],
-          type,
-        });
+        this.setCheckedResults(this.checkedResults);
       },
     },
   };

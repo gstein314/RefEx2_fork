@@ -8,21 +8,21 @@
       <p class="modal_title">
         <font-awesome-icon icon="search" />
         {{ filterObj.label }}
-        <span :class="{ tag: filterObj.is_ontology }"
-          >&nbsp;{{ filterObj.note }}</span
-        >
+        <span :class="{ tag: filterObj.is_ontology }">{{
+          filterObj.note
+        }}</span>
         <span v-if="filterObj.options" class="modal_btns">
           <button
             class="sub all_btn"
             @click="searchValue = [...filterObj.options]"
           >
-            Choose all
+            all
           </button>
           <button class="sub clear_btn" @click="searchValue = ''">
-            Remove all
+            clear
           </button></span
         >
-        <span v-else-if="filterObj.column === 'LogMedian'" class="modal_btns">
+        <span v-if="filterObj.column === 'LogMedian'" class="modal_btns">
           <button
             class="sub reset_btn"
             @click="resetSlider(filterObj.filter_modal)"
@@ -30,11 +30,6 @@
             Reset
           </button>
         </span>
-        <span v-else class="modal_btns">
-          <button class="sub clear_btn" @click="searchValue = ''">
-            Clear
-          </button></span
-        >
       </p>
       <template v-if="filterObj.column === 'LogMedian'">
         <div class="input_wrapper">
@@ -73,7 +68,7 @@
             >
               {{
                 values.length === filterObj.options.length
-                  ? 'All'
+                  ? 'all'
                   : values.length
               }}
               options selected
@@ -89,6 +84,12 @@
           type="text"
           placeholder="filter by text"
           @keyup.enter="close(null)"
+        />
+        <font-awesome-icon
+          v-show="filterObj.filterModal !== ''"
+          class="reset_btn"
+          :icon="['fad', 'circle-xmark']"
+          @click="searchValue = ''"
         />
       </div>
     </div>

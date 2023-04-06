@@ -70,25 +70,18 @@
         this.itemIdsForComparisonStr = route;
       },
       comparisonSearch() {
-        if (!Boolean(this.itemIdsForComparisonStr)) return;
+        if (this.itemIdsForComparisonStr === '') return;
         this.$nuxt.$loading.start();
-        this.$router.push(
-          this.routeToProjectPage(
-            this.itemIdsForComparisonStr.replace(/^,/, '').replace(/ /g, '')
-          )
+        location.href = this.routeToProjectPage(
+          this.itemIdsForComparisonStr.replace(/^,/, '').replace(/ /g, '')
         );
         this.toggleCompareModal();
       },
       closeModalView() {
-        const type = this.activeFilter.name;
         this.inputItemIds = this.itemIdsForComparisonStr
           .replace(/ /g, '')
           .split(',');
-        if (this.inputItemIds[0] === '') {
-          this.setCheckedResults({ checked_results: [], type });
-        } else {
-          this.setCheckedResults({ checked_results: this.inputItemIds, type });
-        }
+        this.setCheckedResults(this.inputItemIds);
         this.toggleCompareModal();
       },
       getActiveDatasetHeader() {
@@ -96,15 +89,19 @@
           switch (this.activeFilter.name) {
             case 'gene':
               return this.activeDataset.gene.header;
+              break;
             case 'sample':
               return 'RES ID';
+              break;
           }
         } else if (this.activeSpecie.species === 'Mouse') {
           switch (this.activeFilter.name) {
             case 'gene':
               return this.activeDataset.gene.header;
+              break;
             case 'sample':
               return 'RES ID';
+              break;
           }
         }
       },
