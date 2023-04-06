@@ -38,7 +38,7 @@
     <vue-simple-suggest
       ref="searchInput"
       v-model.trim="parameters.text"
-      :debounce="500"
+      :debounce="debounceTimer"
       :min-length="0"
       :display-attribute="paramsForSuggestions[1]"
       :value-attribute="paramsForSuggestions[0]"
@@ -47,6 +47,8 @@
       class="text_search_name"
       :placeholder="filterPlaceholder(filterType)"
       @select="moveDetailpage"
+      @show-list="setAlternativeSearchShouldShow(true)"
+      @hide-list="setAlternativeSearchShouldShow(false)"
     >
       <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
       <!-- eslint-disable vue/no-unused-vars -->
@@ -80,6 +82,25 @@
         <span>Loading...</span>
       </div>
     </vue-simple-suggest>
+    <div
+      v-if="alternativeSearchShouldShow"
+      class="alternative-search"
+      :class="{ disabled: !validSearch }"
+      @click="$emit('showSearchResult')"
+    >
+      <span class="search-text">
+        <font-awesome-icon class="search-icon" icon="search" />
+        <template v-if="validSearch">
+          Find {{ activeFilter.name }}s with keyword(s) '<b>{{
+            parameters.text
+          }}</b
+          >'
+        </template>
+        <template v-else>
+          No new results found. Please try other keywords.
+        </template>
+      </span>
+    </div>
     <template v-if="filterType === 'gene'">
       <div
         :class="['summary_check_wrapper', { hide: !Boolean(parameters.text) }]"
@@ -118,6 +139,12 @@
       VueSimpleSuggest,
       ScreenerView,
     },
+    props: {
+      validSearch: {
+        type: Boolean,
+        default: false,
+      },
+    },
     data() {
       return {
         isLoading: false,
@@ -126,11 +153,13 @@
         onEvent: false,
         isSummaryIncluded: false,
         isReloadActive: false,
-        validSearch: false,
         // either 'all' or 'numfound'
         typeOfQuery: 'numfound',
         parameters: { text: '', summary: false },
         initialParameters: {},
+        alternativeSearchShouldShow: false,
+        debounceTimer: 500,
+        setTimeoutId: null,
       };
     },
     computed: {
@@ -211,10 +240,10 @@
     watch: {
       parameters: {
         handler: function () {
-          this.validSearch = !Object.values(this.parameters).every(
-            value => !Boolean(value)
+          this.$emit(
+            'updateValiditySearch',
+            !Object.values(this.parameters).every(value => !Boolean(value))
           );
-          this.$emit('updateValiditySearch', this.validSearch);
           this.showResults('numfound');
         },
         deep: true,
@@ -366,6 +395,17 @@
       setChildIsInitialState(bool) {
         this.childIsInitialState = bool;
       },
+      setAlternativeSearchShouldShow(bool) {
+        if (bool) {
+          clearTimeout(this.setTimeoutId);
+          this.alternativeSearchShouldShow = bool;
+        } else {
+          this.setTimeoutId = setTimeout(() => {
+            this.alternativeSearchShouldShow = bool;
+            this.setTimeoutId = null;
+          }, this.debounceTimer);
+        }
+      },
     },
   };
 </script>
@@ -375,6 +415,7 @@
 </style>
 <style lang="sass" scoped>
   .text_search_area
+      position: relative
       > .search_condition_title
           display: flex
           align-items: center
@@ -428,6 +469,26 @@
               margin-bottom: 15px
       .vue-simple-suggest.designed .suggestions
           +suggestions
+      > .vue-simple-suggest.designed .suggestions
+          transform: translateY(40px)
+      .alternative-search
+          position: absolute
+          box-shadow: 0 2px 5px rgba(62, 70, 82, .22)
+          padding: 10px 0
+          width: 100%
+          text-align: left
+          cursor: pointer
+          background-color: white
+          z-index: 5 // TODO: switch to $SUGGESTION_LAYER
+          &:hover
+              color: white
+              background-color: $WARNING_BUTTON_COLOR
+          &.disabled:hover
+              background-color: $DISABLE_COLOR
+              cursor: not-allowed
+          .search-text
+              display: inline-block
+              margin-left: 20px
       > .summary_check_wrapper
           min-height: 30px
           font-size: 14px

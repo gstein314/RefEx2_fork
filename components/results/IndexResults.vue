@@ -47,14 +47,6 @@
             results to the current screener settings.
           </template>
         </td>
-        <td
-          v-else-if="tableDataIsSameAsScreener && resultsNum === 0"
-          class="warning"
-          :colspan="filters.filter(x => x.is_displayed).length + 2"
-        >
-          <font-awesome-icon icon="exclamation-triangle" />
-          No results found. Please check the spelling or try other keywords.
-        </td>
         <tr
           v-for="(result, resultIndex) in pageItems"
           v-else
