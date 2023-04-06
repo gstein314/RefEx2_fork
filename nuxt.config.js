@@ -42,7 +42,6 @@ export default {
     { src: '@/plugins/plugin', mode: 'client' },
     '~/plugins/mixin.js',
     '~/plugins/fontawesome.js',
-    '~/plugins/floating-vue.js',
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)

@@ -6,7 +6,6 @@
       contains the correct information.
     </p>
     <div v-else ref="chartWrapper" class="chart_wrapper">
-      <LocalNavigation :symbol="infoForMainItem" />
       <div class="content">
         <h1 class="header_title">
           <div class="title">
@@ -44,11 +43,11 @@
               :file-name="tsvTitle"
               :fields-array="projectTableHead"
             />
-            <ShareButton />
+            <ComparisonButton v-if="filterType === 'gene'" />
           </div>
           <div class="align_right">
             <button class="reset_btn" :class="isNoSort" @click="clearSortArray">
-              <font-awesome-icon icon="rotate-right" />
+              <font-awesome-icon icon="xmark" />
               Reset sorting column(s)
             </button>
             <button class="show_all_btn" @click="toggleDisplaySettings">
@@ -70,7 +69,6 @@
       ref="results"
       :height-chart-wrapper="heightChartWrapper"
       :items="items"
-      :current-page-id="currentPageId"
       :gene-id-key="geneIdKey"
       :dataset="dataset"
       :selected-item="selectedId"
@@ -81,7 +79,6 @@
       @activeSort="setProjectSortColumn"
     />
     <ResultsPagination
-      ref="resultsPagination"
       :pages-number="$store.state.project_pages_number"
       :results-displayed="resultsDisplayed"
       table-type="project"
@@ -91,7 +88,6 @@
 </template>
 
 <script>
-  import LocalNavigation from '../../components/search/LocalNavigation/LocalNavigation.vue';
   import 'vue-slider-component/dist-css/vue-slider-component.css';
   import { mapGetters, mapMutations } from 'vuex';
   import ItemComparison from '~/components/results/ItemComparison.vue';
@@ -101,6 +97,7 @@
   import ModalViewFilter from '~/components/ModalView/ModalViewFilter.vue';
   import ProjectResults from '~/components/results/ProjectResults.vue';
   import ResultsPagination from '~/components/results/ResultsPagination.vue';
+  import DownloadButton from '~/components/DownloadButton.vue';
   import _ from 'lodash';
 
   const logMedianFilter = {
@@ -119,7 +116,6 @@
 
   export default {
     components: {
-      LocalNavigation,
       ItemComparison,
       ModalViewGene,
       ModalViewCompare,
@@ -128,11 +124,7 @@
       ProjectResults,
       ResultsPagination,
     },
-    async beforeRouteUpdate(to, from, next) {
-      this.$nuxt.$loading.start();
-      this.currentPageId = to.query.id;
-      await this.$nuxt.refresh();
-      next();
+    beforeRouteUpdate(to, from, next) {
       this.$forceUpdate();
     },
     async asyncData({ $axios, query, store, route }) {
@@ -195,22 +187,16 @@
             };
           });
           store.commit('set_project_results_all', resultsAll);
-          store.commit('set_active_filter', type);
-          const mapStatData = (data, stat) =>
-            data.refex_info?.map(x => {
-              x = parseFloat(x[stat]);
-              return x;
-            });
           return {
             id,
             info: data[`${type}_info`],
-            minData: mapStatData(data, 'LogMin'),
-            firstQuartileData: mapStatData(data, 'Log1stQu'),
-            medianData: mapStatData(data, 'LogMedian'),
-            thirdQuartileData: mapStatData(data, 'Log3rdQu'),
-            maxData: mapStatData(data, 'LogMax'),
-            sdData: mapStatData(data, 'LogSd'),
-            numberOfSamplesData: mapStatData(data, 'NumberOfSamples'),
+            minData: data.refex_info?.map(x => x.LogMin),
+            firstQuartileData: data.refex_info?.map(x => x.Log1stQu),
+            medianData: data.refex_info?.map(x => x.LogMedian),
+            thirdQuartileData: data.refex_info?.map(x => x.Log3rdQu),
+            maxData: data.refex_info?.map(x => x.LogMax),
+            sdData: data.refex_info?.map(x => x.LogSd),
+            numberOfSamplesData: data.refex_info?.map(x => x.NumberOfSamples),
           };
         })
       );
@@ -244,16 +230,8 @@
           column: infoFromCurrentDataset.gene.key,
           label: infoFromCurrentDataset.gene.header,
         };
-      if (type === 'gene') {
-        filters = [description, logMedianFilter, ...filters];
-        store.commit('set_project_filters', filters);
-      } else {
-        filters.splice(1, 0, logMedianFilter);
-        store.commit('set_project_filters', filters);
-      }
-      store.commit('set_project_items', {
-        items: items,
-      });
+      if (type === 'gene') filters = [description, logMedianFilter, ...filters];
+      else filters.splice(1, 0, logMedianFilter);
 
       return {
         filterType: type,
@@ -274,7 +252,6 @@
         projectTableHead: [],
         columnsArray: [],
         ordersArray: [],
-        currentPageId: '',
       };
     },
     computed: {
@@ -337,23 +314,28 @@
       },
       resultsWithCombinedMedians() {
         const medianArraysObj = {};
-        const projectResults =
-          this.projectResultsAll[this.selectedItem.id] ||
-          this.projectResultsAll[this.currentPageId];
         for (const item of Object.values(this.items)) {
           const symbolOrDescription = info => info.symbol || info.Description;
           medianArraysObj[`LogMedian_${symbolOrDescription(item.info)}`] =
             item.medianData;
         }
-
-        const combinedLogMediansArray = _.zip(
-          ...Object.values(medianArraysObj)
-        ).map(arr => _.zipObject(Object.keys(medianArraysObj), arr));
-
-        const resultsWithCombinedMedians = projectResults.map((result, i) => {
-          const combinedLogMediansObj = combinedLogMediansArray[i];
-          return Object.assign({}, result, combinedLogMediansObj);
-        });
+        const combinedLogMediansArray = [];
+        for (
+          let i = 0;
+          i < this.projectResultsAll[this.selectedItem.id].length;
+          i++
+        ) {
+          const combinedLogMediansObj = {};
+          for (const [key, mediansArr] of Object.entries(medianArraysObj)) {
+            combinedLogMediansObj[key] = mediansArr[i];
+          }
+          combinedLogMediansArray.push(combinedLogMediansObj);
+        }
+        const copy = { ...this.projectResultsAll[this.selectedItem.id] };
+        const resultsWithCombinedMedians = [];
+        for (const [i, item] of combinedLogMediansArray.entries()) {
+          resultsWithCombinedMedians.push(_.merge(copy[i], item));
+        }
         return resultsWithCombinedMedians;
       },
       filteredSortedData() {
@@ -394,7 +376,7 @@
             }
             // text filter
             else if (filter.filterModal !== '' && !isFiltered) {
-              // exact match if filter is based on API options
+              // excact match if filter is based on API options
               const isMatch = textFilter(result[key], filter.filterModal);
               isFiltered = filter.filterModal !== '' && !isMatch;
             }
@@ -460,9 +442,7 @@
       });
     },
     updated() {
-      this.heightChartWrapper = Math.floor(
-        this.$refs.chartWrapper.getBoundingClientRect().height
-      );
+      this.heightChartWrapper = this.roundDownClientHeight;
     },
     destroyed() {
       this.setSampleAlias();
@@ -580,7 +560,6 @@
         margin-right: 6px
     .chart_wrapper
       display: flex
-      flex-direction: column
       position: sticky
       left: 0
       min-width: calc(100vw - 15px)
@@ -588,13 +567,14 @@
       position: sticky
       background-color: white
       top: 0
-      z-index: 2
+      z-index: 1
       > .content
         gap: 20px
         padding: 10px 20px
         display: flex
         flex-direction: column
         min-width: fit-content
+        width: 100%
         > .header_title
           align-items: flex-start
           margin: 0
