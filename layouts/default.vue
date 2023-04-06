@@ -12,24 +12,21 @@
     <header>
       <div class="nav_wrapper">
         <div class="title">
-          <p><em>Ref</em>erence <em>Ex</em>pression Dataset 2</p>
-        </div>
-        <h1
-          alt="Reference Expression Dataset 2"
-          @click="$store.commit('set_active_filter', 'gene')"
-        >
           <nuxt-link to="/">
             <img
               class="logotype"
               src="~/assets/img/refex-logotype.svg"
-              alt="Refex"
+              alt="Reference Expression Dataset 2"
             />
           </nuxt-link>
-        </h1>
+        </div>
         <nav>
           <ul>
             <li>
               <nuxt-link to="/about" class="category">About</nuxt-link>
+            </li>
+            <li>
+              <nuxt-link to="/datasets" class="category">Datasets</nuxt-link>
             </li>
             <li>
               <nuxt-link to="/help" class="category">Help</nuxt-link>
@@ -75,7 +72,6 @@
     ul
       list-style: none
     header
-      border-top: 8px solid $MAIN_COLOR
       left: 0
       position: sticky
       width: 100%
@@ -92,19 +88,15 @@
             > img.logotype
               width: 60px
         > .title
+          display: flex
+          align-items: center
           margin: auto 0
           width: 100%
-          text-align: left
-          > p
-            margin: 0
-            font-weight: bold
-            font-family: "Futura"
-            font-weight: normal
-            font-size: 21px
-            color: $GRAY
-            > em
-              color: $BLACK
-              font-style: normal
+          padding: 10px 0
+          a
+            line-height: 0
+          img
+            height: 60px
         > nav
           margin: auto 0
           width: 100%

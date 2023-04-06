@@ -5,7 +5,7 @@
       <ul>
         <li
           :class="{ arrows: true, disabled: currentPage === 1 }"
-          @click="handleChangePage(1)"
+          @click="setPageNumber(1)"
         >
           <font-awesome-icon
             icon="angle-double-left"
@@ -14,7 +14,7 @@
         </li>
         <li
           :class="{ arrows: true, disabled: currentPage === 1 }"
-          @click="handleChangePage(currentPage - 1)"
+          @click="setPageNumber(currentPage - 1)"
         >
           <font-awesome-icon icon="angle-left" class="angle-left" />
         </li>
@@ -26,7 +26,7 @@
           v-for="(pageNumber, i) in pagesNumbersShown"
           :key="i"
           :class="{ pagination_item: true, active: pageNumber === currentPage }"
-          @click="handleChangePage(pageNumber)"
+          @click="setPageNumber(pageNumber)"
         >
           <span> {{ pageNumber }}</span>
         </li>
@@ -35,13 +35,13 @@
         </li>
         <li
           :class="{ arrows: true, disabled: currentPage === pagesNumber }"
-          @click="handleChangePage(currentPage + 1)"
+          @click="setPageNumber(currentPage + 1)"
         >
           <font-awesome-icon icon="angle-right" class="angle-right" />
         </li>
         <li
           :class="{ arrows: true, disabled: currentPage === pagesNumber }"
-          @click="handleChangePage(pagesNumber)"
+          @click="setPageNumber(pagesNumber)"
         >
           <font-awesome-icon
             icon="angle-double-right"
@@ -52,27 +52,19 @@
     </div>
     <div class="wrapper_item_right">
       <div class="showing_page">
-        <div v-if="tableType === 'index'">
-          <b>{{ (1 + (currentPage - 1) * currentLimit).toLocaleString() }}</b>
+        <div>
+          <b>{{ firstItemOrderInCurrentPage }}</b>
           -
-          <b>{{
-            currentPage * currentLimit > resultsNum
-              ? resultsNum.toLocaleString()
-              : (currentPage * currentLimit).toLocaleString()
-          }}</b>
-          of
-          {{ resultsNum.toLocaleString() }}
-        </div>
-        <div v-else-if="tableType === 'project'">
-          <b>{{ (1 + (currentPage - 1) * currentLimit).toLocaleString() }}</b>
-          -
-          <b>{{
-            currentPage * currentLimit > resultsDisplayed.length
-              ? resultsDisplayed.length.toLocaleString()
-              : (currentPage * currentLimit).toLocaleString()
-          }}</b>
-          of
-          {{ resultsDisplayed.length.toLocaleString() }}
+          <template v-if="tableType === 'index'">
+            <b>{{ lastItemOrderInCurrentPage(resultsNum) }}</b>
+            of
+            {{ resultsNum.toLocaleString() }}
+          </template>
+          <template v-else-if="tableType === 'project'">
+            <b>{{ lastItemOrderInCurrentPage(resultsDisplayed.length) }}</b>
+            of
+            {{ resultsDisplayed.length.toLocaleString() }}
+          </template>
         </div>
         <div class="display_pagination">
           <label for="pagination">Show</label>
@@ -119,7 +111,7 @@
         projectResults: 'get_project_results',
       }),
       resultsNum() {
-        return this.resultsByName(this.activeFilter.name).results_num;
+        return this.resultsByName(this.activeFilter.name).results_num ?? 0;
       },
       paginationObject() {
         return this.tableType === 'index'
@@ -174,8 +166,18 @@
           this.pagesNumber
         );
       },
+      firstItemOrderInCurrentPage() {
+        return (
+          1 +
+          (this.currentPage - 1) * this.currentLimit
+        ).toLocaleString();
+      },
     },
-
+    watch: {
+      resultsDisplayed() {
+        this.setPageNumber(1);
+      },
+    },
     methods: {
       ...mapMutations({
         updatePagination: 'set_pagination',
@@ -187,7 +189,7 @@
           type: this.tableType,
         });
       },
-      handleChangePage(page) {
+      setPageNumber(page) {
         if (page < 1 || page > this.pagesNumber) {
           return;
         }
@@ -205,6 +207,11 @@
           offset: newOffset,
           type: this.tableType === 'index' ? 'index' : 'project',
         });
+      },
+      lastItemOrderInCurrentPage(totalNumOfResults) {
+        return this.currentPage * this.currentLimit > totalNumOfResults
+          ? totalNumOfResults.toLocaleString()
+          : (this.currentPage * this.currentLimit).toLocaleString();
       },
     },
   };
@@ -258,7 +265,7 @@
             cursor: pointer
             position: relative
             &.active
-              color: #fff
+              color: $WHITE
               >span
                 border: 1px $MAIN_COLOR solid
                 background-color: $MAIN_COLOR

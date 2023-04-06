@@ -2,7 +2,18 @@
   <!-- v-html setup neccesary for plugin, does NOT use user input/API data and is therefore safe to use -->
   <!-- eslint-disable vue/no-v-html -->
   <div class="text_search_area">
-    <h2>Search Conditions</h2>
+    <div class="search_condition_title">
+      <h2>Search Conditions</h2>
+      <button
+        class="reset_all_btn"
+        :class="{ disabled: isInitialState }"
+        :disabled="isInitialState"
+        @click="resetAllSearchConditions"
+      >
+        <font-awesome-icon icon="rotate-right" />
+        Reset all
+      </button>
+    </div>
     <h3>
       <span class="example"
         >e.g.
@@ -24,52 +35,55 @@
         </dl>
       </span>
     </h3>
-    <template v-if="filterType === 'gene'">
-      <vue-simple-suggest
-        v-model="parameters.text"
-        :debounce="500"
-        :min-length="0"
-        :display-attribute="paramsForSuggestions[1]"
-        :value-attribute="paramsForSuggestions[0]"
-        :list="updateSuggestions"
-        :max-suggestions="20"
-        class="text_search_name"
-        placeholder="transcription factor"
-        @select="moveDetailpage"
-      >
-        <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
-        <!-- eslint-disable vue/no-unused-vars -->
-        <div slot="suggestion-item" slot-scope="{ suggestion }">
-          <strong
-            class="title"
-            v-html="
-              $highlightedSuggestion(
-                suggestion[paramsForSuggestions[0]],
-                parameters.text
-              )
-            "
-          >
-          </strong
-          >&nbsp; -&nbsp;
-          <span
-            v-html="
-              $highlightedSuggestion(
-                suggestion[paramsForSuggestions[1]],
-                parameters.text
-              )
-            "
-          ></span>
-        </div>
-        <div
-          v-if="isLoading"
-          slot="misc-item-below"
-          slot-scope="{ suggestion }"
-          class="misc-item"
+    <vue-simple-suggest
+      ref="searchInput"
+      v-model.trim="parameters.text"
+      :debounce="500"
+      :min-length="0"
+      :display-attribute="paramsForSuggestions[1]"
+      :value-attribute="paramsForSuggestions[0]"
+      :list="updateSuggestions"
+      :max-suggestions="20"
+      class="text_search_name"
+      :placeholder="filterPlaceholder(filterType)"
+      @select="moveDetailpage"
+    >
+      <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
+      <!-- eslint-disable vue/no-unused-vars -->
+      <div slot="suggestion-item" slot-scope="{ suggestion }">
+        <strong
+          class="title"
+          v-html="
+            $highlightedSuggestion(
+              suggestion[paramsForSuggestions[0]],
+              parameters.text
+            )
+          "
         >
-          <span>Loading...</span>
-        </div>
-      </vue-simple-suggest>
-      <div :class="['summary_check_wrapper', { hide: parameters.text === '' }]">
+        </strong
+        >&nbsp; -&nbsp;
+        <span
+          v-html="
+            $highlightedSuggestion(
+              suggestion[paramsForSuggestions[1]],
+              parameters.text
+            )
+          "
+        ></span>
+      </div>
+      <div
+        v-if="isLoading"
+        slot="misc-item-below"
+        slot-scope="{ suggestion }"
+        class="misc-item"
+      >
+        <span>Loading...</span>
+      </div>
+    </vue-simple-suggest>
+    <template v-if="filterType === 'gene'">
+      <div
+        :class="['summary_check_wrapper', { hide: !Boolean(parameters.text) }]"
+      >
         <input
           id="summary_check"
           v-model="isSummaryIncluded"
@@ -80,65 +94,24 @@
       </div>
     </template>
     <template v-else-if="filterType === 'sample'">
-      <vue-simple-suggest
-        v-model="parameters.text"
-        :debounce="500"
-        :min-length="0"
-        :display-attribute="paramsForSuggestions[1]"
-        :value-attribute="paramsForSuggestions[0]"
-        :list="updateSuggestions"
-        :max-suggestions="20"
-        class="text_search_name"
-        placeholder="liver"
-        @select="moveDetailpage"
-      >
-        <!-- plugin uses slot-scope as a prop variable. {suggestion} turns into an object at the plugin-->
-        <!-- eslint-disable vue/no-unused-vars -->
-        <div slot="suggestion-item" slot-scope="{ suggestion }">
-          <strong
-            class="title"
-            v-html="
-              $highlightedSuggestion(
-                suggestion[paramsForSuggestions[0]],
-                parameters.text
-              )
-            "
-          >
-          </strong
-          >&nbsp; -&nbsp;
-          <span
-            v-html="
-              $highlightedSuggestion(
-                suggestion[paramsForSuggestions[1]],
-                parameters.text
-              )
-            "
-          ></span>
-        </div>
-        <div
-          v-if="isLoading"
-          slot="misc-item-below"
-          slot-scope="{ suggestion }"
-          class="misc-item"
-        >
-          <span>Loading...</span>
-        </div>
-      </vue-simple-suggest>
       <div class="summary_check_wrapper"></div>
     </template>
-    <ScreenerView>
+    <ScreenerView ref="screenerView">
       <component
         :is="`screener-view-${filterType}`"
         @updateParameters="updateParams"
+        @storeInitialParameters="storeInitialParameters"
+        @setChildIsInitialState="setChildIsInitialState"
+        @resetAll="resetAllSearchConditions"
       ></component>
     </ScreenerView>
   </div>
 </template>
 <script>
+  import _ from 'lodash';
   import VueSimpleSuggest from 'vue-simple-suggest';
+  import { mapGetters, mapMutations } from 'vuex';
   import ScreenerView from '~/components/ScreenerView/ScreenerView.vue';
-  import { mapGetters } from 'vuex';
-  import { mapMutations } from 'vuex';
 
   export default {
     components: {
@@ -147,17 +120,17 @@
     },
     data() {
       return {
-        parameters: {
-          text: '',
-        },
+        isLoading: false,
+        currentSearchCondition: '',
+        childIsInitialState: true,
         onEvent: false,
         isSummaryIncluded: false,
         isReloadActive: false,
-        isLoading: false,
         validSearch: false,
         // either 'all' or 'numfound'
         typeOfQuery: 'numfound',
-        currentSearchCondition: '',
+        parameters: { text: '', summary: false },
+        initialParameters: {},
       };
     },
     computed: {
@@ -168,6 +141,7 @@
         activeDataset: 'active_dataset',
         activeSpecie: 'active_specie',
         searchCondition: 'search_condition_by_specie',
+        searchConditions: 'get_search_conditions',
       }),
       // returns either gene or sample
       filterType() {
@@ -212,21 +186,36 @@
         const resultParams = this.isNum
           ? ''
           : `{${Object.keys(this.parameters)
-              .filter(param => !['text', 'go'].includes(param))
+              .filter(
+                param =>
+                  ![
+                    'text',
+                    'go',
+                    'chromosomePosition',
+                    'typeOfGene',
+                    'filter',
+                    'summary',
+                  ].includes(param)
+              )
               .join(' ')} ${this.extraVariablesToBeDsiplayedInResults}}`;
         const suffix = this.isNum ? '' : ` ${this.queryPrefix}Numfound`;
         return `{${this.queryPrefix}${
           this.isNum ? 'Numfound' : ''
         }${params}${resultParams}${suffix}}`;
       },
+      isInitialState() {
+        if (!this.childIsInitialState) return false;
+        return _.isEqual(this.parameters, this.initialParameters);
+      },
     },
     watch: {
       parameters: {
         handler: function () {
           this.validSearch = !Object.values(this.parameters).every(
-            value => value === ''
+            value => !Boolean(value)
           );
           this.$emit('updateValiditySearch', this.validSearch);
+          this.showResults('numfound');
         },
         deep: true,
       },
@@ -239,13 +228,26 @@
       },
     },
     created() {
-      this.showResults('numfound');
       this.updateSearchCondition();
+    },
+    mounted() {
+      if (this.searchConditions[this.filterType].text)
+        this.parameters = { ...this.searchConditions[this.filterType] };
+      if (this.filterType === 'gene' && this.searchConditions.gene.summary) {
+        this.isSummaryIncluded = this.searchConditions[this.filterType].summary;
+      }
+      setTimeout(() => {
+        const mainInputField = this.$refs.searchInput.inputElement;
+        if (!Boolean(mainInputField.value)) {
+          mainInputField.focus(), 10;
+        }
+      });
     },
     methods: {
       ...mapMutations({
         setAlertModal: 'set_alert_modal',
         updatePagination: 'set_pagination',
+        setSearchConditions: 'set_search_conditions',
       }),
       updateSearchCondition() {
         if (this.filterType === 'gene') {
@@ -257,9 +259,14 @@
       },
       updateParams(params) {
         this.$emit('updateScreener');
-        this.parameters = { text: this.parameters.text, ...params };
-
-        this.showResults('numfound');
+        this.parameters = {
+          text: this.parameters.text,
+          summary: this.parameters.summary,
+          ...params,
+        };
+      },
+      storeInitialParameters(params) {
+        this.initialParameters = { text: '', summary: false, ...params };
       },
       moveDetailpage(suggestion) {
         this.$nuxt.$loading.start();
@@ -274,15 +281,26 @@
         }
       },
       updateSuggestions() {
-        this.showResults('numfound');
         return this.getSuggestions();
       },
       getSuggestions() {
         this.isLoading = true;
         const suggestion = this.parameters.text;
+        const searchText = {
+          type: this.filterType,
+          item: 'text',
+          value: suggestion,
+        };
+        this.setSearchConditions(searchText);
         const query = `{${this.queryPrefix}(text: "${suggestion}" ${
           this.isSummaryIncluded ? 'summary: "true"' : ''
         }) {${this.paramsForSuggestions.join(' ')}}}`;
+        const searchSummary = {
+          type: this.filterType,
+          item: 'summary',
+          value: this.isSummaryIncluded,
+        };
+        this.setSearchConditions(searchSummary);
         return this.$axios
           .$post('gql', {
             query,
@@ -297,10 +315,12 @@
         this.typeOfQuery = type;
         let results;
         let results_num = 0;
+
         if (this.isSummaryIncluded && this.parameters.text.length === 0)
           this.isSummaryIncluded = false;
         this.$axios
           .$post('gql', {
+            // TODO:
             query: this.suggestQuery,
           })
           .then(result => {
@@ -326,13 +346,42 @@
             });
           });
       },
+      filterPlaceholder(type) {
+        switch (type) {
+          case 'gene':
+            return 'transcription factor';
+          case 'sample':
+            return 'liver';
+        }
+      },
+      resetComponent() {
+        Object.assign(this.parameters, this.initialParameters);
+      },
+      async resetAllSearchConditions() {
+        const screenerViewChild = this.$refs.screenerView.$children[0];
+        await screenerViewChild.resetComponent();
+
+        this.resetComponent();
+      },
+      setChildIsInitialState(bool) {
+        this.childIsInitialState = bool;
+      },
     },
   };
 </script>
-<style lang="sass" scoped>
+<style lang="sass">
   .vue-simple-suggest
       position: relative
+</style>
+<style lang="sass" scoped>
   .text_search_area
+      > .search_condition_title
+          display: flex
+          align-items: center
+          justify-content: space-between
+          > .reset_all_btn
+              +button
+              +sub_button
       width: 100%
       > h3
           display: flex

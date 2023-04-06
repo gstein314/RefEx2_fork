@@ -9,5 +9,8 @@
     "source.fixAll.eslint": true
   },
   "eslint.format.enable": true,
-  "eslint.lintTask.enable": true
+  "eslint.lintTask.enable": true,
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

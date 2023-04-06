@@ -34,7 +34,7 @@
                 v-if="filter.column === 'symbol'"
                 class="text_with_icon"
                 @click="
-                  moveToProjectPage(result['ncbiGeneId' || 'ensemblGeneId'])
+                  moveToProjectPage(result.ncbiGeneId || result.ensemblGeneId)
                 "
               >
                 <font-awesome-icon class="left_icon" icon="dna" />
@@ -149,6 +149,10 @@
         type: Array,
         default: () => [],
       },
+      currentPageId: {
+        type: String,
+        default: '',
+      },
     },
 
     computed: {
@@ -163,6 +167,7 @@
         filterObj: 'active_filter_modal',
         activeDataset: 'active_dataset',
         activeSpecie: 'active_specie',
+        activeFilter: 'active_filter',
       }),
       pageItems() {
         return this.filteredSortedData.slice(
@@ -170,6 +175,7 @@
           this.paginationObject.offset + this.paginationObject.limit
         );
       },
+
       pagesNumber() {
         let pagesNumber = Math.ceil(
           this.filteredSortedData.length / this.paginationObject.limit
@@ -182,6 +188,11 @@
     },
     created() {
       this.setPageType('project');
+      if (location.search.match(/=(.*)&/)[1] === 'gene') {
+        this.$store.commit('set_active_filter', 'gene');
+      } else {
+        this.$store.commit('set_active_filter', 'sample');
+      }
     },
     mounted() {
       this.setDataset();
@@ -199,6 +210,9 @@
         setActiveDataset: 'set_active_dataset',
         setProjectPagesNumber: 'set_project_pages_number',
       }),
+      setQuery() {
+        this.query = this.$route.query;
+      },
       tooltipData(items, itemNum) {
         const statData = {};
         let tmp = {
@@ -210,8 +224,9 @@
           sdData: {},
           numberOfSamplesData: {},
         };
-        const ids = [];
+        let ids = [];
         items.forEach(item => ids.push(item.id));
+        if (this.currentPageId) ids = [this.currentPageId];
         for (let i = 0; i < ids.length; i++) {
           for (const statName in tmp) {
             tmp[statName][ids[i]] =
@@ -222,8 +237,7 @@
         return statData;
       },
       moveToProjectPage(route) {
-        this.$nuxt.$loading.start();
-        window.location.href = this.routeToOtherProjectPage(route);
+        this.$router.push(this.routeToOtherProjectPage(route));
       },
       activeSort(col_name) {
         this.$emit('activeSort', {

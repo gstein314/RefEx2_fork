@@ -7,9 +7,14 @@ $ERROR_COLOR: #FF4C5E
 $WARNING_COLOR: #efd512
 $ACTIVE_COLOR: #fad275 
 $ACTIVE_COLOR_HOVER: rgba(255, 255, 0, .1)
-$BUTTON_HOVER_COLOR: #366c96
+$BUTTON_HOVER_COLOR: #095493
 $WARNING_BUTTON_COLOR: #FF8A17
 $WARNING_BUTTON_COLOR_HOVER: #F06A06
+$WARNING_FIELD_COLOR: rgb(255, 192, 203, 0.5)
+$DISABLE_COLOR:#CCCCCC
+$PLACEHOLDER_COLOR: #CCCCCC
+$DISABLE_INPUT_COLOR: #DDDDDD
+$DISABLE_PLACEHOLDER_COLOR: #AAAAAA
 $COLOR_1: #488EC4
 $COLOR_2: #FF8A17
 $COLOR_3: #67C1C7
@@ -35,7 +40,7 @@ $TOOLTIP_LAYER: 2
 
 @mixin hover
   cursor: pointer
-  color: #ffffff
+  color: $WHITE
   background: $MAIN_COLOR
   border-radius: 100px
   transition: .6s
@@ -49,8 +54,18 @@ $TOOLTIP_LAYER: 2
   border-radius: $BORDER_RADIUS_DEFAULT
   position: relative
   &::placeholder
-    color: $BLACK
-    opacity: .3
+    color: $PLACEHOLDER_COLOR
+  &:focus
+    outline: none
+
+@mixin selection
+  border: none
+  background: $MAIN_COLOR_PALE
+  width: 100%
+  padding: 10px 20px
+  box-sizing: border-box
+  border-radius: $BORDER_RADIUS_DEFAULT
+  position: relative
   &:focus
     outline: none
 
@@ -60,7 +75,7 @@ $TOOLTIP_LAYER: 2
   padding: 20px 0
   margin: 0
   position: absolute
-  background-color: #ffffff
+  background-color: $WHITE
   z-index: 100
 
   > li
@@ -71,12 +86,12 @@ $TOOLTIP_LAYER: 2
       display: flex
       align-items: center
     &.hover
-      color: #ffffff
+      color: $WHITE
       background-color: $MAIN_COLOR
       cursor: pointer
 
 @mixin button
-  color: #ffffff
+  color: $WHITE
   background: $MAIN_COLOR
   font-size: 16px
   font-weight: 500
@@ -100,11 +115,11 @@ $TOOLTIP_LAYER: 2
     &:hover
       background: $WARNING_BUTTON_COLOR_HOVER
   &.disabled
-    background: #cccccc
-    color: #ffffff
+    background: $DISABLE_COLOR
+    color: $WHITE
     cursor: not-allowed
     &:hover
-      background: #cccccc
+      background: $DISABLE_COLOR
 
 
 @mixin sub_button
@@ -128,10 +143,10 @@ $TOOLTIP_LAYER: 2
         background-color: $ACTIVE_COLOR_HOVER
       > th
         position: sticky
-        top: 0
+        top: 70px
         text-align: left
         padding: 8px 10px 6px 10px
-        background-color: #ffffff
+        background-color: $WHITE
         z-index: 1
         .small
           font-weight: normal
@@ -206,7 +221,7 @@ $TOOLTIP_LAYER: 2
     outline: none
   &:hover
     background-color: $MAIN_COLOR
-    color: #fff
+    color: $WHITE
     transition: all 0.3s
 
 @mixin modal_bg
@@ -225,7 +240,7 @@ $TOOLTIP_LAYER: 2
   max-height: 70vh
   overflow: auto
   transform: translate(-50%, -50%)
-  background-color: #ffffff
+  background-color: $WHITE
   padding: 55px 67px
   z-index: $MODAL_LAYER
 
@@ -250,7 +265,7 @@ $TOOLTIP_LAYER: 2
 
 @mixin warning
   text-align: center
-  > .fa-triangle-exclamation
+  .fa-triangle-exclamation
     color: $WARNING_COLOR
 
 @mixin display_settings_wrapper
@@ -258,7 +273,7 @@ $TOOLTIP_LAYER: 2
   justify-content: flex-end
   margin-left: auto
   top: 119px
-  background-color: #ffffff
+  background-color: $WHITE
   z-index: 1
   word-break: keep-all
   > .display_settings
@@ -275,3 +290,50 @@ $TOOLTIP_LAYER: 2
       left: 0
     &:hover
       cursor: pointer
+
+@mixin warning_field
+  background: $WARNING_FIELD_COLOR
+  outline: 1px solid pink
+  outline-offset: -1px
+@mixin tooltip
+  background-color: #ffffff
+  padding: 3px 8px
+  border: 1px solid $MAIN_COLOR
+  border-radius: 3px
+  box-shadow: 0 1px 4px rgba(62, 70, 82, .22)
+  z-index: $TOOLTIP_LAYER
+
+@mixin popper
+  .v-popper--theme-tooltip .v-popper__inner
+    background: $WHITE
+    border: 1px solid $MAIN_COLOR
+    color: $BLACK
+    padding: 3px 8px
+    border-radius: 3px
+    box-shadow: 0 1px 4px rgba(62, 70, 82, .22)
+    z-index: $TOOLTIP_LAYER
+  .v-popper--theme-tooltip .v-popper__arrow-inner
+    z-index: 10
+    visibility: visible
+    border-color: $WHITE
+  .v-popper--theme-tooltip .v-popper__arrow-outer
+    border-color: $MAIN_COLOR
+  .v-popper__arrow-container
+    height: 0
+
+// ! The suggestions overflowed don't get highlighted
+@mixin scrollable-suggestions
+  width: 100%
+  max-height: 252px
+  overflow: auto
+  white-space: nowrap
+  resize: vertical
+  &[style*="height"]
+    max-height: unset
+  &::-webkit-scrollbar-track
+    background: $MAIN_COLOR_PALE
+  &::-webkit-scrollbar-thumb
+    all: initial
+    background: #7C7C7C3F
+  &::-webkit-scrollbar-thumb:hover
+    background: $GRAY

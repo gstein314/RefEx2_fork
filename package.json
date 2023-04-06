@@ -1,5 +1,5 @@
 {
-  "name": "Refex",
+  "name": "refex2",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -25,6 +25,7 @@
     "@johmun/vue-tags-input": "^2.1.0",
     "core-js": "^3.21.0",
     "file-saver": "^2.0.5",
+    "floating-vue": "^1.0.0-beta.19",
     "normalize.css": "^8.0.1",
     "nuxt": "^2.15.8",
     "papaparse": "^5.3.2",

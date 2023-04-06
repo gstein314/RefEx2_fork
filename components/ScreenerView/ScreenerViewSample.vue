@@ -58,14 +58,16 @@
   </div>
 </template>
 <script>
-  import { mapGetters } from 'vuex';
-  import { mapMutations } from 'vuex';
+  import _ from 'lodash';
+  import { mapGetters, mapMutations } from 'vuex';
 
   export default {
     data() {
       return {
         // passed down to API
         parameters: {},
+        // used for comparing and activating reset all
+        initialParameters: {},
         // will contain same keys as parameters. Autocompletion that does not come from the API should be hardcoded here in advance
         autoComplete: {},
         autocompleteStaticData: {},
@@ -76,6 +78,7 @@
       ...mapGetters({
         filterByName: 'filter_by_name',
         activeDataset: 'active_dataset',
+        searchConditions: 'get_search_conditions',
       }),
       description() {
         return this.filterByName('sample').description;
@@ -86,31 +89,60 @@
       filters() {
         return this.dataSetSpecificParameters?.filter ?? [];
       },
+      isInitialState() {
+        return _.isEqual(this.parameters, this.initialParameters);
+      },
     },
     watch: {
       activeDataset() {
         this.parameters = {};
+        this.initialParameters = {};
         this.setAutoComplete();
         this.initiateParametersDataset();
+      },
+      isInitialState(newVal) {
+        this.$emit('setChildIsInitialState', newVal);
       },
     },
     async created() {
       this.getAutoCompleteData().then(() => {
         this.initiateParametersDataset();
         this.setAutoComplete();
+        const sample_conditions = this.searchConditions.sample;
+        this.parameters = {
+          SampleTypeCategory: sample_conditions.SampleTypeCategory,
+          ExperimentCategory: sample_conditions.ExperimentCategory,
+          UberonLabel: sample_conditions.UberonLabel,
+          ClLabel: sample_conditions.ClLabel,
+          NcitLabel: sample_conditions.NcitLabel,
+          DevelopmentalStage: sample_conditions.DevelopmentalStage,
+          Sex: sample_conditions.Sex,
+        };
+        this.emitUpdateParameters();
       });
     },
     methods: {
       ...mapMutations({
         setAlertModal: 'set_alert_modal',
+        setSearchConditions: 'set_search_conditions',
       }),
+      resetComponent() {
+        Object.assign(this.parameters, { ...this.initialParameters });
+      },
       initiateParametersDataset() {
+        const parametersObj = {};
         for (const filter of this.filters) {
           const key = filter.column;
-          this.$set(this.parameters, key, '');
+          parametersObj[key] = '';
           if (!this.autoComplete[key]) this.$set(this.autoComplete, key, []);
         }
-        this.$emit('updateParameters', { ...this.parameters });
+        this.parameters = { ...parametersObj };
+        this.initialParameters = { ...parametersObj };
+        this.emitUpdateParameters();
+        this.emitStoreInitialParameters();
+      },
+      storeInitialParameters(obj) {
+        this.initialParameters = obj;
       },
       getAutoCompleteData() {
         return this.$axios
@@ -142,8 +174,22 @@
         this.isOpen = !this.isOpen;
       },
       updateParameter(key, value) {
-        if (key && value) this.$set(this.parameters, key, value);
+        if (key && value) {
+          this.$set(this.parameters, key, value);
+        }
+        this.emitUpdateParameters();
+        const sampleSearchCondition = {
+          type: 'sample',
+          item: key,
+          value: value,
+        };
+        this.setSearchConditions(sampleSearchCondition);
+      },
+      emitUpdateParameters() {
         this.$emit('updateParameters', this.parameters);
+      },
+      emitStoreInitialParameters() {
+        this.$emit('storeInitialParameters', { ...this.initialParameters });
       },
     },
   };

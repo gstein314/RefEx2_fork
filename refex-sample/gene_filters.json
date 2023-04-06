@@ -1,0 +1,195 @@
+[
+  {
+    "name": "TPM",
+    "type": "TPM",
+    "id": "filter_TPM",
+    "list": [
+      {
+        "sample": {
+          "input": "",
+          "id": "",
+          "description": "",
+          "isSelected": false
+        },
+        "cutoff": "",
+        "condition": "",
+        "statistic": ""
+      }
+    ],
+    "defaultItem": {
+      "sample": {
+        "input": "",
+        "id": "",
+        "description": "",
+        "isSelected": false
+      },
+      "cutoff": "",
+      "condition": "",
+      "statistic": ""
+    },
+    "columns": [
+      {
+        "name": "Sample",
+        "id": "sample",
+        "isRequired": true,
+        "placeholder": "search by keywords",
+        "inputType": "text"
+      },
+      {
+        "name": "Cutoff",
+        "id": "cutoff",
+        "isRequired": true,
+        "placeholder": "0.1",
+        "inputType": "number",
+        "min": "0",
+        "max": "1"
+      },
+      {
+        "name": "Condition",
+        "id": "condition",
+        "isRequired": true,
+        "placeholder": "<",
+        "inputType": "dropdown",
+        "options": [
+          { "description": "<", "value": "gt" },
+          { "description": "=", "value": "eq" },
+          { "description": ">", "value": "lt" }
+        ]
+      },
+      {
+        "name": "Statistic",
+        "id": "statistic",
+        "isRequired": true,
+        "placeholder": "max(TPM)",
+        "inputType": "dropdown",
+        "options": [
+          { "description": "max(TPM)", "value": "max(TPM)" },
+          { "description": "min(TPM)", "value": "min(TPM)" }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Tissue specificity (ROKU)",
+    "type": "ROKU",
+    "id": "filter_specificity_ROKU",
+    "list": [
+      {
+        "group": "",
+        "sample": {
+          "input": "",
+          "id": "",
+          "description": "",
+          "isSelected": false
+        },
+        "horl": "",
+        "emin": "",
+        "emax": ""
+      }
+    ],
+    "defaultItem": {
+      "group": "",
+      "sample": {
+        "input": "",
+        "id": "",
+        "description": "",
+        "isSelected": false
+      },
+      "horl": "",
+      "emin": "",
+      "emax": ""
+    },
+    "columns": [
+      {
+        "name": "Group",
+        "id": "group",
+        "isRequired": true,
+        "placeholder": "All groups",
+        "inputType": "dropdown"
+      },
+      {
+        "name": "Sample",
+        "id": "sample",
+        "isRequired": true,
+        "placeholder": "select a group and search by keywords",
+        "inputType": "text"
+      },
+      {
+        "name": "High or Low",
+        "id": "horl",
+        "isRequired": true,
+        "placeholder": "High",
+        "inputType": "dropdown",
+        "options": [
+          { "description": "High", "value": "high" },
+          { "description": "Low", "value": "low" }
+        ]
+      },
+      {
+        "name": "Entropy-min (Optional)",
+        "id": "emin",
+        "isRequired": false,
+        "placeholder": "1",
+        "inputType": "number",
+        "min": "1",
+        "max": "5"
+      },
+      {
+        "name": "Entropy-max (Optional)",
+        "id": "emax",
+        "isRequired": false,
+        "placeholder": "5",
+        "inputType": "number",
+        "min": "1",
+        "max": "5"
+      }
+    ]
+  },
+  {
+    "name": "Tissue specificity (tau)",
+    "type": "tau",
+    "id": "filter_specificity_tau",
+    "list": [
+      {
+        "group": "",
+        "cutoff": "",
+        "condition": ""
+      }
+    ],
+    "defaultItem": {
+      "group": "",
+      "cutoff": "",
+      "condition": ""
+    },
+    "columns": [
+      {
+        "name": "Group",
+        "id": "group",
+        "isRequired": true,
+        "placeholder": "select a group",
+        "inputType": "dropdown"
+      },
+      {
+        "name": "Cutoff (0-1)",
+        "id": "cutoff",
+        "isRequired": true,
+        "placeholder": "0.1",
+        "inputType": "number",
+        "min": "0",
+        "max": "1"
+      },
+      {
+        "name": "Condition",
+        "id": "condition",
+        "isRequired": true,
+        "placeholder": "<",
+        "inputType": "dropdown",
+        "options": [
+          { "description": "<", "value": "gt" },
+          { "description": "=", "value": "eq" },
+          { "description": ">", "value": "lt" }
+        ]
+      }
+    ]
+  }
+]

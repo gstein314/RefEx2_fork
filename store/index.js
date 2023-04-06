@@ -37,7 +37,10 @@ export const state = () => ({
     limit: 10,
     offset: 0,
   },
-  checked_results: [],
+  checked_results: {
+    gene: [],
+    sample: [],
+  },
   results: filters.reduce((acc, filter) => {
     acc[filter.name] = { results: [], results_num: 0 };
     return acc;
@@ -48,6 +51,28 @@ export const state = () => ({
   index_sample_pages_number: 0,
   project_pages_number: 0,
   project_items: {},
+  search_conditions: {
+    gene: {
+      text: '',
+      summary: '',
+      chr: '',
+      tog: '',
+      go: '',
+      tpm: '',
+      roku: '',
+      tau: '',
+    },
+    sample: {
+      text: '',
+      SampleTypeCategory: '',
+      ExperimentCategory: '',
+      UberonLabel: '',
+      ClLabel: '',
+      NcitLabel: '',
+      DevelopmentalStage: '',
+      Sex: '',
+    },
+  },
 });
 
 export const getters = {
@@ -68,7 +93,7 @@ export const getters = {
     return { limit, offset };
   },
   get_checked_results(state) {
-    return state.checked_results;
+    return state.checked_results[state.active_filter];
   },
   index_pagination(state) {
     return state.index_pagination;
@@ -88,9 +113,9 @@ export const getters = {
   route_to_other_project_page: state => ids => {
     if (Array.isArray(ids)) ids = ids.join(',');
     if (location.search.match(/=(.*)&/)[1] === 'gene')
-      return `${state.active_specie.species}/${state.active_dataset.dataset}?type=sample&id=${ids}`;
+      return `/${state.active_specie.species}/${state.active_dataset.dataset}?type=sample&id=${ids}`;
     else
-      return `${state.active_specie.species}/${state.active_dataset.dataset}?type=gene&id=${ids}`;
+      return `/${state.active_specie.species}/${state.active_dataset.dataset}?type=gene&id=${ids}`;
   },
   gene_modal(state) {
     return state.gene_modal;
@@ -137,6 +162,9 @@ export const getters = {
   },
   get_project_pages_number(state) {
     return state.project_pages_number;
+  },
+  get_search_conditions(state) {
+    return state.search_conditions;
   },
 };
 
@@ -186,8 +214,10 @@ export const mutations = {
   ) {
     const copy = [...state.project_filters];
     const targetObjIndex = copy.findIndex(entry => entry.column === filterKey);
-    copy[targetObjIndex][key] = filter;
-    state.project_filters = copy;
+    if (copy[targetObjIndex][key] !== filter) {
+      copy[targetObjIndex][key] = filter;
+      state.project_filters = copy;
+    }
   },
   set_gene_modal(state, id = null) {
     state.gene_modal = id;
@@ -225,8 +255,8 @@ export const mutations = {
   set_filter_search_value(state, value) {
     state.filter_search_value = value;
   },
-  set_checked_results(state, checked_results) {
-    state.checked_results = checked_results;
+  set_checked_results(state, { checked_results, type }) {
+    state.checked_results[type] = checked_results;
   },
   set_index_gene_pages_number(state, index_gene_pages_number) {
     state.index_gene_pages_number = index_gene_pages_number;
@@ -236,5 +266,8 @@ export const mutations = {
   },
   set_project_pages_number(state, project_pages_number) {
     state.project_pages_number = project_pages_number;
+  },
+  set_search_conditions(state, items) {
+    state.search_conditions[items.type][items.item] = items.value;
   },
 };
