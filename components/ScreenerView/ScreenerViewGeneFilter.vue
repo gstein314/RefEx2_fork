@@ -113,12 +113,9 @@
                     :min-length="0"
                     :placeholder="column.placeholder"
                     class="text_search_name"
-                    @select="
-                      () => {
-                        setSelectedSample(itemIndex, 'ADD');
-                        setGroupOption(itemIndex);
-                      }
-                    "
+                    :class="{ disabled: item.group === '' }"
+                    :disabled="item.group === ''"
+                    @select="setSelectedSample(itemIndex, 'ADD')"
                     @input="dispatchAction('ADD', itemIndex, column.id)"
                     @focus="e => setSelectedSample(itemIndex, 'CLEAR', e)"
                   >
@@ -426,21 +423,6 @@
           }
         }
       },
-      setGroupOption(index) {
-        const targetItem = this.getTargetItem(index);
-        if (targetItem.group !== undefined) {
-          const sampleInput = this.$refs.sampleInputs[index];
-          for (const [groupId, group] of Object.entries(this.availableGroups)) {
-            const isInGroup = Boolean(
-              group.samples.find(({ id }) => id === targetItem.sample.id)
-            );
-            if (isInGroup) {
-              targetItem.group = groupId;
-              break;
-            }
-          }
-        }
-      },
     },
   };
 </script>
@@ -461,6 +443,13 @@
       &.warning
         input, select
           +warning_field
+    .text_search_name
+      &.disabled
+        input
+          background-color: $DISABLE_INPUT_COLOR
+          cursor: not-allowed
+        input::placeholder
+          color: $DISABLE_PLACEHOLDER_COLOR
     .text_search_name input
       &.warning
         +warning_field

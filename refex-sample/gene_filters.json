@@ -111,7 +111,7 @@
         "name": "Sample",
         "id": "sample",
         "isRequired": true,
-        "placeholder": "search by keywords",
+        "placeholder": "select a group and search by keywords",
         "inputType": "text"
       },
       {
