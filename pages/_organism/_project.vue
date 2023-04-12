@@ -307,11 +307,7 @@
         return this.columnsArray.length === 0 ? 'disabled' : '';
       },
       tsvTitle() {
-        let today = new Date();
-        let dd = String(today.getDate()).padStart(2, '0');
-        let mm = String(today.getMonth() + 1).padStart(2, '0');
-        let yyyy = today.getFullYear();
-        today = yyyy + mm + dd;
+        const today = this.$getToday();
         return `RefEx2_${this.activeSpecie.species}_${this.activeDataset.dataset}_${this.filterType}_comparison_${today}.tsv`;
       },
       roundDownClientHeight() {
