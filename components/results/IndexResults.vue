@@ -222,7 +222,17 @@
         const keysToGet = this.filtersDisplayed;
         return this.results.map(obj => {
           const newObj = {};
-          keysToGet.forEach(key => (newObj[key] = obj[key]));
+          keysToGet.forEach(key => {
+            if (key === 'alias') {
+              try {
+                newObj[key] = JSON.parse(obj[key]).join(', ');
+              } catch {
+                newObj[key] = obj[key].replaceAll('"', '');
+              }
+            } else {
+              newObj[key] = obj[key];
+            }
+          });
           return newObj;
         });
       },
