@@ -265,7 +265,7 @@
           this.checkedResults[this.activeFilter.name] = this.getCheckedResults;
         }
       },
-      results: {
+      resultsDisplayed: {
         handler(newVal) {
           if (newVal.length > 0) {
             this.resultsCached = JSON.parse(JSON.stringify(newVal));
