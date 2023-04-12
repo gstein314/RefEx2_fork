@@ -244,6 +244,10 @@
             return isNotEmpty;
           });
       },
+      tsvTitle() {
+        const today = this.$getToday();
+        return `RefEx2_${this.activeSpecie.species}_${this.activeDataset.dataset}_${this.filterType}_search_results_${today}.tsv`;
+      },
     },
     watch: {
       activeDataset() {
