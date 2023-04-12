@@ -2,13 +2,15 @@
   <div class="results_wrapper">
     <div class="results_title_wrapper">
       <h2>Matching {{ filterType }}s</h2>
-      <ComparisonButton />
-      <DownloadButton
-        ref="downloadButton"
-        :download-data="resultsDisplayed"
-        :file-name="tsvTitle"
-        :fields-array="indexTableHead"
-      />
+      <div class="button_wrapper">
+        <ComparisonButton />
+        <DownloadButton
+          ref="downloadButton"
+          :download-data="resultsDisplayed"
+          :file-name="tsvTitle"
+          :fields-array="indexTableHead"
+        />
+      </div>
       <div class="display_settings_wrapper">
         <button class="show_all_btn" @click="$emit('toggleDisplaySettings')">
           <font-awesome-icon icon="eye" />
@@ -326,6 +328,9 @@
       +sample_query
       > h2
         min-width: 190px
+      > .button_wrapper
+        display: flex
+        gap: 10px
       > .display_settings_wrapper
         +display_settings_wrapper
         > .show_all_btn
