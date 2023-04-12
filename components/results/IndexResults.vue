@@ -224,11 +224,7 @@
           const newObj = {};
           keysToGet.forEach(key => {
             if (key === 'alias') {
-              try {
-                newObj[key] = JSON.parse(obj[key]).join(', ');
-              } catch {
-                newObj[key] = obj[key].replaceAll('"', '');
-              }
+              newObj[key] = this.$composeAlias(obj[key]);
             } else {
               newObj[key] = obj[key];
             }

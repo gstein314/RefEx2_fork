@@ -29,4 +29,11 @@ export default ({ app }, inject) => {
     const yyyy = today.getFullYear();
     return yyyy + mm + dd;
   });
+  inject('composeAlias', oldString => {
+    try {
+      return JSON.parse(oldString).join(', ');
+    } catch {
+      return oldString.replaceAll('"', '');
+    }
+  });
 };

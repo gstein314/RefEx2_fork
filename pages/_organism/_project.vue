@@ -424,13 +424,7 @@
                   resultDisplayed[logMediankey] = item[logMediankey];
                 }
               } else if (itemKey === 'alias') {
-                try {
-                  resultDisplayed[itemKey] = JSON.parse(item[itemKey]).join(
-                    ', '
-                  );
-                } catch {
-                  resultDisplayed[itemKey] = item[itemKey].replaceAll('"', '');
-                }
+                resultDisplayed[itemKey] = this.$composeAlias(item[itemKey]);
               } else resultDisplayed[itemKey] = item[itemKey];
               return resultDisplayed;
             }, {});
