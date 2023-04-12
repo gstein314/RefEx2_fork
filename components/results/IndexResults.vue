@@ -3,6 +3,12 @@
     <div class="results_title_wrapper">
       <h2>Matching {{ filterType }}s</h2>
       <ComparisonButton />
+      <DownloadButton
+        ref="downloadButton"
+        :download-data="resultsDisplayed"
+        :file-name="tsvTitle"
+        :fields-array="indexTableHead"
+      />
       <div class="display_settings_wrapper">
         <button class="show_all_btn" @click="$emit('toggleDisplaySettings')">
           <font-awesome-icon icon="eye" />
@@ -120,6 +126,8 @@
 <script>
   import { mapGetters, mapMutations } from 'vuex';
   import ResultsPagination from '~/components/results/ResultsPagination.vue';
+  import DownloadButton from '../DownloadButton.vue';
+  import filters from '~/static/filters.json';
 
   const initialState = () => {
     return {
@@ -131,6 +139,7 @@
   export default {
     components: {
       ResultsPagination,
+      DownloadButton,
     },
     props: {
       filters: {
@@ -203,6 +212,37 @@
         return Math.ceil(
           this.resultsCached.length / this.paginationObject.limit
         );
+      },
+      filtersDisplayed() {
+        return this.filters
+          .filter(({ is_displayed }) => is_displayed)
+          .map(({ column }) => column);
+      },
+      resultsDisplayed() {
+        const keysToGet = this.filtersDisplayed;
+        return this.results.map(obj => {
+          const newObj = {};
+          keysToGet.forEach(key => (newObj[key] = obj[key]));
+          return newObj;
+        });
+      },
+      indexTableHead() {
+        if (this.results.length === 0) return [];
+        return Object.keys(this.results?.[0])
+          .map(oldTitle => {
+            const obj = {};
+            this.filters.forEach(({ column, label, is_displayed }) => {
+              const newTitle = label;
+              if (oldTitle === column && is_displayed) {
+                obj[oldTitle] = newTitle;
+              }
+            });
+            return obj;
+          })
+          .filter(obj => {
+            const isNotEmpty = Object.keys(obj).length !== 0;
+            return isNotEmpty;
+          });
       },
     },
     watch: {
