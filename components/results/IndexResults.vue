@@ -236,7 +236,7 @@
       },
       indexTableHead() {
         if (this.results.length === 0) return [];
-        return Object.keys(this.results?.[0])
+        const arr = Object.keys(this.results?.[0])
           .map(oldTitle => {
             const obj = {};
             this.filters.forEach(({ column, label, is_displayed }) => {
@@ -251,6 +251,11 @@
             const isNotEmpty = Object.keys(obj).length !== 0;
             return isNotEmpty;
           });
+        // hardcode to add Description column to download data
+        if (this.filterType === 'sample') {
+          arr.unshift({ Description: 'Description' });
+        }
+        return arr;
       },
       tsvTitle() {
         const today = this.$getToday();
