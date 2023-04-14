@@ -221,17 +221,17 @@
           .map(({ column }) => column);
       },
       resultsDisplayed() {
-        const keysToGet = this.filtersDisplayed;
-        return this.results.map(obj => {
-          const newObj = {};
-          keysToGet.forEach(key => {
-            if (key === 'alias') {
-              newObj[key] = this.$composeAlias(obj[key]);
-            } else {
-              newObj[key] = obj[key];
-            }
-          });
-          return newObj;
+        return this.results.map(result => {
+          const updatedResult = { ...result };
+          const keyToReplace = 'alias';
+
+          if (this.filtersDisplayed.includes(keyToReplace)) {
+            updatedResult[keyToReplace] = this.$composeAlias(
+              result[keyToReplace]
+            );
+          }
+
+          return updatedResult;
         });
       },
       indexTableHead() {
