@@ -9,6 +9,7 @@
           :download-data="resultsDisplayed"
           :file-name="tsvTitle"
           :fields-array="indexTableHead"
+          :disabled="resultsDisplayed.length === 0"
         />
       </div>
       <div class="display_settings_wrapper">
