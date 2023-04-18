@@ -6,7 +6,6 @@
       <h2>Search Conditions</h2>
       <button
         class="reset_all_btn"
-        :class="{ disabled: isInitialState }"
         :disabled="isInitialState"
         @click="resetAllSearchConditions"
       >

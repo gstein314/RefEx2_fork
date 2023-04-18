@@ -10,7 +10,7 @@
       </div>
       <button
         class="reset_btn"
-        :class="{ disabled: resetIsDisabled }"
+        :disabled="resetIsDisabled"
         @click="dispatchAction('INIT')"
       >
         <font-awesome-icon icon="rotate-right" />
