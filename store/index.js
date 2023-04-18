@@ -15,6 +15,31 @@ const numberFilterObj = ([min, max]) => {
   };
 };
 
+const default_search_conditions = () => {
+  return {
+    gene: {
+      text: '',
+      summary: '',
+      chr: '',
+      tog: '',
+      go: '',
+      tpm: '',
+      roku: '',
+      tau: '',
+    },
+    sample: {
+      text: '',
+      SampleTypeCategory: '',
+      ExperimentCategory: '',
+      UberonLabel: '',
+      ClLabel: '',
+      NcitLabel: '',
+      DevelopmentalStage: '',
+      Sex: '',
+    },
+  };
+};
+
 export const state = () => ({
   active_specie: specieSets[0],
   active_filter: 'gene',
@@ -51,28 +76,7 @@ export const state = () => ({
   index_sample_pages_number: 0,
   project_pages_number: 0,
   project_items: {},
-  search_conditions: {
-    gene: {
-      text: '',
-      summary: '',
-      chr: '',
-      tog: '',
-      go: '',
-      tpm: '',
-      roku: '',
-      tau: '',
-    },
-    sample: {
-      text: '',
-      SampleTypeCategory: '',
-      ExperimentCategory: '',
-      UberonLabel: '',
-      ClLabel: '',
-      NcitLabel: '',
-      DevelopmentalStage: '',
-      Sex: '',
-    },
-  },
+  search_conditions: default_search_conditions(),
 });
 
 export const getters = {
@@ -269,5 +273,8 @@ export const mutations = {
   },
   set_search_conditions(state, items) {
     state.search_conditions[items.type][items.item] = items.value;
+  },
+  reset_search_conditions(state) {
+    state.search_conditions = default_search_conditions();
   },
 };

@@ -278,6 +278,7 @@
         setAlertModal: 'set_alert_modal',
         updatePagination: 'set_pagination',
         setSearchConditions: 'set_search_conditions',
+        resetSearchConditions: 'reset_search_conditions',
       }),
       updateSearchCondition() {
         if (this.filterType === 'gene') {
@@ -388,6 +389,7 @@
         Object.assign(this.parameters, this.initialParameters);
       },
       async resetAllSearchConditions() {
+        this.resetSearchConditions();
         const screenerViewChild = this.$refs.screenerView.$children[0];
         await screenerViewChild.resetComponent();
         this.$emit('resetIndexResults');
