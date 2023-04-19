@@ -204,7 +204,7 @@
       ...mapGetters({
         activeDataset: 'active_dataset',
         searchConditions: 'get_search_conditions',
-        getScreenFilterList: 'get_screen_filter_list',
+        getScreenerFilterList: 'get_screener_filter_list',
       }),
       list() {
         return this.filter.list;
@@ -272,8 +272,8 @@
     mounted() {
       // TODO: https://github.com/dbcls/RefEx2/issues/141
       const target = this.filter.type.toLowerCase();
-      if (this.getScreenFilterList.type === target) {
-        Object.assign(this.filter.list, this.getScreenFilterList.list);
+      if (this.getScreenerFilterList.type === target) {
+        Object.assign(this.filter.list, this.getScreenerFilterList.list);
       } else return;
     },
     methods: {

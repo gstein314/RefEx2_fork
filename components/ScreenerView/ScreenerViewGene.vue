@@ -253,7 +253,7 @@
     methods: {
       ...mapMutations({
         setSearchConditions: 'set_search_conditions',
-        setScreenFilterList: 'set_screen_filter_list',
+        setScreenerFilterList: 'set_screener_filter_list',
       }),
       resetUpdateParameters() {
         this.$emit('updateParameters', {});
@@ -408,7 +408,7 @@
           type: type.toLowerCase(),
           list: _.cloneDeep(list),
         };
-        this.setScreenFilterList(filterListObj);
+        this.setScreenerFilterList(filterListObj);
       },
     },
   };

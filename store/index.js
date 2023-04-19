@@ -77,7 +77,7 @@ export const state = () => ({
   project_pages_number: 0,
   project_items: {},
   search_conditions: default_search_conditions(),
-  screen_filter_list: {},
+  screener_filter_list: {},
 });
 
 export const getters = {
@@ -171,8 +171,8 @@ export const getters = {
   get_search_conditions(state) {
     return state.search_conditions;
   },
-  get_screen_filter_list(state) {
-    return state.screen_filter_list;
+  get_screener_filter_list(state) {
+    return state.screener_filter_list;
   },
 };
 
@@ -281,7 +281,7 @@ export const mutations = {
   reset_search_conditions(state) {
     state.search_conditions = default_search_conditions();
   },
-  set_screen_filter_list(state, screen_filter_list) {
-    state.screen_filter_list = screen_filter_list;
+  set_screener_filter_list(state, screener_filter_list) {
+    state.screener_filter_list = screener_filter_list;
   },
 };
