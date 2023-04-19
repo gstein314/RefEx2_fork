@@ -336,7 +336,7 @@
         min-width: 190px
       > .button_wrapper
         display: flex
-        gap: 10px
+        gap: 15px
       > .display_settings_wrapper
         +display_settings_wrapper
         > .show_all_btn
