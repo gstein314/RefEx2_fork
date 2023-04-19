@@ -131,7 +131,7 @@
       temporaryParameters: {
         goTerm: '',
       },
-      // passed down to API
+      // passed down to API and then converted & emitted to parent
       parameters: {
         go: [],
         chromosomePosition: '',
