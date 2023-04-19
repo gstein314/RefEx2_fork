@@ -252,6 +252,8 @@
         this.filterValue = this.searchConditions.gene.roku;
       if (this.searchConditions.gene.tau)
         this.filterValue = this.searchConditions.gene.tau;
+      if (this.searchConditions.gene.filter)
+        this.filterValue = this.searchConditions.gene.filter;
     },
     methods: {
       ...mapMutations({
