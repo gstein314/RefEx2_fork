@@ -37,7 +37,7 @@
     background-color: $WARNING_BUTTON_COLOR
     color: $WHITE
     width: max-content
-    padding: 5px
+    padding: 10px
     top: 30px
     left: 0
     right: 0
