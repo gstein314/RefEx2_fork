@@ -203,6 +203,8 @@
     computed: {
       ...mapGetters({
         activeDataset: 'active_dataset',
+        searchConditions: 'get_search_conditions',
+        getScreenFilterList: 'get_screen_filter_list',
       }),
       list() {
         return this.filter.list;
@@ -266,6 +268,13 @@
         },
         deep: true,
       },
+    },
+    mounted() {
+      // TODO: https://github.com/dbcls/RefEx2/issues/141
+      const target = this.filter.type.toLowerCase();
+      if (this.getScreenFilterList.type === target) {
+        Object.assign(this.filter.list, this.getScreenFilterList.list);
+      } else return;
     },
     methods: {
       validateNumInput(index, column, e) {
