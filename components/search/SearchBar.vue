@@ -387,10 +387,10 @@
       resetComponent() {
         Object.assign(this.parameters, this.initialParameters);
       },
-      async resetAllSearchConditions() {
+      resetAllSearchConditions() {
         this.resetStoreSearchConditions();
         const screenerViewChild = this.$refs.screenerView.$children[0];
-        await screenerViewChild.resetComponent();
+        screenerViewChild.resetComponent();
         this.$emit('resetIndexResults');
         this.resetComponent();
       },
