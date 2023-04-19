@@ -37,20 +37,14 @@
         return this.fieldsArray.map(item => Object.values(item)[0]);
       },
       dataArray() {
-        const arr = [];
-        for (const item of this.downloadData) {
-          const subArr = [];
-          for (const oldField of this.oldFields) {
-            subArr.push(item[oldField]);
-          }
-          arr.push(subArr);
-        }
-        return arr;
+        return this.downloadData.map(item =>
+          this.oldFields.map(field => item[field])
+        );
       },
     },
     methods: {
       downloadTsv() {
-        let tsv = Papa.unparse(
+        const tsv = Papa.unparse(
           {
             fields: this.newFields,
             data: this.dataArray,
@@ -59,7 +53,7 @@
             delimiter: this.delimiter,
           }
         );
-        let blob = new Blob([tsv], { type: 'text/plain;charset=utf-8' });
+        const blob = new Blob([tsv], { type: 'text/plain;charset=utf-8' });
         FileSaver.saveAs(blob, this.fileName);
       },
     },
@@ -67,5 +61,5 @@
 </script>
 <style lang="sass" scoped>
   .download_btn
-      +button
+    +button
 </style>
