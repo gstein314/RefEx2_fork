@@ -22,4 +22,18 @@ export default ({ app }, inject) => {
   inject('variableName', str => {
     return str.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
   });
+  inject('getToday', () => {
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const yyyy = today.getFullYear();
+    return yyyy + mm + dd;
+  });
+  inject('composeAlias', oldString => {
+    try {
+      return JSON.parse(oldString).join(', ');
+    } catch {
+      return oldString.replaceAll('"', '');
+    }
+  });
 };

@@ -6,7 +6,6 @@
       <h2>Search Conditions</h2>
       <button
         class="reset_all_btn"
-        :class="{ disabled: isInitialState }"
         :disabled="isInitialState"
         @click="resetAllSearchConditions"
       >
@@ -277,7 +276,8 @@
       ...mapMutations({
         setAlertModal: 'set_alert_modal',
         updatePagination: 'set_pagination',
-        setSearchConditions: 'set_search_conditions',
+        setStoreSearchConditions: 'set_search_conditions',
+        resetStoreSearchConditions: 'reset_search_conditions',
       }),
       updateSearchCondition() {
         if (this.filterType === 'gene') {
@@ -321,7 +321,7 @@
           item: 'text',
           value: suggestion,
         };
-        this.setSearchConditions(searchText);
+        this.setStoreSearchConditions(searchText);
         const query = `{${this.queryPrefix}(text: "${suggestion}" ${
           this.isSummaryIncluded ? 'summary: "true"' : ''
         }) {${this.paramsForSuggestions.join(' ')}}}`;
@@ -330,7 +330,7 @@
           item: 'summary',
           value: this.isSummaryIncluded,
         };
-        this.setSearchConditions(searchSummary);
+        this.setStoreSearchConditions(searchSummary);
         return this.$axios
           .$post('gql', {
             query,
@@ -387,9 +387,10 @@
       resetComponent() {
         Object.assign(this.parameters, this.initialParameters);
       },
-      async resetAllSearchConditions() {
+      resetAllSearchConditions() {
+        this.resetStoreSearchConditions();
         const screenerViewChild = this.$refs.screenerView.$children[0];
-        await screenerViewChild.resetComponent();
+        screenerViewChild.resetComponent();
         this.$emit('resetIndexResults');
         this.resetComponent();
       },

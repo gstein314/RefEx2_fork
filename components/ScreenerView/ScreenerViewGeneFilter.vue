@@ -10,7 +10,7 @@
       </div>
       <button
         class="reset_btn"
-        :class="{ disabled: resetIsDisabled }"
+        :disabled="resetIsDisabled"
         @click="dispatchAction('INIT')"
       >
         <font-awesome-icon icon="rotate-right" />
@@ -203,6 +203,8 @@
     computed: {
       ...mapGetters({
         activeDataset: 'active_dataset',
+        searchConditions: 'get_search_conditions',
+        getScreenerFilterList: 'get_screener_filter_list',
       }),
       list() {
         return this.filter.list;
@@ -266,6 +268,15 @@
         },
         deep: true,
       },
+    },
+    mounted() {
+      // TODO: https://github.com/dbcls/RefEx2/issues/141
+      const updateScreenerFilterList = () => {
+        const target = this.filter.type.toLowerCase();
+        if (this.getScreenerFilterList.type === target)
+          this.$emit('updateScreenerFilterList', this.$vnode.key);
+      };
+      updateScreenerFilterList();
     },
     methods: {
       validateNumInput(index, column, e) {

@@ -64,6 +64,7 @@
         "inputType": "dropdown",
         "options": [
           { "description": "max(TPM)", "value": "max(TPM)" },
+          { "description": "median(TPM)", "value": "median(TPM)" },
           { "description": "min(TPM)", "value": "min(TPM)" }
         ]
       }

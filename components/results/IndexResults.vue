@@ -2,7 +2,16 @@
   <div class="results_wrapper">
     <div class="results_title_wrapper">
       <h2>Matching {{ filterType }}s</h2>
-      <ComparisonButton />
+      <div class="button_wrapper">
+        <ComparisonButton />
+        <DownloadButton
+          ref="downloadButton"
+          :download-data="resultsDisplayed"
+          :file-name="tsvTitle"
+          :fields-array="indexTableHead"
+          :disabled="resultsDisplayed.length === 0"
+        />
+      </div>
       <div class="display_settings_wrapper">
         <button class="show_all_btn" @click="$emit('toggleDisplaySettings')">
           <font-awesome-icon icon="eye" />
@@ -120,6 +129,8 @@
 <script>
   import { mapGetters, mapMutations } from 'vuex';
   import ResultsPagination from '~/components/results/ResultsPagination.vue';
+  import DownloadButton from '../DownloadButton.vue';
+  import filters from '~/static/filters.json';
 
   const initialState = () => {
     return {
@@ -131,6 +142,7 @@
   export default {
     components: {
       ResultsPagination,
+      DownloadButton,
     },
     props: {
       filters: {
@@ -204,6 +216,52 @@
           this.resultsCached.length / this.paginationObject.limit
         );
       },
+      filtersDisplayed() {
+        return this.filters
+          .filter(({ is_displayed }) => is_displayed)
+          .map(({ column }) => column);
+      },
+      resultsDisplayed() {
+        return this.results.map(result => {
+          const updatedResult = { ...result };
+          const keyToReplace = 'alias';
+
+          if (this.filtersDisplayed.includes(keyToReplace)) {
+            updatedResult[keyToReplace] = this.$composeAlias(
+              result[keyToReplace]
+            );
+          }
+
+          return updatedResult;
+        });
+      },
+      indexTableHead() {
+        if (this.results.length === 0) return [];
+        const arr = Object.keys(this.results?.[0])
+          .map(oldTitle => {
+            const obj = {};
+            this.filters.forEach(({ column, label, is_displayed }) => {
+              const newTitle = label;
+              if (oldTitle === column && is_displayed) {
+                obj[oldTitle] = newTitle;
+              }
+            });
+            return obj;
+          })
+          .filter(obj => {
+            const isNotEmpty = Object.keys(obj).length !== 0;
+            return isNotEmpty;
+          });
+        // hardcode to add Description column to download data
+        if (this.filterType === 'sample') {
+          arr.unshift({ Description: 'Description' });
+        }
+        return arr;
+      },
+      tsvTitle() {
+        const today = this.$getToday();
+        return `RefEx2_${this.activeSpecie.species}_${this.activeDataset.dataset}_${this.filterType}_search_results_${today}.tsv`;
+      },
     },
     watch: {
       activeDataset() {
@@ -215,7 +273,7 @@
           this.checkedResults[this.activeFilter.name] = this.getCheckedResults;
         }
       },
-      results: {
+      resultsDisplayed: {
         handler(newVal) {
           if (newVal.length > 0) {
             this.resultsCached = JSON.parse(JSON.stringify(newVal));
@@ -276,6 +334,9 @@
       +sample_query
       > h2
         min-width: 190px
+      > .button_wrapper
+        display: flex
+        gap: 15px
       > .display_settings_wrapper
         +display_settings_wrapper
         > .show_all_btn
