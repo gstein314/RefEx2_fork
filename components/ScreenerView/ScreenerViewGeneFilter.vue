@@ -271,10 +271,12 @@
     },
     mounted() {
       // TODO: https://github.com/dbcls/RefEx2/issues/141
-      const target = this.filter.type.toLowerCase();
-      if (this.getScreenerFilterList.type === target) {
-        Object.assign(this.filter.list, this.getScreenerFilterList.list);
-      } else return;
+      const updateScreenerFilterList = () => {
+        const target = this.filter.type.toLowerCase();
+        if (this.getScreenerFilterList.type === target)
+          this.$emit('updateScreenerFilterList', this.$vnode.key);
+      };
+      updateScreenerFilterList();
     },
     methods: {
       validateNumInput(index, column, e) {

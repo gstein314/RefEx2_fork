@@ -108,6 +108,7 @@
       @addFilterValue="addFilterValue"
       @resetUpdateParameters="resetUpdateParameters"
       @resetActiveFilterObj="activeFilterObj = {}"
+      @updateScreenerFilterList="updateScreenerFilterList"
     />
   </div>
 </template>
@@ -413,6 +414,9 @@
           activeFilterObj: this.activeFilterObj,
         };
         this.setScreenerFilterList(filterListObj);
+      },
+      updateScreenerFilterList(target) {
+        this.geneFilters[target].list = this.getScreenerFilterList.list;
       },
     },
   };
