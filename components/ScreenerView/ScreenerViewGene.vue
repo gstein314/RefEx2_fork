@@ -108,6 +108,7 @@
       @addFilterValue="addFilterValue"
       @resetUpdateParameters="resetUpdateParameters"
       @resetActiveFilterObj="activeFilterObj = {}"
+      @updateScreenerFilterList="updateScreenerFilterList"
     />
   </div>
 </template>
@@ -131,17 +132,21 @@
       temporaryParameters: {
         goTerm: '',
       },
-      // passed down to API
+      // passed down to API and then converted & emitted to parent
       parameters: {
         go: [],
         chromosomePosition: '',
         typeOfGene: '',
-        filter: '',
+        filter: [],
       },
       hideCaret: false,
       geneFilters: JSON.parse(stringifiedGeneFilters),
       datasets: JSON.parse(stringifiedDatasets),
       activeFilterObj: {},
+      filterValue: [],
+      TPMValue: [],
+      ROKUValue: [],
+      tauValue: [],
     };
   };
 
@@ -149,10 +154,6 @@
     components: { MultiSelect, ScreenerViewGeneFilter },
     data() {
       return {
-        filterValue: [],
-        TPMValue: [],
-        ROKUValue: [],
-        tauValue: [],
         autocompleteStaticData: {},
         chrCheckedValue: [],
         chrOptions: [],
@@ -173,6 +174,7 @@
         activeDataset: 'active_dataset',
         activeFilter: 'active_filter',
         searchConditions: 'get_search_conditions',
+        getScreenerFilterList: 'get_screener_filter_list',
       }),
       goTermString() {
         if (this.parameters.go.length === 0) return '';
@@ -227,7 +229,7 @@
       filterValue(list) {
         const filterCondition = {
           type: 'gene',
-          item: JSON.parse(list.replace(/\\/g, '')).method,
+          item: 'filter',
           value: list,
         };
         this.setSearchConditions(filterCondition);
@@ -240,22 +242,22 @@
       this.initiateParametersDataset();
     },
     mounted() {
+      // TODO: https://github.com/dbcls/RefEx2/issues/141
       if (this.searchConditions.gene.chr)
         this.chrValue = this.searchConditions.gene.chr;
       if (this.searchConditions.gene.tog)
         this.TOGValue = this.searchConditions.gene.tog;
       if (this.searchConditions.gene.go)
         this.setTags(this.searchConditions.gene.go, 'go');
-      if (this.searchConditions.gene.temporaryParameters)
-        this.filterValue = this.searchConditions.gene.tpm;
-      if (this.searchConditions.gene.roku)
-        this.filterValue = this.searchConditions.gene.roku;
-      if (this.searchConditions.gene.tau)
-        this.filterValue = this.searchConditions.gene.tau;
+      if (this.searchConditions.gene.filter)
+        this.filterValue = this.searchConditions.gene.filter;
+      if (this.getScreenerFilterList.activeFilterObj)
+        this.activeFilterObj = this.getScreenerFilterList.activeFilterObj;
     },
     methods: {
       ...mapMutations({
         setSearchConditions: 'set_search_conditions',
+        setScreenerFilterList: 'set_screener_filter_list',
       }),
       resetUpdateParameters() {
         this.$emit('updateParameters', {});
@@ -271,7 +273,7 @@
           go: '',
           chromosomePosition: '',
           typeOfGene: '',
-          filter: '',
+          filter: [],
         };
         this.$emit('updateParameters', { ...parametersObj });
         this.$emit('storeInitialParameters', { ...parametersObj });
@@ -406,6 +408,15 @@
             }
             break;
         }
+        const filterListObj = {
+          type: type.toLowerCase(),
+          list: _.cloneDeep(list),
+          activeFilterObj: this.activeFilterObj,
+        };
+        this.setScreenerFilterList(filterListObj);
+      },
+      updateScreenerFilterList(target) {
+        this.geneFilters[target].list = this.getScreenerFilterList.list;
       },
     },
   };
