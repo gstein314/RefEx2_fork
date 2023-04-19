@@ -235,7 +235,7 @@
         const item = getItem();
         const filterCondition = {
           type: 'gene',
-          item,
+          item: 'filter',
           value: list,
         };
         this.setSearchConditions(filterCondition);
