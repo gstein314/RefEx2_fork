@@ -173,6 +173,7 @@
         activeDataset: 'active_dataset',
         activeFilter: 'active_filter',
         searchConditions: 'get_search_conditions',
+        getScreenerFilterList: 'get_screener_filter_list',
       }),
       goTermString() {
         if (this.parameters.go.length === 0) return '';
@@ -249,6 +250,8 @@
         this.setTags(this.searchConditions.gene.go, 'go');
       if (this.searchConditions.gene.filter)
         this.filterValue = this.searchConditions.gene.filter;
+      if (this.getScreenerFilterList.activeFilterObj)
+        this.activeFilterObj = this.getScreenerFilterList.activeFilterObj;
     },
     methods: {
       ...mapMutations({
@@ -407,6 +410,7 @@
         const filterListObj = {
           type: type.toLowerCase(),
           list: _.cloneDeep(list),
+          activeFilterObj: this.activeFilterObj,
         };
         this.setScreenerFilterList(filterListObj);
       },
