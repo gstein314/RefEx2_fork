@@ -1,5 +1,5 @@
 <template>
-  <button class="download_btn" @click="downloadTsv">
+  <button class="download_btn" :disabled="disabled" @click="downloadTsv">
     <font-awesome-icon icon="arrow-down-to-line" />
     Download .tsv
   </button>
@@ -27,6 +27,10 @@
       delimiter: {
         type: String,
         default: '\t',
+      },
+      disabled: {
+        type: Boolean,
+        default: false,
       },
     },
     computed: {

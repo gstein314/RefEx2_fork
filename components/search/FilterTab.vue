@@ -18,7 +18,6 @@
           <button
             class="find_results_btn"
             :class="{
-              disabled: !validSearch,
               update: !tableDataIsSameAsScreener,
             }"
             :disabled="!validSearch"
