@@ -225,15 +225,17 @@
         this.handleTOGTagsUpdate(this.TOGValue);
       },
       filterValue(list) {
+        const getItem = () => {
+          try {
+            return JSON.parse(list.replace(/\\/g, '')).method;
+          } catch {
+            return '';
+          }
+        };
+        const item = getItem();
         const filterCondition = {
           type: 'gene',
-          item: () => {
-            try {
-              return JSON.parse(list.replace(/\\/g, '')).method;
-            } catch {
-              return '';
-            }
-          },
+          item,
           value: list,
         };
         this.setSearchConditions(filterCondition);
