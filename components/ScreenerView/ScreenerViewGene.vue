@@ -136,7 +136,7 @@
         go: [],
         chromosomePosition: '',
         typeOfGene: '',
-        filter: '',
+        filter: [],
       },
       hideCaret: false,
       geneFilters: JSON.parse(stringifiedGeneFilters),
@@ -271,7 +271,7 @@
           go: '',
           chromosomePosition: '',
           typeOfGene: '',
-          filter: '',
+          filter: [],
         };
         this.$emit('updateParameters', { ...parametersObj });
         this.$emit('storeInitialParameters', { ...parametersObj });
