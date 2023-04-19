@@ -142,6 +142,10 @@
       geneFilters: JSON.parse(stringifiedGeneFilters),
       datasets: JSON.parse(stringifiedDatasets),
       activeFilterObj: {},
+      filterValue: [],
+      TPMValue: [],
+      ROKUValue: [],
+      tauValue: [],
     };
   };
 
@@ -149,10 +153,6 @@
     components: { MultiSelect, ScreenerViewGeneFilter },
     data() {
       return {
-        filterValue: [],
-        TPMValue: [],
-        ROKUValue: [],
-        tauValue: [],
         autocompleteStaticData: {},
         chrCheckedValue: [],
         chrOptions: [],
@@ -227,7 +227,13 @@
       filterValue(list) {
         const filterCondition = {
           type: 'gene',
-          item: JSON.parse(list.replace(/\\/g, '')).method,
+          item: () => {
+            try {
+              return JSON.parse(list.replace(/\\/g, '')).method;
+            } catch {
+              return '';
+            }
+          },
           value: list,
         };
         this.setSearchConditions(filterCondition);
