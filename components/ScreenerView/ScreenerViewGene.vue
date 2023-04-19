@@ -240,18 +240,13 @@
       this.initiateParametersDataset();
     },
     mounted() {
+      // TODO: https://github.com/dbcls/RefEx2/issues/141
       if (this.searchConditions.gene.chr)
         this.chrValue = this.searchConditions.gene.chr;
       if (this.searchConditions.gene.tog)
         this.TOGValue = this.searchConditions.gene.tog;
       if (this.searchConditions.gene.go)
         this.setTags(this.searchConditions.gene.go, 'go');
-      if (this.searchConditions.gene.temporaryParameters)
-        this.filterValue = this.searchConditions.gene.tpm;
-      if (this.searchConditions.gene.roku)
-        this.filterValue = this.searchConditions.gene.roku;
-      if (this.searchConditions.gene.tau)
-        this.filterValue = this.searchConditions.gene.tau;
       if (this.searchConditions.gene.filter)
         this.filterValue = this.searchConditions.gene.filter;
     },
