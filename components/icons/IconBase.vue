@@ -24,7 +24,16 @@
     },
     computed: {
       wrapperSize() {
-        return 60;
+        const sizeMap = {
+          XS: 15,
+          S: 30,
+          default: 60,
+        };
+        const resizeMap = {
+          Mouse: 'S',
+        };
+        if (resizeMap[this.iconName]) return sizeMap[resizeMap[this.iconName]];
+        return sizeMap.default;
       },
     },
   };
