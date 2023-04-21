@@ -4,14 +4,16 @@
       <li v-for="specie in species" :key="specie.species">
         <icon-base :icon-name="specie.species" />
         <div>
-          <p>{{ specie.species }}</p>
-          <span
-            v-for="dataset in specie.datasets"
-            :key="dataset.dataset"
-            class="dataset_name"
-            @click="updateSpecie(specie.species, dataset.dataset)"
-            >{{ dataset.label }}</span
-          >
+          <div class="specie_name">{{ specie.species }}</div>
+          <div class="tag_wrapper">
+            <span
+              v-for="dataset in specie.datasets"
+              :key="dataset.dataset"
+              class="dataset_name"
+              @click="updateSpecie(specie.species, dataset.dataset)"
+              >{{ dataset.label }}</span
+            >
+          </div>
         </div>
       </li>
     </ul>
@@ -106,11 +108,10 @@
     top: 100%
     left: 0
     display: none
-    padding: 0
     list-style-type: none
     background-color: white
     z-index: 999
-    padding: 20px
+    padding: 10px
     box-shadow: 0px 5px 15px -5px $BLACK
     cursor: auto
   .isOpenDataset, .isOpenType
@@ -124,26 +125,28 @@
       color: black
       min-width: 200px
       border-bottom: 1px solid #fff
-      display: grid
-      grid-template-columns: 30px 1fr
+      display: flex
       align-content: center
       > svg
         width: 30px
         font-size: 18px
         align-self: center
-      > div
-        padding: 0 13px
-        > p
-          margin: 0
-          padding-bottom: 2px
-        > .dataset_name
-          background: $MAIN_COLOR
-          color: white
-          padding: 5px
-          border-radius: 5px
-          cursor: pointer
-          margin: 0 3px 3px 0
-          display: inline-block
-          &:hover
-            background: #095493
+      .svg_wrapper
+        margin-right: 10px
+      .tag_wrapper
+        display: flex
+      .specie_name
+        margin: 0
+        padding-bottom: 2px
+      .dataset_name
+        background: $MAIN_COLOR
+        color: white
+        padding: 5px
+        border-radius: 5px
+        cursor: pointer
+        margin: 0 3px 3px 0
+        display: inline-block
+        white-space: nowrap
+        &:hover
+          background: #095493
 </style>
