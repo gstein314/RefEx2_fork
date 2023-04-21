@@ -47,32 +47,27 @@
     },
     computed: {
       size() {
-        const originalSize = sizeMap.get(this.iconName) ?? [
+        const [originalWidth, originalHeight] = sizeMap.get(this.iconName) || [
           wrapperSize,
           wrapperSize,
         ];
-        const [x, y] = originalSize;
-        const ratio = x / y;
-        const isOversized = x > wrapperSize || y > wrapperSize;
-        const isUndersized = x < wrapperSize || y < wrapperSize;
-        const xIsLonger = x > y;
-
-        if (isOversized) {
-          if (xIsLonger) {
-            return [wrapperSize, wrapperSize / ratio];
-          } else {
-            return [wrapperSize * ratio, wrapperSize];
-          }
-        }
-        if (isUndersized) {
-          if (xIsLonger) {
-            return [wrapperSize, wrapperSize / ratio];
-          } else {
-            return [wrapperSize * ratio, wrapperSize];
-          }
-        }
-        return [wrapperSize, wrapperSize];
+        const ratio = originalWidth / originalHeight;
+        const isOversized =
+          originalWidth > wrapperSize || originalHeight > wrapperSize;
+        const isUndersized =
+          originalWidth < wrapperSize && originalHeight < wrapperSize;
+        const [width, height] = isOversized
+          ? originalWidth > originalHeight
+            ? [wrapperSize, wrapperSize / ratio]
+            : [wrapperSize * ratio, wrapperSize]
+          : isUndersized
+          ? originalWidth > originalHeight
+            ? [wrapperSize, wrapperSize / ratio]
+            : [wrapperSize * ratio, wrapperSize]
+          : [wrapperSize, wrapperSize];
+        return [width, height];
       },
+
       parsedName() {
         return this.iconName
           .split('_')
