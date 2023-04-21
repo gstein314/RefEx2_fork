@@ -3,7 +3,7 @@
     <ul v-show="isOpenDataset" class="dropdown_list" :class="{ isOpenDataset }">
       <li v-for="specie in species" :key="specie.species">
         <icon-base :icon-name="specie.species" />
-        <div>
+        <div class="option_wrapper">
           <div class="specie_name">{{ specie.species }}</div>
           <div class="tag_wrapper">
             <span
@@ -123,7 +123,8 @@
         cursor: pointer
     > li
       color: black
-      min-width: 200px
+      // min-width: 200px
+      // max-width: 300px
       border-bottom: 1px solid #fff
       display: flex
       align-content: center
@@ -133,8 +134,13 @@
         align-self: center
       .svg_wrapper
         margin-right: 10px
+      .option_wrapper
+        min-width: 200px
+        max-width: 300px
       .tag_wrapper
+        width: 100%
         display: flex
+        flex-wrap: wrap
       .specie_name
         margin: 0
         padding-bottom: 2px
