@@ -139,6 +139,8 @@
           grid-template-columns: auto 1fr
           align-content: center
           z-index: 2
+          .svg_wrapper
+            filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(222deg) brightness(104%) contrast(103%)
           > .specie_wrapper
             overflow: hidden
             display: -webkit-box
