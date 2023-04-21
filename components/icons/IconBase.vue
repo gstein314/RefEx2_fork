@@ -26,7 +26,7 @@
   const sizeMap = new Map([
     ['Human', [24, 62]],
     ['Mouse', [63, 24]],
-    ['Arabidopsis thaliana', [82, 164]],
+    ['Arabidopsis thaliana', [82.29, 164.57]],
   ]);
 
   // wrapper is set to be square (1:1)
@@ -50,11 +50,15 @@
           wrapperSize,
         ];
         const ratio = originalWidth / originalHeight;
+        const isPerfectSized =
+          originalWidth === wrapperSize || originalHeight === wrapperSize;
         const isOversized =
           originalWidth > wrapperSize || originalHeight > wrapperSize;
         const isUndersized =
           originalWidth < wrapperSize && originalHeight < wrapperSize;
-        const [width, height] = isOversized
+        const [width, height] = isPerfectSized
+          ? [originalWidth, originalHeight]
+          : isOversized
           ? originalWidth > originalHeight
             ? [wrapperSize, wrapperSize / ratio]
             : [wrapperSize * ratio, wrapperSize]
@@ -81,9 +85,9 @@
 </script>
 <style lang="sass" scoped>
   .svg_wrapper
-    display: inline-block
-    text-align: center
-    // line-height: 1
+    display: flex
+    align-items: center
+    justify-content: center
     width: 60px
     height: 60px
 </style>
