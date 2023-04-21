@@ -26,9 +26,7 @@
   const sizeMap = new Map([
     ['Human', [24, 62]],
     ['Mouse', [63, 24]],
-    ['drosophilidae', [36, 18]],
-    ['oryza_sativa', [42, 71]],
-    ['bombyx_mori', [43, 10]],
+    ['Arabidopsis thaliana', [82, 164]],
   ]);
 
   // wrapper is set to be square (1:1)
@@ -70,7 +68,7 @@
 
       parsedName() {
         return this.iconName
-          .split('_')
+          .split(' ')
           .map(word => this.$firstLetterUppercase(word))
           .join('');
       },
