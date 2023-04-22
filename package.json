@@ -54,6 +54,7 @@
     "push-dir": "^0.4.1",
     "sass": "^1.49.7",
     "sass-loader": "^10.2.1",
+    "vue-remove-attributes": "^1.0.3",
     "vue-slider-component": "^3.2.15"
   }
 }
