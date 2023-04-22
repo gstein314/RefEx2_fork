@@ -1,3 +1,4 @@
+/// <reference types="Cypress" />
 /* eslint-disable cypress/no-unnecessary-waiting */
 describe('Reset to initial state', () => {
   it('passes', () => {
