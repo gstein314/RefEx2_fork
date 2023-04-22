@@ -23,7 +23,7 @@
             v-for="(example, example_index) of condition.examples"
             :key="example_index"
             class="sample_value"
-            :data-cy="example"
+            :data-cy="`${$vnode.key}_example_${index}`"
             @click="
               updateParams({
                 ...parameters,
