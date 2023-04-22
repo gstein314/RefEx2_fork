@@ -7,6 +7,7 @@
       <button
         class="reset_all_btn"
         :disabled="isInitialState"
+        :data-cy="`reset_all_${$vnode.key}`"
         @click="resetAllSearchConditions"
       >
         <font-awesome-icon icon="rotate-right" />
@@ -22,6 +23,7 @@
             v-for="(example, example_index) of condition.examples"
             :key="example_index"
             class="sample_value"
+            :data-cy="example"
             @click="
               updateParams({
                 ...parameters,
@@ -44,6 +46,7 @@
       :list="updateSuggestions"
       :max-suggestions="20"
       class="text_search_name"
+      :data-cy="`main_input_${$vnode.key}`"
       :placeholder="filterPlaceholder(filterType)"
       @select="moveDetailpage"
       @show-list="setAlternativeSearchShouldShow(true)"
