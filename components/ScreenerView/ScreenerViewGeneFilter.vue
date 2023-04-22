@@ -54,6 +54,9 @@
                   warning:
                     column.isRequired && !isValidInput(column.id, itemIndex),
                 }"
+                :data-cy="`${filter.type.toLowerCase()}_${
+                  column.id
+                }_${itemIndex}`"
               >
                 <select
                   v-if="column.inputType === 'dropdown'"

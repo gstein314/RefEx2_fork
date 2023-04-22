@@ -7,7 +7,7 @@
       <button
         class="reset_all_btn"
         :disabled="isInitialState"
-        :data-cy="`reset_all_${$vnode.key}`"
+        :data-cy="`${$vnode.key}_reset_all`"
         @click="resetAllSearchConditions"
       >
         <font-awesome-icon icon="rotate-right" />
@@ -46,7 +46,7 @@
       :list="updateSuggestions"
       :max-suggestions="20"
       class="text_search_name"
-      :data-cy="`main_input_${$vnode.key}`"
+      :data-cy="`${$vnode.key}_main_input`"
       :placeholder="filterPlaceholder(filterType)"
       @select="moveDetailpage"
       @show-list="setAlternativeSearchShouldShow(true)"
@@ -119,7 +119,7 @@
     <template v-else-if="filterType === 'sample'">
       <div class="summary_check_wrapper"></div>
     </template>
-    <ScreenerView ref="screenerView">
+    <ScreenerView ref="screenerView" :key="$vnode.key">
       <component
         :is="`screener-view-${filterType}`"
         @updateParameters="updateParams"
