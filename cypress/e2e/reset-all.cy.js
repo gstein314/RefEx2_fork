@@ -1,5 +1,4 @@
 /// <reference types="Cypress" />
-/* eslint-disable cypress/no-unnecessary-waiting */
 describe('Reset to initial state', () => {
   it('search, return to main and reset all', () => {
     cy.viewport(1920, 1080);
