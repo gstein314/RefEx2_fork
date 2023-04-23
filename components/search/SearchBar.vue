@@ -242,10 +242,7 @@
     watch: {
       parameters: {
         handler: function () {
-          this.$emit(
-            'updateValiditySearch',
-            !Object.values(this.parameters).every(value => !Boolean(value))
-          );
+          this.$emit('updateValiditySearch', !this.isInitialState);
           this.showResults('numfound');
         },
         deep: true,
