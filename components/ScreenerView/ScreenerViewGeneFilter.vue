@@ -1,5 +1,5 @@
 <template>
-  <div class="filter">
+  <div class="filter" :data-cy="`${filter.type.toLowerCase()}_filter`">
     <div class="filter_title">
       <div>
         Filter by {{ filter.name }}

@@ -11,10 +11,26 @@ describe('Reset to initial state', () => {
       .as('screener')
       .within(() => cy.get('.screener_title').as('screener_toggle'));
     cy.get('@screener_toggle').click();
-    cy.get('@screener').within(() => {
-      cy.get('.v-popper--has-tooltip').as('tooltips');
-      cy.get('@tooltips').eq(1).realHover();
-    });
-    cy.get('.v-popper__inner').should('contain', 'This is Filter by');
+    cy.get('.v-popper--has-tooltip').as('tooltips');
+    // cy.get('@tooltips').each(($el, index, $list) => {
+    //   cy.wrap($el).realHover();
+    //   cy.document().its('body').should('contain', 'This is Filter by');
+    //   cy.document().its('body').children('.v-popper__popper').invoke('remove');
+    //   // refer body which is outside of the screener
+    //   // cy.wait(2000);
+    //   cy.get('body').realHover({ position: 'topLeft' });
+    // });
+    cy.getBySel('tpm_filter').find('svg').first().realHover();
+    cy.get('.v-popper__popper').should('contain', 'This is Filter by');
+    // removed the hover tooltip otherwise it will persist
+    cy.get('.v-popper__popper').invoke('remove');
+    cy.getBySel('roku_filter').find('.v-popper--has-tooltip').eq(2).realHover();
+    cy.get('.v-popper__popper').should('contain', 'Range');
+    cy.get('.v-popper__popper').invoke('remove');
+    // cy.document().its('body').should('contain', 'This is Filter by');
+    // cy.get('body').realHover({ position: 'topLeft' });
+    // cy.getBySel('roku_filter').find('svg').realHover();
+    // cy.document().its('body').should('contain', 'This is Filter by');
+    // cy.get('body').realHover({ position: 'topLeft' });
   });
 });
