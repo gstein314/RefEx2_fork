@@ -13,8 +13,11 @@ describe('Reset to initial state', () => {
     cy.getBySel('gene_search_main_input').blur();
     // cy.wait(2000);
 
-    // expand screener
-    cy.getBySel('gene_search_screener').click();
+    // get screener title and store it
+    cy.getBySel('gene_search_screener').within(() =>
+      cy.get('.screener_title').as('screener_toggle')
+    );
+    cy.get('@screener_toggle').click();
 
     // set tau conditions (select element within element)
     cy.getBySel('tau_group_0').within(() =>
@@ -39,7 +42,7 @@ describe('Reset to initial state', () => {
     cy.get('.nav_item').first().click();
 
     // expand screener
-    cy.getBySel('gene_search_screener').click();
+    cy.get('@screener_toggle').click();
     // wait to see if the data persists in screener
     cy.wait(2000);
 
