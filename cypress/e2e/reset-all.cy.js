@@ -5,6 +5,14 @@ describe('Reset to initial state', () => {
     cy.viewport(1920, 1080);
     cy.visit('http://localhost:3000');
 
+    // get find button and store it
+    cy.getBySel('gene_find_results_button').as('find_button');
+    cy.getBySel('gene_search_reset_all').as('reset_all');
+
+    // assertion: check button effect
+    cy.get('@find_button').should('be.disabled');
+    cy.get('@reset_all').should('be.disabled');
+
     // click example text
     cy.getBySel('gene_search_example_0').click();
     // get input and store it
@@ -17,8 +25,6 @@ describe('Reset to initial state', () => {
     cy.get('@main_input').blur();
 
     // assertion: check button effect
-    cy.getBySel('gene_find_results_button').as('find_button');
-    cy.getBySel('gene_search_reset_all').as('reset_all');
     cy.get('@find_button').should('not.be.disabled');
     cy.get('@reset_all').should('not.be.disabled');
     // cy.wait(2000);
