@@ -5,6 +5,7 @@
         Filter by {{ filter.name }}
         <font-awesome-icon
           v-tooltip="'This is Filter by ' + filter.name"
+          data-cy="filter_tooltip"
           icon="info-circle"
         />
       </div>
@@ -27,6 +28,7 @@
                 <font-awesome-icon
                   v-if="isEntropy(column.id)"
                   v-tooltip="'Range: 1-5'"
+                  data-cy="entropy_tooltip"
                   icon="info-circle"
                 />
                 <WarningMessage
