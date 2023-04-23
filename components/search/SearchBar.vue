@@ -7,7 +7,7 @@
       <button
         class="reset_all_btn"
         :disabled="isInitialState"
-        :data-cy="`${$vnode.key}_reset_all`"
+        :data-cy="`${$vnode.key}_reset_all_button`"
         @click="resetAllSearchConditions"
       >
         <font-awesome-icon icon="rotate-right" />

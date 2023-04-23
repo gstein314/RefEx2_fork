@@ -6,12 +6,14 @@ describe('Reset to initial state', () => {
     cy.visit('http://localhost:3000');
 
     // get find button and store it
-    cy.getBySel('gene_find_results_button').as('find_button');
-    cy.getBySel('gene_search_reset_all').as('reset_all');
+    cy.getBySel('gene_find_results_button').as('search');
+    cy.getBySel('gene_search_reset_all_button').as('reset_all');
+    cy.getBySel('gene_results_download_button').as('download');
 
     // assertion: check button effect
-    cy.get('@find_button').should('be.disabled');
+    cy.get('@search').should('be.disabled');
     cy.get('@reset_all').should('be.disabled');
+    cy.get('@download').should('be.disabled');
 
     // click example text
     cy.getBySel('gene_search_example_0').click();
@@ -25,7 +27,7 @@ describe('Reset to initial state', () => {
     cy.get('@main_input').blur();
 
     // assertion: check button effect
-    cy.get('@find_button').should('not.be.disabled');
+    cy.get('@search').should('not.be.disabled');
     cy.get('@reset_all').should('not.be.disabled');
     // cy.wait(2000);
 
@@ -45,7 +47,9 @@ describe('Reset to initial state', () => {
     // select dropdown option
     cy.getBySel('tau_condition_0').within(() => cy.get('select').select('gt'));
 
-    cy.get('@find_button').click();
+    cy.get('@search').click();
+
+    cy.get('@download').should('not.be.disabled');
 
     // get the third result in tbody and store it
     cy.getBySel('gene_results_index_tbody').within(() =>
@@ -65,8 +69,9 @@ describe('Reset to initial state', () => {
     // assertions
     // all inputs should be empty
     cy.get('input').should('have.value', '');
-    cy.get('@find_button').should('be.disabled');
+    cy.get('@search').should('be.disabled');
     cy.get('@reset_all').should('be.disabled');
     cy.get('button.reset_btn').should('be.disabled');
+    cy.get('@reset_all').should('be.disabled');
   });
 });

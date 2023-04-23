@@ -6,6 +6,7 @@
         <ComparisonButton />
         <DownloadButton
           ref="downloadButton"
+          :data-cy="`${$vnode.key}_download_button`"
           :download-data="resultsDisplayed"
           :file-name="tsvTitle"
           :fields-array="indexTableHead"
