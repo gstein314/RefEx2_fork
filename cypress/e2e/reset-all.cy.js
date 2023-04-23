@@ -7,10 +7,14 @@ describe('Reset to initial state', () => {
 
     // click example text
     cy.getBySel('gene_search_example_0').click();
-    cy.getBySel('gene_search_main_input').clear();
-    // type in input
-    cy.getBySel('gene_search_main_input').type('transcription fac');
-    cy.getBySel('gene_search_main_input').blur();
+    // get input and store it
+    cy.getBySel('gene_search_main_input').as('main_input');
+    // empty input
+    cy.get('@main_input').clear();
+    // type text in input
+    cy.get('@main_input').type('transcription fac');
+    // blur input
+    cy.get('@main_input').blur();
     // cy.wait(2000);
 
     // get screener title and store it
@@ -26,16 +30,18 @@ describe('Reset to initial state', () => {
 
     cy.getBySel('tau_cutoff_0').type('0.9');
 
-    // select option
+    // select dropdown option
     cy.getBySel('tau_condition_0').within(() => cy.get('select').select('gt'));
 
-    // click search button
-    cy.getBySel('gene_find_results_button').click();
+    // store find button and click it
+    cy.getBySel('gene_find_results_button').as('find_button');
+    cy.get('@find_button').click();
 
-    // click the third symbol in index results
+    // get the third result in tbody and store it
     cy.getBySel('gene_results_index_tbody').within(() =>
       cy.get('tr').eq(2).as('result')
     );
+    // get the symbol of the third result and click it
     cy.get('@result').within(() => cy.get('.symbol').click());
 
     // click the first breadcrumb
@@ -43,13 +49,16 @@ describe('Reset to initial state', () => {
 
     // expand screener
     cy.get('@screener_toggle').click();
-    // wait to see if the data persists in screener
-    cy.wait(2000);
 
     // click reset all button
-    cy.getBySel('gene_search_reset_all').click();
+    cy.getBySel('gene_search_reset_all').as('reset_all');
+    cy.get('@reset_all').click();
 
-    // check if the input field is empty
-    cy.getBySel('gene_search_main_input').should('have.text', '');
+    // assertions
+    // all inputs should be empty
+    cy.get('input').should('have.value', '');
+    cy.get('@find_button').should('be.disabled');
+    cy.get('@reset_all').should('be.disabled');
+    cy.get('button.reset_btn').should('be.disabled');
   });
 });
