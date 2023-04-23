@@ -3,7 +3,7 @@ import 'cypress-real-events'; // work only in the chromium-based browser.
 
 describe('Reset to initial state', () => {
   it('search, return to main and reset all', () => {
-    cy.viewport(1920, 1080);
+    cy.viewport(1280, 1440);
     cy.visit('http://localhost:3000');
 
     // get screener title and store it

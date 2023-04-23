@@ -1,7 +1,7 @@
 /// <reference types="Cypress" />
 describe('Reset to initial state', () => {
   it('search, return to main and reset all', () => {
-    cy.viewport(1920, 1080);
+    cy.viewport(1280, 1440);
     cy.visit('http://localhost:3000');
 
     // get find button and store it
@@ -55,10 +55,10 @@ describe('Reset to initial state', () => {
       cy.get('tr').eq(2).as('result')
     );
     // get the symbol of the third result and click it
-    cy.get('@result').within(() => cy.get('.symbol').click());
+    cy.get('@result').within(() => cy.get('.left_icon').click());
 
     // click the first breadcrumb
-    cy.get('.nav_item').first().click();
+    cy.wait(10000).get('.nav_item').first().click();
 
     // expand screener
     cy.get('@screener_toggle').click();
