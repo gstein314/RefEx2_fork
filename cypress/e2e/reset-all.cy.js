@@ -15,6 +15,12 @@ describe('Reset to initial state', () => {
     cy.get('@main_input').type('transcription fac');
     // blur input
     cy.get('@main_input').blur();
+
+    // assertion: check button effect
+    cy.getBySel('gene_find_results_button').as('find_button');
+    cy.getBySel('gene_search_reset_all').as('reset_all');
+    cy.get('@find_button').should('not.be.disabled');
+    cy.get('@reset_all').should('not.be.disabled');
     // cy.wait(2000);
 
     // get screener title and store it
@@ -33,8 +39,6 @@ describe('Reset to initial state', () => {
     // select dropdown option
     cy.getBySel('tau_condition_0').within(() => cy.get('select').select('gt'));
 
-    // store find button and click it
-    cy.getBySel('gene_find_results_button').as('find_button');
     cy.get('@find_button').click();
 
     // get the third result in tbody and store it
@@ -50,8 +54,6 @@ describe('Reset to initial state', () => {
     // expand screener
     cy.get('@screener_toggle').click();
 
-    // click reset all button
-    cy.getBySel('gene_search_reset_all').as('reset_all');
     cy.get('@reset_all').click();
 
     // assertions
