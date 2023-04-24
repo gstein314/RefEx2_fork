@@ -11,7 +11,8 @@
     "lint": "npm run lint:js",
     "lint:fix": "eslint --ext .ts,.js,.vue . --fix",
     "deploy": "push-dir --dir=refex --branch=gh-pages --cleanup",
-    "cypress:open": "cypress open"
+    "cy:open": "cypress open",
+    "cy:run": "cypress run --browser=chrome"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
