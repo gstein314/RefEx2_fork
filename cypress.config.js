@@ -9,7 +9,7 @@ module.exports = defineConfig({
   },
 
   e2e: {
-    baseUrl: 'http://localhost:8484',
+    baseUrl: 'http://localhost:3000',
     setupNodeEvents(on, config) {
       on('before:browser:launch', (browser = {}, launchOptions) => {
         // `args` is an array of all the arguments that will
