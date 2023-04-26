@@ -19,7 +19,6 @@
         </button>
       </div>
     </div>
-
     <table>
       <thead>
         <tr>
@@ -36,7 +35,18 @@
             v-show="filter.is_displayed"
             :key="index"
           >
-            {{ filter.label }}
+            <template v-if="filter.column === 'geneid'">
+              <span
+                v-if="geneIdListForCopy.length > 0"
+                class="copy_button"
+                @click="copyToClipboard(geneIdListForCopy)"
+                >{{ filter.label }}<font-awesome-icon :icon="['far', 'copy']"
+              /></span>
+              <span v-else>{{ filter.label }}</span>
+            </template>
+            <template v-else>
+              {{ filter.label }}
+            </template>
           </th>
         </tr>
       </thead>
@@ -262,6 +272,10 @@
         const today = this.$getToday();
         return `RefEx2_${this.activeSpecie.species}_${this.activeDataset.dataset}_${this.filterType}_search_results_${today}.tsv`;
       },
+      geneIdListForCopy() {
+        const geneIdList = this.resultsCached?.map(({ geneid }) => geneid);
+        return geneIdList.join('\r\n');
+      },
     },
     watch: {
       activeDataset() {
@@ -291,6 +305,9 @@
         setPageType: 'set_page_type',
         setCheckedResults: 'set_checked_results',
       }),
+      copyToClipboard(target) {
+        navigator.clipboard.writeText(target);
+      },
       moveToProjectPage(route) {
         this.$nuxt.$loading.start();
         this.$router.push(this.routeToProjectPage(route));
@@ -345,6 +362,10 @@
           white-space: nowrap
     > table
       +table
+      .copy_button
+        cursor: pointer
+        > svg
+          margin-left: 5px
       > tbody
         > .warning
           +warning
