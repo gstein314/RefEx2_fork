@@ -494,21 +494,4 @@
       color: $PLACEHOLDER_COLOR
   .suggestions
     +scrollable-suggestions
-  .v-popper--theme-tooltip
-    .v-popper__inner
-      background: $WHITE
-      border: 1px solid $MAIN_COLOR
-      color: $BLACK
-      padding: 3px 8px
-      border-radius: 3px
-      box-shadow: 0 1px 4px rgba(62, 70, 82, .22)
-      z-index: $TOOLTIP_LAYER
-    .v-popper__arrow-inner
-      z-index: 10
-      visibility: visible
-      border-color: $WHITE
-    .v-popper__arrow-outer
-      border-color: $MAIN_COLOR
-    .v-popper__arrow-container
-      height: 0
 </style>
