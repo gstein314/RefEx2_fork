@@ -44,7 +44,7 @@
               :file-name="tsvTitle"
               :fields-array="projectTableHead"
             />
-            <ShareButton />
+            <CopyButton icon="link" text="Share" />
           </div>
           <div class="align_right">
             <button class="reset_btn" :class="isNoSort" @click="clearSortArray">
