@@ -15,7 +15,10 @@
           icon="copy"
           text="Copy Gene ID(s)"
           :content="geneIdListForCopy"
-          :disabled="geneIdListForCopy.length === 0"
+          :disabled="
+            !filtersDisplayed.includes('geneid') ||
+            resultsDisplayed.length === 0
+          "
         />
       </div>
       <div class="display_settings_wrapper">
