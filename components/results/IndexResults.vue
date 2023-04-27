@@ -12,6 +12,7 @@
           :disabled="resultsDisplayed.length === 0"
         />
         <CopyButton
+          v-if="filterType === 'gene'"
           icon="copy"
           text="Copy Gene ID(s)"
           :content="geneIdListForCopy"
