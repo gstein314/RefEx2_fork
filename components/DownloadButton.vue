@@ -1,7 +1,7 @@
 <template>
   <button class="download_btn" :disabled="disabled" @click="downloadTsv">
     <font-awesome-icon icon="arrow-down-to-line" />
-    Download .tsv
+    Download as table
   </button>
 </template>
 
