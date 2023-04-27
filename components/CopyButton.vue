@@ -53,6 +53,7 @@
     right: 0
     border-radius: 5px
     margin: auto
+    z-index: $TOOLTIP_LAYER
   .copy_btn_complete::after
     content: ''
     position: absolute
@@ -64,4 +65,5 @@
     margin: auto
     top: 27px
     clip-path: polygon(50% 0,100% 50%,0% 50%)
+    z-index: $TOOLTIP_LAYER
 </style>
