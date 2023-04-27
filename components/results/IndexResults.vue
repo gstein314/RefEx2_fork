@@ -11,7 +11,11 @@
           :fields-array="indexTableHead"
           :disabled="resultsDisplayed.length === 0"
         />
-        <CopyButton icon="copy" text="Copy Gene ID(s)" />
+        <CopyButton
+          icon="copy"
+          text="Copy Gene ID(s)"
+          :content="geneIdListForCopy"
+        />
       </div>
       <div class="display_settings_wrapper">
         <button class="show_all_btn" @click="$emit('toggleDisplaySettings')">

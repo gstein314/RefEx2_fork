@@ -20,6 +20,10 @@
         type: String,
         default: 'Copy',
       },
+      content: {
+        type: String,
+        default: '',
+      },
     },
     data() {
       return {
@@ -28,7 +32,7 @@
     },
     methods: {
       copyLink() {
-        navigator.clipboard.writeText(window.location.href);
+        navigator.clipboard.writeText(this.content);
         this.isTextCopied = true;
         setTimeout(() => {
           this.isTextCopied = !this.isTextCopied;
