@@ -36,12 +36,22 @@
             :key="index"
           >
             <template v-if="filter.column === 'geneid'">
-              <span
+              <VDropdown
                 v-if="geneIdListForCopy.length > 0"
-                class="copy_button"
-                @click="copyToClipboard(geneIdListForCopy)"
-                >{{ filter.label }}<font-awesome-icon :icon="['far', 'copy']"
-              /></span>
+                placement="top"
+                :delay="{ hide: 500 }"
+                :hide-triggers="triggers => [...triggers, 'hover']"
+              >
+                <span
+                  class="copy_button"
+                  @click="copyToClipboard(geneIdListForCopy)"
+                  >{{ filter.label }}<font-awesome-icon :icon="['far', 'copy']"
+                /></span>
+                <template #popper
+                  ><span>Gene ID(s) are copied!!</span></template
+                >
+              </VDropdown>
+
               <span v-else>{{ filter.label }}</span>
             </template>
             <template v-else>
