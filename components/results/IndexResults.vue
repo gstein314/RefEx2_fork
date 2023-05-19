@@ -29,8 +29,8 @@
         </button>
       </div>
     </div>
-    <table>
-      <thead>
+    <table :data-cy="`${$vnode.key}_index_table`">
+      <thead :data-cy="`${$vnode.key}_index_thead`">
         <tr>
           <th class="checkbox">
             <input
