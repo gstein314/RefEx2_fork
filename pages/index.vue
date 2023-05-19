@@ -31,3 +31,7 @@
     },
   };
 </script>
+
+<style lang="sass">
+  +popper
+</style>

@@ -44,7 +44,7 @@
               :file-name="tsvTitle"
               :fields-array="projectTableHead"
             />
-            <ShareButton />
+            <CopyButton icon="link" text="Share" :content="currentUrl" />
           </div>
           <div class="align_right">
             <button class="reset_btn" :class="isNoSort" @click="clearSortArray">
@@ -431,6 +431,9 @@
           resultsDisplayed.push(filtered);
         }
         return resultsDisplayed;
+      },
+      currentUrl() {
+        return window.location.href;
       },
     },
     created() {

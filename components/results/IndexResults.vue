@@ -12,6 +12,16 @@
           :fields-array="indexTableHead"
           :disabled="resultsDisplayed.length === 0"
         />
+        <CopyButton
+          v-if="filterType === 'gene'"
+          icon="copy"
+          text="Copy Gene ID(s)"
+          :content="geneIdListForCopy"
+          :disabled="
+            !filtersDisplayed.includes('geneid') ||
+            resultsDisplayed.length === 0
+          "
+        />
       </div>
       <div class="display_settings_wrapper">
         <button class="show_all_btn" @click="$emit('toggleDisplaySettings')">
@@ -20,7 +30,6 @@
         </button>
       </div>
     </div>
-
     <table :data-cy="`${$vnode.key}_index_table`">
       <thead :data-cy="`${$vnode.key}_index_thead`">
         <tr>
@@ -264,6 +273,10 @@
         const today = this.$getToday();
         return `RefEx2_${this.activeSpecie.species}_${this.activeDataset.dataset}_${this.filterType}_search_results_${today}.tsv`;
       },
+      geneIdListForCopy() {
+        const geneIdList = this.resultsCached?.map(({ geneid }) => geneid);
+        return geneIdList.join('\r\n');
+      },
     },
     watch: {
       activeDataset() {
@@ -293,6 +306,9 @@
         setPageType: 'set_page_type',
         setCheckedResults: 'set_checked_results',
       }),
+      copyToClipboard(target) {
+        navigator.clipboard.writeText(target);
+      },
       moveToProjectPage(route) {
         this.$nuxt.$loading.start();
         this.$router.push(this.routeToProjectPage(route));
@@ -347,6 +363,10 @@
           white-space: nowrap
     > table
       +table
+      .copy_button
+        cursor: pointer
+        > svg
+          margin-left: 5px
       > tbody
         > .warning
           +warning

@@ -1,37 +1,51 @@
 <template>
   <button
-    :class="{ share_btn_complete: copyText }"
-    class="share_btn"
+    :class="{ copy_btn_complete: isTextCopied }"
+    class="copy_btn"
     @click="copyLink"
   >
-    <font-awesome-icon icon="link" />
-    Share
+    <font-awesome-icon :icon="icon" />
+    {{ text }}
   </button>
 </template>
 
 <script>
   export default {
+    props: {
+      icon: {
+        type: String,
+        default: 'copy',
+      },
+      text: {
+        type: String,
+        default: 'Copy',
+      },
+      content: {
+        type: String,
+        default: '',
+      },
+    },
     data() {
       return {
-        copyText: false,
+        isTextCopied: false,
       };
     },
     methods: {
       copyLink() {
-        navigator.clipboard.writeText(window.location.href);
-        this.copyText = true;
+        navigator.clipboard.writeText(this.content);
+        this.isTextCopied = true;
         setTimeout(() => {
-          this.copyText = !this.copyText;
+          this.isTextCopied = !this.isTextCopied;
         }, '1000');
       },
     },
   };
 </script>
 <style lang="sass" scoped>
-  .share_btn
+  .copy_btn
     +button
     position: relative
-  .share_btn_complete::before
+  .copy_btn_complete::before
     content: 'Copied'
     position: absolute
     background-color: $WARNING_BUTTON_COLOR
@@ -43,7 +57,8 @@
     right: 0
     border-radius: 5px
     margin: auto
-  .share_btn_complete::after
+    z-index: $TOOLTIP_LAYER
+  .copy_btn_complete::after
     content: ''
     position: absolute
     background-color: $WARNING_BUTTON_COLOR
@@ -54,4 +69,5 @@
     margin: auto
     top: 27px
     clip-path: polygon(50% 0,100% 50%,0% 50%)
+    z-index: $TOOLTIP_LAYER
 </style>

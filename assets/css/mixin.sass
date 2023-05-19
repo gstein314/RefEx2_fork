@@ -102,6 +102,7 @@ $TOOLTIP_LAYER: 2
   align-items: center
   gap: 5px
   transition: background 0.3s ease-in-out
+  white-space: nowrap
   &:focus
     outline: none
   &:hover
@@ -304,22 +305,23 @@ $TOOLTIP_LAYER: 2
   z-index: $TOOLTIP_LAYER
 
 @mixin popper
-  .v-popper--theme-tooltip .v-popper__inner
-    background: $WHITE
-    border: 1px solid $MAIN_COLOR
-    color: $BLACK
-    padding: 3px 8px
-    border-radius: 3px
-    box-shadow: 0 1px 4px rgba(62, 70, 82, .22)
-    z-index: $TOOLTIP_LAYER
-  .v-popper--theme-tooltip .v-popper__arrow-inner
-    z-index: 10
-    visibility: visible
-    border-color: $WHITE
-  .v-popper--theme-tooltip .v-popper__arrow-outer
-    border-color: $MAIN_COLOR
-  .v-popper__arrow-container
-    height: 0
+  .v-popper--theme-tooltip,.v-popper--theme-dropdown,.v-popper__wrapper
+    .v-popper__inner
+      background: $WHITE
+      border: 1px solid $MAIN_COLOR
+      color: $BLACK
+      padding: 3px 8px
+      border-radius: 3px
+      box-shadow: 0 1px 4px rgba(62, 70, 82, .22)
+      z-index: $TOOLTIP_LAYER
+    .v-popper__arrow-inner
+      z-index: 10
+      visibility: visible
+      border-color: $WHITE
+    .v-popper__arrow-outer
+      border-color: $MAIN_COLOR
+    .v-popper__arrow-container
+      height: 0
 
 // ! The suggestions overflowed don't get highlighted
 @mixin scrollable-suggestions
