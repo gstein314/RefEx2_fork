@@ -6,6 +6,7 @@
         <ComparisonButton />
         <DownloadButton
           ref="downloadButton"
+          :data-cy="`${$vnode.key}_download_button`"
           :download-data="resultsDisplayed"
           :file-name="tsvTitle"
           :fields-array="indexTableHead"
@@ -49,7 +50,7 @@
           </th>
         </tr>
       </thead>
-      <tbody>
+      <tbody :data-cy="`${$vnode.key}_index_tbody`">
         <td
           v-if="resultsCached.length === 0"
           class="warning"
@@ -69,6 +70,7 @@
           v-for="(result, resultIndex) in pageItems"
           v-else
           :key="`result_${resultIndex}`"
+          :data-cy="`${$vnode.key}_index_result_${resultIndex}`"
         >
           <td class="checkbox" @click="e => e.stopPropagation()">
             <input

@@ -409,6 +409,17 @@ A specie consists of the following attributes:
 - make sure all SVG icons do not have a `fill` color set otherwise the `components/icons/IconBase` will not be able to alter the color.
 - if the SVG icon makes use of `stroke`, set `strokeColor` as a prop and use it for all strokes of the icon. (see `components/icons/IconOryzasativa` for an example)
 
+## Test Framework
+
+### Cypress
+
+`/cypress.config.js`: The configuration file for Cypress.
+`/cypress/component` : Contains component test files.
+`/cypress/e2e` : Contains E2E test files.
+`/cypress/support/commands.js` : Contains custom global functions that can be used in all tests.
+More information about the usage in [Cypress](https://docs.cypress.io/).
+
+
 ## Folders
 
 ### `components`
@@ -460,4 +471,3 @@ More information about the usage of this directory in [the documentation](https:
 
 This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
 More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
-

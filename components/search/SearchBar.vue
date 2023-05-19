@@ -7,6 +7,7 @@
       <button
         class="reset_all_btn"
         :disabled="isInitialState"
+        :data-cy="`${$vnode.key}_reset_all_button`"
         @click="resetAllSearchConditions"
       >
         <font-awesome-icon icon="rotate-right" />
@@ -22,6 +23,7 @@
             v-for="(example, example_index) of condition.examples"
             :key="example_index"
             class="sample_value"
+            :data-cy="`${$vnode.key}_example_${index}`"
             @click="
               updateParams({
                 ...parameters,
@@ -44,6 +46,7 @@
       :list="updateSuggestions"
       :max-suggestions="20"
       class="text_search_name"
+      :data-cy="`${$vnode.key}_main_input`"
       :placeholder="filterPlaceholder(filterType)"
       @select="moveDetailpage"
       @show-list="setAlternativeSearchShouldShow(true)"
@@ -116,7 +119,7 @@
     <template v-else-if="filterType === 'sample'">
       <div class="summary_check_wrapper"></div>
     </template>
-    <ScreenerView ref="screenerView">
+    <ScreenerView ref="screenerView" :key="$vnode.key">
       <component
         :is="`screener-view-${filterType}`"
         @updateParameters="updateParams"
@@ -239,10 +242,7 @@
     watch: {
       parameters: {
         handler: function () {
-          this.$emit(
-            'updateValiditySearch',
-            !Object.values(this.parameters).every(value => !Boolean(value))
-          );
+          this.$emit('updateValiditySearch', !this.isInitialState);
           this.showResults('numfound');
         },
         deep: true,
