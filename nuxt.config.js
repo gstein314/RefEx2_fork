@@ -1,5 +1,6 @@
 import datasets from './refex-sample/datasets.json';
 import { exponentialDelay } from 'axios-retry';
+import createAttributeRemover from 'vue-remove-attributes';
 
 const isProduction = process.env.NODE_ENV == 'production';
 const href = isProduction ? '/RefEx2/favicon.ico' : '/favicon.ico';
@@ -73,6 +74,16 @@ export default {
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
     vendor: ['@johmun/vue-tags-input'],
+    extend({ module }) {
+      if (process.env.NODE_ENV === 'production') {
+        const vueLoader = module.rules.find(rule =>
+          rule.loader.match(/vue-loader/)
+        );
+        vueLoader.options.compilerOptions = {
+          modules: [createAttributeRemover(/^(:)?data-(cy|test|testid)$/)],
+        };
+      }
+    },
   },
 
   generate: {

@@ -1,10 +1,11 @@
 <template>
-  <div class="filter">
+  <div class="filter" :data-cy="`${filter.type.toLowerCase()}_filter`">
     <div class="filter_title">
       <div>
         Filter by {{ filter.name }}
         <font-awesome-icon
           v-tooltip="'This is Filter by ' + filter.name"
+          data-cy="filter_tooltip"
           icon="info-circle"
         />
       </div>
@@ -27,6 +28,7 @@
                 <font-awesome-icon
                   v-if="isEntropy(column.id)"
                   v-tooltip="'Range: 1-5'"
+                  data-cy="entropy_tooltip"
                   icon="info-circle"
                 />
                 <WarningMessage
@@ -54,6 +56,9 @@
                   warning:
                     column.isRequired && !isValidInput(column.id, itemIndex),
                 }"
+                :data-cy="`${filter.type.toLowerCase()}_${
+                  column.id
+                }_${itemIndex}`"
               >
                 <select
                   v-if="column.inputType === 'dropdown'"
