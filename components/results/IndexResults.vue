@@ -6,10 +6,21 @@
         <ComparisonButton />
         <DownloadButton
           ref="downloadButton"
+          :data-cy="`${$vnode.key}_download_button`"
           :download-data="resultsDisplayed"
           :file-name="tsvTitle"
           :fields-array="indexTableHead"
           :disabled="resultsDisplayed.length === 0"
+        />
+        <CopyButton
+          v-if="filterType === 'gene'"
+          icon="copy"
+          text="Copy Gene ID(s)"
+          :content="geneIdListForCopy"
+          :disabled="
+            !filtersDisplayed.includes('geneid') ||
+            resultsDisplayed.length === 0
+          "
         />
       </div>
       <div class="display_settings_wrapper">
@@ -19,9 +30,8 @@
         </button>
       </div>
     </div>
-
-    <table>
-      <thead>
+    <table :data-cy="`${$vnode.key}_index_table`">
+      <thead :data-cy="`${$vnode.key}_index_thead`">
         <tr>
           <th class="checkbox">
             <input
@@ -40,7 +50,7 @@
           </th>
         </tr>
       </thead>
-      <tbody>
+      <tbody :data-cy="`${$vnode.key}_index_tbody`">
         <td
           v-if="resultsCached.length === 0"
           class="warning"
@@ -60,6 +70,7 @@
           v-for="(result, resultIndex) in pageItems"
           v-else
           :key="`result_${resultIndex}`"
+          :data-cy="`${$vnode.key}_index_result_${resultIndex}`"
         >
           <td class="checkbox" @click="e => e.stopPropagation()">
             <input
@@ -262,6 +273,10 @@
         const today = this.$getToday();
         return `RefEx2_${this.activeSpecie.species}_${this.activeDataset.dataset}_${this.filterType}_search_results_${today}.tsv`;
       },
+      geneIdListForCopy() {
+        const geneIdList = this.resultsCached?.map(({ geneid }) => geneid);
+        return geneIdList.join('\r\n');
+      },
     },
     watch: {
       activeDataset() {
@@ -291,6 +306,9 @@
         setPageType: 'set_page_type',
         setCheckedResults: 'set_checked_results',
       }),
+      copyToClipboard(target) {
+        navigator.clipboard.writeText(target);
+      },
       moveToProjectPage(route) {
         this.$nuxt.$loading.start();
         this.$router.push(this.routeToProjectPage(route));
@@ -345,6 +363,10 @@
           white-space: nowrap
     > table
       +table
+      .copy_button
+        cursor: pointer
+        > svg
+          margin-left: 5px
       > tbody
         > .warning
           +warning

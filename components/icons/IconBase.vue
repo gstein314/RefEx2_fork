@@ -1,27 +1,16 @@
 <template>
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    :width="size[0]"
-    :height="size[1]"
-    :viewBox="`0 0 ${size[0]} ${size[1]}`"
-    :aria-labelledby="iconName"
-    role="presentation"
-  >
-    <title :id="iconName" lang="en">{{ iconName }} icon</title>
-    <g :fill="iconColor">
-      <component :is="iconComponent" :stroke-color="iconColor" />
-    </g>
-  </svg>
+  <div class="svg_wrapper">
+    <img
+      :src="require(`~/assets/img/${iconName}.svg`)"
+      :style="{
+        width: `${wrapperSize}px`,
+        height: `${wrapperSize}px`,
+      }"
+      :alt="iconName"
+    />
+  </div>
 </template>
 <script>
-  const sizeMap = new Map([
-    ['Human', [24, 62]],
-    ['Mouse', [63, 24]],
-    ['drosophilidae', [36, 18]],
-    ['oryza_sativa', [42, 71]],
-    ['bombyx_mori', [43, 10]],
-  ]);
-
   export default {
     props: {
       iconName: {
@@ -34,19 +23,26 @@
       },
     },
     computed: {
-      size() {
-        return sizeMap.get(this.iconName) ?? [24, 62];
-      },
-      parsedName() {
-        return this.iconName
-          .split('_')
-          .map(word => this.$firstLetterUppercase(word))
-          .join('');
-      },
-      iconComponent() {
-        import(`~/components/icons/Icon${this.parsedName}.vue`);
-        return () => import(`~/components/icons/Icon${this.parsedName}.vue`);
+      wrapperSize() {
+        const sizeMap = {
+          XS: 15,
+          S: 30,
+          default: 60,
+        };
+        const resizeMap = {
+          Mouse: 'S',
+        };
+        if (resizeMap[this.iconName]) return sizeMap[resizeMap[this.iconName]];
+        return sizeMap.default;
       },
     },
   };
 </script>
+<style lang="sass" scoped>
+  .svg_wrapper
+    display: flex
+    align-items: center
+    justify-content: center
+    width: 60px
+    height: 60px
+</style>

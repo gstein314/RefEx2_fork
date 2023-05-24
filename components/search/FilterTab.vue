@@ -21,6 +21,7 @@
               update: !tableDataIsSameAsScreener,
             }"
             :disabled="!validSearch"
+            :data-cy="`${$vnode.key}_find_results_button`"
             @click="showSearchResult($vnode.key)"
           >
             <font-awesome-icon icon="search" />
