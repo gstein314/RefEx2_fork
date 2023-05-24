@@ -22,18 +22,37 @@
               icon="info-circle"
               @click="setGeneModal(items[0].id)"
             />
+            <font-awesome-icon
+              v-else-if="filterType === 'sample'"
+              icon="info-circle"
+              @click="setSampleModal(items[0].id)"
+            />
           </div>
           <span v-if="filterType === 'gene'" class="metadata">{{
             `(${infoForMainItem.name}, Gene ID: ${infoForMainItem.id})`
           }}</span>
+          <span v-else-if="filterType === 'sample'" class="metadata">{{
+            `(Sample ID: ${infoForMainItem.sample_id})`
+          }}</span>
         </h1>
         <item-comparison
+          v-if="filterType === 'gene'"
           :items="items"
           :active-id="selectedId"
           :display-info-button="filterType === 'gene'"
           :project-sort-columns="projectSortColumns"
           @select="updateSelectedItem"
           @showModal="setGeneModal"
+        >
+        </item-comparison>
+        <item-comparison
+          v-else-if="filterType === 'sample'"
+          :items="items"
+          :active-id="selectedId"
+          :display-info-button="filterType === 'sample'"
+          :project-sort-columns="projectSortColumns"
+          @select="updateSelectedItem"
+          @showModal="setSampleModal"
         >
         </item-comparison>
         <div class="results_title_wrapper">
@@ -65,6 +84,7 @@
     />
     <ModalViewFilter />
     <ModalViewGene />
+    <ModalViewSample />
     <ModalViewCompare />
     <project-results
       ref="results"
@@ -96,6 +116,7 @@
   import { mapGetters, mapMutations } from 'vuex';
   import ItemComparison from '~/components/results/ItemComparison.vue';
   import ModalViewGene from '~/components/ModalView/ModalViewGene.vue';
+  import ModalViewSample from '~/components/ModalView/ModalViewSample.vue';
   import ModalViewCompare from '~/components/ModalView/ModalViewCompare.vue';
   import ModalViewDisplay from '~/components/ModalView/ModalViewDisplay.vue';
   import ModalViewFilter from '~/components/ModalView/ModalViewFilter.vue';
@@ -463,6 +484,7 @@
     methods: {
       ...mapMutations({
         setGeneModal: 'set_gene_modal',
+        setSampleModal: 'set_sample_modal',
       }),
       toggleDisplaySettings() {
         this.isDisplaySettingsOn = !this.isDisplaySettingsOn;

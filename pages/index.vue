@@ -3,6 +3,7 @@
     <LocalNavigation />
     <FilterTab v-for="filter of filters" :key="filter.name" />
     <ModalViewGene />
+    <ModalViewSample />
     <ModalViewCompare ref="ModalViewCompare" />
     <ModalViewAlert />
   </div>
@@ -10,6 +11,7 @@
 
 <script>
   import ModalViewGene from '~/components/ModalView/ModalViewGene.vue';
+  import ModalViewSample from '~/components/ModalView/ModalViewSample.vue';
   import ModalViewCompare from '~/components/ModalView/ModalViewCompare.vue';
   import LocalNavigation from '~/components/search/LocalNavigation/LocalNavigation.vue';
   import FilterTab from '~/components/search/FilterTab.vue';
@@ -19,6 +21,7 @@
   export default {
     components: {
       ModalViewGene,
+      ModalViewSample,
       ModalViewCompare,
       LocalNavigation,
       FilterTab,
