@@ -36,7 +36,7 @@
         this.isTextCopied = true;
         setTimeout(() => {
           this.isTextCopied = !this.isTextCopied;
-        }, '1000');
+        }, '500');
       },
     },
   };
@@ -51,8 +51,8 @@
     background-color: $WARNING_BUTTON_COLOR
     color: $WHITE
     width: max-content
-    padding: 10px
-    top: 30px
+    padding: 5px 8px
+    top: -30px
     left: 0
     right: 0
     border-radius: 5px
@@ -67,7 +67,8 @@
     left: 0
     right: 0
     margin: auto
-    top: 27px
+    top: -8px
     clip-path: polygon(50% 0,100% 50%,0% 50%)
+    transform: rotate(180deg)
     z-index: $TOOLTIP_LAYER
 </style>
