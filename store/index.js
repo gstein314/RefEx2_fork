@@ -50,6 +50,7 @@ export const state = () => ({
   },
   filter_modal: null,
   gene_modal: null,
+  sample_modal: null,
   alert_modal: { isOn: false, msg: '' },
   compare_modal: false,
   project_results: {
@@ -124,6 +125,9 @@ export const getters = {
   },
   gene_modal(state) {
     return state.gene_modal;
+  },
+  sample_modal(state) {
+    return state.sample_modal;
   },
   dataset_by_name: state => name => {
     return state.active_specie.datasets.find(x => x.dataset === name);
@@ -229,6 +233,9 @@ export const mutations = {
   },
   set_gene_modal(state, id = null) {
     state.gene_modal = id;
+  },
+  set_sample_modal(state, id = null) {
+    state.sample_modal = id;
   },
   set_alert_modal(state, { msg = '', bool = true }) {
     state.alert_modal.msg = msg;
