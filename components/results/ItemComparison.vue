@@ -12,7 +12,7 @@
         v-if="displayInfoButton"
         class="info"
         icon="info-circle"
-        @click="$emit('showModal', item.id)"
+        @click.stop="$emit('showModal', item.id)"
       />
       <font-awesome-icon
         v-if="isMedianSort(item.id)"

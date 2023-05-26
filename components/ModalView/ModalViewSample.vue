@@ -9,74 +9,26 @@
           ><span>{{ `SampleID: ${id}` }}</span></a
         >
         <div class="detail_contents">
-          <p class="title">Sample Data</p>
-          <p
-            v-if="data.alias && typeof data.alias === 'object'"
-            class="contents"
-          >
-            <span v-for="(alias, index) in data.alias" :key="index">
-              <span>{{ alias }}</span>
-              <span v-if="index !== data.alias.length - 1" class="comma"
-                >,</span
-              >
-            </span>
-          </p>
-          <p v-else class="contents">
+          <p class="title">Description</p>
+          <p class="contents"></p>
+          <p class="title">Sample type</p>
+          <p class="contents">
             <span>{{ data.alias }}</span>
           </p>
-          <p class="title">Sample Data</p>
-          <p class="contents">{{ data.type_of_gene }}</p>
-          <p class="title">Sample Data</p>
-          <p class="contents">{{ data.summary }}</p>
-          <p class="title">Sample Data</p>
-          <p v-if="data.refseq" class="contents">
-            <span v-if="typeof data.refseq.rna === 'object'">
-              <span v-for="(rna, index) in data.refseq.rna" :key="index">
-                <a
-                  :href="`https://www.ncbi.nlm.nih.gov/gene/?term=${rna}`"
-                  target="_blank"
-                  >{{ rna }}</a
-                >
-                <span v-if="index !== data.refseq.rna.length - 1" class="comma"
-                  >,</span
-                >
-              </span>
-            </span>
-            <span v-else>
-              <a
-                :href="`https://www.ncbi.nlm.nih.gov/gene/?term=${data.refseq.rna}`"
-                target="_blank"
-                >{{ data.refseq.rna }}</a
-              >
-            </span>
-          </p>
-          <p class="title">Sample Data</p>
-          <div v-if="data.ensembl">
-            <p v-if="Array.isArray(data.ensembl)" class="contents">
-              <span v-for="index in data.ensembl.length" :key="index">
-                <a
-                  :href="`http://asia.ensembl.org/Multi/Search/Results?q=${
-                    data.ensembl[index - 1].gene
-                  };site=enssembl`"
-                  target="_blank"
-                  >{{ data.ensembl[index - 1].gene }}</a
-                >
-                <span v-if="index !== data.ensembl.length" class="comma"
-                  >,</span
-                >
-              </span>
-            </p>
-            <p v-else class="contents">
-              <span>
-                <a
-                  :href="`http://asia.ensembl.org/Multi/Search/Results?q=${data.ensembl.gene};site=enssembl`"
-                  target="_blank"
-                  >{{ data.ensembl.gene }}</a
-                >
-              </span>
-            </p>
-          </div>
-          <p class="title">Sample Data</p>
+          <p class="title">Experiment</p>
+          <p class="contents"></p>
+          <p class="title">Tissue</p>
+          <p class="contents"></p>
+          <p class="title">Cell type</p>
+          <p class="contents"></p>
+          <p class="title">Disease</p>
+          <p class="contents"></p>
+          <p class="title">Developmental stage</p>
+          <p class="contents"></p>
+          <p class="title">Sex</p>
+          <p class="contents"></p>
+          <p class="title">Bio Sample</p>
+          <p class="contents"></p>
         </div>
       </div>
       <p v-else class="loading">Loading...</p>
