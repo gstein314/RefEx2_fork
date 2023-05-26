@@ -251,6 +251,7 @@
         this.$set(this.parameters, 'text', '');
         this.typeOfQuery = 'reset numfound';
         this.resetAllSearchConditions();
+        this.updateSearchCondition();
       },
       isSummaryIncluded() {
         this.updateSuggestions();
