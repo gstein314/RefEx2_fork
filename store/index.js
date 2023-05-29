@@ -20,12 +20,10 @@ const default_search_conditions = () => {
     gene: {
       text: '',
       summary: '',
-      chr: '',
-      tog: '',
+      chromosomePosition: '',
+      typeOfGene: '',
       go: '',
-      tpm: '',
-      roku: '',
-      tau: '',
+      filter: '',
     },
     sample: {
       text: '',
