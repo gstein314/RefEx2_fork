@@ -346,7 +346,6 @@
         this.typeOfQuery = type;
         let results;
         let results_num = 0;
-
         if (this.isSummaryIncluded && this.parameters.text.length === 0)
           this.isSummaryIncluded = false;
         this.$axios

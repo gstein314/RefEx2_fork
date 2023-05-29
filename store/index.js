@@ -286,7 +286,16 @@ export const mutations = {
     state.search_conditions[items.type][items.item] = items.value;
   },
   reset_search_conditions(state) {
-    state.search_conditions = default_search_conditions();
+    const currentSampleScreener = state.active_dataset.sample.filter
+      .map(obj => obj.column)
+      .reduce((converted, item) => {
+        converted[item] = '';
+        return converted;
+      }, {});
+    state.search_conditions = {
+      gene: default_search_conditions().gene,
+      sample: currentSampleScreener,
+    };
   },
   set_screener_filter_list(state, screener_filter_list) {
     state.screener_filter_list = screener_filter_list;
