@@ -6,15 +6,12 @@
           class="sample_name"
           :href="`https://www.ncbi.nlm.nih.gov/gene/?term=${id}`"
           target="_blank"
-          ><span>{{ `SampleID: ${id}` }}</span></a
+          ><span>{{ `Sample ID: ${id}` }}</span></a
         >
         <div class="detail_contents">
           <p class="title">Description</p>
           <p class="contents"></p>
           <p class="title">Sample type</p>
-          <p class="contents">
-            <span>{{ data.alias }}</span>
-          </p>
           <p class="title">Experiment</p>
           <p class="contents"></p>
           <p class="title">Tissue</p>
@@ -28,7 +25,19 @@
           <p class="title">Sex</p>
           <p class="contents"></p>
           <p class="title">Bio Sample</p>
-          <p class="contents"></p>
+          <p class="contents">
+            <span
+              v-for="(alias, index) in JSON.parse(data.BioSampleId)"
+              :key="index"
+            >
+              <span>{{ alias }}</span>
+              <span
+                v-if="index !== JSON.parse(data.BioSampleId).length - 1"
+                class="comma"
+                >,</span
+              >
+            </span>
+          </p>
         </div>
       </div>
       <p v-else class="loading">Loading...</p>
@@ -53,22 +62,27 @@
     computed: {
       ...mapGetters({
         id: 'sample_modal',
+        activeDataset: 'active_dataset',
       }),
     },
     watch: {
       async id() {
         if (this.id === null) return;
         this.isLoading = true;
-        // await this.$axios
-        //   .$get(`https://mygene.info/v3/gene/${this.id}`)
-        //   .then(data => {
-        //     this.data = data;
-        //   })
-        //   .catch(_error => {
-        //     this.setAlertModal({
-        //       msg: 'Failed to get data in Modal View Sample',
-        //     });
-        //   });
+        await this.$axios
+          .$get(
+            `https://refex2-api.dbcls.jp/api/sample/${
+              this.id
+            }?dataset=${this.activeDataset.dataset.toLowerCase()}`
+          )
+          .then(data => {
+            this.data = data.sample_info;
+          })
+          .catch(_error => {
+            this.setAlertModal({
+              msg: 'Failed to get data in Modal View Sample',
+            });
+          });
 
         this.isLoading = false;
       },
