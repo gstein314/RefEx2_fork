@@ -2,42 +2,33 @@
   <modal-view v-if="id" @click.native="setSampleModal()">
     <div class="modal_wrapper" @click.stop="">
       <div v-if="!isLoading" class="sample_detail">
-        <a
-          class="sample_name"
-          :href="`https://www.ncbi.nlm.nih.gov/gene/?term=${id}`"
-          target="_blank"
-          ><span>{{ `Sample ID: ${id}` }}</span></a
-        >
-        <div class="detail_contents">
-          <p class="title">Description</p>
-          <p class="contents"></p>
-          <p class="title">Sample type</p>
-          <p class="title">Experiment</p>
-          <p class="contents"></p>
-          <p class="title">Tissue</p>
-          <p class="contents"></p>
-          <p class="title">Cell type</p>
-          <p class="contents"></p>
-          <p class="title">Disease</p>
-          <p class="contents"></p>
-          <p class="title">Developmental stage</p>
-          <p class="contents"></p>
-          <p class="title">Sex</p>
-          <p class="contents"></p>
-          <p class="title">Bio Sample</p>
-          <p class="contents">
-            <span
-              v-for="(alias, index) in JSON.parse(data.BioSampleId)"
-              :key="index"
-            >
-              <span>{{ alias }}</span>
+        <p class="sample_name">
+          {{ ` ${data.Description} (Sample ID: ${id})` }}
+        </p>
+        <div v-for="(value, key) in data" :key="key" class="detail_contents">
+          <template
+            v-if="key === 'RefexSampleId' || key === 'Description'"
+          ></template>
+          <template v-else-if="key === 'BioSampleId'">
+            <p class="title">{{ key }}</p>
+            <p class="contents">
               <span
-                v-if="index !== JSON.parse(data.BioSampleId).length - 1"
-                class="comma"
-                >,</span
+                v-for="(biosample, index) in JSON.parse(value)"
+                :key="index"
               >
-            </span>
-          </p>
+                <span>{{ biosample }}</span>
+                <span
+                  v-if="index !== JSON.parse(value).length - 1"
+                  class="comma"
+                  >,</span
+                >
+              </span>
+            </p>
+          </template>
+          <template v-else>
+            <p class="title">{{ key }}</p>
+            <p class="contents">{{ value }}</p>
+          </template>
         </div>
       </div>
       <p v-else class="loading">Loading...</p>
@@ -83,7 +74,6 @@
               msg: 'Failed to get data in Modal View Sample',
             });
           });
-
         this.isLoading = false;
       },
     },
@@ -92,18 +82,14 @@
         setSampleModal: 'set_sample_modal',
         setAlertModal: 'set_alert_modal',
       }),
-      isArrayExpression(type) {
-        return `${type.id}: ${type.term}: ${type.evidence}: ${type.qualifier}`;
-      },
-      notArrayExpression(type) {
-        return `${this.data.go[type].id}: ${this.data.go[type].term}: ${this.data.go[type].evidence}: ${this.data.go[type].qualifier}`;
-      },
     },
   };
 </script>
 
 <style lang="sass">
   a
+    color: $MAIN_COLOR
+  .sample_name
     color: $MAIN_COLOR
   .modal_wrapper
     +modal

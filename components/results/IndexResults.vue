@@ -87,6 +87,10 @@
             >
               <font-awesome-icon icon="flask" />
               {{ result.Description }}
+              <font-awesome-icon
+                icon="info-circle"
+                @click.stop="setSampleModal(result['refexSampleId'])"
+              />
             </a>
           </td>
           <td
@@ -303,6 +307,7 @@
     methods: {
       ...mapMutations({
         setGeneModal: 'set_gene_modal',
+        setSampleModal: 'set_sample_modal',
         setPageType: 'set_page_type',
         setCheckedResults: 'set_checked_results',
       }),
