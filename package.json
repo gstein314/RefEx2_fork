@@ -9,9 +9,7 @@
     "generate": "nuxt generate",
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
     "lint": "npm run lint:js",
-    "lint:fix": "eslint --ext .ts,.js,.vue . --fix",
-    "deploy": "push-dir --dir=refex --branch=gh-pages --cleanup",
-    "cy:open": "cypress open",
+    "lint:fix": "eslint --ext .ts,.js,.vue . --fix",    "cy:open": "cypress open",
     "cy:run": "cypress run --browser=chrome"
   },
   "dependencies": {
@@ -51,9 +49,8 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.4.1",
     "fibers": "^5.0.1",
-    "node-sass": "^6.0.1",
+    "node-sass": "^8.0.0",
     "nuxt-fontawesome": "^0.4.0",
-    "push-dir": "^0.4.1",
     "sass": "^1.49.7",
     "sass-loader": "^10.2.1",
     "vue-remove-attributes": "^1.0.3",
