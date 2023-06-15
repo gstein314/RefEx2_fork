@@ -211,7 +211,7 @@
       chrValue() {
         const chrCondition = {
           type: 'gene',
-          item: 'chr',
+          item: 'chromosomePosition',
           value: this.chrValue,
         };
         this.setSearchConditions(chrCondition);
@@ -220,7 +220,7 @@
       TOGValue() {
         const TOGCondition = {
           type: 'gene',
-          item: 'tog',
+          item: 'typeOfGene',
           value: this.TOGValue,
         };
         this.setSearchConditions(TOGCondition);
@@ -243,10 +243,10 @@
     },
     mounted() {
       // TODO: https://github.com/dbcls/RefEx2/issues/141
-      if (this.searchConditions.gene.chr)
-        this.chrValue = this.searchConditions.gene.chr;
-      if (this.searchConditions.gene.tog)
-        this.TOGValue = this.searchConditions.gene.tog;
+      if (this.searchConditions.gene.chromosomePosition)
+        this.chrValue = this.searchConditions.gene.chromosomePosition;
+      if (this.searchConditions.gene.typeOfGene)
+        this.TOGValue = this.searchConditions.gene.typeOfGene;
       if (this.searchConditions.gene.go)
         this.setTags(this.searchConditions.gene.go, 'go');
       if (this.searchConditions.gene.filter)

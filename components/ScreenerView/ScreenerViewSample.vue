@@ -110,13 +110,7 @@
         this.setAutoComplete();
         const sample_conditions = this.searchConditions.sample;
         this.parameters = {
-          SampleTypeCategory: sample_conditions.SampleTypeCategory,
-          ExperimentCategory: sample_conditions.ExperimentCategory,
-          UberonLabel: sample_conditions.UberonLabel,
-          ClLabel: sample_conditions.ClLabel,
-          NcitLabel: sample_conditions.NcitLabel,
-          DevelopmentalStage: sample_conditions.DevelopmentalStage,
-          Sex: sample_conditions.Sex,
+          ...sample_conditions,
         };
         this.emitUpdateParameters();
       });

@@ -32,7 +32,7 @@
             `(${infoForMainItem.name}, Gene ID: ${infoForMainItem.id})`
           }}</span>
           <span v-else-if="filterType === 'sample'" class="metadata">{{
-            `(Sample ID: ${infoForMainItem.sample_id})`
+            `(Sample ID: ${infoForMainItem.RefexSampleId})`
           }}</span>
         </h1>
         <item-comparison
