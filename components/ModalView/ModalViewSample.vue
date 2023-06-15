@@ -9,8 +9,12 @@
           <template
             v-if="key === 'RefexSampleId' || key === 'Description'"
           ></template>
+          <template v-else-if="key === 'NumberOfSamples'"
+            ><p class="title">Number of Samples</p>
+            <p class="contents">{{ value }}</p></template
+          >
           <template v-else-if="key === 'BioSampleId'">
-            <p class="title">{{ key }}</p>
+            <p class="title">BioSample ID</p>
             <p class="contents">
               <span
                 v-for="(biosample, index) in JSON.parse(value)"
@@ -26,7 +30,7 @@
             </p>
           </template>
           <template v-else>
-            <p class="title">{{ key }}</p>
+            <p class="title">{{ getColumnLabel(key) }}</p>
             <p class="contents">{{ value }}</p>
           </template>
         </div>
@@ -39,6 +43,7 @@
 <script>
   import ModalView from '~/components/ModalView/ModalView.vue';
   import { mapGetters, mapMutations } from 'vuex';
+  import datasets from '~/refex-sample/datasets.json';
 
   export default {
     components: {
@@ -82,6 +87,16 @@
         setSampleModal: 'set_sample_modal',
         setAlertModal: 'set_alert_modal',
       }),
+      getColumnLabel(column) {
+        const sampleFilter =
+          datasets
+            .flatMap(data => data.datasets)
+            .find(index => index.dataset === this.activeDataset.dataset)?.sample
+            .filter || [];
+        const data = Object.values(sampleFilter);
+        const match = data.find(item => item.column === column);
+        return match ? match.label : column;
+      },
     },
   };
 </script>
