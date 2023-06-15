@@ -31,6 +31,7 @@
         };
         const resizeMap = {
           Mouse: 'S',
+          Fruitfly: 'S',
         };
         if (resizeMap[this.iconName]) return sizeMap[resizeMap[this.iconName]];
         return sizeMap.default;
