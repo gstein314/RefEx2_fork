@@ -1078,5 +1078,71 @@
         "specificity": []
       }
     ]
+  },
+  {
+    "species": "Drosophila melanogaster",
+    "search_conditions": [
+      { "label": "Gene Name", "examples": ["transcription factor"] },
+      { "label": "Symbol", "examples": ["Mt2"] },
+      { "label": "Summary", "examples": ["antenna"] }
+    ],
+    "datasets": [
+      {
+        "dataset": "droso2017",
+        "label": "Drosophila transcriptome",
+        "gene": {
+          "key": "ncbiGeneId",
+          "header": "NCBI Gene ID",
+          "url_prefix": "http://identifiers.org/ncbigene/",
+          "item_comparison_example": [
+            {
+              "route": "37724,39836,31271,33636",
+              "label": "ABCG subfamily (bw, st, w, Atet)"
+            }
+          ]
+        },
+        "sample": {
+          "filter": [
+            {
+              "column": "Sex",
+              "label": "Sex",
+              "note": "",
+              "is_checkbox": true,
+              "is_displayed": true,
+              "is_ontology": false
+            },
+            {
+              "column": "Strain",
+              "label": "Strain",
+              "note": "",
+              "is_checkbox": true,
+              "is_displayed": true,
+              "is_ontology": false
+            },
+            {
+              "column": "Tissue",
+              "label": "Tissue",
+              "note": "",
+              "is_checkbox": true,
+              "is_displayed": true,
+              "is_ontology": false
+            }
+          ],
+          "item_comparison_example": [
+            {
+              "route": "RES00001623,RES00001624,RES00001639,RES00001640",
+              "label": "Head"
+            }
+          ],
+          "search_conditions": [
+            {
+              "label": "Sample Name",
+              "examples": ["head", "gonad"]
+            }
+          ]
+        },
+        "specificity": []
+      }
+    ]
   }
 ]

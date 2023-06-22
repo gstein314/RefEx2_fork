@@ -1,0 +1,33 @@
+RefexSampleId	Description	NumberOfSamples	Category	Strain	Tissue	Sex
+RES00001615	orgR, abdomen without digestive or reproductive system, female	4	tissues	orgR	abdomen without digestive or reproductive system	female
+RES00001616	orgR, abdomen without digestive or reproductive system, male	4	tissues	orgR	abdomen without digestive or reproductive system	male
+RES00001617	orgR, digestive plus excretory system, female	4	tissues	orgR	digestive plus excretory system	female
+RES00001618	orgR, digestive plus excretory system, male	4	tissues	orgR	digestive plus excretory system	male
+RES00001619	orgR, genitalia, female	4	tissues	orgR	genitalia	female
+RES00001620	orgR, genitalia, male	4	tissues	orgR	genitalia	male
+RES00001621	orgR, gonad, female	4	tissues	orgR	gonad	female
+RES00001622	orgR, gonad, male	4	tissues	orgR	gonad	male
+RES00001623	orgR, head, female	4	tissues	orgR	head	female
+RES00001624	orgR, head, male	4	tissues	orgR	head	male
+RES00001625	orgR, reproductive system without gonad and genitalia, female	4	tissues	orgR	reproductive system without gonad and genitalia	female
+RES00001626	orgR, reproductive system without gonad and genitalia, male	4	tissues	orgR	reproductive system without gonad and genitalia	male
+RES00001627	orgR, thorax without digestive system, female	4	tissues	orgR	thorax without digestive system	female
+RES00001628	orgR, thorax without digestive system, male	4	tissues	orgR	thorax without digestive system	male
+RES00001629	orgR, whole body, female	4	tissues	orgR	whole body	female
+RES00001630	orgR, whole body, male	4	tissues	orgR	whole body	male
+RES00001631	w1118, abdomen without digestive or reproductive system, female	4	tissues	w1118	abdomen without digestive or reproductive system	female
+RES00001632	w1118, abdomen without digestive or reproductive system, male	4	tissues	w1118	abdomen without digestive or reproductive system	male
+RES00001633	w1118, digestive plus excretory system, female	4	tissues	w1118	digestive plus excretory system	female
+RES00001634	w1118, digestive plus excretory system, male	4	tissues	w1118	digestive plus excretory system	male
+RES00001635	w1118, genitalia, female	4	tissues	w1118	genitalia	female
+RES00001636	w1118, genitalia, male	4	tissues	w1118	genitalia	male
+RES00001637	w1118, gonad, female	4	tissues	w1118	gonad	female
+RES00001638	w1118, gonad, male	4	tissues	w1118	gonad	male
+RES00001639	w1118, head, female	4	tissues	w1118	head	female
+RES00001640	w1118, head, male	4	tissues	w1118	head	male
+RES00001641	w1118, reproductive system without gonad and genitalia, female	4	tissues	w1118	reproductive system without gonad and genitalia	female
+RES00001642	w1118, reproductive system without gonad and genitalia, male	4	tissues	w1118	reproductive system without gonad and genitalia	male
+RES00001643	w1118, thorax without digestive system, female	4	tissues	w1118	thorax without digestive system	female
+RES00001644	w1118, thorax without digestive system, male	4	tissues	w1118	thorax without digestive system	male
+RES00001645	w1118, whole body, female	4	tissues	w1118	whole body	female
+RES00001646	w1118, whole body, male	4	tissues	w1118	whole body	male
