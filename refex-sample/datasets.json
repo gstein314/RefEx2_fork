@@ -386,7 +386,8 @@
                 "description": "vein"
               }
             ]
-          }, {
+          },
+          {
             "id": "humanFantom5Spec002",
             "label": "Epithelial cells",
             "samples": [
@@ -766,7 +767,8 @@
                 "description": "Fallopian Tube"
               }
             ]
-          }, {
+          },
+          {
             "id": "gtexV8Spec002",
             "label": "Brain sub-regions",
             "samples": [
