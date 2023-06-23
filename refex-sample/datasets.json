@@ -1082,56 +1082,48 @@
     ]
   },
   {
-    "species": "Fruitfly",
+    "species": "Drosophila melanogaster",
     "search_conditions": [
       { "label": "Gene Name", "examples": ["transcription factor"] },
-      { "label": "Symbol", "examples": ["DNMT2"] },
-      { "label": "Summary", "examples": ["chloroplast"] }
+      { "label": "Symbol", "examples": ["Mt2"] },
+      { "label": "Summary", "examples": ["antenna"] }
     ],
     "datasets": [
       {
-        "dataset": "athTPJ2016",
-        "label": "Dummy",
+        "dataset": "droso2017",
+        "label": "Drosophila transcriptome",
         "gene": {
           "key": "ncbiGeneId",
           "header": "NCBI Gene ID",
           "url_prefix": "http://identifiers.org/ncbigene/",
           "item_comparison_example": [
             {
-              "route": "814851,814850,843783,837968",
-              "label": "Fucosyltransferases (FT1, FUT2, FUT3, FUT6)"
+              "route": "37724,39836,31271,33636",
+              "label": "ABCG subfamily (bw, st, w, Atet)"
             }
           ]
         },
         "sample": {
           "filter": [
             {
-              "column": "Age",
-              "label": "Age",
+              "column": "Sex",
+              "label": "Sex",
               "note": "",
               "is_checkbox": true,
               "is_displayed": true,
               "is_ontology": false
             },
             {
-              "column": "DevelopmentalStage",
-              "label": "Developmenntal stage",
+              "column": "Strain",
+              "label": "Strain",
               "note": "",
               "is_checkbox": true,
               "is_displayed": true,
               "is_ontology": false
             },
             {
-              "column": "OrganismPart",
-              "label": "Organism part",
-              "note": "",
-              "is_checkbox": true,
-              "is_displayed": true,
-              "is_ontology": false
-            },
-            {
-              "column": "Treatment",
-              "label": "Treatment",
+              "column": "Tissue",
+              "label": "Tissue",
               "note": "",
               "is_checkbox": true,
               "is_displayed": true,
@@ -1140,18 +1132,14 @@
           ],
           "item_comparison_example": [
             {
-              "route": "RES00003780,RES00003781,RES00003782,RES00003783,RES00003784",
-              "label": "Heat-treated leaves"
-            },
-            {
-              "route": "RES00003710,RES00003711",
-              "label": "Root apex vs Root"
+              "route": "RES00001623,RES00001624,RES00001639,RES00001640",
+              "label": "Head"
             }
           ],
           "search_conditions": [
             {
               "label": "Sample Name",
-              "examples": ["flower", "seed"]
+              "examples": ["head", "gonad"]
             }
           ]
         },

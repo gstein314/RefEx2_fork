@@ -20,12 +20,10 @@ const default_search_conditions = () => {
     gene: {
       text: '',
       summary: '',
-      chr: '',
-      tog: '',
+      chromosomePosition: '',
+      typeOfGene: '',
       go: '',
-      tpm: '',
-      roku: '',
-      tau: '',
+      filter: '',
     },
     sample: {
       text: '',
@@ -268,7 +266,7 @@ export const mutations = {
     state.page_type = type;
   },
   set_filter_search_value(state, value) {
-    state.filter_search_value = value;
+    state.filter_search_value = [value];
   },
   set_checked_results(state, { checked_results, type }) {
     state.checked_results[type] = checked_results;
@@ -286,7 +284,16 @@ export const mutations = {
     state.search_conditions[items.type][items.item] = items.value;
   },
   reset_search_conditions(state) {
-    state.search_conditions = default_search_conditions();
+    const currentSampleScreener = state.active_dataset.sample.filter
+      .map(obj => obj.column)
+      .reduce((converted, item) => {
+        converted[item] = '';
+        return converted;
+      }, {});
+    state.search_conditions = {
+      gene: default_search_conditions().gene,
+      sample: currentSampleScreener,
+    };
   },
   set_screener_filter_list(state, screener_filter_list) {
     state.screener_filter_list = screener_filter_list;
