@@ -31,7 +31,7 @@
         };
         const resizeMap = {
           Mouse: 'S',
-          Fruitfly: 'S',
+          'Drosophila melanogaster': 'S',
         };
         if (resizeMap[this.iconName]) return sizeMap[resizeMap[this.iconName]];
         return sizeMap.default;
