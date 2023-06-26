@@ -246,11 +246,15 @@
         });
       },
       setDataset() {
-        if (this.dataset === 'humanFantom5') {
-          this.setActiveDataset(specieSets[0].datasets[0]);
-        } else if (this.dataset === 'gtexV8') {
-          this.setActiveDataset(specieSets[0].datasets[1]);
-        }
+        const pageUrl = window.location.href;
+        const regex = /\/([^\/?]+)\?/;
+        const match = pageUrl.match(regex);
+        const urlDataset = match[1];
+        this.setActiveDataset(
+          this.activeSpecie.datasets.find(
+            dataset => dataset.dataset === urlDataset
+          )
+        );
       },
       hasStringQuotes(str) {
         return str?.startsWith('"') && str?.endsWith('"');
