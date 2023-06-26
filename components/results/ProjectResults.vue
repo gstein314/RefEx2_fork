@@ -52,6 +52,11 @@
               >
                 <font-awesome-icon icon="flask" />
                 {{ result.Description }}
+                <font-awesome-icon
+                  class="right_icon info"
+                  icon="info-circle"
+                  @click.stop="setSampleModal(result['RefexSampleId'])"
+                />
               </a>
               <MedianBar
                 v-else-if="filter.column === 'LogMedian'"
@@ -203,6 +208,7 @@
     methods: {
       ...mapMutations({
         setGeneModal: 'set_gene_modal',
+        setSampleModal: 'set_sample_modal',
         updatePagination: 'set_project_pagination',
         setPageType: 'set_page_type',
         setFilterSearchValue: 'set_filter_search_value',
