@@ -67,7 +67,7 @@
         this.isLoading = true;
         await this.$axios
           .$get(
-            `https://refex2-api.dbcls.jp/api/sample/${
+            `https://refex2-api.dbcls.jp/api/sample_info/${
               this.id
             }?dataset=${this.activeDataset.dataset.toLowerCase()}`
           )
