@@ -52,6 +52,11 @@
               >
                 <font-awesome-icon icon="flask" />
                 {{ result.Description }}
+                <font-awesome-icon
+                  class="right_icon info"
+                  icon="info-circle"
+                  @click.stop="setSampleModal(result['RefexSampleId'])"
+                />
               </a>
               <MedianBar
                 v-else-if="filter.column === 'LogMedian'"
@@ -203,6 +208,7 @@
     methods: {
       ...mapMutations({
         setGeneModal: 'set_gene_modal',
+        setSampleModal: 'set_sample_modal',
         updatePagination: 'set_project_pagination',
         setPageType: 'set_page_type',
         setFilterSearchValue: 'set_filter_search_value',
@@ -246,11 +252,15 @@
         });
       },
       setDataset() {
-        if (this.dataset === 'humanFantom5') {
-          this.setActiveDataset(specieSets[0].datasets[0]);
-        } else if (this.dataset === 'gtexV8') {
-          this.setActiveDataset(specieSets[0].datasets[1]);
-        }
+        const pageUrl = window.location.href;
+        const regex = /\/([^\/?]+)\?/;
+        const match = pageUrl.match(regex);
+        const urlDataset = match[1];
+        this.setActiveDataset(
+          this.activeSpecie.datasets.find(
+            dataset => dataset.dataset === urlDataset
+          )
+        );
       },
       hasStringQuotes(str) {
         return str?.startsWith('"') && str?.endsWith('"');
