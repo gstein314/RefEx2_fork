@@ -193,14 +193,12 @@
     },
     created() {
       this.setPageType('project');
+      this.setDataset();
       if (location.search.match(/=(.*)&/)[1] === 'gene') {
         this.$store.commit('set_active_filter', 'gene');
       } else {
         this.$store.commit('set_active_filter', 'sample');
       }
-    },
-    mounted() {
-      this.setDataset();
     },
     updated() {
       this.setProjectPagesNumber(this.pagesNumber);
