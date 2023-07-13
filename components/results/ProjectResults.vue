@@ -193,8 +193,6 @@
     },
     created() {
       this.setPageType('project');
-      const test = location.href;
-      console.log(test);
       this.setDataset();
       if (location.search.match(/=(.*)&/)[1] === 'gene') {
         this.$store.commit('set_active_filter', 'gene');
@@ -253,20 +251,9 @@
       },
       setDataset() {
         const pageUrl = window.location.href;
-        console.log(pageUrl);
-        let regex = /\/([^\/?]+)\/\?/;
+        const regex = /\/([^\/?]+)\/\?/;
         const match = pageUrl.match(regex);
-        let urlDataset;
-
-        if (!match) {
-          regex = /\/([^\/?]+)\?/;
-          const newMatch = pageUrl.match(regex);
-          urlDataset = newMatch ? newMatch[1] : '';
-        } else {
-          urlDataset = match[1];
-        }
-
-        console.log(urlDataset);
+        const urlDataset = match[1];
         this.setActiveDataset(
           this.activeSpecie.datasets.find(
             dataset => dataset.dataset === urlDataset
