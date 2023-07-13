@@ -254,6 +254,8 @@
         const regex = /\/([^\/?]+)\?/;
         const match = pageUrl.match(regex);
         const urlDataset = match[1];
+        console.log(pageUrl);
+        console.log(urlDataset);
         this.setActiveDataset(
           this.activeSpecie.datasets.find(
             dataset => dataset.dataset === urlDataset
