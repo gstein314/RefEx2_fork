@@ -87,6 +87,6 @@ export default {
   },
 
   router: {
-    base: '/',
+    base: '/dbcls/refex_fork/',
   },
 };
