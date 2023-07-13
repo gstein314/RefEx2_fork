@@ -973,7 +973,7 @@
             },
             {
               "column": "DevelopmentalStage",
-              "label": "Developmenntal stage",
+              "label": "Developmental stage",
               "note": "",
               "is_checkbox": true,
               "is_displayed": true,
@@ -1041,7 +1041,7 @@
             },
             {
               "column": "DevelopmentalStage",
-              "label": "Developmenntal stage",
+              "label": "Developmental stage",
               "note": "",
               "is_checkbox": true,
               "is_displayed": true,
