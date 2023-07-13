@@ -87,8 +87,6 @@ export default {
   },
 
   router: {
-    mode: 'history',
-    trailingSlash: false,
     base: '/RefEx2_fork/',
   },
 };

@@ -254,9 +254,18 @@
       setDataset() {
         const pageUrl = window.location.href;
         console.log(pageUrl);
-        const regex = /\/([^\/?]+)\?/;
+        let regex = /\/([^\/?]+)\/\?/;
         const match = pageUrl.match(regex);
-        const urlDataset = match[1];
+        let urlDataset;
+
+        if (!match) {
+          regex = /\/([^\/?]+)\?/;
+          const newMatch = pageUrl.match(regex);
+          urlDataset = newMatch ? newMatch[1] : '';
+        } else {
+          urlDataset = match[1];
+        }
+
         console.log(urlDataset);
         this.setActiveDataset(
           this.activeSpecie.datasets.find(
