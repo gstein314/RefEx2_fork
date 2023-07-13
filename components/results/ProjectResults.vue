@@ -193,6 +193,8 @@
     },
     created() {
       this.setPageType('project');
+      const test = location.href;
+      console.log(test);
       this.setDataset();
       if (location.search.match(/=(.*)&/)[1] === 'gene') {
         this.$store.commit('set_active_filter', 'gene');
@@ -251,10 +253,10 @@
       },
       setDataset() {
         const pageUrl = window.location.href;
+        console.log(pageUrl);
         const regex = /\/([^\/?]+)\?/;
         const match = pageUrl.match(regex);
         const urlDataset = match[1];
-        console.log(pageUrl);
         console.log(urlDataset);
         this.setActiveDataset(
           this.activeSpecie.datasets.find(
