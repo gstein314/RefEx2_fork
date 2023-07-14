@@ -224,6 +224,7 @@ export const mutations = {
   ) {
     const copy = [...state.project_filters];
     const targetObjIndex = copy.findIndex(entry => entry.column === filterKey);
+    // TODO: the value assigned needs to be changed depending on the filter type
     if (copy[targetObjIndex][key] !== filter) {
       copy[targetObjIndex][key] = filter;
       state.project_filters = copy;
