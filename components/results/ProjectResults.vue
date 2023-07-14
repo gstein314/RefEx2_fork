@@ -168,7 +168,6 @@
         filters: 'project_filters',
         geneSummarySource: 'gene_summary_source',
         routeToOtherProjectPage: 'route_to_other_project_page',
-        getFilterSearchValue: 'get_filter_search_value',
         filterObj: 'active_filter_modal',
         activeDataset: 'active_dataset',
         activeSpecie: 'active_specie',
