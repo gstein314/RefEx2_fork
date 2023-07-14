@@ -266,7 +266,7 @@ export const mutations = {
     state.page_type = type;
   },
   set_filter_search_value(state, value) {
-    state.filter_search_value = [value];
+    state.filter_search_value = value;
   },
   set_checked_results(state, { checked_results, type }) {
     state.checked_results[type] = checked_results;
