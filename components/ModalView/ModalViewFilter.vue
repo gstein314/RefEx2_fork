@@ -58,7 +58,10 @@
         >
           <template slot="option" slot-scope="props">
             <div class="option">
-              <input type="checkbox" :checked="searchValue === props.option" />
+              <input
+                type="checkbox"
+                :checked="searchValue.includes(props.option)"
+              />
               <span class="option__small">{{ props.option }}</span>
               <!-- <font-awesome-icon icon="exclamation-triangle" /> -->
             </div>
