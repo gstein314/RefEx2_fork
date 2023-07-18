@@ -154,7 +154,6 @@
       this.currentPageId = to.query.id;
       await this.$nuxt.refresh();
       next();
-      this.$forceUpdate();
     },
     async asyncData({ $axios, query, store, route }) {
       let results;
@@ -354,9 +353,15 @@
       },
       resultsWithCombinedMedians() {
         const medianArraysObj = {};
-        const projectResults =
-          this.projectResultsAll[this.selectedItem.id] ||
-          this.projectResultsAll[this.currentPageId];
+        let projectResults;
+        if (Object.keys(this.projectResultsAll).length === 1) {
+          projectResults =
+            this.projectResultsAll[Object.keys(this.projectResultsAll)[0]];
+        } else {
+          projectResults =
+            this.projectResultsAll[this.selectedItem.id] ||
+            this.projectResultsAll[this.currentPageId];
+        }
         for (const item of Object.values(this.items)) {
           const symbolOrDescription = info => info.symbol || info.Description;
           medianArraysObj[`LogMedian_${symbolOrDescription(item.info)}`] =
