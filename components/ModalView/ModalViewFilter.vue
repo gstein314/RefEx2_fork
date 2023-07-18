@@ -16,10 +16,10 @@
             class="sub all_btn"
             @click="searchValue = [...filterObj.options]"
           >
-            Choose all
+            Select all
           </button>
           <button class="sub clear_btn" @click="searchValue = ''">
-            Remove all
+            Unselect all
           </button></span
         >
         <span v-else-if="filterObj.column === 'LogMedian'" class="modal_btns">
