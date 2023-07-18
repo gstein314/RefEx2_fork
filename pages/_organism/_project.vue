@@ -152,7 +152,7 @@
     async beforeRouteUpdate(to, from, next) {
       this.$nuxt.$loading.start();
       this.currentPageId = to.query.id;
-      this.$nuxt.refresh();
+      await this.$nuxt.refresh();
       next();
     },
     async asyncData({ $axios, query, store, route }) {
