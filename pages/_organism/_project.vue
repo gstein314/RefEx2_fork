@@ -396,6 +396,11 @@
             if (!filter.is_displayed) continue;
             // options filter
             else if (filter.options) {
+              if (typeof filter.filterModal === 'string') {
+                this.$store.commit('update_project_filters', {
+                  filter: [filter.filterModal],
+                });
+              }
               if (!filter.filterModal.includes(result[key])) isFiltered = true;
             }
             // number filter
