@@ -13,7 +13,7 @@
         "gene": {
           "key": "ncbiGeneId",
           "header": "NCBI Gene ID",
-          "url_prefix": "http://identifiers.org/ncbigene/",
+          "url_prefix": "https://www.ncbi.nlm.nih.gov/gene/",
           "item_comparison_example": [
             {
               "route": "5460,6657,9314,4609",
@@ -477,7 +477,7 @@
         "gene": {
           "key": "ensemblGeneId",
           "header": "Ensembl Gene ID",
-          "url_prefix": "http://identifiers.org/ensembl/",
+          "url_prefix": "https://www.ensembl.org/id/",
           "item_comparison_example": [
             {
               "route": "ENSG00000204531,ENSG00000181449,ENSG00000136826,ENSG00000136997",
@@ -844,7 +844,7 @@
         "gene": {
           "key": "ncbiGeneId",
           "header": "NCBI Gene ID",
-          "url_prefix": "http://identifiers.org/ncbigene/",
+          "url_prefix": "https://www.ncbi.nlm.nih.gov/gene/",
           "item_comparison_example": [
             {
               "route": "17869,16600,20674,18999",
@@ -953,7 +953,7 @@
         "gene": {
           "key": "ncbiGeneId",
           "header": "NCBI Gene ID",
-          "url_prefix": "http://identifiers.org/ncbigene/",
+          "url_prefix": "https://www.ncbi.nlm.nih.gov/gene/",
           "item_comparison_example": [
             {
               "route": "814851,814850,843783,837968",
@@ -1021,7 +1021,7 @@
         "gene": {
           "key": "ncbiGeneId",
           "header": "NCBI Gene ID",
-          "url_prefix": "http://identifiers.org/ncbigene/",
+          "url_prefix": "https://www.ncbi.nlm.nih.gov/gene/",
           "item_comparison_example": [
             {
               "route": "814851,814850,843783,837968",
@@ -1095,7 +1095,7 @@
         "gene": {
           "key": "ncbiGeneId",
           "header": "NCBI Gene ID",
-          "url_prefix": "http://identifiers.org/ncbigene/",
+          "url_prefix": "https://www.ncbi.nlm.nih.gov/gene/",
           "item_comparison_example": [
             {
               "route": "37724,39836,31271,33636",
