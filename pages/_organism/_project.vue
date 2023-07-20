@@ -392,7 +392,6 @@
           let isFiltered = false;
           for (const filter of this.projectFilters) {
             const key = filter.column;
-
             if (!filter.is_displayed) continue;
             // options filter
             else if (filter.options) {

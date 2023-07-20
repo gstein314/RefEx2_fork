@@ -14,7 +14,11 @@
         <span v-if="filterObj.options" class="modal_btns">
           <button
             class="sub all_btn"
-            @click="searchValue = [...filterObj.options]"
+            @click="
+              () => {
+                searchValue = [...filterObj.options];
+              }
+            "
           >
             Select all
           </button>
@@ -123,13 +127,17 @@
       isOn() {
         return this.filterObj !== null;
       },
+      console: () => console,
     },
     watch: {
       getFilterSearchValue() {
         this.searchValue = this.getFilterSearchValue;
       },
       searchValue() {
-        if (this.isOn) this.updateStore();
+        if (this.isOn) {
+          this.updateStore();
+          this.setFilterSearchValue(this.searchValue);
+        }
       },
       filterObj() {
         this.searchValue = this.filterObj?.filterModal || '';
@@ -142,6 +150,7 @@
       ...mapMutations({
         updateProjectFilters: 'update_project_filters',
         close: 'set_filter_modal',
+        setFilterSearchValue: 'set_filter_search_value',
       }),
       updateStore(filter = this.searchValue) {
         this.updateFilterModal('filterModal', filter);

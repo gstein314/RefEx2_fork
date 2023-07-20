@@ -94,6 +94,7 @@
                 <span
                   v-if="filter.column !== 'alias'"
                   @click="
+                    setFilterSearchValue('');
                     setFilterSearchValue(result[filter.column]);
                     setFilterModal(filter.column);
                   "
