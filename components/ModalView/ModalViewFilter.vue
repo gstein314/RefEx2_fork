@@ -14,11 +14,7 @@
         <span v-if="filterObj.options" class="modal_btns">
           <button
             class="sub all_btn"
-            @click="
-              () => {
-                searchValue = [...filterObj.options];
-              }
-            "
+            @click="searchValue = [...filterObj.options]"
           >
             Select all
           </button>
