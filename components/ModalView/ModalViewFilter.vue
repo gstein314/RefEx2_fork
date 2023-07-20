@@ -57,7 +57,7 @@
           :multiple="true"
           :allow-empty="true"
           :close-on-select="false"
-          placeholder="Search"
+          placeholder="Please select option(s)"
           :options="filterObj.options"
         >
           <template slot="option" slot-scope="props">
