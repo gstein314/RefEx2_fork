@@ -43,21 +43,33 @@
         type: String,
         default: '',
       },
+      // eslint-disable-next-line vue/require-default-prop
       note: {
         type: String,
-        default: '',
+        required: false,
+      },
+      is_ontology: {
+        type: Boolean,
+        default: false,
+      },
+      // eslint-disable-next-line vue/require-default-prop
+      is_displayed: {
+        type: Boolean,
+        default: true,
       },
       filterModal: {
         type: [String, Array],
         default: '',
       },
+      // eslint-disable-next-line vue/require-default-prop
       options: {
-        type: Array,
-        default: () => [],
+        type: [Array],
+        required: false,
       },
+      // eslint-disable-next-line vue/require-default-prop
       numberValue: {
         type: Object,
-        default: () => {},
+        required: false,
       },
       columnsArray: {
         type: Array,
