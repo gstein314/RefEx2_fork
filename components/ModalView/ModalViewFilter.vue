@@ -22,7 +22,7 @@
           >
             Select all
           </button>
-          <button class="sub clear_btn" @click="searchValue = ''">
+          <button class="sub clear_btn" @click="setFilterSearchValue([])">
             Unselect all
           </button></span
         >
