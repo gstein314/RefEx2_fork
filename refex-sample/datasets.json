@@ -949,7 +949,7 @@
     "datasets": [
       {
         "dataset": "athTPJ2016",
-        "label": "Trava",
+        "label": "TraVA",
         "gene": {
           "key": "ncbiGeneId",
           "header": "NCBI Gene ID",
