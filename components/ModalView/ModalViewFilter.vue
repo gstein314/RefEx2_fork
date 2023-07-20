@@ -127,7 +127,6 @@
       isOn() {
         return this.filterObj !== null;
       },
-      console: () => console,
     },
     watch: {
       getFilterSearchValue() {

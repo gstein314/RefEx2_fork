@@ -198,7 +198,6 @@ export const mutations = {
     else state.project_results = { ...state.project_results, limit, offset };
   },
   set_filter_modal(state, filterKey = null) {
-    console.log('set_filter_modal', filterKey);
     state.filter_modal = filterKey;
   },
   set_compare_modal(state) {
@@ -225,8 +224,6 @@ export const mutations = {
   ) {
     const copy = [...state.project_filters];
     const targetObjIndex = copy.findIndex(entry => entry.column === filterKey);
-    // TODO: the value assigned needs to be changed depending on the filter type
-    console.log(copy, targetObjIndex, key, filter);
     if (copy[targetObjIndex][key] !== filter) {
       copy[targetObjIndex][key] = filter;
       state.project_filters = copy;
