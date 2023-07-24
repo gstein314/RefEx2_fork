@@ -296,6 +296,7 @@
         columnsArray: [],
         ordersArray: [],
         currentPageId: '',
+        currentUrl: '',
       };
     },
     computed: {
@@ -453,9 +454,6 @@
         }
         return resultsDisplayed;
       },
-      currentUrl() {
-        return window.location.href;
-      },
     },
     created() {
       this.$store.commit('set_project_items', this.projectItems);
@@ -474,6 +472,7 @@
       });
     },
     updated() {
+      this.currentUrl = window.location.href;
       this.heightChartWrapper = Math.floor(
         this.$refs.chartWrapper.getBoundingClientRect().height
       );
