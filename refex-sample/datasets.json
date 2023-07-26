@@ -6,6 +6,9 @@
       { "label": "Symbol", "examples": ["ITG"] },
       { "label": "Summary", "examples": ["Breast cancer"] }
     ],
+    "prefix": {
+      "ensembl": "https://ensembl.org/Homo_sapiens/Gene/Summary?db=core;g="
+    },
     "datasets": [
       {
         "dataset": "humanFantom5",
@@ -837,6 +840,9 @@
       { "label": "Symbol", "examples": ["ITG"] },
       { "label": "Summary", "examples": ["Breast cancer"] }
     ],
+    "prefix": {
+      "ensembl": "https://ensembl.org/Mus_musculus/Gene/Summary?db=core;g="
+    },
     "datasets": [
       {
         "dataset": "mouseFantom5",
@@ -946,6 +952,9 @@
       { "label": "Symbol", "examples": ["DNMT2"] },
       { "label": "Summary", "examples": ["chloroplast"] }
     ],
+    "prefix": {
+      "ensembl": "https://plants.ensembl.org/Arabidopsis_thaliana/Gene/Summary?g="
+    },
     "datasets": [
       {
         "dataset": "athTPJ2016",
@@ -1088,6 +1097,9 @@
       { "label": "Symbol", "examples": ["Mt2"] },
       { "label": "Summary", "examples": ["antenna"] }
     ],
+    "prefix": {
+      "ensembl": "https://ensembl.org/Drosophila_melanogaster/Gene/Summary?db=core;g="
+    },
     "datasets": [
       {
         "dataset": "droso2017",
