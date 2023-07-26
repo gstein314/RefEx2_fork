@@ -354,9 +354,17 @@
       },
       resultsWithCombinedMedians() {
         const medianArraysObj = {};
-        const projectResults =
-          this.projectResultsAll[this.selectedItem.id] ||
-          this.projectResultsAll[this.currentPageId];
+        let projectResults = [];
+        const propertyNames = Object.keys(this.projectResultsAll);
+
+        if (propertyNames.length === 1) {
+          const propertyName = propertyNames[0];
+          projectResults = [...this.projectResultsAll[propertyName]];
+        } else {
+          projectResults =
+            this.projectResultsAll[this.selectedItem.id] ||
+            this.projectResultsAll[this.currentPageId];
+        }
         for (const item of Object.values(this.items)) {
           const symbolOrDescription = info => info.symbol || info.Description;
           medianArraysObj[`LogMedian_${symbolOrDescription(item.info)}`] =
