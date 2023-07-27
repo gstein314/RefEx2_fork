@@ -471,7 +471,6 @@
     mounted() {
       if (this.isError) return;
       this.checkSampleAlias();
-      this.$store.commit('set_project_filters', this.filters);
       this.$store.commit(
         'set_project_results',
         this.projectResultsAll[this.selectedId]
