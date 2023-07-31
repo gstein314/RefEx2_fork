@@ -2,7 +2,7 @@
   <div>
     <ul v-show="isOpenDataset" class="dropdown_list" :class="{ isOpenDataset }">
       <li v-for="specie in species" :key="specie.species">
-        <icon-base :icon-name="specie.species" />
+        <icon-base :icon-name="specie.species_id" />
         <div class="option_wrapper">
           <div class="specie_name">{{ specie.species }}</div>
           <div class="tag_wrapper">

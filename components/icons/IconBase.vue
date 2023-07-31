@@ -30,8 +30,8 @@
           default: 60,
         };
         const resizeMap = {
-          Mouse: 'S',
-          'Drosophila melanogaster': 'S',
+          mouse: 'S',
+          'drosophila-melanogaster': 'S',
         };
         if (resizeMap[this.iconName]) return sizeMap[resizeMap[this.iconName]];
         return sizeMap.default;
