@@ -161,7 +161,7 @@
       let resultsAll = {};
       let isError = false;
       const { project, organism } = route.params;
-      store.commit('set_specie', organism);
+      store.commit('set_specie', organism.toLowerCase());
       const { id, type } = query;
       const items = await Promise.all(
         id.split(',').map(async (id, index) => {
