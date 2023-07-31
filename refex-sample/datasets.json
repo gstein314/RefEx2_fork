@@ -1,5 +1,6 @@
 [
   {
+    "species_id": "human",
     "species": "Human",
     "search_conditions": [
       { "label": "Gene Name", "examples": ["transcription factor"] },
@@ -834,6 +835,7 @@
     ]
   },
   {
+    "species_id": "mouse",
     "species": "Mouse",
     "search_conditions": [
       { "label": "Gene Name", "examples": ["transcription factor"] },
@@ -946,6 +948,7 @@
     ]
   },
   {
+    "species_id": "arabidopsis-thaliana",
     "species": "Arabidopsis thaliana",
     "search_conditions": [
       { "label": "Gene Name", "examples": ["transcription factor"] },
@@ -1091,6 +1094,7 @@
     ]
   },
   {
+    "species_id": "drosophila-melanogaster",
     "species": "Drosophila melanogaster",
     "search_conditions": [
       { "label": "Gene Name", "examples": ["transcription factor"] },

@@ -4,7 +4,7 @@
     @click.stop="$emit('eventUpdateIsOpenDataset')"
   >
     <div class="nav_item">
-      <icon-base :icon-name="activeSpecie.species" />
+      <icon-base :icon-name="activeSpecie.species_id" />
       <div class="specie_wrapper">
         <p class="title">Dataset</p>
         <p>{{ activeSpecie.species }}</p>
@@ -57,7 +57,7 @@
       }),
     },
     created() {
-      this.setSpecie(this.activeSpecie.species);
+      this.setSpecie(this.activeSpecie.species_id);
     },
     mounted() {},
     methods: {
