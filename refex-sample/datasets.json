@@ -1,11 +1,15 @@
 [
   {
+    "species_id": "human",
     "species": "Human",
     "search_conditions": [
       { "label": "Gene Name", "examples": ["transcription factor"] },
       { "label": "Symbol", "examples": ["ITG"] },
       { "label": "Summary", "examples": ["Breast cancer"] }
     ],
+    "prefix": {
+      "ensembl": "https://ensembl.org/Homo_sapiens/Gene/Summary?db=core;g="
+    },
     "datasets": [
       {
         "dataset": "humanFantom5",
@@ -13,7 +17,7 @@
         "gene": {
           "key": "ncbiGeneId",
           "header": "NCBI Gene ID",
-          "url_prefix": "http://identifiers.org/ncbigene/",
+          "url_prefix": "https://www.ncbi.nlm.nih.gov/gene/",
           "item_comparison_example": [
             {
               "route": "5460,6657,9314,4609",
@@ -477,7 +481,7 @@
         "gene": {
           "key": "ensemblGeneId",
           "header": "Ensembl Gene ID",
-          "url_prefix": "http://identifiers.org/ensembl/",
+          "url_prefix": "https://www.ensembl.org/id/",
           "item_comparison_example": [
             {
               "route": "ENSG00000204531,ENSG00000181449,ENSG00000136826,ENSG00000136997",
@@ -831,12 +835,16 @@
     ]
   },
   {
+    "species_id": "mouse",
     "species": "Mouse",
     "search_conditions": [
       { "label": "Gene Name", "examples": ["transcription factor"] },
       { "label": "Symbol", "examples": ["ITG"] },
       { "label": "Summary", "examples": ["Breast cancer"] }
     ],
+    "prefix": {
+      "ensembl": "https://ensembl.org/Mus_musculus/Gene/Summary?db=core;g="
+    },
     "datasets": [
       {
         "dataset": "mouseFantom5",
@@ -844,7 +852,7 @@
         "gene": {
           "key": "ncbiGeneId",
           "header": "NCBI Gene ID",
-          "url_prefix": "http://identifiers.org/ncbigene/",
+          "url_prefix": "https://www.ncbi.nlm.nih.gov/gene/",
           "item_comparison_example": [
             {
               "route": "17869,16600,20674,18999",
@@ -940,20 +948,24 @@
     ]
   },
   {
+    "species_id": "arabidopsis-thaliana",
     "species": "Arabidopsis thaliana",
     "search_conditions": [
       { "label": "Gene Name", "examples": ["transcription factor"] },
       { "label": "Symbol", "examples": ["DNMT2"] },
       { "label": "Summary", "examples": ["chloroplast"] }
     ],
+    "prefix": {
+      "ensembl": "https://plants.ensembl.org/Arabidopsis_thaliana/Gene/Summary?g="
+    },
     "datasets": [
       {
         "dataset": "athTPJ2016",
-        "label": "Trava",
+        "label": "TraVA",
         "gene": {
           "key": "ncbiGeneId",
           "header": "NCBI Gene ID",
-          "url_prefix": "http://identifiers.org/ncbigene/",
+          "url_prefix": "https://www.ncbi.nlm.nih.gov/gene/",
           "item_comparison_example": [
             {
               "route": "814851,814850,843783,837968",
@@ -973,7 +985,7 @@
             },
             {
               "column": "DevelopmentalStage",
-              "label": "Developmenntal stage",
+              "label": "Developmental stage",
               "note": "",
               "is_checkbox": true,
               "is_displayed": true,
@@ -1021,7 +1033,7 @@
         "gene": {
           "key": "ncbiGeneId",
           "header": "NCBI Gene ID",
-          "url_prefix": "http://identifiers.org/ncbigene/",
+          "url_prefix": "https://www.ncbi.nlm.nih.gov/gene/",
           "item_comparison_example": [
             {
               "route": "814851,814850,843783,837968",
@@ -1041,7 +1053,7 @@
             },
             {
               "column": "DevelopmentalStage",
-              "label": "Developmenntal stage",
+              "label": "Developmental stage",
               "note": "",
               "is_checkbox": true,
               "is_displayed": true,
@@ -1082,12 +1094,16 @@
     ]
   },
   {
+    "species_id": "drosophila-melanogaster",
     "species": "Drosophila melanogaster",
     "search_conditions": [
       { "label": "Gene Name", "examples": ["transcription factor"] },
       { "label": "Symbol", "examples": ["Mt2"] },
       { "label": "Summary", "examples": ["antenna"] }
     ],
+    "prefix": {
+      "ensembl": "https://ensembl.org/Drosophila_melanogaster/Gene/Summary?db=core;g="
+    },
     "datasets": [
       {
         "dataset": "droso2017",
@@ -1095,7 +1111,7 @@
         "gene": {
           "key": "ncbiGeneId",
           "header": "NCBI Gene ID",
-          "url_prefix": "http://identifiers.org/ncbigene/",
+          "url_prefix": "https://www.ncbi.nlm.nih.gov/gene/",
           "item_comparison_example": [
             {
               "route": "37724,39836,31271,33636",

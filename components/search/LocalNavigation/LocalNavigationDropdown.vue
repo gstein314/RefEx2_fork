@@ -1,8 +1,8 @@
 <template>
   <div>
     <ul v-show="isOpenDataset" class="dropdown_list" :class="{ isOpenDataset }">
-      <li v-for="specie in species" :key="specie.species">
-        <icon-base :icon-name="specie.species" />
+      <li v-for="specie in species" :key="specie.species_id">
+        <icon-base :icon-name="specie.species_id" />
         <div class="option_wrapper">
           <div class="specie_name">{{ specie.species }}</div>
           <div class="tag_wrapper">
@@ -10,7 +10,7 @@
               v-for="dataset in specie.datasets"
               :key="dataset.dataset"
               class="dataset_name"
-              @click="updateSpecie(specie.species, dataset.dataset)"
+              @click="updateSpecie(specie.species_id, dataset.dataset)"
               >{{ dataset.label }}</span
             >
           </div>
@@ -65,7 +65,7 @@
         // isOpenDataset: false,
         // isOpenType: false,
         selectedProject: datasets.reduce((acc, specie) => {
-          acc[specie.species] = specie.datasets[0].dataset;
+          acc[specie.species_id] = specie.datasets[0].dataset;
           return acc;
         }, {}),
       };
@@ -77,7 +77,7 @@
       }),
     },
     created() {
-      this.setSpecie(this.activeSpecie.species);
+      this.setSpecie(this.activeSpecie.species_id);
     },
     mounted() {
       window.addEventListener('click', this.closeDropDown);

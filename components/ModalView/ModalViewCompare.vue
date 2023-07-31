@@ -92,14 +92,14 @@
         this.toggleCompareModal();
       },
       getActiveDatasetHeader() {
-        if (this.activeSpecie.species === 'Human') {
+        if (this.activeSpecie.species_id === 'human') {
           switch (this.activeFilter.name) {
             case 'gene':
               return this.activeDataset.gene.header;
             case 'sample':
               return 'RES ID';
           }
-        } else if (this.activeSpecie.species === 'Mouse') {
+        } else if (this.activeSpecie.species_id === 'mouse') {
           switch (this.activeFilter.name) {
             case 'gene':
               return this.activeDataset.gene.header;
