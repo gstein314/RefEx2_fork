@@ -57,7 +57,7 @@
       }),
     },
     created() {
-      this.setSpecie(this.activeSpecie.species);
+      this.setSpecie(this.activeSpecie.species_id);
     },
     mounted() {},
     methods: {

@@ -275,7 +275,7 @@
       },
       tsvTitle() {
         const today = this.$getToday();
-        return `RefEx2_${this.activeSpecie.species}_${this.activeDataset.dataset}_${this.filterType}_search_results_${today}.tsv`;
+        return `RefEx2_${this.activeSpecie.species_id}_${this.activeDataset.dataset}_${this.filterType}_search_results_${today}.tsv`;
       },
       geneIdListForCopy() {
         const geneIdList = this.resultsCached?.map(({ geneid }) => geneid);

@@ -112,14 +112,14 @@ export const getters = {
   },
   route_to_project_page: state => ids => {
     if (Array.isArray(ids)) ids = ids.join(',');
-    return `${state.active_specie.species}/${state.active_dataset.dataset}?type=${state.active_filter}&id=${ids}`;
+    return `${state.active_specie.species_id}/${state.active_dataset.dataset}?type=${state.active_filter}&id=${ids}`;
   },
   route_to_other_project_page: state => ids => {
     if (Array.isArray(ids)) ids = ids.join(',');
     if (location.search.match(/=(.*)&/)[1] === 'gene')
-      return `/${state.active_specie.species}/${state.active_dataset.dataset}?type=sample&id=${ids}`;
+      return `/${state.active_specie.species_id}/${state.active_dataset.dataset}?type=sample&id=${ids}`;
     else
-      return `/${state.active_specie.species}/${state.active_dataset.dataset}?type=gene&id=${ids}`;
+      return `/${state.active_specie.species_id}/${state.active_dataset.dataset}?type=gene&id=${ids}`;
   },
   gene_modal(state) {
     return state.gene_modal;
@@ -128,7 +128,7 @@ export const getters = {
     return state.sample_modal;
   },
   dataset_by_name: state => name => {
-    return state.active_specie.datasets.find(x => x.dataset === name);
+    return state.active_specie.datasets.find(x => x.dataset === name) ?? {};
   },
   active_dataset(state) {
     return state.active_dataset;
@@ -241,7 +241,7 @@ export const mutations = {
   },
   set_specie(state, specieId) {
     state.active_specie = specieSets.find(
-      specie => specie.species === specieId
+      specie => specie.species_id === specieId
     );
   },
   set_active_dataset(state, project) {

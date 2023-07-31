@@ -329,7 +329,7 @@
       },
       tsvTitle() {
         const today = this.$getToday();
-        return `RefEx2_${this.activeSpecie.species}_${this.activeDataset.dataset}_${this.filterType}_comparison_${today}.tsv`;
+        return `RefEx2_${this.activeSpecie.species_id}_${this.activeDataset.dataset}_${this.filterType}_comparison_${today}.tsv`;
       },
       roundDownClientHeight() {
         return Math.floor(
