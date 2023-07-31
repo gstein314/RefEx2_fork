@@ -16,10 +16,10 @@
             class="sub all_btn"
             @click="searchValue = [...filterObj.options]"
           >
-            Choose all
+            Select all
           </button>
-          <button class="sub clear_btn" @click="searchValue = ''">
-            Remove all
+          <button class="sub clear_btn" @click="setFilterSearchValue([])">
+            Unselect all
           </button></span
         >
         <span v-else-if="filterObj.column === 'LogMedian'" class="modal_btns">
@@ -53,7 +53,7 @@
           :multiple="true"
           :allow-empty="true"
           :close-on-select="false"
-          placeholder="Search"
+          placeholder="Please select option(s)"
           :options="filterObj.options"
         >
           <template slot="option" slot-scope="props">
@@ -129,7 +129,10 @@
         this.searchValue = this.getFilterSearchValue;
       },
       searchValue() {
-        if (this.isOn) this.updateStore();
+        if (this.isOn) {
+          this.updateStore();
+          this.setFilterSearchValue(this.searchValue);
+        }
       },
       filterObj() {
         this.searchValue = this.filterObj?.filterModal || '';
@@ -142,6 +145,7 @@
       ...mapMutations({
         updateProjectFilters: 'update_project_filters',
         close: 'set_filter_modal',
+        setFilterSearchValue: 'set_filter_search_value',
       }),
       updateStore(filter = this.searchValue) {
         this.updateFilterModal('filterModal', filter);
