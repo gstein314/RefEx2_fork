@@ -949,7 +949,7 @@
   },
   {
     "species_id": "arabidopsis-thaliana",
-    "species": "Arabidopsis-thaliana",
+    "species": "Arabidopsis thaliana",
     "search_conditions": [
       { "label": "Gene Name", "examples": ["transcription factor"] },
       { "label": "Symbol", "examples": ["DNMT2"] },
